@@ -2,7 +2,9 @@
   <div id="container" :class="isEnLang ? 'fontfamily_en' : 'fontfamily_zh'" @scroll="handleScrollScroll($event)">
     <HeaderLayout />
     <div id="container_body">
-      <router-view />
+      <div id="container_view">
+        <router-view />
+      </div>
       <FooterLayout />
     </div>
   </div>
@@ -48,14 +50,18 @@ export default {
 <style lang="scss">
 #container {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: relative;
   color: #ffffff;
-  background: #09071f;
+  background: #16161a;
   overflow: auto;
 }
 #container_body {
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
+  #container_view {
+    width: 100%;
+    min-height: calc(100vh - 4rem);
+  }
 }
 </style>

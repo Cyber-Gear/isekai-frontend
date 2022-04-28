@@ -51,12 +51,20 @@
         <img class="img_bg3" src="../../assets/images/img3.png" alt="" />
         <ul class="card_list2">
           <li v-for="(item, index) in cardList2" :key="index">
-            <div class="box_item">
-              <div>{{ item.text }}</div>
-            </div>
-            <div class="box_top">
-              <img :src="item.image" alt="" />
-              <span>{{ item.name }}</span>
+            <div class="box_border1">
+              <div class="box_border2">
+                <div class="box_border1">
+                  <div class="box_border2">
+                    <div class="box_item">
+                      {{ item.text }}
+                    </div>
+                    <div class="box_top">
+                      <img :src="item.image" alt="" />
+                      <span>{{ item.name }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </li>
         </ul>
@@ -71,12 +79,22 @@
       <div class="box_content">
         <ul class="cardList3">
           <li v-for="(item, index) in cardList3" :key="index">
-            <div>{{ item.text1 }}</div>
-            <div>{{ item.text2 }}</div>
-            <div>
-              <div class="btn">{{ item.text3 }}</div>
-              <div class="progress_bar">
-                <div :style="{ width: item.progress }">{{ item.progress }}</div>
+            <div class="box_border1">
+              <div class="box_border2">
+                <div class="box_item">
+                  <div>{{ item.text1 }}</div>
+                  <div>{{ item.text2 }}</div>
+                  <div>
+                    <div class="btn">
+                      <div class="box_border1">
+                        <div class="box_border2">{{ item.text3 }}</div>
+                      </div>
+                    </div>
+                    <div class="progress_bar">
+                      <div :style="{ width: item.progress }">{{ item.progress }}</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </li>
@@ -91,15 +109,23 @@
       </div>
       <div class="box_content">
         <div class="top">
-          <span>
-            NFT artist shika studio provided the character artwork for the release of NFT on the ISEKAI platform, which was used in Cybergear's game
-            scenes.
-          </span>
-          <img src="../../assets/images/img7.png" alt="" />
+          <div class="box_border1">
+            <div class="box_border2">
+              <span>
+                NFT artist shika studio provided the character artwork for the release of NFT on the ISEKAI platform, which was used in Cybergear's
+                game scenes.
+              </span>
+              <img src="../../assets/images/img7.png" alt="" />
+            </div>
+          </div>
         </div>
         <div class="bottom">
           <div class="left">
-            <img src="../../assets/images/img8.png" alt="" />
+            <div class="box_border1">
+              <div class="box_border2">
+                <img src="../../assets/images/img8.png" alt="" />
+              </div>
+            </div>
           </div>
           <div class="right">
             <div><img src="../../assets/images/img9.png" alt="" /></div>
@@ -117,27 +143,31 @@
       <div class="box_content">
         <ul class="cardList4">
           <li v-for="(item, index) in cardList4" :key="index">
-            <ul>
-              <li><img :src="item.image" alt="" /></li>
-              <li>{{ item.name1 }}</li>
-              <li>{{ item.name2 }}</li>
-              <li>
-                <img :src="item.logo" alt="" /><span>{{ item.num }}</span>
-              </li>
-              <li>
-                <div>
-                  <div class="connected" v-if="item.offer">
-                    <span>{{ item.offer.name }}</span>
-                    <img :src="item.logo" alt="" />
-                    <span>{{ item.offer.num }}</span>
-                  </div>
-                  <div class="no_connect" v-else>connect</div>
-                </div>
-                <div class="btn">
-                  <img src="../../assets/images/img15.png" alt="" />
-                </div>
-              </li>
-            </ul>
+            <div class="box_border1">
+              <div class="box_border2">
+                <ul>
+                  <li><img :src="item.image" alt="" /></li>
+                  <li>{{ item.name1 }}</li>
+                  <li>{{ item.name2 }}</li>
+                  <li>
+                    <img :src="item.logo" alt="" /><span>{{ item.num }}</span>
+                  </li>
+                  <li>
+                    <div>
+                      <div class="connected" v-if="item.offer">
+                        <span>{{ item.offer.name }}</span>
+                        <img :src="item.logo" alt="" />
+                        <span>{{ item.offer.num }}</span>
+                      </div>
+                      <div class="no_connect" v-else>connect</div>
+                    </div>
+                    <div class="btn">
+                      <img src="../../assets/images/img15.png" alt="" />
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </li>
         </ul>
       </div>
@@ -445,6 +475,7 @@ export default {
   left: 0;
   bottom: 0;
 }
+
 .box1 {
   width: 100%;
   height: 9.4rem;
@@ -490,7 +521,7 @@ export default {
             font-size: 25px;
             font-weight: bold;
             background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
-            border: 1px solid;
+            border: 0.01rem solid;
             border-image: linear-gradient(320deg, rgba(219, 98, 255, 1), rgba(136, 253, 238, 0)) 1 1;
           }
           &:nth-child(2) {
@@ -520,11 +551,23 @@ export default {
     right: 0;
   }
 }
+.box_border1,
+.box_border2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.05rem;
+}
+.box_border1 {
+  padding: 0.01rem;
+}
+.box_border2 {
+  padding: 0;
+  background: rgba(8, 8, 9, 1);
+}
 .box2 {
   width: 100%;
   margin: 0 auto;
   position: relative;
-
   .box_content {
     width: 80%;
     margin: 0 auto;
@@ -540,7 +583,7 @@ export default {
       width: 3.2rem;
       height: 1.4rem;
       background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
-      border: 1px solid;
+      border: 0.01rem solid;
       border-image: linear-gradient(320deg, rgba(219, 98, 255, 1), rgba(136, 253, 238, 0)) 1 1;
       position: relative;
       p {
@@ -556,7 +599,7 @@ export default {
         font-size: 12px;
         font-weight: bold;
         position: absolute;
-        top: 0.4rem;
+        top: 0.3rem;
         right: 0.05rem;
         background: url("../../assets/images/img2.png") no-repeat;
         background-size: 100% 100%;
@@ -579,34 +622,48 @@ export default {
     align-items: center;
     justify-content: space-between;
     li {
+      width: 2.7rem;
+      height: 1.8rem;
       position: relative;
+      .box_border1 {
+        background-image: linear-gradient(
+          to right bottom,
+          rgba(0, 211, 255, 0.5),
+          rgba(0, 211, 255, 0.5),
+          rgba(0, 211, 255, 0),
+          rgba(233, 150, 255, 0.5)
+        );
+        .box_border2 {
+          padding: 0.1rem;
+          .box_border1 {
+            background-image: linear-gradient(
+              to left bottom,
+              rgba(0, 211, 255, 0.5),
+              rgba(0, 211, 255, 0.5),
+              rgba(0, 211, 255, 0),
+              rgba(233, 150, 255, 0.5)
+            );
+            .box_border2 {
+              padding: 0;
+            }
+          }
+        }
+      }
       &:nth-child(1) {
-        .box_item div {
+        .box_item {
           color: #000000;
           background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
         }
       }
       .box_item {
-        width: 2.7rem;
-        height: 1.8rem;
-        padding: 0.05rem;
-        background: rgba(8, 8, 9, 0.58);
-        border-radius: 0.05rem;
-        border: 1px solid;
-        border-image: linear-gradient(to right bottom, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0), rgba(233, 150, 255, 0.5)) 1 1;
-        div {
-          width: 100%;
-          height: 100%;
-          font-size: 0.12rem;
-          font-weight: 600;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 0 0.4rem;
-          border-radius: 0.05rem;
-          border: 1px solid;
-          border-image: linear-gradient(to left bottom, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0), rgba(233, 150, 255, 0.5)) 1 1;
-        }
+        width: 100%;
+        height: 100%;
+        font-size: 0.12rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0.2rem;
       }
       .box_top {
         display: flex;
@@ -666,46 +723,56 @@ export default {
     .cardList3 {
       li {
         width: 7.8rem;
-        background: rgba(8, 8, 9, 0.58);
-        padding: 0.3rem 0.4rem;
         margin-bottom: 0.5rem;
-        border-radius: 0.1rem;
-        border: 1px solid;
-        border-image: linear-gradient(to right bottom, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0), rgba(233, 150, 255, 0.5)) 1 1;
-        div {
-          &:nth-child(1) {
-            font-size: 0.2rem;
-            font-weight: bold;
-          }
-          &:nth-child(2) {
-            font-size: 0.12rem;
-            font-weight: bold;
-            margin: 0.2rem 0;
-          }
-          &:nth-child(3) {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            .btn {
-              cursor: pointer;
-              font-size: 0.15rem;
+        .box_border1 {
+          background-image: linear-gradient(150deg, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5));
+        }
+        .box_item {
+          width: 100%;
+          height: 100%;
+          padding: 0.2rem 0.4rem;
+          > div {
+            &:nth-child(1) {
+              font-size: 0.2rem;
               font-weight: bold;
-              padding: 0.1rem 0.5rem;
-              border-radius: 0.05rem;
-              border: 1px solid;
-              border-image: linear-gradient(to right, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5))
-                1 1;
             }
-            .progress_bar {
-              width: 2rem;
-              height: auto;
-              div {
-                border-radius: 0.1rem;
-                padding-right: 0.1rem;
-                text-align: right;
-                font-size: 0.1rem;
+            &:nth-child(2) {
+              font-size: 0.12rem;
+              font-weight: bold;
+              margin: 0.2rem 0;
+            }
+            &:nth-child(3) {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              .btn {
+                cursor: pointer;
+                font-size: 0.15rem;
                 font-weight: bold;
-                background-image: linear-gradient(to right, rgba(0, 211, 255, 0.5), rgba(176, 108, 198, 1));
+                .box_border1 {
+                  background-image: linear-gradient(
+                    120deg,
+                    rgba(0, 211, 255, 0.5),
+                    rgba(0, 211, 255, 0),
+                    rgba(233, 150, 255, 0),
+                    rgba(233, 150, 255, 0.5)
+                  );
+                  .box_border2 {
+                    padding: 0.1rem 0.5rem;
+                  }
+                }
+              }
+              .progress_bar {
+                width: 2rem;
+                height: auto;
+                div {
+                  border-radius: 0.1rem;
+                  padding-right: 0.1rem;
+                  text-align: right;
+                  font-size: 0.1rem;
+                  font-weight: bold;
+                  background-image: linear-gradient(to right, rgba(0, 211, 255, 0.5), rgba(176, 108, 198, 1));
+                }
               }
             }
           }
@@ -718,19 +785,19 @@ export default {
   width: 100%;
   margin-bottom: 1rem;
   position: relative;
-
   .box_content {
     width: 9.5rem;
     margin: 0 auto;
     .top {
       width: 100%;
-      background: rgba(8, 8, 9, 0.58);
-      border-radius: 0.05rem;
-      border: 1px solid;
-      border-image: linear-gradient(to right, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5)) 1 1;
-      position: relative;
-      padding: 0.2rem 0.2rem 0.2rem 2rem;
       margin-bottom: 0.5rem;
+      position: relative;
+      .box_border1 {
+        background-image: linear-gradient(120deg, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5));
+        .box_border2 {
+          padding: 0.2rem 0.2rem 0.2rem 2rem;
+        }
+      }
       span {
         font-size: 0.2rem;
       }
@@ -746,11 +813,9 @@ export default {
       display: flex;
       justify-content: space-between;
       .left {
-        background: rgba(8, 8, 9, 0.58);
-        border-radius: 0.05rem;
-        border: 1px solid;
-        border-image: linear-gradient(to right bottom, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5))
-          1 1;
+        .box_border1 {
+          background-image: linear-gradient(150deg, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0.5), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5));
+        }
         img {
           width: 3.4rem;
           height: 5rem;
@@ -788,13 +853,12 @@ export default {
       align-items: center;
       justify-content: space-around;
       > li {
-        width: 2.4rem;
-        padding: 0.18rem 0.12rem;
-        background: rgba(8, 8, 9, 0.58);
-        border-radius: 0.05rem;
-        border: 1px solid;
-        border-image: linear-gradient(to right bottom, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5))
-          1 1;
+        .box_border1 {
+          background-image: linear-gradient(150deg, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0.5), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5));
+          .box_border2 {
+            padding: 0.18rem 0.12rem;
+          }
+        }
         ul {
           li {
             &:nth-child(1) {
@@ -815,7 +879,7 @@ export default {
             }
             &:nth-child(4) {
               padding: 0.1rem;
-              border-bottom: 1px solid;
+              border-bottom: 0.01rem solid;
               border-image: linear-gradient(63deg, rgba(7, 209, 229, 1), rgba(152, 90, 173, 1)) 1 1;
               display: flex;
               align-items: center;
@@ -891,7 +955,7 @@ export default {
         font-size: 0.15rem;
         font-weight: bold;
         padding: 0.2rem 0;
-        border-bottom: 1px solid #979797;
+        border-bottom: 0.01rem solid #979797;
         > div {
           display: flex;
           align-items: center;
@@ -902,7 +966,7 @@ export default {
             padding: 0.05rem 0.5rem;
             margin-right: 0.2rem;
             background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
-            border: 1px solid;
+            border: 0.01rem solid;
             border-image: linear-gradient(320deg, rgba(219, 98, 255, 1), rgba(136, 253, 238, 0)) 1 1;
           }
           img {

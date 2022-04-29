@@ -16,6 +16,7 @@
     <img class="absolute12" src="../../assets/images/absolute2.png" alt="" />
     <img class="absolute13" src="../../assets/images/absolute13.png" alt="" />
     <img class="absolute14" src="../../assets/images/absolute14.png" alt="" />
+    <img class="absolute15" src="../../assets/images/bg4.png" alt="" />
     <div class="box1">
       <ul>
         <li>
@@ -183,9 +184,9 @@
         <ul class="cardList5">
           <li v-for="(item, index) in cardList5" :key="index">
             <div>
-              <div v-if="item.tag">TAG</div>
+              <div>TAG</div>
               <span>{{ item.time }}</span>
-              <img v-if="item.tag" src="../../assets/images/img5.png" alt="" />
+              <img src="../../assets/images/img5.png" alt="" />
             </div>
             <span>{{ item.text }}</span>
           </li>
@@ -399,7 +400,7 @@ export default {
   height: auto;
   position: absolute;
   left: 0;
-  top: 30%;
+  top: 31%;
 }
 .absolute5 {
   width: 1.5rem;
@@ -413,7 +414,7 @@ export default {
   height: auto;
   position: absolute;
   left: 0;
-  top: 42%;
+  top: 43%;
   z-index: 2;
 }
 .absolute7 {
@@ -438,7 +439,7 @@ export default {
   height: auto;
   position: absolute;
   left: 0;
-  top: 60.2%;
+  top: 59.7%;
 }
 .absolute10 {
   width: 1.05rem;
@@ -459,14 +460,14 @@ export default {
   height: auto;
   position: absolute;
   left: 4%;
-  top: 82.8%;
+  top: 83.8%;
 }
 .absolute13 {
   width: 0.75rem;
   height: auto;
   position: absolute;
   right: 0;
-  top: 86.8%;
+  top: 88.2%;
 }
 .absolute14 {
   width: 0.75rem;
@@ -475,7 +476,13 @@ export default {
   left: 0;
   bottom: 0;
 }
-
+.absolute15 {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  left: 0;
+  top: 54%;
+}
 .box1 {
   width: 100%;
   height: 9.4rem;
@@ -563,6 +570,7 @@ export default {
 .box_border2 {
   padding: 0;
   background: rgba(8, 8, 9, 1);
+  transition: all 1s;
 }
 .box2 {
   width: 100%;
@@ -649,11 +657,9 @@ export default {
           }
         }
       }
-      &:nth-child(1) {
-        .box_item {
-          color: #000000;
-          background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
-        }
+      &:hover .box_item {
+        color: #000000;
+        background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
       }
       .box_item {
         width: 100%;
@@ -664,6 +670,7 @@ export default {
         align-items: center;
         justify-content: center;
         padding: 0 0.2rem;
+        transition: all 1s;
       }
       .box_top {
         display: flex;
@@ -749,6 +756,9 @@ export default {
                 cursor: pointer;
                 font-size: 0.15rem;
                 font-weight: bold;
+                &:hover .box_border2 {
+                  background: linear-gradient(180deg, #02aed3 0%, rgba(8, 8, 9, 0.58) 100%);
+                }
                 .box_border1 {
                   background-image: linear-gradient(
                     120deg,
@@ -838,21 +848,21 @@ export default {
 }
 .box5 {
   width: 100%;
-  height: 10.5rem;
-  padding: 1.5rem 0;
+  height: 8rem;
   margin-bottom: 1rem;
-  background: url("../../assets/images/bg4.png") no-repeat;
-  background-size: 80% auto;
-  background-position: center top;
   position: relative;
   .box_content {
     .cardList4 {
       width: 80%;
       margin: 0 auto;
+      padding: 1rem 0;
       display: flex;
       align-items: center;
       justify-content: space-around;
       > li {
+        &:hover .box_border2 {
+          background: rgba(8, 8, 9, 0);
+        }
         .box_border1 {
           background-image: linear-gradient(150deg, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0.5), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5));
           .box_border2 {
@@ -950,29 +960,47 @@ export default {
     .cardList5 {
       width: 100%;
       li {
+        width: 100%;
+        height: 0.5rem;
         display: flex;
         align-items: center;
         font-size: 0.15rem;
         font-weight: bold;
-        padding: 0.2rem 0;
+        line-height: 0.25rem;
         border-bottom: 0.01rem solid #979797;
-        > div {
-          display: flex;
-          align-items: center;
-          span {
-            margin-right: 0.2rem;
-          }
+        cursor: pointer;
+        &:hover > div {
           div {
-            padding: 0.05rem 0.5rem;
+            width: 8em;
             margin-right: 0.2rem;
-            background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
             border: 0.01rem solid;
             border-image: linear-gradient(320deg, rgba(219, 98, 255, 1), rgba(136, 253, 238, 0)) 1 1;
           }
           img {
-            width: auto;
-            height: 0.2rem;
+            width: 0.3rem;
             margin-right: 0.2rem;
+          }
+        }
+        > div {
+          height: 60%;
+          display: flex;
+          align-items: center;
+          transition: all 1s;
+          div {
+            width: 0;
+            height: 100%;
+            text-align: center;
+            overflow: hidden;
+            background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
+            transition: all 0.5s;
+          }
+          span {
+            margin-right: 0.2rem;
+          }
+          img {
+            width: 0;
+            height: auto;
+            transition: all 0.5s;
           }
         }
       }

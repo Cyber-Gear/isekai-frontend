@@ -6,6 +6,17 @@
         <span>{{ $t(item.label) }}</span>
       </li>
     </ul>
+    <div class="lang_box" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
+      <img class="lang_img" :src="languageImage" alt="" />
+      <img class="angle" src="../assets/images/angle.png" alt="" />
+      <transition name="select-lang" appear>
+        <ul v-show="showLangSelect">
+          <li v-for="(item, index) in langArr" :key="index" @click="selectLang(item)">
+            <img :src="item.image" alt="" />
+          </li>
+        </ul>
+      </transition>
+    </div>
   </div>
 </template>
 <script>
@@ -18,6 +29,12 @@ export default {
         { label: "message.nav.text2", link: "/home" },
         { label: "message.nav.text3", link: "/home" },
         { label: "message.nav.text4", link: "/home" },
+      ],
+      showLangSelect: false,
+      languageImage: "",
+      langArr: [
+        { lang: "cn", image: require("../assets/images/national_cn.png") },
+        { lang: "en", image: require("../assets/images/national_us.png") },
       ],
     };
   },
@@ -33,9 +50,19 @@ export default {
       }
     },
   },
+  created() {
+    this.languageImage = this.$i18n.locale == "cn" ? this.langArr[0].image : this.langArr[1].image;
+  },
   methods: {
     toRoute(link) {
       if (link) this.$router.push(link);
+    },
+    selectLang(item) {
+      if (this.$i18n.locale == item.lang) return (this.showLangSelect = false);
+      this.$i18n.locale = item.lang;
+      this.languageImage = item.image;
+      this.$utils.setCookie("LANG", this.$i18n.locale);
+      // location.reload();
     },
   },
 };
@@ -58,7 +85,7 @@ export default {
     width: 1.3rem;
     height: auto;
   }
-  ul {
+  > ul {
     height: 100%;
     display: flex;
     align-items: center;
@@ -82,6 +109,44 @@ export default {
         background-position: center;
       }
     }
+  }
+  .lang_box {
+    cursor: pointer;
+    padding: 0.05rem 0.1rem;
+    background: url("../assets/images/btn_bg2.png") no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    img {
+      width: 0.2rem;
+      height: auto;
+    }
+    ul {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      text-align: center;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 99;
+      transition: transform 0.3s;
+      transform-origin: top center;
+      li {
+        padding: 0.1rem 0;
+        &:hover {
+          background: #000;
+        }
+      }
+    }
+  }
+  .select-lang-enter,
+  .select-lang-leave-to {
+    transform: scaleY(0);
+  }
+  .select-lang-enter-to,
+  .select-lang-leave {
+    transform: scaleY(1);
   }
 }
 </style>

@@ -20,12 +20,13 @@
     <div class="box1">
       <ul>
         <li>
-          Create a <span>MAG</span>
+          <!-- Create a <span>MAG</span>
           <br />
-          Community on Web3
+          Community on Web3 -->
+          {{ $t("message.home.text1") }}
         </li>
         <li><div></div></li>
-        <li>Strong connection to both MAG & Crypto Technologies to lower the barriers of crypto entrance</li>
+        <li>{{ $t("message.home.text2") }}</li>
         <li>
           <div>WHITE PAGE</div>
           <div>
@@ -45,8 +46,8 @@
       <div class="box_content">
         <ul class="card_list1">
           <li v-for="(item, index) in cardList1" :key="index">
-            <p>{{ item.text1 }}</p>
-            <div>{{ item.text2 }}</div>
+            <p>{{ $t(item.text1) }}</p>
+            <div>{{ $t(item.text2) }}</div>
           </li>
         </ul>
         <img class="img_bg3" src="../../assets/images/img3.png" alt="" />
@@ -57,11 +58,11 @@
                 <div class="box_border1">
                   <div class="box_border2">
                     <div class="box_item">
-                      {{ item.text }}
+                      {{ $t(item.text) }}
                     </div>
                     <div class="box_top">
                       <img :src="item.image" alt="" />
-                      <span>{{ item.name }}</span>
+                      <span>{{ $t(item.name) }}</span>
                     </div>
                   </div>
                 </div>
@@ -83,12 +84,12 @@
             <div class="box_border1">
               <div class="box_border2">
                 <div class="box_item">
-                  <div>{{ item.text1 }}</div>
-                  <div>{{ item.text2 }}</div>
+                  <div>{{ $t(item.text1) }}</div>
+                  <div>{{ $t(item.text2) }}</div>
                   <div>
                     <div class="btn">
                       <div class="box_border1">
-                        <div class="box_border2">{{ item.text3 }}</div>
+                        <div class="box_border2">{{ $t(item.text3) }}</div>
                       </div>
                     </div>
                     <div class="progress_bar">
@@ -113,8 +114,7 @@
           <div class="box_border1">
             <div class="box_border2">
               <span>
-                NFT artist shika studio provided the character artwork for the release of NFT on the ISEKAI platform, which was used in Cybergear's
-                game scenes.
+                {{ $t("message.home.text3") }}
               </span>
               <img src="../../assets/images/img7.png" alt="" />
             </div>
@@ -185,10 +185,10 @@
           <li v-for="(item, index) in cardList5" :key="index">
             <div>
               <div>TAG</div>
-              <span>{{ item.time }}</span>
+              <span>{{ $t(item.time) }}</span>
               <img src="../../assets/images/img5.png" alt="" />
             </div>
-            <span>{{ item.text }}</span>
+            <span>{{ $t(item.text) }}</span>
           </li>
         </ul>
       </div>
@@ -215,50 +215,47 @@ export default {
   data() {
     return {
       cardList1: [
-        { text1: "Submit Artist Info", text2: "start the journey of secondary creation and get rewarded" },
-        { text1: "Submit cooperation Info", text2: "Create your NFT、Game、Event，we will contact with you" },
-        { text1: "Polling vote", text2: "Vote for your favorite artists, KOLs, games and works and get rewarded" },
+        { text1: "message.home.list1[0].text1", text2: "message.home.list1[0].text2" },
+        { text1: "message.home.list1[1].text1", text2: "message.home.list1[1].text2" },
+        { text1: "message.home.list1[2].text1", text2: "message.home.list1[2].text2" },
       ],
       cardList2: [
         {
           image: require("../../assets/images/card_img1.png"),
-          name: "Negoro",
-          text: "插画师、概念设计师，曾参与过《阴阳师》立绘设计，干净利落的线稿，色彩搭配上清新雅致。非常喜欢画同人图。",
+          name: "message.home.list2[0].text1",
+          text: "message.home.list2[0].text2",
+        },
+        {
+          image: require("../../assets/images/card_img4.png"),
+          name: "message.home.list2[1].text1",
+          text: "message.home.list2[1].text2",
         },
         {
           image: require("../../assets/images/card_img2.png"),
-          name: "Z.W.",
-          text: "Pixiv画师，游戏插画师。参与过韩国MOBA网游《魔狱军团》担当角色设定；日本二次元RPG游戏《碧蓝档案》卡牌绘制；",
+          name: "message.home.list2[2].text1",
+          text: "message.home.list2[2].text2",
         },
-        {
-          image: require("../../assets/images/card_img3.png"),
-          name: "Akiha",
-          text: "Overidea所属的一位日本虚拟主播、偶像。早期于Youtube上进行活动，主要内容为翻唱，游戏直播以及日常聊天。2020年，举行了第一场个人演唱会。",
-        },
-        { image: require("../../assets/images/card_img4.png"), name: "Animan", text: "海外动漫up主，资深宅。视频以动漫杂谈为主，风格独特见解独到。" },
+        { image: require("../../assets/images/card_img3.png"), name: "message.home.list2[3].text1", text: "message.home.list2[3].text2" },
       ],
       cardList3: [
         {
-          text1: "Notification",
-          text2:
-            "hello to all you isekai out therelets put a notification option ( email , phone notification , ... ) so we wont miss what isekai hold for us",
-          text3: "detail",
+          text1: "message.home.list3[0].text1",
+          text2: "message.home.list3[0].text2",
+          text3: "message.home.list3[0].text3",
           link: "",
           progress: "88%",
         },
         {
-          text1: "Isekai Governance Threshold",
-          text2:
-            "This vote aims to determine intention as to whether a threshold is a legitimate alternative path to isekai shareholders, if so, what the appropriate threshold should be.",
-          text3: "detail",
+          text1: "message.home.list3[1].text1",
+          text2: "message.home.list3[1].text2",
+          text3: "message.home.list3[1].text3",
           link: "",
           progress: "68%",
         },
         {
-          text1: "Launched the Fist Game",
-          text2:
-            "There are many games under Isekai that are suitable for gamefi users. The first game to be launched will be selected by users' votes.",
-          text3: "detail",
+          text1: "message.home.list3[2].text1",
+          text2: "message.home.list3[2].text2",
+          text3: "message.home.list3[2].text3",
           link: "",
           progress: "68%",
         },
@@ -313,16 +310,7 @@ export default {
           },
         },
       ],
-      cardList5: [
-        { time: "2022.04.13", text: "cybergear will soon be on the Gamedao board, please look forward to it!", tag: true },
-        { time: "2022.04.13", text: "cybergear will soon be on the Gamedao board, please look forward to it!" },
-        { time: "2022.04.13", text: "cybergear will soon be on the Gamedao board, please look forward to it!" },
-        { time: "2022.04.13", text: "cybergear will soon be on the Gamedao board, please look forward to it!" },
-        { time: "2022.04.13", text: "cybergear will soon be on the Gamedao board, please look forward to it!" },
-        { time: "2022.04.13", text: "cybergear will soon be on the Gamedao board, please look forward to it!" },
-        { time: "2022.04.13", text: "cybergear will soon be on the Gamedao board, please look forward to it!" },
-        { time: "2022.04.13", text: "cybergear will soon be on the Gamedao board, please look forward to it!" },
-      ],
+      cardList5: [{ time: "message.home.list4[0].text1", text: "message.home.list4[0].text2" }],
       cardList6: [
         require("../../assets/images/collaborators1.png"),
         require("../../assets/images/collaborators2.png"),
@@ -356,7 +344,7 @@ export default {
 }
 .absolute_text1 {
   white-space: nowrap;
-  font-size: 0.17rem;
+  font-size: 0.15rem;
   color: #ffa332;
   letter-spacing: 0.75rem;
   transform: rotate(90deg);
@@ -366,7 +354,7 @@ export default {
 }
 .absolute_text2 {
   white-space: nowrap;
-  font-size: 0.17rem;
+  font-size: 0.15rem;
   color: #ffa332;
   letter-spacing: 0.75rem;
   transform: rotate(90deg);
@@ -493,7 +481,7 @@ export default {
   padding: 0.5rem 0;
   position: relative;
   ul {
-    width: 60%;
+    width: 55%;
     li {
       padding-left: 1rem;
       &:nth-child(1) {
@@ -959,6 +947,8 @@ export default {
     }
     .cardList5 {
       width: 100%;
+      height: 4rem;
+      overflow-y: auto;
       li {
         width: 100%;
         height: 0.5rem;

@@ -5,6 +5,9 @@ export const message = {
     text3: "MARKET",
     text4: "MEDIA",
   },
+  footer: {
+    text1: "COPYRIGHT © 2022 isekai, All rights Reserved",
+  },
   home: {
     text1: "在Web3的世界创建一个MAG社区",
     text2: "以MAG和加密技术的紧密联系来降低加密货币进入的门槛",

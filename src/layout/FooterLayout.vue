@@ -9,6 +9,7 @@
         <img src="../assets/images/contact4.png" alt="" />
       </div>
     </div>
+    <p>{{ $t("message.footer.text1") }}</p>
   </div>
 </template>
 <script>
@@ -24,11 +25,11 @@ export default {
   height: 4rem;
   background: url("../assets/images/footer_bg1.png") no-repeat;
   background-size: 100% auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding-top: 1.5rem;
+  text-align: center;
   .center {
     width: 50%;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -44,6 +45,14 @@ export default {
         cursor: pointer;
       }
     }
+  }
+  p {
+    width: 50%;
+    margin: 0.3rem auto;
+    font-size: 0.15rem;
+    font-weight: bold;
+    color: #c1c3c5;
+    letter-spacing: 0.08rem;
   }
 }
 </style>

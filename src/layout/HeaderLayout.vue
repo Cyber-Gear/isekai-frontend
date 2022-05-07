@@ -7,12 +7,12 @@
       </li>
     </ul>
     <div class="lang_box" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
-      <img class="lang_img" :src="languageImage" alt="" />
+      <span>{{ $i18n.locale.toUpperCase() }}</span>
       <img class="angle" src="../assets/images/angle.png" alt="" />
       <transition name="select-lang" appear>
         <ul v-show="showLangSelect">
           <li v-for="(item, index) in langArr" :key="index" @click="selectLang(item)">
-            <img :src="item.image" alt="" />
+            <span> {{ item.toUpperCase() }}</span>
           </li>
         </ul>
       </transition>
@@ -31,11 +31,7 @@ export default {
         { label: "message.nav.text4", link: "/home" },
       ],
       showLangSelect: false,
-      languageImage: "",
-      langArr: [
-        { lang: "cn", image: require("../assets/images/national_cn.png") },
-        { lang: "en", image: require("../assets/images/national_us.png") },
-      ],
+      langArr: ["en", "cn"],
     };
   },
   watch: {
@@ -58,9 +54,9 @@ export default {
       if (link) this.$router.push(link);
     },
     selectLang(item) {
-      if (this.$i18n.locale == item.lang) return (this.showLangSelect = false);
-      this.$i18n.locale = item.lang;
-      this.languageImage = item.image;
+      if (this.$i18n.locale == item) return (this.showLangSelect = false);
+      this.$i18n.locale = item;
+      this.showLangSelect = false;
       this.$utils.setCookie("LANG", this.$i18n.locale);
       // location.reload();
     },
@@ -118,6 +114,7 @@ export default {
     position: relative;
     display: flex;
     align-items: center;
+    font-size: 0.14rem;
     img {
       width: 0.2rem;
       height: auto;

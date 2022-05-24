@@ -1,11 +1,12 @@
 <template>
   <div class="page">
-    <h1>NFT</h1>
+    <h1>LAUNCHPAD</h1>
   </div>
 </template>
 
 <script>
 export default {
+  name: "LAUNCHPAD",
   data() {
     return {};
   },

@@ -1,0 +1,97 @@
+@font-face {
+  font-family: "iconfont"; /* Project id  */
+  src: url('iconfont.ttf?t=1653286691136') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-guanbi2fill:before {
+  content: "\e724";
+}
+
+.icon-fanhui:before {
+  content: "\e60c";
+}
+
+.icon-gouxuan:before {
+  content: "\e641";
+}
+
+.icon-dengji:before {
+  content: "\e621";
+}
+
+.icon-chakan:before {
+  content: "\e544";
+}
+
+.icon-medium:before {
+  content: "\e87a";
+}
+
+.icon-guanbi:before {
+  content: "\eaf2";
+}
+
+.icon-tuite:before {
+  content: "\e652";
+}
+
+.icon-zhuanfa:before {
+  content: "\e6c9";
+}
+
+.icon-favorites-fill:before {
+  content: "\e721";
+}
+
+.icon-integral-fill:before {
+  content: "\e726";
+}
+
+.icon-arrow-up:before {
+  content: "\e743";
+}
+
+.icon-assessed-badge:before {
+  content: "\e744";
+}
+
+.icon-Customermanagement-fill:before {
+  content: "\e77c";
+}
+
+.icon-telegram:before {
+  content: "\e794";
+}
+
+.icon-favorites:before {
+  content: "\e7b3";
+}
+
+.icon-pingfendengjiRating11:before {
+  content: "\e6b5";
+}
+
+.icon-pingfendengjiRating15:before {
+  content: "\e6b6";
+}
+
+.icon-shuxingchaxun:before {
+  content: "\e77a";
+}
+
+.icon-zhili:before {
+  content: "\e60b";
+}
+
+.icon-discord:before {
+  content: "\ebf8";
+}
+

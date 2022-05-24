@@ -15,9 +15,34 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/home/IndexView.vue"),
   },
   {
-    path: "/nft",
-    name: "NFT",
-    component: () => import("../views/nft/IndexView.vue"),
+    path: "/artist",
+    name: "ARTIST",
+    component: () => import("../views/artist/IndexView.vue"),
+  },
+  {
+    path: "/artist-details",
+    name: "Details",
+    component: () => import("../views/artist/Details.vue"),
+  },
+  {
+    path: "/artist-detailsofdetails",
+    name: "DetailsOfDetails",
+    component: () => import("../views/artist/DetailsOfDetails.vue"),
+  },
+  {
+    path: "/dao",
+    name: "DAO",
+    component: () => import("../views/dao/IndexView.vue"),
+  },
+  {
+    path: "/launchpad",
+    name: "LAUNCHPAD",
+    component: () => import("../views/launchpad/IndexView.vue"),
+  },
+  {
+    path: "/market",
+    name: "MARKET",
+    component: () => import("../views/market/IndexView.vue"),
   },
 ];
 
@@ -25,4 +50,7 @@ const router = new VueRouter({
   routes,
 });
 
+router.afterEach(() => {
+  window.scrollTo(0, 0);
+});
 export default router;

@@ -212,6 +212,7 @@
 
 <script>
 export default {
+  name: "HOME",
   data() {
     return {
       cardList1: [
@@ -337,7 +338,6 @@ export default {
 .home {
   width: 100%;
   position: relative;
-  padding-bottom: 1rem;
   background: url("../../assets/images/bg2.png") no-repeat;
   background-size: 100% auto;
   background-position: 0% 15%;
@@ -677,30 +677,6 @@ export default {
           margin-bottom: 0.2rem;
         }
       }
-    }
-  }
-}
-.box_title {
-  margin-bottom: 1rem;
-  img {
-    width: 2.95rem;
-    height: auto;
-  }
-  span {
-    font-size: 0.35rem;
-    font-weight: bold;
-    color: #53d0ff;
-    position: relative;
-    left: 0.1rem;
-    &::before {
-      content: "";
-      width: 0.5rem;
-      height: 0.5rem;
-      background: url("../../assets/images/box_title2.png") no-repeat;
-      background-size: 100% auto;
-      position: absolute;
-      top: 0.35rem;
-      left: 0;
     }
   }
 }

@@ -1,5 +1,6 @@
 <template>
   <div class="footer_box">
+    <img src="../assets/images/footer_bg1.png" alt="" />
     <div class="center">
       <img src="../assets/images/logo1.png" alt="" />
       <div>
@@ -23,12 +24,22 @@ export default {
 .footer_box {
   width: 100%;
   height: 4rem;
-  background: url("../assets/images/footer_bg1.png") no-repeat;
+  background: url("../assets/images/footer_bg2.png") no-repeat;
   background-size: 100% auto;
-  padding-top: 1.5rem;
   text-align: center;
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+  border-top: 2px solid #244647;
+  position: relative;
+  > img {
+    width: 4rem;
+    height: auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
   .center {
-    width: 50%;
+    width: 48%;
     margin: 0 auto;
     display: flex;
     align-items: center;

@@ -2,10 +2,14 @@
   <div class="nav">
     <img src="../assets/images/logo1.png" alt="" />
     <ul>
-      <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item.link)">
+      <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item)">
         <span>{{ $t(item.label) }}</span>
       </li>
     </ul>
+    <div class="connect">
+      <span @click="openWalletPopup">{{ $t("message.nav.text6") }}</span>
+      <!-- <span>Ox8652....583D</span> -->
+    </div>
     <div class="lang_box" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
       <span>{{ $i18n.locale.toUpperCase() }}</span>
       <img class="angle" src="../assets/images/angle.png" alt="" />
@@ -17,48 +21,57 @@
         </ul>
       </transition>
     </div>
+    <WalletPopup v-if="isShowWalletPopup"></WalletPopup>
   </div>
 </template>
 <script>
+import WalletPopup from "../components/WalletPopup.vue";
 export default {
+  components: { WalletPopup },
   data() {
     return {
       navActive: 0,
       navArr: [
-        { label: "message.nav.text1", link: "/home" },
-        { label: "message.nav.text2", link: "/home" },
-        { label: "message.nav.text3", link: "/home" },
-        { label: "message.nav.text4", link: "/home" },
+        { label: "message.nav.text1", link: "/home", isOpen: true },
+        { label: "message.nav.text2", link: "/artist", isOpen: true },
+        { label: "message.nav.text3", link: "/dao", isOpen: false },
+        { label: "message.nav.text4", link: "/launchpad", isOpen: false },
+        { label: "message.nav.text5", link: "/market", isOpen: false },
       ],
       showLangSelect: false,
-      langArr: ["en", "cn"],
+      langArr: ["en", "zh"],
+      isShowWalletPopup: false,
     };
   },
   watch: {
-    $route(to, from) {
-      if (from.matched.length && to.matched[0].path !== from.matched[0].path) {
-        window.scrollTo(0, 0);
-      }
+    $route(to) {
       if (to.path == "/home") {
         this.navActive = 0;
-      } else if (to.path == "/nft") {
+      } else if (to.path.indexOf("/artist") !== -1) {
         this.navActive = 1;
+      } else if (to.path.indexOf("/dao") !== -1) {
+        this.navActive = 2;
+      } else if (to.path.indexOf("/launchpad") !== -1) {
+        this.navActive = 3;
+      } else if (to.path.indexOf("/market") !== -1) {
+        this.navActive = 4;
       }
     },
   },
-  created() {
-    this.languageImage = this.$i18n.locale == "cn" ? this.langArr[0].image : this.langArr[1].image;
-  },
   methods: {
-    toRoute(link) {
-      if (link) this.$router.push(link);
+    toRoute(item) {
+      if (item.isOpen) this.$router.push(item.link);
     },
     selectLang(item) {
       if (this.$i18n.locale == item) return (this.showLangSelect = false);
-      this.$i18n.locale = item;
       this.showLangSelect = false;
+      this.$i18n.locale = item;
       this.$utils.setCookie("LANG", this.$i18n.locale);
       // location.reload();
+    },
+    openWalletPopup() {
+      this.isShowWalletPopup = true;
+      this.$utils.forbiddenScroll();
     },
   },
 };
@@ -105,6 +118,14 @@ export default {
         background-position: center;
       }
     }
+  }
+  .connect {
+    cursor: pointer;
+    font-size: 0.12rem;
+    font-weight: 400;
+    border-radius: 0.03rem;
+    padding: 0.05rem 0.2rem;
+    background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
   }
   .lang_box {
     cursor: pointer;

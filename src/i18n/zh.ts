@@ -1,9 +1,11 @@
 export const message = {
   nav: {
-    text1: "DAO",
-    text2: "LAUNCHPAD",
-    text3: "MARKET",
-    text4: "MEDIA",
+    text1: "HOME",
+    text2: "ARTIST",
+    text3: "DAO",
+    text4: "LAUNCHPAD",
+    text5: "MARKET",
+    text6: "Connected",
   },
   footer: {
     text1: "COPYRIGHT © 2022 isekai, All rights Reserved",

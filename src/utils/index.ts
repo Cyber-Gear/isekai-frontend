@@ -11,7 +11,23 @@ export default {
     if ((arr = document.cookie.match(reg))) return unescape(arr[2]);
     else return null;
   },
-  delCookie(name: string) { 
+  delCookie(name: string) {
     this.setCookie(name, "", -1);
+  },
+  //禁止滚动条滚动
+  forbiddenScroll() {
+    const scroll = (e: any) => {
+      e.preventDefault();
+    };
+    document.body.style.overflow = "hidden";
+    document.addEventListener("touchmove", scroll, false);
+  },
+  //恢复滚动条滚动
+  restoreTheScroll() {
+    const scroll = (e: any) => {
+      e.preventDefault();
+    };
+    document.body.style.overflow = "";
+    document.removeEventListener("touchmove", scroll, false);
   },
 };

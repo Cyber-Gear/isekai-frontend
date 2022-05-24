@@ -5,8 +5,8 @@ Vue.use(VueI18n);
 const i18n = new VueI18n({
   locale: utils.getCookie("LANG") || "en",
   messages: {
-    cn: require("./cn"),
     en: require("./en"),
+    zh: require("./zh"),
   },
 });
 export default i18n;

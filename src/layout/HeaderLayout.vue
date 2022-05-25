@@ -34,7 +34,7 @@ export default {
       navArr: [
         { label: "message.nav.text1", link: "/home", isOpen: true },
         { label: "message.nav.text2", link: "/artist", isOpen: true },
-        { label: "message.nav.text3", link: "/dao", isOpen: false },
+        { label: "message.nav.text3", link: "/dao", isOpen: true },
         { label: "message.nav.text4", link: "/launchpad", isOpen: false },
         { label: "message.nav.text5", link: "/market", isOpen: false },
       ],

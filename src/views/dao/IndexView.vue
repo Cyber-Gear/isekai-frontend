@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name:"DAO",
+  name: "DAO",
   data() {
     return {};
   },
@@ -16,6 +16,7 @@ export default {
 <style lang="scss" scoped>
 .page {
   width: 100%;
-  height: 80vh;
+  padding-top: 0.8rem;
+  position: relative;
 }
 </style>

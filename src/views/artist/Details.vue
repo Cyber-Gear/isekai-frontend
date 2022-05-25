@@ -4,7 +4,7 @@
       <img src="../../assets/images/artist/banner.png" alt="" />
       <div class="back_box" @click="goBack">
         <i class="iconfont icon-fanhui"></i>
-        <span>返回主页面</span>
+        <span>{{ $t("message.artist.text3") }}</span>
       </div>
     </div>
     <div class="content">
@@ -21,7 +21,7 @@
       </div>
       <div class="box2">
         <ul>
-          <li>Cybergear</li>
+          <li>{{ $t(detail.title) }}</li>
           <li>
             <i class="iconfont icon-assessed-badge"></i>
             <i class="iconfont icon-gouxuan"></i>
@@ -30,22 +30,24 @@
           <li>
             <div>
               <div><span>10.0k</span></div>
-              <div>items</div>
+              <div>{{ $t("message.artist.items[0]") }}</div>
             </div>
             <div>
               <div><span>10.0k</span></div>
-              <div>owners</div>
+              <div>{{ $t("message.artist.items[1]") }}</div>
             </div>
             <div>
               <div><img src="../../assets/images/logo_ETH.png" alt="" />10.0k</div>
-              <div>items</div>
+              <div>{{ $t("message.artist.items[2]") }}</div>
             </div>
             <div>
               <div><img src="../../assets/images/logo_ETH.png" alt="" />10.0k</div>
-              <div>items</div>
+              <div>{{ $t("message.artist.items[3]") }}</div>
             </div>
           </li>
-          <li>{{ introduce }}</li>
+          <li :class="{ hidden: !isShowIntroduce }">
+            <pre>{{ $t(detail.des) }}</pre>
+          </li>
           <li @click="isShowIntroduce = !isShowIntroduce" :class="{ active: isShowIntroduce }">
             <i class="iconfont icon-arrow-up"></i>
           </li>
@@ -53,18 +55,18 @@
       </div>
       <div class="box3">
         <ul class="card_list">
-          <li v-for="(item, index) in cardList" :key="index" @click="toDetail(item)">
-            <div class="top"><img :src="item.image" alt="" /></div>
+          <li v-for="(item, index) in cardList" :key="index" @click="toDetail(index)">
+            <div class="top"><img :src="item.logo" alt="" /></div>
             <div class="center">
               <div>
-                <span>isekai</span>
+                <span>{{ $t(detail.title) }}</span>
                 <img src="../../assets/images/icon1.png" alt="" />
               </div>
               <div>
-                <span>isekai...</span>
+                <span>{{ $t(item.name) }}</span>
                 <span>88busd</span>
               </div>
-              <div>上次成交77busd</div>
+              <div>{{ $t("message.artist.text10") }}77busd</div>
             </div>
             <div class="bottom">
               <i class="iconfont icon-favorites"></i>
@@ -80,111 +82,48 @@
 </template>
 
 <script>
+import { nftworks } from "./nftworks";
 export default {
   name: "Details",
   data() {
     return {
-      akiha: [
-        { image: require("../../assets/images/artist/akiha/1.jpg") },
-        { image: require("../../assets/images/artist/akiha/2.jpg") },
-        { image: require("../../assets/images/artist/akiha/3.jpg") },
-        { image: require("../../assets/images/artist/akiha/4.jpg") },
-        { image: require("../../assets/images/artist/akiha/5.jpg") },
-        { image: require("../../assets/images/artist/akiha/6.jpg") },
-        { image: require("../../assets/images/artist/akiha/7.jpg") },
-        { image: require("../../assets/images/artist/akiha/8.jpg") },
-        { image: require("../../assets/images/artist/akiha/9.jpg") },
-        { image: require("../../assets/images/artist/akiha/10.jpg") },
-        { image: require("../../assets/images/artist/akiha/11.jpg") },
-        { image: require("../../assets/images/artist/akiha/12.jpg") },
-      ],
-      negoro: [
-        { image: require("../../assets/images/artist/negoro/1.jpg") },
-        { image: require("../../assets/images/artist/negoro/2.jpg") },
-        { image: require("../../assets/images/artist/negoro/3.jpg") },
-        { image: require("../../assets/images/artist/negoro/4.jpg") },
-        { image: require("../../assets/images/artist/negoro/5.jpg") },
-        { image: require("../../assets/images/artist/negoro/6.jpg") },
-        { image: require("../../assets/images/artist/negoro/7.jpg") },
-        { image: require("../../assets/images/artist/negoro/8.jpg") },
-        { image: require("../../assets/images/artist/negoro/9.jpg") },
-        { image: require("../../assets/images/artist/negoro/10.jpg") },
-        { image: require("../../assets/images/artist/negoro/11.jpg") },
-        { image: require("../../assets/images/artist/negoro/12.jpg") },
-      ],
-      zw: [
-        { image: require("../../assets/images/artist/zw/1.jpg") },
-        { image: require("../../assets/images/artist/zw/2.jpg") },
-        { image: require("../../assets/images/artist/zw/3.jpg") },
-        { image: require("../../assets/images/artist/zw/4.jpg") },
-        { image: require("../../assets/images/artist/zw/5.jpg") },
-        { image: require("../../assets/images/artist/zw/6.jpg") },
-        { image: require("../../assets/images/artist/zw/7.jpg") },
-        { image: require("../../assets/images/artist/zw/8.jpg") },
-        { image: require("../../assets/images/artist/zw/9.jpg") },
-        { image: require("../../assets/images/artist/zw/10.jpg") },
-        { image: require("../../assets/images/artist/zw/11.jpg") },
-        { image: require("../../assets/images/artist/zw/12.jpg") },
-      ],
-      shikastudio: [
-        { image: require("../../assets/images/artist/shikastudio/1.png") },
-        { image: require("../../assets/images/artist/shikastudio/2.png") },
-        { image: require("../../assets/images/artist/shikastudio/3.png") },
-        { image: require("../../assets/images/artist/shikastudio/4.png") },
-        { image: require("../../assets/images/artist/shikastudio/5.png") },
-        { image: require("../../assets/images/artist/shikastudio/6.png") },
-        { image: require("../../assets/images/artist/shikastudio/7.png") },
-        { image: require("../../assets/images/artist/shikastudio/8.png") },
-        { image: require("../../assets/images/artist/shikastudio/9.png") },
-        { image: require("../../assets/images/artist/shikastudio/10.png") },
-        { image: require("../../assets/images/artist/shikastudio/11.png") },
-        { image: require("../../assets/images/artist/shikastudio/12.png") },
-        { image: require("../../assets/images/artist/shikastudio/13.png") },
-        { image: require("../../assets/images/artist/shikastudio/14.png") },
-        { image: require("../../assets/images/artist/shikastudio/15.png") },
-      ],
+      detail: null,
       cardList: [],
-
       isShowIntroduce: false,
-      introduce1:
-        "Shika Studio was established in May 19, by a group of senior MAG lover, open working atmosphere makes all the team become a higher pursuit of the game. Team members have ……",
-      introduce2:
-        "Shika Studio was established in May 19, by a group of senior MAG lover, open working atmosphere makes all the team become a higher pursuit of the game. Team members haveShika Studio was established in May 19, by a group of senior MAG lover, open working atmosphere makes all the team become a higher pursuit of the game. Team members have",
-      introduce: "",
     };
-  },
-  watch: {
-    isShowIntroduce(newValue) {
-      this.introduce = newValue ? this.introduce2 : this.introduce1;
-    },
   },
   created() {
     if (Object.keys(this.$route.query).length > 0) {
-      this.introduce = this.introduce1;
-      switch (this.$route.query.key) {
-        case "zw":
-          this.cardList = this.zw;
-          break;
-        case "shikastudio":
-          this.cardList = this.shikastudio;
-          break;
-        case "negoro":
-          this.cardList = this.negoro;
-          break;
-        case "akiha":
-          this.cardList = this.akiha;
-          break;
-        default:
-          break;
-      }
+      nftworks.forEach((element) => {
+        if (element.id === this.$route.query.id) {
+          this.detail = element;
+          this.cardList = element.works;
+        }
+      });
     }
   },
   methods: {
     goBack() {
       history.go(-1);
     },
-    toDetail(item) {
-      this.$router.push({ path: "artist-detailsofdetails", query: { key: item } });
+    toDetail(index) {
+      switch (this.$route.query.id) {
+        // case "zw":
+        //   this.$router.push({ path: "artist-details-zw", query: { id: index } });
+        //   break;
+        // case "akiha":
+        //   this.$router.push({ path: "artist-details-akiha", query: { id: index } });
+        //   break;
+        // case "negoro":
+        //   this.$router.push({ path: "artist-details-negoro", query: { id: index } });
+        //   break;
+        case "shikastudio":
+          this.$router.push({ path: "artist-details-shikastudio", query: { id: index } });
+          break;
+        default:
+          this.$message({ message: this.$t("message.message.text1") });
+          break;
+      }
     },
   },
 };
@@ -331,9 +270,16 @@ export default {
         }
       }
       &:nth-child(4) {
-        text-align: left;
         font-size: 0.15rem;
         font-weight: 600;
+        text-align: left;
+        &.hidden {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+        }
       }
       &:nth-child(5) {
         cursor: pointer;
@@ -404,7 +350,7 @@ export default {
     }
     .center {
       width: 100%;
-      height: 0.7rem;
+      height: 0.75rem;
       border-bottom: 1px solid rgba(132, 125, 125, 0.2);
       div {
         display: flex;
@@ -436,7 +382,7 @@ export default {
     }
     .bottom {
       width: 100%;
-      height: 0.4rem;
+      height: 0.35rem;
       padding: 0 0.4rem;
       display: flex;
       align-items: center;

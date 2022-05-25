@@ -52,6 +52,30 @@ input {
     }
   }
 }
+pre {
+  white-space: pre-line;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.el-message {
+  min-width: 1rem;
+  font-size: 0.15rem;
+  background-color: #edf2fc;
+  border-color: #ebeef5;
+}
+.el-message--success {
+  background-color: #f0f9eb;
+  border-color: #e1f3d8;
+}
+.el-message--warning {
+  background-color: #fdf6ec;
+  border-color: #faecd8;
+}
+.el-message--error {
+  background-color: #fef0f0;
+  border-color: #fde2e2;
+}
 
 .box_title {
   margin-bottom: 1rem;

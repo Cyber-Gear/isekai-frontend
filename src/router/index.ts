@@ -25,9 +25,24 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/artist/Details.vue"),
   },
   {
-    path: "/artist-detailsofdetails",
-    name: "DetailsOfDetails",
-    component: () => import("../views/artist/DetailsOfDetails.vue"),
+    path: "/artist-details-zw",
+    name: "DetailsZW",
+    component: () => import("../views/artist/DetailsZW.vue"),
+  },
+  {
+    path: "/artist-details-akiha",
+    name: "DetailsAkiha",
+    component: () => import("../views/artist/DetailsAkiha.vue"),
+  },
+  {
+    path: "/artist-details-negoro",
+    name: "DetailsNegoro",
+    component: () => import("../views/artist/DetailsNegoro.vue"),
+  },
+  {
+    path: "/artist-details-shikastudio",
+    name: "DetailsShikastudio",
+    component: () => import("../views/artist/DetailsShikastudio.vue"),
   },
   {
     path: "/dao",

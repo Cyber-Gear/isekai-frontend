@@ -8,13 +8,13 @@ export const message = {
     text6: "Connected",
   },
   footer: {
-    text1: "COPYRIGHT © 2022 isekai, All rights Reserved",
+    text1: "COPYRIGHT © 2022 FUNTOPIA, All rights Reserved",
   },
   home: {
     text1: "Create a MAG Community on Web3",
     text2: "Strong connection to both MAG & Crypto Technologies to lower the barriers of crypto entrance",
     text3:
-      "NFT artist shika studio provided the character artwork for the release of NFT on the ISEKAI platform, which was used in Cybergear's game scenes.",
+      "NFT artist shika studio provided the character artwork for the release of NFT on the FUNTOPIA platform, which was used in Cybergear's game scenes.",
     list1: [
       { text1: "Submit Artist Info", text2: "start the journey of secondary creation and get rewarded" },
       { text1: "Submit cooperation Info", text2: "Create your NFT、Game、Event，we will contact with you" },
@@ -45,19 +45,19 @@ export const message = {
       {
         text1: "Notification",
         text2:
-          "hello to all you isekai out therelets put a notification option ( email , phone notification , ... ) so we won’t miss what isekai hold for us",
+          "hello to all you funtopia out therelets put a notification option ( email , phone notification , ... ) so we won’t miss what funtopia hold for us",
         text3: "detail",
       },
       {
-        text1: "Isekai Governance Threshold",
+        text1: "Funtopia Governance Threshold",
         text2:
-          "This vote aims to determine intention as to whether a threshold is a legitimate alternative path to isekai shareholders, if so, what the appropriate threshold should be.",
+          "This vote aims to determine intention as to whether a threshold is a legitimate alternative path to funtopia shareholders, if so, what the appropriate threshold should be.",
         text3: "detail",
       },
       {
         text1: "Launched the Fist Game",
         text2:
-          "There are many games under Isekai that are suitable for gamefi users. The first game to be launched will be selected by users' votes.",
+          "There are many games under Funtopia that are suitable for gamefi users. The first game to be launched will be selected by users' votes.",
         text3: "detail",
       },
     ],

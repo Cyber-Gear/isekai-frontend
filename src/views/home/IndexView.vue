@@ -37,7 +37,7 @@
           </div>
         </li>
         <li>
-          <img src="../../assets/images/logo2.png" alt="" />
+          <img src="../../assets/images/logo3.png" alt="" />
         </li>
       </ul>
       <img class="banner_img" src="../../assets/images/img1.png" alt="" />
@@ -500,7 +500,7 @@ export default {
         }
       }
       &:nth-child(3) {
-        font-size: 20px;
+        font-size: 0.2rem;
         font-weight: bold;
         letter-spacing: 2px;
       }
@@ -513,7 +513,7 @@ export default {
             width: fit-content;
             padding: 0 0.3rem;
             margin-right: 0.5rem;
-            font-size: 25px;
+            font-size: 0.25rem;
             font-weight: bold;
             background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
             border: 0.01rem solid;
@@ -532,8 +532,8 @@ export default {
       &:nth-child(5) {
         padding-left: 0.2rem;
         img {
-          width: 8.3rem;
-          height: 2.2rem;
+          width: 8rem;
+          height: auto;
         }
       }
     }
@@ -592,7 +592,7 @@ export default {
       div {
         width: 3.5rem;
         height: 1.4rem;
-        font-size: 12px;
+        font-size: 0.12rem;
         font-weight: bold;
         position: absolute;
         top: 0.3rem;

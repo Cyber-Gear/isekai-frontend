@@ -29,7 +29,7 @@ Vue.prototype.$message = (option: any) => {
 };
 
 const production = process.env.NODE_ENV === "production";
-const aws = production ? "https://cdn.isekai.fans/cybergear_assets_main" : "https://cdn.isekai.fans/cybergear_assets_test";
+const aws = production ? "https://cdn.funtopia.fans/cybergear_assets_main" : "https://cdn.funtopia.fans/cybergear_assets_test";
 Vue.prototype.$urlImages = aws + "/images/";
 Vue.prototype.$urlVideos = aws + "/videos/";
 Vue.prototype.$urlFonts = aws + "/fonts/";

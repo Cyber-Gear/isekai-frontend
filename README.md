@@ -1,2 +1,2 @@
-# isekai-frontend
-isekai main features
+# funtopia-frontend
+funtopia main features

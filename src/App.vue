@@ -36,7 +36,13 @@ export default {
   methods: {
     resetRem() {
       const clientWidth = document.body.clientWidth;
-      const rem = (clientWidth * 100) / 1440;
+      let rem = 0;
+      if (clientWidth > 1440) {
+        // rem = (1440 * 100) / 1440;
+        rem = 100;
+      } else if (clientWidth <= 1440) {
+        rem = (clientWidth * 100) / 1440;
+      }
       document.getElementsByTagName("html")[0].style.fontSize = rem + "px";
     },
     handleScrollScroll(e) {

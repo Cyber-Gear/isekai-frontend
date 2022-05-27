@@ -21,7 +21,7 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: "/artist-details",
-    name: "Details",
+    name: "ARTISTDetails",
     component: () => import("../views/artist/Details.vue"),
   },
   {
@@ -48,6 +48,11 @@ const routes: Array<RouteConfig> = [
     path: "/dao",
     name: "DAO",
     component: () => import("../views/dao/IndexView.vue"),
+  },
+  {
+    path: "/dao-details",
+    name: "DAODetails",
+    component: () => import("../views/dao/Details.vue"),
   },
   {
     path: "/launchpad",

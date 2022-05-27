@@ -59,19 +59,19 @@
             <div class="top"><img :src="item.logo" alt="" /></div>
             <div class="center">
               <div>
-                <span>{{ $t(detail.title) }}</span>
+                <span>{{ $t(item.name) }}</span>
                 <img src="../../assets/images/icon1.png" alt="" />
               </div>
               <div>
-                <span>{{ $t(item.name) }}</span>
+                <span>{{ $t(detail.title) }}</span>
                 <span>88busd</span>
               </div>
               <div>{{ $t("message.artist.text10") }}77busd</div>
             </div>
             <div class="bottom">
               <i class="iconfont icon-favorites"></i>
-              <i class="iconfont icon-favorites-fill"></i>
-              <span>3</span>
+              <!-- <i class="iconfont icon-favorites-fill"></i>
+              <span>3</span> -->
             </div>
             <img class="angle2" src="../../assets/images/angle2.png" alt="" />
           </li>
@@ -84,7 +84,7 @@
 <script>
 import { nftworks } from "./nftworks";
 export default {
-  name: "Details",
+  name: "ARTISTDetails",
   data() {
     return {
       detail: null,
@@ -148,6 +148,8 @@ export default {
   position: relative;
   background: url("../../assets/images/bg5.png") no-repeat;
   background-size: 100% auto;
+  padding-bottom: 1rem;
+
 }
 .avatar {
   width: 1.3rem;
@@ -160,10 +162,10 @@ export default {
   right: 0;
   top: -0.5rem;
   margin: auto;
-  div {
+  > div {
     width: 100%;
     height: 100%;
-    padding: 0.05rem;
+    padding: 0.1rem;
     border-radius: 50%;
     background: #000;
     display: flex;
@@ -383,7 +385,7 @@ export default {
     .bottom {
       width: 100%;
       height: 0.35rem;
-      padding: 0 0.4rem;
+      padding: 0 0.2rem;
       display: flex;
       align-items: center;
       justify-content: flex-end;

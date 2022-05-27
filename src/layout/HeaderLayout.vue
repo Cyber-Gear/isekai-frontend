@@ -61,6 +61,7 @@ export default {
   methods: {
     toRoute(item) {
       if (item.isOpen) this.$router.push(item.link);
+      else this.$message({ message: "Comming soon" });
     },
     selectLang(item) {
       if (this.$i18n.locale == item) return (this.showLangSelect = false);
@@ -91,7 +92,7 @@ export default {
   transition: all 0.5s;
   border-bottom: 1px solid #29a7e1;
   > img {
-    width: 1.3rem;
+    width: 0.7rem;
     height: auto;
   }
   > ul {

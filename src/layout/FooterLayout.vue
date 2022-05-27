@@ -2,7 +2,7 @@
   <div class="footer_box">
     <img src="../assets/images/footer_bg1.png" alt="" />
     <div class="center">
-      <img src="../assets/images/logo1.png" alt="" />
+      <img src="../assets/images/logo2.png" alt="" />
       <div>
         <img src="../assets/images/contact1.png" alt="" />
         <img src="../assets/images/contact2.png" alt="" />
@@ -28,11 +28,11 @@ export default {
   background-size: 100% auto;
   text-align: center;
   padding-top: 1.5rem;
-  margin-top: 2rem;
+  // margin-top: 2rem;
   border-top: 2px solid #244647;
   position: relative;
   > img {
-    width: 4rem;
+    width: 3rem;
     height: auto;
     position: absolute;
     bottom: 0;

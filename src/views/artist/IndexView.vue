@@ -51,17 +51,25 @@ export default {
 <style lang="scss" scoped>
 .page {
   width: 100%;
-  height: 20rem;
   padding-top: 0.8rem;
-  position: relative;
+  padding-bottom: 1rem;
+  overflow: hidden;
 }
 .bgbox {
   width: 100%;
-  position: absolute;
-  top: 0;
+  height: 100%;
+  position: relative;
   img {
     width: 100%;
     height: auto;
+    position: absolute;
+    left: 0;
+  }
+  .absolute1 {
+    top: 0;
+  }
+  .absolute2 {
+    top: 5rem;
   }
 }
 .box_title {
@@ -69,7 +77,7 @@ export default {
 }
 .card_list {
   max-width: 85%;
-  height: 18rem;
+  height: 12rem;
   overflow-y: auto;
   margin: 0 auto;
   // display: flex;

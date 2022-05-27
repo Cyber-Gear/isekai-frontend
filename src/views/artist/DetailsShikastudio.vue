@@ -19,7 +19,7 @@
               <i class="iconfont icon-integral-fill"></i>
               {{ $t("message.artist.text4") }}
             </div>
-            <div><i class="iconfont icon-arrow-up"></i></div>
+            <!-- <div><i class="iconfont icon-arrow-up"></i></div> -->
           </div>
           <div class="text">
             <div>
@@ -106,6 +106,7 @@ export default {
 .page {
   width: 100%;
   padding-top: 0.8rem;
+  padding-bottom: 1rem;
 }
 .banner {
   width: 100%;

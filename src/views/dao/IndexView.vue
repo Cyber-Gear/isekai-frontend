@@ -1,7 +1,9 @@
 <template>
   <div class="page">
-    <img class="absolute1" src="../../assets/images/bg2.png" alt="" />
-    <img class="absolute2" src="../../assets/images/bg3.png" alt="" />
+    <div class="bgbox">
+      <img class="absolute1" src="../../assets/images/bg2.png" alt="" />
+      <img class="absolute2" src="../../assets/images/bg3.png" alt="" />
+    </div>
     <div class="box">
       <div class="leftbox">
         <div class="avatar">
@@ -34,7 +36,7 @@
             <li><pre>本期竞选的项目有3个，来自shika studio、metalulu、cryptopuck等</pre></li>
             <li>
               <div>还剩5天</div>
-              <div class="btn">参与治理</div>
+              <div class="btn" @click="toDetail(1)">参与治理</div>
             </li>
           </ul>
         </li>
@@ -65,6 +67,11 @@ export default {
   data() {
     return {};
   },
+  methods: {
+    toDetail(id) {
+      this.$router.push({ path: "dao-details", query: { id: id } });
+    },
+  },
 };
 </script>
 
@@ -72,21 +79,24 @@ export default {
 .page {
   width: 100%;
   padding-top: 0.8rem;
+  overflow: hidden;
+}
+.bgbox {
+  width: 100%;
+  height: 100%;
   position: relative;
-}
-.absolute1 {
-  width: 100%;
-  height: auto;
-  position: absolute;
-  top: -30%;
-  left: 0;
-}
-.absolute2 {
-  width: 100%;
-  height: auto;
-  position: absolute;
-  top: 50%;
-  left: 0;
+  img {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    left: 0;
+  }
+  .absolute1 {
+    top: 0;
+  }
+  .absolute2 {
+    top: 5rem;
+  }
 }
 .box {
   width: fit-content;
@@ -109,7 +119,7 @@ export default {
   .avatar {
     width: 1.2rem;
     height: 1.2rem;
-    padding: 0.05rem;
+    padding: 0.1rem;
     border-radius: 50%;
     background: #000;
     display: flex;

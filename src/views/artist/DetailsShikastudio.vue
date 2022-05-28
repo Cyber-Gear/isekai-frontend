@@ -158,16 +158,16 @@ export default {
         transform: scale(0.8);
       }
       &.MR {
-        background-image: url("../../assets/images/artist/shikastudio/btn-MR.webp");
+        background-image: url("../../assets/images/ShikaStudio/btn-MR.webp");
       }
       &.R {
-        background-image: url("../../assets/images/artist/shikastudio/btn-R.webp");
+        background-image: url("../../assets/images/ShikaStudio/btn-R.webp");
       }
       &.SR {
-        background-image: url("../../assets/images/artist/shikastudio/btn-SR.webp");
+        background-image: url("../../assets/images/ShikaStudio/btn-SR.webp");
       }
       &.UR {
-        background-image: url("../../assets/images/artist/shikastudio/btn-UR.webp");
+        background-image: url("../../assets/images/ShikaStudio/btn-UR.webp");
       }
     }
   }

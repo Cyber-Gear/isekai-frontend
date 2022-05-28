@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="banner">
-      <img src="../../assets/images/artist/banner.png" alt="" />
+      <img src="../../assets/images/artist_banner.png" alt="" />
       <div class="back_box" @click="goBack">
         <i class="iconfont icon-fanhui"></i>
         <span>{{ $t("message.artist.text3") }}</span>
@@ -149,7 +149,6 @@ export default {
   background: url("../../assets/images/bg5.png") no-repeat;
   background-size: 100% auto;
   padding-bottom: 1rem;
-
 }
 .avatar {
   width: 1.3rem;

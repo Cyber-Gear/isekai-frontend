@@ -86,23 +86,65 @@ export const message = {
     text10: "Last transaction",
     text11: "View role painting",
     items: ["items", "owners", "items", "items"],
-    nftworks: [
-      {
+    nftworks: {
+      zw: {
         title: "Shadow&Light",
         name: "Z.W.",
         des: 'Pixiv artist, game illustrator. \n Participated in the character setting of the Korean MOBA game "Chaos Online"; \n the card design of the Japanese RPG game "Blue Archive"; \n Switches back and forth between dark and cute & sexy style , and is good at painting the female characters in his works with a mysterious veil through the cool tones and melancholy characters.',
+        works: [
+          { name: "A" },
+          { name: "Akemi Homura" },
+          { name: "Card game" },
+          { name: "Joker" },
+          { name: "Kaguya sama" },
+          { name: "Kanna" },
+          { name: "Kuro" },
+          { name: "Makia" },
+          { name: "Misa" },
+          { name: "Noshiro" },
+          { name: "Satono Diamond" },
+          { name: "Tomoyo Daidoji" },
+        ],
       },
-      {
+      akiha: {
         title: "Secret of seasons",
         name: "Akiha",
         des: 'A Korean freelance illustrator who specializes in using unique colors and shadows to express his works. \n A very unique use of color and light and shadow of the artist, seems to be very fond of the combination of sailor suit, beautiful girls and Japanese swords. \n The distinctive style of painting light and shade and color are beautiful, and the characters in the illustrations are unforgettable with their changing demeanor. \n He has worked on several light novel works such as "The "Hentai" Prince and the Stony Cat" and "Sister Life".',
+        works: [
+          { name: "Armed girl" },
+          { name: "Crying in the gym" },
+          { name: "Fall" },
+          { name: "Windy" },
+          { name: "After jogging" },
+          { name: "Summer" },
+          { name: "Shadow" },
+          { name: "X" },
+          { name: "Witch" },
+          { name: "White hair angel" },
+          { name: "The happy ending of a dying girl" },
+          { name: "Encountered and got knocked down" },
+        ],
       },
-      {
+      negoro: {
         title: "Fanart world",
         name: "Negoro",
         des: 'Illustrator and concept designer, once participated in the design of "Onmyoji" character painting. \n Featured with neat outline sketch and fresh color collocation. \n Keens on fanart creation. ',
+        works: [
+          { name: "The duel" },
+          { name: "Irelia" },
+          { name: "Ishtar" },
+          { name: "Luna" },
+          { name: "Lucia" },
+          { name: "Nezuko" },
+          { name: "Yor" },
+          { name: "Princess knight" },
+          { name: "Rose" },
+          { name: "Kamisato Ayaka" },
+          { name: "Okita Sōji" },
+          { name: "Kaedehara Kazuha" },
+        ],
       },
-      {
+      shikastudio: {
         title: "Cybergear",
         name: "Shika studio",
         des: 'Shika Studio was established in May 19, by a group of senior MAG lover, open working atmosphere makes all the team become a higher pursuit of the game. \n Team members have participated in several commercial MAG senior game producer such as " Girls\' Frontline ", but also with the love has been carrying out independent game development passionate gamer producers. \n So far, the studio has developed many handheld games and has mature global operation experience.',
@@ -216,7 +258,7 @@ export const message = {
           },
         ],
       },
-    ],
+    },
   },
   dao: {
     text1: "Proposal",

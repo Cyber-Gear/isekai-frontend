@@ -10,47 +10,54 @@
         <span>{{ $t("message.artist.text3") }}</span>
       </div>
     </div>
-    <div class="box_title">
+    <!-- <div class="box_title">
       <img src="../../assets/images/box_title1.png" alt="" />
-      <span>Explore Artist</span>
-    </div>
+      <span>{{ $t("message.dao.text14") }}</span>
+    </div> -->
     <div class="contentbox">
       <div class="leftbox">
         <div class="box1">
           <div>
-            <span><img src="../../assets/images/box_title3.png" alt="" />推选第一款上架Launchpad的项目</span>
-            <span>进行中</span>
+            <span><img src="../../assets/images/box_title3.png" alt="" />{{ $t("message.dao.text7") }}</span>
+            <span>{{ $t("message.dao.text5") }}</span>
           </div>
-          <div><pre>本期竞选的项目有3个，来自shika studio、metalulu、cryptopuck等，详情请看</pre></div>
+          <div>
+            <pre>{{ $t("message.dao.text8") }}3{{ $t("message.dao.text39") }}shika studio,metalulu,cryptopunk{{ $t("message.dao.text40") }}</pre>
+          </div>
         </div>
         <div class="box2">
           <div class="menu">
-            <span @click="changeHash('#Detail')">Detail</span>
-            <span @click="changeHash('#Vote')">Vote</span>
-            <span @click="changeHash('#Comment')">Comment</span>
+            <span @click="changeHash('#Detail')">{{ $t("message.dao.text15") }}</span>
+            <span @click="changeHash('#Vote')">{{ $t("message.dao.text16") }}</span>
+            <span @click="changeHash('#Comment')">{{ $t("message.dao.text17") }}</span>
           </div>
           <div class="box3" id="Detail">
             <div>
-              <span>Shika Studio是来自于XXXXXXX</span>
-              <div><i class="iconfont icon-chakan"></i><span>点击可以查看艺术作品</span></div>
+              <span>Shika Studio{{ $t("message.dao.text18") }}XXXXXXX</span>
+              <div>
+                <i class="iconfont icon-chakan"></i><span>{{ $t("message.dao.text19") }}</span>
+              </div>
             </div>
             <div>
-              <span>Shika Studio是来自于XXXXXXX</span>
-              <div><i class="iconfont icon-chakan"></i><span>点击可以查看艺术作品</span></div>
+              <span>Shika Studio{{ $t("message.dao.text18") }}XXXXXXX</span>
+              <div>
+                <i class="iconfont icon-chakan"></i><span>{{ $t("message.dao.text19") }}</span>
+              </div>
             </div>
             <div>
-              <span>Shika Studio是来自于XXXXXXX</span>
-              <div><i class="iconfont icon-chakan"></i><span>点击可以查看艺术作品</span></div>
+              <span>Shika Studio{{ $t("message.dao.text18") }}XXXXXXX</span>
+              <div>
+                <i class="iconfont icon-chakan"></i><span>{{ $t("message.dao.text19") }}</span>
+              </div>
             </div>
           </div>
           <div class="box4" id="Vote">
             <div class="title">
-              <span><img src="../../assets/images/box_title3.png" alt="" />进行中</span>
-              <span>October 01, 2020 - October 03, 2020 </span>
+              <span><img src="../../assets/images/box_title3.png" alt="" />{{ $t("message.dao.text20") }}</span>
+              <span>{{ $t("message.dao.text21") }}</span>
             </div>
             <div class="des">
-              The project passes the audit and starts the lock-in plan. The investors can lock the fund through the smart contract and support the
-              project
+              {{ $t("message.dao.text22") }}
             </div>
             <div class="check_boxs">
               <div class="check">
@@ -68,39 +75,39 @@
             </div>
             <div class="inputboxs">
               <div class="inputbox">
-                <div class="text1">Ticket</div>
+                <div class="text1">{{ $t("message.dao.text23") }}</div>
                 <input type="text" />
-                <div class="text2">MAX</div>
+                <div class="text2">{{ $t("message.dao.text24") }}</div>
               </div>
-              <div class="btn">Lock</div>
+              <div class="btn">{{ $t("message.dao.text25") }}</div>
             </div>
           </div>
-          <div class="box5" id="Comment">Comment</div>
+          <div class="box5" id="Comment">{{ $t("message.dao.text17") }}</div>
         </div>
       </div>
       <div class="rightbox">
         <div class="box1">
-          <div class="title"><img src="../../assets/images/box_title3.png" alt="" />信息</div>
+          <div class="title"><img src="../../assets/images/box_title3.png" alt="" />{{ $t("message.dao.text26") }}</div>
           <ul class="list">
             <li>
-              <div>策略</div>
+              <div>{{ $t("message.dao.text27") }}</div>
               <div><img src="../../assets/images/logo1.png" alt="" /></div>
             </li>
             <li>
-              <div>IPFS</div>
+              <div>{{ $t("message.dao.text28") }}</div>
               <div>#QmcEIKN<i class="iconfont icon-chakan"></i></div>
             </li>
             <li>
-              <div>投票制度</div>
-              <div>单选投票</div>
+              <div>{{ $t("message.dao.text29") }}</div>
+              <div>{{ $t("message.dao.text32") }}</div>
             </li>
             <li>
-              <div>开始日期</div>
-              <div>may23,2022,11:55AM</div>
+              <div>{{ $t("message.dao.text30") }}</div>
+              <div>{{ $t("message.dao.text33") }}</div>
             </li>
             <li>
-              <div>结束日期</div>
-              <div>may31,2022,12:00PM</div>
+              <div>{{ $t("message.dao.text31") }}</div>
+              <div>{{ $t("message.dao.text34") }}</div>
             </li>
             <li>
               <div></div>
@@ -109,25 +116,25 @@
           </ul>
         </div>
         <div class="box1">
-          <div class="title"><img src="../../assets/images/box_title3.png" alt="" />当前结果</div>
+          <div class="title"><img src="../../assets/images/box_title3.png" alt="" />{{ $t("message.dao.text35") }}</div>
           <ul class="progressbarlist">
             <li>
               <div>
-                <span>UNverse</span>
+                <span>{{ $t("message.dao.text36") }}</span>
                 <p><span>0 HC</span><span>0 %</span></p>
               </div>
               <div><div></div></div>
             </li>
             <li>
               <div>
-                <span>DTland</span>
+                <span>{{ $t("message.dao.text37") }}</span>
                 <p><span>0 HC</span><span>0 %</span></p>
               </div>
               <div><div></div></div>
             </li>
             <li>
               <div>
-                <span>TMkown</span>
+                <span>{{ $t("message.dao.text38") }}</span>
                 <p><span>0 HC</span><span>0 %</span></p>
               </div>
               <div><div></div></div>
@@ -142,9 +149,6 @@
 <script>
 export default {
   name: "DAODetails",
-  data() {
-    return {};
-  },
   data() {
     return {
       detail: null,

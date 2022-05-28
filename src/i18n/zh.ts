@@ -1,4 +1,7 @@
 export const message = {
+  message: {
+    text1: "未上传作品",
+  },
   nav: {
     text1: "HOME",
     text2: "ARTIST",
@@ -14,6 +17,13 @@ export const message = {
     text1: "在Web3的世界创建一个MAG社区",
     text2: "以MAG和加密技术的紧密联系来降低加密货币进入的门槛",
     text3: "NFT艺术家shika工作室为在Funtopia平台上发布的NFT进行了角色美术设计，将用于Cybergear的游戏场景中。",
+    text4: "WHITE PAGE",
+    text5: "DAO",
+    text6: "LAUNCHPAD",
+    text7: "MARKET",
+    text8: "MEDIA",
+    text9: "INVESTOR&PARTNER",
+    text10: "TAG",
     list1: [
       { text1: "提交艺术家信息", text2: "用你优秀的二次创作来获得奖励" },
       { text1: "提交合作信息", text2: "创建你的NFT、游戏、活动，我们会与你联系" },
@@ -40,7 +50,7 @@ export const message = {
     list4: [{ text1: "2022.04.13", text2: "Cybergear即将进入发布游戏候选，敬请期待" }],
   },
   artist: {
-    text1: "Explore Artist",
+    text1: "探索艺术家",
     text2: "by",
     text3: "返回主页面",
     text4: "作品介绍",
@@ -183,7 +193,153 @@ export const message = {
       },
     ],
   },
-  message: {
-    text1: "未上传作品",
+  dao: {
+    text1: "治理数",
+    text2: "成员数",
+    text3: "发起提案",
+    text5: "进行中",
+    text6: "已完成",
+    text7: "推选第一款上架Launchpad的项目",
+    text10: "通过提案",
+    text11: "200人支持",
+    text12: "参与治理",
+    text15: "Detail",
+    text16: "Vote",
+    text17: "Comment",
+    text18: "是来自于",
+    text19: "点击可以查看艺术作品",
+    text20: "进行中",
+    text21: "October 01, 2020 - October 03, 2020 ",
+    text22:
+      "The project passes the audit and starts the lock-in plan. The investors can lock the fund through the smart contract and support the project",
+    text23: "Ticket",
+    text24: "MAX",
+    text25: "Lock",
+    text26: "信息",
+    text27: "策略",
+    text28: "IPFS",
+    text29: "投票制度",
+    text30: "开始日期",
+    text31: "结束日期",
+    text32: "单选投票",
+    text33: "may23,2022,11:55AM",
+    text34: "may31,2022,12:00PM",
+    text35: "当前结果",
+    text36: "UNverse",
+    text37: "DTland",
+    text38: "TMkown",
+    // text8: "本期竞选的项目有3个，来自shika studio,metalulu,cryptopunk等等",
+    text8: "本期竞选的项目有",
+    text39: "个，来自",
+    text40: "等等",
+    // text9: "还剩5天",
+    text9: "还剩",
+    text41: "天",
+    text4: "当前提案由",
+    text13: "发起",
+  },
+  // 以下暂无页面
+  launchpad: {
+    text1: "完成发售",
+    text2: "当前项目处于上架状态",
+    text3: "已上架",
+    text4: "开始发售",
+    text5: "NFT名称",
+    text6: "查看",
+    text7: "分享",
+    text8: "社群",
+    text9: "官网",
+    text10: "共计",
+    text11: "已售罄",
+    text12: "品类",
+    text13: "总共售出的数量",
+    text14: "每个NFT的价格",
+    text15: "每个账号限购",
+
+    // 挂单页
+    // 挂单
+    // Pending Order
+
+    // 全部选择
+    // Select All
+
+    // 确定
+    // Pending Order
+
+    // 合集筛选
+    // Series
+
+    // 价格筛选
+    // Price
+
+    // 币种筛选
+    // Token
+
+    // 类型筛选
+    // Type
+
+    // 稀有度筛选
+    // Rarity
+
+    // 属性筛选
+    // Property
+
+    // 职业
+    // Vocation
+
+    // 等级
+    // Grade
+
+    // 角色
+    // Role
+    // 未连接钱包
+    // Wallet Connected
+
+    // 当前没有连接钱包，您是否要连接钱包
+    // No wallet is currently connected,please connect the wallet
+
+    // 取消
+    // Cancet
+
+    // 确定
+    // Connect
+
+    // 市场页
+    // 价格
+    // Price
+
+    // 购买
+    // Buy
+
+    // 属性
+    // Property
+
+    // 等级
+    // Grade
+
+    // 星级
+    // Stars
+
+    // 稀有度
+    // Rarity
+
+    // 人物介绍
+    // Introduction
+
+    // 交易记录
+    // Transaction Record
+
+    // 挂单弹窗
+    // 挂单
+    // Pending Order
+
+    // 挂单价格
+    // Price
+
+    // 手续费
+    // Fee
+
+    // 实际收益
+    // Income
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <span class="absolute_text1">Create a MAG Community on Web3</span>
-    <span class="absolute_text2">Create a MAG Community on Web3</span>
+    <span class="absolute_text1">{{ $t("message.home.text1") }}</span>
+    <span class="absolute_text2">{{ $t("message.home.text1") }}</span>
     <img class="absolute1" src="../../assets/images/absolute1.png" alt="" />
     <img class="absolute2" src="../../assets/images/absolute2.png" alt="" />
     <img class="absolute3" src="../../assets/images/absolute3.png" alt="" />
@@ -28,7 +28,7 @@
         <li><div></div></li>
         <li>{{ $t("message.home.text2") }}</li>
         <li>
-          <div>WHITE PAGE</div>
+          <div>{{ $t("message.home.text4") }}</div>
           <div>
             <img src="../../assets/images/contact1.png" alt="" />
             <img src="../../assets/images/contact2.png" alt="" />
@@ -76,7 +76,7 @@
     <div class="box3">
       <div class="box_title">
         <img src="../../assets/images/box_title1.png" alt="" />
-        <span>DAO</span>
+        <span>{{ $t("message.home.text5") }}</span>
       </div>
       <div class="box_content">
         <ul class="cardList3">
@@ -107,7 +107,7 @@
     <div class="box4">
       <div class="box_title">
         <img src="../../assets/images/box_title1.png" alt="" />
-        <span>LAUNCHPAD</span>
+        <span>{{ $t("message.home.text6") }}</span>
       </div>
       <div class="box_content">
         <div class="top">
@@ -139,7 +139,7 @@
     <div class="box5">
       <div class="box_title">
         <img src="../../assets/images/box_title1.png" alt="" />
-        <span>MARKET</span>
+        <span>{{ $t("message.home.text7") }}</span>
       </div>
       <div class="box_content">
         <ul class="cardList4">
@@ -177,14 +177,14 @@
     <div class="box6">
       <div class="box_title">
         <img src="../../assets/images/box_title1.png" alt="" />
-        <span>MEDIA</span>
+        <span>{{ $t("message.home.text8") }}</span>
       </div>
       <div class="box_content">
         <img class="title_img" src="../../assets/images/img4.png" alt="" />
         <ul class="cardList5">
           <li v-for="(item, index) in cardList5" :key="index">
             <div>
-              <div>TAG</div>
+              <div>{{ $t("message.home.text10") }}</div>
               <span>{{ $t(item.time) }}</span>
               <img src="../../assets/images/img5.png" alt="" />
             </div>
@@ -197,7 +197,7 @@
     <div class="box7">
       <div class="box_title">
         <img src="../../assets/images/box_title1.png" alt="" />
-        <span>INVESTOR&PARTNER</span>
+        <span>{{ $t("message.home.text9") }}</span>
       </div>
       <div class="box_content">
         <ul class="cardList6">
@@ -341,6 +341,7 @@ export default {
   background: url("../../assets/images/bg2.png") no-repeat;
   background-size: 100% auto;
   background-position: 0% 15%;
+  padding-bottom: 1rem;
 }
 .absolute_text1 {
   white-space: nowrap;

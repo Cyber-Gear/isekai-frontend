@@ -16,43 +16,29 @@
           <div><i class="iconfont icon-medium"></i></div>
         </div>
         <div class="lis">
-          <div><i class="iconfont icon-zhili"></i>治理数</div>
+          <div><i class="iconfont icon-zhili"></i>{{ $t("message.dao.text1") }}</div>
           <div>123</div>
         </div>
         <div class="lis">
-          <div><i class="iconfont icon-Customermanagement-fill"></i>成员数</div>
+          <div><i class="iconfont icon-Customermanagement-fill"></i>{{ $t("message.dao.text2") }}</div>
           <div>123</div>
         </div>
-        <div class="btn">发起提案</div>
+        <div class="btn">{{ $t("message.dao.text3") }}</div>
       </div>
       <ul class="rightbox">
         <li>
           <ul>
             <li>
-              <div>当前提案由<span>Oxlk325kl3j32...04569s</span>发起</div>
-              <div class="status">进行中</div>
+              <div>{{ $t("message.dao.text4") }} <span>Oxlk32...04569s</span> {{ $t("message.dao.text13") }}</div>
+              <div class="status">{{ $t("message.dao.text5") }}</div>
             </li>
-            <li>推选第一款上架Launchpad的项目 <img src="../../assets/images/box_title3.png" alt="" /></li>
-            <li><pre>本期竞选的项目有3个，来自shika studio、metalulu、cryptopuck等</pre></li>
+            <li>{{ $t("message.dao.text7") }} <img src="../../assets/images/box_title3.png" alt="" /></li>
             <li>
-              <div>还剩5天</div>
-              <div class="btn" @click="toDetail(1)">参与治理</div>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <ul>
-            <li>
-              <div>当前提案由<span>Oxlk325kl3j32...04569s</span>发起</div>
-              <div class="status">已完成</div>
-            </li>
-            <li>Aqueen <img src="../../assets/images/box_title3.png" alt="" /></li>
-            <li>
-              <pre>{{ `The fund will provide investors access to buy the newest miners. \n The fund will be distributed into 3 stages.` }}</pre>
+              <pre>{{ $t("message.dao.text8") }}3{{ $t("message.dao.text39") }}shika studio,metalulu,cryptopunk{{ $t("message.dao.text40") }}</pre>
             </li>
             <li>
-              <div><span>✔ 通过提案</span><span>200人支持</span></div>
-              <div class="btn">参与治理</div>
+              <div>{{ $t("message.dao.text9") }}5{{ $t("message.dao.text41") }}</div>
+              <div class="btn" @click="toDetail(1)">{{ $t("message.dao.text12") }}</div>
             </li>
           </ul>
         </li>
@@ -221,7 +207,7 @@ export default {
             background: #000000;
             border-radius: 0.1rem;
             margin: 0 0.2rem;
-            padding: 0 0.5rem;
+            padding: 0 0.2rem;
           }
           .status {
             font-size: 0.12rem;

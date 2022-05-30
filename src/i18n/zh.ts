@@ -8,7 +8,7 @@ export const message = {
     text3: "DAO",
     text4: "LAUNCHPAD",
     text5: "MARKET",
-    text6: "Connected",
+    text6: "未连接",
   },
   footer: {
     text1: "COPYRIGHT © 2022 FUNTOPIA, All rights Reserved",
@@ -61,7 +61,7 @@ export const message = {
     text9: "NFT介绍",
     text10: "上次成交",
     text11: "查看全身立绘",
-    items: ["items", "owners", "items", "items"],
+    items: ["作品", "拥有者", "作品", "作品"],
     nftworks: {
       zw: {
         title: "光与影",
@@ -245,18 +245,17 @@ export const message = {
     text10: "通过提案",
     text11: "200人支持",
     text12: "参与治理",
-    text15: "Detail",
-    text16: "Vote",
-    text17: "Comment",
+    text15: "细节",
+    text16: "投票",
+    text17: "评论",
     text18: "是来自于",
     text19: "点击可以查看艺术作品",
     text20: "进行中",
-    text21: "October 01, 2020 - October 03, 2020 ",
-    text22:
-      "The project passes the audit and starts the lock-in plan. The investors can lock the fund through the smart contract and support the project",
+    text21: "October 01, 2020 - October 03, 2020",
+    text22: "项目通过审计并启动锁仓计划。投资者可以通过智能合约对您的资金进行锁仓且支持本项目",
     text23: "Ticket",
-    text24: "MAX",
-    text25: "Lock",
+    text24: "最大",
+    text25: "锁仓",
     text26: "信息",
     text27: "策略",
     text28: "IPFS",
@@ -383,5 +382,8 @@ export const message = {
 
     // 实际收益
     // Income
+  },
+  tips: {
+    text1: "敬请期待",
   },
 };

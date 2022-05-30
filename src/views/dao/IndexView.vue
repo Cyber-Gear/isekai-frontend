@@ -1,13 +1,13 @@
 <template>
   <div class="page">
     <div class="bgbox">
-      <img class="absolute1" src="../../assets/images/bg2.png" alt="" />
-      <img class="absolute2" src="../../assets/images/bg3.png" alt="" />
+      <img class="absolute1" src="../../assets/images/bg2.webp" alt="" />
+      <img class="absolute2" src="../../assets/images/bg3.webp" alt="" />
     </div>
     <div class="box">
       <div class="leftbox">
         <div class="avatar">
-          <img src="../../assets/images/logo1.png" alt="" />
+          <img src="../../assets/images/logo1.webp" alt="" />
         </div>
         <div class="linkbox">
           <div><i class="iconfont icon-telegram"></i></div>
@@ -32,7 +32,7 @@
               <div>{{ $t("message.dao.text4") }} <span>Oxlk32...04569s</span> {{ $t("message.dao.text13") }}</div>
               <div class="status">{{ $t("message.dao.text5") }}</div>
             </li>
-            <li>{{ $t("message.dao.text7") }} <img src="../../assets/images/box_title3.png" alt="" /></li>
+            <li>{{ $t("message.dao.text7") }} <img src="../../assets/images/box_title3.webp" alt="" /></li>
             <li>
               <pre>{{ $t("message.dao.text8") }}3{{ $t("message.dao.text39") }}shika studio,metalulu,cryptopunk{{ $t("message.dao.text40") }}</pre>
             </li>

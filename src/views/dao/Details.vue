@@ -1,8 +1,8 @@
 <template>
   <div class="page">
     <div class="bgbox">
-      <img class="absolute1" src="../../assets/images/bg2.png" alt="" />
-      <img class="absolute2" src="../../assets/images/bg3.png" alt="" />
+      <img class="absolute1" src="../../assets/images/bg2.webp" alt="" />
+      <img class="absolute2" src="../../assets/images/bg3.webp" alt="" />
     </div>
     <div class="banner">
       <div class="back_box" @click="goBack">
@@ -11,14 +11,14 @@
       </div>
     </div>
     <!-- <div class="box_title">
-      <img src="../../assets/images/box_title1.png" alt="" />
+      <img src="../../assets/images/box_title1.webp" alt="" />
       <span>{{ $t("message.dao.text14") }}</span>
     </div> -->
     <div class="contentbox">
       <div class="leftbox">
         <div class="box1">
           <div>
-            <span><img src="../../assets/images/box_title3.png" alt="" />{{ $t("message.dao.text7") }}</span>
+            <span><img src="../../assets/images/box_title3.webp" alt="" />{{ $t("message.dao.text7") }}</span>
             <span>{{ $t("message.dao.text5") }}</span>
           </div>
           <div>
@@ -53,7 +53,7 @@
           </div>
           <div class="box4" id="Vote">
             <div class="title">
-              <span><img src="../../assets/images/box_title3.png" alt="" />{{ $t("message.dao.text20") }}</span>
+              <span><img src="../../assets/images/box_title3.webp" alt="" />{{ $t("message.dao.text20") }}</span>
               <span>{{ $t("message.dao.text21") }}</span>
             </div>
             <div class="des">
@@ -87,11 +87,11 @@
       </div>
       <div class="rightbox">
         <div class="box1">
-          <div class="title"><img src="../../assets/images/box_title3.png" alt="" />{{ $t("message.dao.text26") }}</div>
+          <div class="title"><img src="../../assets/images/box_title3.webp" alt="" />{{ $t("message.dao.text26") }}</div>
           <ul class="list">
             <li>
               <div>{{ $t("message.dao.text27") }}</div>
-              <div><img src="../../assets/images/logo1.png" alt="" /></div>
+              <div><img src="../../assets/images/logo1.webp" alt="" /></div>
             </li>
             <li>
               <div>{{ $t("message.dao.text28") }}</div>
@@ -116,7 +116,7 @@
           </ul>
         </div>
         <div class="box1">
-          <div class="title"><img src="../../assets/images/box_title3.png" alt="" />{{ $t("message.dao.text35") }}</div>
+          <div class="title"><img src="../../assets/images/box_title3.webp" alt="" />{{ $t("message.dao.text35") }}</div>
           <ul class="progressbarlist">
             <li>
               <div>

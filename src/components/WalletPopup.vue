@@ -7,15 +7,15 @@
         <div class="title2">By connecting your wallet,you agree to <span>Fun Topia</span></div>
         <ul>
           <li>
-            <img src="../assets/images/wallet_MetaMaskFox.png" alt="" />
+            <img src="../assets/images/wallet_MetaMaskFox.webp" alt="" />
             Metamask
           </li>
           <li>
-            <img src="../assets/images/wallet_TokenPocet.png" alt="" />
+            <img src="../assets/images/wallet_TokenPocet.webp" alt="" />
             Wallet Connect
           </li>
           <li>
-            <img src="../assets/images/wallet_WalletConnect.png" alt="" />
+            <img src="../assets/images/wallet_WalletConnect.webp" alt="" />
             Token Pocet
           </li>
         </ul>
@@ -49,7 +49,7 @@ export default {
   .box {
     width: 100%;
     height: 100%;
-    background: url("../assets/images/bg2.png") no-repeat;
+    background: url("../assets/images/bg2.webp") no-repeat;
     background-size: 100% auto;
     background-position: center;
     display: flex;

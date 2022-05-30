@@ -1,7 +1,7 @@
 const production = process.env.NODE_ENV === "production";
 module.exports = {
   publicPath: "/",
-  // devServer: { disableHostCheck: true },
+  devServer: { disableHostCheck: true },
   productionSourceMap: false,
   lintOnSave: true,
   chainWebpack(config) {

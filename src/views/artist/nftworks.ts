@@ -2,8 +2,8 @@ export const nftworks = [
   {
     id: "zw",
     name: "Z.W.",
-    logo: require("../../assets/images/ZW/logo.png"),
-    avatar: require("../../assets/images/ZW/avatar.png"),
+    logo: require("../../assets/images/ZW/logo.webp"),
+    avatar: require("../../assets/images/ZW/avatar.webp"),
     title: "message.artist.nftworks.zw.title",
     des: "message.artist.nftworks.zw.des",
     works: [
@@ -24,8 +24,8 @@ export const nftworks = [
   {
     id: "akiha",
     name: "Akiha",
-    logo: require("../../assets/images/Akiha/logo.png"),
-    avatar: require("../../assets/images/Akiha/avatar.png"),
+    logo: require("../../assets/images/Akiha/logo.webp"),
+    avatar: require("../../assets/images/Akiha/avatar.webp"),
     title: "message.artist.nftworks.akiha.title",
     des: "message.artist.nftworks.akiha.des",
     works: [
@@ -46,8 +46,8 @@ export const nftworks = [
   {
     id: "negoro",
     name: "Negoro",
-    logo: require("../../assets/images/Negoro/logo.png"),
-    avatar: require("../../assets/images/Negoro/avatar.png"),
+    logo: require("../../assets/images/Negoro/logo.webp"),
+    avatar: require("../../assets/images/Negoro/avatar.webp"),
     title: "message.artist.nftworks.negoro.title",
     des: "message.artist.nftworks.negoro.des",
     works: [
@@ -73,8 +73,8 @@ export const nftworks = [
     // des 画师描述
     id: "shikastudio",
     name: "Shika studio",
-    logo: require("../../assets/images/ShikaStudio/logo.png"),
-    avatar: require("../../assets/images/ShikaStudio/avatar.png"),
+    logo: require("../../assets/images/ShikaStudio/logo.webp"),
+    avatar: require("../../assets/images/ShikaStudio/avatar.webp"),
     title: "message.artist.nftworks.shikastudio.title",
     des: "message.artist.nftworks.shikastudio.des",
     works: [
@@ -89,7 +89,7 @@ export const nftworks = [
       // worddes 作品介绍
       // nftdes NFT介绍
       {
-        logo: require("../../assets/images/ShikaStudio/Lord.png"),
+        logo: require("../../assets/images/ShikaStudio/Lord.webp"),
         card: require("../../assets/images/ShikaStudio/Lord-1.webp"),
         card2: require("../../assets/images/ShikaStudio/Lord-2.webp"),
         video: require("../../assets/videos/ShikaStudio/Lord.mp4"),
@@ -115,7 +115,7 @@ export const nftworks = [
         nftdes: "message.artist.nftworks.shikastudio.works[1].nftdes",
       },
       {
-        logo: require("../../assets/images/ShikaStudio/Mia.png"),
+        logo: require("../../assets/images/ShikaStudio/Mia.webp"),
         card: require("../../assets/images/ShikaStudio/Mia-1.webp"),
         card2: require("../../assets/images/ShikaStudio/Mia-2.webp"),
         video: require("../../assets/videos/ShikaStudio/Mia.mp4"),
@@ -128,7 +128,7 @@ export const nftworks = [
         nftdes: "message.artist.nftworks.shikastudio.works[2].nftdes",
       },
       {
-        logo: require("../../assets/images/ShikaStudio/Una.png"),
+        logo: require("../../assets/images/ShikaStudio/Una.webp"),
         card: require("../../assets/images/ShikaStudio/Una-1.webp"),
         card2: require("../../assets/images/ShikaStudio/Una-2.webp"),
         video: require("../../assets/videos/ShikaStudio/Una.mp4"),
@@ -141,7 +141,7 @@ export const nftworks = [
         nftdes: "message.artist.nftworks.shikastudio.works[3].nftdes",
       },
       {
-        logo: require("../../assets/images/ShikaStudio/Rin.png"),
+        logo: require("../../assets/images/ShikaStudio/Rin.webp"),
         card: require("../../assets/images/ShikaStudio/Rin-1.webp"),
         card2: require("../../assets/images/ShikaStudio/Rin-2.webp"),
         video: require("../../assets/videos/ShikaStudio/Rin.mp4"),
@@ -154,7 +154,7 @@ export const nftworks = [
         nftdes: "message.artist.nftworks.shikastudio.works[4].nftdes",
       },
       {
-        logo: require("../../assets/images/ShikaStudio/Ichika.png"),
+        logo: require("../../assets/images/ShikaStudio/Ichika.webp"),
         card: require("../../assets/images/ShikaStudio/Ichika-1.webp"),
         card2: require("../../assets/images/ShikaStudio/Ichika-2.webp"),
         video: require("../../assets/videos/ShikaStudio/Ichika.mp4"),
@@ -180,7 +180,7 @@ export const nftworks = [
         nftdes: "message.artist.nftworks.shikastudio.works[6].nftdes",
       },
       {
-        logo: require("../../assets/images/ShikaStudio/Rika.png"),
+        logo: require("../../assets/images/ShikaStudio/Rika.webp"),
         card: require("../../assets/images/ShikaStudio/Rika-1.webp"),
         card2: require("../../assets/images/ShikaStudio/Rika-2.webp"),
         video: require("../../assets/videos/ShikaStudio/Rika.mp4"),
@@ -193,7 +193,7 @@ export const nftworks = [
         nftdes: "message.artist.nftworks.shikastudio.works[7].nftdes",
       },
       {
-        logo: require("../../assets/images/ShikaStudio/Kasey.png"),
+        logo: require("../../assets/images/ShikaStudio/Kasey.webp"),
         card: require("../../assets/images/ShikaStudio/Kasey-1.webp"),
         card2: require("../../assets/images/ShikaStudio/Kasey-2.webp"),
         video: require("../../assets/videos/ShikaStudio/Kasey.mp4"),
@@ -206,7 +206,7 @@ export const nftworks = [
         nftdes: "message.artist.nftworks.shikastudio.works[8].nftdes",
       },
       {
-        logo: require("../../assets/images/ShikaStudio/Maki.png"),
+        logo: require("../../assets/images/ShikaStudio/Maki.webp"),
         card: require("../../assets/images/ShikaStudio/Maki-1.webp"),
         card2: require("../../assets/images/ShikaStudio/Maki-2.webp"),
         video: require("../../assets/videos/ShikaStudio/Maki.mp4"),
@@ -219,7 +219,7 @@ export const nftworks = [
         nftdes: "message.artist.nftworks.shikastudio.works[9].nftdes",
       },
       {
-        logo: require("../../assets/images/ShikaStudio/Shino.png"),
+        logo: require("../../assets/images/ShikaStudio/Shino.webp"),
         card: require("../../assets/images/ShikaStudio/Shino-1.webp"),
         card2: require("../../assets/images/ShikaStudio/Shino-2.webp"),
         video: require("../../assets/videos/ShikaStudio/Shino.mp4"),
@@ -232,7 +232,7 @@ export const nftworks = [
         nftdes: "message.artist.nftworks.shikastudio.works[10].nftdes",
       },
       {
-        logo: require("../../assets/images/ShikaStudio/Tina.png"),
+        logo: require("../../assets/images/ShikaStudio/Tina.webp"),
         card: require("../../assets/images/ShikaStudio/Tina-1.webp"),
         card2: require("../../assets/images/ShikaStudio/Tina-2.webp"),
         video: require("../../assets/videos/ShikaStudio/Tina.mp4"),
@@ -258,7 +258,7 @@ export const nftworks = [
         nftdes: "message.artist.nftworks.shikastudio.works[12].nftdes",
       },
       {
-        logo: require("../../assets/images/ShikaStudio/Kate.png"),
+        logo: require("../../assets/images/ShikaStudio/Kate.webp"),
         card: require("../../assets/images/ShikaStudio/Kate-1.webp"),
         card2: require("../../assets/images/ShikaStudio/Kate-2.webp"),
         video: require("../../assets/videos/ShikaStudio/Kate.mp4"),
@@ -271,7 +271,7 @@ export const nftworks = [
         nftdes: "message.artist.nftworks.shikastudio.works[13].nftdes",
       },
       {
-        logo: require("../../assets/images/ShikaStudio/Alice.png"),
+        logo: require("../../assets/images/ShikaStudio/Alice.webp"),
         card: require("../../assets/images/ShikaStudio/Alice-1.webp"),
         card2: require("../../assets/images/ShikaStudio/Alice-2.webp"),
         video: require("../../assets/videos/ShikaStudio/Alice.mp4"),

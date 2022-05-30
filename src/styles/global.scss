@@ -2,7 +2,6 @@ html,
 body {
   font-size: 0;
 }
-
 // 字体样式
 @font-face {
   font-family: "PingFang";
@@ -16,7 +15,6 @@ body {
 //   font-family: "CaviarDreams-Bold";
 //   src: url("../assets/fonts/CaviarDreams-Bold.ttf");
 // }
-
 // 中文常规
 .fontfamily_zh {
   font-family: PingFang;
@@ -25,59 +23,7 @@ body {
 .fontfamily_en {
   font-family: CaviarDreams;
 }
-
-// 重置滚动条样式
-::-webkit-scrollbar {
-  width: 0.05rem;
-  height: 0.05rem;
-}
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(104, 35, 145, 1), rgba(12, 129, 161, 1));
-  border-radius: 0.05rem;
-}
-::-webkit-scrollbar-track {
-  background: #000;
-}
-input {
-  background: none;
-  outline: none;
-  border: 0px;
-  caret-color: white;
-  &[type="number"] {
-    -moz-appearance: textfield;
-    &::-webkit-inner-spin-button,
-    &::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-  }
-}
-pre {
-  white-space: pre-line;
-  word-break: break-all;
-  word-wrap: break-word;
-  font-family: inherit;
-}
-
-.el-message {
-  min-width: 1rem;
-  font-size: 0.15rem;
-  background-color: #edf2fc;
-  border-color: #ebeef5;
-}
-.el-message--success {
-  background-color: #f0f9eb;
-  border-color: #e1f3d8;
-}
-.el-message--warning {
-  background-color: #fdf6ec;
-  border-color: #faecd8;
-}
-.el-message--error {
-  background-color: #fef0f0;
-  border-color: #fde2e2;
-}
-
+// 公用样式
 .box_title {
   margin-bottom: 1rem;
   img {
@@ -94,7 +40,7 @@ pre {
       content: "";
       width: 0.5rem;
       height: 0.5rem;
-      background: url("../assets/images/box_title2.png") no-repeat;
+      background: url("../assets/images/box_title2.webp") no-repeat;
       background-size: 100% auto;
       position: absolute;
       top: 0.35rem;
@@ -107,7 +53,7 @@ pre {
     content: "";
     width: 0.15rem;
     height: 0.15rem;
-    background: url("../assets/images/box_title3.png") no-repeat;
+    background: url("../assets/images/box_title3.webp") no-repeat;
     background-size: 100% auto;
     position: absolute;
     top: 0.08rem;
@@ -133,4 +79,57 @@ pre {
     border-bottom: 1px solid #ffffff;
     margin-left: 0.05rem;
   }
+}
+
+// 重置滚动条样式
+::-webkit-scrollbar {
+  width: 0.05rem;
+  height: 0.05rem;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(104, 35, 145, 1), rgba(12, 129, 161, 1));
+  border-radius: 0.05rem;
+}
+::-webkit-scrollbar-track {
+  background: #000;
+}
+// 重置原生样式
+input {
+  background: none;
+  outline: none;
+  border: 0px;
+  caret-color: white;
+  &[type="number"] {
+    -moz-appearance: textfield;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}
+pre {
+  white-space: pre-line;
+  word-break: break-all;
+  word-wrap: break-word;
+  font-family: inherit;
+}
+// 重置组件样式
+.el-message {
+  min-width: 1rem;
+  font-size: 0.15rem;
+  background-color: #edf2fc;
+  border-color: #ebeef5;
+}
+.el-message--success {
+  background-color: #f0f9eb;
+  border-color: #e1f3d8;
+}
+.el-message--warning {
+  background-color: #fdf6ec;
+  border-color: #faecd8;
+}
+.el-message--error {
+  background-color: #fef0f0;
+  border-color: #fde2e2;
 }

@@ -1,13 +1,13 @@
 <template>
   <div class="footer_box">
-    <img src="../assets/images/footer_bg1.png" alt="" />
+    <img src="../assets/images/footer_bg1.webp" alt="" />
     <div class="center">
-      <img src="../assets/images/logo2.png" alt="" />
+      <img src="../assets/images/logo2.webp" alt="" />
       <div>
-        <img src="../assets/images/contact1.png" alt="" />
-        <img src="../assets/images/contact2.png" alt="" />
-        <img src="../assets/images/contact3.png" alt="" />
-        <img src="../assets/images/contact4.png" alt="" />
+        <img src="../assets/images/contact1.webp" alt="" />
+        <img src="../assets/images/contact2.webp" alt="" />
+        <img src="../assets/images/contact3.webp" alt="" />
+        <img src="../assets/images/contact4.webp" alt="" />
       </div>
     </div>
     <p>{{ $t("message.footer.text1") }}</p>
@@ -24,7 +24,7 @@ export default {
 .footer_box {
   width: 100%;
   height: 4rem;
-  background: url("../assets/images/footer_bg2.png") no-repeat;
+  background: url("../assets/images/footer_bg2.webp") no-repeat;
   background-size: 100% auto;
   text-align: center;
   padding-top: 1.5rem;
@@ -63,7 +63,7 @@ export default {
     font-size: 0.15rem;
     font-weight: bold;
     color: #c1c3c5;
-    letter-spacing: 0.08rem;
+    letter-spacing: 0.06rem;
   }
 }
 </style>

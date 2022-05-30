@@ -1,11 +1,11 @@
 <template>
   <div class="page">
     <div class="bgbox">
-      <img class="absolute1" src="../../assets/images/bg2.png" alt="" />
-      <img class="absolute2" src="../../assets/images/bg3.png" alt="" />
+      <img class="absolute1" src="../../assets/images/bg2.webp" alt="" />
+      <img class="absolute2" src="../../assets/images/bg3.webp" alt="" />
     </div>
     <div class="box_title">
-      <img src="../../assets/images/box_title1.png" alt="" />
+      <img src="../../assets/images/box_title1.webp" alt="" />
       <span>{{ $t("message.artist.text1") }}</span>
     </div>
     <ul class="card_list">
@@ -22,7 +22,7 @@
             <pre>{{ $t(item.des) }}</pre>
           </div>
         </div>
-        <img class="angle2" src="../../assets/images/angle2.png" alt="" />
+        <img class="angle2" src="../../assets/images/angle2.webp" alt="" />
       </li>
     </ul>
   </div>

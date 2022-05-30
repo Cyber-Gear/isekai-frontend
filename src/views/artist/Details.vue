@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="banner">
-      <img src="../../assets/images/artist_banner.png" alt="" />
+      <img src="../../assets/images/artist_banner.webp" alt="" />
       <div class="back_box" @click="goBack">
         <i class="iconfont icon-fanhui"></i>
         <span>{{ $t("message.artist.text3") }}</span>
@@ -9,7 +9,7 @@
     </div>
     <div class="content">
       <div class="avatar">
-        <div><img src="../../assets/images/logo1.png" alt="" /></div>
+        <div><img src="../../assets/images/logo1.webp" alt="" /></div>
       </div>
       <div class="box1">
         <div class="linkbox">
@@ -37,11 +37,11 @@
               <div>{{ $t("message.artist.items[1]") }}</div>
             </div>
             <div>
-              <div><img src="../../assets/images/logo_ETH.png" alt="" />10.0k</div>
+              <div><img src="../../assets/images/logo_ETH.webp" alt="" />10.0k</div>
               <div>{{ $t("message.artist.items[2]") }}</div>
             </div>
             <div>
-              <div><img src="../../assets/images/logo_ETH.png" alt="" />10.0k</div>
+              <div><img src="../../assets/images/logo_ETH.webp" alt="" />10.0k</div>
               <div>{{ $t("message.artist.items[3]") }}</div>
             </div>
           </li>
@@ -60,7 +60,7 @@
             <div class="center">
               <div>
                 <span>{{ $t(item.name) }}</span>
-                <img src="../../assets/images/icon1.png" alt="" />
+                <img src="../../assets/images/icon1.webp" alt="" />
               </div>
               <div>
                 <span>{{ $t(detail.title) }}</span>
@@ -73,7 +73,7 @@
               <!-- <i class="iconfont icon-favorites-fill"></i>
               <span>3</span> -->
             </div>
-            <img class="angle2" src="../../assets/images/angle2.png" alt="" />
+            <img class="angle2" src="../../assets/images/angle2.webp" alt="" />
           </li>
         </ul>
       </div>
@@ -146,7 +146,7 @@ export default {
 .content {
   width: 100%;
   position: relative;
-  background: url("../../assets/images/bg5.png") no-repeat;
+  background: url("../../assets/images/bg5.webp") no-repeat;
   background-size: 100% auto;
   padding-bottom: 1rem;
 }

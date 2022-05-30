@@ -117,7 +117,7 @@ export default {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  background: url("../../assets/images/bg6.png") no-repeat;
+  background: url("../../assets/images/bg6.webp") no-repeat;
   background-size: 100% auto;
   padding: 0.3rem 0;
 }

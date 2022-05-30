@@ -14,11 +14,13 @@ import VueAwesomeSwiper from "vue-awesome-swiper";
 import "swiper/dist/css/swiper.css";
 Vue.use(VueAwesomeSwiper);
 
-import { Icon, Button, Message } from "element-ui";
+import { Icon, Button, Message, Steps, Step } from "element-ui";
 Vue.use(Icon);
 Vue.use(Button);
+Vue.use(Steps);
+Vue.use(Step);
 Vue.prototype.$message = (option: any) => {
-  // option.duration = 0;
+  option.duration = 0;
   option.offset = 100;
   option.customClass = i18n.locale == "en" ? "fontfamily_en" : "fontfamily_zh";
   // this.$message({ message: this.$t("message.message.text1") });
@@ -29,7 +31,7 @@ Vue.prototype.$message = (option: any) => {
 };
 
 const production = process.env.NODE_ENV === "production";
-const aws = production ? "https://cdn.funtopia.fans/cybergear_assets_main" : "https://cdn.funtopia.fans/cybergear_assets_test";
+const aws = production ? "https://cdn.funtopia.fans/funtopia_assets_main" : "https://cdn.funtopia.fans/funtopia_assets_test";
 Vue.prototype.$urlImages = aws + "/images/";
 Vue.prototype.$urlVideos = aws + "/videos/";
 Vue.prototype.$urlFonts = aws + "/fonts/";

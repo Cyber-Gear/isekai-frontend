@@ -63,7 +63,7 @@ export default {
   methods: {
     toRoute(item) {
       if (item.isOpen) this.$router.push(item.link);
-      else this.$message({ message: "Comming soon" });
+      else this.$message({ message: this.$t("message.tips.text1") });
     },
     selectLang(item) {
       if (this.$i18n.locale == item) return (this.showLangSelect = false);
@@ -91,8 +91,7 @@ export default {
   transition: all 0.5s;
   border-bottom: 1px solid #29a7e1;
   > div {
-    // max-width: 1440px;
-    max-width: 1050px;
+    width: 11.5rem;
     height: 100%;
     margin: 0 auto;
     display: flex;

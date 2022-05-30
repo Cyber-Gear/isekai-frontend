@@ -118,18 +118,34 @@ pre {
 .el-message {
   min-width: 1rem;
   font-size: 0.15rem;
-  background-color: #edf2fc;
-  border-color: #ebeef5;
+  border-color: transparent;
+  background: linear-gradient(90deg, #7b95a3 0%, #7f82a3 100%);
+  .el-icon-info,
+  .el-message__content {
+    color: #ffffff;
+  }
 }
 .el-message--success {
-  background-color: #f0f9eb;
-  border-color: #e1f3d8;
+  background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
 }
 .el-message--warning {
-  background-color: #fdf6ec;
-  border-color: #faecd8;
+  background: linear-gradient(90deg, #8e8754 0%, #946144 100%);
 }
 .el-message--error {
-  background-color: #fef0f0;
-  border-color: #fde2e2;
+  background: linear-gradient(90deg, #905a54 0%, #6f272f 100%);
+}
+.el-step {
+  .is-finish {
+    color: #00b3ff;
+    .el-step__line {
+      background: linear-gradient(135deg, rgba(212, 135, 241, 0.44), rgba(82, 224, 255, 0.44));
+    }
+  }
+  .is-process,
+  .is-wait {
+    color: #919191;
+    .el-step__line {
+      background: #919191;
+    }
+  }
 }

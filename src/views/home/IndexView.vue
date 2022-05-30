@@ -746,7 +746,6 @@ export default {
                 height: auto;
                 div {
                   border-radius: 0.1rem;
-                  padding-right: 0.1rem;
                   text-align: right;
                   font-size: 0.1rem;
                   font-weight: bold;

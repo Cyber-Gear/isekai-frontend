@@ -149,3 +149,57 @@ pre {
     }
   }
 }
+.el-popup-parent--hidden {
+  padding-right: 0 !important;
+}
+.el-dialog__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(0.1rem);
+  .el-dialog {
+    width: fit-content;
+    margin: 0;
+    background: #211f24;
+    border-radius: 0.2rem;
+    border: 1px solid #504e4e;
+    .el-dialog__header {
+      .el-dialog__title {
+        font-size: 0.2rem;
+        font-weight: bold;
+        color: #ffffff;
+        line-height: 0.2rem;
+      }
+      .el-dialog__headerbtn {
+        font-size: 0.35rem;
+        top: 0.1rem;
+        right: 0.1rem;
+        .el-dialog__close {
+          color: #ffffff;
+        }
+      }
+    }
+    .el-dialog__body {
+      padding: 0.2rem;
+    }
+    .el-dialog__footer .dialog-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .el-button {
+        width: 1.2rem;
+        padding: 0.1rem 0;
+        font-size: 0.15rem;
+        color: #413f3f;
+        background: #211f24;
+        border-color: #413f3f;
+        border-radius: 0.1rem;
+      }
+      .el-button--primary {
+        color: #ffffff;
+        background: linear-gradient(90deg, #44819d 0%, #7a649e 100%);
+        border-color: transparent;
+      }
+    }
+  }
+}

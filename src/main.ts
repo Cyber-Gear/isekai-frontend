@@ -14,13 +14,14 @@ import VueAwesomeSwiper from "vue-awesome-swiper";
 import "swiper/dist/css/swiper.css";
 Vue.use(VueAwesomeSwiper);
 
-import { Icon, Button, Message, Steps, Step } from "element-ui";
+import { Icon, Button, Message, Steps, Step, Dialog } from "element-ui";
 Vue.use(Icon);
 Vue.use(Button);
 Vue.use(Steps);
 Vue.use(Step);
+Vue.use(Dialog);
 Vue.prototype.$message = (option: any) => {
-  option.duration = 0;
+  // option.duration = 0;
   option.offset = 100;
   option.customClass = i18n.locale == "en" ? "fontfamily_en" : "fontfamily_zh";
   // this.$message({ message: this.$t("message.message.text1") });

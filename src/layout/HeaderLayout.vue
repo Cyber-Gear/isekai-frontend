@@ -1,6 +1,6 @@
 <template>
   <div class="nav">
-    <div>
+    <div class="nav_inset">
       <img class="logo" src="../assets/images/logo1.webp" alt="" />
       <ul class="menu">
         <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item)">
@@ -23,13 +23,11 @@
         </transition>
       </div>
     </div>
-    <WalletPopup v-if="isShowWalletPopup"></WalletPopup>
   </div>
 </template>
 <script>
-import WalletPopup from "../components/WalletPopup.vue";
 export default {
-  components: { WalletPopup },
+  name: "HeaderLayout",
   data() {
     return {
       navActive: 0,
@@ -42,7 +40,6 @@ export default {
       ],
       showLangSelect: false,
       langArr: ["en", "zh"],
-      isShowWalletPopup: false,
     };
   },
   watch: {
@@ -73,8 +70,7 @@ export default {
       // location.reload();
     },
     openWalletPopup() {
-      this.isShowWalletPopup = true;
-      this.$utils.forbiddenScroll();
+      this.$store.commit("setWalletListPopup", true);
     },
   },
 };
@@ -90,10 +86,12 @@ export default {
   z-index: 999;
   transition: all 0.5s;
   border-bottom: 1px solid #29a7e1;
-  > div {
-    width: 11.5rem;
+  .nav_inset {
+    max-width: 14.4rem;
+    width: 100%;
     height: 100%;
     margin: 0 auto;
+    padding: 0 5vw;
     display: flex;
     align-items: center;
     justify-content: space-between;

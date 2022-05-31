@@ -11,7 +11,7 @@
         <div class="cardbox">
           <img :src="card.card" alt="" />
           <span>{{ $t(card.name) }}</span>
-          <div class="btn" :class="[card.rarity, isShowVideo ? '' : 'normal']" @click="openVideo">{{ $t("message.artist.text11") }}</div>
+          <div class="btn" :class="card.rarity" @click="openVideo">{{ $t("message.artist.text11") }}</div>
         </div>
         <div class="workbox">
           <div class="titlebtn">
@@ -60,23 +60,20 @@
         </div>
       </div>
     </div>
-    <div class="videobox" v-if="isShowVideo">
-      <i class="iconfont icon-guanbi close_btn" @click="closeVideo"></i>
-      <video loop autoplay muted>
-        <source :src="card.video" type="video/mp4" />
-      </video>
-    </div>
+    <PaintingVideo></PaintingVideo>
   </div>
 </template>
 
 <script>
 import { nftworks } from "./nftworks";
+import PaintingVideo from "../../components/PaintingVideo.vue";
+
 export default {
   name: "DetailsShikastudio",
+  components: { PaintingVideo },
   data() {
     return {
       card: null,
-      isShowVideo: false,
     };
   },
   created() {
@@ -90,10 +87,7 @@ export default {
   },
   methods: {
     openVideo() {
-      if (!this.isShowVideo) this.isShowVideo = true;
-    },
-    closeVideo() {
-      this.isShowVideo = false;
+      this.$store.commit("setPaintingVideo", { isShow: true, name: this.$t(this.card.name), url: this.card.video });
     },
     goBack() {
       history.go(-1);
@@ -154,7 +148,7 @@ export default {
       background-size: 100% auto;
       background-position: center;
       transition: all 0.3s;
-      &.normal:hover {
+      &:hover {
         transform: scale(0.8);
       }
       &.MR {
@@ -277,34 +271,6 @@ export default {
           overflow-y: auto;
         }
       }
-    }
-  }
-}
-.videobox {
-  width: 6rem;
-  height: 6rem;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  video {
-    width: 100%;
-    height: 100%;
-  }
-  .close_btn {
-    cursor: pointer;
-    display: block;
-    position: absolute;
-    right: 0.2rem;
-    top: 0.2rem;
-    z-index: 2;
-    font-size: 0.35rem;
-    transition: all 0.3s;
-    &:hover {
-      color: #00b4ff;
-      transform: scale(0.8);
     }
   }
 }

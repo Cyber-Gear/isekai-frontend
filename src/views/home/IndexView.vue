@@ -45,7 +45,7 @@
     <div class="box2">
       <div class="box_content">
         <ul class="card_list1">
-          <li v-for="(item, index) in cardList1" :key="index">
+          <li v-for="(item, index) in cardList1" :key="index" @click="submitInfo(index)">
             <p>{{ $t(item.text1) }}</p>
             <div>{{ $t(item.text2) }}</div>
           </li>
@@ -336,6 +336,17 @@ export default {
       ],
     };
   },
+  methods: {
+    submitInfo(index) {
+      switch (index) {
+        case 0:
+          window.location.href = "https://forms.gle/zZDWkvZgGMS69LHx5";
+          break;
+        default:
+          break;
+      }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -581,6 +592,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     li {
+      cursor: pointer;
       width: 3.2rem;
       height: 1.4rem;
       background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);

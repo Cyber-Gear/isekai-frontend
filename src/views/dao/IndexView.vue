@@ -1,13 +1,13 @@
 <template>
   <div class="page">
     <div class="bgbox">
-      <img class="absolute1" src="../../assets/images/bg2.webp" alt="" />
-      <img class="absolute2" src="../../assets/images/bg3.webp" alt="" />
+      <img class="absolute1" :src="`${$urlImages}bg2.webp`" alt="" />
+      <img class="absolute2" :src="`${$urlImages}bg3.webp`" alt="" />
     </div>
     <div class="box">
       <div class="leftbox">
         <div class="avatar">
-          <img src="../../assets/images/logo1.webp" alt="" />
+          <img :src="`${$urlImages}logo1.webp`" alt="" />
         </div>
         <div class="linkbox">
           <div><i class="iconfont icon-telegram"></i></div>
@@ -32,7 +32,7 @@
               <div>{{ $t("message.dao.text4") }} <span>Oxlk32...04569s</span> {{ $t("message.dao.text5") }}</div>
               <div class="status">{{ $t("message.status.text4") }}</div>
             </li>
-            <li>{{ $t("message.dao.text6") }} <img src="../../assets/images/box_title3.webp" alt="" /></li>
+            <li>{{ $t("message.dao.text6") }} <img :src="`${$urlImages}box_title3.webp`" alt="" /></li>
             <li>
               <pre>{{ $t("message.dao.text7") }}</pre>
             </li>

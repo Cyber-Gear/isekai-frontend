@@ -35,7 +35,6 @@ const isProd = process.env.NODE_ENV == "production";
 const cdn = isProd ? "//cdn.funtopia.io/funtopia_assets_main/" : "//cdn.funtopia.io/funtopia_assets_test/";
 Vue.prototype.$urlImages = cdn + "images/";
 Vue.prototype.$urlVideos = cdn + "videos/";
-Vue.prototype.$urlFonts = cdn + "fonts/";
 
 Vue.config.productionTip = false;
 new Vue({

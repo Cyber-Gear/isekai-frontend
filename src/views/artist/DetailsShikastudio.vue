@@ -111,7 +111,7 @@ export default {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  background: url("../../assets/images/bg6.webp") no-repeat;
+  background: url($urlImages + "bg6.webp") no-repeat;
   background-size: 100% auto;
   padding: 0.3rem 0;
 }
@@ -144,7 +144,7 @@ export default {
       right: 0;
       bottom: 0.4rem;
       margin: auto;
-      background-repeat: no-repeat;
+      // background-repeat: no-repeat;
       background-size: 100% auto;
       background-position: center;
       transition: all 0.3s;
@@ -152,16 +152,16 @@ export default {
         transform: scale(0.8);
       }
       &.MR {
-        background-image: url("../../assets/images/ShikaStudio/btn-MR.webp");
+        background: url($urlImages + "ShikaStudio/btn-MR.webp") no-repeat;
       }
       &.R {
-        background-image: url("../../assets/images/ShikaStudio/btn-R.webp");
+        background: url($urlImages + "ShikaStudio/btn-R.webp") no-repeat;
       }
       &.SR {
-        background-image: url("../../assets/images/ShikaStudio/btn-SR.webp");
+        background: url($urlImages + "ShikaStudio/btn-SR.webp") no-repeat;
       }
       &.UR {
-        background-image: url("../../assets/images/ShikaStudio/btn-UR.webp");
+        background: url($urlImages + "ShikaStudio/btn-UR.webp") no-repeat;
       }
     }
   }

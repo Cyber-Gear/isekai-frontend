@@ -29,9 +29,9 @@ export default {
   data() {
     return {
       walletArr: [
-        { name: "Metamask", image: require("../assets/images/wallet_MetaMaskFox.webp") },
-        { name: "WalletConnect", image: require("../assets/images/wallet_WalletConnect.webp") },
-        { name: "TokenPocet", image: require("../assets/images/wallet_TokenPocet.webp") },
+        { name: "Metamask", image: this.$urlImages + "wallet_MetaMaskFox.webp" },
+        { name: "Metamask", image: this.$urlImages + "wallet_WalletConnect.webp" },
+        { name: "Metamask", image: this.$urlImages + "wallet_TokenPocet.webp" },
       ],
     };
   },

@@ -2,21 +2,21 @@
   <div class="home">
     <span class="absolute_text1">{{ $t("message.home.text1") }}</span>
     <span class="absolute_text2">{{ $t("message.home.text1") }}</span>
-    <img class="absolute1" src="../../assets/images/absolute1.webp" alt="" />
-    <img class="absolute2" src="../../assets/images/absolute2.webp" alt="" />
-    <img class="absolute3" src="../../assets/images/absolute3.webp" alt="" />
-    <img class="absolute4" src="../../assets/images/absolute4.webp" alt="" />
-    <img class="absolute5" src="../../assets/images/absolute5.webp" alt="" />
-    <img class="absolute6" src="../../assets/images/absolute6.webp" alt="" />
-    <img class="absolute7" src="../../assets/images/absolute2.webp" alt="" />
-    <img class="absolute8" src="../../assets/images/absolute2.webp" alt="" />
-    <img class="absolute9" src="../../assets/images/absolute9.webp" alt="" />
-    <img class="absolute10" src="../../assets/images/absolute10.webp" alt="" />
-    <img class="absolute11" src="../../assets/images/absolute11.webp" alt="" />
-    <img class="absolute12" src="../../assets/images/absolute2.webp" alt="" />
-    <img class="absolute13" src="../../assets/images/absolute13.webp" alt="" />
-    <img class="absolute14" src="../../assets/images/absolute14.webp" alt="" />
-    <img class="absolute15" src="../../assets/images/bg4.webp" alt="" />
+    <img class="absolute1" :src="`${$urlImages}absolute1.webp`" alt="" />
+    <img class="absolute2" :src="`${$urlImages}absolute2.webp`" alt="" />
+    <img class="absolute3" :src="`${$urlImages}absolute3.webp`" alt="" />
+    <img class="absolute4" :src="`${$urlImages}absolute4.webp`" alt="" />
+    <img class="absolute5" :src="`${$urlImages}absolute5.webp`" alt="" />
+    <img class="absolute6" :src="`${$urlImages}absolute6.webp`" alt="" />
+    <img class="absolute7" :src="`${$urlImages}absolute2.webp`" alt="" />
+    <img class="absolute8" :src="`${$urlImages}absolute2.webp`" alt="" />
+    <img class="absolute9" :src="`${$urlImages}absolute9.webp`" alt="" />
+    <img class="absolute10" :src="`${$urlImages}absolute10.webp`" alt="" />
+    <img class="absolute11" :src="`${$urlImages}absolute11.webp`" alt="" />
+    <img class="absolute12" :src="`${$urlImages}absolute2.webp`" alt="" />
+    <img class="absolute13" :src="`${$urlImages}absolute13.webp`" alt="" />
+    <img class="absolute14" :src="`${$urlImages}absolute14.webp`" alt="" />
+    <img class="absolute15" :src="`${$urlImages}bg4.webp`" alt="" />
     <div class="box1">
       <ul>
         <li>
@@ -30,17 +30,17 @@
         <li>
           <div>{{ $t("message.home.text4") }}</div>
           <div>
-            <img src="../../assets/images/contact1.webp" alt="" />
-            <img src="../../assets/images/contact2.webp" alt="" />
-            <img src="../../assets/images/contact3.webp" alt="" />
-            <img src="../../assets/images/contact4.webp" alt="" />
+            <img :src="`${$urlImages}contact1.webp`" alt="" />
+            <img :src="`${$urlImages}contact2.webp`" alt="" />
+            <img :src="`${$urlImages}contact3.webp`" alt="" />
+            <img :src="`${$urlImages}contact4.webp`" alt="" />
           </div>
         </li>
         <li>
-          <img src="../../assets/images/logo3.webp" alt="" />
+          <img :src="`${$urlImages}logo3.webp`" alt="" />
         </li>
       </ul>
-      <img class="banner_img" src="../../assets/images/img1.webp" alt="" />
+      <img class="banner_img" :src="`${$urlImages}img1.webp`" alt="" />
     </div>
     <div class="box2">
       <div class="box_content">
@@ -50,7 +50,7 @@
             <div>{{ $t(item.text2) }}</div>
           </li>
         </ul>
-        <img class="img_bg3" src="../../assets/images/img3.webp" alt="" />
+        <img class="img_bg3" :src="`${$urlImages}img3.webp`" alt="" />
         <ul class="card_list2">
           <li v-for="(item, index) in cardList2" :key="index">
             <div class="box_border1">
@@ -75,7 +75,7 @@
     <!-- DAO -->
     <div class="box3">
       <div class="box_title">
-        <img src="../../assets/images/box_title1.webp" alt="" />
+        <img :src="`${$urlImages}box_title1.webp`" alt="" />
         <span>{{ $t("message.home.text5") }}</span>
       </div>
       <div class="box_content">
@@ -106,7 +106,7 @@
     <!-- LAUNCHPAD -->
     <div class="box4">
       <div class="box_title">
-        <img src="../../assets/images/box_title1.webp" alt="" />
+        <img :src="`${$urlImages}box_title1.webp`" alt="" />
         <span>{{ $t("message.home.text6") }}</span>
       </div>
       <div class="box_content">
@@ -116,7 +116,7 @@
               <span>
                 {{ $t("message.home.text3") }}
               </span>
-              <img src="../../assets/images/img7.webp" alt="" />
+              <img :src="`${$urlImages}img7.webp`" alt="" />
             </div>
           </div>
         </div>
@@ -124,13 +124,13 @@
           <div class="left">
             <div class="box_border1">
               <div class="box_border2">
-                <img src="../../assets/images/img8.webp" alt="" />
+                <img :src="`${$urlImages}img8.webp`" alt="" />
               </div>
             </div>
           </div>
           <div class="right">
-            <div><img src="../../assets/images/img9.webp" alt="" /></div>
-            <div><img src="../../assets/images/img10.webp" alt="" /></div>
+            <div><img :src="`${$urlImages}img9.webp`" alt="" /></div>
+            <div><img :src="`${$urlImages}img10.webp`" alt="" /></div>
           </div>
         </div>
       </div>
@@ -138,7 +138,7 @@
     <!-- MARKET -->
     <div class="box5">
       <div class="box_title">
-        <img src="../../assets/images/box_title1.webp" alt="" />
+        <img :src="`${$urlImages}box_title1.webp`" alt="" />
         <span>{{ $t("message.home.text7") }}</span>
       </div>
       <div class="box_content">
@@ -163,7 +163,7 @@
                       <div class="no_connect" v-else>connect</div>
                     </div>
                     <div class="btn">
-                      <img src="../../assets/images/img15.webp" alt="" />
+                      <img :src="`${$urlImages}img15.webp`" alt="" />
                     </div>
                   </li>
                 </ul>
@@ -176,17 +176,17 @@
     <!-- MEDIA -->
     <div class="box6">
       <div class="box_title">
-        <img src="../../assets/images/box_title1.webp" alt="" />
+        <img :src="`${$urlImages}box_title1.webp`" alt="" />
         <span>{{ $t("message.home.text8") }}</span>
       </div>
       <div class="box_content">
-        <img class="title_img" src="../../assets/images/img4.webp" alt="" />
+        <img class="title_img" :src="`${$urlImages}img4.webp`" alt="" />
         <ul class="cardList5">
           <li v-for="(item, index) in cardList5" :key="index">
             <div>
               <div>{{ $t("message.home.text10") }}</div>
               <span>{{ $t(item.time) }}</span>
-              <img src="../../assets/images/img5.webp" alt="" />
+              <img :src="`${$urlImages}img5.webp`" alt="" />
             </div>
             <span>{{ $t(item.text) }}</span>
           </li>
@@ -196,7 +196,7 @@
     <!-- INVESTOR&PARTNER -->
     <div class="box7">
       <div class="box_title">
-        <img src="../../assets/images/box_title1.webp" alt="" />
+        <img :src="`${$urlImages}box_title1.webp`" alt="" />
         <span>{{ $t("message.home.text9") }}</span>
       </div>
       <div class="box_content">
@@ -222,22 +222,22 @@ export default {
       ],
       cardList2: [
         {
-          image: require("../../assets/images/card_img1.webp"),
+          image: this.$urlImages + "card_img1.webp",
           name: "message.home.list2[0].text1",
           text: "message.home.list2[0].text2",
         },
         {
-          image: require("../../assets/images/card_img4.webp"),
+          image: this.$urlImages + "card_img4.webp",
           name: "message.home.list2[1].text1",
           text: "message.home.list2[1].text2",
         },
         {
-          image: require("../../assets/images/card_img2.webp"),
+          image: this.$urlImages + "card_img2.webp",
           name: "message.home.list2[2].text1",
           text: "message.home.list2[2].text2",
         },
         {
-          image: require("../../assets/images/card_img3.webp"),
+          image: this.$urlImages + "card_img3.webp",
           name: "message.home.list2[3].text1",
           text: "message.home.list2[3].text2",
         },
@@ -267,72 +267,72 @@ export default {
       ],
       cardList4: [
         {
-          image: require("../../assets/images/img11.webp"),
+          image: this.$urlImages + "img11.webp",
           name1: "name1",
           name2: "name2",
-          logo: require("../../assets/images/logo_ETH.webp"),
+          logo: this.$urlImages + "logo_ETH.webp",
           num: 10,
           offer: {
             name: "offer",
-            logo: require("../../assets/images/logo_ETH.webp"),
+            logo: this.$urlImages + "logo_ETH.webp",
             num: 10,
           },
         },
         {
-          image: require("../../assets/images/img12.webp"),
+          image: this.$urlImages + "img12.webp",
           name1: "name1",
           name2: "name2",
-          logo: require("../../assets/images/logo_ETH.webp"),
+          logo: this.$urlImages + "logo_ETH.webp",
           num: 10,
           offer: {
             name: "offer",
-            logo: require("../../assets/images/logo_ETH.webp"),
+            logo: this.$urlImages + "logo_ETH.webp",
             num: 10,
           },
         },
         {
-          image: require("../../assets/images/img13.webp"),
+          image: this.$urlImages + "img13.webp",
           name1: "name1",
           name2: "name2",
-          logo: require("../../assets/images/logo_ETH.webp"),
+          logo: this.$urlImages + "logo_ETH.webp",
           num: 10,
           offer: {
             name: "offer",
-            logo: require("../../assets/images/logo_ETH.webp"),
+            logo: this.$urlImages + "logo_ETH.webp",
             num: 10,
           },
         },
         {
-          image: require("../../assets/images/img14.webp"),
+          image: this.$urlImages + "img14.webp",
           name1: "name1",
           name2: "name2",
-          logo: require("../../assets/images/logo_ETH.webp"),
+          logo: this.$urlImages + "logo_ETH.webp",
           num: 10,
           offer: {
             name: "offer",
-            logo: require("../../assets/images/logo_ETH.webp"),
+            logo: this.$urlImages + "logo_ETH.webp",
             num: 10,
           },
         },
       ],
       cardList5: [{ time: "message.home.list4[0].text1", text: "message.home.list4[0].text2" }],
       cardList6: [
-        require("../../assets/images/collaborators1.webp"),
-        require("../../assets/images/collaborators2.webp"),
-        require("../../assets/images/collaborators3.webp"),
-        require("../../assets/images/collaborators4.webp"),
-        require("../../assets/images/collaborators5.webp"),
-        require("../../assets/images/collaborators6.webp"),
-        require("../../assets/images/collaborators7.webp"),
-        require("../../assets/images/collaborators8.webp"),
-        require("../../assets/images/collaborators9.webp"),
-        require("../../assets/images/collaborators10.webp"),
-        require("../../assets/images/collaborators11.webp"),
-        require("../../assets/images/collaborators12.webp"),
-        require("../../assets/images/collaborators13.webp"),
-        require("../../assets/images/collaborators14.webp"),
-        require("../../assets/images/collaborators15.webp"),
-        require("../../assets/images/collaborators16.webp"),
+        this.$urlImages + "collaborators1.webp",
+        this.$urlImages + "collaborators2.webp",
+        this.$urlImages + "collaborators3.webp",
+        this.$urlImages + "collaborators4.webp",
+        this.$urlImages + "collaborators5.webp",
+        this.$urlImages + "collaborators6.webp",
+        this.$urlImages + "collaborators7.webp",
+        this.$urlImages + "collaborators8.webp",
+        this.$urlImages + "collaborators9.webp",
+        this.$urlImages + "collaborators10.webp",
+        this.$urlImages + "collaborators11.webp",
+        this.$urlImages + "collaborators12.webp",
+        this.$urlImages + "collaborators13.webp",
+        this.$urlImages + "collaborators14.webp",
+        this.$urlImages + "collaborators15.webp",
+        this.$urlImages + "collaborators16.webp",
       ],
     };
   },
@@ -353,7 +353,7 @@ export default {
 .home {
   width: 100%;
   position: relative;
-  background: url("../../assets/images/bg2.webp") no-repeat;
+  background: url($urlImages + "bg2.webp") no-repeat;
   background-size: 100% auto;
   background-position: 0% 15%;
   padding-bottom: 1rem;
@@ -490,7 +490,7 @@ export default {
 .box1 {
   width: 100%;
   height: 9.4rem;
-  background: url("../../assets/images/bg1.webp") no-repeat;
+  background: url($urlImages + "bg1.webp") no-repeat;
   background-size: 100% 100%;
   display: flex;
   align-items: flex-end;
@@ -614,7 +614,7 @@ export default {
         position: absolute;
         top: 0.3rem;
         right: 0.05rem;
-        background: url("../../assets/images/img2.webp") no-repeat;
+        background: url($urlImages + "img2.webp") no-repeat;
         background-size: 100% 100%;
         display: flex;
         align-items: center;
@@ -701,7 +701,7 @@ export default {
   width: 100%;
   margin-bottom: 1rem;
   position: relative;
-  background: url("../../assets/images/bg3.webp") no-repeat;
+  background: url($urlImages + "bg3.webp") no-repeat;
   background-size: 100% 50%;
   background-position: center bottom;
   .box_content {

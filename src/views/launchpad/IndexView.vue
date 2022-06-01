@@ -4,7 +4,7 @@
     <div class="box">
       <div class="leftbox">
         <div class="blindbox">
-          <img src="../../assets/images/blindbox.webp" alt="" />
+          <img :src="`${$urlImages}blindbox.webp`" alt="" />
         </div>
         <div class="tabs">
           <div :class="{ active: nowCategoryIndex == 0 }" @click="switchCategory(0)">{{ $t("message.launchpad.text2") }}1</div>
@@ -30,8 +30,8 @@
             <el-step v-for="(item, index) in stepsArr" :key="index" :title="$t(item.title)" :description="item.des">
               <template slot="icon">
                 <div @click="changeSteps(item, index)">
-                  <img v-if="index < nowStatusIndex" src="../../assets/images/progress_img_active.webp" alt="" />
-                  <img v-else src="../../assets/images/progress_img_normal.webp" alt="" />
+                  <img v-if="index < nowStatusIndex" :src="`${$urlImages}progress_img_active.webp`" alt="" />
+                  <img v-else :src="`${$urlImages}progress_img_normal.webp`" alt="" />
                 </div>
               </template>
             </el-step>
@@ -39,7 +39,7 @@
         </div>
         <div class="box1">
           <div class="title">
-            <div><img src="../../assets/images/box_title3.webp" alt="" />{{ $t("message.launchpad.text6") }}</div>
+            <div><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("message.launchpad.text6") }}</div>
             <ul>
               <li>{{ $t("message.launchpad.text7") }}</li>
               <li>{{ $t("message.launchpad.text8") }}</li>
@@ -107,7 +107,7 @@
         </div>
         <div class="box1">
           <div class="title">
-            <div><img src="../../assets/images/box_title3.webp" alt="" />{{ $t("message.launchpad.text22") }}</div>
+            <div><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("message.launchpad.text22") }}</div>
           </div>
           <div class="content">
             <pre>{{ $t("message.launchpad.introduction2") }}</pre>
@@ -354,7 +354,7 @@ export default {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: url("../../assets/images/bg8.webp") no-repeat;
+          background: url($urlImages + "bg8.webp") no-repeat;
           background-size: 100% 100%;
           span {
             font-size: 0.12rem;
@@ -369,7 +369,7 @@ export default {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: url("../../assets/images/bg9.webp") no-repeat;
+          background: url($urlImages + "bg9.webp") no-repeat;
           background-size: 100% 100%;
           text-align: center;
           font-weight: bold;

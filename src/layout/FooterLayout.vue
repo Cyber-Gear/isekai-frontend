@@ -1,13 +1,13 @@
 <template>
   <div class="footer_box">
-    <img src="../assets/images/footer_bg1.webp" alt="" />
+    <img :src="`${$urlImages}footer_bg1.webp`" alt="" />
     <div class="center">
-      <img src="../assets/images/logo2.webp" alt="" />
+      <img :src="`${$urlImages}logo2.webp`" alt="" />
       <div>
-        <img src="../assets/images/contact1.webp" alt="" />
-        <img src="../assets/images/contact2.webp" alt="" />
-        <img src="../assets/images/contact3.webp" alt="" />
-        <img src="../assets/images/contact4.webp" alt="" />
+        <img :src="`${$urlImages}contact1.webp`" alt="" />
+        <img :src="`${$urlImages}contact2.webp`" alt="" />
+        <img :src="`${$urlImages}contact3.webp`" alt="" />
+        <img :src="`${$urlImages}contact4.webp`" alt="" />
       </div>
     </div>
     <p>{{ $t("message.footer.text1") }}</p>
@@ -25,11 +25,10 @@ export default {
 .footer_box {
   width: 100%;
   height: 4rem;
-  background: url("../assets/images/footer_bg2.webp") no-repeat;
+  background: url($urlImages + "footer_bg2.webp") no-repeat;
   background-size: 100% auto;
   text-align: center;
   padding-top: 1.5rem;
-  // margin-top: 2rem;
   border-top: 2px solid #244647;
   position: relative;
   > img {

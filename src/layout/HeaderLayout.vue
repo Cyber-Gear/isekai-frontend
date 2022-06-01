@@ -1,7 +1,7 @@
 <template>
   <div class="nav">
     <div class="nav_inset">
-      <img class="logo" src="../assets/images/logo1.webp" alt="" />
+      <img class="logo" :src="`${$urlImages}logo1.webp`" alt="" />
       <ul class="menu">
         <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item)">
           <span>{{ $t(item.label) }}</span>
@@ -13,7 +13,7 @@
       </div>
       <div class="lang_box" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
         <span>{{ $i18n.locale.toUpperCase() }}</span>
-        <img class="angle" src="../assets/images/angle.webp" alt="" />
+        <img class="angle" :src="`${$urlImages}angle.webp`" alt="" />
         <transition name="select-lang" appear>
           <ul v-show="showLangSelect">
             <li v-for="(item, index) in langArr" :key="index" @click="selectLang(item)">
@@ -118,7 +118,7 @@ export default {
         }
         &.active {
           color: #29a7e1;
-          background: url("../assets/images/nav_active.webp") no-repeat;
+          background: url($urlImages + "nav_active.webp") no-repeat;
           background-size: 75% auto;
           background-position: center;
         }
@@ -135,7 +135,7 @@ export default {
     .lang_box {
       cursor: pointer;
       padding: 0.05rem 0.1rem;
-      background: url("../assets/images/btn_bg2.webp") no-repeat;
+      background: url($urlImages + "btn_bg2.webp") no-repeat;
       background-size: 100% 100%;
       position: relative;
       display: flex;

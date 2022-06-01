@@ -31,11 +31,11 @@ Vue.prototype.$message = (option: any) => {
   return Message(option);
 };
 
-const production = process.env.NODE_ENV === "production";
-const aws = production ? "https://cdn.funtopia.fans/funtopia_assets_main" : "https://cdn.funtopia.fans/funtopia_assets_test";
-Vue.prototype.$urlImages = aws + "/images/";
-Vue.prototype.$urlVideos = aws + "/videos/";
-Vue.prototype.$urlFonts = aws + "/fonts/";
+const isProd = process.env.NODE_ENV == "production";
+const cdn = isProd ? "//cdn.funtopia.io/funtopia_assets_main/" : "//cdn.funtopia.io/funtopia_assets_test/";
+Vue.prototype.$urlImages = cdn + "images/";
+Vue.prototype.$urlVideos = cdn + "videos/";
+Vue.prototype.$urlFonts = cdn + "fonts/";
 
 Vue.config.productionTip = false;
 new Vue({

@@ -5,11 +5,11 @@ body {
 // 字体样式
 @font-face {
   font-family: "PingFang";
-  src: url("../assets/fonts/PingFang.ttf");
+  src: url($urlFonts + "PingFang.ttf");
 }
 @font-face {
   font-family: "CaviarDreams";
-  src: url("../assets/fonts/CaviarDreams.ttf");
+  src: url($urlFonts + "CaviarDreams.ttf");
 }
 // @font-face {
 //   font-family: "CaviarDreams-Bold";

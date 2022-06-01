@@ -1,14 +1,31 @@
-const production = process.env.NODE_ENV === "production"; // 判断当前是否为生产环境
+const isProd = process.env.NODE_ENV == "production";
 const timestamp = new Date().getTime(); // 获取当前时间戳
-
-const jsFile = production ? `js/[name].[chunkhash].${timestamp}.js` : `js/[name].js`;
-const cssFile = production ? `css/[name].[chunkhash].${timestamp}.css` : `css/[name].css`;
 
 module.exports = {
   publicPath: "/",
   devServer: { disableHostCheck: true },
   lintOnSave: true,
   productionSourceMap: false,
+
+  chainWebpack(config) {
+    config.module.rule("scss").oneOfs.store.forEach((item) => {
+      item
+        .use("sass-resources-loader")
+        .loader("sass-resources-loader")
+        .options({
+          resources: [isProd ? "src/styles/variables_prod.scss" : "src/styles/variables_dev.scss"],
+        })
+        .end();
+    });
+  },
+  css: isProd
+    ? {
+        extract: {
+          filename: `css/[name].[chunkhash].${timestamp}.css`, // 打包时css文件配置
+          chunkFilename: `css/[name].[chunkhash].${timestamp}.css`,
+        },
+      }
+    : {}, // 生产环境时给css文件添加时间戳，避免浏览器使用旧版css文件
 
   configureWebpack: (config) => {
     config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
@@ -32,32 +49,15 @@ module.exports = {
         },
       },
     };
-    Object.assign(config, {
-      output: {
-        // 生产环境时给js文件添加时间戳，避免浏览器使用旧版js文件
-        ...config.output,
-        filename: jsFile, // 打包时js文件配置
-        chunkFilename: jsFile,
-      },
-    });
-  },
-
-  css: {
-    extract: {
-      filename: cssFile, // 打包时css文件配置
-      chunkFilename: cssFile,
-    },
-  }, // 生产环境时给css文件添加时间戳，避免浏览器使用旧版css文件
-
-  chainWebpack(config) {
-    config.module.rule("scss").oneOfs.store.forEach((item) => {
-      item
-        .use("sass-resources-loader")
-        .loader("sass-resources-loader")
-        .options({
-          resources: [production ? "src/styles/variables_prod.scss" : "src/styles/variables_test.scss"],
-        })
-        .end();
-    });
+    if (isProd) {
+      Object.assign(config, {
+        output: {
+          // 生产环境时给js文件添加时间戳，避免浏览器使用旧版js文件
+          ...config.output,
+          filename: `js/[name].[chunkhash].${timestamp}.js`, // 打包时js文件配置
+          chunkFilename: `js/[name].[chunkhash].${timestamp}.js`,
+        },
+      });
+    }
   },
 };

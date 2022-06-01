@@ -1,9 +1,13 @@
 const production = process.env.NODE_ENV === "production"; // 判断当前是否为生产环境
 const timestamp = new Date().getTime(); // 获取当前时间戳
+
+const jsFile = production ? `js/[name].[chunkhash].${timestamp}.js` : `js/[name].js`;
+const cssFile = production ? `css/[name].[chunkhash].${timestamp}.css` : `css/[name].css`;
+
 module.exports = {
   publicPath: "/",
-  lintOnSave: true,
   devServer: { disableHostCheck: true },
+  lintOnSave: true,
   productionSourceMap: false,
 
   configureWebpack: (config) => {
@@ -32,16 +36,16 @@ module.exports = {
       output: {
         // 生产环境时给js文件添加时间戳，避免浏览器使用旧版js文件
         ...config.output,
-        filename: `js/[name].[chunkhash].${timestamp}.js`, // 打包时js文件配置
-        chunkFilename: `js/[name].[chunkhash].${timestamp}.js`,
+        filename: jsFile, // 打包时js文件配置
+        chunkFilename: jsFile,
       },
     });
   },
 
   css: {
     extract: {
-      filename: `css/[name].[chunkhash].${timestamp}.css`, // 打包时css文件配置
-      chunkFilename: `css/[name].[chunkhash].${timestamp}.css`,
+      filename: cssFile, // 打包时css文件配置
+      chunkFilename: cssFile,
     },
   }, // 生产环境时给css文件添加时间戳，避免浏览器使用旧版css文件
 

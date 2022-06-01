@@ -81,14 +81,18 @@
               <div class="selling" v-if="nowStatusIndex > 1">
                 <div class="left">
                   <div>{{ $t("message.launchpad.text17") }}</div>
-                  <div class="inputbox"><span class="span1">-</span><input type="number" value="5" /><span class="span2">+</span></div>
+                  <div class="inputbox" :class="{ disabled: nowStatusIndex == 3 }">
+                    <span class="span1">-</span>
+                    <input type="number" value="" :disabled="nowStatusIndex == 3" />
+                    <span class="span2">+</span>
+                  </div>
                   <div>
                     <span>{{ $t("message.launchpad.text18") }} 400U</span><span>0/0</span>
                   </div>
                 </div>
                 <div class="right">
                   <div class="btn" v-if="nowStatusIndex == 2">{{ $t("message.launchpad.text19") }}</div>
-                  <div class="btn disable" v-if="nowStatusIndex == 3">{{ $t("message.launchpad.text20") }}</div>
+                  <div class="btn disabled" v-if="nowStatusIndex == 3">{{ $t("message.launchpad.text20") }}</div>
                 </div>
               </div>
             </div>
@@ -430,6 +434,14 @@ export default {
               color: #ffffff;
               text-align: center;
             }
+            &.disabled {
+              cursor: not-allowed;
+              input,
+              .span1,
+              .span2 {
+                cursor: not-allowed;
+              }
+            }
             .span1,
             .span2 {
               width: 0.5rem;
@@ -440,9 +452,6 @@ export default {
               text-align: center;
               border-image: linear-gradient(180deg, rgba(85, 85, 87, 0), rgba(85, 85, 87, 1), rgba(85, 85, 87, 1), rgba(85, 85, 87, 0)) 1 1;
               cursor: pointer;
-              &:hover {
-                color: #29a7e1;
-              }
             }
             .span1 {
               border-right: 1px solid;
@@ -464,7 +473,7 @@ export default {
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            &.disable {
+            &.disabled {
               color: #424242;
               background: #17181b;
               cursor: not-allowed;

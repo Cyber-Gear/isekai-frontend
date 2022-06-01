@@ -3,7 +3,7 @@
     <div class="banner">
       <div class="back_box" @click="goBack">
         <i class="iconfont icon-fanhui"></i>
-        <span>{{ $t("message.artist.text3") }}</span>
+        <span>{{ $t("message.btns.text1") }}</span>
       </div>
     </div>
   </div>

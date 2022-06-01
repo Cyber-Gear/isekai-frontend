@@ -7,7 +7,7 @@
     <div class="banner">
       <div class="back_box" @click="goBack">
         <i class="iconfont icon-fanhui"></i>
-        <span>{{ $t("message.artist.text3") }}</span>
+        <span>{{ $t("message.btns.text1") }}</span>
       </div>
     </div>
     <!-- <div class="box_title">
@@ -18,11 +18,11 @@
       <div class="leftbox">
         <div class="box1">
           <div>
-            <span><img src="../../assets/images/box_title3.webp" alt="" />{{ $t("message.dao.text7") }}</span>
-            <span>{{ $t("message.dao.text5") }}</span>
+            <span><img src="../../assets/images/box_title3.webp" alt="" />{{ $t("message.dao.text6") }}</span>
+            <span>{{ $t("message.status.text4") }}</span>
           </div>
           <div>
-            <pre>{{ $t("message.dao.text8") }}3{{ $t("message.dao.text39") }}shika studio,metalulu,cryptopunk{{ $t("message.dao.text40") }}</pre>
+            <pre>{{ $t("message.dao.text7") }}</pre>
           </div>
         </div>
         <div class="box2">
@@ -33,19 +33,19 @@
           </div>
           <div class="box3" id="Detail">
             <div>
-              <span>Shika Studio{{ $t("message.dao.text18") }}XXXXXXX</span>
+              <span>Shika Studio {{ $t("message.dao.text18") }} XXXXXXX</span>
               <div>
                 <i class="iconfont icon-chakan"></i><span>{{ $t("message.dao.text19") }}</span>
               </div>
             </div>
             <div>
-              <span>Shika Studio{{ $t("message.dao.text18") }}XXXXXXX</span>
+              <span>Shika Studio {{ $t("message.dao.text18") }} XXXXXXX</span>
               <div>
                 <i class="iconfont icon-chakan"></i><span>{{ $t("message.dao.text19") }}</span>
               </div>
             </div>
             <div>
-              <span>Shika Studio{{ $t("message.dao.text18") }}XXXXXXX</span>
+              <span>Shika Studio {{ $t("message.dao.text18") }} XXXXXXX</span>
               <div>
                 <i class="iconfont icon-chakan"></i><span>{{ $t("message.dao.text19") }}</span>
               </div>
@@ -53,8 +53,8 @@
           </div>
           <div class="box4" id="Vote">
             <div class="title">
-              <span><img src="../../assets/images/box_title3.webp" alt="" />{{ $t("message.dao.text20") }}</span>
-              <span>{{ $t("message.dao.text21") }}</span>
+              <span><img src="../../assets/images/box_title3.webp" alt="" />{{ $t("message.status.text4") }}</span>
+              <span>October 01, 2020 - October 03, 2020</span>
             </div>
             <div class="des">
               {{ $t("message.dao.text22") }}
@@ -103,11 +103,11 @@
             </li>
             <li>
               <div>{{ $t("message.dao.text30") }}</div>
-              <div>{{ $t("message.dao.text33") }}</div>
+              <div>may23,2022,11:55AM</div>
             </li>
             <li>
               <div>{{ $t("message.dao.text31") }}</div>
-              <div>{{ $t("message.dao.text34") }}</div>
+              <div>may31,2022,12:00PM</div>
             </li>
             <li>
               <div></div>
@@ -120,21 +120,21 @@
           <ul class="progressbarlist">
             <li>
               <div>
-                <span>{{ $t("message.dao.text36") }}</span>
+                <span>UNverse</span>
                 <p><span>0 HC</span><span>0 %</span></p>
               </div>
               <div><div></div></div>
             </li>
             <li>
               <div>
-                <span>{{ $t("message.dao.text37") }}</span>
+                <span>DTland</span>
                 <p><span>0 HC</span><span>0 %</span></p>
               </div>
               <div><div></div></div>
             </li>
             <li>
               <div>
-                <span>{{ $t("message.dao.text38") }}</span>
+                <span>TMkown</span>
                 <p><span>0 HC</span><span>0 %</span></p>
               </div>
               <div><div></div></div>

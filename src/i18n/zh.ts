@@ -52,7 +52,6 @@ export const message = {
   artist: {
     text1: "探索艺术家",
     text2: "by",
-    text3: "返回主页面",
     text4: "作品介绍",
     text5: "属性",
     text6: "等级",
@@ -239,21 +238,24 @@ export const message = {
     text1: "治理数",
     text2: "成员数",
     text3: "发起提案",
-    text5: "进行中",
-    text6: "已完成",
-    text7: "推选第一款上架Launchpad的项目",
+    text4: "当前提案由",
+    text5: "发起",
+    text6: "推选第一款上架Launchpad的项目",
+    text7: "本期竞选的项目有3个，来自shika studio,metalulu,cryptopunk等等",
+    text8: "还剩5天",
+
     text10: "通过提案",
     text11: "200人支持",
     text12: "参与治理",
-    text15: "细节",
+
+    text15: "详情",
     text16: "投票",
     text17: "评论",
     text18: "是来自于",
     text19: "点击可以查看艺术作品",
-    text20: "进行中",
-    text21: "October 01, 2020 - October 03, 2020",
+
     text22: "项目通过审计并启动锁仓计划。投资者可以通过智能合约对您的资金进行锁仓且支持本项目",
-    text23: "Ticket",
+    text23: "票",
     text24: "最大",
     text25: "锁仓",
     text26: "信息",
@@ -263,21 +265,7 @@ export const message = {
     text30: "开始日期",
     text31: "结束日期",
     text32: "单选投票",
-    text33: "may23,2022,11:55AM",
-    text34: "may31,2022,12:00PM",
     text35: "当前结果",
-    text36: "UNverse",
-    text37: "DTland",
-    text38: "TMkown",
-    // text8: "本期竞选的项目有3个，来自shika studio,metalulu,cryptopunk等等",
-    text8: "本期竞选的项目有",
-    text39: "个，来自",
-    text40: "等等",
-    // text9: "还剩5天",
-    text9: "还剩",
-    text41: "天",
-    text4: "当前提案由",
-    text13: "发起",
   },
   // 以下暂无页面
   launchpad: {
@@ -340,80 +328,6 @@ export const message = {
     1.卡片可以进行升阶，4个同等级的NFT可以通过消耗HC组合到更高的阶位。每张卡都有不同的计算能力和初始属性。
     2.卡可以插入Hashland.com的插槽参与质押挖矿，同时，玩家依然可以使用卡牌参与gameFi中的4种战斗：PVE PVP GVE GVG
     4.玩家可以在PVE中获得少量的HC奖励，获得药水等各种道具。`,
-    // 挂单页
-    // 挂单
-    // Pending Order
-
-    // 全部选择
-    // Select All
-
-    // 确定
-    // Pending Order
-
-    // 合集筛选
-    // Series
-
-    // 价格筛选
-    // Price
-
-    // 币种筛选
-    // Token
-
-    // 类型筛选
-    // Type
-
-    // 稀有度筛选
-    // Rarity
-
-    // 属性筛选
-    // Property
-
-    // 职业
-    // Vocation
-
-    // 等级
-    // Grade
-
-    // 角色
-    // Role
-
-    // 市场页
-    // 价格
-    // Price
-
-    // 购买
-    // Buy
-
-    // 属性
-    // Property
-
-    // 等级
-    // Grade
-
-    // 星级
-    // Stars
-
-    // 稀有度
-    // Rarity
-
-    // 人物介绍
-    // Introduction
-
-    // 交易记录
-    // Transaction Record
-
-    // 挂单弹窗
-    // 挂单
-    // Pending Order
-
-    // 挂单价格
-    // Price
-
-    // 手续费
-    // Fee
-
-    // 实际收益
-    // Income
   },
   walletPopup: {
     text1: "未连接钱包",
@@ -433,4 +347,81 @@ export const message = {
   tips: {
     text1: "敬请期待",
   },
+  btns: {
+    text1: "返回主页面",
+  },
 };
+// 挂单页
+// 挂单
+// Pending Order
+
+// 全部选择
+// Select All
+
+// 确定
+// Pending Order
+
+// 合集筛选
+// Series
+
+// 价格筛选
+// Price
+
+// 币种筛选
+// Token
+
+// 类型筛选
+// Type
+
+// 稀有度筛选
+// Rarity
+
+// 属性筛选
+// Property
+
+// 职业
+// Vocation
+
+// 等级
+// Grade
+
+// 角色
+// Role
+
+// 市场页
+// 价格
+// Price
+
+// 购买
+// Buy
+
+// 属性
+// Property
+
+// 等级
+// Grade
+
+// 星级
+// Stars
+
+// 稀有度
+// Rarity
+
+// 人物介绍
+// Introduction
+
+// 交易记录
+// Transaction Record
+
+// 挂单弹窗
+// 挂单
+// Pending Order
+
+// 挂单价格
+// Price
+
+// 手续费
+// Fee
+
+// 实际收益
+// Income

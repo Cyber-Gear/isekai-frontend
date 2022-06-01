@@ -29,15 +29,19 @@
         <li>
           <ul>
             <li>
-              <div>{{ $t("message.dao.text4") }} <span>Oxlk32...04569s</span> {{ $t("message.dao.text13") }}</div>
-              <div class="status">{{ $t("message.dao.text5") }}</div>
+              <div>{{ $t("message.dao.text4") }} <span>Oxlk32...04569s</span> {{ $t("message.dao.text5") }}</div>
+              <div class="status">{{ $t("message.status.text4") }}</div>
             </li>
-            <li>{{ $t("message.dao.text7") }} <img src="../../assets/images/box_title3.webp" alt="" /></li>
+            <li>{{ $t("message.dao.text6") }} <img src="../../assets/images/box_title3.webp" alt="" /></li>
             <li>
-              <pre>{{ $t("message.dao.text8") }}3{{ $t("message.dao.text39") }}shika studio,metalulu,cryptopunk{{ $t("message.dao.text40") }}</pre>
+              <pre>{{ $t("message.dao.text7") }}</pre>
             </li>
             <li>
-              <div>{{ $t("message.dao.text9") }}5{{ $t("message.dao.text41") }}</div>
+              <div>{{ $t("message.dao.text8") }}</div>
+              <!-- <div>
+                <span>✔ {{ $t("message.dao.text10") }}</span>
+                <span>{{ $t("message.dao.text11") }}</span>
+              </div> -->
               <div class="btn" @click="toDetail(1)">{{ $t("message.dao.text12") }}</div>
             </li>
           </ul>

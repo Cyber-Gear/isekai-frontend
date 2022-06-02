@@ -135,11 +135,14 @@ pre {
 // 重置组件样式
 .el-message {
   min-width: 1rem;
-  font-size: 0.15rem;
   border-color: transparent;
   background: linear-gradient(90deg, #7b95a3 0%, #7f82a3 100%);
-  .el-icon-info,
+  .el-icon-info {
+    font-size: 0.2rem;
+    color: #ffffff;
+  }
   .el-message__content {
+    font-size: 0.15rem;
     color: #ffffff;
   }
 }

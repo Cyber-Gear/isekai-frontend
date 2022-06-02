@@ -298,7 +298,7 @@ export const message = {
   launchpad: {
     text1: "Current project",
     text2: "Category",
-    text3: "The total amout",
+    text3: "The Total Amout",
     text4: "Price",
     text5: "Purchase Limit",
     text6: "Mystery boxes NFT",

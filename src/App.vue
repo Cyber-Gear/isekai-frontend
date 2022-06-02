@@ -69,7 +69,6 @@ export default {
 }
 #container_body {
   width: 100%;
-  min-height: 100vh;
   #container_view {
     width: 100%;
     min-height: calc(100vh - 4rem);

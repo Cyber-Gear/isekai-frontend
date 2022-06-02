@@ -314,7 +314,7 @@ export default {
       width: 100%;
       padding: 0.2rem 0;
       .row {
-        font-size: 0.12rem;
+        font-size: 0.15rem;
         padding: 0 0.5rem;
         &:nth-child(1) {
           font-weight: 400;
@@ -484,9 +484,9 @@ export default {
     }
     .content {
       width: 100%;
-      height: 5rem;
+      height: 4rem;
       padding: 0.2rem 0.5rem;
-      font-size: 0.12rem;
+      font-size: 0.15rem;
       font-weight: 600;
       overflow-y: auto;
     }

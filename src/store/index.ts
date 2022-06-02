@@ -8,11 +8,7 @@ export default new Vuex.Store({
     currentLanguage: i18n.locale,
     showWalletListPopup: false,
     showWalletConnectPopup: false,
-    showPaintingVideo: {
-      isShow: false,
-      name: "",
-      url: "",
-    },
+    showPlayVideoPopup: { isShow: false, name: "", url: "" },
   },
   getters: {
     isEnLang(state) {
@@ -24,8 +20,8 @@ export default new Vuex.Store({
     getWalletConnectPopup(state) {
       return state.showWalletConnectPopup;
     },
-    getPaintingVideo(state) {
-      return state.showPaintingVideo;
+    getPlayVideoPopup(state) {
+      return state.showPlayVideoPopup;
     },
   },
   mutations: {
@@ -35,8 +31,8 @@ export default new Vuex.Store({
     setWalletConnectPopup(state, data) {
       state.showWalletConnectPopup = data;
     },
-    setPaintingVideo(state, data) {
-      state.showPaintingVideo = data;
+    setPlayVideoPopup(state, data) {
+      state.showPlayVideoPopup = data;
     },
   },
   actions: {},

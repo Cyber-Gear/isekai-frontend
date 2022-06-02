@@ -336,11 +336,37 @@ export default {
       ],
     };
   },
+  // created() {},
+  // mounted() {
+  //   setTimeout(() => {
+  //     this.cardList6 = [
+  //       this.$urlImages + "collaborators1.webp",
+  //       this.$urlImages + "collaborators2.webp",
+  //       this.$urlImages + "collaborators3.webp",
+  //       this.$urlImages + "collaborators4.webp",
+  //       this.$urlImages + "collaborators5.webp",
+  //       this.$urlImages + "collaborators6.webp",
+  //       this.$urlImages + "collaborators7.webp",
+  //       this.$urlImages + "collaborators8.webp",
+  //       this.$urlImages + "collaborators9.webp",
+  //       this.$urlImages + "collaborators10.webp",
+  //       this.$urlImages + "collaborators11.webp",
+  //       this.$urlImages + "collaborators12.webp",
+  //       this.$urlImages + "collaborators13.webp",
+  //       this.$urlImages + "collaborators14.webp",
+  //       this.$urlImages + "collaborators15.webp",
+  //       this.$urlImages + "collaborators16.webp",
+  //     ];
+  //   }, 500);
+  // },
   methods: {
     submitInfo(index) {
       switch (index) {
         case 0:
           window.location.href = "https://forms.gle/zZDWkvZgGMS69LHx5";
+          break;
+        case 1:
+          window.location.href = "https://forms.gle/K9QLDqwe1m3Np7LV8";
           break;
         default:
           break;

@@ -87,7 +87,7 @@ export default {
   },
   methods: {
     openVideo() {
-      this.$store.commit("setPaintingVideo", { isShow: true, name: this.$t(this.card.name), url: this.card.video });
+      this.$store.commit("setPlayVideoPopup", { isShow: true, name: this.$t(this.card.name), url: this.card.video });
     },
     goBack() {
       history.go(-1);

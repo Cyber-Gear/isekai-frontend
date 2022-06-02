@@ -1,7 +1,5 @@
 <template>
-  <div class="page">
-    <h1>MARKET</h1>
-  </div>
+  <div class="page"></div>
 </template>
 
 <script>
@@ -16,6 +14,8 @@ export default {
 <style lang="scss" scoped>
 .page {
   width: 100%;
-  height: 80vh;
+  min-height: calc(100vh - 4rem);
+  background: url("~@/assets/images/bg10.webp") no-repeat;
+  background-size: 100% 100%;
 }
 </style>

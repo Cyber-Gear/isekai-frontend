@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import { nftworks } from "./nftworks";
+import { nftworks } from "../../mock/nftworks";
 import PaintingVideo from "../../components/PaintingVideo.vue";
 
 export default {

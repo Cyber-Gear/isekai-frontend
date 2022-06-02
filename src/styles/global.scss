@@ -85,6 +85,20 @@ body {
   }
 }
 
+.gradient_border {
+  border-radius: 0.05rem;
+  padding: 1px;
+  background-image: linear-gradient(150deg, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5));
+  > div {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.05rem;
+    background: #080809;
+    transition: all 0.3s;
+    overflow: hidden;
+  }
+}
+
 // 重置滚动条样式
 ::-webkit-scrollbar {
   width: 0.05rem;
@@ -205,5 +219,41 @@ pre {
         border-color: transparent;
       }
     }
+  }
+}
+.el-collapse {
+  border-top: none;
+  border-bottom: none;
+  .el-collapse-item__header {
+    height: 0.9rem;
+    line-height: 0.9rem;
+    background-color: transparent;
+    border-bottom: 1px solid transparent;
+    // border-bottom: 1px solid;
+    // border-image: linear-gradient(135deg, rgba(212, 135, 241, 0.44), rgba(82, 224, 255, 0.44)) 1 1;
+    .el-collapse-item__arrow {
+      color: #ffffff;
+      font-size: 0.25rem;
+    }
+  }
+  .el-collapse-item__wrap {
+    background-color: transparent;
+    border-bottom: 1px solid transparent;
+    // border-bottom: 1px solid;
+    // border-image: linear-gradient(135deg, rgba(212, 135, 241, 0.44), rgba(82, 224, 255, 0.44)) 1 1;
+  }
+}
+.el-tag {
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  font-size: 12px;
+  color: #ffffff;
+  background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
+  border-color: transparent;
+  border-radius: 7px;
+  margin-right: 0.1rem;
+  .el-tag__close {
+    color: #ffffff;
   }
 }

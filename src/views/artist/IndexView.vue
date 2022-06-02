@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { nftworks } from "./nftworks";
+import { nftworks } from "../../mock/nftworks";
 export default {
   name: "ARTIST",
   data() {
@@ -76,7 +76,7 @@ export default {
   margin: 0.5rem 0;
 }
 .card_list {
-  max-width: 85%;
+  width: 11.5rem;
   height: 12rem;
   overflow-y: auto;
   margin: 0 auto;
@@ -88,8 +88,8 @@ export default {
   li {
     float: left;
     width: 3rem;
-    height: 4rem;
-    margin: 0.5rem;
+    // height: 4rem;
+    margin: 0.4rem;
     overflow: hidden;
     border-radius: 0.1rem;
     border: 1px solid #514f4f;
@@ -118,7 +118,7 @@ export default {
     }
     .top {
       width: 100%;
-      height: 50%;
+      height: 2rem;
     }
     .center {
       width: 0.5rem;

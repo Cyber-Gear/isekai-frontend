@@ -63,7 +63,7 @@
                 <img :src="`${$urlImages}icon1.webp`" alt="" />
               </div>
               <div>
-                <span>{{ $t(detail.title) }}</span>
+                <span>{{ $t(item.title) }}</span>
                 <span>88busd</span>
               </div>
               <div>{{ $t("message.artist.text10") }}77busd</div>
@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import { nftworks } from "./nftworks";
+import { nftworks } from "../../mock/nftworks";
 export default {
   name: "ARTISTDetails",
   data() {
@@ -302,7 +302,7 @@ export default {
   }
 }
 .box3 {
-  max-width: 85%;
+  width: 11.5rem;
   margin: 0 auto;
   padding-top: 0.5rem;
   border-top: 1px solid;
@@ -310,19 +310,20 @@ export default {
 }
 .card_list {
   width: 100%;
-  height: 13rem;
+  height: 10rem;
   overflow-y: auto;
-  display: grid;
-  grid-gap: 0.3rem;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  // display: grid;
+  // grid-gap: 0.3rem;
+  // grid-template-columns: repeat(4, 1fr);
+  // grid-template-rows: repeat(4, 1fr);
   li {
-    width: 2.7rem;
-    height: 3.8rem;
+    float: left;
+    margin: 0 0.35rem 0.35rem 0;
+    width: 2.5rem;
     border-radius: 0.1rem;
     overflow: hidden;
     border: 1px solid #3f3e43;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(0.04rem);
     background: rgba(0, 0, 0, 0.38);
     cursor: pointer;
     transition: all 0.3s;
@@ -347,7 +348,7 @@ export default {
     }
     .top {
       width: 100%;
-      height: 2.7rem;
+      height: 2.5rem;
     }
     .center {
       width: 100%;

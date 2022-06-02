@@ -60,24 +60,27 @@
               {{ $t("message.dao.text22") }}
             </div>
             <div class="check_boxs">
-              <div class="check">
-                <div class="check_icon"></div>
-                <div class="text"><span>Shika Studio </span><span>(60%，2000)</span></div>
-              </div>
-              <div class="check">
-                <div class="check_icon"></div>
-                <div class="text"><span>Shika Studio </span><span>(60%，2000)</span></div>
-              </div>
-              <div class="check">
-                <div class="check_icon"></div>
-                <div class="text"><span>Shika Studio </span><span>(60%，2000)</span></div>
+              <div class="check" v-for="(item, index) in checkboxList" :key="index" @click="checkboxClick(item)" :class="{ active: item.isChecked }">
+                <div class="gradient_border">
+                  <div>
+                    <div class="check_icon"></div>
+                  </div>
+                </div>
+                <div class="text">
+                  <span>{{ item.label }}</span>
+                  <span>({{ item.percent }}%, {{ item.amount }})</span>
+                </div>
               </div>
             </div>
             <div class="inputboxs">
-              <div class="inputbox">
-                <div class="text1">{{ $t("message.dao.text23") }}</div>
-                <input type="text" />
-                <div class="text2">{{ $t("message.dao.text24") }}</div>
+              <div class="gradient_border">
+                <div>
+                  <div class="inputbox">
+                    <div class="text1">{{ $t("message.dao.text23") }}</div>
+                    <input type="number" />
+                    <div class="text2">{{ $t("message.dao.text24") }}</div>
+                  </div>
+                </div>
               </div>
               <div class="btn">{{ $t("message.dao.text25") }}</div>
             </div>
@@ -152,6 +155,11 @@ export default {
   data() {
     return {
       detail: null,
+      checkboxList: [
+        { label: "Shika Studio", percent: 60, amount: 2000, isChecked: false },
+        { label: "Metalulu", percent: 18.78, amount: 682, isChecked: false },
+        { label: "Cryptopuck", percent: 32.22, amount: 940, isChecked: false },
+      ],
     };
   },
   created() {
@@ -165,6 +173,9 @@ export default {
     },
     goBack() {
       history.go(-1);
+    },
+    checkboxClick(item) {
+      item.isChecked = !item.isChecked;
     },
   },
 };
@@ -333,40 +344,42 @@ export default {
           align-items: center;
           padding: 0.05rem 0;
           cursor: pointer;
-          &.active .check_icon {
+          &.active .gradient_border > div {
             background: #6cebff;
+          }
+          .gradient_border {
+            background-image: linear-gradient(to bottom, rgba(0, 255, 246, 0.7), rgba(255, 56, 148, 0.7), rgba(229, 108, 255, 0.7));
           }
           .check_icon {
             width: 0.15rem;
             height: 0.15rem;
-            border-radius: 0.04rem;
-            border: 1px solid;
-            border-image: linear-gradient(180deg, rgba(65, 240, 255, 1), rgba(207, 85, 225, 1)) 1 1;
           }
           .text {
-            width: 3rem;
             display: flex;
-            justify-content: space-between;
             font-size: 0.15rem;
             font-weight: 300;
             margin-left: 0.1rem;
+            span {
+              &:nth-child(1) {
+                width: 2rem;
+              }
+            }
           }
         }
       }
       .inputboxs {
         display: flex;
         padding: 0.2rem 0;
+        .gradient_border {
+          background-image: linear-gradient(to right, rgba(0, 255, 246, 0.7), rgba(255, 56, 148, 0.7), rgba(229, 108, 255, 0.7));
+        }
         .inputbox {
           width: 4.5rem;
           height: 0.35rem;
-          border-radius: 0.08rem;
-          border: 1px solid;
-          border-image: radial-gradient(circle, rgba(0, 255, 246, 1), rgba(255, 56, 148, 1), rgba(229, 108, 255, 1)) 1 1;
           display: flex;
           align-items: center;
           justify-content: space-between;
           padding: 0 0.2rem;
-          margin-right: 0.2rem;
           .text1,
           .text2 {
             height: 80%;
@@ -389,10 +402,12 @@ export default {
             height: 100%;
             padding: 0 0.2rem;
             font-size: 0.12rem;
+            color: #ffffff;
             font-weight: 400;
           }
         }
         .btn {
+          margin-left: 0.2rem;
           width: 0.9rem;
           height: 0.35rem;
           background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);

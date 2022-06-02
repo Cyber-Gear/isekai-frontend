@@ -26,7 +26,7 @@ export const message = {
     text9: "INVESTOR&PARTNER",
     text10: "TAG",
     list1: [
-      { text1: "Submit Artist Info", text2: "start the journey of secondary creation and get rewarded" },
+      { text1: "Submit Artist Info", text2: "Start the journey of secondary creation and get rewarded" },
       { text1: "Submit cooperation Info", text2: "Create your NFT、Game、Event，we will contact with you" },
       { text1: "Polling vote", text2: "Vote for your favorite artists, KOLs, games and works and get rewarded" },
     ],

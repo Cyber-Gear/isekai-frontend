@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { nftworks } from "./nftworks";
+import { nftworks } from "../../mock/nftworks";
 export default {
   name: "DetailsNegoro",
   data() {

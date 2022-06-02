@@ -595,7 +595,7 @@ export default {
   border-radius: 0.05rem;
 }
 .box_border1 {
-  padding: 0.01rem;
+  padding: 1px;
 }
 .box_border2 {
   padding: 0;

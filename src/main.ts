@@ -14,12 +14,16 @@ import VueAwesomeSwiper from "vue-awesome-swiper";
 import "swiper/dist/css/swiper.css";
 Vue.use(VueAwesomeSwiper);
 
-import { Icon, Button, Message, Steps, Step, Dialog } from "element-ui";
+import { Icon, Button, Message, Steps, Step, Dialog, Collapse, CollapseItem, Tag } from "element-ui";
 Vue.use(Icon);
 Vue.use(Button);
 Vue.use(Steps);
 Vue.use(Step);
 Vue.use(Dialog);
+Vue.use(Collapse);
+Vue.use(CollapseItem);
+Vue.use(Tag);
+
 Vue.prototype.$message = (option: any) => {
   // option.duration = 0;
   option.offset = 100;

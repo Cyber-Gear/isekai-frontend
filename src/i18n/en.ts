@@ -14,8 +14,8 @@ export const message = {
     text1: "COPYRIGHT © 2022 FUNTOPIA, All rights Reserved",
   },
   home: {
-    text1: "Create a MAG Community on Web3",
-    text2: "Strong connection to both MAG & Crypto Technologies to lower the barriers of crypto entrance",
+    text1: "Create A FUN METAVERSE",
+    text2: "Metaverse is coming, our vision is to create a fun metaverse for all users, potential for the market in NFT, Game, Social Network etc.",
     text3:
       "NFT artist shika studio provided the character artwork for the release of NFT on the FUNTOPIA platform, which was used in Cybergear's game scenes.",
     text4: "WHITE PAGE",

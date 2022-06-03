@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <span class="absolute_text1">{{ $t("message.home.text1") }}</span>
-    <span class="absolute_text2">{{ $t("message.home.text1") }}</span>
+    <!-- <span class="absolute_text1">{{ $t("message.home.text1") }}</span>
+    <span class="absolute_text2">{{ $t("message.home.text1") }}</span> -->
     <img class="absolute1" :src="`${$urlImages}absolute1.webp`" alt="" />
     <img class="absolute2" :src="`${$urlImages}absolute2.webp`" alt="" />
     <img class="absolute3" :src="`${$urlImages}absolute3.webp`" alt="" />
@@ -20,9 +20,6 @@
     <div class="box1">
       <ul>
         <li>
-          <!-- Create a <span>MAG</span>
-          <br />
-          Community on Web3 -->
           {{ $t("message.home.text1") }}
         </li>
         <li><div></div></li>

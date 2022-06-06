@@ -1,9 +1,5 @@
 <template>
   <div class="page">
-    <div class="bgbox">
-      <img class="absolute1" :src="`${$urlImages}bg2.webp`" alt="" />
-      <img class="absolute2" :src="`${$urlImages}bg3.webp`" alt="" />
-    </div>
     <div class="box">
       <div class="leftbox">
         <div class="avatar">
@@ -15,15 +11,15 @@
           <div><i class="iconfont icon-discord"></i></div>
           <div><i class="iconfont icon-medium"></i></div>
         </div>
-        <div class="lis">
+        <!-- <div class="lis">
           <div><i class="iconfont icon-zhili"></i>{{ $t("message.dao.text1") }}</div>
           <div>123</div>
-        </div>
+        </div> -->
         <div class="lis">
           <div><i class="iconfont icon-Customermanagement-fill"></i>{{ $t("message.dao.text2") }}</div>
-          <div>123</div>
+          <div>{{ spaceObj.members.length }}</div>
         </div>
-        <div class="btn">{{ $t("message.dao.text3") }}</div>
+        <div class="btn disabled">{{ $t("message.dao.text3") }}</div>
       </div>
       <ul class="rightbox">
         <li>
@@ -52,12 +48,120 @@
 </template>
 
 <script>
+import { vote } from "funtopia-sdk";
+
 export default {
   name: "DAO",
   data() {
-    return {};
+    return {
+      spaceObj: {
+        admins: [],
+        filters: { minScore: 0 },
+        members: [],
+        strategies: [],
+        validation: {},
+      },
+    };
+  },
+  created() {
+    // this.getSpace();
+    this.getProposals();
   },
   methods: {
+    // 获取空间
+    getSpace() {
+      vote
+        .getSpace()
+        .then((res) => {
+          console.log(res.data.space);
+          const space = res.data.space;
+          this.spaceObj.admins = space.admins;
+          this.spaceObj.filters.minScore = space.filters.minScore;
+          this.spaceObj.members = space.members;
+          this.spaceObj.strategies = space.strategies;
+          this.spaceObj.validation = space.validation;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    // 获取提案
+    getProposals() {
+      const params = {
+        first: 10,
+        skip: 0,
+        orderBy: "created",
+        orderDirection: "desc",
+        // state: "",
+        // author: "",
+        // author_not: "",
+      };
+      vote
+        .getProposals(params)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    getVotes() {
+      const params = {
+        first: number,
+        skip: number,
+        orderBy: string,
+        orderDirection: string,
+        // proposal?: string,
+      };
+      vote
+        .getVotes(params)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getScores() {
+      // voters: string[]
+      vote
+        .getScores(voters)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    // 投票
+    castVote() {
+      const params = {
+        // account: string, proposal: string, choice: number
+      };
+      vote
+        .castVote(params)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    // 提交提案
+    createProposal() {
+      const params = {
+        // account: string, title: string, body: string, discussion: string, choices: string[], start: number, end: number
+      };
+      vote
+        .createProposal(params)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     toDetail(id) {
       this.$router.push({ path: "dao-details", query: { id: id } });
     },
@@ -68,25 +172,11 @@ export default {
 <style lang="scss" scoped>
 .page {
   width: 100%;
-  padding-top: 0.8rem;
+  min-height: calc(100vh - 4rem);
+  padding: 0.8rem 0;
   overflow: hidden;
-}
-.bgbox {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  img {
-    width: 100%;
-    height: auto;
-    position: absolute;
-    left: 0;
-  }
-  .absolute1 {
-    top: 0;
-  }
-  .absolute2 {
-    top: 5rem;
-  }
+  background: url($urlImages + "bg7.webp") no-repeat;
+  background-size: 100% 100%;
 }
 .box {
   width: fit-content;
@@ -183,6 +273,11 @@ export default {
     text-align: center;
     padding: 0.2rem 0;
     cursor: pointer;
+    &.disabled {
+      color: #424242;
+      background: #17181b;
+      cursor: not-allowed;
+    }
   }
 }
 .rightbox {

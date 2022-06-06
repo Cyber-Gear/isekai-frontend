@@ -7,14 +7,22 @@
           <i class="iconfont icon-jiantou_qiehuanzuo" @click="closeSelectionList"></i>
         </div>
         <div class="list">
-          <el-collapse accordion v-model="activeName">
+          <el-collapse accordion v-model="activeName" @change="changeSelectionList">
             <el-collapse-item v-for="(item, index) in selectionList" :key="index" :name="index.toString()">
               <template slot="title">
                 <div class="checkbox_title"><i :class="item.icon"></i> {{ item.title }}</div>
               </template>
               <div class="gradient_border">
                 <div>
-                  <ul class="checkbox_content">
+                  <div class="input_list" v-if="index == 1">
+                    <div class="inputbox">
+                      <input type="number" placeholder="min" v-model="item.checkboxList[0].min" />
+                      <span>-</span>
+                      <input type="number" placeholder="max" v-model="item.checkboxList[0].max" />
+                    </div>
+                    <div class="btn" @click="clickOK(item.checkboxList[0])">OK</div>
+                  </div>
+                  <ul class="checkbox_content" v-else>
                     <li v-for="(ite, ind) in item.checkboxList" :key="ind" @click="checkboxClick(ite)">
                       <div class="input">
                         <i class="iconfont icon-fuxuankuang-quanxuan" v-show="ite.isChecked"></i>
@@ -70,7 +78,7 @@ export default {
   name: "MARKET",
   data() {
     return {
-      activeName: "",
+      activeName: "1",
       selectionList: [
         {
           title: "合集筛选",
@@ -84,7 +92,7 @@ export default {
         {
           title: "价格筛选",
           icon: "iconfont icon-dollar",
-          checkboxList: [{ label: "价格范围", isChecked: false }],
+          checkboxList: [{ label: "价格范围", min: 0, max: 0 }],
         },
         {
           title: "币种筛选",
@@ -158,6 +166,20 @@ export default {
       setTimeout(() => {
         this.isShowSelectionList = false;
       }, 300);
+    },
+    changeSelectionList(activeNames) {
+      // console.log(activeNames);
+      if (!this.isShowSelectionList) {
+        this.isShowSelectionList = true;
+        setTimeout(() => {
+          this.activeName = activeNames;
+        }, 300);
+      }
+    },
+
+    clickOK(item) {
+      // console.log(item);
+      // this.tagList.push(ite);
     },
 
     checkboxClick(ite) {
@@ -270,6 +292,49 @@ export default {
         }
       }
     }
+    .input_list {
+      width: 100%;
+      padding: 0.1rem;
+      font-size: 0.15rem;
+      font-weight: 400;
+      color: #ffffff;
+      .inputbox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        input {
+          width: 0.8rem;
+          height: 0.3rem;
+          background: rgba(24, 24, 28, 0.8);
+          border-radius: 0.08rem;
+          border: 1px solid #606060;
+          color: #ffffff;
+          text-align: center;
+        }
+        span {
+          margin: 0 0.1rem;
+        }
+      }
+      .btn {
+        width: 0.8rem;
+        height: 0.3rem;
+        background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
+        border-radius: 0.08rem;
+        font-size: 0.2rem;
+        font-weight: 400;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        margin-top: 0.1rem;
+        &.disabled {
+          color: #424242;
+          background: #17181b;
+          cursor: not-allowed;
+        }
+      }
+    }
   }
 }
 .boxlist {
@@ -322,7 +387,6 @@ export default {
     li {
       float: left;
       margin: 0 0.4rem 0.4rem 0;
-
       width: 2.5rem;
       border-radius: 0.1rem;
       overflow: hidden;
@@ -356,7 +420,6 @@ export default {
       }
       .center {
         width: 100%;
-        height: 0.75rem;
         border-bottom: 1px solid rgba(132, 125, 125, 0.2);
         div {
           display: flex;

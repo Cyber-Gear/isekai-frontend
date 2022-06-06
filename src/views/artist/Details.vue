@@ -352,7 +352,6 @@ export default {
     }
     .center {
       width: 100%;
-      height: 0.75rem;
       border-bottom: 1px solid rgba(132, 125, 125, 0.2);
       div {
         display: flex;

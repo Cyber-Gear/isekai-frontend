@@ -165,8 +165,11 @@ export default {
 <style lang="scss" scoped>
 .page {
   width: 100%;
-  padding-top: 0.8rem;
-  padding-bottom: 1rem;
+  min-height: calc(100vh - 4rem);
+  padding: 0.8rem 0;
+  overflow: hidden;
+  background: url($urlImages + "bg7.webp") no-repeat;
+  background-size: 100% 100%;
 }
 .tip_box {
   width: 11.5rem;

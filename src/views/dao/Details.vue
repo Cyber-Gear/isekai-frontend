@@ -1,9 +1,5 @@
 <template>
   <div class="page">
-    <div class="bgbox">
-      <img class="absolute1" :src="`${$urlImages}bg2.webp`" alt="" />
-      <img class="absolute2" :src="`${$urlImages}bg3.webp`" alt="" />
-    </div>
     <div class="banner">
       <div class="back_box" @click="goBack">
         <i class="iconfont icon-fanhui"></i>
@@ -184,26 +180,11 @@ export default {
 <style lang="scss" scoped>
 .page {
   width: 100%;
-  padding-top: 0.8rem;
-  padding-bottom: 1rem;
+  min-height: calc(100vh - 4rem);
+  padding: 0.8rem 0;
   overflow: hidden;
-}
-.bgbox {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  img {
-    width: 100%;
-    height: auto;
-    position: absolute;
-    left: 0;
-  }
-  .absolute1 {
-    top: 0;
-  }
-  .absolute2 {
-    top: 5rem;
-  }
+  background: url($urlImages + "bg7.webp") no-repeat;
+  background-size: 100% 100%;
 }
 .banner {
   width: 100%;

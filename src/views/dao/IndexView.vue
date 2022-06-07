@@ -55,7 +55,7 @@ export default {
   data() {
     return {
       spaceObj: {
-        admins: [],
+        admins: [""],
         filters: { minScore: 0 },
         members: [],
         strategies: [],
@@ -87,17 +87,15 @@ export default {
     },
     // 获取提案
     getProposals() {
-      const params = {
-        first: 10,
-        skip: 0,
-        orderBy: "created",
-        orderDirection: "desc",
-        // state: "",
-        // author: "",
-        // author_not: "",
-      };
+      const first = 10;
+      const skip = 0;
+      const orderBy = "created";
+      const orderDirection = "desc";
+      // const state = "";
+      // const author = "";
+      // const author_not = "";
       vote
-        .getProposals(params)
+        .getProposals(first, skip, orderBy, orderDirection)
         .then((res) => {
           console.log(res);
         })

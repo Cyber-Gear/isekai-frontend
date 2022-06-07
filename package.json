@@ -16,7 +16,7 @@
     "element-ui": "^2.15.8",
     "react": "^18.1.0",
     "rimraf": "^3.0.2",
-    "funtopia-sdk": "1.0.4",
+    "funtopia-sdk": "1.0.10",
     "sass-resources-loader": "^2.2.5",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^3.1.3",

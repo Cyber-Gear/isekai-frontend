@@ -14,19 +14,26 @@
       <div class="leftbox">
         <div class="box1">
           <div>
-            <span><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("message.dao.text6") }}</span>
-            <span>{{ $t("message.status.text4") }}</span>
+            <!-- <span><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("message.dao.text6") }}</span>
+            <span>{{ $t("message.status.text4") }}</span> -->
+            <span><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ someProposals.title }}</span>
+            <span>
+              <template v-if="someProposals.state == 'active'"> {{ $t("message.status.text4") }} </template>
+              <template v-if="someProposals.state == 'pending'"> {{ $t("message.status.text5") }} </template>
+              <template v-if="someProposals.state == 'closed'"> {{ $t("message.status.text6") }} </template>
+            </span>
           </div>
           <div>
-            <pre>{{ $t("message.dao.text7") }}</pre>
+            <!-- <pre>{{ $t("message.dao.text7") }}</pre> -->
+            <pre>{{ someProposals.body }}</pre>
           </div>
         </div>
         <div class="box2">
-          <div class="menu">
+          <!-- <div class="menu">
             <span @click="changeHash('#Detail')">{{ $t("message.dao.text15") }}</span>
             <span @click="changeHash('#Vote')">{{ $t("message.dao.text16") }}</span>
             <span @click="changeHash('#Comment')">{{ $t("message.dao.text17") }}</span>
-          </div>
+          </div> -->
           <div class="box3" id="Detail">
             <div>
               <span>Shika Studio {{ $t("message.dao.text18") }} XXXXXXX</span>
@@ -50,11 +57,13 @@
           <div class="box4" id="Vote">
             <div class="title">
               <span><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("message.status.text4") }}</span>
-              <span>October 01, 2020 - October 03, 2020</span>
+              <span>
+                <span>{{ $utils.formatDate(someProposals.start * 1000) }}</span>
+                <span>-</span>
+                <span>{{ $utils.formatDate(someProposals.end * 1000) }}</span>
+              </span>
             </div>
-            <div class="des">
-              {{ $t("message.dao.text22") }}
-            </div>
+            <div class="des">{{ $t("message.dao.text22") }}</div>
             <div class="check_boxs">
               <div class="check" v-for="(item, index) in checkboxList" :key="index" @click="checkboxClick(item)" :class="{ active: item.isChecked }">
                 <div class="gradient_border">
@@ -64,7 +73,7 @@
                 </div>
                 <div class="text">
                   <span>{{ item.label }}</span>
-                  <span>({{ item.percent }}%, {{ item.amount }})</span>
+                  <span>({{ item.percent }}%, {{ item.amount | formatNumber }})</span>
                 </div>
               </div>
             </div>
@@ -73,15 +82,33 @@
                 <div>
                   <div class="inputbox">
                     <div class="text1">{{ $t("message.dao.text23") }}</div>
-                    <input type="number" />
-                    <div class="text2">{{ $t("message.dao.text24") }}</div>
+                    <input type="number" v-model="ticketAmount" />
+                    <div class="text2" @click="getMaxAmount">{{ $t("message.dao.text24") }}</div>
                   </div>
                 </div>
               </div>
-              <div class="btn">{{ $t("message.dao.text25") }}</div>
+              <div class="btn" @click="lock">{{ $t("message.dao.text25") }}</div>
             </div>
           </div>
           <div class="box5" id="Comment">{{ $t("message.dao.text17") }}</div>
+          <div class="box6">
+            <div class="title">
+              <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t("message.dao.text16") }}</span>
+              <div>{{ someProposals.votes }}</div>
+            </div>
+            <ul class="list">
+              <li v-for="(item, index) in votesList" :key="index">
+                <div @click="voterLink(item.voter)">{{ item.voter | ellipsisWallet }}</div>
+                <div>
+                  <template v-if="checkboxList.length > 0">{{ checkboxList[item.choice - 1] ? checkboxList[item.choice - 1].label : "" }}</template>
+                </div>
+                <div>暂无</div>
+              </li>
+            </ul>
+            <div class="footer" v-if="hasMore">
+              <span class="more" @click="getMore">查看更多</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="rightbox">
@@ -90,11 +117,13 @@
           <ul class="list">
             <li>
               <div>{{ $t("message.dao.text27") }}</div>
-              <div><img :src="`${$urlImages}logo1.webp`" alt="" /></div>
+              <div>
+                <img v-if="someProposals.space.id == 'fun-topia.eth'" :src="`${$urlImages}logo1.webp`" alt="" />
+              </div>
             </li>
             <li>
               <div>{{ $t("message.dao.text28") }}</div>
-              <div>#QmcEIKN<i class="iconfont icon-chakan"></i></div>
+              <div @click="ipfsLink">#{{ someProposals.ipfs | ellipsisIpfs }}<i class="iconfont icon-chakan"></i></div>
             </li>
             <li>
               <div>{{ $t("message.dao.text29") }}</div>
@@ -102,41 +131,30 @@
             </li>
             <li>
               <div>{{ $t("message.dao.text30") }}</div>
-              <div>may23,2022,11:55AM</div>
+              <div>{{ $utils.formatDate(someProposals.start * 1000) }}</div>
             </li>
             <li>
               <div>{{ $t("message.dao.text31") }}</div>
-              <div>may31,2022,12:00PM</div>
+              <div>{{ $utils.formatDate(someProposals.end * 1000) }}</div>
             </li>
             <li>
               <div></div>
-              <div>#18,041,584</div>
+              <div>#{{ someProposals.snapshot | formatNumber }}</div>
             </li>
           </ul>
         </div>
         <div class="box1">
           <div class="title"><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("message.dao.text35") }}</div>
           <ul class="progressbarlist">
-            <li>
+            <li v-for="(item, index) in checkboxList" :key="index">
               <div>
-                <span>UNverse</span>
-                <p><span>0 HC</span><span>0 %</span></p>
+                <span>{{ item.label }}</span>
+                <p>
+                  <span>{{ item.amount | formatNumber }}</span>
+                  <span>{{ item.percent }}%</span>
+                </p>
               </div>
-              <div><div></div></div>
-            </li>
-            <li>
-              <div>
-                <span>DTland</span>
-                <p><span>0 HC</span><span>0 %</span></p>
-              </div>
-              <div><div></div></div>
-            </li>
-            <li>
-              <div>
-                <span>TMkown</span>
-                <p><span>0 HC</span><span>0 %</span></p>
-              </div>
-              <div><div></div></div>
+              <div><div :style="{ width: item.percent + '%' }"></div></div>
             </li>
           </ul>
         </div>
@@ -146,32 +164,140 @@
 </template>
 
 <script>
+import { vote } from "funtopia-sdk";
+
 export default {
   name: "DAODetails",
   data() {
     return {
-      detail: null,
-      checkboxList: [
-        { label: "Shika Studio", percent: 60, amount: 2000, isChecked: false },
-        { label: "Metalulu", percent: 18.78, amount: 682, isChecked: false },
-        { label: "Cryptopuck", percent: 32.22, amount: 940, isChecked: false },
-      ],
+      someProposals: null,
+      checkboxList: [],
+      ticketAmount: null,
+      totalAmount: 0,
+      votesList: [],
+      hasMore: false,
     };
   },
+  filters: {
+    ellipsisWallet(value) {
+      if (!value) return "";
+      const index = value.length;
+      return value.slice(0, 6) + "..." + value.slice(index - 4, index);
+    },
+    ellipsisIpfs(value) {
+      if (!value) return "";
+      return value.slice(0, 6) + "...";
+    },
+    formatNumber(value) {
+      if (!value) return 0;
+      return (Math.round(value) + "").replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, "$&,");
+    },
+  },
   created() {
-    if (Object.keys(this.$route.query).length > 0) {
-      console.log(this.$route.query);
-    }
+    this.someProposals = JSON.parse(localStorage.getItem("someProposals"));
+    let indexNum = 0;
+    this.someProposals.scores.forEach((element) => {
+      this.totalAmount = this.totalAmount + element;
+      indexNum++;
+    });
+
+    let timer = setInterval(() => {
+      if (indexNum == this.someProposals.scores.length) {
+        clearInterval(timer);
+        this.someProposals.choices.forEach((element) => {
+          const oneChoice = { label: element, percent: 0, amount: 0, isChecked: false };
+          this.checkboxList.push(oneChoice);
+        });
+        this.someProposals.scores.forEach((element, index) => {
+          this.checkboxList[index].amount = element;
+          this.checkboxList[index].percent = (element / this.totalAmount) * 100;
+        });
+      }
+    }, 200);
+
+    this.getVotes({
+      first: 10,
+      skip: 0,
+      orderBy: "created",
+      orderDirection: "desc",
+      proposal: this.someProposals.id,
+    });
   },
   methods: {
-    changeHash(idName) {
-      document.querySelector(idName).scrollIntoView(true);
+    getVotes(params) {
+      vote
+        .getVotes(params.first, params.skip, params.orderBy, params.orderDirection, params.proposal)
+        .then((res) => {
+          console.log(res.data.votes[0]);
+          this.votesList = [...res.data.votes];
+          this.hasMore = res.loading;
+          let arr = [];
+          res.data.votes.forEach((element) => {
+            arr.push(element.voter);
+          });
+          this.getScores(arr);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    goBack() {
-      history.go(-1);
+    getScores(arr) {
+      // voters: string[], blockNumber: number
+      console.log(arr, Number(this.someProposals.snapshot));
+      vote
+        .getScores(arr, Number(this.someProposals.snapshot))
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    lock() {
+      const hasChecked = this.checkboxList.find((item) => item.isChecked);
+      if (!hasChecked) return this.$message({ message: "请选择一个投票", type: "warning" });
+      if (!this.ticketAmount) return this.$message({ message: "请输入投票数量", type: "warning" });
+      // 投票
+      const params = {
+        // account: string, proposal: string, choice: number
+      };
+      vote
+        .castVote(params)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    voterLink(voter) {
+      window.location.href = `https://bscscan.com/address/${voter}`;
+    },
+    ipfsLink() {
+      window.location.href = `https://snapshot.mypinata.cloud/ipfs/${this.someProposals.ipfs}`;
+    },
+    getMaxAmount() {
+      this.ticketAmount = 1000;
+    },
+    getMore() {
+      console.log("getMore");
     },
     checkboxClick(item) {
-      item.isChecked = !item.isChecked;
+      this.checkboxList.forEach((element) => {
+        element.isChecked = false;
+      });
+      item.isChecked = true;
+      // if (this.someProposals.type == "single-choice") {
+      // } else {
+      //   item.isChecked = !item.isChecked;
+      // }
+    },
+    goBack() {
+      localStorage.removeItem("someProposals");
+      history.go(-1);
+    },
+    changeHash(idName) {
+      document.querySelector(idName).scrollIntoView(true);
     },
   },
 };
@@ -310,6 +436,9 @@ export default {
             font-size: 0.12rem;
             font-weight: 300;
             color: #888787;
+            span:nth-child(2) {
+              margin: 0 0.1rem;
+            }
           }
         }
       }
@@ -360,26 +489,28 @@ export default {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 0 0.2rem;
+          // padding: 0 0.2rem;
           .text1,
           .text2 {
+            min-width: 0.5rem;
             height: 80%;
             display: flex;
             align-items: center;
+            text-align: center;
             font-size: 0.12rem;
             font-weight: 400;
+            // padding: 0 0.2rem;
           }
           .text1 {
-            width: 0.5rem;
             border-right: 1px solid;
             border-image: linear-gradient(180deg, rgba(102, 114, 146, 1), rgba(67, 142, 160, 1)) 1 1;
           }
           .text2 {
-            width: 0.3rem;
             color: #00b4ff;
+            cursor: pointer;
           }
           input {
-            width: calc(100% - 0.8rem);
+            width: 100%;
             height: 100%;
             padding: 0 0.2rem;
             font-size: 0.12rem;
@@ -410,6 +541,84 @@ export default {
       font-size: 0.15rem;
       font-weight: 300;
       padding: 0.2rem;
+      margin-bottom: 0.2rem;
+    }
+    .box6 {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.19);
+      border-radius: 0.08rem;
+      border: 1px solid #4b4b4b;
+      backdrop-filter: blur(0.07rem);
+      .title {
+        width: 100%;
+        height: 0.75rem;
+        background: rgba(0, 0, 0, 0.24);
+        border-radius: 0.08rem 0.08rem 0 0;
+        display: flex;
+        align-items: center;
+        padding: 0 0.2rem;
+        font-size: 0.2rem;
+        font-weight: 600;
+        img {
+          width: 0.12rem;
+          height: auto;
+          margin-right: 0.1rem;
+        }
+        > div {
+          background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
+          border-radius: 0.03rem;
+          font-size: 0.12rem;
+          padding: 0.05rem 0.1rem;
+          margin-left: 0.2rem;
+        }
+      }
+      .list {
+        li {
+          width: 100%;
+          height: 0.75rem;
+          display: flex;
+          align-items: center;
+          div {
+            font-size: 0.15rem;
+            font-weight: bold;
+            text-align: center;
+            &:nth-child(1) {
+              width: 25%;
+              cursor: pointer;
+              &:hover {
+                color: #00b2fe;
+              }
+            }
+            &:nth-child(2) {
+              width: 50%;
+            }
+            &:nth-child(3) {
+              width: 25%;
+              i {
+                margin-left: 0.1rem;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+      .footer {
+        width: 100%;
+        height: 0.75rem;
+        background: rgba(0, 0, 0, 0.24);
+        border-radius: 0 0 0.08rem 0.08rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.2rem;
+        font-weight: 600;
+        color: #878787;
+        span {
+          &.more {
+            cursor: pointer;
+          }
+        }
+      }
     }
   }
 }
@@ -442,6 +651,12 @@ export default {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        &:nth-child(2) div:nth-child(2) {
+          cursor: pointer;
+          &:hover {
+            color: #00b4ff;
+          }
+        }
         div {
           &:nth-child(1) {
             font-size: 0.15rem;
@@ -458,12 +673,8 @@ export default {
               height: auto;
             }
             i {
-              cursor: pointer;
               font-size: 0.25rem;
               margin-left: 0.1rem;
-              &:hover {
-                color: #00b4ff;
-              }
             }
           }
         }
@@ -494,7 +705,6 @@ export default {
             border-radius: 0.05rem;
             background: #1d1d22;
             > div {
-              width: 50%;
               height: 100%;
               border-radius: 0.05rem;
               background: linear-gradient(90deg, rgba(56, 104, 126, 1), rgba(93, 76, 120, 1));

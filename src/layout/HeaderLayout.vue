@@ -87,7 +87,7 @@ export default {
   transition: all 0.5s;
   border-bottom: 1px solid #29a7e1;
   .nav_inset {
-    max-width: 14.4rem;
+    // max-width: 14.4rem;
     width: 100%;
     height: 100%;
     margin: 0 auto;

@@ -315,8 +315,9 @@ export const message = {
     text1: "已上架",
     text2: "开始发售",
     text3: "完成发售",
-    text4: "进行中",
-    text5: "已完成",
+    text4: "Active",
+    text5: "Pending",
+    text6: "Closed",
   },
   tips: {
     text1: "敬请期待",

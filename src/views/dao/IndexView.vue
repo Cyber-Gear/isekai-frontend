@@ -22,23 +22,36 @@
         <div class="btn disabled">{{ $t("message.dao.text3") }}</div>
       </div>
       <ul class="rightbox">
-        <li>
+        <li v-for="item in proposalsArr" :key="item.id">
           <ul>
             <li>
-              <div>{{ $t("message.dao.text4") }} <span>Oxlk32...04569s</span> {{ $t("message.dao.text5") }}</div>
-              <div class="status">{{ $t("message.status.text4") }}</div>
+              <div>
+                {{ $t("message.dao.text4") }} <span>{{ item.author | ellipsisWallet }}</span> {{ $t("message.dao.text5") }}
+              </div>
+              <div class="status">
+                <template v-if="item.state == 'active'"> {{ $t("message.status.text4") }} </template>
+                <template v-if="item.state == 'pending'"> {{ $t("message.status.text5") }} </template>
+                <template v-if="item.state == 'closed'"> {{ $t("message.status.text6") }} </template>
+              </div>
             </li>
-            <li>{{ $t("message.dao.text6") }} <img :src="`${$urlImages}box_title3.webp`" alt="" /></li>
+            <li>{{ item.title }} <img :src="`${$urlImages}box_title3.webp`" alt="" /></li>
+            <!-- <li>{{ $t("message.dao.text6") }} <img :src="`${$urlImages}box_title3.webp`" alt="" /></li> -->
             <li>
-              <pre>{{ $t("message.dao.text7") }}</pre>
+              <!-- <pre>{{ $t("message.dao.text7") }}</pre> -->
+              <pre>{{ item.body }}</pre>
             </li>
             <li>
-              <div>{{ $t("message.dao.text8") }}</div>
+              <div>
+                <span>{{ $utils.formatDate(item.start * 1000) }}</span>
+                <span>-</span>
+                <span>{{ $utils.formatDate(item.end * 1000) }}</span>
+              </div>
+              <!-- <div>{{ $t("message.dao.text8") }}</div> -->
               <!-- <div>
                 <span>✔ {{ $t("message.dao.text10") }}</span>
                 <span>{{ $t("message.dao.text11") }}</span>
               </div> -->
-              <div class="btn" @click="toDetail(1)">{{ $t("message.dao.text12") }}</div>
+              <div class="btn" @click="toDetail(item)">{{ $t("message.dao.text12") }}</div>
             </li>
           </ul>
         </li>
@@ -61,10 +74,24 @@ export default {
         strategies: [],
         validation: {},
       },
+      proposalsArr: [],
     };
   },
+  filters: {
+    ellipsisWallet(value) {
+      if (!value) return "";
+      const index = value.length;
+      return value.slice(0, 10) + "......" + value.slice(index - 6, index);
+    },
+    mailEllipsis(value) {
+      if (!value) return "";
+      const index = value.length;
+      const index2 = value.indexOf("@");
+      return value.slice(0, 2) + "***" + value.slice(index2, index);
+    },
+  },
   created() {
-    // this.getSpace();
+    this.getSpace();
     this.getProposals();
   },
   methods: {
@@ -73,7 +100,7 @@ export default {
       vote
         .getSpace()
         .then((res) => {
-          console.log(res.data.space);
+          // console.log(res.data.space);
           const space = res.data.space;
           this.spaceObj.admins = space.admins;
           this.spaceObj.filters.minScore = space.filters.minScore;
@@ -97,55 +124,15 @@ export default {
       vote
         .getProposals(first, skip, orderBy, orderDirection)
         .then((res) => {
-          console.log(res);
+          // console.log(res.data.proposals);
+          this.proposalsArr = res.data.proposals;
         })
         .catch((err) => {
           console.log(err);
         });
     },
 
-    getVotes() {
-      const params = {
-        first: number,
-        skip: number,
-        orderBy: string,
-        orderDirection: string,
-        // proposal?: string,
-      };
-      vote
-        .getVotes(params)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    getScores() {
-      // voters: string[]
-      vote
-        .getScores(voters)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    // 投票
-    castVote() {
-      const params = {
-        // account: string, proposal: string, choice: number
-      };
-      vote
-        .castVote(params)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
+   
     // 提交提案
     createProposal() {
       const params = {
@@ -160,8 +147,9 @@ export default {
           console.log(err);
         });
     },
-    toDetail(id) {
-      this.$router.push({ path: "dao-details", query: { id: id } });
+    toDetail(item) {
+      localStorage.setItem("someProposals", JSON.stringify(item));
+      this.$router.push({ path: "dao-details" });
     },
   },
 };

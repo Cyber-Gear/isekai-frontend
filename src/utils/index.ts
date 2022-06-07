@@ -1,6 +1,8 @@
 // import {wallet, network,sb,sn,getSourceUrl} from "sealemlab-sdk";
 // import BigNumber from "bignumber.js";
 // import store from "../store/index";
+import { Message } from "element-ui";
+
 export default {
   // 设置cookie过期时间
   setCookie(key: string, value: string, time: number) {
@@ -17,22 +19,78 @@ export default {
   delCookie(name: string) {
     this.setCookie(name, "", -1);
   },
-  //禁止滚动条滚动
-  forbiddenScroll() {
-    const scroll = (e: any) => {
-      e.preventDefault();
-    };
-    document.body.style.overflow = "hidden";
-    document.addEventListener("touchmove", scroll, false);
+
+  /**
+   * 格式化时间
+   * 调用 FormatDate(strDate, "yyyy-MM-dd HH:mm:ss")
+   * @param strDate （中国标准时间）时间戳等都可以
+   * @param strFormat 返回格式
+   * @returns
+   */
+  formatDate(strDate: any, strFormat?: any) {
+    if (!strDate) return;
+    if (!strFormat) strFormat = "yyyy/MM/dd HH:mm";
+    switch (typeof strDate) {
+      case "string":
+        strDate = new Date(strDate.replace(/-/g, "/"));
+        break;
+      case "number":
+        strDate = new Date(strDate);
+        break;
+    }
+    if (strDate instanceof Date) {
+      const dict: any = {
+        yyyy: strDate.getFullYear(),
+        M: strDate.getMonth() + 1,
+        d: strDate.getDate(),
+        H: strDate.getHours(),
+        m: strDate.getMinutes(),
+        s: strDate.getSeconds(),
+        MM: ("" + (strDate.getMonth() + 101)).substr(1),
+        dd: ("" + (strDate.getDate() + 100)).substr(1),
+        HH: ("" + (strDate.getHours() + 100)).substr(1),
+        mm: ("" + (strDate.getMinutes() + 100)).substr(1),
+        ss: ("" + (strDate.getSeconds() + 100)).substr(1),
+      };
+      return strFormat.replace(/(yyyy|MM?|dd?|HH?|ss?|mm?)/g, function (m: any) {
+        return dict[m];
+      });
+    }
   },
-  //恢复滚动条滚动
-  restoreTheScroll() {
-    const scroll = (e: any) => {
-      e.preventDefault();
-    };
-    document.body.style.overflow = "";
-    document.removeEventListener("touchmove", scroll, false);
+  /**数字千分位 */
+  formatNumber(num: number) {
+    return (Math.round(num) + "").replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, "$&,");
   },
+  /**
+   * 复制
+   * @param value
+   */
+  handleCopy(value: string) {
+    // const dummy = document.createElement("input"); // 不支持换行符
+    const dummy = document.createElement("textarea"); // 支持换行符
+    document.body.appendChild(dummy);
+    dummy.value = value;
+    dummy.select(); // 选择对象
+    document.execCommand("copy"); // 执行浏览器复制命令
+    document.body.removeChild(dummy);
+    Message({ message: "Copy Success" });
+  },
+  // //禁止滚动条滚动
+  // forbiddenScroll() {
+  //   const scroll = (e: any) => {
+  //     e.preventDefault();
+  //   };
+  //   document.body.style.overflow = "hidden";
+  //   document.addEventListener("touchmove", scroll, false);
+  // },
+  // //恢复滚动条滚动
+  // restoreTheScroll() {
+  //   const scroll = (e: any) => {
+  //     e.preventDefault();
+  //   };
+  //   document.body.style.overflow = "";
+  //   document.removeEventListener("touchmove", scroll, false);
+  // },
 
   // 链接钱包方法封装
   // connectWallet(data:string){

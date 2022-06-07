@@ -342,8 +342,9 @@ export const message = {
     text1: "On Launchpad",
     text2: "On sale",
     text3: "Finished",
-    text4: "In progress",
-    text5: "Finished",
+    text4: "Active",
+    text5: "Pending",
+    text6: "Closed",
   },
   tips: {
     text1: "Comming Soon",

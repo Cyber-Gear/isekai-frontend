@@ -20,7 +20,7 @@ import WalletConnectPopup from "./components/WalletConnectPopup.vue";
 
 export default {
   components: { HeaderLayout, FooterLayout, WalletListPopup, WalletConnectPopup },
-  computed: { ...mapGetters(["isEnLang"]) },
+  computed: { ...mapGetters(["isEnLang"]), ...mapGetters(["getCurrentAccount"]) },
   data() {
     return {
       showToTop: false,

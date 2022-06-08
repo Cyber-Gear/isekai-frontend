@@ -7,14 +7,22 @@
           <span>{{ $t(item.label) }}</span>
         </li>
       </ul>
-      <div class="connect">
-        <span @click="openWalletPopup">{{ $t("message.nav.text6") }}</span>
-        <!-- <span>Ox8652....583D</span> -->
+      <div class="connect" @mouseover="showDisconnectFun" @mouseleave="hiddenDisconnectFun">
+        <span v-if="getCurrentAccount">
+          {{ getCurrentAccount | ellipsisWallet }}
+        </span>
+        <span v-else @click="openWalletPopup">{{ $t("message.nav.text6") }}</span>
+        <transition name="showDisconnect" appear>
+          <div v-show="showDisconnect" class="disconnect" @click="clickDisconnect">
+            <span>{{ $t("message.nav.text7") }}</span>
+            <i class="iconfont icon-block"></i>
+          </div>
+        </transition>
       </div>
       <div class="lang_box" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
         <span>{{ $i18n.locale.toUpperCase() }}</span>
         <img class="angle" :src="`${$urlImages}angle.webp`" alt="" />
-        <transition name="select-lang" appear>
+        <transition name="showLangSelect" appear>
           <ul v-show="showLangSelect">
             <li v-for="(item, index) in langArr" :key="index" @click="selectLang(item)">
               <span> {{ item.toUpperCase() }}</span>
@@ -26,6 +34,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "HeaderLayout",
   data() {
@@ -39,9 +48,11 @@ export default {
         { label: "message.nav.text5", link: "/market", isOpen: true },
       ],
       showLangSelect: false,
+      showDisconnect: false,
       langArr: ["en", "zh"],
     };
   },
+  computed: { ...mapGetters(["getCurrentAccount"]) },
   watch: {
     $route(to) {
       if (to.path == "/home") {
@@ -71,6 +82,16 @@ export default {
     },
     openWalletPopup() {
       this.$store.commit("setWalletListPopup", true);
+    },
+    showDisconnectFun() {
+      if (this.getCurrentAccount) this.showDisconnect = true;
+    },
+    hiddenDisconnectFun() {
+      if (this.getCurrentAccount) this.showDisconnect = false;
+    },
+    clickDisconnect() {
+      this.showDisconnect = false;
+      this.$utils.walletDisconnect();
     },
   },
 };
@@ -126,11 +147,33 @@ export default {
     }
     .connect {
       cursor: pointer;
+      width: 1.2rem;
+      height: 0.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 0.12rem;
       font-weight: 400;
-      border-radius: 0.03rem;
-      padding: 0.05rem 0.2rem;
+      padding: 0.05rem 0;
       background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
+      border-radius: 0.03rem;
+      position: relative;
+      span {
+        // z-index: 1;
+      }
+      .disconnect {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
+        border-radius: 0.03rem;
+        position: absolute;
+        top: 110%;
+        transition: transform 0.3s;
+        transform-origin: top center;
+      }
     }
     .lang_box {
       cursor: pointer;
@@ -165,12 +208,16 @@ export default {
     }
   }
 
-  .select-lang-enter,
-  .select-lang-leave-to {
+  .showLangSelect-enter,
+  .showLangSelect-leave-to,
+  .showDisconnect-enter,
+  .showDisconnect-leave-to {
     transform: scaleY(0);
   }
-  .select-lang-enter-to,
-  .select-lang-leave {
+  .showLangSelect-enter-to,
+  .showLangSelect-leave,
+  .showDisconnect-enter-to,
+  .showDisconnect-leave {
     transform: scaleY(1);
   }
 }

@@ -1,25 +1,92 @@
-// import {wallet, network,sb,sn,getSourceUrl} from "sealemlab-sdk";
-// import BigNumber from "bignumber.js";
-// import store from "../store/index";
+import { wallet, network } from "funtopia-sdk";
 import { Message } from "element-ui";
+// import BigNumber from "bignumber.js";
+import store from "../store/index";
 
 export default {
-  // 设置cookie过期时间
-  setCookie(key: string, value: string, time: number) {
-    const num = new Date(new Date().getTime() + time * 60 * 1000 * 60);
-    document.cookie = `${key} = ${value};expires = ` + num.toUTCString() + ";path = /";
+  /**
+   * 获取当前连接账号
+   */
+  getCurrentAccount() {
+    wallet
+      .getCurrentAccount()
+      .then(this.handleAccountsChanged)
+      .catch((err) => {
+        console.error("获取当前连接账号", err);
+      });
   },
-  // 获取cookie
-  getCookie(name: string) {
-    let arr: any = [];
-    const reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-    if ((arr = document.cookie.match(reg))) return unescape(arr[2]);
-    else return null;
+  /**
+   * 连接MetaMask钱包
+   * @getAccount 连接钱包
+   * @getChainId 获取网络
+   * @onAccountChanged  监听账号变化
+   * @onChainChanged  监听网络变化
+   * @onDisconnect  监听断开连接
+   */
+  walletConnect(walletType: string) {
+    wallet
+      .getAccount(walletType)
+      .then(this.handleAccountsChanged)
+      .catch((err) => {
+        if (err.code === 4001) {
+          // If this happens, the user rejected the connection request.
+          console.log("用户拒绝了连接钱包");
+        } else {
+          console.error("MetaMask连接钱包发生错误", err);
+        }
+      });
+    wallet
+      .getChainId()
+      .then(this.handleChainChanged)
+      .catch((err) => {
+        console.error("MetaMask获取网络发生错误", err);
+      });
   },
-  delCookie(name: string) {
-    this.setCookie(name, "", -1);
+  /**
+   * 断开连接
+   */
+  walletDisconnect() {
+    // wallet.disconnect();
+    store.commit("setCurrentAccount", "");
   },
+  listenerWallet() {
+    wallet.onAccountChanged(this.handleAccountsChanged);
+    wallet.onChainChanged(this.handleChainChanged);
+    // wallet.onDisconnect((res: any) => {
+    //   console.log("onDisconnect", res);
+    // });
+  },
+  /**
+   * 账号变化触发方法
+   * @param accounts string[]
+   */
+  handleAccountsChanged(accounts: string[]) {
+    // 关闭对应的弹窗
+    if (store.getters.getWalletListPopup) {
+      store.commit("setWalletListPopup", false);
+    }
 
+    if (accounts.length === 0) {
+      // MetaMask is locked or the user has not connected any accounts
+      // Please connect to MetaMask.
+      Message({ message: "MetaMask被锁定或用户没有连接任何帐户", type: "warning" });
+    } else if (accounts[0] !== store.getters.getCurrentAccount) {
+      store.commit("setCurrentAccount", accounts[0]);
+      // const accountInfo = { currentAccount: accounts[0], isConnected: true };
+      // store.commit("setAccountInfo", accountInfo);
+      Message({ message: "连接成功", type: "success" });
+    }
+  },
+  /**
+   * 网络变化触发方法
+   * @param chainId string
+   */
+  handleChainChanged(chainId: string) {
+    if (network().chainId !== chainId) {
+      Message({ message: "MetaMask网络连接错误,请切换至正确网络", type: "warning" });
+      wallet.addChain();
+    }
+  },
   /**
    * 格式化时间
    * 调用 FormatDate(strDate, "yyyy-MM-dd HH:mm:ss")
@@ -75,6 +142,22 @@ export default {
     document.body.removeChild(dummy);
     Message({ message: "Copy Success" });
   },
+
+  // 设置cookie过期时间
+  setCookie(key: string, value: string, time: number) {
+    const num = new Date(new Date().getTime() + time * 60 * 1000 * 60);
+    document.cookie = `${key} = ${value};expires = ` + num.toUTCString() + ";path = /";
+  },
+  // 获取cookie
+  getCookie(name: string) {
+    let arr: any = [];
+    const reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if ((arr = document.cookie.match(reg))) return unescape(arr[2]);
+    else return null;
+  },
+  delCookie(name: string) {
+    this.setCookie(name, "", -1);
+  },
   // //禁止滚动条滚动
   // forbiddenScroll() {
   //   const scroll = (e: any) => {
@@ -90,70 +173,5 @@ export default {
   //   };
   //   document.body.style.overflow = "";
   //   document.removeEventListener("touchmove", scroll, false);
-  // },
-
-  // 链接钱包方法封装
-  // connectWallet(data:string){
-  //   return new Promise(async resolve => {
-  //     let obj = {
-  //       account:'',
-  //       chainID:'',
-  //       status:false,
-  //       changeAccount:-1,// 切换账号变量
-  //     }
-  //     let acc = await wallet.getAccount(data); //链接钱包
-  //     obj.account = acc[0]
-  //     obj.changeAccount = 0
-  //     obj.chainID = await wallet.getChainId(); // 连接网络
-  //     let net = network(); // 获取sdk返回的当前的环境
-  //     if(obj.chainID == net.chainId){
-  //       obj.status = true
-  //       store.commit("setnewinfo",  JSON.stringify(obj))
-  //       sessionStorage.setItem("setnewinfo",JSON.stringify(obj));
-  //       resolve(obj)
-  //     }else{
-  //       wallet.addChain()
-  //       resolve(obj)
-  //     }
-  //     wallet.onAccountChanged((res:any) => {
-  //       if(res.length == 0){
-  //         obj.account = ''
-  //         obj.status = false
-  //         obj.changeAccount = -1
-  //         store.commit("setnewinfo",  JSON.stringify(obj))
-  //         sessionStorage.setItem("setnewinfo",JSON.stringify(obj))
-  //         resolve(obj)
-  //       }else{
-  //         obj.account = res[0]
-  //         obj.changeAccount = ++obj.changeAccount
-  //         // console.log("切换账号")
-  //         if(obj.chainID == net.chainId){
-  //           obj.status = true
-  //           store.commit("setnewinfo",  JSON.stringify(obj))
-  //           sessionStorage.setItem("setnewinfo",JSON.stringify(obj));
-  //           resolve(obj)
-  //         }else{
-  //           obj.status = false
-  //           store.commit("setnewinfo",  JSON.stringify(obj))
-  //           sessionStorage.setItem("setnewinfo",JSON.stringify(obj));
-  //           resolve(obj)
-  //         }
-  //       }
-  //     })
-  //     wallet.onChainChanged((res:any) => {
-  //       obj.chainID = res
-  //       if(obj.chainID == net.chainId){
-  //         obj.status = true
-  //         store.commit("setnewinfo",  JSON.stringify(obj))
-  //         sessionStorage.setItem("setnewinfo",JSON.stringify(obj));
-  //         resolve(obj)
-  //       }else{
-  //         obj.status = false
-  //         store.commit("setnewinfo",  JSON.stringify(obj))
-  //         sessionStorage.setItem("setnewinfo",JSON.stringify(obj));
-  //         resolve(obj)
-  //       }
-  //     })
-  //   })
   // },
 };

@@ -77,19 +77,7 @@ export default {
       proposalsArr: [],
     };
   },
-  filters: {
-    ellipsisWallet(value) {
-      if (!value) return "";
-      const index = value.length;
-      return value.slice(0, 10) + "......" + value.slice(index - 6, index);
-    },
-    mailEllipsis(value) {
-      if (!value) return "";
-      const index = value.length;
-      const index2 = value.indexOf("@");
-      return value.slice(0, 2) + "***" + value.slice(index2, index);
-    },
-  },
+
   created() {
     this.getSpace();
     this.getProposals();
@@ -132,7 +120,6 @@ export default {
         });
     },
 
-   
     // 提交提案
     createProposal() {
       const params = {

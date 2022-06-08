@@ -9,6 +9,7 @@ export const message = {
     text4: "LAUNCHPAD",
     text5: "MARKET",
     text6: "未连接",
+    text7: "断开连接",
   },
   footer: {
     text1: "COPYRIGHT © 2022 FUNTOPIA, All rights Reserved",

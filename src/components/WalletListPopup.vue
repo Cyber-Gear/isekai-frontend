@@ -12,7 +12,7 @@
     <div class="popupbox">
       <div class="title">{{ $t("message.walletPopup.text6") }}<span>Fun Topia</span></div>
       <ul>
-        <li v-for="(item, index) in walletArr" :key="index" @click="walletClick(item)">
+        <li v-for="(item, index) in walletArr" :key="index" @click="walletClick(item.walletType)">
           <img :src="item.image" alt="" />
           {{ item.name }}
         </li>
@@ -25,24 +25,30 @@
 import { mapGetters } from "vuex";
 export default {
   name: "WalletListPopup",
-  computed: { ...mapGetters(["getWalletListPopup"]) },
+  computed: { ...mapGetters(["getWalletListPopup"]), ...mapGetters(["getCurrentAccount"]) },
   data() {
     return {
       walletArr: [
-        { name: "Metamask", image: this.$urlImages + "wallet_MetaMaskFox.webp" },
-        { name: "Metamask", image: this.$urlImages + "wallet_WalletConnect.webp" },
-        { name: "Metamask", image: this.$urlImages + "wallet_TokenPocet.webp" },
+        { name: "Metamask", walletType: "metamask", image: this.$urlImages + "wallet_MetaMaskFox.webp" }, //metamask
+        { name: "TokenPocet", walletType: "metamask", image: this.$urlImages + "wallet_TokenPocet.webp" }, //metamask
+        { name: "WalletConnect", walletType: "walletconnect", image: this.$urlImages + "wallet_WalletConnect.webp" }, //walletconnect
       ],
     };
   },
   methods: {
-    // 链接钱包弹窗方法
-    walletClick(item) {
-      const name = item.name.toLowerCase();
-      console.log(name);
-      // this.$utils.connectWallet(name).then((res) => {
-      //   console.log("方法返回res: ", res);
-      // });
+    // 连接钱包弹窗方法
+    walletClick(walletType) {
+      // let currentAccount = "";
+      // if (localStorage.getItem("vuex")) {
+      //   currentAccount = JSON.parse(localStorage.getItem("vuex")).currentAccount;
+      // }
+      // console.log("🐏 ~ currentAccount", currentAccount);
+      if (this.getCurrentAccount) {
+        this.$utils.getCurrentAccount();
+      } else {
+        this.$utils.walletConnect(walletType);
+      }
+      this.$utils.listenerWallet();
     },
     closePopup() {
       this.$store.commit("setWalletListPopup", false);

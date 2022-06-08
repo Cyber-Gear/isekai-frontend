@@ -73,7 +73,7 @@
                 </div>
                 <div class="text">
                   <span>{{ item.label }}</span>
-                  <span>({{ item.percent }}%, {{ item.amount | formatNumber }})</span>
+                  <span>({{ item.percent }}%, {{ item.amount | thousandthsNumber }})</span>
                 </div>
               </div>
             </div>
@@ -139,7 +139,7 @@
             </li>
             <li>
               <div></div>
-              <div>#{{ someProposals.snapshot | formatNumber }}</div>
+              <div>#{{ someProposals.snapshot | thousandthsNumber }}</div>
             </li>
           </ul>
         </div>
@@ -150,7 +150,7 @@
               <div>
                 <span>{{ item.label }}</span>
                 <p>
-                  <span>{{ item.amount | formatNumber }}</span>
+                  <span>{{ item.amount | thousandthsNumber }}</span>
                   <span>{{ item.percent }}%</span>
                 </p>
               </div>
@@ -174,24 +174,10 @@ export default {
       checkboxList: [],
       ticketAmount: null,
       totalAmount: 0,
+      votesParams: { first: 10, skip: 0, orderBy: "created", orderDirection: "desc", proposal: "" },
       votesList: [],
       hasMore: false,
     };
-  },
-  filters: {
-    ellipsisWallet(value) {
-      if (!value) return "";
-      const index = value.length;
-      return value.slice(0, 6) + "..." + value.slice(index - 4, index);
-    },
-    ellipsisIpfs(value) {
-      if (!value) return "";
-      return value.slice(0, 6) + "...";
-    },
-    formatNumber(value) {
-      if (!value) return 0;
-      return (Math.round(value) + "").replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, "$&,");
-    },
   },
   created() {
     this.someProposals = JSON.parse(localStorage.getItem("someProposals"));
@@ -204,8 +190,8 @@ export default {
     let timer = setInterval(() => {
       if (indexNum == this.someProposals.scores.length) {
         clearInterval(timer);
-        this.someProposals.choices.forEach((element) => {
-          const oneChoice = { label: element, percent: 0, amount: 0, isChecked: false };
+        this.someProposals.choices.forEach((element, index) => {
+          const oneChoice = { label: element, choice: index, percent: 0, amount: 0, isChecked: false };
           this.checkboxList.push(oneChoice);
         });
         this.someProposals.scores.forEach((element, index) => {
@@ -215,27 +201,30 @@ export default {
       }
     }, 200);
 
-    this.getVotes({
-      first: 10,
-      skip: 0,
-      orderBy: "created",
-      orderDirection: "desc",
-      proposal: this.someProposals.id,
-    });
+    this.getVotes();
   },
   methods: {
-    getVotes(params) {
+    getMore() {
+      console.log("getMore");
+      this.votesParams.skip = this.someProposals.skip + 10;
+      this.getVotes();
+    },
+    getVotes() {
+      // first: number, skip: number, orderBy: string, orderDirection: string, proposal?: string,
+      this.votesParams.proposal = this.someProposals.id;
+      const { first, skip, orderBy, orderDirection, proposal } = this.votesParams;
       vote
-        .getVotes(params.first, params.skip, params.orderBy, params.orderDirection, params.proposal)
+        .getVotes(first, skip, orderBy, orderDirection, proposal)
         .then((res) => {
-          console.log(res.data.votes[0]);
-          this.votesList = [...res.data.votes];
           this.hasMore = res.loading;
-          let arr = [];
-          res.data.votes.forEach((element) => {
-            arr.push(element.voter);
-          });
-          this.getScores(arr);
+          if (res.data.votes.length > 0) {
+            this.votesList.push(...res.data.votes);
+            let arr = [];
+            res.data.votes.forEach((element) => {
+              arr.push(element.voter);
+            });
+            this.getScores(arr);
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -253,34 +242,28 @@ export default {
           console.log(err);
         });
     },
+    // 投票
     lock() {
-      const hasChecked = this.checkboxList.find((item) => item.isChecked);
-      if (!hasChecked) return this.$message({ message: "请选择一个投票", type: "warning" });
+      const isCheckedItem = this.checkboxList.find((item) => item.isChecked);
+      console.log(isCheckedItem);
+      if (!isCheckedItem) return this.$message({ message: "请选择一个投票", type: "warning" });
       if (!this.ticketAmount) return this.$message({ message: "请输入投票数量", type: "warning" });
-      // 投票
-      const params = {
-        // account: string, proposal: string, choice: number
-      };
-      vote
-        .castVote(params)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+
+      // 投票成功后要刷新最新数据，更新localStorage里的信息
+      // account: string, proposal: string, choice: number
+      // vote
+      //   .castVote(account, this.ticketAmount.toString(), isCheckedItem.choice)
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
     },
-    voterLink(voter) {
-      window.location.href = `https://bscscan.com/address/${voter}`;
-    },
-    ipfsLink() {
-      window.location.href = `https://snapshot.mypinata.cloud/ipfs/${this.someProposals.ipfs}`;
-    },
+
     getMaxAmount() {
+      // 获取钱包里最大数量
       this.ticketAmount = 1000;
-    },
-    getMore() {
-      console.log("getMore");
     },
     checkboxClick(item) {
       this.checkboxList.forEach((element) => {
@@ -291,6 +274,12 @@ export default {
       // } else {
       //   item.isChecked = !item.isChecked;
       // }
+    },
+    voterLink(voter) {
+      window.location.href = `https://bscscan.com/address/${voter}`;
+    },
+    ipfsLink() {
+      window.location.href = `https://snapshot.mypinata.cloud/ipfs/${this.someProposals.ipfs}`;
     },
     goBack() {
       localStorage.removeItem("someProposals");
@@ -492,14 +481,14 @@ export default {
           // padding: 0 0.2rem;
           .text1,
           .text2 {
-            min-width: 0.5rem;
             height: 80%;
             display: flex;
             align-items: center;
             text-align: center;
             font-size: 0.12rem;
             font-weight: 400;
-            // padding: 0 0.2rem;
+            padding: 0 0.2rem;
+            white-space: nowrap;
           }
           .text1 {
             border-right: 1px solid;

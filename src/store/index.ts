@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import createPersistedState from "vuex-persistedstate";
 import i18n from "../i18n/index";
 Vue.use(Vuex);
 
@@ -9,6 +10,9 @@ export default new Vuex.Store({
     showWalletListPopup: false,
     showWalletConnectPopup: false,
     showPlayVideoPopup: { isShow: false, name: "", url: "" },
+
+    currentAccount: "",
+    accountInfo: { currentAccount: "", isConnected: false },
   },
   getters: {
     isEnLang(state) {
@@ -23,6 +27,13 @@ export default new Vuex.Store({
     getPlayVideoPopup(state) {
       return state.showPlayVideoPopup;
     },
+
+    getCurrentAccount(state) {
+      return state.currentAccount;
+    },
+    getAccountInfo(state) {
+      return state.accountInfo;
+    },
   },
   mutations: {
     setWalletListPopup(state, data) {
@@ -34,6 +45,24 @@ export default new Vuex.Store({
     setPlayVideoPopup(state, data) {
       state.showPlayVideoPopup = data;
     },
+
+    setCurrentAccount(state, data) {
+      state.currentAccount = data;
+    },
+    setAccountInfo(state, data) {
+      state.accountInfo = data;
+    },
   },
   actions: {},
+  plugins: [
+    createPersistedState({
+      storage: window.localStorage,
+      reducer(val) {
+        return {
+          currentAccount: val.currentAccount,
+          // accountInfo: val.accountInfo,
+        };
+      },
+    }),
+  ],
 });

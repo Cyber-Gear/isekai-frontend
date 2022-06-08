@@ -38,17 +38,8 @@ export default {
   methods: {
     // 连接钱包弹窗方法
     walletClick(walletType) {
-      // let currentAccount = "";
-      // if (localStorage.getItem("vuex")) {
-      //   currentAccount = JSON.parse(localStorage.getItem("vuex")).currentAccount;
-      // }
-      // console.log("🐏 ~ currentAccount", currentAccount);
-      if (this.getCurrentAccount) {
-        this.$utils.getCurrentAccount();
-      } else {
-        this.$utils.walletConnect(walletType);
-      }
-      this.$utils.listenerWallet();
+      this.$utils.walletConnect(walletType);
+      this.$utils.listenerWalletChanged();
     },
     closePopup() {
       this.$store.commit("setWalletListPopup", false);

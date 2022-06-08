@@ -12,7 +12,7 @@ export default new Vuex.Store({
     showPlayVideoPopup: { isShow: false, name: "", url: "" },
 
     currentAccount: "",
-    accountInfo: { currentAccount: "", isConnected: false },
+    // accountInfo: { currentAccount: "", isConnected: false },
   },
   getters: {
     isEnLang(state) {
@@ -31,9 +31,9 @@ export default new Vuex.Store({
     getCurrentAccount(state) {
       return state.currentAccount;
     },
-    getAccountInfo(state) {
-      return state.accountInfo;
-    },
+    // getAccountInfo(state) {
+    //   return state.accountInfo;
+    // },
   },
   mutations: {
     setWalletListPopup(state, data) {
@@ -49,9 +49,9 @@ export default new Vuex.Store({
     setCurrentAccount(state, data) {
       state.currentAccount = data;
     },
-    setAccountInfo(state, data) {
-      state.accountInfo = data;
-    },
+    // setAccountInfo(state, data) {
+    //   state.accountInfo = data;
+    // },
   },
   actions: {},
   plugins: [

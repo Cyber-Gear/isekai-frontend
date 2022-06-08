@@ -87,7 +87,7 @@
                   </div>
                 </div>
               </div>
-              <div class="btn" @click="lock">{{ $t("message.dao.text25") }}</div>
+              <div class="btn" @click="handleLock">{{ $t("message.dao.text25") }}</div>
             </div>
           </div>
           <div class="box5" id="Comment">{{ $t("message.dao.text17") }}</div>
@@ -102,7 +102,7 @@
                 <div>
                   <template v-if="checkboxList.length > 0">{{ checkboxList[item.choice - 1] ? checkboxList[item.choice - 1].label : "" }}</template>
                 </div>
-                <div>暂无</div>
+                <div>{{ item.score | thousandthsNumber }}</div>
               </li>
             </ul>
             <div class="footer" v-if="hasMore">
@@ -164,6 +164,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import { vote } from "funtopia-sdk";
 
 export default {
@@ -175,10 +176,13 @@ export default {
       ticketAmount: null,
       totalAmount: 0,
       votesParams: { first: 10, skip: 0, orderBy: "created", orderDirection: "desc", proposal: "" },
+      oldVotesList: [],
       votesList: [],
       hasMore: false,
+      castVoteParams: {},
     };
   },
+  computed: { ...mapGetters(["getCurrentAccount"]) },
   created() {
     this.someProposals = JSON.parse(localStorage.getItem("someProposals"));
     let indexNum = 0;
@@ -186,7 +190,6 @@ export default {
       this.totalAmount = this.totalAmount + element;
       indexNum++;
     });
-
     let timer = setInterval(() => {
       if (indexNum == this.someProposals.scores.length) {
         clearInterval(timer);
@@ -204,11 +207,7 @@ export default {
     this.getVotes();
   },
   methods: {
-    getMore() {
-      console.log("getMore");
-      this.votesParams.skip = this.someProposals.skip + 10;
-      this.getVotes();
-    },
+    /**获取投票纪录 */
     getVotes() {
       // first: number, skip: number, orderBy: string, orderDirection: string, proposal?: string,
       this.votesParams.proposal = this.someProposals.id;
@@ -218,47 +217,58 @@ export default {
         .then((res) => {
           this.hasMore = res.loading;
           if (res.data.votes.length > 0) {
-            this.votesList.push(...res.data.votes);
-            let arr = [];
-            res.data.votes.forEach((element) => {
-              arr.push(element.voter);
+            this.oldVotesList = JSON.parse(JSON.stringify(res.data.votes));
+            let voterArr = [];
+            this.oldVotesList.forEach((element) => {
+              voterArr.push(element.voter);
             });
-            this.getScores(arr);
+            this.getScores(voterArr);
           }
         })
         .catch((err) => {
           console.log(err);
         });
     },
-    getScores(arr) {
+    /**获取投票份额 */
+    getScores(voterArr) {
       // voters: string[], blockNumber: number
-      console.log(arr, Number(this.someProposals.snapshot));
       vote
-        .getScores(arr, Number(this.someProposals.snapshot))
+        .getScores(voterArr, Number(this.someProposals.snapshot))
+        .then((res) => {
+          const arr = res[0];
+          Object.keys(arr).forEach((key) => {
+            const index = this.oldVotesList.findIndex((item) => item.voter == key);
+            this.oldVotesList[index].score = arr[key];
+          });
+          this.votesList = [...this.votesList, ...this.oldVotesList];
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    /**获取更多 */
+    getMore() {
+      this.votesParams.skip = this.someProposals.skip + 10;
+      this.getVotes();
+    },
+    // 投票
+    handleLock() {
+      const isCheckedItem = this.checkboxList.find((item) => item.isChecked);
+      if (!isCheckedItem) return this.$message({ message: "请选择一个投票", type: "warning" });
+      if (!this.ticketAmount) return this.$message({ message: "请输入投票数量", type: "warning" });
+      console.log(this.getCurrentAccount);
+      if (!this.getCurrentAccount) return this.$store.commit("setWalletConnectPopup", true);
+      // 投票成功后要刷新最新数据，更新localStorage里的信息
+      // account: string, proposal: string, choice: number
+
+      vote
+        .castVote(this.getCurrentAccount, this.ticketAmount.toString(), isCheckedItem.choice)
         .then((res) => {
           console.log(res);
         })
         .catch((err) => {
           console.log(err);
         });
-    },
-    // 投票
-    lock() {
-      const isCheckedItem = this.checkboxList.find((item) => item.isChecked);
-      console.log(isCheckedItem);
-      if (!isCheckedItem) return this.$message({ message: "请选择一个投票", type: "warning" });
-      if (!this.ticketAmount) return this.$message({ message: "请输入投票数量", type: "warning" });
-
-      // 投票成功后要刷新最新数据，更新localStorage里的信息
-      // account: string, proposal: string, choice: number
-      // vote
-      //   .castVote(account, this.ticketAmount.toString(), isCheckedItem.choice)
-      //   .then((res) => {
-      //     console.log(res);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
     },
 
     getMaxAmount() {

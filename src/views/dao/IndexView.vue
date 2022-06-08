@@ -74,6 +74,7 @@ export default {
         strategies: [],
         validation: {},
       },
+      proposalsParams: { first: 10, skip: 0, orderBy: "created", orderDirection: "desc", state: "", author: "", author_not: "" },
       proposalsArr: [],
     };
   },
@@ -83,7 +84,7 @@ export default {
     this.getProposals();
   },
   methods: {
-    // 获取空间
+    /**获取空间 */
     getSpace() {
       vote
         .getSpace()
@@ -100,15 +101,9 @@ export default {
           console.log(err);
         });
     },
-    // 获取提案
+    /**获取提案 */
     getProposals() {
-      const first = 10;
-      const skip = 0;
-      const orderBy = "created";
-      const orderDirection = "desc";
-      // const state = "";
-      // const author = "";
-      // const author_not = "";
+      const { first, skip, orderBy, orderDirection, state, author, author_not } = this.proposalsParams;
       vote
         .getProposals(first, skip, orderBy, orderDirection)
         .then((res) => {
@@ -119,7 +114,11 @@ export default {
           console.log(err);
         });
     },
-
+    toDetail(item) {
+      localStorage.setItem("someProposals", JSON.stringify(item));
+      this.$router.push({ path: "dao-details" });
+      // this.$router.push({ path: "dao-details", query: { id: item.id } });
+    },
     // 提交提案
     createProposal() {
       const params = {
@@ -133,10 +132,6 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-    },
-    toDetail(item) {
-      localStorage.setItem("someProposals", JSON.stringify(item));
-      this.$router.push({ path: "dao-details" });
     },
   },
 };

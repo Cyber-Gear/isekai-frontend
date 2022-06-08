@@ -17,7 +17,7 @@
     </div>
     <span slot="footer" class="dialog-footer">
       <el-button @click="closePopup">{{ $t("message.walletPopup.text3") }}</el-button>
-      <el-button type="primary" @click="closePopup">{{ $t("message.walletPopup.text4") }}</el-button>
+      <el-button type="primary" @click="openWalletPopup">{{ $t("message.walletPopup.text4") }}</el-button>
     </span>
   </el-dialog>
 </template>
@@ -31,6 +31,10 @@ export default {
     return {};
   },
   methods: {
+    openWalletPopup() {
+      this.closePopup();
+      this.$store.commit("setWalletListPopup", true);
+    },
     closePopup() {
       this.$store.commit("setWalletConnectPopup", false);
     },

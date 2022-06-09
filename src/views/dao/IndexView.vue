@@ -11,10 +11,6 @@
           <div><i class="iconfont icon-discord"></i></div>
           <div><i class="iconfont icon-medium"></i></div>
         </div>
-        <!-- <div class="lis">
-          <div><i class="iconfont icon-zhili"></i>{{ $t("message.dao.text1") }}</div>
-          <div>123</div>
-        </div> -->
         <div class="lis">
           <div><i class="iconfont icon-Customermanagement-fill"></i>{{ $t("message.dao.text2") }}</div>
           <div>{{ spaceObj.members.length }}</div>
@@ -35,9 +31,7 @@
               </div>
             </li>
             <li>{{ item.title }} <img :src="`${$urlImages}box_title3.webp`" alt="" /></li>
-            <!-- <li>{{ $t("message.dao.text6") }} <img :src="`${$urlImages}box_title3.webp`" alt="" /></li> -->
             <li>
-              <!-- <pre>{{ $t("message.dao.text7") }}</pre> -->
               <pre>{{ item.body }}</pre>
             </li>
             <li>
@@ -46,11 +40,6 @@
                 <span>-</span>
                 <span>{{ $utils.formatDate(item.end * 1000) }}</span>
               </div>
-              <!-- <div>{{ $t("message.dao.text8") }}</div> -->
-              <!-- <div>
-                <span>✔ {{ $t("message.dao.text10") }}</span>
-                <span>{{ $t("message.dao.text11") }}</span>
-              </div> -->
               <div class="btn" @click="toDetail(item)">{{ $t("message.dao.text12") }}</div>
             </li>
           </ul>
@@ -115,9 +104,7 @@ export default {
         });
     },
     toDetail(item) {
-      localStorage.setItem("someProposals", JSON.stringify(item));
-      this.$router.push({ path: "dao-details" });
-      // this.$router.push({ path: "dao-details", query: { id: item.id } });
+      this.$router.push({ path: "dao-details", query: { id: item.id } });
     },
     // 提交提案
     createProposal() {

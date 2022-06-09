@@ -261,32 +261,21 @@ export const message = {
     },
   },
   dao: {
-    text1: "Proposal",
     text2: "Member",
     text3: "Submit proposal",
     text4: "Wallet",
     text5: "submitted",
-    // text5: "submitted the current proposal",
-    text6: "Vote for the first project on the Launchpad",
-    text7: "Here are 3 projects you can vote，which is from shika studio,metalulu and Cryptopunk",
-    text8: "5 days left",
-
-    text10: "Proposal passed",
-    text11: "200 people attended",
     text12: "Atthend in DAO",
-
     text15: "Detail",
     text16: "Vote",
     text17: "Comment",
-
     text18: "from",
     text19: "Click to view the art",
-
     text22:
       "The project passes the audit and starts the lock-in plan. The investors can lock the fund through the smart contract and support the project",
     text23: "Ticket",
     text24: "MAX",
-    text25: "Lock",
+    text25: "Vote",
     text26: "Info",
     text27: "Strategy",
     text28: "IPFS",
@@ -295,6 +284,8 @@ export const message = {
     text31: "End Date",
     text32: "Exclusive Vote",
     text35: "Current Result",
+    text36: "Snapshot",
+    text37: "More",
   },
   launchpad: {
     text1: "Current project",
@@ -351,7 +342,6 @@ export const message = {
     text1: "Comming Soon",
   },
   btns: {
-    // text1: "Back to main interface",
     text1: "Back",
   },
 };

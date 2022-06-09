@@ -1,4 +1,4 @@
-import { wallet, network } from "funtopia-sdk";
+import { wallet, network, util } from "funtopia-sdk";
 import { Message } from "element-ui";
 // import BigNumber from "bignumber.js";
 import store from "../store/index";
@@ -8,21 +8,26 @@ export default {
    * 获取当前连接的钱包地址
    * @  wallet.getCurrentAccount() 获取当前连接的钱包地址
    */
-  getCurrentAccount() {
-    wallet
-      .getCurrentAccount()
-      .then((res) => {
-        this.handleAccountsChanged(res);
-      })
-      .catch((err) => {
-        console.error("获取当前连接帐户失败！", err);
-      });
-  },
+  // getCurrentAccount() {
+  //   wallet
+  //     .getCurrentAccount()
+  //     .then((res) => {
+  //       this.handleAccountsChanged(res);
+  //     })
+  //     .catch((err) => {
+  //       console.error("获取当前连接帐户失败！", err);
+  //     });
+  // },
   /**
    * 连接钱包
    * @param walletType 准备连接的钱包类型
    * @  wallet.getAccount() 获取已连接的钱包地址
+   * @  wallet.getChainId() 获取已连接的网络ID
+   * @  onAccountChanged  监听帐户变化
+   * @  onChainChanged  监听网络变化
+   * @  onDisconnect  监听断开连接
    */
+
   walletConnect(walletType: string) {
     wallet
       .getAccount(walletType)
@@ -37,13 +42,23 @@ export default {
           console.error("连接钱包失败", err);
         }
       });
+    wallet
+      .getChainId()
+      .then((res) => {
+        this.handleChainChanged(res);
+      })
+      .catch((err) => {
+        console.error("MetaMask获取网络发生错误", err);
+      });
+    wallet.onAccountChanged(this.handleAccountsChanged);
+    wallet.onChainChanged(this.handleChainChanged);
   },
   /**
    * 帐户变化触发方法
    * @param accounts 已连接的钱包地址
-   * @  wallet.getChainId() 获取已连接的网络ID
    */
   handleAccountsChanged(accounts: string[]) {
+    console.log("帐户变化", accounts);
     // 关闭对应的弹窗
     if (store.getters.getWalletListPopup) {
       store.commit("setWalletListPopup", false);
@@ -52,16 +67,9 @@ export default {
       // MetaMask is locked or the user has not connected any accounts
       Message({ message: "MetaMask被锁定或用户没有连接任何帐户", type: "warning" });
     } else if (accounts[0] !== store.getters.getCurrentAccount) {
-      store.commit("setCurrentAccount", accounts[0]);
+      store.commit("setCurrentAccount", util.getAddress(accounts[0]));
       Message({ message: "连接成功", type: "success" });
-      wallet
-        .getChainId()
-        .then((res) => {
-          this.handleChainChanged(res);
-        })
-        .catch((err) => {
-          console.error("MetaMask获取网络发生错误", err);
-        });
+      console.log("连接成功", util.getAddress(accounts[0]));
     }
   },
   /**
@@ -70,7 +78,8 @@ export default {
    * @  network() sdk网络的网络配置
    */
   handleChainChanged(chainId: string) {
-    if (network().chainId !== chainId) {
+    console.log("网络变化为", network("production").chainName);
+    if (network("production").chainId !== chainId) {
       Message({ message: "MetaMask网络连接错误,请切换至正确网络", type: "warning" });
       wallet.addChain();
     }
@@ -82,19 +91,6 @@ export default {
   walletDisconnect() {
     // wallet.disconnect();
     store.commit("setCurrentAccount", "");
-  },
-  /**
-   * 监听帐户变化
-   * @  onAccountChanged  监听帐户变化
-   * @  onChainChanged  监听网络变化
-   * @  onDisconnect  监听断开连接
-   */
-  listenerWalletChanged() {
-    wallet.onAccountChanged(this.handleAccountsChanged);
-    wallet.onChainChanged(this.handleChainChanged);
-    // wallet.onDisconnect((res: any) => {
-    //   console.log("onDisconnect", res);
-    // });
   },
 
   /**

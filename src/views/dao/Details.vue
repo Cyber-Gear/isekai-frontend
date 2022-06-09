@@ -6,16 +6,10 @@
         <span>{{ $t("message.btns.text1") }}</span>
       </div>
     </div>
-    <!-- <div class="box_title">
-      <img :src="`${$urlImages}box_title1.webp`" alt="" />
-      <span>{{ $t("message.dao.text14") }}</span>
-    </div> -->
-    <div class="contentbox">
+    <div class="contentbox" v-if="someProposals">
       <div class="leftbox">
         <div class="box1">
           <div>
-            <!-- <span><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("message.dao.text6") }}</span>
-            <span>{{ $t("message.status.text4") }}</span> -->
             <span><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ someProposals.title }}</span>
             <span>
               <template v-if="someProposals.state == 'active'"> {{ $t("message.status.text4") }} </template>
@@ -24,7 +18,6 @@
             </span>
           </div>
           <div>
-            <!-- <pre>{{ $t("message.dao.text7") }}</pre> -->
             <pre>{{ someProposals.body }}</pre>
           </div>
         </div>
@@ -73,21 +66,12 @@
                 </div>
                 <div class="text">
                   <span>{{ item.label }}</span>
-                  <span>({{ item.percent }}%, {{ item.amount | thousandthsNumber }})</span>
+                  <!-- <span>({{ item.percent }}%, {{ item.amount | thousandthsNumber }})</span> -->
                 </div>
               </div>
             </div>
             <div class="inputboxs">
-              <div class="gradient_border">
-                <div>
-                  <div class="inputbox">
-                    <div class="text1">{{ $t("message.dao.text23") }}</div>
-                    <input type="number" v-model="ticketAmount" />
-                    <div class="text2" @click="getMaxAmount">{{ $t("message.dao.text24") }}</div>
-                  </div>
-                </div>
-              </div>
-              <div class="btn" @click="handleLock">{{ $t("message.dao.text25") }}</div>
+              <div class="btn" @click="handleVote">{{ $t("message.dao.text25") }}</div>
             </div>
           </div>
           <div class="box5" id="Comment">{{ $t("message.dao.text17") }}</div>
@@ -102,11 +86,11 @@
                 <div>
                   <template v-if="checkboxList.length > 0">{{ checkboxList[item.choice - 1] ? checkboxList[item.choice - 1].label : "" }}</template>
                 </div>
-                <div>{{ item.score | thousandthsNumber }}</div>
+                <div>{{ item.vp | thousandthsNumber }} FUN</div>
               </li>
             </ul>
             <div class="footer" v-if="hasMore">
-              <span class="more" @click="getMore">查看更多</span>
+              <span class="more" @click="getMore">{{ $t("message.dao.text37") }}</span>
             </div>
           </div>
         </div>
@@ -138,7 +122,7 @@
               <div>{{ $utils.formatDate(someProposals.end * 1000) }}</div>
             </li>
             <li>
-              <div></div>
+              <div>{{ $t("message.dao.text36") }}</div>
               <div>#{{ someProposals.snapshot | thousandthsNumber }}</div>
             </li>
           </ul>
@@ -146,11 +130,11 @@
         <div class="box1">
           <div class="title"><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("message.dao.text35") }}</div>
           <ul class="progressbarlist">
-            <li v-for="(item, index) in checkboxList" :key="index">
+            <li v-for="(item, index) in resultList" :key="index">
               <div>
                 <span>{{ item.label }}</span>
                 <p>
-                  <span>{{ item.amount | thousandthsNumber }}</span>
+                  <span>{{ item.amount | thousandthsNumber }} FUN</span>
                   <span>{{ item.percent }}%</span>
                 </p>
               </div>
@@ -172,41 +156,66 @@ export default {
   data() {
     return {
       someProposals: null,
-      checkboxList: [],
-      ticketAmount: null,
-      totalAmount: 0,
+      proposalsParams: { first: 10, skip: 0, orderBy: "created", orderDirection: "desc" },
       votesParams: { first: 10, skip: 0, orderBy: "created", orderDirection: "desc", proposal: "" },
+      checkboxList: [],
+      resultList: [],
+      totalAmount: 0,
       oldVotesList: [],
       votesList: [],
       hasMore: false,
-      castVoteParams: {},
     };
   },
   computed: { ...mapGetters(["getCurrentAccount"]) },
   created() {
-    this.someProposals = JSON.parse(localStorage.getItem("someProposals"));
-    let indexNum = 0;
-    this.someProposals.scores.forEach((element) => {
-      this.totalAmount = this.totalAmount + element;
-      indexNum++;
-    });
-    let timer = setInterval(() => {
-      if (indexNum == this.someProposals.scores.length) {
-        clearInterval(timer);
-        this.someProposals.choices.forEach((element, index) => {
-          const oneChoice = { label: element, choice: index, percent: 0, amount: 0, isChecked: false };
-          this.checkboxList.push(oneChoice);
-        });
-        this.someProposals.scores.forEach((element, index) => {
-          this.checkboxList[index].amount = element;
-          this.checkboxList[index].percent = (element / this.totalAmount) * 100;
-        });
-      }
-    }, 200);
-
-    this.getVotes();
+    if (this.$route.query.id) {
+      this.getProposals(this.$route.query.id);
+    }
   },
   methods: {
+    /**获取提案 */
+    getProposals(id) {
+      const { first, skip, orderBy, orderDirection } = this.proposalsParams;
+      vote
+        .getProposals(first, skip, orderBy, orderDirection, id)
+        .then((res) => {
+          // console.log("获取提案", res.data.proposals[0]);
+          this.someProposals = res.data.proposals[0];
+          this.initData();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    /**初始化数据 */
+    initData() {
+      let indexNum = 0;
+      this.totalAmount = 0;
+      this.checkboxList = [];
+      this.votesList = [];
+      this.someProposals.scores.forEach((element) => {
+        this.totalAmount = this.totalAmount + element;
+        indexNum++;
+      });
+      let timer = setInterval(() => {
+        if (indexNum == this.someProposals.scores.length) {
+          clearInterval(timer);
+          this.someProposals.choices.forEach((element, index) => {
+            const oneChoice = { label: element, choice: index, percent: 0, amount: 0, isChecked: false };
+            this.checkboxList.push(oneChoice);
+          });
+          this.someProposals.scores.forEach((element, index) => {
+            this.checkboxList[index].amount = element;
+            this.checkboxList[index].percent = (element / this.totalAmount) * 100;
+          });
+          const arr = JSON.parse(JSON.stringify(this.checkboxList));
+          this.resultList = arr.sort((a, b) => b.amount - a.amount);
+        }
+      }, 200);
+      this.votesParams.skip = 0;
+      this.getVotes();
+    },
+
     /**获取投票纪录 */
     getVotes() {
       // first: number, skip: number, orderBy: string, orderDirection: string, proposal?: string,
@@ -217,30 +226,15 @@ export default {
         .then((res) => {
           this.hasMore = res.loading;
           if (res.data.votes.length > 0) {
-            this.oldVotesList = JSON.parse(JSON.stringify(res.data.votes));
-            let voterArr = [];
-            this.oldVotesList.forEach((element) => {
-              voterArr.push(element.voter);
-            });
-            this.getScores(voterArr);
+            // console.log("获取投票纪录", res.data.votes);
+            this.votesList = [...this.votesList, ...res.data.votes];
+            // this.oldVotesList = JSON.parse(JSON.stringify(res.data.votes));
+            // let voterArr = [];
+            // this.oldVotesList.forEach((element) => {
+            //   voterArr.push(element.voter);
+            // });
+            // this.getScores(voterArr);
           }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    /**获取投票份额 */
-    getScores(voterArr) {
-      // voters: string[], blockNumber: number
-      vote
-        .getScores(voterArr, Number(this.someProposals.snapshot))
-        .then((res) => {
-          const arr = res[0];
-          Object.keys(arr).forEach((key) => {
-            const index = this.oldVotesList.findIndex((item) => item.voter == key);
-            this.oldVotesList[index].score = arr[key];
-          });
-          this.votesList = [...this.votesList, ...this.oldVotesList];
         })
         .catch((err) => {
           console.log(err);
@@ -248,42 +242,51 @@ export default {
     },
     /**获取更多 */
     getMore() {
-      this.votesParams.skip = this.someProposals.skip + 10;
+      this.votesParams.skip = this.votesParams.skip + 10;
       this.getVotes();
     },
     // 投票
-    handleLock() {
+    handleVote() {
       const isCheckedItem = this.checkboxList.find((item) => item.isChecked);
       if (!isCheckedItem) return this.$message({ message: "请选择一个投票", type: "warning" });
-      if (!this.ticketAmount) return this.$message({ message: "请输入投票数量", type: "warning" });
-      console.log(this.getCurrentAccount);
       if (!this.getCurrentAccount) return this.$store.commit("setWalletConnectPopup", true);
       // 投票成功后要刷新最新数据，更新localStorage里的信息
       // account: string, proposal: string, choice: number
-
       vote
-        .castVote(this.getCurrentAccount, this.ticketAmount.toString(), isCheckedItem.choice)
+        .castVote(this.getCurrentAccount, this.someProposals.id, isCheckedItem.choice + 1)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
+          // console.log("投了", isCheckedItem.label, isCheckedItem.choice + 1);
+          // this.getProposals(this.someProposals.id);
+          location.reload();
         })
         .catch((err) => {
           console.log(err);
         });
     },
+    /**获取投票份额 */
+    // getScores(voterArr) {
+    //   // voters: string[], blockNumber: number
+    //   vote
+    //     .getScores(voterArr, Number(this.someProposals.snapshot))
+    //     .then((res) => {
+    //       const arr = res[0];
+    //       Object.keys(arr).forEach((key) => {
+    //         const index = this.oldVotesList.findIndex((item) => item.voter == key);
+    //         this.oldVotesList[index].score = arr[key];
+    //       });
+    //       this.votesList = [...this.votesList, ...this.oldVotesList];
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // },
 
-    getMaxAmount() {
-      // 获取钱包里最大数量
-      this.ticketAmount = 1000;
-    },
     checkboxClick(item) {
       this.checkboxList.forEach((element) => {
         element.isChecked = false;
       });
       item.isChecked = true;
-      // if (this.someProposals.type == "single-choice") {
-      // } else {
-      //   item.isChecked = !item.isChecked;
-      // }
     },
     voterLink(voter) {
       window.location.href = `https://bscscan.com/address/${voter}`;
@@ -447,84 +450,44 @@ export default {
         padding: 0.2rem 0;
       }
       .check_boxs {
-        padding: 0 0.2rem;
         .check {
           display: flex;
           align-items: center;
           padding: 0.05rem 0;
           cursor: pointer;
-          &.active .gradient_border > div {
-            background: #6cebff;
+          &.active {
+            .gradient_border > div {
+              background: #00b2fe;
+            }
+            .text {
+              color: #00b2fe;
+            }
           }
+
           .gradient_border {
             background-image: linear-gradient(to bottom, rgba(0, 255, 246, 0.7), rgba(255, 56, 148, 0.7), rgba(229, 108, 255, 0.7));
           }
           .check_icon {
-            width: 0.15rem;
-            height: 0.15rem;
+            width: 0.2rem;
+            height: 0.2rem;
           }
           .text {
             display: flex;
-            font-size: 0.15rem;
+            font-size: 0.2rem;
             font-weight: 300;
-            margin-left: 0.1rem;
-            span {
-              &:nth-child(1) {
-                width: 2rem;
-              }
-            }
+            margin-left: 0.2rem;
           }
         }
       }
       .inputboxs {
         display: flex;
         padding: 0.2rem 0;
-        .gradient_border {
-          background-image: linear-gradient(to right, rgba(0, 255, 246, 0.7), rgba(255, 56, 148, 0.7), rgba(229, 108, 255, 0.7));
-        }
-        .inputbox {
-          width: 4.5rem;
-          height: 0.35rem;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          // padding: 0 0.2rem;
-          .text1,
-          .text2 {
-            height: 80%;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            font-size: 0.12rem;
-            font-weight: 400;
-            padding: 0 0.2rem;
-            white-space: nowrap;
-          }
-          .text1 {
-            border-right: 1px solid;
-            border-image: linear-gradient(180deg, rgba(102, 114, 146, 1), rgba(67, 142, 160, 1)) 1 1;
-          }
-          .text2 {
-            color: #00b4ff;
-            cursor: pointer;
-          }
-          input {
-            width: 100%;
-            height: 100%;
-            padding: 0 0.2rem;
-            font-size: 0.12rem;
-            color: #ffffff;
-            font-weight: 400;
-          }
-        }
         .btn {
-          margin-left: 0.2rem;
-          width: 0.9rem;
-          height: 0.35rem;
           background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
           border-radius: 0.06rem;
-          font-size: 0.12rem;
+          font-size: 0.16rem;
           font-weight: 600;
+          padding: 0.1rem 0.2rem;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -544,6 +507,7 @@ export default {
     }
     .box6 {
       width: 100%;
+      min-height: calc(0.75rem * 4);
       background: rgba(0, 0, 0, 0.19);
       border-radius: 0.08rem;
       border: 1px solid #4b4b4b;
@@ -553,6 +517,7 @@ export default {
         height: 0.75rem;
         background: rgba(0, 0, 0, 0.24);
         border-radius: 0.08rem 0.08rem 0 0;
+        border-bottom: 1px solid #535151;
         display: flex;
         align-items: center;
         padding: 0 0.2rem;
@@ -577,8 +542,9 @@ export default {
           height: 0.75rem;
           display: flex;
           align-items: center;
+          border-bottom: 1px solid #535151;
           div {
-            font-size: 0.15rem;
+            font-size: 0.18rem;
             font-weight: bold;
             text-align: center;
             &:nth-child(1) {

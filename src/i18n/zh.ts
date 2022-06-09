@@ -236,29 +236,20 @@ export const message = {
     },
   },
   dao: {
-    text1: "治理数",
     text2: "成员数",
     text3: "发起提案",
     text4: "当前提案由",
     text5: "发起",
-    text6: "推选第一款上架Launchpad的项目",
-    text7: "本期竞选的项目有3个，来自shika studio,metalulu,cryptopunk等等",
-    text8: "还剩5天",
-
-    text10: "通过提案",
-    text11: "200人支持",
     text12: "参与治理",
-
     text15: "详情",
     text16: "投票",
     text17: "评论",
     text18: "是来自于",
     text19: "点击可以查看艺术作品",
-
     text22: "项目通过审计并启动锁仓计划。投资者可以通过智能合约对您的资金进行锁仓且支持本项目",
     text23: "票",
     text24: "最大",
-    text25: "锁仓",
+    text25: "投票",
     text26: "信息",
     text27: "策略",
     text28: "IPFS",
@@ -267,6 +258,8 @@ export const message = {
     text31: "结束日期",
     text32: "单选投票",
     text35: "当前结果",
+    text36: "Snapshot",
+    text37: "查看更多",
   },
   // 以下暂无页面
   launchpad: {
@@ -324,7 +317,7 @@ export const message = {
     text1: "敬请期待",
   },
   btns: {
-    text1: "返回主页面",
+    text1: "返回",
   },
 };
 // 挂单页

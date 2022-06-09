@@ -39,7 +39,7 @@ export default {
     // 连接钱包弹窗方法
     walletClick(walletType) {
       this.$utils.walletConnect(walletType);
-      this.$utils.listenerWalletChanged();
+      // this.$utils.listenerWalletChanged();
     },
     closePopup() {
       this.$store.commit("setWalletListPopup", false);

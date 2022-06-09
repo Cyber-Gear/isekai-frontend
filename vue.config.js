@@ -5,7 +5,7 @@ module.exports = {
   publicPath: "/",
   devServer: { disableHostCheck: true },
   lintOnSave: true,
-  // productionSourceMap: false,
+  productionSourceMap: false,
 
   chainWebpack(config) {
     config.module.rule("scss").oneOfs.store.forEach((item) => {

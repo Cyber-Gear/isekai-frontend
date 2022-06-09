@@ -1,10 +1,11 @@
 <template>
   <div class="page">
-    <div class="box">
+    <div class="box" v-if="spaceObj">
       <div class="leftbox">
         <div class="avatar">
           <img :src="`${$urlImages}logo1.webp`" alt="" />
         </div>
+        <div class="title"><span>FUN TOPIA</span><i class="iconfont icon-telegram"></i></div>
         <div class="linkbox">
           <div><i class="iconfont icon-telegram"></i></div>
           <div><i class="iconfont icon-tuite"></i></div>
@@ -17,34 +18,42 @@
         </div>
         <div class="btn disabled">{{ $t("message.dao.text3") }}</div>
       </div>
-      <ul class="rightbox">
-        <li v-for="item in proposalsArr" :key="item.id">
-          <ul>
-            <li>
-              <div>
-                {{ $t("message.dao.text4") }} <span>{{ item.author | ellipsisWallet }}</span> {{ $t("message.dao.text5") }}
-              </div>
-              <div class="status">
-                <template v-if="item.state == 'active'"> {{ $t("message.status.text4") }} </template>
-                <template v-if="item.state == 'pending'"> {{ $t("message.status.text5") }} </template>
-                <template v-if="item.state == 'closed'"> {{ $t("message.status.text6") }} </template>
-              </div>
-            </li>
-            <li>{{ item.title }} <img :src="`${$urlImages}box_title3.webp`" alt="" /></li>
-            <li>
-              <pre>{{ item.body }}</pre>
-            </li>
-            <li>
-              <div>
-                <span>{{ $utils.formatDate(item.start * 1000) }}</span>
-                <span>-</span>
-                <span>{{ $utils.formatDate(item.end * 1000) }}</span>
-              </div>
-              <div class="btn" @click="toDetail(item)">{{ $t("message.dao.text12") }}</div>
-            </li>
-          </ul>
-        </li>
-      </ul>
+      <div class="rightbox">
+        <div class="title">
+          <div>提案</div>
+          <el-select v-model="value" placeholder="请选择">
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled"> </el-option>
+          </el-select>
+        </div>
+        <ul class="list">
+          <li v-for="item in proposalsArr" :key="item.id">
+            <ul>
+              <li>
+                <div>
+                  {{ $t("message.dao.text4") }} <span>{{ item.author | ellipsisWallet }}</span> {{ $t("message.dao.text5") }}
+                </div>
+                <div class="status">
+                  <template v-if="item.state == 'active'"> {{ $t("message.status.text4") }} </template>
+                  <template v-if="item.state == 'pending'"> {{ $t("message.status.text5") }} </template>
+                  <template v-if="item.state == 'closed'"> {{ $t("message.status.text6") }} </template>
+                </div>
+              </li>
+              <li>{{ item.title }} <img :src="`${$urlImages}box_title3.webp`" alt="" /></li>
+              <li>
+                <pre>{{ item.body }}</pre>
+              </li>
+              <li>
+                <div>
+                  <span>{{ $utils.formatDate(item.start * 1000) }}</span>
+                  <span>-</span>
+                  <span>{{ $utils.formatDate(item.end * 1000) }}</span>
+                </div>
+                <div class="btn" @click="toDetail(item)">{{ $t("message.dao.text12") }}</div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -56,15 +65,32 @@ export default {
   name: "DAO",
   data() {
     return {
-      spaceObj: {
-        admins: [""],
-        filters: { minScore: 0 },
-        members: [],
-        strategies: [],
-        validation: {},
-      },
+      spaceObj: null,
       proposalsParams: { first: 10, skip: 0, orderBy: "created", orderDirection: "desc", state: "", author: "", author_not: "" },
       proposalsArr: [],
+      options: [
+        {
+          value: "所有",
+          label: "所有",
+        },
+        {
+          value: "选项2",
+          label: "双皮奶",
+        },
+        {
+          value: "选项3",
+          label: "蚵仔煎",
+        },
+        {
+          value: "选项4",
+          label: "龙须面",
+        },
+        {
+          value: "选项5",
+          label: "北京烤鸭",
+        },
+      ],
+      value: "所有",
     };
   },
 
@@ -78,13 +104,13 @@ export default {
       vote
         .getSpace()
         .then((res) => {
-          // console.log(res.data.space);
-          const space = res.data.space;
-          this.spaceObj.admins = space.admins;
-          this.spaceObj.filters.minScore = space.filters.minScore;
-          this.spaceObj.members = space.members;
-          this.spaceObj.strategies = space.strategies;
-          this.spaceObj.validation = space.validation;
+          console.log("获取空间", res.data.space);
+          this.spaceObj = res.data.space;
+          // this.spaceObj.admins = space.admins;
+          // this.spaceObj.filters.minScore = space.filters.minScore;
+          // this.spaceObj.members = space.members;
+          // this.spaceObj.strategies = space.strategies;
+          // this.spaceObj.validation = space.validation;
         })
         .catch((err) => {
           console.log(err);
@@ -96,7 +122,7 @@ export default {
       vote
         .getProposals(first, skip, orderBy, orderDirection)
         .then((res) => {
-          // console.log(res.data.proposals);
+          console.log("获取提案", res.data.proposals);
           this.proposalsArr = res.data.proposals;
         })
         .catch((err) => {
@@ -170,6 +196,17 @@ export default {
       height: auto;
     }
   }
+  .title {
+    font-size: 0.3rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i {
+      font-size: 0.3rem;
+      margin-left: 0.1rem;
+    }
+  }
   .linkbox {
     width: fit-content;
     margin: 0.2rem auto;
@@ -237,70 +274,85 @@ export default {
 }
 .rightbox {
   width: 7rem;
-  max-height: 8rem;
-  padding: 0 0.1rem;
-  overflow-y: auto;
-  > li {
+  .title {
     width: 100%;
-    background: rgba(24, 24, 28, 0.8);
-    border-radius: 0.06rem;
-    border: 1px solid #4e4e52;
-    margin-bottom: 0.2rem;
-    padding: 0 0.2rem 0 0.4rem;
-    ul {
-      li {
-        margin: 0.2rem 0;
-        &:nth-child(1) {
-          font-size: 0.15rem;
-          font-weight: 300;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          span {
-            display: inline-block;
-            background: #000000;
-            border-radius: 0.1rem;
-            margin: 0 0.2rem;
-            padding: 0 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.3rem;
+    font-weight: 500;
+    padding: 0 0.2rem;
+  }
+  > .list {
+    width: 100%;
+    max-height: 8rem;
+    padding: 0 0.2rem;
+    overflow-y: auto;
+    > li {
+      width: 100%;
+      background: rgba(24, 24, 28, 0.8);
+      border-radius: 0.06rem;
+      border: 1px solid #4e4e52;
+      margin: 0.2rem 0;
+      padding: 0 0.2rem 0 0.4rem;
+      &:hover {
+        box-shadow: 0px 0px 11px 1px rgba(255, 255, 255, 0.26);
+      }
+      ul {
+        li {
+          margin: 0.2rem 0;
+          &:nth-child(1) {
+            font-size: 0.15rem;
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            span {
+              display: inline-block;
+              background: #000000;
+              border-radius: 0.1rem;
+              margin: 0 0.2rem;
+              padding: 0 0.2rem;
+            }
+            .status {
+              font-size: 0.12rem;
+              font-weight: 600;
+              color: #00b2fe;
+            }
           }
-          .status {
+          &:nth-child(2) {
+            font-size: 0.2rem;
+            font-weight: 600;
+            position: relative;
+            img {
+              width: 0.12rem;
+              height: auto;
+              position: absolute;
+              left: -0.25rem;
+              top: 0.08rem;
+            }
+          }
+          &:nth-child(3) {
+            font-size: 0.15rem;
+            font-weight: 300;
+          }
+          &:nth-child(4) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             font-size: 0.12rem;
             font-weight: 600;
             color: #00b2fe;
-          }
-        }
-        &:nth-child(2) {
-          font-size: 0.2rem;
-          font-weight: 600;
-          position: relative;
-          img {
-            width: 0.12rem;
-            height: auto;
-            position: absolute;
-            left: -0.25rem;
-            top: 0.08rem;
-          }
-        }
-        &:nth-child(3) {
-          font-size: 0.15rem;
-          font-weight: 300;
-        }
-        &:nth-child(4) {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          font-size: 0.12rem;
-          font-weight: 600;
-          color: #00b2fe;
-          span {
-            margin-right: 0.1rem;
-          }
-          .btn {
-            color: #ffffff;
-            background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
-            border-radius: 0.07rem;
-            padding: 0.1rem 0.2rem;
-            cursor: pointer;
+            span {
+              margin-right: 0.1rem;
+            }
+            .btn {
+              color: #ffffff;
+              background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
+              border-radius: 0.07rem;
+              padding: 0.1rem 0.2rem;
+              cursor: pointer;
+            }
           }
         }
       }

@@ -260,3 +260,16 @@ pre {
     color: #ffffff;
   }
 }
+.el-select {
+  width: 1rem;
+  .el-input {
+    .el-input__inner {
+      color: #ffffff;
+      font-size: 0.2rem;
+      font-weight: 400;
+      background-color: rgba(24, 24, 28, 0.8);
+      border-radius: 9px;
+      border: 1px solid #606060;
+    }
+  }
+}

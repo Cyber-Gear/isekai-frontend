@@ -8,7 +8,7 @@ VueRouter.prototype.push = function push(location: any) {
 };
 
 const routes: Array<RouteConfig> = [
-  { path: "/", redirect: "/home" },
+  { path: "", redirect: "Home" },
   {
     path: "/home",
     name: "Home",

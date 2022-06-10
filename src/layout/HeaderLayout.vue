@@ -8,8 +8,8 @@
         </li>
       </ul>
       <div class="connect" @mouseover="showDisconnectFun" @mouseleave="hiddenDisconnectFun">
-        <span v-if="getCurrentAccount">
-          {{ getCurrentAccount | ellipsisWallet }}
+        <span v-if="getWalletAccount">
+          {{ getWalletAccount | ellipsisWallet }}
         </span>
         <span v-else @click="openWalletPopup">{{ $t("message.nav.text6") }}</span>
         <transition name="showDisconnect" appear>
@@ -52,7 +52,7 @@ export default {
       langArr: ["en", "zh"],
     };
   },
-  computed: { ...mapGetters(["getCurrentAccount"]) },
+  computed: { ...mapGetters(["getWalletAccount"]) },
   watch: {
     $route(to) {
       if (to.path == "/home") {
@@ -84,10 +84,10 @@ export default {
       this.$store.commit("setWalletListPopup", true);
     },
     showDisconnectFun() {
-      if (this.getCurrentAccount) this.showDisconnect = true;
+      if (this.getWalletAccount) this.showDisconnect = true;
     },
     hiddenDisconnectFun() {
-      if (this.getCurrentAccount) this.showDisconnect = false;
+      if (this.getWalletAccount) this.showDisconnect = false;
     },
     clickDisconnect() {
       this.showDisconnect = false;

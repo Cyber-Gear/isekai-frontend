@@ -58,20 +58,20 @@
             </div>
             <div class="des">{{ $t("message.dao.text22") }}</div>
             <div class="check_boxs">
-              <div class="check" v-for="(item, index) in checkboxList" :key="index" @click="checkboxClick(item)" :class="{ active: item.isChecked }">
-                <div class="gradient_border">
-                  <div>
-                    <div class="check_icon"></div>
-                  </div>
-                </div>
-                <div class="text">
-                  <span>{{ item.label }}</span>
-                  <!-- <span>({{ item.percent }}%, {{ item.amount | thousandthsNumber }})</span> -->
+              <div
+                class="gradient_border"
+                v-for="(item, index) in checkboxList"
+                :key="index"
+                @click="checkboxClick(item)"
+                :class="{ active: item.isChecked }"
+              >
+                <div>
+                  <div class="text">{{ item.label }}</div>
                 </div>
               </div>
-            </div>
-            <div class="inputboxs">
-              <div class="btn" @click="handleVote">{{ $t("message.dao.text25") }}</div>
+              <div class="btn">
+                <el-button type="primary" :disabled="voteBtnDisabled" @click="handleVote">{{ $t("message.dao.text25") }}</el-button>
+              </div>
             </div>
           </div>
           <div class="box5" id="Comment">{{ $t("message.dao.text17") }}</div>
@@ -164,9 +164,19 @@ export default {
       oldVotesList: [],
       votesList: [],
       hasMore: false,
+      voteBtnDisabled: true,
     };
   },
-  computed: { ...mapGetters(["getCurrentAccount"]) },
+  computed: { ...mapGetters(["getWalletAccount"]) },
+  watch: {
+    checkboxList: {
+      handler(newVal) {
+        const isCheckedItem = newVal.find((item) => item.isChecked);
+        if (isCheckedItem) this.voteBtnDisabled = false;
+      },
+      deep: true,
+    },
+  },
   created() {
     if (this.$route.query.id) {
       this.getProposals(this.$route.query.id);
@@ -206,7 +216,7 @@ export default {
           });
           this.someProposals.scores.forEach((element, index) => {
             this.checkboxList[index].amount = element;
-            this.checkboxList[index].percent = (element / this.totalAmount) * 100;
+            if (this.totalAmount) this.checkboxList[index].percent = (element / this.totalAmount) * 100; // 0 / 0 NAN
           });
           const arr = JSON.parse(JSON.stringify(this.checkboxList));
           this.resultList = arr.sort((a, b) => b.amount - a.amount);
@@ -249,16 +259,14 @@ export default {
     handleVote() {
       const isCheckedItem = this.checkboxList.find((item) => item.isChecked);
       if (!isCheckedItem) return this.$message({ message: "请选择一个投票", type: "warning" });
-      if (!this.getCurrentAccount) return this.$store.commit("setWalletConnectPopup", true);
-      // 投票成功后要刷新最新数据，更新localStorage里的信息
+      if (!this.getWalletAccount) return this.$store.commit("setWalletConnectPopup", true);
       // account: string, proposal: string, choice: number
       vote
-        .castVote(this.getCurrentAccount, this.someProposals.id, isCheckedItem.choice + 1)
+        .castVote(this.getWalletAccount, this.someProposals.id, isCheckedItem.choice + 1)
         .then((res) => {
-          // console.log(res);
           // console.log("投了", isCheckedItem.label, isCheckedItem.choice + 1);
           // this.getProposals(this.someProposals.id);
-          location.reload();
+          location.reload(); // 投票成功后要刷新最新数据
         })
         .catch((err) => {
           console.log(err);
@@ -450,48 +458,33 @@ export default {
         padding: 0.2rem 0;
       }
       .check_boxs {
-        .check {
-          display: flex;
-          align-items: center;
-          padding: 0.05rem 0;
+        .gradient_border {
+          width: fit-content;
+          margin: 0.1rem auto;
+          border-radius: 0.5rem;
+          background-image: linear-gradient(150deg, rgba(0, 211, 255, 0.1), rgba(0, 211, 255, 0), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.1));
           cursor: pointer;
           &.active {
-            .gradient_border > div {
-              background: #00b2fe;
-            }
+            background-image: linear-gradient(to bottom, rgba(0, 255, 246, 0.5), rgba(255, 56, 148, 0.5), rgba(229, 108, 255, 0.5));
+          }
+          div {
+            border-radius: 0.5rem;
             .text {
-              color: #00b2fe;
+              width: 5rem;
+              height: 0.5rem;
+              font-size: 0.2rem;
+              font-weight: 300;
+              display: flex;
+              align-items: center;
+              justify-content: center;
             }
-          }
-
-          .gradient_border {
-            background-image: linear-gradient(to bottom, rgba(0, 255, 246, 0.7), rgba(255, 56, 148, 0.7), rgba(229, 108, 255, 0.7));
-          }
-          .check_icon {
-            width: 0.2rem;
-            height: 0.2rem;
-          }
-          .text {
-            display: flex;
-            font-size: 0.2rem;
-            font-weight: 300;
-            margin-left: 0.2rem;
           }
         }
-      }
-      .inputboxs {
-        display: flex;
-        padding: 0.2rem 0;
         .btn {
-          background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
-          border-radius: 0.06rem;
-          font-size: 0.16rem;
-          font-weight: 600;
-          padding: 0.1rem 0.2rem;
           display: flex;
           align-items: center;
           justify-content: center;
-          cursor: pointer;
+          margin-top: 0.2rem;
         }
       }
     }

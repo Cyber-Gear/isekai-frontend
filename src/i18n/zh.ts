@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace */
 export const message = {
   message: {
     text1: "未上传作品",
@@ -236,6 +237,7 @@ export const message = {
     },
   },
   dao: {
+    text1: "提案",
     text2: "成员数",
     text3: "发起提案",
     text4: "当前提案由",

@@ -25,7 +25,7 @@
 import { mapGetters } from "vuex";
 export default {
   name: "WalletListPopup",
-  computed: { ...mapGetters(["getWalletListPopup"]), ...mapGetters(["getCurrentAccount"]) },
+  computed: { ...mapGetters(["getWalletListPopup"]), ...mapGetters(["getWalletAccount"]) },
   data() {
     return {
       walletArr: [

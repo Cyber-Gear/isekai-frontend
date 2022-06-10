@@ -137,19 +137,7 @@ export default {
       isShowSelectionList: true,
     };
   },
-  // watch: {
-  //   selectionList: {
-  //     handler(newVal) {
-  //       newVal.forEach((element) => {
-  //         element.checkboxList.forEach((ele) => {
-  //           // console.log(ele.isChecked);
-  //           if (ele.isChecked) this.tagList.push(ele);
-  //         });
-  //       });
-  //     },
-  //     deep: true,
-  //   },
-  // },
+ 
   created() {
     nftworks.forEach((element) => {
       if (element.id === "shikastudio") {

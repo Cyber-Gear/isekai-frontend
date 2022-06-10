@@ -207,21 +207,40 @@ pre {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      .el-button {
-        width: 1.2rem;
-        padding: 0.1rem 0;
-        font-size: 0.15rem;
-        color: #413f3f;
-        background: #211f24;
-        border-color: #413f3f;
-        border-radius: 0.1rem;
-      }
-      .el-button--primary {
-        color: #ffffff;
-        background: linear-gradient(90deg, #44819d 0%, #7a649e 100%);
-        border-color: transparent;
-      }
     }
+  }
+}
+.el-button {
+  width: 1.2rem;
+  padding: 0.15rem 0;
+  font-size: 0.15rem;
+  color: #413f3f;
+  background: #211f24;
+  border-color: #413f3f;
+  border-radius: 0.1rem;
+  &:focus,
+  &:hover {
+    color: #ffffff;
+    background: #211f24;
+    border-color: #413f3f;
+  }
+}
+
+.el-button--primary {
+  color: #ffffff;
+  border-color: transparent;
+  background: linear-gradient(90deg, #44819d 0%, #7a649e 100%);
+  &:focus,
+  &:hover {
+    color: #ffffff;
+    border-color: transparent;
+    background: linear-gradient(90deg, #44819d 0%, #7a649e 100%);
+  }
+  &.is-disabled,
+  &.is-disabled:hover {
+    color: #413f3f;
+    background-color: #211f24;
+    border-color: #413f3f;
   }
 }
 .el-collapse {
@@ -247,29 +266,55 @@ pre {
   }
 }
 .el-tag {
-  height: 30px;
-  line-height: 30px;
-  padding: 0 10px;
-  font-size: 12px;
+  height: 0.3rem;
+  line-height: 0.3rem;
+  padding: 0 0.1rem;
+  font-size: 0.12rem;
   color: #ffffff;
   background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
   border-color: transparent;
-  border-radius: 7px;
+  border-radius: 0.07rem;
   margin-right: 0.1rem;
   .el-tag__close {
     color: #ffffff;
   }
 }
 .el-select {
-  width: 1rem;
   .el-input {
     .el-input__inner {
       color: #ffffff;
-      font-size: 0.2rem;
+      font-size: 0.16rem;
       font-weight: 400;
+      text-align: center;
       background-color: rgba(24, 24, 28, 0.8);
-      border-radius: 9px;
+      border-radius: 0.09rem;
       border: 1px solid #606060;
     }
+  }
+}
+.el-select-dropdown {
+  box-shadow: 0px 2px 12px 0px rgba(255, 255, 255, 0.27);
+  background-color: #18181c;
+  border-radius: 0.09rem;
+  border: none;
+  .el-select-dropdown__list {
+    .el-select-dropdown__item {
+      color: #696969;
+      font-size: 0.15rem;
+      font-weight: 400;
+      text-align: center;
+      &:hover,
+      &.hover,
+      &.selected {
+        color: #ffffff;
+        background-color: #27272e;
+      }
+    }
+  }
+}
+.el-popper[x-placement^="bottom"] .popper__arrow {
+  border-bottom-color: transparent;
+  &::after {
+    border-bottom-color: #18181c;
   }
 }

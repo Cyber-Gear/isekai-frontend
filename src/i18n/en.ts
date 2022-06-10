@@ -261,6 +261,7 @@ export const message = {
     },
   },
   dao: {
+    text1: "Proposal",
     text2: "Member",
     text3: "Submit proposal",
     text4: "Wallet",

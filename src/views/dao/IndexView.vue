@@ -19,12 +19,14 @@
         <div class="btn disabled">{{ $t("message.dao.text3") }}</div>
       </div>
       <div class="rightbox">
-        <div class="title">
-          <div>提案</div>
-          <el-select v-model="value" placeholder="请选择">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled"> </el-option>
-          </el-select>
-        </div>
+        <!-- <div class="title">
+          <div>{{ $t("message.dao.text1") }}</div>
+          <div class="selectbox">
+            <el-select v-model="value">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled"> </el-option>
+            </el-select>
+          </div>
+        </div> -->
         <ul class="list">
           <li v-for="item in proposalsArr" :key="item.id">
             <ul>
@@ -74,20 +76,20 @@ export default {
           label: "所有",
         },
         {
-          value: "选项2",
-          label: "双皮奶",
+          value: "核心",
+          label: "核心",
         },
         {
-          value: "选项3",
-          label: "蚵仔煎",
+          value: "活跃",
+          label: "活跃",
         },
         {
-          value: "选项4",
-          label: "龙须面",
+          value: "待开始",
+          label: "待开始",
         },
         {
-          value: "选项5",
-          label: "北京烤鸭",
+          value: "已关闭",
+          label: "已关闭",
         },
       ],
       value: "所有",
@@ -104,13 +106,8 @@ export default {
       vote
         .getSpace()
         .then((res) => {
-          console.log("获取空间", res.data.space);
+          // console.log("获取空间", res.data.space);
           this.spaceObj = res.data.space;
-          // this.spaceObj.admins = space.admins;
-          // this.spaceObj.filters.minScore = space.filters.minScore;
-          // this.spaceObj.members = space.members;
-          // this.spaceObj.strategies = space.strategies;
-          // this.spaceObj.validation = space.validation;
         })
         .catch((err) => {
           console.log(err);
@@ -120,9 +117,9 @@ export default {
     getProposals() {
       const { first, skip, orderBy, orderDirection, state, author, author_not } = this.proposalsParams;
       vote
-        .getProposals(first, skip, orderBy, orderDirection)
+        .getProposals(first, skip, orderBy, orderDirection, state, author, author_not)
         .then((res) => {
-          console.log("获取提案", res.data.proposals);
+          // console.log("获取提案", res.data.proposals);
           this.proposalsArr = res.data.proposals;
         })
         .catch((err) => {
@@ -134,17 +131,15 @@ export default {
     },
     // 提交提案
     createProposal() {
-      const params = {
-        // account: string, title: string, body: string, discussion: string, choices: string[], start: number, end: number
-      };
-      vote
-        .createProposal(params)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      // account: string, title: string, body: string, discussion: string, choices: string[], start: number, end: number
+      // vote
+      //   .createProposal(params)
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
     },
   },
 };
@@ -282,6 +277,9 @@ export default {
     font-size: 0.3rem;
     font-weight: 500;
     padding: 0 0.2rem;
+    .selectbox {
+      width: 1.5rem;
+    }
   }
   > .list {
     width: 100%;

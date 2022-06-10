@@ -11,8 +11,7 @@ export default new Vuex.Store({
     showWalletConnectPopup: false,
     showPlayVideoPopup: { isShow: false, name: "", url: "" },
 
-    currentAccount: "",
-    // accountInfo: { currentAccount: "", isConnected: false },
+    walletAccount: "",
   },
   getters: {
     isEnLang(state) {
@@ -28,12 +27,9 @@ export default new Vuex.Store({
       return state.showPlayVideoPopup;
     },
 
-    getCurrentAccount(state) {
-      return state.currentAccount;
+    getWalletAccount(state) {
+      return state.walletAccount;
     },
-    // getAccountInfo(state) {
-    //   return state.accountInfo;
-    // },
   },
   mutations: {
     setWalletListPopup(state, data) {
@@ -46,21 +42,17 @@ export default new Vuex.Store({
       state.showPlayVideoPopup = data;
     },
 
-    setCurrentAccount(state, data) {
-      state.currentAccount = data;
+    setWalletAccount(state, data) {
+      state.walletAccount = data;
     },
-    // setAccountInfo(state, data) {
-    //   state.accountInfo = data;
-    // },
   },
   actions: {},
   plugins: [
     createPersistedState({
-      storage: window.localStorage,
+      storage: window.sessionStorage,
       reducer(val) {
         return {
-          currentAccount: val.currentAccount,
-          // accountInfo: val.accountInfo,
+          walletAccount: val.walletAccount,
         };
       },
     }),

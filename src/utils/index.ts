@@ -28,27 +28,22 @@ export default {
    * @  onDisconnect  监听断开连接
    */
 
-  walletConnect(walletType: string) {
-    wallet
+  async walletConnect(walletType: string) {
+    await wallet
       .getAccount(walletType)
-      .then((res) => {
-        this.handleAccountsChanged(res);
-      })
+      .then(this.handleAccountsChanged)
       .catch((err) => {
         if (err.code === 4001) {
-          // If this happens, the user rejected the connection request.
-          console.log("取消连接");
+          console.log("如果发生这种情况，用户拒绝了连接请求");
         } else {
-          console.error("连接钱包失败", err);
+          console.error("wallet.getAccount()", err);
         }
       });
-    wallet
+    await wallet
       .getChainId()
-      .then((res) => {
-        this.handleChainChanged(res);
-      })
+      .then(this.handleChainChanged)
       .catch((err) => {
-        console.error("MetaMask获取网络发生错误", err);
+        console.error("wallet.getChainId()", err);
       });
     wallet.onAccountChanged(this.handleAccountsChanged);
     wallet.onChainChanged(this.handleChainChanged);
@@ -58,18 +53,15 @@ export default {
    * @param accounts 已连接的钱包地址
    */
   handleAccountsChanged(accounts: string[]) {
-    console.log("帐户变化", accounts);
     // 关闭对应的弹窗
     if (store.getters.getWalletListPopup) {
       store.commit("setWalletListPopup", false);
     }
     if (accounts.length === 0) {
-      // MetaMask is locked or the user has not connected any accounts
       Message({ message: "MetaMask被锁定或用户没有连接任何帐户", type: "warning" });
-    } else if (accounts[0] !== store.getters.getCurrentAccount) {
-      store.commit("setCurrentAccount", util.getAddress(accounts[0]));
+    } else if (accounts[0] !== store.getters.getWalletAccount) {
       Message({ message: "连接成功", type: "success" });
-      console.log("连接成功", util.getAddress(accounts[0]));
+      store.commit("setWalletAccount", util.getAddress(accounts[0]));
     }
   },
   /**
@@ -78,9 +70,9 @@ export default {
    * @  network() sdk网络的网络配置
    */
   handleChainChanged(chainId: string) {
-    console.log("网络变化为", network("production").chainName);
-    if (network("production").chainId !== chainId) {
-      Message({ message: "MetaMask网络连接错误,请切换至正确网络", type: "warning" });
+    // console.log("网络变化为", chainId, network("production"));
+    if (network().chainId !== chainId) {
+      Message({ message: "连接网络错误，请切换至正确网络", type: "warning" });
       wallet.addChain();
     }
   },
@@ -90,7 +82,7 @@ export default {
    */
   walletDisconnect() {
     // wallet.disconnect();
-    store.commit("setCurrentAccount", "");
+    store.commit("setWalletAccount", "");
   },
 
   /**

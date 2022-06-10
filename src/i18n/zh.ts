@@ -242,6 +242,7 @@ export const message = {
     text3: "发起提案",
     text4: "当前提案由",
     text5: "发起",
+    text6: "请选择一个投票",
     text12: "参与治理",
     text15: "详情",
     text16: "投票",
@@ -317,6 +318,9 @@ export const message = {
   },
   tips: {
     text1: "敬请期待",
+    text2: "MetaMask被锁定或用户没有连接任何帐户",
+    text3: "连接成功",
+    text4: "连接网络错误，请切换至正确网络",
   },
   btns: {
     text1: "返回",

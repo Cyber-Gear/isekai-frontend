@@ -266,6 +266,7 @@ export const message = {
     text3: "Submit proposal",
     text4: "Wallet",
     text5: "submitted",
+    text6: "Please choose one to vote",
     text12: "Atthend in DAO",
     text15: "Detail",
     text16: "Vote",
@@ -341,6 +342,9 @@ export const message = {
   },
   tips: {
     text1: "Comming Soon",
+    text2: "MetaMask is locked or the user is not connected to any account now",
+    text3: "Connection succeeded",
+    text4: "Error, please switch to the correct network",
   },
   btns: {
     text1: "Back",

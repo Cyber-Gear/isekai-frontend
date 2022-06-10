@@ -258,12 +258,13 @@ export default {
     // 投票
     handleVote() {
       const isCheckedItem = this.checkboxList.find((item) => item.isChecked);
-      if (!isCheckedItem) return this.$message({ message: "请选择一个投票", type: "warning" });
+      if (!isCheckedItem) return this.$message({ message: this.$t("message.dao.text6"), type: "warning" });
+
       if (!this.getWalletAccount) return this.$store.commit("setWalletConnectPopup", true);
       // account: string, proposal: string, choice: number
       vote
         .castVote(this.getWalletAccount, this.someProposals.id, isCheckedItem.choice + 1)
-        .then((res) => {
+        .then(() => {
           // console.log("投了", isCheckedItem.label, isCheckedItem.choice + 1);
           // this.getProposals(this.someProposals.id);
           location.reload(); // 投票成功后要刷新最新数据

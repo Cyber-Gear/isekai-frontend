@@ -1,7 +1,90 @@
+import { wallet, network, util } from "funtopia-sdk";
 import { Message } from "element-ui";
 // import BigNumber from "bignumber.js";
+import store from "../store/index";
 
 export default {
+  /**
+   * 获取当前连接的钱包地址
+   * @  wallet.getCurrentAccount() 获取当前连接的钱包地址
+   */
+  // getCurrentAccount() {
+  //   wallet
+  //     .getCurrentAccount()
+  //     .then((res) => {
+  //       this.handleAccountsChanged(res);
+  //     })
+  //     .catch((err) => {
+  //       console.error("获取当前连接帐户失败！", err);
+  //     });
+  // },
+  /**
+   * 连接钱包
+   * @param walletType 准备连接的钱包类型
+   * @  wallet.getAccount() 获取已连接的钱包地址
+   * @  wallet.getChainId() 获取已连接的网络ID
+   * @  onAccountChanged  监听帐户变化
+   * @  onChainChanged  监听网络变化
+   * @  onDisconnect  监听断开连接
+   */
+
+  async walletConnect(walletType: string) {
+    await wallet
+      .getAccount(walletType)
+      .then(this.handleAccountsChanged)
+      .catch((err) => {
+        if (err.code === 4001) {
+          console.log("如果发生这种情况，用户拒绝了连接请求");
+        } else {
+          console.error("wallet.getAccount()", err);
+        }
+      });
+    await wallet
+      .getChainId()
+      .then(this.handleChainChanged)
+      .catch((err) => {
+        console.error("wallet.getChainId()", err);
+      });
+    wallet.onAccountChanged(this.handleAccountsChanged);
+    wallet.onChainChanged(this.handleChainChanged);
+  },
+  /**
+   * 帐户变化触发方法
+   * @param accounts 已连接的钱包地址
+   */
+  handleAccountsChanged(accounts: string[]) {
+    // 关闭对应的弹窗
+    if (store.getters.getWalletListPopup) {
+      store.commit("setWalletListPopup", false);
+    }
+    if (accounts.length === 0) {
+      Message({ message: "MetaMask被锁定或用户没有连接任何帐户", type: "warning" });
+    } else if (accounts[0] !== store.getters.getWalletAccount) {
+      Message({ message: "连接成功", type: "success" });
+      store.commit("setWalletAccount", util.getAddress(accounts[0]));
+    }
+  },
+  /**
+   * 网络变化触发方法
+   * @param chainId 已连接的网络ID
+   * @  network() sdk网络的网络配置
+   */
+  handleChainChanged(chainId: string) {
+    // console.log("网络变化为", chainId, network("production"));
+    if (network().chainId !== chainId) {
+      Message({ message: "连接网络错误，请切换至正确网络", type: "warning" });
+      wallet.addChain();
+    }
+  },
+  /**
+   * 断开连接
+   * @  wallet.disconnect() 断开连接
+   */
+  walletDisconnect() {
+    // wallet.disconnect();
+    store.commit("setWalletAccount", "");
+  },
+
   /**
    * 格式化时间
    * 调用 FormatDate(strDate, "yyyy-MM-dd HH:mm:ss")

@@ -51,9 +51,11 @@ Vue.filter("thousandthsNumber", filters["thousandthsNumber"]);
 // });
 
 Vue.config.productionTip = false;
-new Vue({
+const vm = new Vue({
   router,
   store,
   i18n,
   render: (h) => h(App),
 }).$mount("#app");
+
+export default vm;

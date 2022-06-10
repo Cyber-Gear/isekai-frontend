@@ -28,16 +28,16 @@
           </div>
         </div> -->
         <ul class="list">
-          <li v-for="item in proposalsArr" :key="item.id">
+          <li v-for="item in proposalsArr" :key="item.id" @click="toDetail(item)">
             <ul>
               <li>
                 <div>
                   {{ $t("message.dao.text4") }} <span>{{ item.author | ellipsisWallet }}</span> {{ $t("message.dao.text5") }}
                 </div>
                 <div class="status">
-                  <template v-if="item.state == 'active'"> {{ $t("message.status.text4") }} </template>
-                  <template v-if="item.state == 'pending'"> {{ $t("message.status.text5") }} </template>
-                  <template v-if="item.state == 'closed'"> {{ $t("message.status.text6") }} </template>
+                  <template v-if="item.state == 'active'"> {{ $t("message.status.text6") }} </template>
+                  <template v-if="item.state == 'pending'"> {{ $t("message.status.text7") }} </template>
+                  <template v-if="item.state == 'closed'"> {{ $t("message.status.text8") }} </template>
                 </div>
               </li>
               <li>{{ item.title }} <img :src="`${$urlImages}box_title3.webp`" alt="" /></li>
@@ -50,7 +50,6 @@
                   <span>-</span>
                   <span>{{ $utils.formatDate(item.end * 1000) }}</span>
                 </div>
-                <div class="btn" @click="toDetail(item)">{{ $t("message.dao.text12") }}</div>
               </li>
             </ul>
           </li>
@@ -298,6 +297,7 @@ export default {
       }
       ul {
         li {
+          cursor: pointer;
           margin: 0.2rem 0;
           &:nth-child(1) {
             font-size: 0.15rem;
@@ -344,13 +344,13 @@ export default {
             span {
               margin-right: 0.1rem;
             }
-            .btn {
-              color: #ffffff;
-              background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
-              border-radius: 0.07rem;
-              padding: 0.1rem 0.2rem;
-              cursor: pointer;
-            }
+          }
+          pre {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
           }
         }
       }

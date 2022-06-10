@@ -9,54 +9,28 @@
     <div class="contentbox" v-if="someProposals">
       <div class="leftbox">
         <div class="box1">
-          <div>
+          <div class="title">
             <span><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ someProposals.title }}</span>
             <span>
-              <template v-if="someProposals.state == 'active'"> {{ $t("message.status.text4") }} </template>
-              <template v-if="someProposals.state == 'pending'"> {{ $t("message.status.text5") }} </template>
-              <template v-if="someProposals.state == 'closed'"> {{ $t("message.status.text6") }} </template>
+              <template v-if="someProposals.state == 'active'"> {{ $t("message.status.text6") }} </template>
+              <template v-if="someProposals.state == 'pending'"> {{ $t("message.status.text7") }} </template>
+              <template v-if="someProposals.state == 'closed'"> {{ $t("message.status.text8") }} </template>
             </span>
           </div>
-          <div>
-            <pre>{{ someProposals.body }}</pre>
+          <div class="content">
+            <pre>{{ proposalsInfo.body }}</pre>
+            <template v-if="proposalsInfo.imageList.length > 0">
+              <div v-for="(item, index) in proposalsInfo.imageList" :key="index">
+                <img :src="item.image" :alt="item.alt" />
+              </div>
+            </template>
           </div>
         </div>
         <div class="box2">
-          <!-- <div class="menu">
-            <span @click="changeHash('#Detail')">{{ $t("message.dao.text15") }}</span>
-            <span @click="changeHash('#Vote')">{{ $t("message.dao.text16") }}</span>
-            <span @click="changeHash('#Comment')">{{ $t("message.dao.text17") }}</span>
-          </div> -->
-          <div class="box3" id="Detail">
-            <div>
-              <span>Shika Studio {{ $t("message.dao.text18") }} XXXXXXX</span>
-              <div>
-                <i class="iconfont icon-chakan"></i><span>{{ $t("message.dao.text19") }}</span>
-              </div>
-            </div>
-            <div>
-              <span>Shika Studio {{ $t("message.dao.text18") }} XXXXXXX</span>
-              <div>
-                <i class="iconfont icon-chakan"></i><span>{{ $t("message.dao.text19") }}</span>
-              </div>
-            </div>
-            <div>
-              <span>Shika Studio {{ $t("message.dao.text18") }} XXXXXXX</span>
-              <div>
-                <i class="iconfont icon-chakan"></i><span>{{ $t("message.dao.text19") }}</span>
-              </div>
-            </div>
-          </div>
-          <div class="box4" id="Vote">
+          <div class="box4">
             <div class="title">
-              <span><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("message.status.text4") }}</span>
-              <span>
-                <span>{{ $utils.formatDate(someProposals.start * 1000) }}</span>
-                <span>-</span>
-                <span>{{ $utils.formatDate(someProposals.end * 1000) }}</span>
-              </span>
+              <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t("message.dao.text15") }}</span>
             </div>
-            <div class="des">{{ $t("message.dao.text22") }}</div>
             <div class="check_boxs">
               <div
                 class="gradient_border"
@@ -74,7 +48,14 @@
               </div>
             </div>
           </div>
-          <div class="box5" id="Comment">{{ $t("message.dao.text17") }}</div>
+          <div class="box5">
+            <div class="title">
+              <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t("message.dao.text17") }}</span>
+            </div>
+            <div class="linkbox">
+              <a :href="someProposals.discussion">{{ someProposals.discussion }}</a>
+            </div>
+          </div>
           <div class="box6">
             <div class="title">
               <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t("message.dao.text16") }}</span>
@@ -135,7 +116,7 @@
                 <span>{{ item.label }}</span>
                 <p>
                   <span>{{ item.amount | thousandthsNumber }} FUN</span>
-                  <span>{{ item.percent }}%</span>
+                  <span>{{ item.percent.toFixed(2) }}%</span>
                 </p>
               </div>
               <div><div :style="{ width: item.percent + '%' }"></div></div>
@@ -165,6 +146,7 @@ export default {
       votesList: [],
       hasMore: false,
       voteBtnDisabled: true,
+      proposalsInfo: { body: "", imageList: [] },
     };
   },
   computed: { ...mapGetters(["getWalletAccount"]) },
@@ -191,11 +173,30 @@ export default {
         .then((res) => {
           // console.log("获取提案", res.data.proposals[0]);
           this.someProposals = res.data.proposals[0];
+          this.createTextAndImage(this.someProposals.body);
           this.initData();
         })
         .catch((err) => {
           console.log(err);
         });
+    },
+    /**字符串转换 */
+    createTextAndImage(str) {
+      const arr = str.split("![");
+      this.proposalsInfo.body = arr[0];
+      this.proposalsInfo.imageList = [];
+      if (arr.length <= 1) return;
+      arr.splice(0, 1);
+      arr.forEach((element) => {
+        // ![logo.jpeg](ipfs://QmTSKrVxnzAyGzjKryWAyun7V5ZDqBCLPNfsXH9qmYZvwn)
+        // https://snapshot.mypinata.cloud/ipfs/QmTSKrVxnzAyGzjKryWAyun7V5ZDqBCLPNfsXH9qmYZvwn
+        const index1 = element.indexOf("]");
+        const index2 = element.indexOf("(") + 8;
+        const index3 = element.indexOf(")");
+        const str1 = element.substring(0, index1);
+        const str2 = "https://snapshot.mypinata.cloud/ipfs/" + element.substring(index2, index3);
+        this.proposalsInfo.imageList.push({ alt: str1, image: str2 });
+      });
     },
     /**初始化数据 */
     initData() {
@@ -258,7 +259,7 @@ export default {
     // 投票
     handleVote() {
       const isCheckedItem = this.checkboxList.find((item) => item.isChecked);
-      if (!isCheckedItem) return this.$message({ message: this.$t("message.dao.text6"), type: "warning" });
+      if (!isCheckedItem) return this.$message({ message: this.$t("message.tips.text5"), type: "warning" });
 
       if (!this.getWalletAccount) return this.$store.commit("setWalletConnectPopup", true);
       // account: string, proposal: string, choice: number
@@ -339,89 +340,51 @@ export default {
   border: 1px solid #436e77;
   backdrop-filter: blur(0.07rem);
   .box1 {
-    box-shadow: 0px 2px 5px 1px #000000;
     border-bottom: 1px solid #535151;
     padding: 0.2rem 0.5rem;
-    div {
-      &:nth-child(1) {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        position: relative;
-        img {
-          width: 0.12rem;
-          height: auto;
-          position: absolute;
-          left: -0.25rem;
-          top: 0.08rem;
-        }
-        span {
-          font-size: 0.2rem;
-          font-weight: 600;
-          &:nth-child(2) {
-            color: #00b2fe;
-          }
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      margin-bottom: 0.2rem;
+      img {
+        width: 0.12rem;
+        height: auto;
+        position: absolute;
+        left: -0.25rem;
+        top: 0.08rem;
+      }
+      span {
+        font-size: 0.2rem;
+        font-weight: 600;
+        &:nth-child(2) {
+          color: #00b2fe;
         }
       }
-      &:nth-child(2) {
+    }
+    .content {
+      div {
+        margin-bottom: 0.2rem;
+        img {
+          width: auto;
+          height: auto;
+          max-width: 100%;
+          max-height: 5rem;
+        }
+      }
+      pre {
+        width: 100%;
+        min-height: 1rem;
         font-size: 0.15rem;
         font-weight: 300;
-        width: 100%;
-        height: 1rem;
-        padding-top: 0.2rem;
       }
     }
   }
   .box2 {
     padding: 0.2rem 0.3rem;
-    .menu {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      padding: 0.2rem 0;
-      span {
-        cursor: pointer;
-        margin-right: 0.5rem;
-        font-size: 0.12rem;
-        font-weight: 600;
-        &.active,
-        &:hover {
-          color: #00b2fe;
-        }
-      }
-    }
-    .box3 {
-      width: 100%;
-      height: 2.5rem;
-      background: rgba(24, 24, 28, 0.71);
-      box-shadow: 0px 6px 10px 0px rgba(22, 22, 26, 0.98);
-      border-radius: 0.02rem;
-      overflow-y: auto;
-      padding: 0.2rem;
-      margin-bottom: 0.2rem;
-      > div {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-size: 0.15rem;
-        font-weight: 300;
-        padding: 0.1rem 0;
-        div {
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          padding-right: 0.5rem;
-          &:hover {
-            color: #00b2fe;
-          }
-          i {
-            font-size: 0.2rem;
-            margin-right: 0.1rem;
-          }
-        }
-      }
-    }
-    .box4 {
+    .box4,
+    .box5 {
       width: 100%;
       padding: 0.2rem;
       margin-bottom: 0.2rem;
@@ -429,79 +392,64 @@ export default {
       box-shadow: 0px 6px 10px 0px rgba(22, 22, 26, 0.98);
       border-radius: 0.02rem;
       .title {
-        position: relative;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        margin-bottom: 0.2rem;
         img {
           width: 0.12rem;
           height: auto;
           margin-right: 0.1rem;
         }
         span {
-          &:nth-child(1) {
-            font-size: 0.15rem;
-            font-weight: 300;
-          }
-          &:nth-child(2) {
-            font-size: 0.12rem;
-            font-weight: 300;
-            color: #888787;
-            span:nth-child(2) {
-              margin: 0 0.1rem;
-            }
-          }
-        }
-      }
-      .des {
-        font-size: 0.15rem;
-        font-weight: 300;
-        padding: 0.2rem 0;
-      }
-      .check_boxs {
-        .gradient_border {
-          width: fit-content;
-          margin: 0.1rem auto;
-          border-radius: 0.5rem;
-          background-image: linear-gradient(150deg, rgba(0, 211, 255, 0.1), rgba(0, 211, 255, 0), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.1));
-          cursor: pointer;
-          &.active {
-            background-image: linear-gradient(to bottom, rgba(0, 255, 246, 0.5), rgba(255, 56, 148, 0.5), rgba(229, 108, 255, 0.5));
-          }
-          div {
-            border-radius: 0.5rem;
-            .text {
-              width: 5rem;
-              height: 0.5rem;
-              font-size: 0.2rem;
-              font-weight: 300;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-            }
-          }
-        }
-        .btn {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-top: 0.2rem;
+          font-size: 0.2rem;
+          font-weight: 600;
         }
       }
     }
-    .box5 {
-      width: 100%;
-      background: rgba(24, 24, 28, 0.71);
-      box-shadow: 0px 6px 10px 0px rgba(22, 22, 26, 0.98);
-      border-radius: 0.02rem;
-      font-size: 0.15rem;
-      font-weight: 300;
-      padding: 0.2rem;
-      margin-bottom: 0.2rem;
+    .check_boxs {
+      padding: 0 0.22rem;
+      .gradient_border {
+        margin: 0.1rem auto;
+        border-radius: 0.2rem;
+        background: rgba(146, 146, 146, 0.4);
+        cursor: pointer;
+        &.active {
+          background-image: linear-gradient(to right, rgba(0, 255, 246, 0.7), rgba(255, 56, 148, 0.7), rgba(229, 108, 255, 0.7));
+        }
+        div {
+          border-radius: 0.2rem;
+          .text {
+            width: 100%;
+            height: 0.5rem;
+            font-size: 0.2rem;
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      }
+      .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    .linkbox {
+      padding: 0 0.22rem;
+      a {
+        text-decoration: none;
+        font-size: 0.15rem;
+        font-weight: 300;
+        color: #ffffff;
+        &:hover {
+          color: #00b2fe;
+        }
+      }
     }
     .box6 {
       width: 100%;
-      min-height: calc(0.75rem * 4);
+      // min-height: calc(0.75rem * 4);
       background: rgba(0, 0, 0, 0.19);
       border-radius: 0.08rem;
       border: 1px solid #4b4b4b;
@@ -537,6 +485,10 @@ export default {
           display: flex;
           align-items: center;
           border-bottom: 1px solid #535151;
+          padding: 0 0.2rem;
+          &:last-child {
+            border-bottom: none;
+          }
           div {
             font-size: 0.18rem;
             font-weight: bold;
@@ -553,6 +505,7 @@ export default {
             }
             &:nth-child(3) {
               width: 25%;
+              text-align: right;
               i {
                 margin-left: 0.1rem;
                 cursor: pointer;

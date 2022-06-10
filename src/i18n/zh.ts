@@ -308,9 +308,10 @@ export const message = {
     text3: "完成发售",
     text4: "所有",
     text5: "核心",
-    text6: "活跃",
-    text7: "待开始",
-    text8: "已关闭",
+    text6: "社区",
+    text7: "活跃",
+    text8: "待开始",
+    text9: "已关闭",
   },
   tips: {
     text1: "敬请期待",

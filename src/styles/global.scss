@@ -297,17 +297,21 @@ pre {
   background-color: #18181c;
   border-radius: 0.09rem;
   border: none;
-  .el-select-dropdown__list {
-    .el-select-dropdown__item {
-      color: #696969;
-      font-size: 0.15rem;
-      font-weight: 400;
-      text-align: center;
-      &:hover,
-      &.hover,
-      &.selected {
-        color: #ffffff;
-        background-color: #27272e;
+  .el-scrollbar__wrap {
+    margin-bottom: -5px !important;
+    margin-right: -5px !important;
+    .el-select-dropdown__list {
+      .el-select-dropdown__item {
+        color: #696969;
+        font-size: 0.15rem;
+        font-weight: 400;
+        text-align: center;
+        &:hover,
+        &.hover,
+        &.selected {
+          color: #ffffff;
+          background-color: #27272e;
+        }
       }
     }
   }

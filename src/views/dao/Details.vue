@@ -12,9 +12,9 @@
           <div class="title">
             <span><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ someProposals.title }}</span>
             <span>
-              <template v-if="someProposals.state == 'active'"> {{ $t("message.status.text6") }} </template>
-              <template v-if="someProposals.state == 'pending'"> {{ $t("message.status.text7") }} </template>
-              <template v-if="someProposals.state == 'closed'"> {{ $t("message.status.text8") }} </template>
+              <template v-if="someProposals.state == 'active'"> {{ $t("message.status.text7") }} </template>
+              <template v-if="someProposals.state == 'pending'"> {{ $t("message.status.text8") }} </template>
+              <template v-if="someProposals.state == 'closed'"> {{ $t("message.status.text9") }} </template>
             </span>
           </div>
           <div class="content">
@@ -163,6 +163,8 @@ export default {
     if (this.$route.query.id) {
       this.getProposals(this.$route.query.id);
     }
+    // 1000  K
+    // 1000000 M
   },
   methods: {
     /**获取提案 */

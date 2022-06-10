@@ -332,9 +332,10 @@ export const message = {
     text3: "Finished",
     text4: "All",
     text5: "Core",
-    text6: "Active",
-    text7: "Pending",
-    text8: "Closed",
+    text6: "Community",
+    text7: "Active",
+    text8: "Pending",
+    text9: "Closed",
   },
   tips: {
     text1: "Comming Soon",

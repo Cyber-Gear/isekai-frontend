@@ -19,14 +19,14 @@
         <div class="btn disabled">{{ $t("message.dao.text3") }}</div>
       </div>
       <div class="rightbox">
-        <!-- <div class="title">
+        <div class="title">
           <div>{{ $t("message.dao.text1") }}</div>
           <div class="selectbox">
-            <el-select v-model="value">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled"> </el-option>
+            <el-select v-model="selectKey" @change="selectChange">
+              <el-option v-for="item in selectOptions" :key="item.value" :label="$t(item.label)" :value="item.value"></el-option>
             </el-select>
           </div>
-        </div> -->
+        </div>
         <ul class="list">
           <li v-for="item in proposalsArr" :key="item.id" @click="toDetail(item)">
             <ul>
@@ -35,9 +35,9 @@
                   {{ $t("message.dao.text4") }} <span>{{ item.author | ellipsisWallet }}</span> {{ $t("message.dao.text5") }}
                 </div>
                 <div class="status">
-                  <template v-if="item.state == 'active'"> {{ $t("message.status.text6") }} </template>
-                  <template v-if="item.state == 'pending'"> {{ $t("message.status.text7") }} </template>
-                  <template v-if="item.state == 'closed'"> {{ $t("message.status.text8") }} </template>
+                  <template v-if="item.state == 'active'"> {{ $t("message.status.text7") }} </template>
+                  <template v-if="item.state == 'pending'"> {{ $t("message.status.text8") }} </template>
+                  <template v-if="item.state == 'closed'"> {{ $t("message.status.text9") }} </template>
                 </div>
               </li>
               <li>{{ item.title }} <img :src="`${$urlImages}box_title3.webp`" alt="" /></li>
@@ -67,39 +67,54 @@ export default {
   data() {
     return {
       spaceObj: null,
-      proposalsParams: { first: 10, skip: 0, orderBy: "created", orderDirection: "desc", state: "", author: "", author_not: "" },
+      oldProposalsParams: { first: 10, skip: 0, orderBy: "created", orderDirection: "desc", state: "", author: "", author_not: "" },
+      newProposalsParams: null,
       proposalsArr: [],
-      options: [
-        {
-          value: "所有",
-          label: "所有",
-        },
-        {
-          value: "核心",
-          label: "核心",
-        },
-        {
-          value: "活跃",
-          label: "活跃",
-        },
-        {
-          value: "待开始",
-          label: "待开始",
-        },
-        {
-          value: "已关闭",
-          label: "已关闭",
-        },
+      selectKey: 1,
+      selectOptions: [
+        { value: 1, label: "message.status.text4" },
+        { value: 2, label: "message.status.text5" },
+        { value: 3, label: "message.status.text6" },
+        { value: 4, label: "message.status.text7" },
+        { value: 5, label: "message.status.text8" },
+        { value: 6, label: "message.status.text9" },
       ],
-      value: "所有",
     };
   },
 
   created() {
     this.getSpace();
-    this.getProposals();
+    this.selectChange(1);
   },
   methods: {
+    selectChange(e) {
+      const author = "0x105A80A5Da83997c32818716846BB609C5Ffe35d"; // 全老板
+      this.newProposalsParams = JSON.parse(JSON.stringify(this.oldProposalsParams));
+      // console.log("🐏 ~oldProposalsParams", this.oldProposalsParams);
+      // console.log("🐏 ~    this.newProposalsParams", this.newProposalsParams);
+      switch (e) {
+        case 1:
+          break;
+        case 2:
+          this.newProposalsParams.author = author;
+          break;
+        case 3:
+          this.newProposalsParams.author_not = author;
+          break;
+        case 4:
+          this.newProposalsParams.state = "active";
+          break;
+        case 5:
+          this.newProposalsParams.state = "pending";
+          break;
+        case 6:
+          this.newProposalsParams.state = "closed";
+          break;
+        default:
+          break;
+      }
+      this.getProposals();
+    },
     /**获取空间 */
     getSpace() {
       vote
@@ -114,7 +129,7 @@ export default {
     },
     /**获取提案 */
     getProposals() {
-      const { first, skip, orderBy, orderDirection, state, author, author_not } = this.proposalsParams;
+      const { first, skip, orderBy, orderDirection, state, author, author_not } = this.newProposalsParams;
       vote
         .getProposals(first, skip, orderBy, orderDirection, state, author, author_not)
         .then((res) => {

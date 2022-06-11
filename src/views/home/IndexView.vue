@@ -192,7 +192,7 @@
     </div>
     <!-- INVESTOR&PARTNER -->
     <div class="box7">
-      <div class="box_title">
+      <!-- <div class="box_title">
         <img :src="`${$urlImages}box_title1.webp`" alt="" />
         <span>{{ $t("message.home.text9") }}</span>
       </div>
@@ -202,7 +202,7 @@
             <img :src="item" alt="" />
           </li>
         </ul>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -1014,6 +1014,7 @@ export default {
 }
 .box7 {
   width: 100%;
+  height: 4.7rem;
   .box_content {
     width: 80%;
     margin: 0 auto;

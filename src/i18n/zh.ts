@@ -16,7 +16,7 @@ export const message = {
     text1: "COPYRIGHT © 2022 FUNTOPIA, All rights Reserved",
   },
   home: {
-    text1: "在Web3的世界创建一个MAG社区",
+    text1: "创建一个有趣的元宇宙",
     text2: "以MAG和加密技术的紧密联系来降低加密货币进入的门槛",
     text3: "NFT艺术家shika工作室为在Funtopia平台上发布的NFT进行了角色美术设计，将用于Cybergear的游戏场景中。",
     text4: "WHITE PAGE",

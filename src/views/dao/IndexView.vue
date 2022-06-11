@@ -1,7 +1,7 @@
 <template>
   <div class="page">
-    <div class="box" v-if="spaceObj">
-      <div class="leftbox">
+    <div class="box">
+      <div class="leftbox" v-if="spaceObj">
         <div class="avatar">
           <img :src="`${$urlImages}logo1.webp`" alt="" />
         </div>
@@ -19,14 +19,14 @@
         <div class="btn disabled">{{ $t("message.dao.text3") }}</div>
       </div>
       <div class="rightbox">
-        <div class="title">
+        <!-- <div class="title">
           <div>{{ $t("message.dao.text1") }}</div>
           <div class="selectbox">
             <el-select v-model="selectKey" @change="selectChange">
               <el-option v-for="item in selectOptions" :key="item.value" :label="$t(item.label)" :value="item.value"></el-option>
             </el-select>
           </div>
-        </div>
+        </div> -->
         <ul class="list">
           <li v-for="item in proposalsArr" :key="item.id" @click="toDetail(item)">
             <ul>

@@ -132,9 +132,8 @@ export default {
     }
     .btn {
       cursor: pointer;
-      width: fit-content;
-      height: auto;
-      padding: 0.1rem 0.35rem;
+      width: 1.8rem;
+      height: 0.4rem;
       font-size: 0.15rem;
       display: flex;
       align-items: center;
@@ -144,24 +143,24 @@ export default {
       right: 0;
       bottom: 0.4rem;
       margin: auto;
-      // background-repeat: no-repeat;
-      background-size: 100% auto;
-      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      background-position: center center;
       transition: all 0.3s;
       &:hover {
         transform: scale(0.8);
       }
       &.MR {
-        background: url($urlImages + "ShikaStudio/btn-MR.webp") no-repeat;
+        background-image: url($urlImages + "ShikaStudio/btn-MR.webp");
       }
       &.R {
-        background: url($urlImages + "ShikaStudio/btn-R.webp") no-repeat;
+        background-image: url($urlImages + "ShikaStudio/btn-R.webp");
       }
       &.SR {
-        background: url($urlImages + "ShikaStudio/btn-SR.webp") no-repeat;
+        background-image: url($urlImages + "ShikaStudio/btn-SR.webp");
       }
       &.UR {
-        background: url($urlImages + "ShikaStudio/btn-UR.webp") no-repeat;
+        background-image: url($urlImages + "ShikaStudio/btn-UR.webp");
       }
     }
   }

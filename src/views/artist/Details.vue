@@ -9,7 +9,7 @@
     </div>
     <div class="content">
       <div class="avatar">
-        <div><img :src="`${$urlImages}logo1.webp`" alt="" /></div>
+        <div><img :src="detail.avatar" alt="" /></div>
       </div>
       <div class="box1">
         <div class="linkbox">
@@ -153,7 +153,7 @@ export default {
 .avatar {
   width: 1.3rem;
   height: 1.3rem;
-  padding: 0.05rem;
+  padding: 0.02rem;
   border-radius: 50%;
   background: #ffffff;
   position: absolute;
@@ -164,7 +164,7 @@ export default {
   > div {
     width: 100%;
     height: 100%;
-    padding: 0.1rem;
+    padding: 0.05rem;
     border-radius: 50%;
     background: #000;
     display: flex;

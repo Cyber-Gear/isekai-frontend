@@ -282,6 +282,8 @@ export const message = {
     text35: "Current Result",
     text36: "Snapshot",
     text37: "More",
+    text38: "Pack Up",
+    text39: "Nothing",
   },
   launchpad: {
     text1: "Current project",
@@ -346,5 +348,13 @@ export const message = {
   },
   btns: {
     text1: "Back",
+  },
+  date: {
+    left: "Left",
+    year: "Year",
+    month: "Month",
+    day: "Day",
+    hour: "Hour",
+    minute: "Minute",
   },
 };

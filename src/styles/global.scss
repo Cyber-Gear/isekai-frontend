@@ -23,6 +23,13 @@ body {
 .fontfamily_en {
   font-family: CaviarDreams;
 }
+
+.text_ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+}
 // 公用样式
 .box_title {
   margin-bottom: 1rem;
@@ -214,9 +221,9 @@ pre {
   width: 1.2rem;
   padding: 0.15rem 0;
   font-size: 0.15rem;
-  color: #413f3f;
-  background: #211f24;
-  border-color: #413f3f;
+  color: #7a7a7b;
+  background-color: #080809;
+  border-color: #080809;
   border-radius: 0.1rem;
   &:focus,
   &:hover {

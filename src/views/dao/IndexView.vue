@@ -19,14 +19,14 @@
         <div class="btn disabled">{{ $t("message.dao.text3") }}</div>
       </div>
       <div class="rightbox">
-        <!-- <div class="title">
+        <div class="title">
           <div>{{ $t("message.dao.text1") }}</div>
           <div class="selectbox">
             <el-select v-model="selectKey" @change="selectChange">
               <el-option v-for="item in selectOptions" :key="item.value" :label="$t(item.label)" :value="item.value"></el-option>
             </el-select>
           </div>
-        </div> -->
+        </div>
         <ul class="list">
           <li v-for="item in proposalsArr" :key="item.id" @click="toDetail(item)">
             <ul>
@@ -46,9 +46,10 @@
               </li>
               <li>
                 <div>
-                  <span>{{ $utils.formatDate(item.start * 1000) }}</span>
+                  <!-- <span>{{ $utils.formatDate(item.start * 1000) }}</span>
                   <span>-</span>
-                  <span>{{ $utils.formatDate(item.end * 1000) }}</span>
+                  <span>{{ $utils.formatDate(item.end * 1000) }}</span> -->
+                  <span>{{ countdown(item.start * 1000) }}</span>
                 </div>
               </li>
             </ul>
@@ -67,17 +68,17 @@ export default {
   data() {
     return {
       spaceObj: null,
-      oldProposalsParams: { first: 10, skip: 0, orderBy: "created", orderDirection: "desc", state: "", author: "", author_not: "" },
+      oldProposalsParams: { first: 10, skip: 0, orderBy: "created", orderDirection: "desc", id: "", state: "", author: "" },
       newProposalsParams: null,
       proposalsArr: [],
       selectKey: 1,
       selectOptions: [
         { value: 1, label: "message.status.text4" },
         { value: 2, label: "message.status.text5" },
-        { value: 3, label: "message.status.text6" },
-        { value: 4, label: "message.status.text7" },
-        { value: 5, label: "message.status.text8" },
-        { value: 6, label: "message.status.text9" },
+        // { value: 3, label: "message.status.text6" },
+        { value: 3, label: "message.status.text7" },
+        { value: 4, label: "message.status.text8" },
+        { value: 5, label: "message.status.text9" },
       ],
     };
   },
@@ -88,10 +89,9 @@ export default {
   },
   methods: {
     selectChange(e) {
+      this.proposalsArr = [];
       const author = "0x105A80A5Da83997c32818716846BB609C5Ffe35d"; // 全老板
       this.newProposalsParams = JSON.parse(JSON.stringify(this.oldProposalsParams));
-      // console.log("🐏 ~oldProposalsParams", this.oldProposalsParams);
-      // console.log("🐏 ~    this.newProposalsParams", this.newProposalsParams);
       switch (e) {
         case 1:
           break;
@@ -99,15 +99,12 @@ export default {
           this.newProposalsParams.author = author;
           break;
         case 3:
-          this.newProposalsParams.author_not = author;
-          break;
-        case 4:
           this.newProposalsParams.state = "active";
           break;
-        case 5:
+        case 4:
           this.newProposalsParams.state = "pending";
           break;
-        case 6:
+        case 5:
           this.newProposalsParams.state = "closed";
           break;
         default:
@@ -129,9 +126,9 @@ export default {
     },
     /**获取提案 */
     getProposals() {
-      const { first, skip, orderBy, orderDirection, state, author, author_not } = this.newProposalsParams;
+      const { first, skip, orderBy, orderDirection, id, state, author } = this.newProposalsParams;
       vote
-        .getProposals(first, skip, orderBy, orderDirection, state, author, author_not)
+        .getProposals(first, skip, orderBy, orderDirection, id, state, author)
         .then((res) => {
           // console.log("获取提案", res.data.proposals);
           this.proposalsArr = res.data.proposals;
@@ -143,6 +140,24 @@ export default {
     toDetail(item) {
       this.$router.push({ path: "dao-details", query: { id: item.id } });
     },
+    /**DAO提案倒计时 */
+    countdown(endTime) {
+      let nowTime = new Date().getTime();
+      let t = endTime - nowTime;
+      if (t > 0) {
+        let Y = Math.floor(t / (365 * 24 * 60 * 60 * 1000));
+        let M = Math.floor((t / (30 * 24 * 60 * 60 * 1000)) % 12);
+        let D = Math.floor((t / (24 * 60 * 60 * 1000)) % 30);
+        let h = Math.floor((t / (60 * 60 * 1000)) % 24);
+        let m = Math.floor((t / (60 * 1000)) % 60);
+        if (Y > 0) return `${this.$t("message.date.left") + " " + Y + " " + this.$t("message.date.year")}`;
+        if (M > 0) return `${this.$t("message.date.left") + " " + M + " " + this.$t("message.date.month")}`;
+        if (D > 0) return `${this.$t("message.date.left") + " " + D + " " + this.$t("message.date.day")}`;
+        if (h > 0) return `${this.$t("message.date.left") + " " + h + " " + this.$t("message.date.hour")}`;
+        if (m > 0) return `${this.$t("message.date.left") + " " + m + " " + this.$t("message.date.minute")}`;
+      }
+    },
+
     // 提交提案
     createProposal() {
       // account: string, title: string, body: string, discussion: string, choices: string[], start: number, end: number

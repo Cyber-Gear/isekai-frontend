@@ -18,16 +18,20 @@
             </span>
           </div>
           <div class="content">
-            <pre>{{ proposalsInfo.body }}</pre>
-            <template v-if="proposalsInfo.imageList.length > 0">
-              <div v-for="(item, index) in proposalsInfo.imageList" :key="index">
-                <img :src="item.image" :alt="item.alt" />
-              </div>
-            </template>
+            <div class="text_image" v-for="(item, index) in proposalsInfo" :key="index">
+              <pre v-if="item.type == 'text'">{{ item.text }}</pre>
+              <div v-if="item.type == 'image'"><img :src="item.image" :alt="item.text" /></div>
+            </div>
+          </div>
+          <div class="mask" v-if="oldProposalsInfo.length > 5">
+            <el-button @click="showMoreProposalsInfo">
+              {{ isShowMoreProposalsInfo ? $t("message.dao.text38") : $t("message.dao.text37") }}
+            </el-button>
           </div>
         </div>
         <div class="box2">
-          <div class="box4">
+          <!-- Cast your vote -->
+          <div class="box4" v-if="someProposals.state == 'active'">
             <div class="title">
               <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t("message.dao.text15") }}</span>
             </div>
@@ -48,6 +52,7 @@
               </div>
             </div>
           </div>
+          <!-- Discuss -->
           <div class="box5">
             <div class="title">
               <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t("message.dao.text17") }}</span>
@@ -56,23 +61,27 @@
               <a :href="someProposals.discussion">{{ someProposals.discussion }}</a>
             </div>
           </div>
-          <div class="box6">
+          <!-- Votes -->
+          <div class="box6" v-if="someProposals.state !== 'pending'">
             <div class="title">
               <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t("message.dao.text16") }}</span>
-              <div>{{ someProposals.votes }}</div>
+              <div v-if="someProposals.votes">{{ someProposals.votes }}</div>
             </div>
             <ul class="list">
               <li v-for="(item, index) in votesList" :key="index">
-                <div @click="voterLink(item.voter)">{{ item.voter | ellipsisWallet }}</div>
+                <div class="address" @click="voterLink(item.voter)">{{ item.voter | ellipsisWallet }}</div>
                 <div>
                   <template v-if="checkboxList.length > 0">{{ checkboxList[item.choice - 1] ? checkboxList[item.choice - 1].label : "" }}</template>
                 </div>
-                <div>{{ item.vp | thousandthsNumber }} FUN</div>
+                <div>{{ item.vp | digitalConversionUnitOfCounting }} FUN</div>
+              </li>
+              <li class="nothing" v-if="votesList.length == 0">
+                <div>{{ $t("message.dao.text39") }}</div>
+              </li>
+              <li class="more" v-if="hasMore">
+                <span @click="getMore">{{ $t("message.dao.text37") }}</span>
               </li>
             </ul>
-            <div class="footer" v-if="hasMore">
-              <span class="more" @click="getMore">{{ $t("message.dao.text37") }}</span>
-            </div>
           </div>
         </div>
       </div>
@@ -88,7 +97,7 @@
             </li>
             <li>
               <div>{{ $t("message.dao.text28") }}</div>
-              <div @click="ipfsLink">#{{ someProposals.ipfs | ellipsisIpfs }}<i class="iconfont icon-chakan"></i></div>
+              <div @click="ipfsLink">#{{ someProposals.ipfs | ellipsisNormal }}<i class="iconfont icon-chakan"></i></div>
             </li>
             <li>
               <div>{{ $t("message.dao.text29") }}</div>
@@ -104,7 +113,7 @@
             </li>
             <li>
               <div>{{ $t("message.dao.text36") }}</div>
-              <div>#{{ someProposals.snapshot | thousandthsNumber }}</div>
+              <div>#{{ someProposals.snapshot | digitalConversionInThousandths }}</div>
             </li>
           </ul>
         </div>
@@ -113,9 +122,9 @@
           <ul class="progressbarlist">
             <li v-for="(item, index) in resultList" :key="index">
               <div>
-                <span>{{ item.label }}</span>
+                <span class="text_ellipsis">{{ item.label }}</span>
                 <p>
-                  <span>{{ item.amount | thousandthsNumber }} FUN</span>
+                  <span class="text_ellipsis">{{ item.amount | digitalConversionUnitOfCounting }} FUN</span>
                   <span>{{ item.percent.toFixed(2) }}%</span>
                 </p>
               </div>
@@ -146,7 +155,9 @@ export default {
       votesList: [],
       hasMore: false,
       voteBtnDisabled: true,
-      proposalsInfo: { body: "", imageList: [] },
+      oldProposalsInfo: [],
+      proposalsInfo: [],
+      isShowMoreProposalsInfo: false,
     };
   },
   computed: { ...mapGetters(["getWalletAccount"]) },
@@ -158,13 +169,15 @@ export default {
       },
       deep: true,
     },
+    isShowMoreProposalsInfo: {
+      handler(newVal) {
+        this.proposalsInfo = newVal ? this.oldProposalsInfo : this.oldProposalsInfo.slice(0, 5);
+      },
+      deep: true,
+    },
   },
   created() {
-    if (this.$route.query.id) {
-      this.getProposals(this.$route.query.id);
-    }
-    // 1000  K
-    // 1000000 M
+    if (this.$route.query.id) this.getProposals(this.$route.query.id);
   },
   methods: {
     /**获取提案 */
@@ -184,21 +197,25 @@ export default {
     },
     /**字符串转换 */
     createTextAndImage(str) {
-      const arr = str.split("![");
-      this.proposalsInfo.body = arr[0];
-      this.proposalsInfo.imageList = [];
-      if (arr.length <= 1) return;
-      arr.splice(0, 1);
+      this.oldProposalsInfo = [];
+      const arr = str.split("\n");
       arr.forEach((element) => {
-        // ![logo.jpeg](ipfs://QmTSKrVxnzAyGzjKryWAyun7V5ZDqBCLPNfsXH9qmYZvwn)
-        // https://snapshot.mypinata.cloud/ipfs/QmTSKrVxnzAyGzjKryWAyun7V5ZDqBCLPNfsXH9qmYZvwn
-        const index1 = element.indexOf("]");
-        const index2 = element.indexOf("(") + 8;
-        const index3 = element.indexOf(")");
-        const str1 = element.substring(0, index1);
-        const str2 = "https://snapshot.mypinata.cloud/ipfs/" + element.substring(index2, index3);
-        this.proposalsInfo.imageList.push({ alt: str1, image: str2 });
+        const element1 = element.replaceAll("\n", "");
+        if (element1) {
+          // ![logo.jpeg](ipfs://QmTSKrVxnzAyGzjKryWAyun7V5ZDqBCLPNfsXH9qmYZvwn)
+          // https://snapshot.mypinata.cloud/ipfs/QmTSKrVxnzAyGzjKryWAyun7V5ZDqBCLPNfsXH9qmYZvwn
+          if (element1.indexOf("![") !== -1) {
+            const index1 = element1.indexOf("]");
+            const str1 = element1.substring(2, index1);
+            const str2 = "https://snapshot.mypinata.cloud/ipfs/" + element1.substring(index1 + 9, element1.length - 1);
+            this.oldProposalsInfo.push({ type: "image", text: str1, image: str2 });
+          } else {
+            this.oldProposalsInfo.push({ type: "text", text: element1 });
+          }
+        }
       });
+      const flag = this.oldProposalsInfo.length > 5;
+      this.proposalsInfo = !flag ? this.oldProposalsInfo : this.oldProposalsInfo.slice(0, 5);
     },
     /**初始化数据 */
     initData() {
@@ -226,7 +243,7 @@ export default {
         }
       }, 200);
       this.votesParams.skip = 0;
-      this.getVotes();
+      if (this.someProposals.state !== "pending") this.getVotes();
     },
 
     /**获取投票纪录 */
@@ -293,7 +310,9 @@ export default {
     //       console.log(err);
     //     });
     // },
-
+    showMoreProposalsInfo() {
+      this.isShowMoreProposalsInfo = !this.isShowMoreProposalsInfo;
+    },
     checkboxClick(item) {
       this.checkboxList.forEach((element) => {
         element.isChecked = false;
@@ -342,8 +361,21 @@ export default {
   border: 1px solid #436e77;
   backdrop-filter: blur(0.07rem);
   .box1 {
-    border-bottom: 1px solid #535151;
-    padding: 0.2rem 0.5rem;
+    padding: 0.2rem 0.5rem 0.8rem 0.5rem;
+    position: relative;
+    .mask {
+      width: 100%;
+      height: 0.5rem;
+      padding: 0.4rem 0;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(0.07rem);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     .title {
       display: flex;
       align-items: center;
@@ -366,20 +398,19 @@ export default {
       }
     }
     .content {
-      div {
+      .text_image {
         margin-bottom: 0.2rem;
-        img {
+        pre {
+          width: 100%;
+          font-size: 0.15rem;
+          font-weight: 300;
+        }
+        div img {
           width: auto;
           height: auto;
           max-width: 100%;
           max-height: 5rem;
         }
-      }
-      pre {
-        width: 100%;
-        min-height: 1rem;
-        font-size: 0.15rem;
-        font-weight: 300;
       }
     }
   }
@@ -451,7 +482,6 @@ export default {
     }
     .box6 {
       width: 100%;
-      // min-height: calc(0.75rem * 4);
       background: rgba(0, 0, 0, 0.19);
       border-radius: 0.08rem;
       border: 1px solid #4b4b4b;
@@ -481,6 +511,7 @@ export default {
         }
       }
       .list {
+        min-height: 0.75rem;
         li {
           width: 100%;
           height: 0.75rem;
@@ -491,16 +522,18 @@ export default {
           &:last-child {
             border-bottom: none;
           }
-          div {
+          > div {
             font-size: 0.18rem;
             font-weight: bold;
             text-align: center;
-            &:nth-child(1) {
-              width: 25%;
+            .address {
               cursor: pointer;
               &:hover {
                 color: #00b2fe;
               }
+            }
+            &:nth-child(1) {
+              width: 25%;
             }
             &:nth-child(2) {
               width: 50%;
@@ -514,21 +547,25 @@ export default {
               }
             }
           }
-        }
-      }
-      .footer {
-        width: 100%;
-        height: 0.75rem;
-        background: rgba(0, 0, 0, 0.24);
-        border-radius: 0 0 0.08rem 0.08rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.2rem;
-        font-weight: 600;
-        color: #878787;
-        span {
+          &.nothing {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.2rem;
+            font-weight: 600;
+            color: #878787;
+          }
           &.more {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.24);
+            border-radius: 0 0 0.08rem 0.08rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.2rem;
+            font-weight: 600;
+            color: #cac8c8;
             cursor: pointer;
           }
         }
@@ -605,10 +642,16 @@ export default {
             align-items: center;
             justify-content: space-between;
             padding: 0.1rem 0;
+            > span {
+              width: 50%;
+            }
             p {
+              width: 50%;
+              display: flex;
+              justify-content: space-between;
               span {
-                &:nth-child(2) {
-                  margin-left: 0.2rem;
+                &:nth-child(1) {
+                  width: 65%;
                 }
               }
             }

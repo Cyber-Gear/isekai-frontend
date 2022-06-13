@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="banner">
-      <img :src="`${$urlImages}artist_banner.webp`" alt="" />
+      <img :src="detail.banner" alt="" />
       <div class="back_box" @click="goBack">
         <i class="iconfont icon-fanhui"></i>
         <span>{{ $t("message.btns.text1") }}</span>
@@ -136,7 +136,7 @@ export default {
 }
 .banner {
   width: 100%;
-  height: 2.2rem;
+  height: 20vw;
   position: relative;
   > img {
     width: 100%;

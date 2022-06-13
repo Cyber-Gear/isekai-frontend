@@ -257,6 +257,8 @@ export const message = {
     text35: "当前结果",
     text36: "Snapshot",
     text37: "查看更多",
+    text38: "收起",
+    text39: "什么都没有",
   },
   // 以下暂无页面
   launchpad: {
@@ -322,6 +324,14 @@ export const message = {
   },
   btns: {
     text1: "返回",
+  },
+  date: {
+    left: "还剩",
+    year: "年",
+    month: "月",
+    day: "天",
+    hour: "小时",
+    minute: "分钟",
   },
 };
 // 挂单页

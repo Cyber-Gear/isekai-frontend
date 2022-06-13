@@ -43,19 +43,18 @@ Vue.prototype.$urlVideos = cdn + "videos/";
 
 import filters from "./utils/filters";
 Vue.filter("ellipsisWallet", filters["ellipsisWallet"]);
-Vue.filter("ellipsisIpfs", filters["ellipsisIpfs"]);
-Vue.filter("thousandthsNumber", filters["thousandthsNumber"]);
+Vue.filter("ellipsisNormal", filters["ellipsisNormal"]);
+Vue.filter("digitalConversionInThousandths", filters["digitalConversionInThousandths"]);
+Vue.filter("digitalConversionUnitOfCounting", filters["digitalConversionUnitOfCounting"]);
 
 // Object.keys(filters).forEach((key) => {
 //   Vue.filter(key, filters[key]);// 报错
 // });
 
 Vue.config.productionTip = false;
-const vm = new Vue({
+new Vue({
   router,
   store,
   i18n,
   render: (h) => h(App),
 }).$mount("#app");
-
-export default vm;

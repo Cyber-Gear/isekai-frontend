@@ -12,6 +12,7 @@ export const nftworks = [
     // des 画师描述
     id: "shikastudio",
     name: "Shika studio",
+    banner: urlImages + "ShikaStudio/banner.webp",
     logo: urlImages + "ShikaStudio/logo.webp",
     avatar: urlImages + "ShikaStudio/avatar.webp",
     title: "message.artist.nftworks.shikastudio.title",
@@ -242,6 +243,7 @@ export const nftworks = [
   {
     id: "zw",
     name: "Z.W.",
+    banner: urlImages + "ZW/banner.webp",
     logo: urlImages + "ZW/logo.webp",
     avatar: urlImages + "ZW/avatar.webp",
     title: "message.artist.nftworks.zw.title",
@@ -264,6 +266,7 @@ export const nftworks = [
   {
     id: "akiha",
     name: "Akiha",
+    banner: urlImages + "Akiha/banner.webp",
     logo: urlImages + "Akiha/logo.webp",
     avatar: urlImages + "Akiha/avatar.webp",
     title: "message.artist.nftworks.akiha.title",
@@ -310,6 +313,7 @@ export const nftworks = [
   {
     id: "negoro",
     name: "Negoro",
+    banner: urlImages + "Negoro/banner.webp",
     logo: urlImages + "Negoro/logo.webp",
     avatar: urlImages + "Negoro/avatar.webp",
     title: "message.artist.nftworks.negoro.title",

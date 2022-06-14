@@ -6,13 +6,6 @@
   "description": "",
   "glyphs": [
     {
-      "icon_id": "100710292",
-      "name": "favorites-fill",
-      "font_class": "favorites-fill",
-      "unicode": "e721",
-      "unicode_decimal": 59169
-    },
-    {
       "icon_id": "100977881",
       "name": "返回",
       "font_class": "fanhui",
@@ -55,6 +48,13 @@
       "unicode_decimal": 60146
     },
     {
+      "icon_id": "100984584",
+      "name": "箭头_切换左",
+      "font_class": "jiantou_qiehuanzuo",
+      "unicode": "eb06",
+      "unicode_decimal": 60166
+    },
+    {
       "icon_id": "100977887",
       "name": "推特1",
       "font_class": "tuite",
@@ -69,11 +69,25 @@
       "unicode_decimal": 59081
     },
     {
+      "icon_id": "100984675",
+      "name": "all",
+      "font_class": "all",
+      "unicode": "e6ef",
+      "unicode_decimal": 59119
+    },
+    {
       "icon_id": "100977889",
       "name": "nav-list",
       "font_class": "nav-list",
       "unicode": "e6fd",
       "unicode_decimal": 59133
+    },
+    {
+      "icon_id": "100710292",
+      "name": "favorites-fill",
+      "font_class": "favorites-fill",
+      "unicode": "e721",
+      "unicode_decimal": 59169
     },
     {
       "icon_id": "100977890",
@@ -97,6 +111,13 @@
       "unicode_decimal": 59204
     },
     {
+      "icon_id": "100984587",
+      "name": "category",
+      "font_class": "category",
+      "unicode": "e747",
+      "unicode_decimal": 59207
+    },
+    {
       "icon_id": "100977893",
       "name": "conditions",
       "font_class": "conditions",
@@ -104,11 +125,11 @@
       "unicode_decimal": 59208
     },
     {
-      "icon_id": "100977894",
-      "name": "Customer management-fill",
-      "font_class": "Customermanagement-fill",
-      "unicode": "e77c",
-      "unicode_decimal": 59260
+      "icon_id": "100984590",
+      "name": "dollar",
+      "font_class": "dollar",
+      "unicode": "e74c",
+      "unicode_decimal": 59212
     },
     {
       "icon_id": "100977895",
@@ -130,6 +151,20 @@
       "font_class": "favorites",
       "unicode": "e7b3",
       "unicode_decimal": 59315
+    },
+    {
+      "icon_id": "100984592",
+      "name": "资金",
+      "font_class": "zijin",
+      "unicode": "e7cb",
+      "unicode_decimal": 59339
+    },
+    {
+      "icon_id": "100984593",
+      "name": "block",
+      "font_class": "block",
+      "unicode": "e7de",
+      "unicode_decimal": 59358
     },
     {
       "icon_id": "100977898",
@@ -160,60 +195,11 @@
       "unicode_decimal": 58891
     },
     {
-      "icon_id": "100977902",
-      "name": "discord",
-      "font_class": "discord",
-      "unicode": "ebf8",
-      "unicode_decimal": 60408
-    },
-    {
       "icon_id": "100982875",
       "name": "钱包2-面型",
       "font_class": "qianbao2-mianxing",
       "unicode": "e6e6",
       "unicode_decimal": 59110
-    },
-    {
-      "icon_id": "100984584",
-      "name": "箭头_切换左",
-      "font_class": "jiantou_qiehuanzuo",
-      "unicode": "eb06",
-      "unicode_decimal": 60166
-    },
-    {
-      "icon_id": "100984587",
-      "name": "category",
-      "font_class": "category",
-      "unicode": "e747",
-      "unicode_decimal": 59207
-    },
-    {
-      "icon_id": "100984590",
-      "name": "dollar",
-      "font_class": "dollar",
-      "unicode": "e74c",
-      "unicode_decimal": 59212
-    },
-    {
-      "icon_id": "100984592",
-      "name": "资金",
-      "font_class": "zijin",
-      "unicode": "e7cb",
-      "unicode_decimal": 59339
-    },
-    {
-      "icon_id": "100984593",
-      "name": "block",
-      "font_class": "block",
-      "unicode": "e7de",
-      "unicode_decimal": 59358
-    },
-    {
-      "icon_id": "100984675",
-      "name": "all",
-      "font_class": "all",
-      "unicode": "e6ef",
-      "unicode_decimal": 59119
     },
     {
       "icon_id": "100997594",
@@ -228,6 +214,97 @@
       "font_class": "fuxuankuang-weiquanxuan",
       "unicode": "e668",
       "unicode_decimal": 58984
+    },
+    {
+      "icon_id": "100977902",
+      "name": "discord",
+      "font_class": "discord",
+      "unicode": "ebf8",
+      "unicode_decimal": 60408
+    },
+    {
+      "icon_id": "1166549",
+      "name": "减号",
+      "font_class": "jianhao",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "1166550",
+      "name": "加号",
+      "font_class": "jiahao",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "9066652",
+      "name": "home",
+      "font_class": "home",
+      "unicode": "e88b",
+      "unicode_decimal": 59531
+    },
+    {
+      "icon_id": "11372704",
+      "name": "数据",
+      "font_class": "shuju",
+      "unicode": "e8b9",
+      "unicode_decimal": 59577
+    },
+    {
+      "icon_id": "11474220",
+      "name": "bussiness-man",
+      "font_class": "bussiness-man",
+      "unicode": "e6f0",
+      "unicode_decimal": 59120
+    },
+    {
+      "icon_id": "11488016",
+      "name": "connections",
+      "font_class": "connections",
+      "unicode": "e74a",
+      "unicode_decimal": 59210
+    },
+    {
+      "icon_id": "11488154",
+      "name": "trading volume",
+      "font_class": "tradingvolume",
+      "unicode": "e76a",
+      "unicode_decimal": 59242
+    },
+    {
+      "icon_id": "11488248",
+      "name": "Customer management-fill",
+      "font_class": "Customermanagement-fill",
+      "unicode": "e77c",
+      "unicode_decimal": 59260
+    },
+    {
+      "icon_id": "11674090",
+      "name": "home",
+      "font_class": "home1",
+      "unicode": "e7a7",
+      "unicode_decimal": 59303
+    },
+    {
+      "icon_id": "11674773",
+      "name": "feed-logo",
+      "font_class": "feed-logo",
+      "unicode": "e7ad",
+      "unicode_decimal": 59309
+    },
+    {
+      "icon_id": "18224431",
+      "name": "区块链",
+      "font_class": "qukuailian",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "20009133",
+      "name": "box盒子",
+      "font_class": "boxhezi",
+      "unicode": "e6d3",
+      "unicode_decimal": 59091
     }
   ]
 }

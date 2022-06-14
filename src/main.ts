@@ -42,14 +42,10 @@ Vue.prototype.$urlImages = cdn + "images/";
 Vue.prototype.$urlVideos = cdn + "videos/";
 
 import filters from "./utils/filters";
-Vue.filter("ellipsisWallet", filters["ellipsisWallet"]);
-Vue.filter("ellipsisNormal", filters["ellipsisNormal"]);
-Vue.filter("digitalConversionInThousandths", filters["digitalConversionInThousandths"]);
-Vue.filter("digitalConversionUnitOfCounting", filters["digitalConversionUnitOfCounting"]);
-
-// Object.keys(filters).forEach((key) => {
-//   Vue.filter(key, filters[key]);// 报错
-// });
+// Vue.filter("ellipsisWallet", filters["ellipsisWallet"]);
+Object.keys(filters).forEach((key) => {
+  Vue.filter(key, filters[key]);
+});
 
 Vue.config.productionTip = false;
 new Vue({

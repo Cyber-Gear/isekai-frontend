@@ -1,6 +1,6 @@
 @font-face {
   font-family: "iconfont"; /* Project id  */
-  src: url('iconfont.ttf?t=1653476678159') format('truetype');
+  src: url('iconfont.ttf?t=1655193715729') format('truetype');
 }
 
 .iconfont {
@@ -9,10 +9,6 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-favorites-fill:before {
-  content: "\e721";
 }
 
 .icon-fanhui:before {
@@ -39,6 +35,10 @@
   content: "\eaf2";
 }
 
+.icon-jiantou_qiehuanzuo:before {
+  content: "\eb06";
+}
+
 .icon-tuite:before {
   content: "\e652";
 }
@@ -47,8 +47,16 @@
   content: "\e6c9";
 }
 
+.icon-all:before {
+  content: "\e6ef";
+}
+
 .icon-nav-list:before {
   content: "\e6fd";
+}
+
+.icon-favorites-fill:before {
+  content: "\e721";
 }
 
 .icon-integral-fill:before {
@@ -63,12 +71,16 @@
   content: "\e744";
 }
 
+.icon-category:before {
+  content: "\e747";
+}
+
 .icon-conditions:before {
   content: "\e748";
 }
 
-.icon-Customermanagement-fill:before {
-  content: "\e77c";
+.icon-dollar:before {
+  content: "\e74c";
 }
 
 .icon-telegram:before {
@@ -81,6 +93,14 @@
 
 .icon-favorites:before {
   content: "\e7b3";
+}
+
+.icon-zijin:before {
+  content: "\e7cb";
+}
+
+.icon-block:before {
+  content: "\e7de";
 }
 
 .icon-pingfendengjiRating11:before {
@@ -99,36 +119,8 @@
   content: "\e60b";
 }
 
-.icon-discord:before {
-  content: "\ebf8";
-}
-
 .icon-qianbao2-mianxing:before {
   content: "\e6e6";
-}
-
-.icon-jiantou_qiehuanzuo:before {
-  content: "\eb06";
-}
-
-.icon-category:before {
-  content: "\e747";
-}
-
-.icon-dollar:before {
-  content: "\e74c";
-}
-
-.icon-zijin:before {
-  content: "\e7cb";
-}
-
-.icon-block:before {
-  content: "\e7de";
-}
-
-.icon-all:before {
-  content: "\e6ef";
 }
 
 .icon-fuxuankuang-quanxuan:before {
@@ -137,5 +129,57 @@
 
 .icon-fuxuankuang-weiquanxuan:before {
   content: "\e668";
+}
+
+.icon-discord:before {
+  content: "\ebf8";
+}
+
+.icon-jianhao:before {
+  content: "\e634";
+}
+
+.icon-jiahao:before {
+  content: "\e635";
+}
+
+.icon-home:before {
+  content: "\e88b";
+}
+
+.icon-shuju:before {
+  content: "\e8b9";
+}
+
+.icon-bussiness-man:before {
+  content: "\e6f0";
+}
+
+.icon-connections:before {
+  content: "\e74a";
+}
+
+.icon-tradingvolume:before {
+  content: "\e76a";
+}
+
+.icon-Customermanagement-fill:before {
+  content: "\e77c";
+}
+
+.icon-home1:before {
+  content: "\e7a7";
+}
+
+.icon-feed-logo:before {
+  content: "\e7ad";
+}
+
+.icon-qukuailian:before {
+  content: "\e626";
+}
+
+.icon-boxhezi:before {
+  content: "\e6d3";
 }
 

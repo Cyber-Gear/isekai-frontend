@@ -42,6 +42,8 @@ export default {
       .catch((err) => {
         console.error("wallet.getChainId()", err);
       });
+  },
+  addEventListenerFun() {
     wallet.onAccountChanged(this.handleAccountsChanged);
     wallet.onChainChanged(this.handleChainChanged);
   },

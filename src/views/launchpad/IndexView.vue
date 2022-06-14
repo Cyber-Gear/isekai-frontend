@@ -6,21 +6,17 @@
         <div class="blindbox">
           <img :src="`${$urlImages}blindbox.webp`" alt="" />
         </div>
-        <div class="tabs">
-          <div :class="{ active: nowCategoryIndex == 0 }" @click="switchCategory(0)">{{ $t("message.launchpad.text2") }}1</div>
-          <div :class="{ active: nowCategoryIndex == 1 }" @click="switchCategory(1)">{{ $t("message.launchpad.text2") }}2</div>
-        </div>
         <div class="info">
           <div>
-            <span>{{ $t("message.launchpad.text3") }}</span>
-            <span>{{ categoryArr[nowCategoryIndex].amount }} {{ $t("message.launchpad.text11") }}</span>
+            <span>剩余</span>
+            <span>{{ remainingAmount }} {{ $t("message.launchpad.text11") }}</span>
           </div>
           <div>
-            <span>{{ $t("message.launchpad.text4") }}</span> <span>{{ categoryArr[nowCategoryIndex].price }} U</span>
+            <span>{{ $t("message.launchpad.text4") }}</span> <span>{{ boxPrice | digitalCutZero }} U</span>
           </div>
           <div>
             <span>{{ $t("message.launchpad.text5") }}</span>
-            <span>{{ categoryArr[nowCategoryIndex].forPurchasing }} {{ $t("message.launchpad.text11") }}</span>
+            <span>{{ 0 }} {{ $t("message.launchpad.text11") }}</span>
           </div>
         </div>
       </div>
@@ -54,7 +50,7 @@
             <div class="row">
               <div class="hasbeenon" v-if="nowStatusIndex == 1">
                 <div class="buying">
-                  <span>{{ $t("message.launchpad.text12") }}</span>
+                  <span>发售倒计时</span>
                 </div>
                 <div class="times">
                   <div>
@@ -78,30 +74,31 @@
                   </div>
                 </div>
               </div>
-              <div class="selling" v-if="nowStatusIndex > 1">
+              <div class="buy_box" v-if="nowStatusIndex == 2">
                 <div class="left">
                   <div>{{ $t("message.launchpad.text17") }}</div>
-                  <div class="inputbox" :class="{ disabled: nowStatusIndex == 3 }">
-                    <span class="span1">-</span>
-                    <input type="number" value="" :disabled="nowStatusIndex == 3" />
-                    <span class="span2">+</span>
+                  <div class="inputbox">
+                    <span class="span1"><i class="iconfont icon-jianhao" @click="subtraction"></i></span>
+                    <input type="number" v-model="inputAmount" oninput="value=value.replace(/^(0+)|[^\d]+/g,'')" />
+                    <span class="span2"><i class="iconfont icon-jiahao" @click="addition"></i></span>
                   </div>
                   <div>
-                    <span>{{ $t("message.launchpad.text18") }} 400U</span><span>0/0</span>
+                    <span>{{ $t("message.launchpad.text18") }} {{ totalPrice | digitalConversionInThousandths }} U</span>
                   </div>
                 </div>
                 <div class="right">
-                  <div class="btn" v-if="nowStatusIndex == 2">{{ $t("message.launchpad.text19") }}</div>
-                  <div class="btn disabled" v-if="nowStatusIndex == 3">{{ $t("message.launchpad.text20") }}</div>
+                  <el-button type="primary" @click="buyBoxBefore">{{ $t("message.launchpad.text19") }}</el-button>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div>{{ $t("message.launchpad.text21") }}</div>
-              <div class="progress_bar">
-                <div :style="{ width: progressWidth }">{{ progressWidth }}</div>
+              <div class="progress_bar_box" v-if="nowStatusIndex !== 1 && progressWidth">
+                <div>
+                  <div>{{ $t("message.launchpad.text21") }}</div>
+                  <div class="progress_bar">
+                    <div :style="{ width: progressWidth + '%' }">{{ progressWidth + "%" }}</div>
+                  </div>
+                  <div>{{ soldAmount }} / {{ totalAmount }}</div>
+                </div>
               </div>
-              <div>5,000 / 5,000</div>
             </div>
           </div>
         </div>
@@ -119,44 +116,252 @@
 </template>
 
 <script>
+import { cb, util, getSigner, erc20, token } from "funtopia-sdk";
+import { mapGetters } from "vuex";
 export default {
   name: "LAUNCHPAD",
   data() {
     return {
-      nowCategoryIndex: 0,
-      categoryArr: [
-        { amount: 5000, price: 100, forPurchasing: 10 },
-        { amount: 500, price: 10, forPurchasing: 5 },
-      ],
-      nowStatusText: "",
-      nowStatusIndex: 0,
+      boxType: 0,
+      totalAmount: 0,
+      soldAmount: 0,
+      remainingAmount: 0,
+      hourRemainingAmount: 0,
+
+      boxPrice: 0,
+      paymentAddress: "",
+      isOpenWhitelist: false,
+      isWhite: true,
+      inputAmount: null,
+      totalPrice: 0,
+      balanceAmount: 0,
       stepsArr: [
-        { title: "message.status.text1", des: "2022.12.21 16:20" },
-        { title: "message.status.text2", des: "2022.12.21 16:20" },
-        { title: "message.status.text3", des: "2022.12.21 16:20" },
+        { title: "message.status.text1", des: "2022/06/12 15:00" },
+        { title: "message.status.text2", des: "2022/06/14 15:00" },
+        { title: "message.status.text3", des: "" },
       ],
-      progressWidth: "0%",
+      nowStatusText: "message.status.text1",
+      nowStatusIndex: 0,
+      progressWidth: 0,
     };
   },
+  computed: { ...mapGetters(["getWalletAccount"]) },
+  watch: {
+    getWalletAccount: {
+      handler(newVal) {
+        if (newVal) {
+          if (this.isOpenWhitelist) this.getWhiteListExistence(this.boxType, newVal);
+        }
+      },
+      deep: true, // 深度监听
+      immediate: true, // 立即执行  oval 为undefined  newVal 为data中的初始值
+    },
+    inputAmount: {
+      handler(newVal) {
+        if (newVal) {
+          this.inputAmount = newVal < this.remainingAmount ? newVal : this.remainingAmount;
+          this.totalPrice = this.inputAmount * this.boxPrice;
+        } else {
+          this.totalPrice = 0;
+        }
+      },
+      deep: true, // 深度监听
+    },
+  },
   created() {
-    this.nowStatusText = this.stepsArr[0].title;
-    this.nowStatusIndex = 1;
-    this.nowCategoryIndex = 0;
+    this.getAmount(this.boxType);
+    this.getPriceAddrs(this.boxType);
   },
   methods: {
+    subtraction() {
+      if (this.inputAmount > 0) this.inputAmount--;
+    },
+    addition() {
+      if (this.inputAmount < this.remainingAmount) this.inputAmount++;
+    },
+    // 用户购买某种类型的盲盒，需要通过以下检查才可购买；
+    // 频控检查：单次购买盲盒数量必须大于0小于等于该用户该盲盒类型当前小时剩余购买数量；
+    // 余额检查：前端要将盲盒数量乘该盲盒支付代币单价和用户的该盲盒支付代币余额比较，不要让他输入超过最大余额的盲盒数量，且至少余额要大于1个盲盒的价格才能从0变成1；
+    // 库存检查：购买要求盲盒剩余可销售数量要大于等于用户要购买的数量，不要让用户输入超过剩余数量；
+    // 白名单检查：如果某类型的盲盒开启了白名单，则需要用户在白名单中才可购买；
+    // 授权检查：需要先去该盲盒支付代币合约授权；
+    async buyBoxBefore() {
+      if (!this.inputAmount) return console.log("请输入购买数量");
+      if (this.inputAmount > this.remainingAmount) {
+        this.inputAmount = this.remainingAmount;
+        return console.log("库存检查失败，请重新输入");
+      }
+      console.log(1, "库存检查成功");
+
+      if (!this.isWhite) {
+        return console.log("用户不在白名单中");
+      }
+      console.log(2, "用户在白名单中");
+      const timestamp = Date.parse(new Date()); //精度秒
+      await cb()
+        .getUserHourlyBoxesLeftSupply(this.boxType, this.getWalletAccount, timestamp)
+        .then((res) => {
+          this.hourRemainingAmount = Number(res._hex);
+          console.log(3, "获取某类型的盲盒下某用户某小时剩余购买数量", this.hourRemainingAmount);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      if (this.inputAmount > this.hourRemainingAmount) {
+        return console.log("频控检查失败，请重新输入");
+      }
+      console.log(3, "频控检查成功");
+
+      await erc20(token().USDC)
+        .balanceOf(this.getWalletAccount)
+        .then((res) => {
+          this.balanceAmount = Number(util.formatEther(res._hex));
+          console.log(4, "钱包余额", this.balanceAmount);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      if (this.totalPrice > this.balanceAmount) {
+        this.inputAmount = this.balanceAmount / this.boxPrice;
+        return console.log("余额检查失败，请重新输入");
+      }
+      console.log(4, "余额检查成功");
+
+      this.buyBoxes(this.inputAmount, this.boxType);
+    },
+    /**用户购买某种类型的盲盒 */
+    buyBoxes(amount, boxType) {
+      // buyBoxes(uint256 amount, uint256 boxType, {value: avaxAmount})
+      console.log(5, "购买", amount, boxType);
+      cb()
+        .connect(getSigner())
+        .buyBoxes(amount, boxType)
+        .then((res) => {
+          console.log(5, "购买成功", res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    /**获取某类型的盲盒下某用户某小时剩余购买数量 入参：盲盒类型，用户钱包地址，时间戳(秒) 出参：剩余数量 */
+    getUserHourlyBoxesLeftSupply(boxType, walletAddr, timestamp) {
+      cb()
+        .getUserHourlyBoxesLeftSupply(boxType, walletAddr, timestamp)
+        .then((res) => {
+          this.hourRemainingAmount = Number(res._hex);
+          // console.log("获取某类型的盲盒下某用户某小时剩余购买数量", this.hourRemainingAmount);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    /**
+     * @boxesMaxSupply 获取某类型的盲盒的总销售数量 入参：盲盒类型 出参：总数量
+     * @totalBoxesLength 获取某类型的盲盒的已售出数量 入参：盲盒类型 出参：已售出数量
+     * @getBoxesLeftSupply 获取某类型的盲盒的剩余可销售数量 入参：盲盒类型 出参：剩余数量
+     */
+    async getAmount(boxType) {
+      await cb()
+        .boxesMaxSupply(boxType)
+        .then((res) => {
+          this.totalAmount = Number(res._hex);
+          // console.log("获取某类型的盲盒的总销售数量", this.totalAmount);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      await cb()
+        .totalBoxesLength(boxType)
+        .then((res) => {
+          this.soldAmount = Number(res._hex);
+          // console.log("获取某类型的盲盒的已售出数量", this.soldAmount);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      await cb()
+        .getBoxesLeftSupply(boxType)
+        .then((res) => {
+          this.remainingAmount = Number(res._hex);
+          // this.remainingAmount = 0;
+          // console.log("获取某类型的盲盒的剩余可销售数量", this.remainingAmount);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      this.getCurrentState();
+    },
+    /**获取当前的状态 */
+    getCurrentState() {
+      let time1 = Date.parse(new Date());
+      let time2 = Date.parse(this.stepsArr[0].des);
+      let time3 = Date.parse(this.stepsArr[1].des);
+      let index = time1 > time2 && time1 < time3 ? 0 : 1;
+      if (this.remainingAmount == 0) index = 2;
+      this.nowStatusText = this.stepsArr[index].title;
+      this.nowStatusIndex = index + 1;
+      if (this.nowStatusIndex > 1) this.progressWidth = (this.soldAmount / this.totalAmount) * 100;
+    },
+    /**
+     * @boxTokenPrices 获取某类型的盲盒的支付代币单价 入参：盲盒类型 出参：盲盒单价
+     * @tokenAddrs 获取某类型的盲盒的支付代币地址 入参：盲盒类型 出参：支付代币地址
+     * @whiteListFlags 获取某类型的盲盒是否开启白名单 入参：盲盒类型 出参：开启状态
+     */
+    getPriceAddrs(boxType) {
+      cb()
+        .boxTokenPrices(boxType)
+        .then((res) => {
+          this.boxPrice = util.formatEther(res._hex);
+          // console.log("获取某类型的盲盒的支付代币单价", this.boxPrice);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      cb()
+        .tokenAddrs(boxType)
+        .then((res) => {
+          this.paymentAddress = res;
+          // console.log("获取某类型的盲盒的支付代币地址", this.paymentAddress);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      cb()
+        .whiteListFlags(boxType)
+        .then((res) => {
+          this.isOpenWhitelist = res;
+          // console.log("获取某类型的盲盒是否开启白名单", this.isOpenWhitelist);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    /**判断某用户是否在某类型的盲盒的白名单 入参：盲盒类型，用户钱包地址 出参：是否在白名单 */
+    getWhiteListExistence(boxType, walletAddr) {
+      cb()
+        .getWhiteListExistence(boxType, walletAddr)
+        .then((res) => {
+          this.isWhite = res;
+          // console.log("判断某用户是否在某类型的盲盒的白名单", this.isWhite);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    /**返回该类型盲盒某角色的出现概率，除1e4*100% 入参：盲盒类型，角色ID 出参：概率 */
+    // heroProbabilities() {},
+    /**获取某ID的盲盒的类型 入参：盲盒ID 出参：盲盒类型 */
+    // cbIdToType() {},
+    /**获取某用户基于指针（从0开始）和数量的盲盒ID数组，以及最后一个数据的指针 入参：用户钱包地址，指针，数量(秒) 出参：盲盒ID数组，最后指针 */
+    // tokensOfOwnerBySize() {},
+    /**监听开盲盒结果，获取某用户开出来的英雄的数量和ID数组 用户钱包地址，生成英雄数量，英雄ID数组 */
+    // event SpawnCns(address user, uint256 amount, uint256[] cnIds)
+
     changeSteps(item, index) {
       this.nowStatusText = item.title;
       this.nowStatusIndex = index + 1;
-      if (this.nowStatusIndex == 1) {
-        this.progressWidth = "0%";
-      } else if (this.nowStatusIndex == 2) {
-        this.progressWidth = "70%";
-      } else if (this.nowStatusIndex == 3) {
-        this.progressWidth = "100%";
-      }
-    },
-    switchCategory(index) {
-      this.nowCategoryIndex = index;
     },
   },
 };
@@ -210,29 +415,7 @@ export default {
       height: auto;
     }
   }
-  .tabs {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.2rem;
-    div {
-      cursor: pointer;
-      width: 1.8rem;
-      height: 0.45rem;
-      line-height: 0.45rem;
-      text-align: center;
-      background: rgba(129, 129, 151, 0.19);
-      border-radius: 8px;
-      border: 1px solid #436e77;
-      backdrop-filter: blur(0.07rem);
-      font-size: 0.2rem;
-      font-weight: 600;
-      &.active {
-        background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
-      }
-    }
-  }
+
   .info {
     width: 100%;
     height: 2.4rem;
@@ -324,51 +507,33 @@ export default {
         }
         &:nth-child(2) {
           padding: 0;
-          height: 1.3rem;
-        }
-        &:nth-child(3) {
-          font-weight: bold;
-        }
-        .progress_bar {
-          width: 100%;
           height: auto;
-          background: #17181b;
-          border-radius: 0.1rem;
-          margin: 0.1rem 0;
-          div {
-            transition: all 1s;
-            text-align: right;
-            font-size: 0.1rem;
-            font-weight: 600;
-            background-image: linear-gradient(to right, rgba(0, 211, 255, 0.5), rgba(176, 108, 198, 1));
-            border-radius: 0.1rem;
-          }
         }
       }
       .hasbeenon {
         width: 100%;
-        height: 100%;
+        height: 1.5rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
         .buying {
-          width: 2.05rem;
-          height: 1.1rem;
+          width: 2rem;
+          height: 1.5rem;
           display: flex;
           align-items: center;
           justify-content: center;
           background: url($urlImages + "bg8.webp") no-repeat;
           background-size: 100% 100%;
           span {
-            font-size: 0.12rem;
+            font-size: 0.15rem;
             font-weight: bold;
             border-bottom: 1px solid;
             border-image: linear-gradient(135deg, rgba(212, 135, 241, 0.44), rgba(82, 224, 255, 0.44)) 1 1;
           }
         }
         .times {
-          width: 3.4rem;
-          height: 1.3rem;
+          width: 3.5rem;
+          height: 1.5rem;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -390,9 +555,9 @@ export default {
           }
         }
       }
-      .selling {
+      .buy_box {
         width: 100%;
-        height: 100%;
+        height: 1.2rem;
         padding: 0 0.5rem;
         display: flex;
         align-items: center;
@@ -413,16 +578,10 @@ export default {
                 left: -0.1rem;
               }
             }
-            &:nth-child(3) {
-              font-weight: 400;
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-            }
           }
           .inputbox {
             width: 1.7rem;
-            height: 0.3rem;
+            height: 0.35rem;
             margin: 0.1rem 0;
             background: rgba(24, 24, 28, 0.8);
             border-radius: 0.08rem;
@@ -437,24 +596,23 @@ export default {
               color: #ffffff;
               text-align: center;
             }
-            &.disabled {
-              cursor: not-allowed;
-              input,
-              .span1,
-              .span2 {
-                cursor: not-allowed;
-              }
-            }
             .span1,
             .span2 {
               width: 0.5rem;
               height: 80%;
-              font-size: 0.15rem;
-              font-weight: 400;
-              color: #555557;
-              text-align: center;
               border-image: linear-gradient(180deg, rgba(85, 85, 87, 0), rgba(85, 85, 87, 1), rgba(85, 85, 87, 1), rgba(85, 85, 87, 0)) 1 1;
+              display: flex;
+              align-items: center;
+              justify-content: center;
               cursor: pointer;
+              &:hover i {
+                color: #29a7e1;
+              }
+              i {
+                font-size: 0.25rem;
+                font-weight: 400;
+                color: #555557;
+              }
             }
             .span1 {
               border-right: 1px solid;
@@ -464,22 +622,33 @@ export default {
             }
           }
         }
-        .right {
-          .btn {
-            width: 1.2rem;
-            height: 0.3rem;
-            background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
-            border-radius: 0.08rem;
-            font-size: 0.2rem;
-            font-weight: 400;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            &.disabled {
-              color: #424242;
-              background: #17181b;
-              cursor: not-allowed;
+      }
+      .progress_bar_box {
+        width: 100%;
+        height: 1rem;
+        padding: 0 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        > div {
+          width: 100%;
+          height: auto;
+          font-size: 0.12rem;
+          font-weight: bold;
+          .progress_bar {
+            width: 100%;
+            height: auto;
+            background: #17181b;
+            border-radius: 0.1rem;
+            margin: 0.1rem 0;
+            div {
+              width: 0;
+              transition: all 1s;
+              text-align: right;
+              font-size: 0.1rem;
+              font-weight: 600;
+              background-image: linear-gradient(to right, rgba(0, 211, 255, 0.5), rgba(176, 108, 198, 1));
+              border-radius: 0.1rem;
             }
           }
         }

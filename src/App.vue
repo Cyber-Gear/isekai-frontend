@@ -33,6 +33,7 @@ export default {
     window.addEventListener("resize", () => {
       this.resetRem();
     });
+    this.$utils.addEventListenerFun();
   },
   destroyed() {
     window.removeEventListener("load", this.resetRem());

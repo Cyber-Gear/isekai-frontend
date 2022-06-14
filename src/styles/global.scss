@@ -231,6 +231,14 @@ pre {
     background: #211f24;
     border-color: #413f3f;
   }
+  &.is-disabled,
+  &.is-disabled:focus,
+  &.is-disabled:hover {
+    cursor: not-allowed;
+    color: #7a7a7b;
+    background-color: #080809;
+    border-color: #7a7a7b;
+  }
 }
 
 .el-button--primary {
@@ -242,12 +250,6 @@ pre {
     color: #ffffff;
     border-color: transparent;
     background: linear-gradient(90deg, #44819d 0%, #7a649e 100%);
-  }
-  &.is-disabled,
-  &.is-disabled:hover {
-    color: #7a7a7b;
-    background-color: #080809;
-    border-color: #7a7a7b;
   }
 }
 .el-collapse {

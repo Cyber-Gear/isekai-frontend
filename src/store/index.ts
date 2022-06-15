@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     currentLanguage: i18n.locale,
+    showApprovePopup: false,
     showWalletListPopup: false,
     showWalletConnectPopup: false,
     showPlayVideoPopup: { isShow: false, name: "", url: "" },
@@ -16,6 +17,9 @@ export default new Vuex.Store({
   getters: {
     isEnLang(state) {
       return state.currentLanguage == "en";
+    },
+    getApprovePopup(state) {
+      return state.showApprovePopup;
     },
     getWalletListPopup(state) {
       return state.showWalletListPopup;
@@ -32,6 +36,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setApprovePopup(state, data) {
+      state.showApprovePopup = data;
+    },
     setWalletListPopup(state, data) {
       state.showWalletListPopup = data;
     },

@@ -287,6 +287,7 @@ export const message = {
     text20: "Sold out",
     text21: "PROGRESS",
     text22: "Cybergear Introduction",
+    text23: "Approve",
     introduction1: `Before the game goes live, players can buy limited mystery boxes on the market. From the mystery box, not only the MechaGirl NFT but also 2 MechaGirl sherd can be opened.`,
     introduction2: `
     Cybergear (Mecha Girl) is a community-driven two-dimensional universe, two-dimensional cyberpunk style and GameFi product that integrates SRPG gameplay. 
@@ -310,7 +311,7 @@ export const message = {
   status: {
     text1: "On Launchpad",
     text2: "On sale",
-    text3: "Finished",
+    text3: "Sold out",
     text4: "All",
     text5: "Core",
     text6: "Community",

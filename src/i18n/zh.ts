@@ -275,6 +275,7 @@ export const message = {
     text20: "已售罄",
     text21: "进度",
     text22: "机甲少女介绍",
+    text23: "去授权",
     introduction1: `在游戏上线之前，玩家可以在市场上购买有限的神秘盒子。从神秘盒子中，不仅可以打开 MechaGirl NFT，还可以打开 2 个 MechaGirl 碎片。`,
     introduction2: `
     Cyber​​gear（机甲少女）是一款社区驱动的二次元宇宙、二次元赛博朋克风格、融合SRPG玩法的GameFi产品。
@@ -298,7 +299,7 @@ export const message = {
   status: {
     text1: "已上架",
     text2: "开始发售",
-    text3: "完成发售",
+    text3: "已售罄",
     text4: "所有",
     text5: "核心",
     text6: "社区",

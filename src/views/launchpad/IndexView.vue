@@ -87,7 +87,7 @@
                   </div>
                 </div>
                 <div class="right">
-                  <el-button type="primary" @click="buyBoxBefore">{{ $t("message.launchpad.text19") }}</el-button>
+                  <el-button type="primary" @click="buyBoxesBefore">{{ $t(btnText) }}</el-button>
                 </div>
               </div>
               <div class="progress_bar_box" v-if="nowStatusIndex !== 1 && progressWidth">
@@ -112,14 +112,18 @@
         </div>
       </div>
     </div>
+    <ApprovePopup></ApprovePopup>
   </div>
 </template>
 
 <script>
 import { cb, util, getSigner, erc20, token } from "funtopia-sdk";
 import { mapGetters } from "vuex";
+import ApprovePopup from "../../components/ApprovePopup";
+
 export default {
   name: "LAUNCHPAD",
+  components: { ApprovePopup },
   data() {
     return {
       boxType: 0,
@@ -143,14 +147,23 @@ export default {
       nowStatusText: "message.status.text1",
       nowStatusIndex: 0,
       progressWidth: 0,
+      isApproved: false,
+      btnText: "message.launchpad.text19",
+      popupActive: 1,
+      approvedloading: false,
+      buyloading: false,
     };
   },
-  computed: { ...mapGetters(["getWalletAccount"]) },
+  computed: { ...mapGetters(["getWalletAccount"]), ...mapGetters(["getApprovePopup"]) },
+
   watch: {
     getWalletAccount: {
       handler(newVal) {
         if (newVal) {
           if (this.isOpenWhitelist) this.getWhiteListExistence(this.boxType, newVal);
+          const timestamp = Date.parse(new Date()); //精度秒
+          this.getUserHourlyBoxesLeftSupply(this.boxType, this.getWalletAccount, timestamp);
+          this.getBalanceOf();
         }
       },
       deep: true, // 深度监听
@@ -185,82 +198,115 @@ export default {
     // 库存检查：购买要求盲盒剩余可销售数量要大于等于用户要购买的数量，不要让用户输入超过剩余数量；
     // 白名单检查：如果某类型的盲盒开启了白名单，则需要用户在白名单中才可购买；
     // 授权检查：需要先去该盲盒支付代币合约授权；
-    async buyBoxBefore() {
-      if (!this.inputAmount) return console.log("请输入购买数量");
-      if (this.inputAmount > this.remainingAmount) {
-        this.inputAmount = this.remainingAmount;
-        return console.log("库存检查失败，请重新输入");
-      }
-      console.log(1, "库存检查成功");
 
-      if (!this.isWhite) {
-        return console.log("用户不在白名单中");
-      }
-      console.log(2, "用户在白名单中");
-      const timestamp = Date.parse(new Date()); //精度秒
-      await cb()
-        .getUserHourlyBoxesLeftSupply(this.boxType, this.getWalletAccount, timestamp)
-        .then((res) => {
-          this.hourRemainingAmount = Number(res._hex);
-          console.log(3, "获取某类型的盲盒下某用户某小时剩余购买数量", this.hourRemainingAmount);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      if (this.inputAmount > this.hourRemainingAmount) {
-        return console.log("频控检查失败，请重新输入");
-      }
-      console.log(3, "频控检查成功");
-
-      await erc20(token().USDC)
-        .balanceOf(this.getWalletAccount)
-        .then((res) => {
-          this.balanceAmount = Number(util.formatEther(res._hex));
-          console.log(4, "钱包余额", this.balanceAmount);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      if (this.totalPrice > this.balanceAmount) {
-        this.inputAmount = this.balanceAmount / this.boxPrice;
-        return console.log("余额检查失败，请重新输入");
-      }
-      console.log(4, "余额检查成功");
-
-      this.buyBoxes(this.inputAmount, this.boxType);
+    /**购买 */
+    buyBoxesBefore() {
+      // if (!this.getWalletAccount) return this.$store.commit("setWalletConnectPopup", true);
+      // if (!this.inputAmount) return this.$message({ message: this.$t("请输入购买数量") });
+      // if (this.inputAmount > this.remainingAmount) {
+      //   this.inputAmount = this.remainingAmount;
+      //   return this.$message({ message: this.$t("库存检查失败，请重新输入") });
+      // }
+      // console.log(3, "库存检查成功");
+      // if (this.totalPrice > this.balanceAmount) {
+      //   this.inputAmount = this.balanceAmount / this.boxPrice;
+      //   return this.$message({ message: this.$t("余额不足") });
+      // }
+      // console.log(4, "余额检查成功");
+      // if (this.inputAmount > this.hourRemainingAmount) {
+      //   this.inputAmount = this.hourRemainingAmount;
+      //   return this.$message({ message: this.$t("某用户某小时剩余购买数量不足") });
+      // }
+      // console.log(5, "频控检查成功");
+      // if (!this.isWhite) return this.$message({ message: this.$t("用户不在白名单中") });
+      // console.log(6, "用户在白名单中");
+      // erc20(token().USDT)
+      //   .allowance(this.getWalletAccount, token().CB)
+      //   .then((res) => {
+      //     console.log("额度", Number(res._hex));
+      //     this.isApproved = Number(res._hex) > this.totalPrice;
+      //     if (this.isApproved) {
+      //       console.log(2, "已授权");
+      //       this.buyBoxes();
+      //     } else {
+      //       this.$store.commit("setApprovePopup", true);
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.error("allowance", err);
+      //     this.isApproved = false;
+      //   });
+      this.$store.commit("setApprovePopup", true);
+    },
+    /**去授权 */
+    toApprove() {
+      this.approvedloading = true;
+      setTimeout(() => {
+        this.approvedloading = false;
+        this.isApproved = true;
+        this.popupActive = 2;
+        console.log("授权成功");
+      }, 2000);
+      // try {
+      //   const tx = await erc20(token().USDT).connect(getSigner()).approve(token().CB, util.parseUnits((1e10).toString()));
+      //   await tx.wait();
+      //   // const etReceipt = await tx.wait();
+      //   this.approvedloading = false;
+      //   this.isApproved = true;
+      //   this.popupActive = 2;
+      //   console.log("授权成功");
+      // } catch (err) {
+      //   console.error("approve", err);
+      //   this.approvedloading = false;
+      //   this.isApproved = false;
+      //   this.popupActive = 1;
+      // }
     },
     /**用户购买某种类型的盲盒 */
-    buyBoxes(amount, boxType) {
+    buyBoxes() {
+      this.buyloading = true;
+      setTimeout(() => {
+        this.buyloading = false;
+        if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
+      }, 2000);
       // buyBoxes(uint256 amount, uint256 boxType, {value: avaxAmount})
-      console.log(5, "购买", amount, boxType);
-      cb()
-        .connect(getSigner())
-        .buyBoxes(amount, boxType)
-        .then((res) => {
-          console.log(5, "购买成功", res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      // cb()
+      //   .connect(getSigner())
+      //   .buyBoxes(this.inputAmount, this.boxType)
+      //   .then((res) => {
+      //     console.log("购买成功", res);
+      //     this.buyloading = false;
+      //     if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
+      //   })
+      //   .catch((err) => {
+      //     this.buyloading = false;
+      //     console.error("buyBoxes", err);
+      //   });
     },
-    /**获取某类型的盲盒下某用户某小时剩余购买数量 入参：盲盒类型，用户钱包地址，时间戳(秒) 出参：剩余数量 */
-    getUserHourlyBoxesLeftSupply(boxType, walletAddr, timestamp) {
-      cb()
-        .getUserHourlyBoxesLeftSupply(boxType, walletAddr, timestamp)
-        .then((res) => {
-          this.hourRemainingAmount = Number(res._hex);
-          // console.log("获取某类型的盲盒下某用户某小时剩余购买数量", this.hourRemainingAmount);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
+
     /**
      * @boxesMaxSupply 获取某类型的盲盒的总销售数量 入参：盲盒类型 出参：总数量
      * @totalBoxesLength 获取某类型的盲盒的已售出数量 入参：盲盒类型 出参：已售出数量
      * @getBoxesLeftSupply 获取某类型的盲盒的剩余可销售数量 入参：盲盒类型 出参：剩余数量
      */
     async getAmount(boxType) {
+      let time1 = Date.parse(new Date());
+      let time2 = Date.parse(this.stepsArr[0].des);
+      let time3 = Date.parse(this.stepsArr[1].des);
+      let index = time1 > time2 && time1 < time3 ? 0 : 1;
+      await cb()
+        .getBoxesLeftSupply(boxType)
+        .then((res) => {
+          this.remainingAmount = Number(res._hex);
+          // this.remainingAmount = 0;
+          if (this.remainingAmount == 0) index = 2;
+          // console.log("获取某类型的盲盒的剩余可销售数量", this.remainingAmount);
+        })
+        .catch((err) => {
+          console.error("getBoxesLeftSupply", err);
+        });
+      this.nowStatusText = this.stepsArr[index].title;
+      this.nowStatusIndex = index + 1;
       await cb()
         .boxesMaxSupply(boxType)
         .then((res) => {
@@ -268,7 +314,7 @@ export default {
           // console.log("获取某类型的盲盒的总销售数量", this.totalAmount);
         })
         .catch((err) => {
-          console.log(err);
+          console.error("boxesMaxSupply", err);
         });
       await cb()
         .totalBoxesLength(boxType)
@@ -277,30 +323,9 @@ export default {
           // console.log("获取某类型的盲盒的已售出数量", this.soldAmount);
         })
         .catch((err) => {
-          console.log(err);
+          console.error("totalBoxesLength", err);
         });
-      await cb()
-        .getBoxesLeftSupply(boxType)
-        .then((res) => {
-          this.remainingAmount = Number(res._hex);
-          // this.remainingAmount = 0;
-          // console.log("获取某类型的盲盒的剩余可销售数量", this.remainingAmount);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      this.getCurrentState();
-    },
-    /**获取当前的状态 */
-    getCurrentState() {
-      let time1 = Date.parse(new Date());
-      let time2 = Date.parse(this.stepsArr[0].des);
-      let time3 = Date.parse(this.stepsArr[1].des);
-      let index = time1 > time2 && time1 < time3 ? 0 : 1;
-      if (this.remainingAmount == 0) index = 2;
-      this.nowStatusText = this.stepsArr[index].title;
-      this.nowStatusIndex = index + 1;
-      if (this.nowStatusIndex > 1) this.progressWidth = (this.soldAmount / this.totalAmount) * 100;
+      if (this.nowStatusIndex > 1) this.progressWidth = ((this.soldAmount / this.totalAmount) * 100).toFixed(0);
     },
     /**
      * @boxTokenPrices 获取某类型的盲盒的支付代币单价 入参：盲盒类型 出参：盲盒单价
@@ -315,7 +340,7 @@ export default {
           // console.log("获取某类型的盲盒的支付代币单价", this.boxPrice);
         })
         .catch((err) => {
-          console.log(err);
+          console.error("boxTokenPrices", err);
         });
       cb()
         .tokenAddrs(boxType)
@@ -324,7 +349,7 @@ export default {
           // console.log("获取某类型的盲盒的支付代币地址", this.paymentAddress);
         })
         .catch((err) => {
-          console.log(err);
+          console.error("tokenAddrs", err);
         });
       cb()
         .whiteListFlags(boxType)
@@ -333,7 +358,7 @@ export default {
           // console.log("获取某类型的盲盒是否开启白名单", this.isOpenWhitelist);
         })
         .catch((err) => {
-          console.log(err);
+          console.error("whiteListFlags", err);
         });
     },
 
@@ -346,10 +371,33 @@ export default {
           // console.log("判断某用户是否在某类型的盲盒的白名单", this.isWhite);
         })
         .catch((err) => {
-          console.log(err);
+          console.error("getWhiteListExistence", err);
         });
     },
-
+    /**获取某类型的盲盒下某用户某小时剩余购买数量 入参：盲盒类型，用户钱包地址，时间戳(秒) 出参：剩余数量 */
+    getUserHourlyBoxesLeftSupply(boxType, walletAddr, timestamp) {
+      cb()
+        .getUserHourlyBoxesLeftSupply(boxType, walletAddr, timestamp)
+        .then((res) => {
+          this.hourRemainingAmount = Number(res._hex);
+          // console.log("某用户某小时剩余购买数量", this.hourRemainingAmount);
+        })
+        .catch((err) => {
+          console.error("getUserHourlyBoxesLeftSupply", err);
+        });
+    },
+    /**钱包余额 */
+    getBalanceOf() {
+      erc20(token().USDT)
+        .balanceOf(this.getWalletAccount)
+        .then((res) => {
+          this.balanceAmount = Number(util.formatEther(res._hex));
+          // console.log("钱包余额", this.balanceAmount);
+        })
+        .catch((err) => {
+          console.error("erc20(token().USDC).balanceOf", err);
+        });
+    },
     /**返回该类型盲盒某角色的出现概率，除1e4*100% 入参：盲盒类型，角色ID 出参：概率 */
     // heroProbabilities() {},
     /**获取某ID的盲盒的类型 入参：盲盒ID 出参：盲盒类型 */

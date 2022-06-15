@@ -256,6 +256,9 @@ pre {
     background-color: #080809;
     border-color: #7a7a7b;
   }
+  &.is-loading:before {
+    background-color: transparent;
+  }
 }
 
 .el-button--primary {

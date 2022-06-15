@@ -11,7 +11,7 @@
     <img class="absolute7" :src="`${$urlImages}absolute2.webp`" alt="" />
     <img class="absolute8" :src="`${$urlImages}absolute2.webp`" alt="" />
     <img class="absolute9" :src="`${$urlImages}absolute9.webp`" alt="" />
-    <img class="absolute10" :src="`${$urlImages}absolute10.webp`" alt="" />
+    <img class="absolute10" :src="`${$urlImages}absolute6.webp`" alt="" />
     <img class="absolute11" :src="`${$urlImages}absolute11.webp`" alt="" />
     <img class="absolute12" :src="`${$urlImages}absolute2.webp`" alt="" />
     <img class="absolute13" :src="`${$urlImages}absolute13.webp`" alt="" />
@@ -39,6 +39,7 @@
       </ul>
       <img class="banner_img" :src="`${$urlImages}img1.webp`" alt="" />
     </div>
+    <!-- ARTIST -->
     <div class="box2">
       <div class="box_content">
         <ul class="card_list1">
@@ -49,17 +50,17 @@
         </ul>
         <img class="img_bg3" :src="`${$urlImages}img3.webp`" alt="" />
         <ul class="card_list2">
-          <li v-for="(item, index) in cardList2" :key="index">
+          <li v-for="(item, index) in cardList2" :key="index" @click="toArtistPage(item.id)">
             <div class="box_border1">
               <div class="box_border2">
                 <div class="box_border1">
                   <div class="box_border2">
                     <div class="box_item">
-                      {{ $t(item.text) }}
+                      <pre class="text_ellipsis_row_5">{{ $t(item.des) }}</pre>
                     </div>
                     <div class="box_top">
-                      <img :src="item.image" alt="" />
-                      <span>{{ $t(item.name) }}</span>
+                      <img :src="item.avatar2" alt="" />
+                      <span>{{ item.name }}</span>
                     </div>
                   </div>
                 </div>
@@ -208,6 +209,8 @@
 </template>
 
 <script>
+import { nftworks } from "../../mock/nftworks";
+
 export default {
   name: "HOME",
   data() {
@@ -217,28 +220,8 @@ export default {
         { text1: "message.home.list1[1].text1", text2: "message.home.list1[1].text2" },
         { text1: "message.home.list1[2].text1", text2: "message.home.list1[2].text2" },
       ],
-      cardList2: [
-        {
-          image: this.$urlImages + "card_img1.webp",
-          name: "message.home.list2[0].text1",
-          text: "message.home.list2[0].text2",
-        },
-        {
-          image: this.$urlImages + "card_img4.webp",
-          name: "message.home.list2[1].text1",
-          text: "message.home.list2[1].text2",
-        },
-        {
-          image: this.$urlImages + "card_img2.webp",
-          name: "message.home.list2[2].text1",
-          text: "message.home.list2[2].text2",
-        },
-        {
-          image: this.$urlImages + "card_img3.webp",
-          name: "message.home.list2[3].text1",
-          text: "message.home.list2[3].text2",
-        },
-      ],
+      cardList2: nftworks,
+
       cardList3: [
         {
           text1: "message.home.list3[0].text1",
@@ -333,29 +316,6 @@ export default {
       ],
     };
   },
-  // created() {},
-  // mounted() {
-  //   setTimeout(() => {
-  //     this.cardList6 = [
-  //       this.$urlImages + "collaborators1.webp",
-  //       this.$urlImages + "collaborators2.webp",
-  //       this.$urlImages + "collaborators3.webp",
-  //       this.$urlImages + "collaborators4.webp",
-  //       this.$urlImages + "collaborators5.webp",
-  //       this.$urlImages + "collaborators6.webp",
-  //       this.$urlImages + "collaborators7.webp",
-  //       this.$urlImages + "collaborators8.webp",
-  //       this.$urlImages + "collaborators9.webp",
-  //       this.$urlImages + "collaborators10.webp",
-  //       this.$urlImages + "collaborators11.webp",
-  //       this.$urlImages + "collaborators12.webp",
-  //       this.$urlImages + "collaborators13.webp",
-  //       this.$urlImages + "collaborators14.webp",
-  //       this.$urlImages + "collaborators15.webp",
-  //       this.$urlImages + "collaborators16.webp",
-  //     ];
-  //   }, 500);
-  // },
   methods: {
     submitInfo(index) {
       switch (index) {
@@ -368,6 +328,9 @@ export default {
         default:
           break;
       }
+    },
+    toArtistPage(id) {
+      this.$router.push({ path: "artist-details", query: { id: id } });
     },
   },
 };
@@ -661,6 +624,7 @@ export default {
       width: 2.7rem;
       height: 1.8rem;
       position: relative;
+      cursor: pointer;
       .box_border1 {
         background-image: linear-gradient(
           to right bottom,
@@ -694,11 +658,8 @@ export default {
         height: 100%;
         font-size: 0.12rem;
         font-weight: 600;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 0.2rem;
-        transition: all 1s;
+        padding: 0.3rem 0.2rem;
+        transition: all 0.3s;
       }
       .box_top {
         display: flex;
@@ -714,6 +675,7 @@ export default {
           font-size: 0.2rem;
           font-weight: bold;
           color: #00fdff;
+          margin-left: 0.1rem;
           margin-bottom: 0.2rem;
         }
       }

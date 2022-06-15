@@ -30,6 +30,23 @@ body {
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
 }
+.text_ellipsis_row_4 {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+.text_ellipsis_row_5 {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
 // 公用样式
 .box_title {
   margin-bottom: 1rem;

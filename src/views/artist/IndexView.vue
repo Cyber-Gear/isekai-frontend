@@ -14,7 +14,7 @@
             <span>{{ $t("message.artist.text2") }} </span>
             <span> {{ item.name }}</span>
           </div>
-          <div>
+          <div class="text_ellipsis_row_4">
             <pre>{{ $t(item.des) }}</pre>
           </div>
         </div>
@@ -30,11 +30,8 @@ export default {
   name: "ARTIST",
   data() {
     return {
-      cardList: [],
+      cardList: nftworks,
     };
-  },
-  created() {
-    this.cardList = nftworks;
   },
   methods: {
     toDetail(id) {
@@ -134,12 +131,6 @@ export default {
           margin-top: 0.2rem;
           font-size: 0.12rem;
           text-align: left;
-          width: 100%;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          -webkit-line-clamp: 4;
-          -webkit-box-orient: vertical;
         }
       }
     }

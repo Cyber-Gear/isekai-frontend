@@ -45,12 +45,15 @@
               <div>{{ $t("message.artist.items[3]") }}</div>
             </div>
           </li>
-          <li :class="{ hidden: !isShowIntroduce }">
+          <li>
+            <pre>{{ $t(detail.des) }}</pre>
+          </li>
+          <!-- <li :class="{ hidden: !isShowIntroduce }">
             <pre>{{ $t(detail.des) }}</pre>
           </li>
           <li @click="isShowIntroduce = !isShowIntroduce" :class="{ active: isShowIntroduce }">
             <i class="iconfont icon-arrow-up"></i>
-          </li>
+          </li> -->
         </ul>
       </div>
       <div class="box3">

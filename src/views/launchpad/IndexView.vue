@@ -559,6 +559,7 @@ export default {
     border: 1px solid #436e77;
     backdrop-filter: blur(0.07rem);
     margin-bottom: 0.4rem;
+    overflow: hidden;
     &:last-child {
       margin-bottom: 0;
     }

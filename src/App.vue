@@ -5,6 +5,7 @@
       <div id="container_view">
         <router-view />
       </div>
+      <el-backtop :right="100" :bottom="200"></el-backtop>
       <FooterLayout />
     </div>
     <WalletListPopup></WalletListPopup>

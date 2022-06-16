@@ -14,7 +14,7 @@ import VueAwesomeSwiper from "vue-awesome-swiper";
 import "swiper/dist/css/swiper.css";
 Vue.use(VueAwesomeSwiper);
 
-import { Icon, Button, Message, Steps, Step, Dialog, Collapse, CollapseItem, Tag, Select, Option, Tooltip } from "element-ui";
+import { Icon, Button, Message, Steps, Step, Dialog, Collapse, CollapseItem, Tag, Select, Option, Tooltip,Backtop } from "element-ui";
 Vue.use(Icon);
 Vue.use(Button);
 Vue.use(Steps);
@@ -26,6 +26,7 @@ Vue.use(Tag);
 Vue.use(Select);
 Vue.use(Option);
 Vue.use(Tooltip);
+Vue.use(Backtop);
 
 Vue.prototype.$message = (option: any) => {
   option.offset = 100;

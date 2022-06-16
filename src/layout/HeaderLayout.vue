@@ -75,9 +75,9 @@ export default {
     },
     selectLang(item) {
       if (this.$i18n.locale == item) return (this.showLangSelect = false);
-      this.showLangSelect = false;
-      this.$i18n.locale = item;
-      this.$utils.setCookie("LANG", this.$i18n.locale);
+      // this.showLangSelect = false;
+      // this.$i18n.locale = item;
+      this.$utils.setCookie("LANG", item);
       location.reload();
     },
     openWalletPopup() {

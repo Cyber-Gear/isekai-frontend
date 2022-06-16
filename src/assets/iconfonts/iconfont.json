@@ -223,6 +223,20 @@
       "unicode_decimal": 60408
     },
     {
+      "icon_id": "504564",
+      "name": "查看",
+      "font_class": "chakan1",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "975636",
+      "name": "勾",
+      "font_class": "gou",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
       "icon_id": "1166549",
       "name": "减号",
       "font_class": "jianhao",
@@ -237,11 +251,25 @@
       "unicode_decimal": 58933
     },
     {
-      "icon_id": "9066652",
-      "name": "home",
-      "font_class": "home",
-      "unicode": "e88b",
-      "unicode_decimal": 59531
+      "icon_id": "5387651",
+      "name": "分享",
+      "font_class": "fenxiang",
+      "unicode": "eb24",
+      "unicode_decimal": 60196
+    },
+    {
+      "icon_id": "9839877",
+      "name": "微官网-01",
+      "font_class": "weiguanwang-",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "10139425",
+      "name": "授权",
+      "font_class": "shouquan",
+      "unicode": "e603",
+      "unicode_decimal": 58883
     },
     {
       "icon_id": "11372704",
@@ -281,7 +309,7 @@
     {
       "icon_id": "11674090",
       "name": "home",
-      "font_class": "home1",
+      "font_class": "home",
       "unicode": "e7a7",
       "unicode_decimal": 59303
     },
@@ -305,6 +333,20 @@
       "font_class": "boxhezi",
       "unicode": "e6d3",
       "unicode_decimal": 59091
+    },
+    {
+      "icon_id": "24847119",
+      "name": "社群",
+      "font_class": "shequn",
+      "unicode": "e67a",
+      "unicode_decimal": 59002
+    },
+    {
+      "icon_id": "29574862",
+      "name": "查看",
+      "font_class": "chakan2",
+      "unicode": "e6bd",
+      "unicode_decimal": 59069
     }
   ]
 }

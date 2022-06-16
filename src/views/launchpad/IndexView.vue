@@ -37,10 +37,26 @@
           <div class="title">
             <div><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("message.launchpad.text6") }}</div>
             <ul>
-              <li>{{ $t("message.launchpad.text7") }}</li>
-              <li>{{ $t("message.launchpad.text8") }}</li>
-              <li>{{ $t("message.launchpad.text9") }}</li>
-              <li>{{ $t("message.launchpad.text10") }}</li>
+              <li>
+                <el-tooltip class="item" effect="dark" :content="$t('message.launchpad.text7')" placement="top">
+                  <div><i class="iconfont icon-chakan2"></i></div>
+                </el-tooltip>
+              </li>
+              <li>
+                <el-tooltip class="item" effect="dark" :content="$t('message.launchpad.text8')" placement="top">
+                  <div><i class="iconfont icon-fenxiang"></i></div>
+                </el-tooltip>
+              </li>
+              <li>
+                <el-tooltip class="item" effect="dark" :content="$t('message.launchpad.text9')" placement="top">
+                  <div><i class="iconfont icon-shequn"></i></div>
+                </el-tooltip>
+              </li>
+              <li>
+                <el-tooltip class="item" effect="dark" :content="$t('message.launchpad.text10')" placement="top">
+                  <div><i class="iconfont icon-weiguanwang-"></i></div>
+                </el-tooltip>
+              </li>
             </ul>
           </div>
           <div class="box2">
@@ -567,19 +583,27 @@ export default {
         display: flex;
         align-items: center;
         li {
-          width: fit-content;
-          height: 0.2rem;
-          line-height: 0.2rem;
+          width: 0.5rem;
+          height: 0.25rem;
+          line-height: 0.25rem;
           margin-left: 0.1rem;
           padding: 0 0.05rem;
           background: #535363;
           border-radius: 0.08rem;
-          font-size: 0.12rem;
-          font-weight: 400;
-          text-align: center;
           cursor: pointer;
           &:hover {
             background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
+          }
+          div {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            i {
+              font-size: 0.15rem;
+              font-weight: 400;
+            }
           }
         }
       }

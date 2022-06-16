@@ -362,9 +362,11 @@ pre {
   }
 }
 
-.el-backtop,
-.el-backtop:hover {
+.el-backtop {
   background: rgba(129, 129, 151, 0.19);
+  &:hover {
+    background: linear-gradient(90deg, #44819d 0%, #7a649e 100%);
+  }
   i {
     color: #ffffff;
   }

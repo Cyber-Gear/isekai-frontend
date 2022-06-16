@@ -78,7 +78,7 @@ export default {
       this.showLangSelect = false;
       this.$i18n.locale = item;
       this.$utils.setCookie("LANG", this.$i18n.locale);
-      // location.reload();
+      location.reload();
     },
     openWalletPopup() {
       this.$store.commit("setWalletListPopup", true);

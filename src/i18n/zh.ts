@@ -251,20 +251,19 @@ export const message = {
     text38: "收起",
     text39: "什么都没有",
   },
-  // 以下暂无页面
   launchpad: {
     text1: "当前项目",
     text2: "品类",
-    text3: "总共售出的数量",
+    text3: "剩余",
     text4: "每个NFT的价格",
-    text5: "每个账号限购",
+    text5: "每小时限购数量",
     text6: "神秘盒子 NFT",
     text7: "查看",
     text8: "分享",
     text9: "社群",
     text10: "官网",
     text11: "个",
-    text12: "购买阶段结束于",
+    text12: "发售倒计时",
     text13: "天",
     text14: "时",
     text15: "分",
@@ -275,7 +274,7 @@ export const message = {
     text20: "已售罄",
     text21: "进度",
     text22: "机甲少女介绍",
-    text23: "去授权",
+    text23: "授权",
     introduction1: `在游戏上线之前，玩家可以在市场上购买有限的神秘盒子。从神秘盒子中，不仅可以打开 MechaGirl NFT，还可以打开 2 个 MechaGirl 碎片。`,
     introduction2: `
     Cyber​​gear（机甲少女）是一款社区驱动的二次元宇宙、二次元赛博朋克风格、融合SRPG玩法的GameFi产品。
@@ -296,6 +295,12 @@ export const message = {
     text5: "连接钱包",
     text6: "通过连接您的钱包，您同意",
   },
+  approvePopup: {
+    text1: "购买",
+    text2: "授权",
+    text3: "第一步",
+    text4: "第二步",
+  },
   status: {
     text1: "已上架",
     text2: "开始发售",
@@ -306,6 +311,8 @@ export const message = {
     text7: "活跃",
     text8: "待开始",
     text9: "已关闭",
+    text10: "进行中",
+    text11: "完成",
   },
   tips: {
     text1: "敬请期待",
@@ -313,6 +320,12 @@ export const message = {
     text3: "连接成功",
     text4: "连接网络错误，请切换至正确网络",
     text5: "请选择一个投票",
+    text6: "请输入购买数量",
+    text7: "库存检查失败，请重新输入",
+    text8: "余额不足",
+    text9: "某用户某小时剩余购买数量不足",
+    text10: "用户不在白名单中",
+    text11: "购买成功",
   },
   btns: {
     text1: "返回",
@@ -326,6 +339,7 @@ export const message = {
     minute: "分钟",
   },
 };
+// 以下暂无页面
 // 挂单页
 // 挂单
 // Pending Order

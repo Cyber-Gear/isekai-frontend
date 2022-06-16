@@ -8,7 +8,7 @@
         </div>
         <div class="info">
           <div>
-            <span>剩余</span>
+            <span>{{ $t("message.launchpad.text3") }}</span>
             <span>{{ remainingAmount }} {{ $t("message.launchpad.text11") }}</span>
           </div>
           <div>
@@ -16,7 +16,7 @@
           </div>
           <div>
             <span>{{ $t("message.launchpad.text5") }}</span>
-            <span>{{ 0 }} {{ $t("message.launchpad.text11") }}</span>
+            <span>{{ hourlyBuyAmount }} {{ $t("message.launchpad.text11") }}</span>
           </div>
         </div>
       </div>
@@ -50,26 +50,26 @@
             <div class="row">
               <div class="hasbeenon" v-if="nowStatusIndex == 1">
                 <div class="buying">
-                  <span>发售倒计时</span>
+                  <span>{{ $t("message.launchpad.text12") }}</span>
                 </div>
                 <div class="times">
                   <div>
-                    <p>05</p>
+                    <p>{{ countdownObj.d }}</p>
                     <p>{{ $t("message.launchpad.text13") }}</p>
                   </div>
                   <span>:</span>
                   <div>
-                    <p>05</p>
+                    <p>{{ countdownObj.h }}</p>
                     <p>{{ $t("message.launchpad.text14") }}</p>
                   </div>
                   <span>:</span>
                   <div>
-                    <p>05</p>
+                    <p>{{ countdownObj.m }}</p>
                     <p>{{ $t("message.launchpad.text15") }}</p>
                   </div>
                   <span>:</span>
                   <div>
-                    <p>05</p>
+                    <p>{{ countdownObj.s }}</p>
                     <p>{{ $t("message.launchpad.text16") }}</p>
                   </div>
                 </div>
@@ -133,6 +133,7 @@ export default {
       hourRemainingAmount: 0,
 
       boxPrice: 0,
+      hourlyBuyAmount: 0,
       paymentAddress: "",
       isOpenWhitelist: false,
       isWhite: true,
@@ -144,6 +145,8 @@ export default {
         { title: "message.status.text2", des: "2022/06/14 15:00" },
         { title: "message.status.text3", des: "" },
       ],
+      countdownObj: { d: 0, h: 0, m: 0, s: 0 },
+      countdownTimer: null,
       nowStatusText: "message.status.text1",
       nowStatusIndex: 0,
       progressWidth: 0,
@@ -183,6 +186,10 @@ export default {
   created() {
     this.getAmount(this.boxType);
     this.getPriceAddrs(this.boxType);
+  },
+  beforeDestroy() {
+    clearTimeout(this.countdownTimer);
+    this.countdownTimer = null;
   },
   methods: {
     subtraction() {
@@ -282,10 +289,10 @@ export default {
      * @getBoxesLeftSupply 获取某类型的盲盒的剩余可销售数量 入参：盲盒类型 出参：剩余数量
      */
     async getAmount(boxType) {
-      let time1 = Date.parse(new Date());
-      let time2 = Date.parse(this.stepsArr[0].des);
-      let time3 = Date.parse(this.stepsArr[1].des);
-      let index = time1 > time2 && time1 < time3 ? 0 : 1;
+      let now = Date.parse(new Date());
+      let time1 = Date.parse(this.stepsArr[0].des);
+      let time2 = Date.parse(this.stepsArr[1].des);
+      let index = now > time1 && now < time2 ? 0 : 1;
       await cb()
         .getBoxesLeftSupply(boxType)
         .then((res) => {
@@ -317,12 +324,41 @@ export default {
         .catch((err) => {
           console.error("totalBoxesLength", err);
         });
-      if (this.nowStatusIndex > 1) this.progressWidth = ((this.soldAmount / this.totalAmount) * 100).toFixed(0);
+      if (this.nowStatusIndex == 1) {
+        this.countdownFun(time2);
+      } else {
+        this.progressWidth = ((this.soldAmount / this.totalAmount) * 100).toFixed(0);
+      }
+    },
+    /**开售倒计时 */
+    countdownFun(end) {
+      const msec = end - Date.parse(new Date());
+      if (msec < 0) return;
+      let d = parseInt(msec / 1000 / 60 / 60 / 24);
+      let h = parseInt((msec / 1000 / 60 / 60) % 24);
+      let m = parseInt((msec / 1000 / 60) % 60);
+      let s = parseInt((msec / 1000) % 60);
+      this.countdownObj.d = d > 9 ? d : "0" + d;
+      this.countdownObj.h = h > 9 ? h : "0" + h;
+      this.countdownObj.m = m > 9 ? m : "0" + m;
+      this.countdownObj.s = s > 9 ? s : "0" + s;
+      // console.log("开售倒计时", this.countdownObj.s);
+      if (d >= 0 && h >= 0 && m >= 0 && s >= 0) {
+        if (d == 0 && h == 0 && m == 0 && s == 0) {
+          clearTimeout(this.countdownTimer);
+          this.countdownTimer = null;
+        } else {
+          this.countdownTimer = setTimeout(() => {
+            this.countdownFun(end);
+          }, 1000);
+        }
+      }
     },
     /**
      * @boxTokenPrices 获取某类型的盲盒的支付代币单价 入参：盲盒类型 出参：盲盒单价
      * @tokenAddrs 获取某类型的盲盒的支付代币地址 入参：盲盒类型 出参：支付代币地址
      * @whiteListFlags 获取某类型的盲盒是否开启白名单 入参：盲盒类型 出参：开启状态
+     * @hourlyBuyLimits 每小时限购数量 入参：盲盒类型 出参：每小时限购数量
      */
     getPriceAddrs(boxType) {
       cb()
@@ -352,8 +388,16 @@ export default {
         .catch((err) => {
           console.error("whiteListFlags", err);
         });
+      cb()
+        .hourlyBuyLimits(this.boxType)
+        .then((res) => {
+          this.hourlyBuyAmount = Number(res._hex);
+          // console.log("每小时限购数量", res, Number(res._hex));
+        })
+        .catch((err) => {
+          console.error("hourlyBuyLimits", err);
+        });
     },
-
     /**判断某用户是否在某类型的盲盒的白名单 入参：盲盒类型，用户钱包地址 出参：是否在白名单 */
     getWhiteListExistence() {
       cb()

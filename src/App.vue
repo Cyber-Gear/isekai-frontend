@@ -35,7 +35,7 @@ export default {
     });
     this.$utils.addEventListenerFun();
   },
-  destroyed() {
+  beforeDestroy() {
     window.removeEventListener("load", this.resetRem());
     window.removeEventListener("resize", this.resetRem());
   },

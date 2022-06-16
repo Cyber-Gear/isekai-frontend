@@ -257,9 +257,12 @@ export default {
           this.$message({ message: this.$t("购买成功") });
           this.buyloading = false;
           if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
-          this.getAmount();
-          this.getUserHourlyBoxesLeftSupply();
-          this.getBalanceOf();
+          setTimeout(() => {
+            location.reload();
+          }, 1000);
+          // this.getAmount();
+          // this.getUserHourlyBoxesLeftSupply();
+          // this.getBalanceOf();
         })
         .catch((err) => {
           this.buyloading = false;

@@ -44,8 +44,10 @@
       <div class="box_content">
         <ul class="card_list1">
           <li v-for="(item, index) in cardList1" :key="index" @click="submitInfo(index)">
-            <p>{{ $t(item.text1) }}</p>
-            <div>{{ $t(item.text2) }}</div>
+            <div>
+              <p>{{ $t(item.text1) }}</p>
+              <p>{{ $t(item.text2) }}</p>
+            </div>
           </li>
         </ul>
         <img class="img_bg3" :src="`${$urlImages}img3.webp`" alt="" />
@@ -582,30 +584,30 @@ export default {
       width: 3.2rem;
       height: 1.4rem;
       background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
-      border: 0.01rem solid;
-      border-image: linear-gradient(320deg, rgba(219, 98, 255, 1), rgba(136, 253, 238, 0)) 1 1;
       position: relative;
-      p {
-        text-align: center;
-        font-size: 0.2rem;
-        font-weight: 600;
-        color: #000000;
-        line-height: 0.5rem;
+      transition: all 0.3s;
+      opacity: 0.8;
+      border-radius: 0.05rem;
+      &:hover {
+        opacity: 1;
+        transform: scale(1.1);
       }
       div {
-        width: 3.5rem;
-        height: 1.4rem;
-        font-size: 0.12rem;
-        font-weight: bold;
-        position: absolute;
-        top: 0.3rem;
-        right: 0.05rem;
-        background: url($urlImages + "img2.webp") no-repeat;
-        background-size: 100% 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 0.5rem;
+        padding: 0 0.2rem;
+        p {
+          &:nth-child(1) {
+            height: 0.6rem;
+            line-height: 0.6rem;
+            text-align: center;
+            font-size: 0.2rem;
+            font-weight: bold;
+            color: #000000;
+          }
+          &:nth-child(2) {
+            font-size: 0.12rem;
+            font-weight: bold;
+          }
+        }
       }
     }
   }
@@ -997,5 +999,11 @@ export default {
       }
     }
   }
+}
+@media screen and (min-width: 981px){
+  
+}
+@media screen and (max-width: 980px) {
+
 }
 </style>

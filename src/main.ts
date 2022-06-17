@@ -14,7 +14,7 @@ import VueAwesomeSwiper from "vue-awesome-swiper";
 import "swiper/dist/css/swiper.css";
 Vue.use(VueAwesomeSwiper);
 
-import { Icon, Button, Message, Steps, Step, Dialog, Collapse, CollapseItem, Tag, Select, Option, Tooltip,Backtop } from "element-ui";
+import { Icon, Button, Message, Steps, Step, Dialog, Collapse, CollapseItem, Tag, Select, Option, Tooltip, Backtop } from "element-ui";
 Vue.use(Icon);
 Vue.use(Button);
 Vue.use(Steps);
@@ -42,6 +42,7 @@ const isProd = process.env.NODE_ENV == "production";
 const cdn = isProd ? "//cdn.funtopia.io/funtopia_assets_main/" : "//cdn.funtopia.io/funtopia_assets_test/";
 Vue.prototype.$urlImages = cdn + "images/";
 Vue.prototype.$urlVideos = cdn + "videos/";
+Vue.prototype.$urlNfts = "//cdn.funtopia.io/nfts/";
 
 import filters from "./utils/filters";
 // Vue.filter("ellipsisWallet", filters["ellipsisWallet"]);

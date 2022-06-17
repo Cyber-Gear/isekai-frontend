@@ -2,33 +2,35 @@
   <div class="nav">
     <div class="nav_inset">
       <img class="logo" :src="`${$urlImages}logo1.webp`" alt="" />
-      <ul class="menu">
+      <ul class="menu pc">
         <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item)">
           <span>{{ $t(item.label) }}</span>
         </li>
       </ul>
-      <div class="connect" @mouseover="showDisconnectFun" @mouseleave="hiddenDisconnectFun">
-        <span v-if="getWalletAccount">
-          {{ getWalletAccount | ellipsisWallet }}
-        </span>
-        <span v-else @click="openWalletPopup">{{ $t("message.nav.text6") }}</span>
-        <transition name="showDisconnect" appear>
-          <div v-show="showDisconnect" class="disconnect" @click="clickDisconnect">
-            <span>{{ $t("message.nav.text7") }}</span>
-            <i class="iconfont icon-block"></i>
-          </div>
-        </transition>
-      </div>
-      <div class="lang_box" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
-        <span>{{ $i18n.locale.toUpperCase() }}</span>
-        <img class="angle" :src="`${$urlImages}angle.webp`" alt="" />
-        <transition name="showLangSelect" appear>
-          <ul v-show="showLangSelect">
-            <li v-for="(item, index) in langArr" :key="index" @click="selectLang(item)">
-              <span> {{ item.toUpperCase() }}</span>
-            </li>
-          </ul>
-        </transition>
+      <div class="connect_lang">
+        <div class="connect" @mouseover="showDisconnectFun" @mouseleave="hiddenDisconnectFun">
+          <span v-if="getWalletAccount">
+            {{ getWalletAccount | ellipsisWallet }}
+          </span>
+          <span v-else @click="openWalletPopup">{{ $t("message.nav.text6") }}</span>
+          <transition name="showDisconnect" appear>
+            <div v-show="showDisconnect" class="disconnect" @click="clickDisconnect">
+              <span>{{ $t("message.nav.text7") }}</span>
+              <i class="iconfont icon-block"></i>
+            </div>
+          </transition>
+        </div>
+        <div class="lang_box" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
+          <span>{{ $i18n.locale.toUpperCase() }}</span>
+          <img class="angle" :src="`${$urlImages}angle.webp`" alt="" />
+          <transition name="showLangSelect" appear>
+            <ul v-show="showLangSelect">
+              <li v-for="(item, index) in langArr" :key="index" @click="selectLang(item)">
+                <span> {{ item.toUpperCase() }}</span>
+              </li>
+            </ul>
+          </transition>
+        </div>
       </div>
     </div>
   </div>
@@ -108,7 +110,6 @@ export default {
   transition: all 0.5s;
   border-bottom: 1px solid #29a7e1;
   .nav_inset {
-    // max-width: 14.4rem;
     width: 100%;
     height: 100%;
     margin: 0 auto;
@@ -145,63 +146,63 @@ export default {
         }
       }
     }
-    .connect {
-      cursor: pointer;
-      width: 1.2rem;
-      height: 0.3rem;
+    .connect_lang {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 0.12rem;
-      font-weight: 400;
-      padding: 0.05rem 0;
-      background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
-      border-radius: 0.03rem;
-      position: relative;
-      span {
-        // z-index: 1;
-      }
-      .disconnect {
-        width: 100%;
-        height: 100%;
+      .connect {
+        cursor: pointer;
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: center;
+        font-size: 0.15rem;
+        font-weight: 400;
+        padding: 0.05rem 0.1rem;
         background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
         border-radius: 0.03rem;
-        position: absolute;
-        top: 110%;
-        transition: transform 0.3s;
-        transform-origin: top center;
+        position: relative;
+        .disconnect {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
+          border-radius: 0.03rem;
+          position: absolute;
+          top: 110%;
+          transition: transform 0.3s;
+          transform-origin: top center;
+        }
       }
-    }
-    .lang_box {
-      cursor: pointer;
-      padding: 0.05rem 0.1rem;
-      background: url($urlImages + "btn_bg2.webp") no-repeat;
-      background-size: 100% 100%;
-      position: relative;
-      display: flex;
-      align-items: center;
-      font-size: 0.14rem;
-      img {
-        width: 0.2rem;
-        height: auto;
-      }
-      ul {
-        width: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        text-align: center;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        z-index: 99;
-        transition: transform 0.3s;
-        transform-origin: top center;
-        li {
-          padding: 0.1rem 0;
-          &:hover {
-            background: #000;
+      .lang_box {
+        cursor: pointer;
+        padding: 0.05rem 0.1rem;
+        background: url($urlImages + "btn_bg2.webp") no-repeat;
+        background-size: 100% 100%;
+        position: relative;
+        margin-left: 0.2rem;
+        display: flex;
+        align-items: center;
+        font-size: 0.14rem;
+        img {
+          width: 0.2rem;
+          height: auto;
+        }
+        ul {
+          width: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          text-align: center;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          z-index: 99;
+          transition: transform 0.3s;
+          transform-origin: top center;
+          li {
+            padding: 0.1rem 0;
+            &:hover {
+              background: #000;
+            }
           }
         }
       }
@@ -219,6 +220,68 @@ export default {
   .showDisconnect-enter-to,
   .showDisconnect-leave {
     transform: scaleY(1);
+  }
+}
+// @media screen and (min-width: 981px) {
+// }
+// @media screen and (max-width: 980px) {
+//   .pc {
+//     display: none !important;
+//   }
+//   .nav {
+//     height: 0.45rem;
+//     .nav_inset {
+//       .logo {
+//         width: 0.28rem;
+//       }
+//       .connect_lang {
+//         .connect {
+//           padding: 0.02rem 0.1rem;
+//         }
+//         .lang_box {
+//           padding: 0.02rem 0.1rem;
+//           margin-left: 0.1rem;
+//           img {
+//             width: 0.2rem;
+//           }
+//           ul {
+//             li {
+//               padding: 0.05rem 0;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+@media screen and (max-width: 980px) {
+  .pc {
+    display: none !important;
+  }
+  .nav {
+    height: 1rem;
+    .nav_inset {
+      .logo {
+        width: 0.28rem;
+      }
+      .connect_lang {
+        .connect {
+          padding: 0.02rem 0.1rem;
+        }
+        .lang_box {
+          padding: 0.02rem 0.1rem;
+          margin-left: 0.1rem;
+          img {
+            width: 0.2rem;
+          }
+          ul {
+            li {
+              padding: 0.05rem 0;
+            }
+          }
+        }
+      }
+    }
   }
 }
 </style>

@@ -44,12 +44,18 @@ export default {
     resetRem() {
       const clientWidth = document.body.clientWidth;
       let rem = 0;
-      if (clientWidth > 1440) {
-        // rem = (1440 * 100) / 1440;
+      if (clientWidth >= 1440) {
         rem = 100;
-      } else if (clientWidth <= 1440) {
+      } else {
         rem = (clientWidth * 100) / 1440;
       }
+      // if (clientWidth >= 1440) {
+      //   rem = 100;
+      // } else if (clientWidth > 980 && clientWidth < 1440) {
+      //   rem = (clientWidth * 100) / 1440;
+      // } else if (clientWidth <= 980) {
+      //   rem = (clientWidth * 100) / 375;
+      // }
       document.getElementsByTagName("html")[0].style.fontSize = rem + "px";
     },
     handleScrollScroll(e) {

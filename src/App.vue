@@ -1,13 +1,13 @@
 <template>
-  <div id="container" :class="isEnLang ? 'fontfamily_en' : 'fontfamily_zh'" @scroll="handleScrollScroll($event)">
+  <div id="container" :class="isEnLang ? 'fontfamily_en' : 'fontfamily_zh'">
     <HeaderLayout />
     <div id="container_body">
       <div id="container_view">
         <router-view />
       </div>
-      <el-backtop :right="100" :bottom="200"></el-backtop>
       <FooterLayout />
     </div>
+    <el-backtop></el-backtop>
     <WalletListPopup></WalletListPopup>
     <WalletConnectPopup></WalletConnectPopup>
   </div>
@@ -23,9 +23,7 @@ export default {
   components: { HeaderLayout, FooterLayout, WalletListPopup, WalletConnectPopup },
   computed: { ...mapGetters(["isEnLang"]) },
   data() {
-    return {
-      showToTop: false,
-    };
+    return {};
   },
   mounted() {
     window.addEventListener("load", () => {
@@ -51,16 +49,13 @@ export default {
       }
       // if (clientWidth >= 1440) {
       //   rem = 100;
-      // } else if (clientWidth > 980 && clientWidth < 1440) {
+      // } else if (clientWidth > 750 && clientWidth < 1440) {
       //   rem = (clientWidth * 100) / 1440;
-      // } else if (clientWidth <= 980) {
+      // } else if (clientWidth <= 750) {
       //   rem = (clientWidth * 100) / 375;
       // }
+      console.log(rem);
       document.getElementsByTagName("html")[0].style.fontSize = rem + "px";
-    },
-    handleScrollScroll(e) {
-      this.showToTop = e.srcElement.scrollTop > 900;
-      // console.log(this.showToTop);
     },
   },
 };
@@ -69,7 +64,7 @@ export default {
 <style lang="scss">
 #container {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   position: relative;
   color: #ffffff;
   background: #16161a;
@@ -77,9 +72,23 @@ export default {
 }
 #container_body {
   width: 100%;
+  height: 100%;
   #container_view {
     width: 100%;
     min-height: calc(100vh - 4rem);
+  }
+}
+@media screen and (max-width: 750px) {
+  #container {
+    height: calc(100vh - 3rem);
+  }
+  #container_body {
+    width: 100%;
+    height: 100%;
+    #container_view {
+      width: 100%;
+      min-height: calc(100vh - 4rem - 3rem);
+    }
   }
 }
 </style>

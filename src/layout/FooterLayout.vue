@@ -1,16 +1,18 @@
 <template>
   <div class="footer_box">
     <img :src="`${$urlImages}footer_bg1.webp`" alt="" />
-    <div class="center">
-      <img :src="`${$urlImages}logo2.webp`" alt="" />
-      <div>
-        <img :src="`${$urlImages}contact1.webp`" alt="" />
-        <img :src="`${$urlImages}contact2.webp`" alt="" />
-        <img :src="`${$urlImages}contact3.webp`" alt="" />
-        <img :src="`${$urlImages}contact4.webp`" alt="" />
+    <div class="right">
+      <div class="top">
+        <img :src="`${$urlImages}logo2.webp`" alt="" />
+        <div>
+          <img :src="`${$urlImages}contact1.webp`" alt="" />
+          <img :src="`${$urlImages}contact2.webp`" alt="" />
+          <img :src="`${$urlImages}contact3.webp`" alt="" />
+          <img :src="`${$urlImages}contact4.webp`" alt="" />
+        </div>
       </div>
+      <p>{{ $t("message.footer.text1") }}</p>
     </div>
-    <p>{{ $t("message.footer.text1") }}</p>
   </div>
 </template>
 <script>
@@ -28,42 +30,64 @@ export default {
   background: url($urlImages + "footer_bg2.webp") no-repeat;
   background-size: 100% auto;
   text-align: center;
-  padding-top: 1.5rem;
   border-top: 2px solid #244647;
-  position: relative;
+  display: flex;
+  align-items: center;
   > img {
-    width: 3rem;
+    width: 3.9rem;
     height: auto;
-    position: absolute;
-    bottom: 0;
+    position: relative;
+    top: -0.32rem;
     left: 0;
   }
-  .center {
-    width: 48%;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    > img {
-      width: auto;
-      height: 0.65rem;
-    }
-    > div {
-      img {
-        width: 0.5rem;
+  .right {
+    width: 7rem;
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      > img {
+        width: 3rem;
         height: 0.5rem;
-        margin: 0 0.05rem;
-        cursor: pointer;
+      }
+      > div {
+        img {
+          width: 0.5rem;
+          height: 0.5rem;
+          margin: 0 0.05rem;
+          cursor: pointer;
+        }
       }
     }
+    p {
+      margin: 0.3rem auto;
+      font-size: 0.15rem;
+      font-weight: bold;
+      color: #c1c3c5;
+      letter-spacing: 0.05rem;
+    }
   }
-  p {
-    width: 50%;
-    margin: 0.3rem auto;
-    font-size: 0.15rem;
-    font-weight: bold;
-    color: #c1c3c5;
-    letter-spacing: 0.06rem;
+}
+@media screen and (max-width: 750px) {
+  .footer_box {
+    > img {
+    }
+    .right {
+      width: 8rem;
+      .top {
+        > img {
+        }
+        > div {
+          img {
+            width: 0.7rem;
+            height: 0.7rem;
+          }
+        }
+      }
+      p {
+        letter-spacing: 0;
+      }
+    }
   }
 }
 </style>

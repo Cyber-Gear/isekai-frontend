@@ -45,4 +45,10 @@ export default {
   height: 1rem;
   position: relative;
 }
+@media screen and (max-width: 750px) {
+  .page {
+    width: 100%;
+    padding-top: 1.8rem;
+  }
+}
 </style>

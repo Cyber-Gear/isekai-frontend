@@ -29,31 +29,33 @@
           </li>
           <li>
             <div>
-              <div><span>10.0k</span></div>
-              <div>{{ $t("message.artist.items[0]") }}</div>
+              <div>
+                <div><span>10.0k</span></div>
+                <div>{{ $t("message.artist.items[0]") }}</div>
+              </div>
             </div>
             <div>
-              <div><span>10.0k</span></div>
-              <div>{{ $t("message.artist.items[1]") }}</div>
+              <div>
+                <div><span>10.0k</span></div>
+                <div>{{ $t("message.artist.items[1]") }}</div>
+              </div>
             </div>
             <div>
-              <div><img :src="`${$urlImages}logo_ETH.webp`" alt="" />10.0k</div>
-              <div>{{ $t("message.artist.items[2]") }}</div>
+              <div>
+                <div><img :src="`${$urlImages}logo_ETH.webp`" alt="" />10.0k</div>
+                <div>{{ $t("message.artist.items[2]") }}</div>
+              </div>
             </div>
             <div>
-              <div><img :src="`${$urlImages}logo_ETH.webp`" alt="" />10.0k</div>
-              <div>{{ $t("message.artist.items[3]") }}</div>
+              <div>
+                <div><img :src="`${$urlImages}logo_ETH.webp`" alt="" />10.0k</div>
+                <div>{{ $t("message.artist.items[3]") }}</div>
+              </div>
             </div>
           </li>
           <li>
             <pre>{{ $t(detail.des) }}</pre>
           </li>
-          <!-- <li :class="{ hidden: !isShowIntroduce }">
-            <pre>{{ $t(detail.des) }}</pre>
-          </li>
-          <li @click="isShowIntroduce = !isShowIntroduce" :class="{ active: isShowIntroduce }">
-            <i class="iconfont icon-arrow-up"></i>
-          </li> -->
         </ul>
       </div>
       <div class="box3">
@@ -73,8 +75,6 @@
             </div>
             <div class="bottom">
               <i class="iconfont icon-favorites"></i>
-              <!-- <i class="iconfont icon-favorites-fill"></i>
-              <span>3</span> -->
             </div>
             <img class="angle2" :src="`${$urlImages}angle2.webp`" alt="" />
           </li>
@@ -139,7 +139,7 @@ export default {
 }
 .banner {
   width: 100%;
-  height: 20vw;
+  height: 3rem;
   position: relative;
   > img {
     width: 100%;
@@ -180,9 +180,11 @@ export default {
   }
 }
 .box1 {
+  width: 80%;
   display: flex;
   justify-content: flex-end;
-  padding: 0.2rem 1rem;
+  margin: 0 auto;
+  padding: 0.2rem 0;
   .linkbox {
     display: flex;
     align-items: center;
@@ -197,8 +199,10 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.22rem;
-      margin-right: 0.02rem;
+      margin-right: 0.05rem;
+      i {
+        font-size: 0.22rem;
+      }
       &:last-child {
         margin-right: 0;
       }
@@ -210,15 +214,16 @@ export default {
   }
 }
 .box2 {
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
   ul {
-    max-width: 6rem;
+    max-width: 100%;
     margin: 0 auto;
     padding: 0.2rem 0;
     text-align: center;
     li {
       &:nth-child(1) {
-        font-size: 0.3rem;
+        font-size: 0.5rem;
         font-weight: 600;
       }
       &:nth-child(2) {
@@ -251,39 +256,38 @@ export default {
           backdrop-filter: blur(0.06rem);
           margin-right: 0.02rem;
           padding: 0.2rem 0;
-          &:last-child {
-            margin-right: 0;
-          }
+          display: flex;
+          align-items: center;
+          justify-content: center;
           > div {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            &:nth-child(1) {
-              font-size: 0.25rem;
-              font-weight: bold;
-              img {
-                width: 0.18rem;
-                height: auto;
+            > div {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              &:nth-child(1) {
+                font-size: 0.25rem;
+                font-weight: bold;
+                img {
+                  width: 0.18rem;
+                  height: auto;
+                }
+              }
+              &:nth-child(2) {
+                font-size: 0.15rem;
+                font-weight: bold;
               }
             }
-            &:nth-child(2) {
-              font-size: 0.15rem;
-              font-weight: bold;
-            }
+          }
+          &:last-child {
+            margin-right: 0;
           }
         }
       }
       &:nth-child(4) {
+        padding: 0 0.5rem;
         font-size: 0.15rem;
         font-weight: 600;
         text-align: left;
-        &.hidden {
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
-        }
       }
       &:nth-child(5) {
         cursor: pointer;
@@ -305,7 +309,7 @@ export default {
   }
 }
 .box3 {
-  width: 11.5rem;
+  width: 90%;
   margin: 0 auto;
   padding-top: 0.5rem;
   border-top: 1px solid;
@@ -315,14 +319,9 @@ export default {
   width: 100%;
   height: 10rem;
   overflow-y: auto;
-  // display: grid;
-  // grid-gap: 0.3rem;
-  // grid-template-columns: repeat(4, 1fr);
-  // grid-template-rows: repeat(4, 1fr);
   li {
     float: left;
-    margin: 0 0.35rem 0.35rem 0;
-    width: 2.5rem;
+    margin: 0 0.18rem 0.18rem 0;
     border-radius: 0.1rem;
     overflow: hidden;
     border: 1px solid #3f3e43;
@@ -350,8 +349,8 @@ export default {
       height: 100%;
     }
     .top {
-      width: 100%;
-      height: 2.5rem;
+      width: 3rem;
+      height: 3rem;
     }
     .center {
       width: 100%;
@@ -359,12 +358,11 @@ export default {
       div {
         display: flex;
         align-items: center;
-        padding: 0 0.05rem;
+        padding: 0.05rem;
         &:nth-child(1) {
           font-size: 0.12rem;
           font-weight: bold;
           color: #00b1ff;
-          padding: 0.05rem;
           img {
             width: 0.24rem;
             height: auto;
@@ -386,8 +384,7 @@ export default {
     }
     .bottom {
       width: 100%;
-      height: 0.35rem;
-      padding: 0 0.2rem;
+      padding: 0.05rem 0.2rem;
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -395,8 +392,144 @@ export default {
       font-weight: 600;
       color: #6c6a71;
       i {
-        font-size: 0.25rem;
+        font-size: 0.35rem;
         margin-right: 0.1rem;
+      }
+    }
+  }
+}
+@media screen and (max-width: 750px) {
+  .page {
+    width: 100%;
+    padding-top: 1.8rem;
+  }
+  .banner {
+    height: 3rem;
+  }
+  .content {
+  }
+  .avatar {
+    width: 2.53rem;
+    height: 2.53rem;
+    padding: 0.02rem;
+    top: -1.5rem;
+    > div {
+      img {
+      }
+    }
+  }
+  .box1 {
+    padding: 0.3rem 0;
+    .linkbox {
+      > div {
+        width: 1rem;
+        height: 0.6rem;
+        margin-right: 0.05rem;
+        i {
+          font-size: 0.15rem;
+        }
+        &:last-child {
+        }
+        &:hover {
+        }
+      }
+    }
+  }
+  .box2 {
+    ul {
+      padding: 0.3rem 0;
+      li {
+        &:nth-child(1) {
+        }
+        &:nth-child(2) {
+          margin-top: 0.3rem;
+          i {
+            margin: 0 0.1rem;
+          }
+          .icon-assessed-badge {
+            font-size: 0.7rem;
+          }
+          .icon-gouxuan {
+            font-size: 0.5rem;
+          }
+        }
+        &:nth-child(3) {
+          margin: 0.3rem 0;
+          border-radius: 0.3rem;
+          > div {
+            width: 25%;
+            height: 1.8rem;
+            > div {
+              > div {
+                &:nth-child(1) {
+                  img {
+                    width: 0.42rem;
+                    height: auto;
+                  }
+                }
+                &:nth-child(2) {
+                }
+              }
+            }
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+        &:nth-child(4) {
+        }
+        &:nth-child(5) {
+          &.active i {
+          }
+          i {
+          }
+        }
+      }
+    }
+  }
+  .box3 {
+  }
+  .card_list {
+    height: 24rem;
+    li {
+      margin: 0 0.4rem 0.4rem 0;
+      border-radius: 0.2rem;
+      &:hover {
+        .angle2 {
+        }
+      }
+      .angle2 {
+        width: 0.3rem;
+      }
+      img {
+      }
+      .top {
+        width: 5.95rem;
+        height: 5.95rem;
+      }
+      .center {
+        div {
+          padding: 0.1rem;
+          &:nth-child(1) {
+            img {
+              width: 0.54rem;
+              height: auto;
+              margin-left: 0.2rem;
+            }
+          }
+          &:nth-child(2) {
+          }
+          &:nth-child(3) {
+          }
+        }
+      }
+      .bottom {
+        width: 100%;
+        padding: 0.1rem 0.2rem;
+        i {
+          font-size: 0.6rem;
+          margin-right: 0.1rem;
+        }
       }
     }
   }

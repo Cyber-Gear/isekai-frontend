@@ -1,4 +1,3 @@
-const _this = this;
 export default {
   /**超出默认隐藏长度的文本显示省略号 */
   ellipsisNormal(value: string) {

@@ -50,24 +50,17 @@ export default {
   background: url($urlImages + "bg7.webp") no-repeat;
   background-size: 100% 100%;
 }
-
 .box_title {
   margin: 0.5rem 0;
 }
 .card_list {
-  width: 11.5rem;
-  height: 12rem;
+  width: 90%;
+  min-height: 9rem;
   overflow-y: auto;
   margin: 0 auto;
-  // display: flex;
-  // flex-wrap: wrap;
-  // display: grid;
-  // grid-gap: 5vw;
-  // grid-template-columns: repeat(3, 1fr);
   li {
     float: left;
     width: 3rem;
-    // height: 4rem;
     margin: 0.4rem;
     overflow: hidden;
     border-radius: 0.1rem;
@@ -110,7 +103,7 @@ export default {
     }
     .bottom {
       width: 100%;
-      height: 50%;
+      height: auto;
       padding: 0.3rem 0.1rem 0.1rem 0.1rem;
       > div {
         text-align: center;
@@ -131,6 +124,56 @@ export default {
           margin-top: 0.2rem;
           font-size: 0.12rem;
           text-align: left;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 750px) {
+  .page {
+    width: 100%;
+    padding-top: 1.8rem;
+  }
+  .box_title {
+    margin: 1rem 0;
+  }
+  .card_list {
+    min-height: 18rem;
+    li {
+      width: 5.9rem;
+      margin: 0.2rem;
+      border-radius: 0.2rem;
+      &:hover {
+        .angle2 {
+        }
+      }
+      .angle2 {
+        width: 0.3rem;
+      }
+      img {
+      }
+      .top {
+        width: 100%;
+        height: 3.95rem;
+      }
+      .center {
+        width: 1rem;
+        height: 1rem;
+        top: 3.4rem;
+      }
+      .bottom {
+        padding: 0.5rem 0.2rem 0.5rem 0.2rem;
+        > div {
+          &:nth-child(1) {
+          }
+          &:nth-child(2) {
+            span {
+              &:nth-child(2) {
+              }
+            }
+          }
+          &:nth-child(3) {
+          }
         }
       }
     }

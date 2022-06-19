@@ -2,9 +2,17 @@
   <div class="nav">
     <div class="nav_inset">
       <img class="logo" :src="`${$urlImages}logo1.webp`" alt="" />
-      <ul class="menu pc">
+      <ul class="menu_pc pc">
         <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item)">
           <span>{{ $t(item.label) }}</span>
+        </li>
+      </ul>
+      <ul class="menu_mobile mobile">
+        <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item)">
+          <div>
+            <i class="iconfont" :class="item.icon"></i>
+            <div>{{ $t(item.label) }}</div>
+          </div>
         </li>
       </ul>
       <div class="connect_lang">
@@ -43,11 +51,11 @@ export default {
     return {
       navActive: 0,
       navArr: [
-        { label: "message.nav.text1", link: "/home", isOpen: true },
-        { label: "message.nav.text2", link: "/artist", isOpen: true },
-        { label: "message.nav.text3", link: "/dao", isOpen: true },
-        { label: "message.nav.text4", link: "/launchpad", isOpen: true },
-        { label: "message.nav.text5", link: "/market", isOpen: false },
+        { label: "message.nav.text1", icon: "icon-home", link: "/home", isOpen: true },
+        { label: "message.nav.text2", icon: "icon-bussiness-man", link: "/artist", isOpen: true },
+        { label: "message.nav.text3", icon: "icon-qukuailian", link: "/dao", isOpen: true },
+        { label: "message.nav.text4", icon: "icon-boxhezi", link: "/launchpad", isOpen: true },
+        { label: "message.nav.text5", icon: "icon-tradingvolume", link: "/market", isOpen: false },
       ],
       showLangSelect: false,
       showDisconnect: false,
@@ -57,6 +65,7 @@ export default {
   computed: { ...mapGetters(["getWalletAccount"]) },
   watch: {
     $route(to) {
+      window.scrollTo(0, 0);
       if (to.path == "/home") {
         this.navActive = 0;
       } else if (to.path.indexOf("/artist") !== -1) {
@@ -121,13 +130,13 @@ export default {
       width: 0.7rem;
       height: auto;
     }
-    .menu {
+    .menu_pc {
       height: 100%;
       display: flex;
       align-items: center;
       li {
         height: 80%;
-        font-size: 0.19rem;
+        font-size: 0.2rem;
         font-weight: bold;
         cursor: pointer;
         display: flex;
@@ -222,61 +231,53 @@ export default {
     transform: scaleY(1);
   }
 }
-// @media screen and (min-width: 981px) {
-// }
-// @media screen and (max-width: 980px) {
-//   .pc {
-//     display: none !important;
-//   }
-//   .nav {
-//     height: 0.45rem;
-//     .nav_inset {
-//       .logo {
-//         width: 0.28rem;
-//       }
-//       .connect_lang {
-//         .connect {
-//           padding: 0.02rem 0.1rem;
-//         }
-//         .lang_box {
-//           padding: 0.02rem 0.1rem;
-//           margin-left: 0.1rem;
-//           img {
-//             width: 0.2rem;
-//           }
-//           ul {
-//             li {
-//               padding: 0.05rem 0;
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
-@media screen and (max-width: 980px) {
-  .pc {
-    display: none !important;
-  }
+
+@media screen and (max-width: 750px) {
   .nav {
-    height: 1rem;
+    height: 1.8rem;
     .nav_inset {
       .logo {
-        width: 0.28rem;
+        width: 1.08rem;
+      }
+      .menu_mobile {
+        width: 100vw;
+        height: 3rem;
+        background: #0a0a0d;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        padding: 0 0.5rem;
+        li {
+          font-size: 0.35rem;
+          font-weight: 400;
+          color: #ffffff;
+          i {
+            font-size: 1.25rem;
+          }
+          &.active {
+            color: #29a7e1;
+          }
+        }
       }
       .connect_lang {
         .connect {
-          padding: 0.02rem 0.1rem;
+          font-size: 0.46rem;
+          padding: 0.1rem 0.3rem;
         }
         .lang_box {
-          padding: 0.02rem 0.1rem;
-          margin-left: 0.1rem;
+          font-size: 0.46rem;
+          padding: 0.1rem 0.3rem;
+          margin-left: 0.5rem;
           img {
-            width: 0.2rem;
+            width: 0.38rem;
           }
           ul {
             li {
-              padding: 0.05rem 0;
+              padding: 0.1rem 0.3rem;
             }
           }
         }

@@ -1,7 +1,5 @@
 <template>
   <div class="home">
-    <!-- <span class="absolute_text1">{{ $t("message.home.text1") }}</span>
-    <span class="absolute_text2">{{ $t("message.home.text1") }}</span> -->
     <img class="absolute1" :src="`${$urlImages}absolute1.webp`" alt="" />
     <img class="absolute2" :src="`${$urlImages}absolute2.webp`" alt="" />
     <img class="absolute3" :src="`${$urlImages}absolute3.webp`" alt="" />
@@ -11,7 +9,6 @@
     <img class="absolute7" :src="`${$urlImages}absolute2.webp`" alt="" />
     <img class="absolute8" :src="`${$urlImages}absolute2.webp`" alt="" />
     <img class="absolute9" :src="`${$urlImages}absolute9.webp`" alt="" />
-    <img class="absolute10" :src="`${$urlImages}absolute6.webp`" alt="" />
     <img class="absolute11" :src="`${$urlImages}absolute11.webp`" alt="" />
     <img class="absolute12" :src="`${$urlImages}absolute2.webp`" alt="" />
     <img class="absolute13" :src="`${$urlImages}absolute13.webp`" alt="" />
@@ -188,14 +185,14 @@
               <span>{{ $t(item.time) }}</span>
               <img :src="`${$urlImages}img5.webp`" alt="" />
             </div>
-            <span>{{ $t(item.text) }}</span>
+            <span class="text_ellipsis_row_2">{{ $t(item.text) }}</span>
           </li>
         </ul>
       </div>
     </div>
     <!-- INVESTOR&PARTNER -->
     <div class="box7">
-      <!-- <div class="box_title">
+      <div class="box_title">
         <img :src="`${$urlImages}box_title1.webp`" alt="" />
         <span>{{ $t("message.home.text9") }}</span>
       </div>
@@ -205,7 +202,7 @@
             <img :src="item" alt="" />
           </li>
         </ul>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -297,7 +294,11 @@ export default {
           },
         },
       ],
-      cardList5: [{ time: "message.home.list4[0].text1", text: "message.home.list4[0].text2" }],
+      cardList5: [
+        { time: "message.home.list4[0].text1", text: "message.home.list4[0].text2" },
+        { time: "message.home.list4[0].text1", text: "message.home.list4[0].text2" },
+        { time: "message.home.list4[0].text1", text: "message.home.list4[0].text2" },
+      ],
       cardList6: [
         this.$urlImages + "collaborators1.webp",
         this.$urlImages + "collaborators2.webp",
@@ -346,67 +347,48 @@ export default {
   background-position: 0% 15%;
   padding-bottom: 1rem;
 }
-.absolute_text1 {
-  white-space: nowrap;
-  font-size: 0.15rem;
-  color: #ffa332;
-  letter-spacing: 0.75rem;
-  transform: rotate(90deg);
-  position: absolute;
-  left: -80%;
-  top: 63%;
-}
-.absolute_text2 {
-  white-space: nowrap;
-  font-size: 0.15rem;
-  color: #ffa332;
-  letter-spacing: 0.75rem;
-  transform: rotate(90deg);
-  position: absolute;
-  left: 5%;
-  top: 60%;
-}
+
 .absolute1 {
   width: 0.57rem;
   height: auto;
   position: absolute;
   left: 0;
-  top: 20%;
+  top: 13rem;
 }
 .absolute2 {
   width: 0.11rem;
   height: auto;
   position: absolute;
-  left: 2%;
-  top: 24%;
+  left: 0.3rem;
+  top: 16rem;
 }
 .absolute3 {
   width: 1.36rem;
   height: auto;
   position: absolute;
   right: 0;
-  top: 21%;
+  top: 14rem;
 }
 .absolute4 {
   width: 2.8rem;
   height: auto;
   position: absolute;
   left: 0;
-  top: 31%;
+  top: 19rem;
 }
 .absolute5 {
   width: 1.5rem;
   height: auto;
   position: absolute;
   right: 0;
-  top: 30%;
+  top: 19rem;
 }
 .absolute6 {
   width: 1.57rem;
   height: auto;
   position: absolute;
   left: 0;
-  top: 43%;
+  top: 27rem;
   z-index: 2;
 }
 .absolute7 {
@@ -415,74 +397,68 @@ export default {
   opacity: 0.3;
   transform: rotateY(180deg);
   position: absolute;
-  left: 5%;
-  top: 54%;
+  left: 0.5rem;
+  top: 34rem;
   z-index: 1;
 }
 .absolute8 {
   width: 0.18rem;
   height: auto;
   position: absolute;
-  right: 3%;
-  top: 51%;
+  right: 0.5rem;
+  top: 35rem;
 }
 .absolute9 {
   width: 0.85rem;
   height: auto;
   position: absolute;
   left: 0;
-  top: 59.7%;
+  top: 38rem;
 }
-.absolute10 {
-  width: 1.05rem;
-  height: auto;
-  position: absolute;
-  left: 0;
-  top: 70%;
-}
+
 .absolute11 {
   width: 1.24rem;
   height: auto;
   position: absolute;
   right: 0;
-  top: 65%;
+  top: 36rem;
 }
 .absolute12 {
   width: 0.18rem;
   height: auto;
   position: absolute;
-  left: 4%;
-  top: 83.8%;
+  left: 0.5rem;
+  top: 55rem;
 }
 .absolute13 {
   width: 0.75rem;
   height: auto;
   position: absolute;
   right: 0;
-  top: 88.2%;
+  top: 51rem;
 }
 .absolute14 {
   width: 0.75rem;
   height: auto;
   position: absolute;
   left: 0;
-  top: 88.5%;
+  top: 63rem;
 }
 .absolute15 {
   width: 100%;
   height: auto;
   position: absolute;
   left: 0;
-  top: 54%;
+  top: 35rem;
 }
 .box1 {
   width: 100%;
-  height: 9.4rem;
+  height: 9.5rem;
   background: url($urlImages + "bg1.webp") no-repeat;
   background-size: 100% 100%;
   display: flex;
   align-items: flex-end;
-  padding: 0.5rem 0;
+  padding-top: 0.8rem;
   position: relative;
   ul {
     width: 55%;
@@ -506,7 +482,6 @@ export default {
       &:nth-child(3) {
         font-size: 0.2rem;
         font-weight: bold;
-        letter-spacing: 2px;
       }
       &:nth-child(4) {
         margin: 0.8rem 0 0.2rem 0;
@@ -520,7 +495,7 @@ export default {
             font-size: 0.25rem;
             font-weight: bold;
             background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
-            border: 0.01rem solid;
+            border: 1px solid;
             border-image: linear-gradient(320deg, rgba(219, 98, 255, 1), rgba(136, 253, 238, 0)) 1 1;
           }
           &:nth-child(2) {
@@ -543,8 +518,8 @@ export default {
     }
   }
   .banner_img {
-    width: 6.45rem;
-    height: auto;
+    width: auto;
+    height: 8.55rem;
     position: absolute;
     top: 1.2rem;
     right: 0;
@@ -614,17 +589,17 @@ export default {
   .img_bg3 {
     width: 100%;
     height: auto;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
   .card_list2 {
     width: 100%;
-    margin-bottom: 1rem;
+    margin: 0.5rem 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
     li {
-      width: 2.7rem;
-      height: 1.8rem;
+      width: 2.5rem;
       position: relative;
       cursor: pointer;
       .box_border1 {
@@ -668,9 +643,9 @@ export default {
         align-items: center;
         position: absolute;
         top: -0.55rem;
-        left: 0;
+        left: -0.4rem;
         img {
-          width: 0.9rem;
+          width: 1rem;
           height: 1rem;
         }
         span {
@@ -772,7 +747,11 @@ export default {
       .box_border1 {
         background-image: linear-gradient(120deg, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5));
         .box_border2 {
-          padding: 0.2rem 0.2rem 0.2rem 2rem;
+          width: 100%;
+          height: 0.9rem;
+          display: flex;
+          align-items: center;
+          padding: 0 0.2rem 0 2rem;
         }
       }
       span {
@@ -792,11 +771,13 @@ export default {
       .left {
         .box_border1 {
           background-image: linear-gradient(150deg, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0.5), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5));
+          .box_border2 {
+            padding: 0.24rem;
+          }
         }
         img {
           width: 3.4rem;
           height: 5rem;
-          margin: 0.24rem;
         }
       }
       .right {
@@ -806,7 +787,7 @@ export default {
           }
           img {
             width: 5rem;
-            height: auto;
+            height: 2.7rem;
           }
         }
       }
@@ -815,28 +796,29 @@ export default {
 }
 .box5 {
   width: 100%;
-  height: 8rem;
+  height: 12rem;
   margin-bottom: 1rem;
   position: relative;
   .box_content {
     .cardList4 {
       width: 80%;
       margin: 0 auto;
-      padding: 1rem 0;
       display: flex;
-      align-items: center;
-      justify-content: space-around;
+      justify-content: space-between;
+      flex-wrap: wrap;
       > li {
+        margin-bottom: 0.5rem;
         &:hover .box_border2 {
           background: rgba(8, 8, 9, 0);
         }
         .box_border1 {
           background-image: linear-gradient(150deg, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0.5), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5));
           .box_border2 {
-            padding: 0.18rem 0.12rem;
+            padding: 0.18rem 0.12rem 0 0.12rem;
           }
         }
         ul {
+          width: 2.15rem;
           li {
             &:nth-child(1) {
               img {
@@ -856,7 +838,7 @@ export default {
             }
             &:nth-child(4) {
               padding: 0.1rem;
-              border-bottom: 0.01rem solid;
+              border-bottom: 1px solid;
               border-image: linear-gradient(63deg, rgba(7, 209, 229, 1), rgba(152, 90, 173, 1)) 1 1;
               display: flex;
               align-items: center;
@@ -893,7 +875,7 @@ export default {
                 width: 0.38rem;
                 height: 0.38rem;
                 background: rgba(0, 0, 0, 0.24);
-                border-radius: 5px;
+                border-radius: 0.1rem;
                 cursor: pointer;
                 display: flex;
                 align-items: center;
@@ -913,9 +895,6 @@ export default {
 .box6 {
   width: 100%;
   margin-bottom: 1rem;
-  .box_title {
-    margin-bottom: 0.1rem;
-  }
   .box_content {
     width: 9.8rem;
     height: auto;
@@ -935,14 +914,13 @@ export default {
         align-items: center;
         font-size: 0.15rem;
         font-weight: bold;
-        line-height: 0.25rem;
-        border-bottom: 0.01rem solid #979797;
+        border-bottom: 1px solid #979797;
         cursor: pointer;
         &:hover > div {
           div {
-            width: 8em;
+            width: 1rem;
             margin-right: 0.2rem;
-            border: 0.01rem solid;
+            border: 1px solid;
             border-image: linear-gradient(320deg, rgba(219, 98, 255, 1), rgba(136, 253, 238, 0)) 1 1;
           }
           img {
@@ -951,14 +929,16 @@ export default {
           }
         }
         > div {
-          height: 60%;
+          height: 50%;
           display: flex;
           align-items: center;
           transition: all 1s;
           div {
             width: 0;
             height: 100%;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
             background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
             transition: all 0.5s;
@@ -978,7 +958,6 @@ export default {
 }
 .box7 {
   width: 100%;
-  height: 4.7rem;
   .box_content {
     width: 80%;
     margin: 0 auto;
@@ -1000,10 +979,397 @@ export default {
     }
   }
 }
-@media screen and (min-width: 981px){
-  
-}
-@media screen and (max-width: 980px) {
 
+@media screen and (max-width: 750px) {
+  .absolute1 {
+    width: 0.57rem;
+    height: auto;
+    position: absolute;
+    left: 0;
+    top: 24rem;
+  }
+  .absolute2 {
+    width: 0.11rem;
+    height: auto;
+    position: absolute;
+    left: 0.3rem;
+    top: 27rem;
+  }
+  .absolute3 {
+    width: 1.36rem;
+    height: auto;
+    position: absolute;
+    right: 0;
+    top: 25rem;
+  }
+  .absolute4 {
+    width: 2.8rem;
+    height: auto;
+    position: absolute;
+    left: 0;
+    top: 41rem;
+  }
+  .absolute5 {
+    width: 1.5rem;
+    height: auto;
+    position: absolute;
+    right: 0;
+    top: 41rem;
+  }
+  .absolute6 {
+    width: 1.57rem;
+    height: auto;
+    position: absolute;
+    left: 0;
+    top: 58rem;
+    z-index: 2;
+  }
+  .absolute7 {
+    width: 0.07rem;
+    height: auto;
+    opacity: 0.3;
+    transform: rotateY(180deg);
+    position: absolute;
+    left: 0.5rem;
+    top: 68rem;
+    z-index: 1;
+  }
+  .absolute8 {
+    width: 0.18rem;
+    height: auto;
+    position: absolute;
+    right: 0.5rem;
+    top: 69rem;
+  }
+  .absolute9 {
+    width: 0.85rem;
+    height: auto;
+    position: absolute;
+    left: 0;
+    top: 74rem;
+  }
+
+  .absolute11 {
+    width: 1.24rem;
+    height: auto;
+    position: absolute;
+    right: 0;
+    top: 68rem;
+  }
+  .absolute12 {
+    width: 0.18rem;
+    height: auto;
+    position: absolute;
+    left: 0.5rem;
+    top: 99rem;
+  }
+  .absolute13 {
+    width: 0.75rem;
+    height: auto;
+    position: absolute;
+    right: 0;
+    top: 94rem;
+  }
+  .absolute14 {
+    width: 0.75rem;
+    height: auto;
+    position: absolute;
+    left: 0;
+    top: 115rem;
+  }
+  .absolute15 {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    left: 0;
+    top: 73rem;
+  }
+  .box1 {
+    width: 100%;
+    height: 12rem;
+    padding-top: 1.8rem;
+    ul {
+      li {
+        &:nth-child(1) {
+          span {
+          }
+        }
+        &:nth-child(2) {
+          div {
+          }
+        }
+        &:nth-child(3) {
+        }
+        &:nth-child(4) {
+          div {
+            &:nth-child(1) {
+              margin-right: 0.1rem;
+            }
+            &:nth-child(2) {
+              img {
+                width: 0.7rem;
+                height: 0.7rem;
+              }
+            }
+          }
+        }
+        &:nth-child(5) {
+          img {
+          }
+        }
+      }
+    }
+    .banner_img {
+      width: auto;
+      height: 8.8rem;
+      top: 1.8rem;
+    }
+  }
+  .box2 {
+    .box_content {
+      width: 100%;
+    }
+    .card_list1 {
+      display: block;
+      li {
+        width: 11.14rem;
+        height: 2.65rem;
+        margin: 0.5rem auto;
+        &:hover {
+          transform: scale(1.05);
+        }
+        div {
+          padding: 0 0.5rem;
+          p {
+            &:nth-child(1) {
+              height: 1rem;
+              line-height: 1rem;
+              text-align: left;
+            }
+            &:nth-child(2) {
+            }
+          }
+        }
+      }
+    }
+    .img_bg3 {
+    }
+    .card_list2 {
+      justify-content: center;
+      li {
+        width: 5rem;
+        margin: 1rem 0.5rem;
+        .box_item {
+          padding: 0.5rem 0.2rem;
+        }
+        .box_top {
+          top: -1.2rem;
+          left: -0.6rem;
+          img {
+            width: 1.6rem;
+            height: 1.9rem;
+          }
+          span {
+          }
+        }
+      }
+    }
+  }
+  .box3 {
+    .box_content {
+      .cardList3 {
+        li {
+          width: 80%;
+          margin: 0 auto 0.5rem auto;
+          .box_border1 {
+          }
+          .box_item {
+            width: 100%;
+            height: 100%;
+            padding: 0.5rem;
+            > div {
+              &:nth-child(1) {
+              }
+              &:nth-child(2) {
+              }
+              &:nth-child(3) {
+                .btn {
+                  &:hover .box_border2 {
+                  }
+                  .box_border1 {
+                    .box_border2 {
+                      padding: 0.1rem 0.8rem;
+                    }
+                  }
+                }
+                .progress_bar {
+                  width: 6rem;
+                  height: auto;
+                  div {
+                    font-size: 0.12rem;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .box4 {
+    .box_content {
+      width: 80%;
+      .top {
+        margin-bottom: 0.8rem;
+        .box_border1 {
+          .box_border2 {
+            height: 2.85rem;
+            padding: 0 0.2rem 0 2.5rem;
+          }
+        }
+        span {
+        }
+        img {
+          width: 3.65rem;
+          left: -10%;
+          top: 0%;
+        }
+      }
+      .bottom {
+        display: flex;
+        justify-content: space-between;
+        .left {
+          .box_border1 {
+            background-image: linear-gradient(
+              150deg,
+              rgba(0, 211, 255, 0.5),
+              rgba(0, 211, 255, 0.5),
+              rgba(233, 150, 255, 0),
+              rgba(233, 150, 255, 0.5)
+            );
+            .box_border2 {
+              padding: 0.2rem;
+            }
+          }
+          img {
+            width: 4.45rem;
+            height: 6.6rem;
+          }
+        }
+        .right {
+          div {
+            &:nth-child(1) {
+            }
+            img {
+              width: 6rem;
+              height: 3.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+  .box5 {
+    width: 100%;
+    height: 20rem;
+    .box_content {
+      .cardList4 {
+        > li {
+          margin-bottom: 0.5rem;
+          &:hover .box_border2 {
+          }
+          .box_border1 {
+            .box_border2 {
+              padding: 0.38rem 0.27rem 0 0.27rem;
+            }
+          }
+          ul {
+            width: 4.6rem;
+            li {
+              &:nth-child(1) {
+                img {
+                }
+              }
+              &:nth-child(2) {
+              }
+              &:nth-child(3) {
+              }
+              &:nth-child(4) {
+                img {
+                  width: auto;
+                  height: 0.38rem;
+                }
+                span {
+                  margin-left: 0.2rem;
+                }
+              }
+              &:nth-child(5) {
+                > div {
+                  .no_connect {
+                  }
+                  .connected {
+                    img {
+                      width: auto;
+                      height: 0.38rem;
+                      margin: 0 0.2rem;
+                    }
+                  }
+                }
+                > .btn {
+                  width: 0.8rem;
+                  height: 0.8rem;
+                  img {
+                    width: 65%;
+                    height: auto;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .box6 {
+    .box_title {
+    }
+    .box_content {
+      width: 80%;
+      .title_img {
+      }
+      .cardList5 {
+        height: 10rem;
+        li {
+          height: 2rem;
+          &:hover > div {
+            div {
+              width: 1.8rem;
+            }
+            img {
+              width: 0.8rem;
+            }
+          }
+          > div {
+            div {
+            }
+            span {
+            }
+            img {
+            }
+          }
+        }
+      }
+    }
+  }
+  .box7 {
+    .box_content {
+      .cardList6 {
+        li {
+          img {
+          }
+        }
+      }
+    }
+  }
 }
 </style>

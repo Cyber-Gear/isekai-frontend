@@ -99,8 +99,9 @@ export default {
 <style lang="scss" scoped>
 .page {
   width: 100%;
+  min-height: calc(100vh - 4rem - 3rem);
   padding-top: 0.8rem;
-  padding-bottom: 1rem;
+  padding-bottom: 0.8rem;
 }
 .banner {
   width: 100%;
@@ -187,6 +188,7 @@ export default {
         font-weight: 600;
         i {
           font-size: 0.35rem;
+          margin-right: 0.1rem;
         }
       }
     }
@@ -249,11 +251,9 @@ export default {
       background: #18181c;
       border-radius: 0.06rem;
       padding: 0.1rem;
-      margin-top: 0.5rem;
       .title {
         width: 100%;
         height: 0.3rem;
-        padding: 0 0.1rem;
         font-size: 0.15rem;
         font-weight: 600;
       }
@@ -268,6 +268,93 @@ export default {
           height: 100%;
           padding: 0 0.1rem;
           overflow-y: auto;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 750px) {
+  .page {
+    padding-top: 1.8rem;
+  }
+  .banner {
+  }
+  .content {
+    flex-wrap: wrap;
+  }
+  .leftbox {
+    .cardbox {
+      width: 10.5rem;
+      height: 16rem;
+      margin: 0 auto;
+      > img {
+      }
+      span {
+        left: 0.8rem;
+        top: 1.3rem;
+      }
+      .btn {
+        width: 6rem;
+        height: 1.5rem;
+        bottom: 1.5rem;
+      }
+    }
+    .workbox {
+      width: 80%;
+      margin-bottom: 0.5rem;
+      .titlebtn {
+        height: 1.5rem;
+        padding: 0 0.3rem;
+        div {
+          font-size: 0.6rem;
+          i {
+            font-size: 0.8rem;
+            margin-right: 0.3rem;
+          }
+        }
+      }
+      .text {
+        height: 4rem;
+        padding: 0.3rem;
+        div {
+        }
+      }
+    }
+  }
+  .rightbox {
+    width: 80%;
+    height: 12.75rem;
+    margin-left: 0;
+    > div {
+      padding: 0 0.3rem;
+      .introbox1 {
+        li {
+          padding: 0.3rem 0;
+          &:nth-child(1) {
+            font-size: 0.6rem;
+            padding: 0.5rem 0;
+          }
+          i {
+            font-size: 0.6rem;
+          }
+          div {
+            width: 3.5rem;
+          }
+        }
+      }
+      .introbox2 {
+        width: 100%;
+        height: 6rem;
+        padding: 0.3rem;
+        .title {
+          width: 100%;
+          height: 0.8rem;
+        }
+        .text {
+          width: 100%;
+          height: calc(100% - 0.8rem);
+          div {
+          }
         }
       }
     }

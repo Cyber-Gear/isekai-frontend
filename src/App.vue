@@ -46,7 +46,7 @@ export default {
       //   rem = 100;
       // } else {
       //   rem = (clientWidth * 100) / 1440;
-      // }
+      // }  
       if (clientWidth >= 1440) {
         rem = 100;
       } else if (clientWidth > 750 && clientWidth < 1440) {

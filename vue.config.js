@@ -6,7 +6,7 @@ module.exports = {
   devServer: { disableHostCheck: true },
   lintOnSave: true,
   productionSourceMap: false,
-
+     
   chainWebpack(config) {
     config.module.rule("scss").oneOfs.store.forEach((item) => {
       item

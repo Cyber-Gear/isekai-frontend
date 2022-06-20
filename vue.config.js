@@ -1,5 +1,5 @@
 const isProd = process.env.NODE_ENV == "production";
-// const timestamp = new Date().getTime(); // 获取当前时间戳
+const timestamp = new Date().getTime(); // 获取当前时间戳
 
 module.exports = {
   publicPath: "/",

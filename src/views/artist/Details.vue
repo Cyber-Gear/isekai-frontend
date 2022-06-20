@@ -150,8 +150,8 @@ export default {
   width: 100%;
   position: relative;
   background: url($urlImages + "bg5.webp") no-repeat;
-  background-size: 100% auto;
-  padding-bottom: 1rem;
+  background-size: 100% 100%;
+  padding-bottom: 0.8rem;
 }
 .avatar {
   width: 1.3rem;
@@ -407,6 +407,7 @@ export default {
     height: 3rem;
   }
   .content {
+    padding-bottom: 1.8rem;
   }
   .avatar {
     width: 2.53rem;
@@ -424,7 +425,6 @@ export default {
       > div {
         width: 1rem;
         height: 0.6rem;
-        margin-right: 0.05rem;
         i {
           font-size: 0.15rem;
         }

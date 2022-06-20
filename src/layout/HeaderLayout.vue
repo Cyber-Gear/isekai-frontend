@@ -130,31 +130,6 @@ export default {
       width: 0.7rem;
       height: auto;
     }
-    .menu_pc {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      li {
-        height: 80%;
-        font-size: 0.2rem;
-        font-weight: bold;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        padding: 0 2vw;
-        border-right: 1px solid;
-        border-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #29a7e1, rgba(0, 0, 0, 0)) 1 1;
-        &:last-child {
-          border-right: 0;
-        }
-        &.active {
-          color: #29a7e1;
-          background: url($urlImages + "nav_active.webp") no-repeat;
-          background-size: 75% auto;
-          background-position: center;
-        }
-      }
-    }
     .connect_lang {
       display: flex;
       align-items: center;
@@ -192,7 +167,7 @@ export default {
         margin-left: 0.2rem;
         display: flex;
         align-items: center;
-        font-size: 0.14rem;
+        font-size: 0.15rem;
         img {
           width: 0.2rem;
           height: auto;
@@ -231,53 +206,89 @@ export default {
     transform: scaleY(1);
   }
 }
+.menu_pc {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  li {
+    height: 80%;
+    font-size: 0.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0 2vw;
+    border-right: 1px solid;
+    border-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #29a7e1, rgba(0, 0, 0, 0)) 1 1;
+    &:last-child {
+      border-right: 0;
+    }
+    &.active {
+      color: #29a7e1;
+      background: url($urlImages + "nav_active.webp") no-repeat;
+      background-size: 75% auto;
+      background-position: center;
+    }
+  }
+}
+.menu_mobile {
+  width: 100vw;
+  height: 0.8rem;
+  background: #0a0a0d;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 0 0.2rem;
+  li {
+    font-size: 0.12rem;
+    font-weight: 400;
+    color: #ffffff;
+    i {
+      font-size: 0.3rem;
+    }
+    &.active {
+      color: #29a7e1;
+    }
+  }
+}
 
 @media screen and (max-width: 750px) {
   .nav {
-    height: 1.8rem;
+    width: 100vw;
+    height: 0.45rem;
     .nav_inset {
+      padding: 0 0.3rem;
       .logo {
-        width: 1.08rem;
-      }
-      .menu_mobile {
-        width: 100vw;
-        height: 3rem;
-        background: #0a0a0d;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        text-align: center;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        padding: 0 0.5rem;
-        li {
-          font-size: 0.35rem;
-          font-weight: 400;
-          color: #ffffff;
-          i {
-            font-size: 1.25rem;
-          }
-          &.active {
-            color: #29a7e1;
-          }
-        }
+        width: 0.44rem;
+        height: auto;
       }
       .connect_lang {
         .connect {
-          font-size: 0.46rem;
-          padding: 0.1rem 0.3rem;
+          font-size: 0.12rem;
+          font-weight: 400;
+          padding: 0.05rem 0.1rem;
+          border-radius: 0.03rem;
+          .disconnect {
+            border-radius: 0.03rem;
+          }
         }
         .lang_box {
-          font-size: 0.46rem;
-          padding: 0.1rem 0.3rem;
-          margin-left: 0.5rem;
+          font-size: 0.12rem;
+          padding: 0.05rem 0.1rem;
+          margin-left: 0.2rem;
           img {
-            width: 0.38rem;
+            width: 0.2rem;
+            height: auto;
           }
           ul {
             li {
-              padding: 0.1rem 0.3rem;
+              padding: 0.1rem 0;
+              &:hover {
+              }
             }
           }
         }

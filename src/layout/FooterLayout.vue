@@ -1,7 +1,7 @@
 <template>
   <div class="footer_box">
     <img :src="`${$urlImages}footer_bg1.webp`" alt="" />
-    <div class="right">
+    <div class="center">
       <div class="top">
         <img :src="`${$urlImages}logo2.webp`" alt="" />
         <div>
@@ -33,15 +33,18 @@ export default {
   border-top: 2px solid #244647;
   display: flex;
   align-items: center;
+  position: relative;
   > img {
     width: 3.9rem;
     height: auto;
-    position: relative;
-    top: -0.32rem;
+    position: absolute;
+    bottom: 0;
     left: 0;
   }
-  .right {
+  .center {
     width: 7rem;
+    position: relative;
+    left: 4rem;
     .top {
       display: flex;
       align-items: center;
@@ -70,22 +73,33 @@ export default {
 }
 @media screen and (max-width: 750px) {
   .footer_box {
+    width: 100%;
+    height: 1rem;
     > img {
+      width: 1.02rem;
+      height: 1.2rem;
     }
-    .right {
-      width: 8rem;
+    .center {
+      width: 2rem;
+      left: 1rem;
       .top {
         > img {
+          width: 0.78rem;
+          height: 0.13rem;
         }
         > div {
           img {
-            width: 0.7rem;
-            height: 0.7rem;
+            width: 0.18rem;
+            height: 0.18rem;
+            margin: 0 0.01rem;
           }
         }
       }
       p {
-        letter-spacing: 0;
+        margin: 0.05rem auto;
+        font-size: 0.12rem;
+        font-weight: bold;
+        letter-spacing: 0.01rem;
       }
     }
   }

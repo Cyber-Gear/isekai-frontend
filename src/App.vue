@@ -42,19 +42,21 @@ export default {
     resetRem() {
       const clientWidth = document.body.clientWidth;
       let rem = 0;
-      if (clientWidth >= 1440) {
-        rem = 100;
-      } else {
-        rem = (clientWidth * 100) / 1440;
-      }
       // if (clientWidth >= 1440) {
       //   rem = 100;
-      // } else if (clientWidth > 750 && clientWidth < 1440) {
+      // } else {
       //   rem = (clientWidth * 100) / 1440;
-      // } else if (clientWidth <= 750) {
-      //   rem = (clientWidth * 100) / 375;
       // }
-      console.log(rem);
+      if (clientWidth >= 1440) {
+        rem = 100;
+      } else if (clientWidth > 750 && clientWidth < 1440) {
+        rem = (clientWidth * 100) / 1440;
+      } else if (clientWidth <= 750) {
+        rem = (clientWidth * 100) / 375;
+      }
+      if (clientWidth == 375) {
+        console.log(rem);
+      }
       document.getElementsByTagName("html")[0].style.fontSize = rem + "px";
     },
   },
@@ -75,19 +77,19 @@ export default {
   height: 100%;
   #container_view {
     width: 100%;
-    min-height: calc(100vh - 4rem);
+    min-height: calc(100vh - 1rem);
   }
 }
 @media screen and (max-width: 750px) {
   #container {
-    height: calc(100vh - 3rem);
+    height: calc(100vh - 0.8rem);
   }
   #container_body {
     width: 100%;
     height: 100%;
     #container_view {
       width: 100%;
-      min-height: calc(100vh - 4rem - 3rem);
+      min-height: calc(100vh - 1rem - 0.8rem);
     }
   }
 }

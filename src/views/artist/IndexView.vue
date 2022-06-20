@@ -44,9 +44,7 @@ export default {
 <style lang="scss" scoped>
 .page {
   width: 100%;
-  min-height: calc(100vh - 4rem);
   padding: 0.8rem 0;
-  overflow: hidden;
   background: url($urlImages + "bg7.webp") no-repeat;
   background-size: 100% 100%;
 }
@@ -132,7 +130,7 @@ export default {
 @media screen and (max-width: 750px) {
   .page {
     width: 100%;
-    padding-top: 1.8rem;
+    padding: 1.8rem 0;
   }
   .box_title {
     margin: 1rem 0;

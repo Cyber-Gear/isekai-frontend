@@ -16,7 +16,7 @@
           <div><i class="iconfont icon-Customermanagement-fill"></i>{{ $t("message.dao.text2") }}</div>
           <div>{{ spaceObj.members.length }}</div>
         </div>
-        <div class="btn disabled">{{ $t("message.dao.text3") }}</div>
+        <div class="btn">{{ $t("message.dao.text3") }}</div>
       </div>
       <div class="rightbox">
         <div class="title">
@@ -177,14 +177,12 @@ export default {
 <style lang="scss" scoped>
 .page {
   width: 100%;
-  min-height: calc(100vh - 4rem);
   padding: 0.8rem 0;
-  overflow: hidden;
   background: url($urlImages + "bg7.webp") no-repeat;
   background-size: 100% 100%;
 }
 .box {
-  width: fit-content;
+  width: 11rem;
   margin: 1rem auto;
   background: rgba(129, 129, 151, 0.19);
   border-radius: 0.08rem;
@@ -192,15 +190,15 @@ export default {
   backdrop-filter: blur(0.07rem);
   display: flex;
   justify-content: space-between;
-  padding: 0.6rem 0.2rem;
+  padding: 0.8rem 0.5rem 0.5rem 0.5rem;
 }
 .leftbox {
   width: 3rem;
-  height: 4.5rem;
+  height: fit-content;
   background: rgba(24, 24, 28, 0.8);
   border-radius: 0.06rem;
   position: relative;
-  padding: 0.8rem 0.3rem;
+  padding: 0.8rem 0.2rem;
   .avatar {
     width: 1.2rem;
     height: 1.2rem;
@@ -247,8 +245,10 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.22rem;
-      margin-right: 0.02rem;
+      margin-right: 0.05rem;
+      i {
+        font-size: 0.22rem;
+      }
       &:last-child {
         margin-right: 0;
       }
@@ -306,8 +306,10 @@ export default {
     font-size: 0.3rem;
     font-weight: 500;
     padding: 0 0.2rem;
+    margin-bottom: 0.1rem;
     .selectbox {
       width: 1.5rem;
+      height: 0.45rem;
     }
   }
   > .list {
@@ -381,6 +383,145 @@ export default {
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 750px) {
+  .page {
+    width: 100%;
+    padding: 1.8rem 0;
+  }
+  .box {
+    width: 90%;
+    margin: 1rem auto;
+    padding: 2rem 0.5rem 0.5rem 0.5rem;
+    flex-wrap: wrap;
+  }
+  .leftbox {
+    width: 100%;
+    padding: 1.5rem 3rem 1rem 3rem;
+    margin-bottom: 1rem;
+    .avatar {
+      width: 2.5rem;
+      height: 2.5rem;
+      padding: 0.2rem;
+      top: -1.25rem;
+      img {
+      }
+    }
+    .title {
+      font-size: 0.3rem;
+      i {
+        font-size: 0.3rem;
+        margin-left: 0.2rem;
+      }
+    }
+    .linkbox {
+      margin: 0.4rem auto;
+      border-radius: 0.3rem;
+      > div {
+        width: 1rem;
+        height: 0.6rem;
+        i {
+          font-size: 0.15rem;
+        }
+        &:last-child {
+        }
+        &:hover {
+        }
+      }
+    }
+    .lis {
+      div {
+        font-size: 0.15rem;
+        font-weight: 300;
+        i {
+          font-size: 0.35rem;
+          margin-right: 0.2rem;
+        }
+      }
+    }
+    .btn {
+    }
+  }
+  .rightbox {
+    width: 100%;
+    .title {
+      font-size: 0.3rem;
+      font-weight: 500;
+      padding: 0;
+      margin-bottom: 0.1rem;
+      .selectbox {
+        width: 2.7rem;
+        height: 1.2rem;
+      }
+    }
+    > .list {
+      width: 100%;
+      max-height: 16rem;
+      padding: 0;
+      padding-right: 0.2rem;
+      > li {
+        margin: 0.4rem 0;
+        padding: 0 0.2rem 0 0.4rem;
+        &:hover {
+        }
+        ul {
+          li {
+            margin: 0.4rem 0;
+            &:nth-child(1) {
+              font-size: 0.15rem;
+              font-weight: 300;
+              span {
+                display: inline-block;
+                background: #000000;
+                border-radius: 0.1rem;
+                margin: 0 0.2rem;
+                padding: 0 0.2rem;
+              }
+              .status {
+                font-size: 0.12rem;
+                font-weight: 600;
+                color: #00b2fe;
+              }
+            }
+            &:nth-child(2) {
+              font-size: 0.2rem;
+              font-weight: 600;
+              position: relative;
+              img {
+                width: 0.12rem;
+                height: auto;
+                position: absolute;
+                left: -0.25rem;
+                top: 0.08rem;
+              }
+            }
+            &:nth-child(3) {
+              font-size: 0.15rem;
+              font-weight: 300;
+            }
+            &:nth-child(4) {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              font-size: 0.12rem;
+              font-weight: 600;
+              color: #00b2fe;
+              span {
+                margin-right: 0.1rem;
+              }
+            }
+            pre {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp: 3;
+              -webkit-box-orient: vertical;
+            }
           }
         }
       }

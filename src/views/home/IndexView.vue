@@ -461,12 +461,13 @@ export default {
   padding-top: 0.8rem;
   position: relative;
   ul {
-    width: 55%;
+    width: calc(100% - 6.45rem);
     li {
-      padding-left: 1rem;
+      font-size: 0.2rem;
+      font-weight: bold;
+      padding-left: 0.5rem;
       &:nth-child(1) {
         font-size: 0.45rem;
-        font-weight: bold;
         span {
           color: #74ceff;
         }
@@ -480,11 +481,9 @@ export default {
         }
       }
       &:nth-child(3) {
-        font-size: 0.2rem;
-        font-weight: bold;
       }
       &:nth-child(4) {
-        margin: 0.8rem 0 0.2rem 0;
+        margin: 0.2rem 0;
         display: flex;
         align-items: center;
         div {
@@ -492,8 +491,6 @@ export default {
             width: fit-content;
             padding: 0 0.3rem;
             margin-right: 0.5rem;
-            font-size: 0.25rem;
-            font-weight: bold;
             background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
             border: 1px solid;
             border-image: linear-gradient(320deg, rgba(219, 98, 255, 1), rgba(136, 253, 238, 0)) 1 1;
@@ -509,7 +506,7 @@ export default {
         }
       }
       &:nth-child(5) {
-        padding-left: 0.2rem;
+        padding-left: 0;
         img {
           width: 8rem;
           height: auto;
@@ -518,7 +515,7 @@ export default {
     }
   }
   .banner_img {
-    width: auto;
+    width: 6.45rem;
     height: 8.55rem;
     position: absolute;
     top: 1.2rem;
@@ -554,6 +551,8 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+
     li {
       cursor: pointer;
       width: 3.2rem;
@@ -568,19 +567,14 @@ export default {
         transform: scale(1.1);
       }
       div {
-        padding: 0 0.2rem;
+        padding: 0.2rem;
         p {
+          font-size: 0.12rem;
+          font-weight: bold;
           &:nth-child(1) {
-            height: 0.6rem;
-            line-height: 0.6rem;
-            text-align: center;
             font-size: 0.2rem;
-            font-weight: bold;
             color: #000000;
-          }
-          &:nth-child(2) {
-            font-size: 0.12rem;
-            font-weight: bold;
+            margin-bottom: 0.08rem;
           }
         }
       }
@@ -667,12 +661,11 @@ export default {
   background-size: 100% 50%;
   background-position: center bottom;
   .box_content {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+    width: 7.8rem;
+    margin: 0 auto;
     .cardList3 {
       li {
-        width: 7.8rem;
+        width: 100%;
         margin-bottom: 0.5rem;
         .box_border1 {
           background-image: linear-gradient(150deg, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5));
@@ -682,13 +675,10 @@ export default {
           height: 100%;
           padding: 0.2rem 0.4rem;
           > div {
-            &:nth-child(1) {
-              font-size: 0.2rem;
-              font-weight: bold;
-            }
+            font-size: 0.2rem;
+            font-weight: bold;
             &:nth-child(2) {
               font-size: 0.12rem;
-              font-weight: bold;
               margin: 0.2rem 0;
             }
             &:nth-child(3) {
@@ -748,27 +738,30 @@ export default {
         background-image: linear-gradient(120deg, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5));
         .box_border2 {
           width: 100%;
-          height: 0.9rem;
+          padding: 0.2rem;
           display: flex;
-          align-items: center;
-          padding: 0 0.2rem 0 2rem;
         }
       }
       span {
         font-size: 0.2rem;
+        margin-left: 1.2rem;
       }
       img {
         width: 2rem;
         height: auto;
         position: absolute;
         left: -5%;
-        top: -25%;
+        top: 0;
+        bottom: 0;
+        margin: auto;
       }
     }
     .bottom {
       display: flex;
       justify-content: space-between;
       .left {
+        width: 3.8rem;
+        height: 5.5rem;
         .box_border1 {
           background-image: linear-gradient(150deg, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0.5), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5));
           .box_border2 {
@@ -776,18 +769,20 @@ export default {
           }
         }
         img {
-          width: 3.4rem;
-          height: 5rem;
+          width: 100%;
+          height: 100%;
         }
       }
       .right {
         div {
+          width: 5.07rem;
+          height: 2.72rem;
           &:nth-child(1) {
             margin-bottom: 0.1rem;
           }
           img {
-            width: 5rem;
-            height: 2.7rem;
+            width: 100%;
+            height: 100%;
           }
         }
       }
@@ -807,6 +802,7 @@ export default {
       justify-content: space-between;
       flex-wrap: wrap;
       > li {
+        width: 2.4rem;
         margin-bottom: 0.5rem;
         &:hover .box_border2 {
           background: rgba(8, 8, 9, 0);
@@ -814,12 +810,13 @@ export default {
         .box_border1 {
           background-image: linear-gradient(150deg, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0.5), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5));
           .box_border2 {
-            padding: 0.18rem 0.12rem 0 0.12rem;
+            padding: 0.12rem 0.12rem 0 0.12rem;
           }
         }
         ul {
-          width: 2.15rem;
           li {
+            font-size: 0.2rem;
+            font-weight: bold;
             &:nth-child(1) {
               img {
                 width: 100%;
@@ -828,13 +825,10 @@ export default {
             }
             &:nth-child(2) {
               padding: 0 0.1rem;
-              font-size: 0.2rem;
-              font-weight: bold;
+              color: #979797;
             }
             &:nth-child(3) {
               padding: 0 0.1rem;
-              font-size: 0.2rem;
-              font-weight: bold;
             }
             &:nth-child(4) {
               padding: 0.1rem;
@@ -859,8 +853,8 @@ export default {
               justify-content: space-between;
               > div {
                 font-size: 0.14rem;
+                font-weight: bold;
                 .no_connect {
-                  font-weight: bold;
                   color: #965aab;
                 }
                 .connected {
@@ -916,18 +910,6 @@ export default {
         font-weight: bold;
         border-bottom: 1px solid #979797;
         cursor: pointer;
-        &:hover > div {
-          div {
-            width: 1rem;
-            margin-right: 0.2rem;
-            border: 1px solid;
-            border-image: linear-gradient(320deg, rgba(219, 98, 255, 1), rgba(136, 253, 238, 0)) 1 1;
-          }
-          img {
-            width: 0.3rem;
-            margin-right: 0.2rem;
-          }
-        }
         > div {
           height: 50%;
           display: flex;
@@ -950,6 +932,18 @@ export default {
             width: 0;
             height: auto;
             transition: all 0.5s;
+          }
+        }
+        &:hover > div {
+          div {
+            width: 1rem;
+            margin-right: 0.2rem;
+            border: 1px solid;
+            border-image: linear-gradient(320deg, rgba(219, 98, 255, 1), rgba(136, 253, 238, 0)) 1 1;
+          }
+          img {
+            width: 0.3rem;
+            margin-right: 0.2rem;
           }
         }
       }
@@ -981,232 +975,233 @@ export default {
 }
 
 @media screen and (max-width: 750px) {
-  .absolute1 {
-    width: 0.57rem;
-    height: auto;
-    position: absolute;
+  .home {
+    width: 100%;
+    position: relative;
+    background: url($urlImages + "bg2.webp") no-repeat;
+    background-size: 100% auto;
+    background-position: 0% 15%;
+    padding-bottom: 1rem;
+  }
+  .absolute1,
+  .absolute3,
+  .absolute4,
+  .absolute5,
+  .absolute6,
+  .absolute8,
+  .absolute9,
+  .absolute11,
+  .absolute12,
+  .absolute13,
+  .absolute14 {
+    width: 0;
+    height: 0;
     left: 0;
-    top: 24rem;
+    top: 0;
   }
   .absolute2 {
-    width: 0.11rem;
+    width: 0.08rem;
     height: auto;
     position: absolute;
-    left: 0.3rem;
-    top: 27rem;
-  }
-  .absolute3 {
-    width: 1.36rem;
-    height: auto;
-    position: absolute;
-    right: 0;
-    top: 25rem;
-  }
-  .absolute4 {
-    width: 2.8rem;
-    height: auto;
-    position: absolute;
-    left: 0;
-    top: 41rem;
-  }
-  .absolute5 {
-    width: 1.5rem;
-    height: auto;
-    position: absolute;
-    right: 0;
-    top: 41rem;
-  }
-  .absolute6 {
-    width: 1.57rem;
-    height: auto;
-    position: absolute;
-    left: 0;
-    top: 58rem;
-    z-index: 2;
+    left: 0.15rem;
+    top: 60vh;
   }
   .absolute7 {
-    width: 0.07rem;
+    width: 0.04rem;
     height: auto;
     opacity: 0.3;
     transform: rotateY(180deg);
     position: absolute;
-    left: 0.5rem;
-    top: 68rem;
+    left: 0.2rem;
+    top: 175vh;
     z-index: 1;
-  }
-  .absolute8 {
-    width: 0.18rem;
-    height: auto;
-    position: absolute;
-    right: 0.5rem;
-    top: 69rem;
-  }
-  .absolute9 {
-    width: 0.85rem;
-    height: auto;
-    position: absolute;
-    left: 0;
-    top: 74rem;
-  }
-
-  .absolute11 {
-    width: 1.24rem;
-    height: auto;
-    position: absolute;
-    right: 0;
-    top: 68rem;
-  }
-  .absolute12 {
-    width: 0.18rem;
-    height: auto;
-    position: absolute;
-    left: 0.5rem;
-    top: 99rem;
-  }
-  .absolute13 {
-    width: 0.75rem;
-    height: auto;
-    position: absolute;
-    right: 0;
-    top: 94rem;
-  }
-  .absolute14 {
-    width: 0.75rem;
-    height: auto;
-    position: absolute;
-    left: 0;
-    top: 115rem;
   }
   .absolute15 {
     width: 100%;
     height: auto;
     position: absolute;
     left: 0;
-    top: 73rem;
+    top: 245vh;
   }
+
   .box1 {
     width: 100%;
-    height: 12rem;
-    padding-top: 1.8rem;
+    height: 3rem;
+    padding-top: 0.45rem;
     ul {
+      width: calc(100% - 1.48rem);
       li {
+        font-size: 0.12rem;
+        font-weight: bold;
+        padding-left: 0.2rem;
         &:nth-child(1) {
+          font-size: 0.15rem;
           span {
           }
         }
         &:nth-child(2) {
           div {
+            width: 0.1rem;
+            height: 0.01rem;
+            margin: 0.05rem 0;
           }
         }
         &:nth-child(3) {
         }
         &:nth-child(4) {
+          margin: 0.2rem 0;
           div {
             &:nth-child(1) {
+              padding: 0 0.1rem;
               margin-right: 0.1rem;
             }
             &:nth-child(2) {
               img {
-                width: 0.7rem;
-                height: 0.7rem;
+                width: 0.18rem;
+                height: 0.18rem;
+                margin: 0 0.02rem;
               }
             }
           }
         }
         &:nth-child(5) {
           img {
+            width: 2.11rem;
+            height: 0.36rem;
           }
         }
       }
     }
     .banner_img {
-      width: auto;
-      height: 8.8rem;
-      top: 1.8rem;
+      width: 1.48rem;
+      height: 2.29rem;
+      top: 0.45rem;
     }
+  }
+  .box_border1,
+  .box_border2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.05rem;
+  }
+  .box_border1 {
+    padding: 1px;
+  }
+  .box_border2 {
+    padding: 0;
+    background: rgba(8, 8, 9, 1);
+    transition: all 1s;
   }
   .box2 {
     .box_content {
       width: 100%;
+      padding: 0.2rem 0;
     }
     .card_list1 {
-      display: block;
+      width: 100%;
+      padding: 0 10%;
+      margin-bottom: 0;
       li {
-        width: 11.14rem;
-        height: 2.65rem;
-        margin: 0.5rem auto;
+        width: 100%;
+        height: 0.7rem;
+        border-radius: 0.05rem;
+        margin-bottom: 0.2rem;
         &:hover {
-          transform: scale(1.05);
         }
         div {
-          padding: 0 0.5rem;
+          padding: 0.1rem;
           p {
+            font-size: 0.12rem;
             &:nth-child(1) {
-              height: 1rem;
-              line-height: 1rem;
-              text-align: left;
-            }
-            &:nth-child(2) {
+              font-size: 0.12rem;
+              margin-bottom: 0.08rem;
             }
           }
         }
       }
     }
     .img_bg3 {
+      margin-bottom: 0.2rem;
     }
     .card_list2 {
-      justify-content: center;
+      width: 100%;
+      margin: 0.2rem 0;
+      padding: 0 0.35rem;
       li {
-        width: 5rem;
-        margin: 1rem 0.5rem;
+        width: 1.33rem;
+        margin-bottom: 0.35rem;
+        .box_border1 {
+          .box_border2 {
+            padding: 0.05rem;
+            .box_border1 {
+              .box_border2 {
+                padding: 0;
+              }
+            }
+          }
+        }
         .box_item {
-          padding: 0.5rem 0.2rem;
+          font-size: 0.12rem;
+          font-weight: 600;
+          padding: 0.1rem 0.1rem;
         }
         .box_top {
-          top: -1.2rem;
-          left: -0.6rem;
+          top: -0.25rem;
+          left: -0.25rem;
           img {
-            width: 1.6rem;
-            height: 1.9rem;
+            width: 0.4rem;
+            height: 0.5rem;
           }
           span {
+            font-size: 0.16rem;
+            font-weight: bold;
+            margin-left: 0.05rem;
+            margin-bottom: 0.2rem;
           }
         }
       }
     }
   }
   .box3 {
+    width: 100%;
+    margin-bottom: 0.5rem;
     .box_content {
+      width: 80%;
       .cardList3 {
         li {
-          width: 80%;
-          margin: 0 auto 0.5rem auto;
+          margin-bottom: 0.2rem;
           .box_border1 {
           }
           .box_item {
-            width: 100%;
-            height: 100%;
-            padding: 0.5rem;
+            padding: 0.2rem;
             > div {
+              font-size: 0.16rem;
+              font-weight: bold;
               &:nth-child(1) {
               }
               &:nth-child(2) {
+                font-size: 0.12rem;
+                margin: 0.1rem 0;
               }
               &:nth-child(3) {
                 .btn {
+                  font-size: 0.12rem;
+                  font-weight: bold;
                   &:hover .box_border2 {
                   }
                   .box_border1 {
                     .box_border2 {
-                      padding: 0.1rem 0.8rem;
+                      padding: 0.05rem 0.2rem;
                     }
                   }
                 }
                 .progress_bar {
-                  width: 6rem;
+                  width: 1.5rem;
                   height: auto;
                   div {
+                    border-radius: 0.1rem;
                     font-size: 0.12rem;
+                    font-weight: bold;
                   }
                 }
               }
@@ -1217,52 +1212,44 @@ export default {
     }
   }
   .box4 {
+    margin-bottom: 0.5rem;
     .box_content {
       width: 80%;
       .top {
-        margin-bottom: 0.8rem;
+        margin-bottom: 0.2rem;
         .box_border1 {
           .box_border2 {
-            height: 2.85rem;
-            padding: 0 0.2rem 0 2.5rem;
           }
         }
         span {
+          font-size: 0.12rem;
+          margin-left: 0.4rem;
         }
         img {
-          width: 3.65rem;
+          width: 0.95rem;
           left: -10%;
-          top: 0%;
         }
       }
       .bottom {
-        display: flex;
-        justify-content: space-between;
         .left {
+          width: 1.2rem;
+          height: 1.85rem;
           .box_border1 {
-            background-image: linear-gradient(
-              150deg,
-              rgba(0, 211, 255, 0.5),
-              rgba(0, 211, 255, 0.5),
-              rgba(233, 150, 255, 0),
-              rgba(233, 150, 255, 0.5)
-            );
             .box_border2 {
-              padding: 0.2rem;
+              padding: 0.05rem;
             }
           }
           img {
-            width: 4.45rem;
-            height: 6.6rem;
           }
         }
         .right {
           div {
+            width: 1.7rem;
+            height: 0.9rem;
             &:nth-child(1) {
+              margin-bottom: 0.05rem;
             }
             img {
-              width: 6rem;
-              height: 3.5rem;
             }
           }
         }
@@ -1271,56 +1258,68 @@ export default {
   }
   .box5 {
     width: 100%;
-    height: 20rem;
+    height: 5.5rem;
+    margin-bottom: 0.5rem;
     .box_content {
       .cardList4 {
+        width: 80%;
         > li {
-          margin-bottom: 0.5rem;
+          width: 1.4rem;
+          margin-bottom: 0.2rem;
           &:hover .box_border2 {
           }
           .box_border1 {
             .box_border2 {
-              padding: 0.38rem 0.27rem 0 0.27rem;
+              padding: 0.05rem 0.05rem 0 0.05rem;
             }
           }
           ul {
-            width: 4.6rem;
             li {
+              font-size: 0.12rem;
+              font-weight: bold;
               &:nth-child(1) {
                 img {
                 }
               }
               &:nth-child(2) {
+                padding: 0 0.05rem;
               }
               &:nth-child(3) {
+                padding: 0 0.05rem;
               }
               &:nth-child(4) {
+                padding: 0.05rem;
                 img {
                   width: auto;
-                  height: 0.38rem;
+                  height: 0.1rem;
                 }
                 span {
-                  margin-left: 0.2rem;
+                  font-size: 0.12rem;
+                  font-weight: bold;
+                  margin-left: 0.05rem;
                 }
               }
               &:nth-child(5) {
+                padding: 0.05rem;
                 > div {
+                  font-size: 0.12rem;
+                  font-weight: bold;
                   .no_connect {
+                    color: #965aab;
                   }
                   .connected {
                     img {
                       width: auto;
-                      height: 0.38rem;
-                      margin: 0 0.2rem;
+                      height: 0.1rem;
+                      margin: 0 0.05rem;
                     }
                   }
                 }
                 > .btn {
-                  width: 0.8rem;
-                  height: 0.8rem;
+                  width: 0.21rem;
+                  height: 0.21rem;
+                  border-radius: 0.1rem;
                   img {
-                    width: 65%;
-                    height: auto;
                   }
                 }
               }
@@ -1331,30 +1330,37 @@ export default {
     }
   }
   .box6 {
-    .box_title {
-    }
+    width: 100%;
+    margin-bottom: 0.5rem;
     .box_content {
       width: 80%;
       .title_img {
       }
       .cardList5 {
-        height: 10rem;
+        width: 100%;
+        height: 2rem;
         li {
-          height: 2rem;
-          &:hover > div {
-            div {
-              width: 1.8rem;
-            }
-            img {
-              width: 0.8rem;
-            }
-          }
+          width: 100%;
+          height: 0.5rem;
+          font-size: 0.12rem;
+          font-weight: bold;
           > div {
             div {
             }
             span {
+              margin-right: 0.05rem;
             }
             img {
+            }
+          }
+          &:hover > div {
+            div {
+              width: 0.5rem;
+              margin-right: 0.05rem;
+            }
+            img {
+              width: 0.2rem;
+              margin-right: 0.05rem;
             }
           }
         }
@@ -1365,6 +1371,7 @@ export default {
     .box_content {
       .cardList6 {
         li {
+          padding: 0.05rem;
           img {
           }
         }

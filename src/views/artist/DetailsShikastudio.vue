@@ -99,9 +99,7 @@ export default {
 <style lang="scss" scoped>
 .page {
   width: 100%;
-  min-height: calc(100vh - 4rem - 3rem);
   padding-top: 0.8rem;
-  padding-bottom: 0.8rem;
 }
 .banner {
   width: 100%;
@@ -114,7 +112,7 @@ export default {
   justify-content: center;
   background: url($urlImages + "bg6.webp") no-repeat;
   background-size: 100% auto;
-  padding: 0.3rem 0;
+  padding-bottom: 0.8rem;
 }
 .leftbox {
   .cardbox {
@@ -275,12 +273,14 @@ export default {
 }
 @media screen and (max-width: 750px) {
   .page {
+    width: 100%;
     padding-top: 1.8rem;
   }
   .banner {
   }
   .content {
     flex-wrap: wrap;
+    padding-bottom: 1.8rem;
   }
   .leftbox {
     .cardbox {

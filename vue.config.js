@@ -5,7 +5,7 @@ module.exports = {
   publicPath: "/",
   devServer: { disableHostCheck: true },
   lintOnSave: true,
-  productionSourceMap: false,
+  productionSourceMap: false,   // 生产环境是否生成 sourceMap 文件
   chainWebpack(config) {
     config.module.rule("scss").oneOfs.store.forEach((item) => {
       item

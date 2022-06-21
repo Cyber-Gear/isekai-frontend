@@ -279,14 +279,14 @@ export default {
         .lang_box {
           font-size: 0.12rem;
           padding: 0.05rem 0.1rem;
-          margin-left: 0.2rem;
+          margin-left: 0.1rem;
           img {
             width: 0.2rem;
             height: auto;
           }
           ul {
             li {
-              padding: 0.1rem 0;
+              padding: 0.05rem 0;
               &:hover {
               }
             }

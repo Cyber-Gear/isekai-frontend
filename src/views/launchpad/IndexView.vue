@@ -158,7 +158,7 @@ export default {
       balanceAmount: 0,
       stepsArr: [
         { title: "message.status.text1", des: "2022/06/12 15:00" },
-        { title: "message.status.text2", des: "2022/06/14 15:00" },
+        { title: "message.status.text2", des: "2022/06/21 15:00" },
         { title: "message.status.text3", des: "" },
       ],
       countdownObj: { d: 0, h: 0, m: 0, s: 0 },
@@ -499,6 +499,7 @@ export default {
   height: auto;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .leftbox {
   width: 4.2rem;
@@ -567,13 +568,15 @@ export default {
       background: rgba(0, 0, 0, 0.41);
       border-bottom: 1px solid #436e77;
       backdrop-filter: blur(0.07rem);
-      padding: 0.2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding: 0 0.2rem;
+      width: 100%;
+      height: 0.5rem;
+      font-size: 0.2rem;
+      font-weight: 600;
       div {
-        font-size: 0.2rem;
-        font-weight: 600;
         img {
           width: 0.12rem;
           height: auto;
@@ -617,6 +620,7 @@ export default {
         padding: 0 0.5rem;
         &:nth-child(1) {
           font-weight: 400;
+          color: #979494;
         }
         &:nth-child(2) {
           padding: 0;
@@ -629,6 +633,7 @@ export default {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        flex-wrap: wrap;
         .buying {
           width: 2rem;
           height: 1.5rem;
@@ -653,14 +658,15 @@ export default {
           background: url($urlImages + "bg9.webp") no-repeat;
           background-size: 100% 100%;
           text-align: center;
-          font-weight: bold;
           span {
             font-size: 0.25rem;
+            font-weight: bold;
             margin: 0 0.1rem;
           }
           p {
             &:nth-child(1) {
               font-size: 0.25rem;
+              font-weight: bold;
             }
             &:nth-child(2) {
               font-size: 0.12rem;
@@ -670,7 +676,7 @@ export default {
       }
       .buy_box {
         width: 100%;
-        height: 1.2rem;
+        height: 1.5rem;
         padding: 0 0.5rem;
         display: flex;
         align-items: center;
@@ -693,8 +699,8 @@ export default {
             }
           }
           .inputbox {
-            width: 1.7rem;
-            height: 0.35rem;
+            width: 2rem;
+            height: 0.5rem;
             margin: 0.1rem 0;
             background: rgba(24, 24, 28, 0.8);
             border-radius: 0.08rem;
@@ -704,7 +710,7 @@ export default {
             input {
               width: 100%;
               height: 100%;
-              font-size: 0.15rem;
+              font-size: 0.2rem;
               font-weight: 400;
               color: #ffffff;
               text-align: center;
@@ -735,6 +741,14 @@ export default {
             }
           }
         }
+        .right {
+          .el-button {
+            width: 1.2rem;
+            height: 0.5rem;
+            line-height: 0.5rem;
+            font-size: 0.15rem;
+          }
+        }
       }
       .progress_bar_box {
         width: 100%;
@@ -747,7 +761,9 @@ export default {
           width: 100%;
           height: auto;
           font-size: 0.12rem;
-          font-weight: bold;
+          > div:nth-child(1) {
+            font-weight: bold;
+          }
           .progress_bar {
             width: 100%;
             height: auto;
@@ -774,6 +790,194 @@ export default {
       font-size: 0.15rem;
       font-weight: 600;
       overflow-y: auto;
+    }
+  }
+}
+@media screen and (max-width: 750px) {
+  .page {
+    width: 100%;
+    min-height: calc(100vh - 1rem);
+    padding: 0.45rem 0;
+  }
+  .tip_box {
+    width: 90%;
+    height: 0.3rem;
+    line-height: 0.3rem;
+    border-radius: 0.04rem;
+    margin: 0.1rem auto;
+    font-size: 0.12rem;
+    font-weight: 600;
+  }
+  .box {
+    width: 90%;
+    margin: 0 auto;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  .leftbox {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.2rem;
+    .blindbox {
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-bottom: 0;
+      img {
+        width: 1.07rem;
+        height: auto;
+      }
+    }
+    .info {
+      width: 1.7rem;
+      height: 1.8rem;
+      padding: 0.1rem;
+      div {
+        font-size: 0.12rem;
+        font-weight: 600;
+      }
+    }
+  }
+  .rightbox {
+    width: 100%;
+    height: auto;
+    padding-left: 0;
+    .stepsbox {
+      margin-bottom: 0.2rem;
+    }
+    .box1 {
+      margin-bottom: 0.2rem;
+      .title {
+        width: 100%;
+        height: 0.4rem;
+        padding: 0 0.1rem;
+        font-size: 0.15rem;
+        font-weight: 600;
+        div {
+          img {
+            width: 0.07rem;
+            height: auto;
+            margin-right: 0.05rem;
+          }
+        }
+        ul {
+          display: flex;
+          align-items: center;
+          li {
+            width: 0.36rem;
+            height: 0.15rem;
+            line-height: 0.15rem;
+            margin-left: 0.05rem;
+            padding: 0 0.05rem;
+            div {
+              i {
+                font-size: 0.12rem;
+                font-weight: 400;
+              }
+            }
+          }
+        }
+      }
+      .box2 {
+        width: 100%;
+        padding: 0.1rem 0;
+        .row {
+          font-size: 0.12rem;
+          padding: 0 0.2rem;
+          &:nth-child(1) {
+            font-weight: 400;
+            color: #979494;
+          }
+          &:nth-child(2) {
+            padding: 0;
+            height: auto;
+          }
+        }
+        .hasbeenon {
+          width: 100%;
+          height: 1rem;
+          .buying {
+            width: 1.5rem;
+            height: 0.5rem;
+            span {
+              font-size: 0.12rem;
+              font-weight: bold;
+            }
+          }
+          .times {
+            width: 100%;
+            height: 0.5rem;
+            justify-content: space-between;
+            padding: 0 0.2rem;
+            span {
+              font-size: 0.25rem;
+              margin: 0 0.1rem;
+            }
+            p {
+              &:nth-child(1) {
+                font-size: 0.15rem;
+              }
+              &:nth-child(2) {
+                font-size: 0.12rem;
+              }
+            }
+          }
+        }
+        .buy_box {
+          width: 100%;
+          height: 1.2rem;
+          padding: 0 0.2rem;
+          .left {
+            div {
+              font-size: 0.12rem;
+            }
+            .inputbox {
+              width: 1.5rem;
+              height: 0.35rem;
+              margin: 0.1rem 0;
+              input {
+                font-size: 0.15rem;
+                font-weight: 400;
+              }
+              .span1,
+              .span2 {
+                width: 0.5rem;
+              }
+            }
+          }
+          .right {
+            .el-button {
+              width: 1rem;
+              height: 0.35rem;
+              line-height: 0.35rem;
+              font-size: 0.12rem;
+            }
+          }
+        }
+        .progress_bar_box {
+          width: 100%;
+          height: 0.8rem;
+          padding: 0 0.2rem;
+          > div {
+            font-size: 0.12rem;
+            > div:nth-child(1) {
+              font-weight: bold;
+            }
+            .progress_bar {
+              border-radius: 0.1rem;
+              margin: 0.1rem 0;
+            }
+          }
+        }
+      }
+      .content {
+        width: 100%;
+        height: 3rem;
+        padding: 0.1rem 0.2rem;
+        font-size: 0.12rem;
+      }
     }
   }
 }

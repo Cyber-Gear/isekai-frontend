@@ -110,6 +110,7 @@ export default {
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  flex-wrap: wrap;
   background: url($urlImages + "bg6.webp") no-repeat;
   background-size: 100% auto;
   padding-bottom: 0.8rem;
@@ -254,6 +255,7 @@ export default {
         height: 0.3rem;
         font-size: 0.15rem;
         font-weight: 600;
+        padding: 0 0.1rem;
       }
       .text {
         width: 100%;
@@ -274,86 +276,104 @@ export default {
 @media screen and (max-width: 750px) {
   .page {
     width: 100%;
-    padding-top: 1.8rem;
+    padding-top: 0.45rem;
   }
   .banner {
+    width: 100%;
+    height: 0.5rem;
   }
   .content {
-    flex-wrap: wrap;
-    padding-bottom: 1.8rem;
+    padding-bottom: 0.45rem;
   }
   .leftbox {
     .cardbox {
-      width: 10.5rem;
-      height: 16rem;
+      width: 2.72rem;
+      height: 4.22rem;
       margin: 0 auto;
-      > img {
-      }
+      margin-bottom: 0.1rem;
       span {
-        left: 0.8rem;
-        top: 1.3rem;
+        font-size: 0.12rem;
+        left: 0.2rem;
+        top: 0.35rem;
       }
       .btn {
-        width: 6rem;
-        height: 1.5rem;
-        bottom: 1.5rem;
+        width: 1.5rem;
+        height: 0.35rem;
+        font-size: 0.12rem;
+        bottom: 0.35rem;
       }
     }
     .workbox {
       width: 80%;
-      margin-bottom: 0.5rem;
+      border-radius: 0.02rem;
+      margin-bottom: 0.2rem;
       .titlebtn {
-        height: 1.5rem;
-        padding: 0 0.3rem;
+        width: 100%;
+        height: 0.38rem;
+        padding: 0 0.1rem;
         div {
-          font-size: 0.6rem;
+          font-size: 0.12rem;
+          font-weight: 600;
           i {
-            font-size: 0.8rem;
-            margin-right: 0.3rem;
+            font-size: 0.15rem;
+            margin-right: 0.05rem;
           }
         }
       }
       .text {
-        height: 4rem;
-        padding: 0.3rem;
+        width: 100%;
+        height: 0.9rem;
+        font-size: 0.12rem;
+        font-weight: 600;
+        padding: 0.05rem;
         div {
+          padding: 0 0.05rem;
         }
       }
     }
   }
   .rightbox {
     width: 80%;
-    height: 12.75rem;
+    height: 3.35rem;
     margin-left: 0;
     > div {
-      padding: 0 0.3rem;
+      padding: 0 0.1rem;
       .introbox1 {
         li {
-          padding: 0.3rem 0;
+          font-size: 0.12rem;
+          font-weight: 600;
+          padding: 0.08rem 0;
           &:nth-child(1) {
-            font-size: 0.6rem;
-            padding: 0.5rem 0;
+            font-size: 0.15rem;
+            padding: 0.1rem 0;
           }
           i {
-            font-size: 0.6rem;
+            font-size: 0.15rem;
+            margin-right: 0.1rem;
           }
           div {
-            width: 3.5rem;
+            width: 1rem;
           }
         }
       }
       .introbox2 {
         width: 100%;
-        height: 6rem;
-        padding: 0.3rem;
+        height: 1.58rem;
+        padding: 0.05rem;
         .title {
           width: 100%;
-          height: 0.8rem;
+          height: 0.2rem;
+          font-size: 0.15rem;
+          font-weight: 600;
+          padding: 0 0.05rem;
         }
         .text {
           width: 100%;
-          height: calc(100% - 0.8rem);
+          height: calc(100% - 0.2rem);
+          font-size: 0.12rem;
+          font-weight: bold;
           div {
+            padding: 0 0.05rem;
           }
         }
       }

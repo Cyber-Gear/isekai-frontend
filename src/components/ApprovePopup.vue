@@ -25,7 +25,7 @@
               <div class="status">
                 <div>{{ $parent.popupActive == 1 ? $t("message.status.text10") : $t("message.status.text11") }}</div>
               </div>
-              <el-button size="small" type="primary" :loading="$parent.approvedloading" @click="toApprove">
+              <el-button type="primary" :loading="$parent.approvedloading" @click="toApprove">
                 {{ $t("message.approvePopup.text2") }}
               </el-button>
             </div>
@@ -47,7 +47,7 @@
               <div class="status">
                 <div v-show="$parent.popupActive == 2">{{ $t("message.status.text10") }}</div>
               </div>
-              <el-button size="small" type="primary" :disabled="$parent.popupActive == 1" :loading="$parent.buyloading" @click="toBuy">
+              <el-button type="primary" :disabled="$parent.popupActive == 1" :loading="$parent.buyloading" @click="toBuy">
                 {{ $t("message.approvePopup.text1") }}
               </el-button>
             </div>
@@ -166,24 +166,84 @@ export default {
   }
   .normal_des {
     .title {
-      font-size: 12px;
+      font-size: 0.12rem;
       font-weight: bold;
       color: #ffffff;
     }
     .status {
-      width: 1rem;
-      height: 0.2rem;
+      width: 1.2rem;
+      height: 0.25rem;
+      line-height: 0.25rem;
       margin: 0.1rem auto;
       > div {
         width: 100%;
         height: 100%;
-        font-size: 12px;
+        font-size: 0.12rem;
         font-weight: bold;
         color: #ffffff;
         background: linear-gradient(90deg, #44819d 0%, #7a649e 100%);
-        border-radius: 4px;
+        border-radius: 0.04rem;
       }
     }
+  }
+}
+.el-button {
+  width: 1.2rem;
+  height: 0.5rem;
+  line-height: 0.5rem;
+  font-size: 0.15rem;
+}
+@media screen and (max-width: 750px) {
+  /deep/ .el-step__main {
+    margin-top: 0.2rem;
+  }
+  .popupbox {
+    width: 80vw;
+    padding: 0.1rem 0;
+    .normal_icon {
+      min-width: 0.4rem;
+      min-height: 0.4rem;
+      width: 0.4rem;
+      height: 0.4rem;
+      .icon1 {
+        > div {
+          i {
+            font-size: 0.2rem;
+          }
+        }
+      }
+      .icon2 {
+        > div {
+          > div {
+            i {
+              font-size: 0.2rem;
+            }
+          }
+        }
+      }
+    }
+    .normal_des {
+      .title {
+        font-size: 0.12rem;
+        font-weight: bold;
+      }
+      .status {
+        width: 1rem;
+        height: 0.2rem;
+        line-height: 0.2rem;
+        margin: 0.05rem auto;
+        > div {
+          font-size: 0.12rem;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  .el-button {
+    width: 1rem;
+    height: 0.35rem;
+    line-height: 0.35rem;
+    font-size: 0.12rem;
   }
 }
 </style>

@@ -32,4 +32,10 @@ export default {
     height: 100%;
   }
 }
+@media screen and (max-width: 750px) {
+  .popupbox {
+    width: 80vw;
+    height: 80vw;
+  }
+}
 </style>

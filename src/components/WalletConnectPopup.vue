@@ -78,4 +78,42 @@ export default {
     }
   }
 }
+.dialog-footer {
+  .el-button {
+    width: 1.2rem;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    font-size: 0.15rem;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .popupbox {
+    width: 80vw;
+    > p {
+      font-size: 0.12rem;
+      font-weight: 400;
+    }
+    > div {
+      width: 1.5rem;
+      height: 1.5rem;
+      i {
+        &:nth-child(1) {
+          font-size: 0.65rem;
+        }
+        &:nth-child(2) {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+  .dialog-footer {
+    .el-button {
+      width: 1rem;
+      height: 0.35rem;
+      line-height: 0.35rem;
+      font-size: 0.12rem;
+    }
+  }
+}
 </style>

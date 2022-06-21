@@ -51,10 +51,9 @@ export default {
 .popupbox {
   width: 4.5rem;
   color: #ffffff;
-  font-size: 0.12rem;
-  font-weight: 600;
   .title {
     text-align: center;
+    font-size: 0.12rem;
     font-weight: bold;
     margin-bottom: 0.3rem;
     span {
@@ -66,10 +65,9 @@ export default {
     }
   }
   ul {
-    width: fit-content;
-    margin: 0 auto;
+    width: 100%;
     li {
-      width: 3.5rem;
+      width: 100%;
       height: 0.5rem;
       margin-bottom: 0.2rem;
       background: #211f24;
@@ -84,8 +82,30 @@ export default {
       }
       img {
         width: auto;
-        height: 0.3rem;
+        height: 80%;
         margin-right: 0.1rem;
+      }
+    }
+  }
+}
+@media screen and (max-width: 750px) {
+  .popupbox {
+    width: 80vw;
+    .title {
+      margin-bottom: 0.1rem;
+      span {
+        margin-left: 0.05rem;
+      }
+    }
+    ul {
+      li {
+        height: 0.4rem;
+        margin-bottom: 0.1rem;
+        img {
+          width: auto;
+          height: 80%;
+          margin-right: 0.1rem;
+        }
       }
     }
   }

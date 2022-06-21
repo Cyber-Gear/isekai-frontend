@@ -43,8 +43,7 @@ export default {
   }
   .center {
     width: 7rem;
-    position: relative;
-    left: 4rem;
+    margin: 0 auto;
     .top {
       display: flex;
       align-items: center;
@@ -76,11 +75,11 @@ export default {
     width: 100%;
     height: 1rem;
     > img {
-      width: 1.02rem;
+      width: 1rem;
       height: 1.2rem;
     }
     .center {
-      width: 2rem;
+      width: 1.8rem;
       left: 1rem;
       .top {
         > img {

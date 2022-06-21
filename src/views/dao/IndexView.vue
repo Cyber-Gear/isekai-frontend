@@ -2,30 +2,32 @@
   <div class="page">
     <div class="box">
       <div class="leftbox" v-if="spaceObj">
-        <div class="avatar">
-          <img :src="`${$urlImages}logo1.webp`" alt="" />
+        <div>
+          <div class="avatar">
+            <img :src="`${$urlImages}logo1.webp`" alt="" />
+          </div>
+          <div class="title"><span>FUN TOPIA</span><i class="iconfont icon-telegram"></i></div>
+          <div class="linkbox">
+            <div><i class="iconfont icon-telegram"></i></div>
+            <div><i class="iconfont icon-tuite"></i></div>
+            <div><i class="iconfont icon-discord"></i></div>
+            <div><i class="iconfont icon-medium"></i></div>
+          </div>
+          <div class="lis">
+            <div><i class="iconfont icon-Customermanagement-fill"></i>{{ $t("message.dao.text2") }}</div>
+            <div>{{ spaceObj.members.length }}</div>
+          </div>
+          <div class="btn">
+            <el-button :disabled="true"> {{ $t("message.dao.text3") }} </el-button>
+          </div>
         </div>
-        <div class="title"><span>FUN TOPIA</span><i class="iconfont icon-telegram"></i></div>
-        <div class="linkbox">
-          <div><i class="iconfont icon-telegram"></i></div>
-          <div><i class="iconfont icon-tuite"></i></div>
-          <div><i class="iconfont icon-discord"></i></div>
-          <div><i class="iconfont icon-medium"></i></div>
-        </div>
-        <div class="lis">
-          <div><i class="iconfont icon-Customermanagement-fill"></i>{{ $t("message.dao.text2") }}</div>
-          <div>{{ spaceObj.members.length }}</div>
-        </div>
-        <div class="btn">{{ $t("message.dao.text3") }}</div>
       </div>
       <div class="rightbox">
         <div class="title">
           <div>{{ $t("message.dao.text1") }}</div>
-          <div class="selectbox">
-            <el-select v-model="selectKey" @change="selectChange">
-              <el-option v-for="item in selectOptions" :key="item.value" :label="$t(item.label)" :value="item.value"></el-option>
-            </el-select>
-          </div>
+          <el-select v-model="selectKey" @change="selectChange">
+            <el-option v-for="item in selectOptions" :key="item.value" :label="$t(item.label)" :value="item.value"></el-option>
+          </el-select>
         </div>
         <ul class="list">
           <li v-for="item in proposalsArr" :key="item.id" @click="toDetail(item)">
@@ -35,20 +37,17 @@
                   {{ $t("message.dao.text4") }} <span>{{ item.author | ellipsisWallet }}</span> {{ $t("message.dao.text5") }}
                 </div>
                 <div class="status">
-                  <template v-if="item.state == 'active'"> {{ $t("message.status.text7") }} </template>
-                  <template v-if="item.state == 'pending'"> {{ $t("message.status.text8") }} </template>
-                  <template v-if="item.state == 'closed'"> {{ $t("message.status.text9") }} </template>
+                  <template v-if="item.state == 'active'">{{ $t("message.status.text7") }} </template>
+                  <template v-if="item.state == 'pending'">{{ $t("message.status.text8") }} </template>
+                  <template v-if="item.state == 'closed'">{{ $t("message.status.text9") }} </template>
                 </div>
               </li>
               <li>{{ item.title }} <img :src="`${$urlImages}box_title3.webp`" alt="" /></li>
               <li>
-                <pre>{{ item.body }}</pre>
+                <pre class="text_ellipsis_row_3">{{ item.body }}</pre>
               </li>
-              <li>
+              <li v-if="item.state == 'pending'">
                 <div>
-                  <!-- <span>{{ $utils.formatDate(item.start * 1000) }}</span>
-                  <span>-</span>
-                  <span>{{ $utils.formatDate(item.end * 1000) }}</span> -->
                   <span>{{ countdown(item.start * 1000) }}</span>
                 </div>
               </li>
@@ -182,7 +181,7 @@ export default {
   background-size: 100% 100%;
 }
 .box {
-  width: 11rem;
+  width: fit-content;
   margin: 1rem auto;
   background: rgba(129, 129, 151, 0.19);
   border-radius: 0.08rem;
@@ -190,109 +189,108 @@ export default {
   backdrop-filter: blur(0.07rem);
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding: 0.8rem 0.5rem 0.5rem 0.5rem;
 }
 .leftbox {
   width: 3rem;
   height: fit-content;
-  background: rgba(24, 24, 28, 0.8);
-  border-radius: 0.06rem;
-  position: relative;
-  padding: 0.8rem 0.2rem;
-  .avatar {
-    width: 1.2rem;
-    height: 1.2rem;
-    padding: 0.1rem;
-    border-radius: 50%;
-    background: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: -0.5rem;
-    left: 0;
-    right: 0;
-    margin: auto;
-    img {
-      width: 100%;
-      height: auto;
+  > div {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: rgba(24, 24, 28, 0.8);
+    border-radius: 0.06rem;
+    padding: 0.8rem 0.2rem 0.2rem 0.2rem;
+    .avatar {
+      width: 1.2rem;
+      height: 1.2rem;
+      padding: 0.1rem;
+      border-radius: 50%;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: -0.5rem;
+      left: 0;
+      right: 0;
+      margin: auto;
+      img {
+        width: 100%;
+        height: auto;
+      }
     }
-  }
-  .title {
-    font-size: 0.3rem;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    i {
+    .title {
       font-size: 0.3rem;
-      margin-left: 0.1rem;
-    }
-  }
-  .linkbox {
-    width: fit-content;
-    margin: 0.2rem auto;
-    display: flex;
-    align-items: center;
-    border-radius: 0.15rem;
-    overflow: hidden;
-    > div {
-      cursor: pointer;
-      width: 0.55rem;
-      height: 0.35rem;
-      background: rgba(255, 255, 255, 0.21);
-      backdrop-filter: blur(0.06rem);
+      font-weight: bold;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-right: 0.05rem;
       i {
-        font-size: 0.22rem;
-      }
-      &:last-child {
-        margin-right: 0;
-      }
-      &:hover {
-        background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
-        box-shadow: 0px 0px 8px 4px #000000;
+        font-size: 0.3rem;
+        margin-left: 0.1rem;
       }
     }
-  }
-  .lis {
-    width: 100%;
-    padding: 0.2rem;
-    border-bottom: 1px solid;
-    border-image: linear-gradient(135deg, rgba(212, 135, 241, 0.44), rgba(82, 224, 255, 0.44)) 1 1;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    div {
+    .linkbox {
+      width: fit-content;
+      margin: 0.2rem auto;
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 0.15rem;
-      font-weight: 300;
-      i {
-        font-size: 0.35rem;
-        margin-right: 0.1rem;
+      border-radius: 0.15rem;
+      overflow: hidden;
+      > div {
+        cursor: pointer;
+        width: 0.55rem;
+        height: 0.35rem;
+        background: rgba(255, 255, 255, 0.21);
+        backdrop-filter: blur(0.06rem);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 0.05rem;
+        i {
+          font-size: 0.22rem;
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+        &:hover {
+          background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
+          box-shadow: 0px 0px 8px 4px #000000;
+        }
       }
     }
-  }
-  .btn {
-    width: 100%;
-    height: auto;
-    margin: 0.2rem auto;
-    background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
-    border-radius: 0.04rem;
-    font-size: 0.15rem;
-    font-weight: 300;
-    text-align: center;
-    padding: 0.2rem 0;
-    cursor: pointer;
-    &.disabled {
-      color: #424242;
-      background: #17181b;
-      cursor: not-allowed;
+    .lis {
+      width: 100%;
+      padding: 0.2rem;
+      border-bottom: 1px solid;
+      margin: 0 auto;
+      border-image: linear-gradient(135deg, rgba(212, 135, 241, 0.44), rgba(82, 224, 255, 0.44)) 1 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.15rem;
+        font-weight: 300;
+        i {
+          font-size: 0.35rem;
+          margin-right: 0.1rem;
+        }
+      }
+    }
+    .btn {
+      width: fit-content;
+      margin: 0.2rem auto;
+      .el-button {
+        width: 2rem;
+        height: 0.5rem;
+        line-height: 0.5rem;
+        font-size: 0.15rem;
+      }
     }
   }
 }
@@ -307,14 +305,14 @@ export default {
     font-weight: 500;
     padding: 0 0.2rem;
     margin-bottom: 0.1rem;
-    .selectbox {
+    .el-select {
       width: 1.5rem;
-      height: 0.45rem;
+      height: 0.4rem;
     }
   }
   > .list {
     width: 100%;
-    max-height: 8rem;
+    height: 6rem;
     padding: 0 0.2rem;
     overflow-y: auto;
     > li {
@@ -377,13 +375,6 @@ export default {
               margin-right: 0.1rem;
             }
           }
-          pre {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-          }
         }
       }
     }
@@ -392,95 +383,100 @@ export default {
 @media screen and (max-width: 750px) {
   .page {
     width: 100%;
-    padding: 1.8rem 0;
+    padding: 0.45rem 0;
   }
   .box {
     width: 90%;
-    margin: 1rem auto;
-    padding: 2rem 0.5rem 0.5rem 0.5rem;
-    flex-wrap: wrap;
+    margin: 0.5rem auto;
+    padding: 0.6rem 0 0 0;
   }
   .leftbox {
     width: 100%;
-    padding: 1.5rem 3rem 1rem 3rem;
-    margin-bottom: 1rem;
-    .avatar {
-      width: 2.5rem;
-      height: 2.5rem;
-      padding: 0.2rem;
-      top: -1.25rem;
-      img {
+    height: fit-content;
+    margin-bottom: 0.2rem;
+    padding: 0 0.2rem;
+    > div {
+      padding: 0.5rem 0 0.2rem 0;
+      .avatar {
+        width: 0.8rem;
+        height: 0.8rem;
+        padding: 0.05rem;
+        top: -0.4rem;
       }
-    }
-    .title {
-      font-size: 0.3rem;
-      i {
-        font-size: 0.3rem;
-        margin-left: 0.2rem;
-      }
-    }
-    .linkbox {
-      margin: 0.4rem auto;
-      border-radius: 0.3rem;
-      > div {
-        width: 1rem;
-        height: 0.6rem;
+      .title {
+        font-size: 0.2rem;
+        font-weight: bold;
         i {
-          font-size: 0.15rem;
-        }
-        &:last-child {
-        }
-        &:hover {
+          font-size: 0.2rem;
+          margin-left: 0.1rem;
         }
       }
-    }
-    .lis {
-      div {
-        font-size: 0.15rem;
-        font-weight: 300;
-        i {
-          font-size: 0.35rem;
-          margin-right: 0.2rem;
+      .linkbox {
+        width: fit-content;
+        margin: 0.1rem auto;
+        > div {
+          width: 0.4rem;
+          height: 0.2rem;
+          margin-right: 0.02rem;
+          i {
+            font-size: 0.15rem;
+          }
         }
       }
-    }
-    .btn {
+      .lis {
+        width: 70%;
+        padding: 0.1rem;
+        div {
+          font-size: 0.12rem;
+          font-weight: 300;
+          i {
+            font-size: 0.2rem;
+            margin-right: 0.1rem;
+          }
+        }
+      }
+      .btn {
+        width: fit-content;
+        margin: 0.1rem auto;
+        .el-button {
+          width: 1.5rem;
+          height: 0.35rem;
+          line-height: 0.35rem;
+          font-size: 0.12rem;
+        }
+      }
     }
   }
   .rightbox {
     width: 100%;
+    padding: 0 0.1rem;
     .title {
-      font-size: 0.3rem;
+      width: 100%;
+      font-size: 0.2rem;
       font-weight: 500;
-      padding: 0;
-      margin-bottom: 0.1rem;
-      .selectbox {
-        width: 2.7rem;
-        height: 1.2rem;
+      padding: 0 0.1rem;
+      margin-bottom: 0.05rem;
+      .el-select {
+        width: 1.2rem;
+        height: 0.3rem;
       }
     }
     > .list {
       width: 100%;
-      max-height: 16rem;
-      padding: 0;
-      padding-right: 0.2rem;
+      height: 4rem;
+      padding: 0 0.1rem;
       > li {
-        margin: 0.4rem 0;
-        padding: 0 0.2rem 0 0.4rem;
-        &:hover {
-        }
+        margin: 0.1rem 0;
+        padding: 0 0.1rem 0 0.2rem;
         ul {
           li {
-            margin: 0.4rem 0;
+            margin: 0.1rem 0;
             &:nth-child(1) {
-              font-size: 0.15rem;
-              font-weight: 300;
+              font-size: 0.12rem;
+              font-weight: 600;
               span {
-                display: inline-block;
-                background: #000000;
-                border-radius: 0.1rem;
-                margin: 0 0.2rem;
-                padding: 0 0.2rem;
+                margin: 0 0.05rem;
+                padding: 0 0.1rem;
               }
               .status {
                 font-size: 0.12rem;
@@ -489,38 +485,24 @@ export default {
               }
             }
             &:nth-child(2) {
-              font-size: 0.2rem;
+              font-size: 0.15rem;
               font-weight: 600;
-              position: relative;
               img {
-                width: 0.12rem;
-                height: auto;
-                position: absolute;
-                left: -0.25rem;
-                top: 0.08rem;
+                width: 0.08rem;
+                left: -0.15rem;
+                top: 0.05rem;
               }
             }
             &:nth-child(3) {
-              font-size: 0.15rem;
+              font-size: 0.12rem;
               font-weight: 300;
             }
             &:nth-child(4) {
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
               font-size: 0.12rem;
               font-weight: 600;
-              color: #00b2fe;
               span {
-                margin-right: 0.1rem;
+                margin-right: 0.05rem;
               }
-            }
-            pre {
-              overflow: hidden;
-              text-overflow: ellipsis;
-              display: -webkit-box;
-              -webkit-line-clamp: 3;
-              -webkit-box-orient: vertical;
             }
           }
         }

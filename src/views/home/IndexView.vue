@@ -661,7 +661,7 @@ export default {
   background-size: 100% 50%;
   background-position: center bottom;
   .box_content {
-    width: 7.8rem;
+    width: 8.5rem;
     margin: 0 auto;
     .cardList3 {
       li {

@@ -29,7 +29,8 @@ Vue.use(Tooltip);
 Vue.use(Backtop);
 
 Vue.prototype.$message = (option: any) => {
-  option.offset = 100;
+  // option.duration = 0;
+  // option.offset = 100;
   option.customClass = i18n.locale == "en" ? "fontfamily_en" : "fontfamily_zh";
   // this.$message({ message: this.$t("message.message.text1") });
   // this.$message({ message: this.$t("message.message.text1"), type: "success" });

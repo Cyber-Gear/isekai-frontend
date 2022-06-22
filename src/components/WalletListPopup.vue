@@ -82,7 +82,9 @@ export default {
       }
       img {
         width: auto;
-        height: 80%;
+        height: auto;
+        max-width: 0.4rem;
+        max-height: 0.4rem;
         margin-right: 0.1rem;
       }
     }
@@ -103,8 +105,10 @@ export default {
         margin-bottom: 0.1rem;
         img {
           width: auto;
-          height: 80%;
-          margin-right: 0.1rem;
+          height: auto;
+          max-width: 0.25rem;
+          max-height: 0.25rem;
+          margin-right: 0.05rem;
         }
       }
     }

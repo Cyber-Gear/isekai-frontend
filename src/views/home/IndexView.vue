@@ -191,7 +191,7 @@
       </div>
     </div>
     <!-- INVESTOR&PARTNER -->
-    <div class="box7">
+    <!-- <div class="box7">
       <div class="box_title">
         <img :src="`${$urlImages}box_title1.webp`" alt="" />
         <span>{{ $t("message.home.text9") }}</span>
@@ -203,7 +203,7 @@
           </li>
         </ul>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -662,7 +662,7 @@ export default {
   background-size: 100% 50%;
   background-position: center bottom;
   .box_content {
-    width: 8.5rem;
+    width: 9.8rem;
     margin: 0 auto;
     .cardList3 {
       li {

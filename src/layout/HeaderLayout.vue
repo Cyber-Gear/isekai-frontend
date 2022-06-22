@@ -65,7 +65,6 @@ export default {
   computed: { ...mapGetters(["getWalletAccount"]) },
   watch: {
     $route(to) {
-      window.scrollTo(0, 0);
       if (to.path == "/home") {
         this.navActive = 0;
       } else if (to.path.indexOf("/artist") !== -1) {
@@ -233,7 +232,7 @@ export default {
 }
 .menu_mobile {
   width: 100vw;
-  height: 0.8rem;
+  height: 0.5rem;
   background: #0a0a0d;
   display: flex;
   align-items: center;
@@ -248,7 +247,7 @@ export default {
     font-weight: 400;
     color: #ffffff;
     i {
-      font-size: 0.3rem;
+      font-size: 0.25rem;
     }
     &.active {
       color: #29a7e1;
@@ -259,7 +258,7 @@ export default {
 @media screen and (max-width: 750px) {
   .nav {
     width: 100vw;
-    height: 0.45rem;
+    height: 0.5rem;
     .nav_inset {
       padding: 0 0.3rem;
       .logo {

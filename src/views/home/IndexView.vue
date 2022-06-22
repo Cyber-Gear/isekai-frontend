@@ -346,6 +346,7 @@ export default {
   background-size: 100% auto;
   background-position: 0% 15%;
   padding-bottom: 1rem;
+  overflow: hidden;
 }
 
 .absolute1 {
@@ -442,7 +443,7 @@ export default {
   height: auto;
   position: absolute;
   left: 0;
-  top: 63rem;
+  top: 62rem;
 }
 .absolute15 {
   width: 100%;
@@ -467,7 +468,7 @@ export default {
       font-weight: bold;
       padding-left: 0.5rem;
       &:nth-child(1) {
-        font-size: 0.45rem;
+        font-size: 0.5rem;
         span {
           color: #74ceff;
         }
@@ -1027,7 +1028,7 @@ export default {
   .box1 {
     width: 100%;
     height: 3rem;
-    padding-top: 0.45rem;
+    padding-top: 0.5rem;
     ul {
       width: calc(100% - 1.48rem);
       li {
@@ -1075,7 +1076,7 @@ export default {
     .banner_img {
       width: 1.48rem;
       height: 2.29rem;
-      top: 0.45rem;
+      top: 0.5rem;
     }
   }
   .box_border1,

@@ -687,7 +687,7 @@ export default {
 @media screen and (max-width: 750px) {
   .page {
     width: 100%;
-    padding: 0.45rem 0;
+    padding: 0.5rem 0;
   }
   .banner {
     width: 100%;

@@ -182,7 +182,7 @@ export default {
 }
 .box {
   width: fit-content;
-  margin: 1rem auto;
+  margin: 0.5rem auto;
   background: rgba(129, 129, 151, 0.19);
   border-radius: 0.08rem;
   border: 1px solid #535151;
@@ -383,12 +383,12 @@ export default {
 @media screen and (max-width: 750px) {
   .page {
     width: 100%;
-    padding: 0.45rem 0;
+    padding: 0.5rem 0;
   }
   .box {
     width: 90%;
-    margin: 0.5rem auto;
-    padding: 0.6rem 0 0 0;
+    margin: 0.2rem auto;
+    padding: 0.5rem 0 0 0;
   }
   .leftbox {
     width: 100%;

@@ -797,7 +797,7 @@ export default {
   .page {
     width: 100%;
     min-height: calc(100vh - 1rem);
-    padding: 0.45rem 0;
+    padding: 0.5rem 0;
   }
   .tip_box {
     width: 90%;

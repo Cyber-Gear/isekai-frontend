@@ -10,6 +10,7 @@ export const message = {
     text5: "MARKET",
     text6: "Connected",
     text7: "Disconnect",
+    text8: "DASHBOARD",
   },
   footer: {
     text1: "COPYRIGHT © 2022 FUNTOPIA, All rights Reserved",
@@ -299,6 +300,9 @@ export const message = {
     Unlike traditional games, Cybergear utilizes blockchain technology to perfectly realize that players permanently own the characters and virtual items in the game, and they can trade these items through the market, or transfer these items to any wallet through the blockchain as an individual collect.
     
     Developers, communities, players and investors work together to create, manage, advance game development, and gain continuous revenue. Cybergear is planned to launch in Q2 this year, and players can get rewards by owning, crafting, trading, and competing.`,
+  },
+  dashboard: {
+    text1: "Dashboard",
   },
   walletPopup: {
     text1: "Wallet Connected",

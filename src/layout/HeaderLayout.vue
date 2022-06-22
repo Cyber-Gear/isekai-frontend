@@ -55,7 +55,8 @@ export default {
         { label: "message.nav.text2", icon: "icon-bussiness-man", link: "/artist", isOpen: true },
         { label: "message.nav.text3", icon: "icon-qukuailian", link: "/dao", isOpen: true },
         { label: "message.nav.text4", icon: "icon-boxhezi", link: "/launchpad", isOpen: true },
-        { label: "message.nav.text5", icon: "icon-tradingvolume", link: "/market", isOpen: false },
+        { label: "message.nav.text5", icon: "icon-tradingvolume", link: "/market", isOpen: true },
+        { label: "message.nav.text8", icon: "icon-tradingvolume", link: "/dashboard", isOpen: true },
       ],
       showLangSelect: false,
       showDisconnect: false,
@@ -75,6 +76,8 @@ export default {
         this.navActive = 3;
       } else if (to.path.indexOf("/market") !== -1) {
         this.navActive = 4;
+      } else if (to.path.indexOf("/dashboard") !== -1) {
+        this.navActive = 5;
       }
     },
   },

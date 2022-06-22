@@ -393,6 +393,16 @@ body {
     border-bottom-color: #18181c;
   }
 }
+.el-drawer__wrapper {
+  .el-drawer__container {
+    .el-drawer {
+      width: 3.16rem !important;
+      background-color: rgba(129, 129, 151, 0.19);
+      border-radius: 0.08rem;
+      backdrop-filter: blur(7px);
+    }
+  }
+}
 // @media screen and (min-width: 981px) { }
 @media screen and (max-width: 750px) {
   .pc {

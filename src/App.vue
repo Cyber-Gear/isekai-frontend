@@ -40,20 +40,12 @@ export default {
     resetRem() {
       const clientWidth = document.body.clientWidth;
       let rem = 0;
-      // if (clientWidth >= 1440) {
-      //   rem = 100;
-      // } else {
-      //   rem = (clientWidth * 100) / 1440;
-      // }
-      if (clientWidth >= 1440) {
+      if (1440 <= clientWidth) {
         rem = 100;
-      } else if (clientWidth > 750 && clientWidth < 1440) {
+      } else if (750 < clientWidth && clientWidth < 1440) {
         rem = (clientWidth * 100) / 1440;
       } else if (clientWidth <= 750) {
         rem = (clientWidth * 100) / 375;
-      }
-      if (clientWidth == 375) {
-        console.log(rem);
       }
       document.getElementsByTagName("html")[0].style.fontSize = rem + "px";
     },

@@ -11,6 +11,7 @@ export const message = {
     text5: "MARKET",
     text6: "未连接",
     text7: "断开连接",
+    text8: "DASHBOARD",
   },
   footer: {
     text1: "COPYRIGHT © 2022 FUNTOPIA, All rights Reserved",
@@ -286,6 +287,9 @@ export const message = {
     开发者、社区、玩家和投资者共同创造、管理、推进游戏开发，并获得持续的收入。 
     
     Cyber​​gear计划于今年Q2上线，玩家可以通过拥有、制作、交易、竞技等方式获得奖励。`,
+  },
+  dashboard: {
+    text1: "Dashboard",
   },
   walletPopup: {
     text1: "未连接钱包",

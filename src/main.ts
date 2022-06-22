@@ -14,7 +14,7 @@ import VueAwesomeSwiper from "vue-awesome-swiper";
 import "swiper/dist/css/swiper.css";
 Vue.use(VueAwesomeSwiper);
 
-import { Icon, Button, Message, Steps, Step, Dialog, Collapse, CollapseItem, Tag, Select, Option, Tooltip, Backtop } from "element-ui";
+import { Icon, Button, Message, Steps, Step, Dialog, Collapse, CollapseItem, Tag, Select, Option, Tooltip, Backtop, Drawer } from "element-ui";
 Vue.use(Icon);
 Vue.use(Button);
 Vue.use(Steps);
@@ -27,6 +27,7 @@ Vue.use(Select);
 Vue.use(Option);
 Vue.use(Tooltip);
 Vue.use(Backtop);
+Vue.use(Drawer);
 
 Vue.prototype.$message = (option: any) => {
   // option.duration = 0;

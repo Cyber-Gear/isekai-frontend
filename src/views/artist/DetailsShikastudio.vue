@@ -19,7 +19,6 @@
               <i class="iconfont icon-integral-fill"></i>
               {{ $t("message.artist.text4") }}
             </div>
-            <!-- <div><i class="iconfont icon-arrow-up"></i></div> -->
           </div>
           <div class="text">
             <div>

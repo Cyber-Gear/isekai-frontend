@@ -286,8 +286,6 @@ export default {
           ul {
             li {
               padding: 0.05rem 0;
-              &:hover {
-              }
             }
           }
         }

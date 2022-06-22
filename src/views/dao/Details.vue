@@ -693,8 +693,6 @@ export default {
     width: 100%;
     height: 0.5rem;
   }
-  .contentbox {
-  }
   .leftbox {
     width: 90%;
     margin-bottom: 0.2rem;

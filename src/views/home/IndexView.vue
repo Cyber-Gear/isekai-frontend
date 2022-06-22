@@ -481,8 +481,6 @@ export default {
           margin: 0.2rem 0;
         }
       }
-      &:nth-child(3) {
-      }
       &:nth-child(4) {
         margin: 0.2rem 0;
         display: flex;
@@ -1037,8 +1035,6 @@ export default {
         padding-left: 0.2rem;
         &:nth-child(1) {
           font-size: 0.15rem;
-          span {
-          }
         }
         &:nth-child(2) {
           div {
@@ -1046,8 +1042,6 @@ export default {
             height: 0.01rem;
             margin: 0.05rem 0;
           }
-        }
-        &:nth-child(3) {
         }
         &:nth-child(4) {
           margin: 0.2rem 0;
@@ -1107,8 +1101,6 @@ export default {
         height: 0.7rem;
         border-radius: 0.05rem;
         margin-bottom: 0.2rem;
-        &:hover {
-        }
         div {
           padding: 0.1rem;
           p {
@@ -1171,15 +1163,11 @@ export default {
       .cardList3 {
         li {
           margin-bottom: 0.2rem;
-          .box_border1 {
-          }
           .box_item {
             padding: 0.2rem;
             > div {
               font-size: 0.16rem;
               font-weight: bold;
-              &:nth-child(1) {
-              }
               &:nth-child(2) {
                 font-size: 0.12rem;
                 margin: 0.1rem 0;
@@ -1188,8 +1176,6 @@ export default {
                 .btn {
                   font-size: 0.12rem;
                   font-weight: bold;
-                  &:hover .box_border2 {
-                  }
                   .box_border1 {
                     .box_border2 {
                       padding: 0.05rem 0.2rem;
@@ -1218,10 +1204,6 @@ export default {
       width: 80%;
       .top {
         margin-bottom: 0.2rem;
-        .box_border1 {
-          .box_border2 {
-          }
-        }
         span {
           font-size: 0.12rem;
           margin-left: 0.4rem;
@@ -1240,8 +1222,6 @@ export default {
               padding: 0.05rem;
             }
           }
-          img {
-          }
         }
         .right {
           div {
@@ -1249,8 +1229,6 @@ export default {
             height: 0.9rem;
             &:nth-child(1) {
               margin-bottom: 0.05rem;
-            }
-            img {
             }
           }
         }
@@ -1267,8 +1245,6 @@ export default {
         > li {
           width: 1.4rem;
           margin-bottom: 0.2rem;
-          &:hover .box_border2 {
-          }
           .box_border1 {
             .box_border2 {
               padding: 0.05rem 0.05rem 0 0.05rem;
@@ -1278,10 +1254,6 @@ export default {
             li {
               font-size: 0.12rem;
               font-weight: bold;
-              &:nth-child(1) {
-                img {
-                }
-              }
               &:nth-child(2) {
                 padding: 0 0.05rem;
               }
@@ -1320,8 +1292,6 @@ export default {
                   width: 0.21rem;
                   height: 0.21rem;
                   border-radius: 0.1rem;
-                  img {
-                  }
                 }
               }
             }
@@ -1335,8 +1305,6 @@ export default {
     margin-bottom: 0.5rem;
     .box_content {
       width: 80%;
-      .title_img {
-      }
       .cardList5 {
         width: 100%;
         height: 2rem;
@@ -1346,12 +1314,8 @@ export default {
           font-size: 0.12rem;
           font-weight: bold;
           > div {
-            div {
-            }
             span {
               margin-right: 0.05rem;
-            }
-            img {
             }
           }
           &:hover > div {
@@ -1373,8 +1337,6 @@ export default {
       .cardList6 {
         li {
           padding: 0.05rem;
-          img {
-          }
         }
       }
     }

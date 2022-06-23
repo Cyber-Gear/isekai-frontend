@@ -7,14 +7,43 @@ import "./styles/reset.scss";
 import "./styles/global.scss";
 import "./assets/iconfonts/iconfont.css";
 
+const isProd = process.env.NODE_ENV == "production";
+const cdn = isProd ? "//cdn.funtopia.io/funtopia_assets_main/" : "//cdn.funtopia.io/funtopia_assets_test/";
+Vue.prototype.$urlNfts = "//cdn.funtopia.io/nfts/";
+Vue.prototype.$urlImages = cdn + "images/";
+Vue.prototype.$urlVideos = cdn + "videos/";
+
 import utils from "./utils/index";
 Vue.prototype.$utils = utils;
+import filters from "./utils/filters";
+Object.keys(filters).forEach((key) => {
+  Vue.filter(key, filters[key]);
+});
 
 import VueAwesomeSwiper from "vue-awesome-swiper";
 import "swiper/dist/css/swiper.css";
 Vue.use(VueAwesomeSwiper);
 
-import { Icon, Button, Message, Steps, Step, Dialog, Collapse, CollapseItem, Tag, Select, Option, Tooltip, Backtop, Drawer } from "element-ui";
+import {
+  Icon,
+  Button,
+  Message,
+  Steps,
+  Step,
+  Dialog,
+  Collapse,
+  CollapseItem,
+  Tag,
+  Select,
+  Option,
+  Tooltip,
+  Backtop,
+  Drawer,
+  Menu,
+  Submenu,
+  MenuItem,
+  MenuItemGroup,
+} from "element-ui";
 Vue.use(Icon);
 Vue.use(Button);
 Vue.use(Steps);
@@ -28,6 +57,10 @@ Vue.use(Option);
 Vue.use(Tooltip);
 Vue.use(Backtop);
 Vue.use(Drawer);
+Vue.use(Menu);
+Vue.use(Submenu);
+Vue.use(MenuItem);
+Vue.use(MenuItemGroup);
 
 Vue.prototype.$message = (option: any) => {
   // option.duration = 0;
@@ -39,18 +72,6 @@ Vue.prototype.$message = (option: any) => {
   // this.$message({ message: this.$t("message.message.text1"), type: "error" });
   return Message(option);
 };
-
-const isProd = process.env.NODE_ENV == "production";
-const cdn = isProd ? "//cdn.funtopia.io/funtopia_assets_main/" : "//cdn.funtopia.io/funtopia_assets_test/";
-Vue.prototype.$urlImages = cdn + "images/";
-Vue.prototype.$urlVideos = cdn + "videos/";
-Vue.prototype.$urlNfts = "//cdn.funtopia.io/nfts/";
-
-import filters from "./utils/filters";
-// Vue.filter("ellipsisWallet", filters["ellipsisWallet"]);
-Object.keys(filters).forEach((key) => {
-  Vue.filter(key, filters[key]);
-});
 
 Vue.config.productionTip = false;
 new Vue({

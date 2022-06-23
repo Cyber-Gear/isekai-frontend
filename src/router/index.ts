@@ -66,8 +66,36 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: "/dashboard",
-    name: "DASHBOARD",
+    // name: "DASHBOARD",
     component: () => import("../views/dashboard/IndexView.vue"),
+    children: [
+      { path: "/", redirect: "nft-asstet" },
+      {
+        path: "nft-asstet",
+        name: "NFTAsstet",
+        component: () => import("../views/dashboard/NFTAsstet.vue"),
+      },
+      {
+        path: "mystey-boxes",
+        name: "MysteyBoxes",
+        component: () => import("../views/dashboard/MysteyBoxes.vue"),
+      },
+      {
+        path: "crypto-asstet",
+        name: "CryptoAsstet",
+        component: () => import("../views/dashboard/CryptoAsstet.vue"),
+      },
+      {
+        path: "orders",
+        name: "Orders",
+        component: () => import("../views/dashboard/Orders.vue"),
+      },
+      {
+        path: "my-favorites",
+        name: "MyFavorites",
+        component: () => import("../views/dashboard/MyFavorites.vue"),
+      },
+    ],
   },
 ];
 

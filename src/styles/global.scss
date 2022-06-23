@@ -403,6 +403,45 @@ body {
     }
   }
 }
+
+.el-menu-dashboard {
+  border-right: 0;
+  background-color: transparent;
+  .el-submenu {
+    .el-submenu__title {
+      font-size: 0.25rem;
+      font-weight: bold;
+      height: 0.5rem;
+      line-height: 0.5rem;
+      color: #ffffff;
+      i {
+        font-size: 0.25rem;
+        color: #ffffff;
+      }
+    }
+    .el-menu-item {
+      font-size: 0.15rem;
+      font-weight: bold;
+      height: 0.5rem;
+      line-height: 0.5rem;
+      color: #ffffff;
+      padding: 0 0.5rem;
+      padding-left: 0.8rem !important;
+      min-width: 3rem;
+    }
+    .el-menu {
+      background-color: transparent;
+    }
+    .el-submenu__title:focus,
+    .el-submenu__title:hover,
+    .el-menu-item:focus,
+    .el-menu-item:hover,
+    .el-menu-item.is-active {
+      background-color: rgba(129, 129, 151, 0.19);
+      border-radius: 0.08rem;
+    }
+  }
+}
 // @media screen and (min-width: 981px) { }
 @media screen and (max-width: 750px) {
   .pc {

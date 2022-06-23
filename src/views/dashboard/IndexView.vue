@@ -23,9 +23,36 @@
         <div class="nftbox">
           <div class="leftbox">
             <div class="title"><i class="iconfont icon-category"></i>MY NFT</div>
+            <div class="list">
+              <el-menu class="el-menu-dashboard" :default-active="defaultActive" :default-openeds="defaultOpeneds" active-text-color="#00B5FF" router>
+                <el-submenu index="asstet">
+                  <template slot="title">
+                    <i class="iconfont icon-bussiness-man"></i>
+                    <span>Asstet</span>
+                  </template>
+                  <el-menu-item index="nft-asstet">NFT Asstet</el-menu-item>
+                  <el-menu-item index="mystey-boxes">Mystey Boxes</el-menu-item>
+                  <el-menu-item index="crypto-asstet">Crypto Asstet</el-menu-item>
+                </el-submenu>
+                <el-submenu index="history">
+                  <template slot="title">
+                    <i class="iconfont icon-bussiness-man"></i>
+                    <span>History</span>
+                  </template>
+                  <el-menu-item index="orders">Orders</el-menu-item>
+                </el-submenu>
+                <el-submenu index="favorites">
+                  <template slot="title">
+                    <i class="iconfont icon-favorites"></i>
+                    <span>Favorites</span>
+                  </template>
+                  <el-menu-item index="my-favorites">My Favorites</el-menu-item>
+                </el-submenu>
+              </el-menu>
+            </div>
           </div>
           <div class="rightbox">
-            <div class="title">NFT ASSTET</div>
+            <router-view />
           </div>
         </div>
       </div>
@@ -75,11 +102,19 @@ export default {
   name: "DASHBOARD",
   data() {
     return {
+      defaultActive: "nft-asstet",
+      defaultOpeneds: ["asstet", "history", "favorites"],
       isShowDrawer: false,
       tagList: [{ label: "video favor" }, { label: "singer" }, { label: "cool" }, { label: "artist" }, { label: "love" }],
     };
   },
   methods: {
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    },
     openDrawer() {
       this.isShowDrawer = true;
     },
@@ -119,7 +154,6 @@ export default {
   ul {
     width: 100%;
     li {
-      // width: 4rem;
       width: 40%;
       margin: 0.2rem 0;
       &:nth-child(1) {
@@ -188,18 +222,20 @@ export default {
   }
 }
 .nftbox {
-  width: 100%;
+  width: 11.5rem;
+  min-height: 5rem;
   margin: 0.2rem 0;
   display: flex;
   justify-content: space-between;
   .leftbox {
+    width: 3rem;
     .title {
       width: 100%;
-      height: 0.5rem;
-      line-height: 0.5rem;
+      height: 0.6rem;
+      line-height: 0.6rem;
       font-size: 0.3rem;
       font-weight: bold;
-      color: #ffffff;
+      margin-bottom: 0.2rem;
       i {
         font-size: 0.3rem;
         margin-right: 0.1rem;
@@ -207,18 +243,8 @@ export default {
     }
   }
   .rightbox {
-    .title {
-      width: 100%;
-      height: 0.5rem;
-      line-height: 0.5rem;
-      font-size: 0.3rem;
-      font-weight: bold;
-      color: #ffffff;
-      i {
-        font-size: 0.3rem;
-        margin-right: 0.1rem;
-      }
-    }
+    width: calc(100% - 3rem);
+    padding-left: 0.5rem;
   }
 }
 .drawer_box {

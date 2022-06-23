@@ -365,7 +365,7 @@ export default {
       justify-content: flex-end;
       i {
         color: #6c6a71;
-        font-size: 0.35rem;
+        font-size: 0.25rem;
       }
     }
     .angle2 {

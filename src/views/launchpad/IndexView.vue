@@ -700,7 +700,7 @@ export default {
           }
           .inputbox {
             width: 2rem;
-            height: 0.5rem;
+            height: 0.4rem;
             margin: 0.1rem 0;
             background: rgba(24, 24, 28, 0.8);
             border-radius: 0.08rem;
@@ -744,8 +744,8 @@ export default {
         .right {
           .el-button {
             width: 1.2rem;
-            height: 0.5rem;
-            line-height: 0.5rem;
+            height: 0.4rem;
+            line-height: 0.4rem;
             font-size: 0.15rem;
           }
         }

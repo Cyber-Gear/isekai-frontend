@@ -139,7 +139,7 @@ export default {
   .box_content {
     width: fit-content;
     margin: 0 auto;
-    padding: 0.5rem 0;
+    // padding: 0.5rem 0;
   }
 }
 .info {
@@ -150,12 +150,12 @@ export default {
   border-radius: 0.08rem;
   border: 0.01rem solid #436e77;
   backdrop-filter: blur(7px);
-  padding: 0.1rem 0.3rem;
+  padding: 0.1rem 0.2rem;
   ul {
     width: 100%;
     li {
       width: 40%;
-      margin: 0.2rem 0;
+      margin: 0.1rem 0;
       &:nth-child(1) {
         font-size: 0.25rem;
         font-weight: bold;

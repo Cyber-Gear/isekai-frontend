@@ -55,7 +55,7 @@ export default {
         { label: "nav.text2", icon: "icon-bussiness-man", link: "/artist", isOpen: true },
         { label: "nav.text3", icon: "icon-qukuailian", link: "/dao", isOpen: true },
         { label: "nav.text4", icon: "icon-boxhezi", link: "/launchpad", isOpen: true },
-        { label: "nav.text5", icon: "icon-tradingvolume", link: "/market", isOpen: true },
+        { label: "nav.text5", icon: "icon-tradingvolume", link: "/market", isOpen: false },
         { label: "nav.text8", icon: "icon-tradingvolume", link: "/dashboard", isOpen: true },
       ],
       showLangSelect: false,

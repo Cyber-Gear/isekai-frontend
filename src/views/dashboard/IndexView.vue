@@ -9,7 +9,7 @@
         <div class="info">
           <ul>
             <li>Welcome back Zhaochangpeng!</li>
-            <li><pre>See you once again, n\ Let's participate in more activities!</pre></li>
+            <li><pre>See you once again, Let's participate in more activities!</pre></li>
             <li>
               <div v-for="(item, index) in tagList" :key="index">#{{ item.label }}</div>
             </li>

@@ -108,7 +108,7 @@ export default {
       }
     },
     toDetail(id) {
-      this.$router.push({ path: "mystey-boxes-details", query: { id: id } });
+      this.$router.push({ path: "/dashboard/mystey-boxes-details", query: { id: id } });
     },
   },
 };

@@ -1,8 +1,5 @@
 /* eslint-disable no-irregular-whitespace */
-export const message = {
-  message: {
-    text1: "未上传作品",
-  },
+export default {
   nav: {
     text1: "HOME",
     text2: "ARTIST",
@@ -330,6 +327,7 @@ export const message = {
     text9: "某用户某小时剩余购买数量不足",
     text10: "用户不在白名单中",
     text11: "购买成功",
+    text12: "未上传作品",
   },
   btns: {
     text1: "返回",
@@ -342,79 +340,79 @@ export const message = {
     hour: "小时",
     minute: "分钟",
   },
+  // 以下暂无页面
+  // 挂单页
+  // 挂单
+  // Pending Order
+
+  // 全部选择
+  // Select All
+
+  // 确定
+  // Pending Order
+
+  // 合集筛选
+  // Series
+
+  // 价格筛选
+  // Price
+
+  // 币种筛选
+  // Token
+
+  // 类型筛选
+  // Type
+
+  // 稀有度筛选
+  // Rarity
+
+  // 属性筛选
+  // Property
+
+  // 职业
+  // Vocation
+
+  // 等级
+  // Grade
+
+  // 角色
+  // Role
+
+  // 市场页
+  // 价格
+  // Price
+
+  // 购买
+  // Buy
+
+  // 属性
+  // Property
+
+  // 等级
+  // Grade
+
+  // 星级
+  // Stars
+
+  // 稀有度
+  // Rarity
+
+  // 人物介绍
+  // Introduction
+
+  // 交易记录
+  // Transaction Record
+
+  // 挂单弹窗
+  // 挂单
+  // Pending Order
+
+  // 挂单价格
+  // Price
+
+  // 手续费
+  // Fee
+
+  // 实际收益
+  // Income
 };
-// 以下暂无页面
-// 挂单页
-// 挂单
-// Pending Order
-
-// 全部选择
-// Select All
-
-// 确定
-// Pending Order
-
-// 合集筛选
-// Series
-
-// 价格筛选
-// Price
-
-// 币种筛选
-// Token
-
-// 类型筛选
-// Type
-
-// 稀有度筛选
-// Rarity
-
-// 属性筛选
-// Property
-
-// 职业
-// Vocation
-
-// 等级
-// Grade
-
-// 角色
-// Role
-
-// 市场页
-// 价格
-// Price
-
-// 购买
-// Buy
-
-// 属性
-// Property
-
-// 等级
-// Grade
-
-// 星级
-// Stars
-
-// 稀有度
-// Rarity
-
-// 人物介绍
-// Introduction
-
-// 交易记录
-// Transaction Record
-
-// 挂单弹窗
-// 挂单
-// Pending Order
-
-// 挂单价格
-// Price
-
-// 手续费
-// Fee
-
-// 实际收益
-// Income

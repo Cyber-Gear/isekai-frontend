@@ -14,17 +14,17 @@
             <div><i class="iconfont icon-medium"></i></div>
           </div>
           <div class="lis">
-            <div><i class="iconfont icon-Customermanagement-fill"></i>{{ $t("message.dao.text2") }}</div>
+            <div><i class="iconfont icon-Customermanagement-fill"></i>{{ $t("dao.text2") }}</div>
             <div>{{ spaceObj.members.length }}</div>
           </div>
           <div class="btn">
-            <el-button :disabled="true"> {{ $t("message.dao.text3") }} </el-button>
+            <el-button :disabled="true"> {{ $t("dao.text3") }} </el-button>
           </div>
         </div>
       </div>
       <div class="rightbox">
         <div class="title">
-          <div>{{ $t("message.dao.text1") }}</div>
+          <div>{{ $t("dao.text1") }}</div>
           <el-select v-model="selectKey" @change="selectChange">
             <el-option v-for="item in selectOptions" :key="item.value" :label="$t(item.label)" :value="item.value"></el-option>
           </el-select>
@@ -34,12 +34,12 @@
             <ul>
               <li>
                 <div>
-                  {{ $t("message.dao.text4") }} <span>{{ item.author | ellipsisWallet }}</span> {{ $t("message.dao.text5") }}
+                  {{ $t("dao.text4") }} <span>{{ item.author | ellipsisWallet }}</span> {{ $t("dao.text5") }}
                 </div>
                 <div class="status">
-                  <template v-if="item.state == 'active'">{{ $t("message.status.text7") }} </template>
-                  <template v-if="item.state == 'pending'">{{ $t("message.status.text8") }} </template>
-                  <template v-if="item.state == 'closed'">{{ $t("message.status.text9") }} </template>
+                  <template v-if="item.state == 'active'">{{ $t("status.text7") }} </template>
+                  <template v-if="item.state == 'pending'">{{ $t("status.text8") }} </template>
+                  <template v-if="item.state == 'closed'">{{ $t("status.text9") }} </template>
                 </div>
               </li>
               <li>{{ item.title }} <img :src="`${$urlImages}box_title3.webp`" alt="" /></li>
@@ -72,12 +72,12 @@ export default {
       proposalsArr: [],
       selectKey: 1,
       selectOptions: [
-        { value: 1, label: "message.status.text4" },
-        { value: 2, label: "message.status.text5" },
-        // { value: 3, label: "message.status.text6" },
-        { value: 3, label: "message.status.text7" },
-        { value: 4, label: "message.status.text8" },
-        { value: 5, label: "message.status.text9" },
+        { value: 1, label: "status.text4" },
+        { value: 2, label: "status.text5" },
+        // { value: 3, label: "status.text6" },
+        { value: 3, label: "status.text7" },
+        { value: 4, label: "status.text8" },
+        { value: 5, label: "status.text9" },
       ],
     };
   },
@@ -149,11 +149,11 @@ export default {
         let D = Math.floor((t / (24 * 60 * 60 * 1000)) % 30);
         let h = Math.floor((t / (60 * 60 * 1000)) % 24);
         let m = Math.floor((t / (60 * 1000)) % 60);
-        if (Y > 0) return `${this.$t("message.date.left") + " " + Y + " " + this.$t("message.date.year")}`;
-        if (M > 0) return `${this.$t("message.date.left") + " " + M + " " + this.$t("message.date.month")}`;
-        if (D > 0) return `${this.$t("message.date.left") + " " + D + " " + this.$t("message.date.day")}`;
-        if (h > 0) return `${this.$t("message.date.left") + " " + h + " " + this.$t("message.date.hour")}`;
-        if (m > 0) return `${this.$t("message.date.left") + " " + m + " " + this.$t("message.date.minute")}`;
+        if (Y > 0) return `${this.$t("date.left") + " " + Y + " " + this.$t("date.year")}`;
+        if (M > 0) return `${this.$t("date.left") + " " + M + " " + this.$t("date.month")}`;
+        if (D > 0) return `${this.$t("date.left") + " " + D + " " + this.$t("date.day")}`;
+        if (h > 0) return `${this.$t("date.left") + " " + h + " " + this.$t("date.hour")}`;
+        if (m > 0) return `${this.$t("date.left") + " " + m + " " + this.$t("date.minute")}`;
       }
     },
 

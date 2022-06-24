@@ -2,7 +2,7 @@
   <el-dialog
     center
     top="0"
-    :title="$t('message.walletPopup.text1')"
+    :title="$t('walletPopup.text1')"
     :visible="getWalletConnectPopup"
     :modal-append-to-body="false"
     :destroy-on-close="true"
@@ -13,11 +13,11 @@
         <i class="iconfont icon-qianbao2-mianxing"></i>
         <i class="iconfont icon-block"></i>
       </div>
-      <p>{{ $t("message.walletPopup.text2") }}</p>
+      <p>{{ $t("walletPopup.text2") }}</p>
     </div>
     <span slot="footer" class="dialog-footer">
-      <el-button @click="closePopup">{{ $t("message.walletPopup.text3") }}</el-button>
-      <el-button type="primary" @click="openWalletPopup">{{ $t("message.walletPopup.text4") }}</el-button>
+      <el-button @click="closePopup">{{ $t("walletPopup.text3") }}</el-button>
+      <el-button type="primary" @click="openWalletPopup">{{ $t("walletPopup.text4") }}</el-button>
     </span>
   </el-dialog>
 </template>

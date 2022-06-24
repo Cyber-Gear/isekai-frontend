@@ -81,6 +81,11 @@ const routes: Array<RouteConfig> = [
         component: () => import("../views/dashboard/MysteyBoxes.vue"),
       },
       {
+        path: "mystey-boxes-details",
+        name: "MysteyBoxesDetails",
+        component: () => import("../views/dashboard/MysteyBoxesDetails.vue"),
+      },
+      {
         path: "crypto-asstet",
         name: "CryptoAsstet",
         component: () => import("../views/dashboard/CryptoAsstet.vue"),

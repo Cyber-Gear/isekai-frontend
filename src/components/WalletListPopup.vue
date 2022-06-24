@@ -2,7 +2,7 @@
   <el-dialog
     center
     top="0"
-    :title="$t('message.walletPopup.text5')"
+    :title="$t('walletPopup.text5')"
     :visible="getWalletListPopup"
     :modal-append-to-body="false"
     :destroy-on-close="true"
@@ -10,7 +10,7 @@
   >
     <!-- :visible.sync="getwalletstatus" -->
     <div class="popupbox">
-      <div class="title">{{ $t("message.walletPopup.text6") }}<span>Fun Topia</span></div>
+      <div class="title">{{ $t("walletPopup.text6") }}<span>Fun Topia</span></div>
       <ul>
         <li v-for="(item, index) in walletArr" :key="index" @click="walletClick(item.walletType)">
           <img :src="item.image" alt="" />

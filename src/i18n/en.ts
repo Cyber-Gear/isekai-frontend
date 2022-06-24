@@ -1,7 +1,4 @@
-export const message = {
-  message: {
-    text1: "Not uploaded yet",
-  },
+export default {
   nav: {
     text1: "HOME",
     text2: "ARTIST",
@@ -291,15 +288,15 @@ export const message = {
     text23: "Approve",
     introduction1: `Before the game goes live, players can buy limited mystery boxes on the market. From the mystery box, not only the MechaGirl NFT but also 2 MechaGirl sherd can be opened.`,
     introduction2: `
-    Cybergear (Mecha Girl) is a community-driven two-dimensional universe, two-dimensional cyberpunk style and GameFi product that integrates SRPG gameplay. 
+  Cybergear (Mecha Girl) is a community-driven two-dimensional universe, two-dimensional cyberpunk style and GameFi product that integrates SRPG gameplay. 
 
-    It is the world's first NFT+DeFi+SRPG+AI war chess strategy game. 
+  It is the world's first NFT+DeFi+SRPG+AI war chess strategy game. 
 
-    The game perfectly combines blockchain NFT and DeFi technology, allowing players to easily obtain corresponding benefits while participating in the game.
+  The game perfectly combines blockchain NFT and DeFi technology, allowing players to easily obtain corresponding benefits while participating in the game.
 
-    Unlike traditional games, Cybergear utilizes blockchain technology to perfectly realize that players permanently own the characters and virtual items in the game, and they can trade these items through the market, or transfer these items to any wallet through the blockchain as an individual collect.
-    
-    Developers, communities, players and investors work together to create, manage, advance game development, and gain continuous revenue. Cybergear is planned to launch in Q2 this year, and players can get rewards by owning, crafting, trading, and competing.`,
+  Unlike traditional games, Cybergear utilizes blockchain technology to perfectly realize that players permanently own the characters and virtual items in the game, and they can trade these items through the market, or transfer these items to any wallet through the blockchain as an individual collect.
+  
+  Developers, communities, players and investors work together to create, manage, advance game development, and gain continuous revenue. Cybergear is planned to launch in Q2 this year, and players can get rewards by owning, crafting, trading, and competing.`,
   },
   dashboard: {
     text1: "Dashboard",
@@ -343,6 +340,7 @@ export const message = {
     text9: "请选择一个投票",
     text10: "请选择一个投票",
     text11: "购买成功",
+    text12: "Not uploaded yet",
   },
   btns: {
     text1: "Back",

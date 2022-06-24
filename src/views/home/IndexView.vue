@@ -17,12 +17,12 @@
     <div class="box1">
       <ul>
         <li>
-          {{ $t("message.home.text1") }}
+          {{ $t("home.text1") }}
         </li>
         <li><div></div></li>
-        <li>{{ $t("message.home.text2") }}</li>
+        <li>{{ $t("home.text2") }}</li>
         <li>
-          <div>{{ $t("message.home.text4") }}</div>
+          <div>{{ $t("home.text4") }}</div>
           <div>
             <img :src="`${$urlImages}contact1.webp`" alt="" />
             <img :src="`${$urlImages}contact2.webp`" alt="" />
@@ -73,7 +73,7 @@
     <div class="box3">
       <div class="box_title">
         <img :src="`${$urlImages}box_title1.webp`" alt="" />
-        <span>{{ $t("message.home.text5") }}</span>
+        <span>{{ $t("home.text5") }}</span>
       </div>
       <div class="box_content">
         <ul class="cardList3">
@@ -104,14 +104,14 @@
     <div class="box4">
       <div class="box_title">
         <img :src="`${$urlImages}box_title1.webp`" alt="" />
-        <span>{{ $t("message.home.text6") }}</span>
+        <span>{{ $t("home.text6") }}</span>
       </div>
       <div class="box_content">
         <div class="top">
           <div class="box_border1">
             <div class="box_border2">
               <span>
-                {{ $t("message.home.text3") }}
+                {{ $t("home.text3") }}
               </span>
               <img :src="`${$urlImages}img7.webp`" alt="" />
             </div>
@@ -136,7 +136,7 @@
     <div class="box5">
       <div class="box_title">
         <img :src="`${$urlImages}box_title1.webp`" alt="" />
-        <span>{{ $t("message.home.text7") }}</span>
+        <span>{{ $t("home.text7") }}</span>
       </div>
       <div class="box_content">
         <ul class="cardList4">
@@ -174,14 +174,14 @@
     <div class="box6">
       <div class="box_title">
         <img :src="`${$urlImages}box_title1.webp`" alt="" />
-        <span>{{ $t("message.home.text8") }}</span>
+        <span>{{ $t("home.text8") }}</span>
       </div>
       <div class="box_content">
         <img class="title_img" :src="`${$urlImages}img4.webp`" alt="" />
         <ul class="cardList5">
           <li v-for="(item, index) in cardList5" :key="index">
             <div>
-              <div>{{ $t("message.home.text10") }}</div>
+              <div>{{ $t("home.text10") }}</div>
               <span>{{ $t(item.time) }}</span>
               <img :src="`${$urlImages}img5.webp`" alt="" />
             </div>
@@ -194,7 +194,7 @@
     <!-- <div class="box7">
       <div class="box_title">
         <img :src="`${$urlImages}box_title1.webp`" alt="" />
-        <span>{{ $t("message.home.text9") }}</span>
+        <span>{{ $t("home.text9") }}</span>
       </div>
       <div class="box_content">
         <ul class="cardList6">
@@ -208,38 +208,38 @@
 </template>
 
 <script>
-import { nftworks } from "../../mock/nftworks";
+import { nftworks } from "@/mock/nftworks";
 
 export default {
   name: "HOME",
   data() {
     return {
       cardList1: [
-        { text1: "message.home.list1[0].text1", text2: "message.home.list1[0].text2" },
-        { text1: "message.home.list1[1].text1", text2: "message.home.list1[1].text2" },
-        { text1: "message.home.list1[2].text1", text2: "message.home.list1[2].text2" },
+        { text1: "home.list1[0].text1", text2: "home.list1[0].text2" },
+        { text1: "home.list1[1].text1", text2: "home.list1[1].text2" },
+        { text1: "home.list1[2].text1", text2: "home.list1[2].text2" },
       ],
       cardList2: nftworks,
 
       cardList3: [
         {
-          text1: "message.home.list3[0].text1",
-          text2: "message.home.list3[0].text2",
-          text3: "message.home.list3[0].text3",
+          text1: "home.list3[0].text1",
+          text2: "home.list3[0].text2",
+          text3: "home.list3[0].text3",
           link: "",
           progress: "88%",
         },
         {
-          text1: "message.home.list3[1].text1",
-          text2: "message.home.list3[1].text2",
-          text3: "message.home.list3[1].text3",
+          text1: "home.list3[1].text1",
+          text2: "home.list3[1].text2",
+          text3: "home.list3[1].text3",
           link: "",
           progress: "68%",
         },
         {
-          text1: "message.home.list3[2].text1",
-          text2: "message.home.list3[2].text2",
-          text3: "message.home.list3[2].text3",
+          text1: "home.list3[2].text1",
+          text2: "home.list3[2].text2",
+          text3: "home.list3[2].text3",
           link: "",
           progress: "68%",
         },
@@ -295,9 +295,9 @@ export default {
         },
       ],
       cardList5: [
-        { time: "message.home.list4[0].text1", text: "message.home.list4[0].text2" },
-        { time: "message.home.list4[0].text1", text: "message.home.list4[0].text2" },
-        { time: "message.home.list4[0].text1", text: "message.home.list4[0].text2" },
+        { time: "home.list4[0].text1", text: "home.list4[0].text2" },
+        { time: "home.list4[0].text1", text: "home.list4[0].text2" },
+        { time: "home.list4[0].text1", text: "home.list4[0].text2" },
       ],
       cardList6: [
         this.$urlImages + "collaborators1.webp",

@@ -3,7 +3,7 @@
     <div class="banner">
       <div class="back_box" @click="goBack">
         <i class="iconfont icon-fanhui"></i>
-        <span>{{ $t("message.btns.text1") }}</span>
+        <span>{{ $t("btns.text1") }}</span>
       </div>
     </div>
     <div class="content">
@@ -11,13 +11,13 @@
         <div class="cardbox">
           <img :src="card.card" alt="" />
           <span>{{ $t(card.name) }}</span>
-          <div class="btn" :class="card.rarity" @click="openVideo">{{ $t("message.artist.text11") }}</div>
+          <div class="btn" :class="card.rarity" @click="openVideo">{{ $t("artist.text11") }}</div>
         </div>
         <div class="workbox">
           <div class="titlebtn">
             <div>
               <i class="iconfont icon-integral-fill"></i>
-              {{ $t("message.artist.text4") }}
+              {{ $t("artist.text4") }}
             </div>
           </div>
           <div class="text">
@@ -32,24 +32,24 @@
           <ul class="introbox1">
             <li>{{ $t(card.name) }}</li>
             <li>
-              <div><i class="iconfont icon-shuxingchaxun"></i>{{ $t("message.artist.text5") }}</div>
+              <div><i class="iconfont icon-shuxingchaxun"></i>{{ $t("artist.text5") }}</div>
               {{ $t(card.attribute) }}
             </li>
             <li>
-              <div><i class="iconfont icon-pingfendengjiRating11"></i>{{ $t("message.artist.text6") }}</div>
+              <div><i class="iconfont icon-pingfendengjiRating11"></i>{{ $t("artist.text6") }}</div>
               {{ $t(card.level) }}
             </li>
             <li>
-              <div><i class="iconfont icon-pingfendengjiRating15"></i>{{ $t("message.artist.text7") }}</div>
+              <div><i class="iconfont icon-pingfendengjiRating15"></i>{{ $t("artist.text7") }}</div>
               {{ $t(card.starlevel) }}
             </li>
             <li>
-              <div><i class="iconfont icon-dengji"></i>{{ $t("message.artist.text8") }}</div>
+              <div><i class="iconfont icon-dengji"></i>{{ $t("artist.text8") }}</div>
               {{ card.rarity }}
             </li>
           </ul>
           <div class="introbox2">
-            <div class="title">{{ $t("message.artist.text9") }}</div>
+            <div class="title">{{ $t("artist.text9") }}</div>
             <div class="text">
               <div>
                 <pre>{{ $t(card.nftdes) }}</pre>
@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { nftworks } from "../../mock/nftworks";
+import { nftworks } from "@/mock/nftworks";
 import PaintingVideo from "../../components/PaintingVideo.vue";
 
 export default {

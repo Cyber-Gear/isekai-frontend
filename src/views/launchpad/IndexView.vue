@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <div class="tip_box">{{ $t("message.launchpad.text1") }} {{ $t(nowStatusText) }}</div>
+    <div class="tip_box">{{ $t("launchpad.text1") }} {{ $t(nowStatusText) }}</div>
     <div class="box">
       <div class="leftbox">
         <div class="blindbox">
@@ -8,15 +8,15 @@
         </div>
         <div class="info">
           <div>
-            <span>{{ $t("message.launchpad.text3") }}</span>
-            <span>{{ remainingAmount }} {{ $t("message.launchpad.text11") }}</span>
+            <span>{{ $t("launchpad.text3") }}</span>
+            <span>{{ remainingAmount }} {{ $t("launchpad.text11") }}</span>
           </div>
           <div>
-            <span>{{ $t("message.launchpad.text4") }}</span> <span>{{ boxPrice | digitalCutZero }} U</span>
+            <span>{{ $t("launchpad.text4") }}</span> <span>{{ boxPrice | digitalCutZero }} U</span>
           </div>
           <div>
-            <span>{{ $t("message.launchpad.text5") }}</span>
-            <span>{{ hourlyBuyAmount }} {{ $t("message.launchpad.text11") }}</span>
+            <span>{{ $t("launchpad.text5") }}</span>
+            <span>{{ hourlyBuyAmount }} {{ $t("launchpad.text11") }}</span>
           </div>
         </div>
       </div>
@@ -35,25 +35,25 @@
         </div>
         <div class="box1">
           <div class="title">
-            <div><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("message.launchpad.text6") }}</div>
+            <div><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("launchpad.text6") }}</div>
             <ul>
               <li>
-                <el-tooltip class="item" effect="dark" :content="$t('message.launchpad.text7')" placement="top">
+                <el-tooltip class="item" effect="dark" :content="$t('launchpad.text7')" placement="top">
                   <div><i class="iconfont icon-chakan2"></i></div>
                 </el-tooltip>
               </li>
               <li>
-                <el-tooltip class="item" effect="dark" :content="$t('message.launchpad.text8')" placement="top">
+                <el-tooltip class="item" effect="dark" :content="$t('launchpad.text8')" placement="top">
                   <div><i class="iconfont icon-fenxiang"></i></div>
                 </el-tooltip>
               </li>
               <li>
-                <el-tooltip class="item" effect="dark" :content="$t('message.launchpad.text9')" placement="top">
+                <el-tooltip class="item" effect="dark" :content="$t('launchpad.text9')" placement="top">
                   <div><i class="iconfont icon-shequn"></i></div>
                 </el-tooltip>
               </li>
               <li>
-                <el-tooltip class="item" effect="dark" :content="$t('message.launchpad.text10')" placement="top">
+                <el-tooltip class="item" effect="dark" :content="$t('launchpad.text10')" placement="top">
                   <div><i class="iconfont icon-weiguanwang-"></i></div>
                 </el-tooltip>
               </li>
@@ -61,45 +61,45 @@
           </div>
           <div class="box2">
             <div class="row">
-              <pre>{{ $t("message.launchpad.introduction1") }}</pre>
+              <pre>{{ $t("launchpad.introduction1") }}</pre>
             </div>
             <div class="row">
               <div class="hasbeenon" v-if="nowStatusIndex == 1">
                 <div class="buying">
-                  <span>{{ $t("message.launchpad.text12") }}</span>
+                  <span>{{ $t("launchpad.text12") }}</span>
                 </div>
                 <div class="times">
                   <div>
                     <p>{{ countdownObj.d }}</p>
-                    <p>{{ $t("message.launchpad.text13") }}</p>
+                    <p>{{ $t("launchpad.text13") }}</p>
                   </div>
                   <span>:</span>
                   <div>
                     <p>{{ countdownObj.h }}</p>
-                    <p>{{ $t("message.launchpad.text14") }}</p>
+                    <p>{{ $t("launchpad.text14") }}</p>
                   </div>
                   <span>:</span>
                   <div>
                     <p>{{ countdownObj.m }}</p>
-                    <p>{{ $t("message.launchpad.text15") }}</p>
+                    <p>{{ $t("launchpad.text15") }}</p>
                   </div>
                   <span>:</span>
                   <div>
                     <p>{{ countdownObj.s }}</p>
-                    <p>{{ $t("message.launchpad.text16") }}</p>
+                    <p>{{ $t("launchpad.text16") }}</p>
                   </div>
                 </div>
               </div>
               <div class="buy_box" v-if="nowStatusIndex == 2">
                 <div class="left">
-                  <div>{{ $t("message.launchpad.text17") }}</div>
+                  <div>{{ $t("launchpad.text17") }}</div>
                   <div class="inputbox">
                     <span class="span1"><i class="iconfont icon-jianhao" @click="subtraction"></i></span>
                     <input type="number" v-model="inputAmount" oninput="value=value.replace(/^(0+)|[^\d]+/g,'')" :disabled="buyloading" />
                     <span class="span2"><i class="iconfont icon-jiahao" @click="addition"></i></span>
                   </div>
                   <div>
-                    <span>{{ $t("message.launchpad.text18") }} {{ totalPrice | digitalConversionInThousandths }} U</span>
+                    <span>{{ $t("launchpad.text18") }} {{ totalPrice | digitalConversionInThousandths }} U</span>
                   </div>
                 </div>
                 <div class="right">
@@ -108,7 +108,7 @@
               </div>
               <div class="progress_bar_box" v-if="nowStatusIndex !== 1 && progressWidth">
                 <div>
-                  <div>{{ $t("message.launchpad.text21") }}</div>
+                  <div>{{ $t("launchpad.text21") }}</div>
                   <div class="progress_bar">
                     <div :style="{ width: progressWidth + '%' }">{{ progressWidth + "%" }}</div>
                   </div>
@@ -120,10 +120,10 @@
         </div>
         <div class="box1">
           <div class="title">
-            <div><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("message.launchpad.text22") }}</div>
+            <div><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("launchpad.text22") }}</div>
           </div>
           <div class="content">
-            <pre>{{ $t("message.launchpad.introduction2") }}</pre>
+            <pre>{{ $t("launchpad.introduction2") }}</pre>
           </div>
         </div>
       </div>
@@ -157,17 +157,17 @@ export default {
       totalPrice: 0,
       balanceAmount: 0,
       stepsArr: [
-        { title: "message.status.text1", des: "2022/06/12 15:00" },
-        { title: "message.status.text2", des: "2022/06/21 15:00" },
-        { title: "message.status.text3", des: "" },
+        { title: "status.text1", des: "2022/06/12 15:00" },
+        { title: "status.text2", des: "2022/06/21 15:00" },
+        { title: "status.text3", des: "" },
       ],
       countdownObj: { d: 0, h: 0, m: 0, s: 0 },
       countdownTimer: null,
-      nowStatusText: "message.status.text1",
+      nowStatusText: "status.text1",
       nowStatusIndex: 0,
       progressWidth: 0,
       isApproved: false,
-      btnText: "message.launchpad.text19",
+      btnText: "launchpad.text19",
       popupActive: 1,
       approvedloading: false,
       buyloading: false,
@@ -424,6 +424,7 @@ export default {
         .then((res) => {
           this.isWhite = res;
           // console.log("判断某用户是否在某类型的盲盒的白名单", this.isWhite);
+          if (!this.isWhite) return this.$message({ message: this.$t("用户不在白名单中") });
         })
         .catch((err) => {
           console.error("getWhiteListExistence", err);

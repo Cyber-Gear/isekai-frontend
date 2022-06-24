@@ -181,6 +181,7 @@ body {
     overflow: hidden;
   }
 }
+
 // 重置组件样式
 .el-message {
   min-width: 1rem;
@@ -337,8 +338,8 @@ body {
   border-radius: 0.09rem;
   border: none;
   .el-scrollbar__wrap {
-    margin-bottom: -5px !important;
-    margin-right: -5px !important;
+    // margin-bottom: -5px !important;
+    // margin-right: -5px !important;
     .el-select-dropdown__list {
       .el-select-dropdown__item {
         color: #696969;
@@ -387,10 +388,13 @@ body {
     color: #ffffff;
   }
 }
-.el-popper[x-placement^="bottom"] .popper__arrow {
-  border-bottom-color: transparent;
-  &::after {
-    border-bottom-color: #18181c;
+.el-select-dropdown.el-popper[x-placement^="bottom"],
+.el-picker-panel.el-popper[x-placement^="bottom"] {
+  .popper__arrow {
+    border-bottom-color: transparent;
+    &::after {
+      border-bottom-color: #18181c;
+    }
   }
 }
 .el-drawer__wrapper {
@@ -403,7 +407,6 @@ body {
     }
   }
 }
-
 .el-menu-dashboard {
   border-right: 0;
   background-color: transparent;
@@ -427,7 +430,7 @@ body {
       color: #ffffff;
       padding: 0 0.5rem;
       padding-left: 0.8rem !important;
-      min-width: 3rem;
+      min-width: 1rem;
     }
     .el-menu {
       background-color: transparent;
@@ -439,6 +442,49 @@ body {
     .el-menu-item.is-active {
       background-color: rgba(129, 129, 151, 0.19);
       border-radius: 0.08rem;
+    }
+  }
+}
+.el-date-editor.el-input__inner {
+  height: 0.35rem;
+  background-color: rgba(24, 24, 28, 0.8);
+  border: 1px solid #606060;
+  .el-range-input {
+    color: #ffffff;
+    line-height: 0.35rem;
+  }
+  .el-range-separator {
+    color: #ffffff;
+    line-height: 0.25rem;
+  }
+  .el-range__icon,
+  .el-range__close-icon {
+    color: #ffffff;
+    line-height: 0.28rem;
+  }
+}
+.el-picker-panel {
+  color: #ffffff;
+  line-height: 0.3rem;
+  box-shadow: 0px 2px 12px 0px rgba(255, 255, 255, 0.27);
+  background: #18181c;
+  border-radius: 0.09rem;
+  border: none;
+  .el-date-range-picker__content.is-left {
+    border-right: 1px solid #696969;
+  }
+  .el-date-table {
+    th {
+      color: #ffffff;
+      border-bottom: 1px solid #696969;
+    }
+    td.in-range div {
+      background-color: #696969;
+    }
+    td.start-date span,
+    td.end-date span {
+      background-color: #696969;
+      background: linear-gradient(90deg, #44819d 0%, #7a649e 100%);
     }
   }
 }

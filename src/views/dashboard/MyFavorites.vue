@@ -1,14 +1,42 @@
 <template>
   <div class="box">
     <div class="title">My Favorites</div>
+    <ul class="card_list">
+      <li v-for="(item, index) in cardList" :key="index">
+        <div class="card">
+          <div class="top"><img :src="item.logo" alt="" /></div>
+          <div class="center">
+            <div>
+              <span>{{ $t(item.name) }}</span>
+              <img :src="`${$urlImages}icon1.webp`" alt="" />
+            </div>
+            <div>
+              <span>{{ $t(item.title) }}</span>
+              <span>88busd</span>
+            </div>
+            <div>{{ $t("artist.text10") }}77busd</div>
+          </div>
+          <div class="bottom">
+            <i class="iconfont icon-favorites"></i>
+          </div>
+          <img class="angle2" :src="`${$urlImages}angle2.webp`" alt="" />
+        </div>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
+import { nftworks } from "@/mock/nftworks";
 export default {
   name: "MyFavorites",
   data() {
-    return {};
+    return {
+      cardList: [],
+    };
+  },
+  created() {
+    this.cardList = nftworks.find((item) => item.id === "shikastudio").works;
   },
   methods: {},
 };
@@ -28,10 +56,98 @@ export default {
   background: rgba(129, 129, 151, 0.19);
   border-radius: 0.08rem;
   backdrop-filter: blur(7px);
-  padding: 0 0.5rem;
+  padding: 0 0.1rem;
+  margin-bottom: 0.2rem;
   i {
     font-size: 0.3rem;
     margin-right: 0.1rem;
+  }
+}
+
+.card_list {
+  width: 100%;
+  height: 8rem;
+  overflow-y: auto;
+  li {
+    float: left;
+    width: 2.05rem;
+    margin: 0 0.15rem 0.15rem 0;
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
+    .card {
+      border: 1px solid #3f3e43;
+      backdrop-filter: blur(0.04rem);
+      background: rgba(0, 0, 0, 0.38);
+      border-radius: 0.1rem;
+      transition: all 0.3s;
+      cursor: pointer;
+      .top {
+        width: 100%;
+        height: auto;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .center {
+        width: 100%;
+        border-bottom: 1px solid rgba(132, 125, 125, 0.2);
+        div {
+          display: flex;
+          align-items: center;
+          padding: 0.05rem;
+          font-size: 0.12rem;
+          font-weight: bold;
+          &:nth-child(1) {
+            color: #00b1ff;
+            img {
+              width: 0.24rem;
+              height: auto;
+              margin-left: 0.1rem;
+            }
+          }
+          &:nth-child(2) {
+            justify-content: space-between;
+          }
+          &:nth-child(3) {
+            justify-content: flex-end;
+            font-weight: 600;
+            color: #6c6a71;
+          }
+        }
+      }
+      .bottom {
+        width: 100%;
+        padding: 0.05rem 0.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        i {
+          color: #6c6a71;
+          font-size: 0.25rem;
+        }
+      }
+
+      .angle2 {
+        width: 0.1rem;
+        height: auto;
+        position: absolute;
+        right: 0.1rem;
+        bottom: 0.1rem;
+        opacity: 0;
+      }
+    }
+    &:hover,
+    &.active {
+      .card {
+        background: rgba(51, 52, 60, 0.57);
+        box-shadow: 5px 8px 10px 0px rgba(0, 0, 0, 0.5);
+        .angle2 {
+          opacity: 1;
+        }
+      }
+    }
   }
 }
 </style>

@@ -3,7 +3,7 @@
     <div class="box">
       <div class="box_title">
         <img :src="`${$urlImages}box_title1.webp`" alt="" />
-        <span>{{ $t("message.artist.text1") }}</span>
+        <span>{{ $t("artist.text1") }}</span>
       </div>
       <ul class="card_list">
         <li v-for="(item, index) in cardList" :key="index" @click="toDetail(item.id)">
@@ -12,7 +12,7 @@
           <div class="bottom">
             <div>{{ $t(item.title) }}</div>
             <div>
-              <span>{{ $t("message.artist.text2") }} </span>
+              <span>{{ $t("artist.text2") }} </span>
               <span> {{ item.name }}</span>
             </div>
             <div class="text_ellipsis_row_4">
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { nftworks } from "../../mock/nftworks";
+import { nftworks } from "@/mock/nftworks";
 export default {
   name: "ARTIST",
   data() {

@@ -2,7 +2,7 @@
   <el-dialog
     center
     top="0"
-    :title="$t('message.approvePopup.text2') + '&' + $t('message.approvePopup.text1')"
+    :title="$t('approvePopup.text2') + '&' + $t('approvePopup.text1')"
     :visible="getApprovePopup"
     :modal-append-to-body="false"
     :close-on-click-modal="false"
@@ -21,12 +21,12 @@
           </template>
           <template slot="description">
             <div class="normal_des active">
-              <div class="title">{{ $t("message.approvePopup.text3") }}</div>
+              <div class="title">{{ $t("approvePopup.text3") }}</div>
               <div class="status">
-                <div>{{ $parent.popupActive == 1 ? $t("message.status.text10") : $t("message.status.text11") }}</div>
+                <div>{{ $parent.popupActive == 1 ? $t("status.text10") : $t("status.text11") }}</div>
               </div>
               <el-button type="primary" :loading="$parent.approvedloading" @click="toApprove">
-                {{ $t("message.approvePopup.text2") }}
+                {{ $t("approvePopup.text2") }}
               </el-button>
             </div>
           </template>
@@ -43,12 +43,12 @@
           </template>
           <template slot="description">
             <div class="normal_des">
-              <div class="title">{{ $t("message.approvePopup.text4") }}</div>
+              <div class="title">{{ $t("approvePopup.text4") }}</div>
               <div class="status">
-                <div v-show="$parent.popupActive == 2">{{ $t("message.status.text10") }}</div>
+                <div v-show="$parent.popupActive == 2">{{ $t("status.text10") }}</div>
               </div>
               <el-button type="primary" :disabled="$parent.popupActive == 1" :loading="$parent.buyloading" @click="toBuy">
-                {{ $t("message.approvePopup.text1") }}
+                {{ $t("approvePopup.text1") }}
               </el-button>
             </div>
           </template>

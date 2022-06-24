@@ -3,317 +3,114 @@
     <div class="title">Mystey Boxes</div>
     <div class="switch_box">
       <ul class="switch_list">
-        <li class="active">ollection (0)</li>
-        <li>on sale (0)</li>
+        <li v-for="(item, index) in switchList" :key="index" :class="{ active: switchIndex == index }" @click="switchTab(index)">
+          {{ item.label }}({{ item.total }})
+        </li>
       </ul>
-      <div>
+      <div v-show="isShowCheck">
         <i class="iconfont icon-fuxuankuang-quanxuan"></i>
         <i class="iconfont icon-fuxuankuang-weiquanxuan"></i>
         Select all/Unselect
       </div>
     </div>
-    <!-- <ul class="box_list">
-      <li>
+    <ul class="box_list" v-if="switchIndex == 0 && cardList.length > 0">
+      <li v-for="(item, index) in cardList" :key="index" @click="toDetail(index)">
         <div class="leftbox">
           <img :src="`${$urlImages}blindbox.webp`" alt="" />
         </div>
         <div class="rightbox">
           <div>
-            <p>Bir Mystery Box</p>
-            <p>Total: <span>1</span></p>
+            <p>{{ item.label }}</p>
+            <p>
+              Total: <span>{{ item.total }}</span>
+            </p>
           </div>
           <div>View All <i class="iconfont icon-fuxuankuang-quanxuan"></i></div>
         </div>
       </li>
-      <li>
-        <div class="leftbox">
-          <img :src="`${$urlImages}blindbox.webp`" alt="" />
-        </div>
-        <div class="rightbox">
-          <div>
-            <p>Bir Mystery Box</p>
-            <p>Total: <span>1</span></p>
-          </div>
-          <div>View All <i class="iconfont icon-fuxuankuang-quanxuan"></i></div>
-        </div>
-      </li>
-      <li>
-        <div class="leftbox">
-          <img :src="`${$urlImages}blindbox.webp`" alt="" />
-        </div>
-        <div class="rightbox">
-          <div>
-            <p>Bir Mystery Box</p>
-            <p>Total: <span>1</span></p>
-          </div>
-          <div>View All <i class="iconfont icon-fuxuankuang-quanxuan"></i></div>
-        </div>
-      </li>
-      <li>
-        <div class="leftbox">
-          <img :src="`${$urlImages}blindbox.webp`" alt="" />
-        </div>
-        <div class="rightbox">
-          <div>
-            <p>Bir Mystery Box</p>
-            <p>Total: <span>1</span></p>
-          </div>
-          <div>View All <i class="iconfont icon-fuxuankuang-quanxuan"></i></div>
-        </div>
-      </li>
-    </ul> -->
-    <ul class="card_list">
-      <li>
+    </ul>
+    <ul class="card_list" v-if="switchIndex == 1 && cardList.length > 0">
+      <li v-for="(item, index) in cardList" :key="index">
         <div class="card">
           <div class="top"><img :src="`${$urlImages}blindbox.webp`" alt="" /></div>
           <div class="center">
             <div class="row1">
               <div>
-                <span>aaaaaa</span>
+                <span>{{ item.name1 }}</span>
                 <img :src="`${$urlImages}icon1.webp`" alt="" />
               </div>
               <div>
-                <span>88busd</span>
+                <span>{{ item.num1 }}busd</span>
               </div>
             </div>
             <div class="row2">
-              <div>isekai…</div>
-              <div>上次成交88busd</div>
+              <div>{{ item.name2 }}</div>
+              <div>上次成交{{ item.num2 }}busd</div>
             </div>
           </div>
         </div>
         <div class="cancel_box">
-          <span>90 BUSD</span>
-          <el-button type="primary">Cancel</el-button>
-        </div>
-      </li>
-      <li>
-        <div class="card">
-          <div class="top"><img :src="`${$urlImages}blindbox.webp`" alt="" /></div>
-          <div class="center">
-            <div class="row1">
-              <div>
-                <span>aaaaaa</span>
-                <img :src="`${$urlImages}icon1.webp`" alt="" />
-              </div>
-              <div>
-                <span>88busd</span>
-              </div>
-            </div>
-            <div class="row2">
-              <div>isekai…</div>
-              <div>上次成交88busd</div>
-            </div>
-          </div>
-        </div>
-        <div class="cancel_box">
-          <span>90 BUSD</span>
-          <el-button type="primary">Cancel</el-button>
-        </div>
-      </li>
-      <li>
-        <div class="card">
-          <div class="top"><img :src="`${$urlImages}blindbox.webp`" alt="" /></div>
-          <div class="center">
-            <div class="row1">
-              <div>
-                <span>aaaaaa</span>
-                <img :src="`${$urlImages}icon1.webp`" alt="" />
-              </div>
-              <div>
-                <span>88busd</span>
-              </div>
-            </div>
-            <div class="row2">
-              <div>isekai…</div>
-              <div>上次成交88busd</div>
-            </div>
-          </div>
-        </div>
-        <div class="cancel_box">
-          <span>90 BUSD</span>
-          <el-button type="primary">Cancel</el-button>
-        </div>
-      </li>
-      <li>
-        <div class="card">
-          <div class="top"><img :src="`${$urlImages}blindbox.webp`" alt="" /></div>
-          <div class="center">
-            <div class="row1">
-              <div>
-                <span>aaaaaa</span>
-                <img :src="`${$urlImages}icon1.webp`" alt="" />
-              </div>
-              <div>
-                <span>88busd</span>
-              </div>
-            </div>
-            <div class="row2">
-              <div>isekai…</div>
-              <div>上次成交88busd</div>
-            </div>
-          </div>
-        </div>
-        <div class="cancel_box">
-          <span>90 BUSD</span>
-          <el-button type="primary">Cancel</el-button>
-        </div>
-      </li>
-      <li>
-        <div class="card">
-          <div class="top"><img :src="`${$urlImages}blindbox.webp`" alt="" /></div>
-          <div class="center">
-            <div class="row1">
-              <div>
-                <span>aaaaaa</span>
-                <img :src="`${$urlImages}icon1.webp`" alt="" />
-              </div>
-              <div>
-                <span>88busd</span>
-              </div>
-            </div>
-            <div class="row2">
-              <div>isekai…</div>
-              <div>上次成交88busd</div>
-            </div>
-          </div>
-        </div>
-        <div class="cancel_box">
-          <span>90 BUSD</span>
-          <el-button type="primary">Cancel</el-button>
-        </div>
-      </li>
-      <li>
-        <div class="card">
-          <div class="top"><img :src="`${$urlImages}blindbox.webp`" alt="" /></div>
-          <div class="center">
-            <div class="row1">
-              <div>
-                <span>aaaaaa</span>
-                <img :src="`${$urlImages}icon1.webp`" alt="" />
-              </div>
-              <div>
-                <span>88busd</span>
-              </div>
-            </div>
-            <div class="row2">
-              <div>isekai…</div>
-              <div>上次成交88busd</div>
-            </div>
-          </div>
-        </div>
-        <div class="cancel_box">
-          <span>90 BUSD</span>
-          <el-button type="primary">Cancel</el-button>
-        </div>
-      </li>
-      <li>
-        <div class="card">
-          <div class="top"><img :src="`${$urlImages}blindbox.webp`" alt="" /></div>
-          <div class="center">
-            <div class="row1">
-              <div>
-                <span>aaaaaa</span>
-                <img :src="`${$urlImages}icon1.webp`" alt="" />
-              </div>
-              <div>
-                <span>88busd</span>
-              </div>
-            </div>
-            <div class="row2">
-              <div>isekai…</div>
-              <div>上次成交88busd</div>
-            </div>
-          </div>
-        </div>
-        <div class="cancel_box">
-          <span>90 BUSD</span>
-          <el-button type="primary">Cancel</el-button>
-        </div>
-      </li>
-      <li>
-        <div class="card">
-          <div class="top"><img :src="`${$urlImages}blindbox.webp`" alt="" /></div>
-          <div class="center">
-            <div class="row1">
-              <div>
-                <span>aaaaaa</span>
-                <img :src="`${$urlImages}icon1.webp`" alt="" />
-              </div>
-              <div>
-                <span>88busd</span>
-              </div>
-            </div>
-            <div class="row2">
-              <div>isekai…</div>
-              <div>上次成交88busd</div>
-            </div>
-          </div>
-        </div>
-        <div class="cancel_box">
-          <span>90 BUSD</span>
-          <el-button type="primary">Cancel</el-button>
-        </div>
-      </li>
-      <li>
-        <div class="card">
-          <div class="top"><img :src="`${$urlImages}blindbox.webp`" alt="" /></div>
-          <div class="center">
-            <div class="row1">
-              <div>
-                <span>aaaaaa</span>
-                <img :src="`${$urlImages}icon1.webp`" alt="" />
-              </div>
-              <div>
-                <span>88busd</span>
-              </div>
-            </div>
-            <div class="row2">
-              <div>isekai…</div>
-              <div>上次成交88busd</div>
-            </div>
-          </div>
-        </div>
-        <div class="cancel_box">
-          <span>90 BUSD</span>
-          <el-button type="primary">Cancel</el-button>
-        </div>
-      </li>
-      <li>
-        <div class="card">
-          <div class="top"><img :src="`${$urlImages}blindbox.webp`" alt="" /></div>
-          <div class="center">
-            <div class="row1">
-              <div>
-                <span>aaaaaa</span>
-                <img :src="`${$urlImages}icon1.webp`" alt="" />
-              </div>
-              <div>
-                <span>88busd</span>
-              </div>
-            </div>
-            <div class="row2">
-              <div>isekai…</div>
-              <div>上次成交88busd</div>
-            </div>
-          </div>
-        </div>
-        <div class="cancel_box">
-          <span>90 BUSD</span>
+          <span>{{ item.num3 }}BUSD</span>
           <el-button type="primary">Cancel</el-button>
         </div>
       </li>
     </ul>
+    <NoData v-if="cardList.length == 0"></NoData>
   </div>
 </template>
 
 <script>
+import NoData from "@/components/NoData.vue";
 export default {
+  components: { NoData },
   name: "MysteyBoxes",
   data() {
-    return {};
+    return {
+      isShowCheck: false,
+      switchIndex: 0,
+      switchList: [
+        { label: "Collection", total: 0 },
+        { label: "On sale", total: 0 },
+      ],
+      cardList: [],
+    };
   },
-  methods: {},
+  created() {
+    this.switchTab(0);
+  },
+  methods: {
+    switchTab(index) {
+      this.switchIndex = index;
+      this.cardList = [];
+      if (index == 0) {
+        this.isShowCheck = false;
+        const arr = [
+          { label: "Bir Mystery Box", total: 0, id: 0 },
+          { label: "Bir Mystery Box", total: 1, id: 1 },
+          { label: "Bir Mystery Box", total: 2, id: 2 },
+          { label: "Bir Mystery Box", total: 3, id: 3 },
+        ];
+        this.cardList = arr;
+      } else {
+        this.isShowCheck = true;
+        const arr = [
+          { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
+          { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
+          { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
+          { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
+          { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
+          { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
+          { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
+          { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
+          { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
+        ];
+        this.cardList = arr;
+      }
+    },
+    toDetail(id) {
+      this.$router.push({ path: "mystey-boxes-details", query: { id: id } });
+    },
+  },
 };
 </script>
 
@@ -331,7 +128,8 @@ export default {
   background: rgba(129, 129, 151, 0.19);
   border-radius: 0.08rem;
   backdrop-filter: blur(7px);
-  padding: 0 0.5rem;
+  padding: 0 0.1rem;
+  margin-bottom: 0.2rem;
   i {
     font-size: 0.3rem;
     margin-right: 0.1rem;
@@ -343,9 +141,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  ul {
+  .switch_list {
     li {
-      display: inline-block;
+      float: left;
       cursor: pointer;
       width: fit-content;
       height: 0.3rem;
@@ -374,8 +172,7 @@ export default {
   overflow-y: auto;
   li {
     float: left;
-    width: 3.9rem;
-    height: fit-content;
+    width: 4.2rem;
     margin: 0 0.2rem 0.2rem 0;
     background: rgba(129, 129, 151, 0.19);
     border-radius: 0.1rem;
@@ -383,17 +180,20 @@ export default {
     backdrop-filter: blur(7px);
     padding: 0.2rem 0.1rem;
     display: flex;
+    cursor: pointer;
     &:nth-child(2n) {
       margin-right: 0;
     }
     .leftbox {
-      padding: 0.1rem;
+      width: 50%;
+      padding: 0.3rem 0;
+      text-align: center;
       background: rgba(0, 0, 0, 0.32);
       border-radius: 0.1rem;
       backdrop-filter: blur(7px);
       img {
-        width: 1.35rem;
-        height: 1.2rem;
+        width: 70%;
+        height: auto;
       }
     }
     .rightbox {
@@ -402,7 +202,6 @@ export default {
       align-content: space-between;
       div {
         width: 100%;
-        height: fit-content;
         margin-left: 0.1rem;
         &:nth-child(1) {
           p {
@@ -440,15 +239,13 @@ export default {
   overflow-y: auto;
   li {
     float: left;
-    width: 2.5rem;
-    height: fit-content;
-    margin: 0 0.2rem 0.2rem 0;
-    &:nth-child(3n) {
+    width: 2.1rem;
+    margin: 0 0.1rem 0.1rem 0;
+    &:nth-child(4n) {
       margin-right: 0;
     }
     .card {
       width: 100%;
-      overflow: hidden;
       background: rgba(0, 0, 0, 0.38);
       border: 0.01rem solid #3f3e43;
       backdrop-filter: blur(4px);
@@ -457,7 +254,8 @@ export default {
         width: 100%;
         padding: 0.3rem 0;
         text-align: center;
-        background: pink;
+        background: linear-gradient(230deg, rgba(52, 44, 86, 0.5) 0%, rgba(28, 57, 90, 0.8) 45%, rgba(96, 78, 157, 0) 100%);
+        border-bottom: 0.01rem solid #3f3e43;
         img {
           width: 70%;
           height: auto;
@@ -502,7 +300,7 @@ export default {
       border-radius: 0.08rem;
       display: flex;
       justify-content: space-between;
-      margin-top: 0.1rem;
+      margin-top: 0.05rem;
       padding-left: 0.1rem;
       span {
         font-size: 0.15rem;

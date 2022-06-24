@@ -4,7 +4,7 @@
       <img :src="detail.banner" alt="" />
       <div class="back_box" @click="goBack">
         <i class="iconfont icon-fanhui"></i>
-        <span>{{ $t("message.btns.text1") }}</span>
+        <span>{{ $t("btns.text1") }}</span>
       </div>
     </div>
     <div class="content">
@@ -31,25 +31,25 @@
             <div>
               <div>
                 <div><span>10.0k</span></div>
-                <div>{{ $t("message.artist.items[0]") }}</div>
+                <div>{{ $t("artist.items[0]") }}</div>
               </div>
             </div>
             <div>
               <div>
                 <div><span>10.0k</span></div>
-                <div>{{ $t("message.artist.items[1]") }}</div>
+                <div>{{ $t("artist.items[1]") }}</div>
               </div>
             </div>
             <div>
               <div>
                 <div><img :src="`${$urlImages}logo_ETH.webp`" alt="" />10.0k</div>
-                <div>{{ $t("message.artist.items[2]") }}</div>
+                <div>{{ $t("artist.items[2]") }}</div>
               </div>
             </div>
             <div>
               <div>
                 <div><img :src="`${$urlImages}logo_ETH.webp`" alt="" />10.0k</div>
-                <div>{{ $t("message.artist.items[3]") }}</div>
+                <div>{{ $t("artist.items[3]") }}</div>
               </div>
             </div>
           </li>
@@ -71,7 +71,7 @@
                 <span>{{ $t(item.title) }}</span>
                 <span>88busd</span>
               </div>
-              <div>{{ $t("message.artist.text10") }}77busd</div>
+              <div>{{ $t("artist.text10") }}77busd</div>
             </div>
             <div class="bottom">
               <i class="iconfont icon-favorites"></i>
@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import { nftworks } from "../../mock/nftworks";
+import { nftworks } from "@/mock/nftworks";
 export default {
   name: "ARTISTDetails",
   data() {
@@ -124,7 +124,7 @@ export default {
           this.$router.push({ path: "artist-details-shikastudio", query: { id: index } });
           break;
         default:
-          this.$message({ message: this.$t("message.message.text1") });
+          this.$message({ message: this.$t("tips.text12") });
           break;
       }
     },
@@ -180,7 +180,7 @@ export default {
   }
 }
 .box1 {
-  width: 80%;
+  width: 11.5rem;
   display: flex;
   justify-content: flex-end;
   margin: 0 auto;
@@ -214,7 +214,7 @@ export default {
   }
 }
 .box2 {
-  width: 80%;
+  width: 11.5rem;
   margin: 0 auto;
   ul {
     max-width: 100%;
@@ -291,7 +291,7 @@ export default {
   }
 }
 .box3 {
-  width: 90%;
+  width: 11.5rem;
   margin: 0 auto;
   padding-top: 0.5rem;
   border-top: 1px solid;
@@ -301,34 +301,27 @@ export default {
   width: 100%;
   height: 10rem;
   overflow-y: auto;
-  display: flex;
-  flex-wrap: wrap;
   li {
-    margin: 0 0.18rem 0.18rem 0;
+    float: left;
+    width: 2.7rem;
+    margin: 0 0.15rem 0.15rem 0;
     border-radius: 0.1rem;
     overflow: hidden;
     border: 1px solid #3f3e43;
     backdrop-filter: blur(0.04rem);
     background: rgba(0, 0, 0, 0.38);
-    cursor: pointer;
     transition: all 0.3s;
-    // &:nth-child(4n) {
-    //   margin-right: 0;
-    // }
-    &:hover {
-      background: rgba(51, 52, 60, 0.57);
-      box-shadow: 5px 8px 10px 0px rgba(0, 0, 0, 0.5);
-      .angle2 {
-        opacity: 1;
-      }
-    }
-    img {
-      width: 100%;
-      height: 100%;
+    cursor: pointer;
+    &:nth-child(4n) {
+      margin-right: 0;
     }
     .top {
-      width: 3rem;
-      height: 3rem;
+      width: 100%;
+      height: auto;
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
     .center {
       width: 100%;
@@ -336,7 +329,7 @@ export default {
       div {
         display: flex;
         align-items: center;
-        padding: 0.05rem;
+        margin: 0.05rem;
         font-size: 0.12rem;
         font-weight: bold;
         &:nth-child(1) {
@@ -376,6 +369,13 @@ export default {
       bottom: 0.1rem;
       opacity: 0;
     }
+    &:hover {
+      background: rgba(51, 52, 60, 0.57);
+      box-shadow: 5px 8px 10px 0px rgba(0, 0, 0, 0.5);
+      .angle2 {
+        opacity: 1;
+      }
+    }
   }
 }
 @media screen and (max-width: 750px) {
@@ -397,6 +397,7 @@ export default {
     top: -0.4rem;
   }
   .box1 {
+    width: 90%;
     padding: 0.1rem 0;
     .linkbox {
       > div {
@@ -410,7 +411,7 @@ export default {
     }
   }
   .box2 {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     ul {
       padding: 0.1rem 0;
@@ -464,21 +465,22 @@ export default {
     }
   }
   .box3 {
+    width: 90%;
     padding-top: 0.2rem;
   }
   .card_list {
     width: 100%;
     height: 4rem;
     li {
-      margin: 0 0.05rem 0.05rem 0;
-      border-radius: 0.04rem;
-      .top {
-        width: 1.55rem;
-        height: 1.55rem;
+      width: 1.6rem;
+      margin: 0 0.1rem 0.1rem 0;
+      border-radius: 0.08rem;
+      &:nth-child(2n) {
+        margin-right: 0;
       }
       .center {
         div {
-          padding: 0.05rem;
+          margin: 0.05rem;
           font-size: 0.12rem;
           font-weight: bold;
           &:nth-child(1) {

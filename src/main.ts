@@ -43,6 +43,7 @@ import {
   Submenu,
   MenuItem,
   MenuItemGroup,
+  DatePicker,
 } from "element-ui";
 Vue.use(Icon);
 Vue.use(Button);
@@ -61,15 +62,16 @@ Vue.use(Menu);
 Vue.use(Submenu);
 Vue.use(MenuItem);
 Vue.use(MenuItemGroup);
+Vue.use(DatePicker);
 
 Vue.prototype.$message = (option: any) => {
   // option.duration = 0;
   // option.offset = 100;
   option.customClass = i18n.locale == "en" ? "fontfamily_en" : "fontfamily_zh";
-  // this.$message({ message: this.$t("message.message.text1") });
-  // this.$message({ message: this.$t("message.message.text1"), type: "success" });
-  // this.$message({ message: this.$t("message.message.text1"), type: "warning" });
-  // this.$message({ message: this.$t("message.message.text1"), type: "error" });
+  // this.$message({ message: this.$t("message.tips.text12") });
+  // this.$message({ message: this.$t("message.tips.text12"), type: "success" });
+  // this.$message({ message: this.$t("message.tips.text12"), type: "warning" });
+  // this.$message({ message: this.$t("message.tips.text12"), type: "error" });
   return Message(option);
 };
 

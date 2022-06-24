@@ -20,10 +20,10 @@
           <span v-if="getWalletAccount">
             {{ getWalletAccount | ellipsisWallet }}
           </span>
-          <span v-else @click="openWalletPopup">{{ $t("message.nav.text6") }}</span>
+          <span v-else @click="openWalletPopup">{{ $t("nav.text6") }}</span>
           <transition name="showDisconnect" appear>
             <div v-show="showDisconnect" class="disconnect" @click="clickDisconnect">
-              <span>{{ $t("message.nav.text7") }}</span>
+              <span>{{ $t("nav.text7") }}</span>
               <i class="iconfont icon-block"></i>
             </div>
           </transition>
@@ -51,12 +51,12 @@ export default {
     return {
       navActive: 0,
       navArr: [
-        { label: "message.nav.text1", icon: "icon-home", link: "/home", isOpen: true },
-        { label: "message.nav.text2", icon: "icon-bussiness-man", link: "/artist", isOpen: true },
-        { label: "message.nav.text3", icon: "icon-qukuailian", link: "/dao", isOpen: true },
-        { label: "message.nav.text4", icon: "icon-boxhezi", link: "/launchpad", isOpen: true },
-        { label: "message.nav.text5", icon: "icon-tradingvolume", link: "/market", isOpen: true },
-        { label: "message.nav.text8", icon: "icon-tradingvolume", link: "/dashboard", isOpen: true },
+        { label: "nav.text1", icon: "icon-home", link: "/home", isOpen: true },
+        { label: "nav.text2", icon: "icon-bussiness-man", link: "/artist", isOpen: true },
+        { label: "nav.text3", icon: "icon-qukuailian", link: "/dao", isOpen: true },
+        { label: "nav.text4", icon: "icon-boxhezi", link: "/launchpad", isOpen: true },
+        { label: "nav.text5", icon: "icon-tradingvolume", link: "/market", isOpen: true },
+        { label: "nav.text8", icon: "icon-tradingvolume", link: "/dashboard", isOpen: true },
       ],
       showLangSelect: false,
       showDisconnect: false,
@@ -84,7 +84,7 @@ export default {
   methods: {
     toRoute(item) {
       if (item.isOpen) this.$router.push(item.link);
-      else this.$message({ message: this.$t("message.tips.text1") });
+      else this.$message({ message: this.$t("tips.text1") });
     },
     selectLang(item) {
       if (this.$i18n.locale == item) return (this.showLangSelect = false);

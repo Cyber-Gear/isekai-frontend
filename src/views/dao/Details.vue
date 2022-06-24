@@ -3,7 +3,7 @@
     <div class="banner">
       <div class="back_box" @click="goBack">
         <i class="iconfont icon-fanhui"></i>
-        <span>{{ $t("message.btns.text1") }}</span>
+        <span>{{ $t("btns.text1") }}</span>
       </div>
     </div>
     <div class="contentbox" v-if="someProposals">
@@ -12,9 +12,9 @@
           <div class="title">
             <span><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ someProposals.title }}</span>
             <span>
-              <template v-if="someProposals.state == 'active'"> {{ $t("message.status.text7") }} </template>
-              <template v-if="someProposals.state == 'pending'"> {{ $t("message.status.text8") }} </template>
-              <template v-if="someProposals.state == 'closed'"> {{ $t("message.status.text9") }} </template>
+              <template v-if="someProposals.state == 'active'"> {{ $t("status.text7") }} </template>
+              <template v-if="someProposals.state == 'pending'"> {{ $t("status.text8") }} </template>
+              <template v-if="someProposals.state == 'closed'"> {{ $t("status.text9") }} </template>
             </span>
           </div>
           <div class="content">
@@ -25,7 +25,7 @@
           </div>
           <div class="mask" v-if="oldProposalsInfo.length > 5">
             <el-button @click="showMoreProposalsInfo">
-              {{ isShowMoreProposalsInfo ? $t("message.dao.text38") : $t("message.dao.text37") }}
+              {{ isShowMoreProposalsInfo ? $t("dao.text38") : $t("dao.text37") }}
             </el-button>
           </div>
         </div>
@@ -33,7 +33,7 @@
           <!-- Cast your vote -->
           <div class="box4" v-if="someProposals.state == 'active'">
             <div class="title">
-              <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t("message.dao.text15") }}</span>
+              <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t("dao.text15") }}</span>
             </div>
             <div class="check_boxs">
               <div
@@ -48,14 +48,14 @@
                 </div>
               </div>
               <div class="btn">
-                <el-button type="primary" :disabled="voteBtnDisabled" @click="handleVote">{{ $t("message.dao.text25") }}</el-button>
+                <el-button type="primary" :disabled="voteBtnDisabled" @click="handleVote">{{ $t("dao.text25") }}</el-button>
               </div>
             </div>
           </div>
           <!-- Discuss -->
           <div class="box5">
             <div class="title">
-              <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t("message.dao.text17") }}</span>
+              <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t("dao.text17") }}</span>
             </div>
             <div class="linkbox">
               <a :href="someProposals.discussion">{{ someProposals.discussion }}</a>
@@ -64,7 +64,7 @@
           <!-- Votes -->
           <div class="box6" v-if="someProposals.state !== 'pending'">
             <div class="title">
-              <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t("message.dao.text16") }}</span>
+              <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t("dao.text16") }}</span>
               <div v-if="someProposals.votes">{{ someProposals.votes }}</div>
             </div>
             <ul class="list">
@@ -76,10 +76,10 @@
                 <div>{{ item.vp | digitalConversionUnitOfCounting }} FUN</div>
               </li>
               <li class="nothing" v-if="votesList.length == 0">
-                <div>{{ $t("message.dao.text39") }}</div>
+                <div>{{ $t("dao.text39") }}</div>
               </li>
               <li class="more" v-if="hasMore">
-                <span @click="getMore">{{ $t("message.dao.text37") }}</span>
+                <span @click="getMore">{{ $t("dao.text37") }}</span>
               </li>
             </ul>
           </div>
@@ -87,38 +87,38 @@
       </div>
       <div class="rightbox">
         <div class="box1">
-          <div class="title"><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("message.dao.text26") }}</div>
+          <div class="title"><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("dao.text26") }}</div>
           <ul class="list">
             <li>
-              <div>{{ $t("message.dao.text27") }}</div>
+              <div>{{ $t("dao.text27") }}</div>
               <div>
                 <img v-if="someProposals.space.id == 'fun-topia.eth'" :src="`${$urlImages}logo1.webp`" alt="" />
               </div>
             </li>
             <li>
-              <div>{{ $t("message.dao.text28") }}</div>
+              <div>{{ $t("dao.text28") }}</div>
               <div @click="ipfsLink">#{{ someProposals.ipfs | ellipsisNormal }}<i class="iconfont icon-chakan"></i></div>
             </li>
             <li>
-              <div>{{ $t("message.dao.text29") }}</div>
-              <div>{{ $t("message.dao.text32") }}</div>
+              <div>{{ $t("dao.text29") }}</div>
+              <div>{{ $t("dao.text32") }}</div>
             </li>
             <li>
-              <div>{{ $t("message.dao.text30") }}</div>
+              <div>{{ $t("dao.text30") }}</div>
               <div>{{ $utils.formatDate(someProposals.start * 1000) }}</div>
             </li>
             <li>
-              <div>{{ $t("message.dao.text31") }}</div>
+              <div>{{ $t("dao.text31") }}</div>
               <div>{{ $utils.formatDate(someProposals.end * 1000) }}</div>
             </li>
             <li>
-              <div>{{ $t("message.dao.text36") }}</div>
+              <div>{{ $t("dao.text36") }}</div>
               <div>#{{ someProposals.snapshot | digitalConversionInThousandths }}</div>
             </li>
           </ul>
         </div>
         <div class="box1">
-          <div class="title"><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("message.dao.text35") }}</div>
+          <div class="title"><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("dao.text35") }}</div>
           <ul class="progressbarlist">
             <li v-for="(item, index) in resultList" :key="index">
               <div>
@@ -278,7 +278,7 @@ export default {
     // 投票
     handleVote() {
       const isCheckedItem = this.checkboxList.find((item) => item.isChecked);
-      if (!isCheckedItem) return this.$message({ message: this.$t("message.tips.text5"), type: "warning" });
+      if (!isCheckedItem) return this.$message({ message: this.$t("tips.text5"), type: "warning" });
 
       if (!this.getWalletAccount) return this.$store.commit("setWalletConnectPopup", true);
       // account: string, proposal: string, choice: number

@@ -3,16 +3,17 @@
     <div class="title">NFT Asstet</div>
     <div class="switch_box">
       <ul class="switch_list">
-        <li class="active">ollection (0)</li>
-        <li>on sale (0)</li>
+        <li v-for="(item, index) in switchList" :key="index" :class="{ active: switchIndex == index }" @click="switchTab(index)">
+          {{ item.label }}({{ item.total }})
+        </li>
       </ul>
-      <div>
+      <div v-show="isShowCheck">
         <i class="iconfont icon-fuxuankuang-quanxuan"></i>
         <i class="iconfont icon-fuxuankuang-weiquanxuan"></i>
         Select all/Unselect
       </div>
     </div>
-    <ul class="card_list">
+    <ul class="card_list" v-if="cardList.length > 0">
       <li v-for="(item, index) in cardList" :key="index">
         <div class="card">
           <div class="top"><img :src="item.logo" alt="" /></div>
@@ -25,39 +26,57 @@
               <span>{{ $t(item.title) }}</span>
               <span>88busd</span>
             </div>
-            <div>{{ $t("message.artist.text10") }}77busd</div>
+            <div>{{ $t("artist.text10") }}77busd</div>
           </div>
           <div class="bottom">
             <i class="iconfont icon-favorites"></i>
           </div>
           <img class="angle2" :src="`${$urlImages}angle2.webp`" alt="" />
         </div>
-        <div class="cancel_box">
+        <div class="cancel_box" v-if="isShowCheck">
           <span>90 BUSD</span>
           <el-button type="primary">Cancel</el-button>
         </div>
       </li>
     </ul>
+    <NoData v-if="cardList.length == 0"></NoData>
   </div>
 </template>
 
 <script>
-import { nftworks } from "../../mock/nftworks";
+import { nftworks } from "@/mock/nftworks";
+import NoData from "@/components/NoData.vue";
+
 export default {
+  components: { NoData },
   name: "NFTAsstet",
   data() {
     return {
+      isShowCheck: false,
+      switchIndex: 0,
+      switchList: [
+        { label: "Collection", total: 0 },
+        { label: "On sale", total: 0 },
+      ],
       cardList: [],
     };
   },
   created() {
-    nftworks.forEach((element) => {
-      if (element.id === "shikastudio") {
-        this.cardList = element.works;
-      }
-    });
+    this.switchTab(0);
   },
-  methods: {},
+  methods: {
+    switchTab(index) {
+      this.switchIndex = index;
+      this.cardList = [];
+      if (index == 0) {
+        this.isShowCheck = false;
+        this.cardList = nftworks.find((item) => item.id === "shikastudio").works;
+      } else {
+        this.isShowCheck = true;
+        this.cardList = nftworks.find((item) => item.id === "shikastudio").works;
+      }
+    },
+  },
 };
 </script>
 
@@ -75,7 +94,7 @@ export default {
   background: rgba(129, 129, 151, 0.19);
   border-radius: 0.08rem;
   backdrop-filter: blur(7px);
-  padding: 0 0.5rem;
+  padding: 0 0.1rem;
   margin-bottom: 0.2rem;
   i {
     font-size: 0.3rem;
@@ -90,7 +109,7 @@ export default {
   justify-content: space-between;
   ul {
     li {
-      display: inline-block;
+      float: left;
       cursor: pointer;
       width: fit-content;
       height: 0.3rem;
@@ -117,23 +136,27 @@ export default {
   width: 100%;
   height: 8rem;
   overflow-y: auto;
-  display: flex;
-  flex-wrap: wrap;
   li {
-    width: fit-content;
-    height: fit-content;
-    margin: 0 0.1rem 0.1rem 0;
+    float: left;
+    width: 2.05rem;
+    margin: 0 0.15rem 0.15rem 0;
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
     .card {
-      border-radius: 0.1rem;
-      overflow: hidden;
       border: 1px solid #3f3e43;
       backdrop-filter: blur(0.04rem);
       background: rgba(0, 0, 0, 0.38);
-      cursor: pointer;
+      border-radius: 0.1rem;
       transition: all 0.3s;
+      cursor: pointer;
       .top {
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 100%;
+        height: auto;
+        img {
+          width: 100%;
+          height: 100%;
+        }
       }
       .center {
         width: 100%;
@@ -173,10 +196,7 @@ export default {
           font-size: 0.25rem;
         }
       }
-      img {
-        width: 100%;
-        height: 100%;
-      }
+
       .angle2 {
         width: 0.1rem;
         height: auto;
@@ -207,7 +227,7 @@ export default {
       border-radius: 0.08rem;
       display: flex;
       justify-content: space-between;
-      margin-top: 0.1rem;
+      margin-top: 0.05rem;
       padding-left: 0.1rem;
       span {
         font-size: 0.15rem;

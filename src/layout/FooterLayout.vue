@@ -11,7 +11,7 @@
           <img :src="`${$urlImages}contact4.webp`" alt="" />
         </div>
       </div>
-      <p>{{ $t("message.footer.text1") }}</p>
+      <p>{{ $t("footer.text1") }}</p>
     </div>
   </div>
 </template>

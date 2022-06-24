@@ -3,7 +3,7 @@
     <div class="box">
       <div class="box_title">
         <img :src="`${$urlImages}box_title1.webp`" alt="" />
-        <span>{{ $t("message.dashboard.text1") }}</span>
+        <span>{{ $t("dashboard.text1") }}</span>
       </div>
       <div class="box_content">
         <div class="info">
@@ -25,28 +25,12 @@
             <div class="title"><i class="iconfont icon-category"></i>MY NFT</div>
             <div class="list">
               <el-menu class="el-menu-dashboard" :default-active="defaultActive" :default-openeds="defaultOpeneds" active-text-color="#00B5FF" router>
-                <el-submenu index="asstet">
+                <el-submenu v-for="(item, index) in menuList" :key="index" :index="item.index">
                   <template slot="title">
-                    <i class="iconfont icon-bussiness-man"></i>
-                    <span>Asstet</span>
+                    <i class="iconfont" :class="item.icon"></i>
+                    <span>{{ item.label }}</span>
                   </template>
-                  <el-menu-item index="nft-asstet">NFT Asstet</el-menu-item>
-                  <el-menu-item index="mystey-boxes">Mystey Boxes</el-menu-item>
-                  <el-menu-item index="crypto-asstet">Crypto Asstet</el-menu-item>
-                </el-submenu>
-                <el-submenu index="history">
-                  <template slot="title">
-                    <i class="iconfont icon-bussiness-man"></i>
-                    <span>History</span>
-                  </template>
-                  <el-menu-item index="orders">Orders</el-menu-item>
-                </el-submenu>
-                <el-submenu index="favorites">
-                  <template slot="title">
-                    <i class="iconfont icon-favorites"></i>
-                    <span>Favorites</span>
-                  </template>
-                  <el-menu-item index="my-favorites">My Favorites</el-menu-item>
+                  <el-menu-item v-for="(ite, ind) in item.children" :key="ind" :index="ite.index">{{ ite.label }}</el-menu-item>
                 </el-submenu>
               </el-menu>
             </div>
@@ -102,13 +86,39 @@ export default {
   name: "DASHBOARD",
   data() {
     return {
-      defaultActive: "nft-asstet",
+      defaultActive: "",
       defaultOpeneds: ["asstet", "history", "favorites"],
       isShowDrawer: false,
+      menuList: [
+        {
+          index: "asstet",
+          icon: "icon-bussiness-man",
+          label: "Asstet",
+          children: [
+            { index: "nft-asstet", label: "NFT Asstet" },
+            { index: "mystey-boxes", label: "Mystey Boxes" },
+            { index: "crypto-asstet", label: "Crypto Asstet" },
+          ],
+        },
+        { index: "history", icon: "icon-bussiness-man", label: "History", children: [{ index: "orders", label: "Orders" }] },
+        { index: "favorites", icon: "icon-favorites", label: "Favorites", children: [{ index: "my-favorites", label: "My Favorites" }] },
+      ],
       tagList: [{ label: "video favor" }, { label: "singer" }, { label: "cool" }, { label: "artist" }, { label: "love" }],
     };
   },
+  watch: {
+    $route(to) {
+      this.getDefaultActive(to.path);
+    },
+  },
+  created() {
+    this.getDefaultActive(this.$route.path);
+  },
   methods: {
+    getDefaultActive(path) {
+      const str = path.replace("/dashboard/", "");
+      this.defaultActive = str == "mystey-boxes-details" ? "mystey-boxes" : str;
+    },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
@@ -168,9 +178,9 @@ export default {
       }
       &:nth-child(3) {
         width: 100%;
-        text-align: right;
+        display: flex;
+        justify-content: flex-end;
         div {
-          display: inline-block;
           width: fit-content;
           height: 0.3rem;
           line-height: 0.3rem;
@@ -228,7 +238,7 @@ export default {
   display: flex;
   justify-content: space-between;
   .leftbox {
-    width: 3rem;
+    width: 2.5rem;
     .title {
       width: 100%;
       height: 0.6rem;
@@ -243,8 +253,8 @@ export default {
     }
   }
   .rightbox {
-    width: calc(100% - 3rem);
-    padding-left: 0.5rem;
+    width: calc(100% - 2.5rem);
+    padding-left: 0.2rem;
   }
 }
 .drawer_box {
@@ -306,7 +316,7 @@ export default {
     }
     ul {
       li {
-        display: inline-block;
+        float: left;
         width: fit-content;
         height: 0.3rem;
         line-height: 0.3rem;

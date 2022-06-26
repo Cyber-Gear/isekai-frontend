@@ -18,7 +18,7 @@
             <div>{{ spaceObj.members.length }}</div>
           </div>
           <div class="btn">
-            <el-button :disabled="true"> {{ $t("dao.text3") }} </el-button>
+            <el-button :disabled="true" @click="aBill"> {{ $t("dao.text3") }} </el-button>
           </div>
         </div>
       </div>
@@ -156,8 +156,11 @@ export default {
         if (m > 0) return `${this.$t("date.left") + " " + m + " " + this.$t("date.minute")}`;
       }
     },
-
-    // 提交提案
+    /**发起提案 */
+    aBill() {
+      // console.log("发起提案");
+    },
+    /**提交提案 */
     createProposal() {
       // account: string, title: string, body: string, discussion: string, choices: string[], start: number, end: number
       // vote
@@ -181,7 +184,7 @@ export default {
   background-size: 100% 100%;
 }
 .box {
-  width: fit-content;
+  width: 11.5rem;
   margin: 0.5rem auto;
   background: rgba(129, 129, 151, 0.19);
   border-radius: 0.08rem;
@@ -193,7 +196,7 @@ export default {
   padding: 0.8rem 0.5rem 0.5rem 0.5rem;
 }
 .leftbox {
-  width: 3rem;
+  width: 3.5rem;
   height: fit-content;
   > div {
     width: 100%;
@@ -295,14 +298,14 @@ export default {
   }
 }
 .rightbox {
-  width: 7rem;
+  width: calc(100% - 3.5rem);
   .title {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-size: 0.3rem;
-    font-weight: 500;
+    font-weight: bold;
     padding: 0 0.2rem;
     margin-bottom: 0.1rem;
     .el-select {

@@ -243,12 +243,13 @@ export default {
         }
       }
       &:nth-child(3) {
+        width: 60%;
+        margin: 0.3rem auto;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 0.15rem;
         overflow: hidden;
-        margin: 0.3rem 0;
         > div {
           width: 25%;
           height: 0.9rem;
@@ -434,8 +435,9 @@ export default {
           }
         }
         &:nth-child(3) {
+          width: 80%;
           border-radius: 0.15rem;
-          margin: 0.1rem 0;
+          margin: 0.1rem auto;
           > div {
             width: 25%;
             height: 0.47rem;

@@ -25,7 +25,9 @@
           </div>
           <div class="mask" v-if="oldProposalsInfo.length > 5">
             <el-button @click="showMoreProposalsInfo">
-              {{ isShowMoreProposalsInfo ? $t("dao.text38") : $t("dao.text37") }}
+              <!-- {{ isShowMoreProposalsInfo ? $t("dao.text38") : $t("dao.text37") }} -->
+              <i class="iconfont icon-arrow-up" v-show="isShowMoreProposalsInfo"></i>
+              <i class="iconfont icon-arrow-down" v-show="!isShowMoreProposalsInfo"></i>
             </el-button>
           </div>
         </div>
@@ -361,25 +363,26 @@ export default {
   border: 1px solid #436e77;
   backdrop-filter: blur(0.07rem);
   .box1 {
-    padding: 0 0.5rem 0.8rem 0.5rem;
+    padding: 0 0.3rem 0.3rem 0.3rem;
     position: relative;
     .mask {
       width: 100%;
-      height: 0.5rem;
-      padding: 0.4rem 0;
+      height: 0.3rem;
       position: absolute;
       bottom: 0;
       left: 0;
-      background: rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(0.07rem);
+      // background: rgba(0, 0, 0, 0.2);
+      // backdrop-filter: blur(0.07rem);
       display: flex;
       justify-content: center;
       align-items: center;
       .el-button {
-        width: 1.2rem;
-        height: 0.5rem;
-        line-height: 0.5rem;
-        font-size: 0.15rem;
+        width: 2rem;
+        height: 0.3rem;
+        line-height: 0.3rem;
+        i {
+          font-size: 0.3rem;
+        }
       }
     }
     .title {
@@ -697,17 +700,18 @@ export default {
     width: 90%;
     margin-bottom: 0.2rem;
     .box1 {
-      padding: 0 0.2rem 0.5rem 0.2rem;
+      padding: 0 0.2rem 0.2rem 0.2rem;
       position: relative;
       .mask {
         width: 100%;
-        height: 0.5rem;
-        padding: 0.1rem 0;
+        height: 0.2rem;
         .el-button {
           width: 1rem;
-          height: 0.35rem;
-          line-height: 0.35rem;
-          font-size: 0.12rem;
+          height: 0.2rem;
+          line-height: 0.2rem;
+          i {
+            font-size: 0.2rem;
+          }
         }
       }
       .title {

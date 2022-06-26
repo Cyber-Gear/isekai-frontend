@@ -490,6 +490,14 @@ body {
 }
 // @media screen and (min-width: 981px) { }
 @media screen and (max-width: 750px) {
+  // 重置滚动条样式
+  ::-webkit-scrollbar {
+    width: 0.02rem;
+    height: 0.02rem;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0.02rem;
+  }
   .pc {
     display: none !important;
   }

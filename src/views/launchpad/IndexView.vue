@@ -25,7 +25,8 @@
           <el-steps :active="nowStatusIndex" align-center>
             <el-step v-for="(item, index) in stepsArr" :key="index" :title="$t(item.title)" :description="item.des">
               <template slot="icon">
-                <div @click="changeSteps(item, index)">
+                <!-- <div @click="changeSteps(item, index)"> -->
+                <div>
                   <img v-if="index < nowStatusIndex" :src="`${$urlImages}progress_img_active.webp`" alt="" />
                   <img v-else :src="`${$urlImages}progress_img_normal.webp`" alt="" />
                 </div>
@@ -200,8 +201,8 @@ export default {
     },
   },
   created() {
-    this.getAmount(this.boxType);
-    this.getPriceAddrs(this.boxType);
+    this.getAmount();
+    this.getPriceAddrs();
   },
   beforeDestroy() {
     clearTimeout(this.countdownTimer);
@@ -269,16 +270,16 @@ export default {
         .connect(getSigner())
         .buyBoxes(this.inputAmount, this.boxType)
         .then((res) => {
-          console.log("购买成功", res);
-          this.$message({ message: this.$t("购买成功") });
-          this.buyloading = false;
-          if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
+          // console.log("购买成功", res);
           setTimeout(() => {
-            location.reload();
-          }, 1000);
-          // this.getAmount();
-          // this.getUserHourlyBoxesLeftSupply();
-          // this.getBalanceOf();
+            if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
+            this.$message({ message: this.$t("购买成功") });
+            this.buyloading = false;
+            this.inputAmount = null;
+            this.getAmount();
+            this.getUserHourlyBoxesLeftSupply();
+            this.getBalanceOf();
+          }, 2000);
         })
         .catch((err) => {
           this.buyloading = false;
@@ -307,16 +308,15 @@ export default {
      * @totalBoxesLength 获取某类型的盲盒的已售出数量 入参：盲盒类型 出参：已售出数量
      * @getBoxesLeftSupply 获取某类型的盲盒的剩余可销售数量 入参：盲盒类型 出参：剩余数量
      */
-    async getAmount(boxType) {
+    async getAmount() {
       let now = Date.parse(new Date());
       let time1 = Date.parse(this.stepsArr[0].des);
       let time2 = Date.parse(this.stepsArr[1].des);
       let index = now > time1 && now < time2 ? 0 : 1;
       await cb()
-        .getBoxesLeftSupply(boxType)
+        .getBoxesLeftSupply(this.boxType)
         .then((res) => {
           this.remainingAmount = Number(res._hex);
-          // this.remainingAmount = 0;
           if (this.remainingAmount == 0) index = 2;
           // console.log("获取某类型的盲盒的剩余可销售数量", this.remainingAmount);
         })
@@ -326,7 +326,7 @@ export default {
       this.nowStatusText = this.stepsArr[index].title;
       this.nowStatusIndex = index + 1;
       await cb()
-        .boxesMaxSupply(boxType)
+        .boxesMaxSupply(this.boxType)
         .then((res) => {
           this.totalAmount = Number(res._hex);
           // console.log("获取某类型的盲盒的总销售数量", this.totalAmount);
@@ -335,7 +335,7 @@ export default {
           console.error("boxesMaxSupply", err);
         });
       await cb()
-        .totalBoxesLength(boxType)
+        .totalBoxesLength(this.boxType)
         .then((res) => {
           this.soldAmount = Number(res._hex);
           // console.log("获取某类型的盲盒的已售出数量", this.soldAmount);
@@ -379,9 +379,9 @@ export default {
      * @whiteListFlags 获取某类型的盲盒是否开启白名单 入参：盲盒类型 出参：开启状态
      * @hourlyBuyLimits 每小时限购数量 入参：盲盒类型 出参：每小时限购数量
      */
-    getPriceAddrs(boxType) {
+    getPriceAddrs() {
       cb()
-        .boxTokenPrices(boxType)
+        .boxTokenPrices(this.boxType)
         .then((res) => {
           this.boxPrice = util.formatEther(res._hex);
           // console.log("获取某类型的盲盒的支付代币单价", this.boxPrice);
@@ -390,7 +390,7 @@ export default {
           console.error("boxTokenPrices", err);
         });
       cb()
-        .tokenAddrs(boxType)
+        .tokenAddrs(this.boxType)
         .then((res) => {
           this.paymentAddress = res;
           // console.log("获取某类型的盲盒的支付代币地址", this.paymentAddress);
@@ -399,7 +399,7 @@ export default {
           console.error("tokenAddrs", err);
         });
       cb()
-        .whiteListFlags(boxType)
+        .whiteListFlags(this.boxType)
         .then((res) => {
           this.isOpenWhitelist = res;
           // console.log("获取某类型的盲盒是否开启白名单", this.isOpenWhitelist);
@@ -411,7 +411,7 @@ export default {
         .hourlyBuyLimits(this.boxType)
         .then((res) => {
           this.hourlyBuyAmount = Number(res._hex);
-          // console.log("每小时限购数量", res, Number(res._hex));
+          // console.log("每小时限购数量", res, this.hourlyBuyAmount);
         })
         .catch((err) => {
           console.error("hourlyBuyLimits", err);
@@ -464,10 +464,10 @@ export default {
     /**监听开盲盒结果，获取某用户开出来的英雄的数量和ID数组 用户钱包地址，生成英雄数量，英雄ID数组 */
     // event SpawnCns(address user, uint256 amount, uint256[] cnIds)
 
-    changeSteps(item, index) {
-      this.nowStatusText = item.title;
-      this.nowStatusIndex = index + 1;
-    },
+    // changeSteps(item, index) {
+    //   this.nowStatusText = item.title;
+    //   this.nowStatusIndex = index + 1;
+    // },
   },
 };
 </script>

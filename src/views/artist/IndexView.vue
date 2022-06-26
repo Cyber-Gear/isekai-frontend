@@ -15,7 +15,7 @@
               <span>{{ $t("artist.text2") }} </span>
               <span> {{ item.name }}</span>
             </div>
-            <div class="text_ellipsis_row_4">
+            <div class="text_ellipsis_row_5">
               <pre>{{ $t(item.des) }}</pre>
             </div>
           </div>
@@ -64,18 +64,19 @@ export default {
   overflow-x: hidden;
   overflow-y: auto;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, auto);
-  grid-gap: 0.1rem;
-  justify-items: center;
   li {
+    float: left;
     width: 2.75rem;
-    height: fit-content;
+    height: 4rem;
+    margin: 0 0.15rem 0.15rem 0;
     border-radius: 0.1rem;
     border: 1px solid #514f4f;
     position: relative;
     transition: all 0.3s;
     cursor: pointer;
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
     &:hover {
       background: #2f2e38;
       box-shadow: 0.08rem 0.1rem 0.1rem 0px #000000;
@@ -104,7 +105,7 @@ export default {
     .bottom {
       width: 100%;
       height: auto;
-      padding: 0.3rem 0.1rem 0.1rem 0.1rem;
+      padding: 0.3rem 0.1rem 0 0.1rem;
       > div {
         text-align: center;
         &:nth-child(1) {
@@ -151,12 +152,15 @@ export default {
   }
   .card_list {
     width: 90%;
-    height: 4.7rem;
-    grid-template-columns: repeat(2, auto);
-    grid-gap: 0.05rem;
+    height: 5rem;
     li {
       width: 1.6rem;
+      height: 2.4rem;
+      margin: 0 0.1rem 0.1rem 0;
       border-radius: 0.05rem;
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
       .top {
         width: 100%;
         height: 1.05rem;
@@ -167,7 +171,7 @@ export default {
         top: 0.9rem;
       }
       .bottom {
-        padding: 0.15rem 0.1rem 0.1rem 0.1rem;
+        padding: 0.15rem 0.1rem 0 0.1rem;
         > div {
           &:nth-child(1) {
             font-size: 0.12rem;

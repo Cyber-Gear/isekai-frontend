@@ -246,6 +246,7 @@ export default {
     }
     .card {
       width: 100%;
+      padding: 0.1rem;
       background: rgba(0, 0, 0, 0.38);
       border: 0.01rem solid #3f3e43;
       backdrop-filter: blur(4px);
@@ -254,15 +255,15 @@ export default {
         width: 100%;
         padding: 0.3rem 0;
         text-align: center;
-        background: linear-gradient(230deg, rgba(52, 44, 86, 0.5) 0%, rgba(28, 57, 90, 0.8) 45%, rgba(96, 78, 157, 0) 100%);
-        border-bottom: 0.01rem solid #3f3e43;
+        background: radial-gradient(circle, #342c56 0%, #1c395a 33%, rgba(96, 78, 157, 0.72) 100%);
+        border-radius: 0.08rem;
         img {
           width: 70%;
           height: auto;
         }
       }
       .center {
-        padding: 0.1rem 0.05rem;
+        padding: 0.05rem 0;
         > div {
           display: flex;
           align-items: center;

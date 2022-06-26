@@ -25,7 +25,7 @@
       <div class="rightbox">
         <div class="title">
           <div>{{ $t("dao.text1") }}</div>
-          <el-select v-model="selectKey" @change="selectChange">
+          <el-select v-model="selectKey" @change="selectChange" v-show="spaceObj">
             <el-option v-for="item in selectOptions" :key="item.value" :label="$t(item.label)" :value="item.value"></el-option>
           </el-select>
         </div>

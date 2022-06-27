@@ -14,11 +14,11 @@
         <ul>
           <li>
             <div><img :src="`${$urlImages}coin_FUN.webp`" alt="" /> FUN</div>
-            <div>{{ item.num1 }}</div>
+            <div>{{ item.num1 | numberToFixed(12) }}</div>
           </li>
           <li>
             <div></div>
-            <div>=${{ item.num2 }}</div>
+            <div>=${{ item.num2 | numberToFixed(5) }}</div>
           </li>
           <li>
             <div>Available</div>

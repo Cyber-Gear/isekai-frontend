@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     toDetail(id) {
-      this.$router.push({ path: "artist-details", query: { id: id } });
+      this.$router.push({ path: "/artist-details", query: { id: id } });
     },
   },
 };

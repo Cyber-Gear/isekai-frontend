@@ -12,7 +12,7 @@
             <span>{{ remainingAmount }} {{ $t("launchpad.text11") }}</span>
           </div>
           <div>
-            <span>{{ $t("launchpad.text4") }}</span> <span>{{ boxPrice | digitalCutZero }} U</span>
+            <span>{{ $t("launchpad.text4") }}</span> <span>{{ boxPrice }} U</span>
           </div>
           <div>
             <span>{{ $t("launchpad.text5") }}</span>
@@ -96,11 +96,12 @@
                   <div>{{ $t("launchpad.text17") }}</div>
                   <div class="inputbox">
                     <span class="span1"><i class="iconfont icon-jianhao" @click="subtraction"></i></span>
+                    <!-- <el-input oninput ="value=value.replace(/[^0-9.]/g,'')" placeholder="请输入(整数或者小数)金额" v-model="form.ysje"></el-input> -->
                     <input type="number" v-model="inputAmount" oninput="value=value.replace(/^(0+)|[^\d]+/g,'')" :disabled="buyloading" />
                     <span class="span2"><i class="iconfont icon-jiahao" @click="addition"></i></span>
                   </div>
                   <div>
-                    <span>{{ $t("launchpad.text18") }} {{ totalPrice | digitalConversionInThousandths }} U</span>
+                    <span>{{ $t("launchpad.text18") }} {{ totalPrice | numberThousands }} U</span>
                   </div>
                 </div>
                 <div class="right">
@@ -271,15 +272,20 @@ export default {
         .buyBoxes(this.inputAmount, this.boxType)
         .then((res) => {
           // console.log("购买成功", res);
-          setTimeout(() => {
-            if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
-            this.$message({ message: this.$t("购买成功") });
-            this.buyloading = false;
-            this.inputAmount = null;
-            this.getAmount();
-            this.getUserHourlyBoxesLeftSupply();
-            this.getBalanceOf();
-          }, 2000);
+          if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
+          this.$message({ message: this.$t("购买成功") });
+          this.buyloading = false;
+          this.inputAmount = null;
+          this.$router.push("/dashboard");
+          // setTimeout(() => {
+          //   if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
+          //   this.$message({ message: this.$t("购买成功") });
+          //   this.buyloading = false;
+          //   this.inputAmount = null;
+          //   this.getAmount();
+          //   this.getUserHourlyBoxesLeftSupply();
+          //   this.getBalanceOf();
+          // }, 2000);
         })
         .catch((err) => {
           this.buyloading = false;
@@ -383,7 +389,7 @@ export default {
       cb()
         .boxTokenPrices(this.boxType)
         .then((res) => {
-          this.boxPrice = util.formatEther(res._hex);
+          this.boxPrice = Number(util.formatEther(res._hex));
           // console.log("获取某类型的盲盒的支付代币单价", this.boxPrice);
         })
         .catch((err) => {

@@ -112,16 +112,16 @@ export default {
     toDetail(index) {
       switch (this.$route.query.id) {
         // case "zw":
-        //   this.$router.push({ path: "artist-details-zw", query: { id: index } });
+        //   this.$router.push({ path: "/artist-details-zw", query: { id: index } });
         //   break;
         // case "akiha":
-        //   this.$router.push({ path: "artist-details-akiha", query: { id: index } });
+        //   this.$router.push({ path: "/artist-details-akiha", query: { id: index } });
         //   break;
         // case "negoro":
-        //   this.$router.push({ path: "artist-details-negoro", query: { id: index } });
+        //   this.$router.push({ path: "/artist-details-negoro", query: { id: index } });
         //   break;
         case "shikastudio":
-          this.$router.push({ path: "artist-details-shikastudio", query: { id: index } });
+          this.$router.push({ path: "/artist-details-shikastudio", query: { id: index } });
           break;
         default:
           this.$message({ message: this.$t("tips.text12") });

@@ -75,7 +75,7 @@
                 <div>
                   <template v-if="checkboxList.length > 0">{{ checkboxList[item.choice - 1] ? checkboxList[item.choice - 1].label : "" }}</template>
                 </div>
-                <div>{{ item.vp | digitalConversionUnitOfCounting }} FUN</div>
+                <div>{{ item.vp | numberTally }} FUN</div>
               </li>
               <li class="nothing" v-if="votesList.length == 0">
                 <div>{{ $t("dao.text39") }}</div>
@@ -115,7 +115,7 @@
             </li>
             <li>
               <div>{{ $t("dao.text36") }}</div>
-              <div>#{{ someProposals.snapshot | digitalConversionInThousandths }}</div>
+              <div>#{{ someProposals.snapshot | numberThousands }}</div>
             </li>
           </ul>
         </div>
@@ -126,8 +126,8 @@
               <div>
                 <span class="text_ellipsis">{{ item.label }}</span>
                 <p>
-                  <span class="text_ellipsis">{{ item.amount | digitalConversionUnitOfCounting }} FUN</span>
-                  <span>{{ item.percent.toFixed(2) }}%</span>
+                  <span class="text_ellipsis">{{ item.amount | numberTally }} FUN</span>
+                  <span>{{ item.percent | numberToFixed(2) }}%</span>
                 </p>
               </div>
               <div><div :style="{ width: item.percent + '%' }"></div></div>

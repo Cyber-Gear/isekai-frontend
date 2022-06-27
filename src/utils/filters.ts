@@ -19,26 +19,30 @@ export default {
   },
 
   /**数字转换千分位 */
-  digitalConversionInThousandths(value: number) {
+  numberThousands(value: number) {
     if (!value) return 0;
     return (Math.round(value) + "").replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, "$&,");
   },
   /**数字转换计数单位 */
-  digitalConversionUnitOfCounting(value: number) {
+  numberTally(value: number) {
     if (!value) return 0;
     // Number.isInteger(num) 判断是否是整数
-    if (value >= 1000000) {
-      const num = value / 1000000;
-      return (Number.isInteger(num) ? num : num.toFixed(2)) + " M";
-    } else if (value >= 1000) {
-      const num = value / 1000;
-      return (Number.isInteger(num) ? num : num.toFixed(2)) + " K";
+    if (1000000 <= value) {
+      return value / 1000000 + " M";
+    } else if (1000 <= value && value < 1000000) {
+      return value / 1000 + " K";
     } else {
       return value;
     }
   },
+  /**数字四舍五入去0 */
+  numberToFixed(value: number, digits: number) {
+    if (!value) return 0;
+    return Number(value.toFixed(digits));
+  },
+
   /**去掉小数后的0 */
-  digitalCutZero(value: number) {
+  numberCutZero(value: number) {
     const str = value.toString();
     const newstr = str;
     const leng = str.length - str.indexOf(".") - 1;

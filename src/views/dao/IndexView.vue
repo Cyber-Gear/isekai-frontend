@@ -137,7 +137,7 @@ export default {
         });
     },
     toDetail(item) {
-      this.$router.push({ path: "dao-details", query: { id: item.id } });
+      this.$router.push({ path: "/dao-details", query: { id: item.id } });
     },
     /**DAO提案倒计时 */
     countdown(endTime) {

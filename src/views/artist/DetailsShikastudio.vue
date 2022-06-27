@@ -64,9 +64,8 @@
 </template>
 
 <script>
-import { nftworks } from "@/mock/nftworks";
-import PaintingVideo from "../../components/PaintingVideo.vue";
-
+import PaintingVideo from "@/components/PaintingVideo.vue";
+import { shikastudio } from "@/mock/nftworks";
 export default {
   name: "DetailsShikastudio",
   components: { PaintingVideo },
@@ -77,11 +76,8 @@ export default {
   },
   created() {
     if (Object.keys(this.$route.query).length > 0) {
-      nftworks.forEach((element) => {
-        if (element.id === "shikastudio") {
-          this.card = element.works[this.$route.query.id];
-        }
-      });
+      const id = this.$route.query.id;
+      this.card = shikastudio.works.find((item) => item.id == id);
     }
   },
   methods: {

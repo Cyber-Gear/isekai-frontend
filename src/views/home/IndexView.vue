@@ -208,8 +208,7 @@
 </template>
 
 <script>
-import { nftworks } from "@/mock/nftworks";
-
+import { shikastudio, zw, akiha, negoro } from "@/mock/nftworks";
 export default {
   name: "HOME",
   data() {
@@ -219,8 +218,7 @@ export default {
         { text1: "home.list1[1].text1", text2: "home.list1[1].text2" },
         { text1: "home.list1[2].text1", text2: "home.list1[2].text2" },
       ],
-      cardList2: nftworks,
-
+      cardList2: [shikastudio, zw, akiha, negoro],
       cardList3: [
         {
           text1: "home.list3[0].text1",

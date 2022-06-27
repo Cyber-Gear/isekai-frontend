@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { nftworks } from "@/mock/nftworks";
+import { shikastudio } from "@/mock/nftworks";
 export default {
   name: "MyFavorites",
   data() {
@@ -36,7 +36,7 @@ export default {
     };
   },
   created() {
-    this.cardList = nftworks.find((item) => item.id === "shikastudio").works;
+    this.cardList = shikastudio.works;
   },
   methods: {},
 };

@@ -60,7 +60,7 @@
       </div>
       <div class="box3">
         <ul class="card_list">
-          <li v-for="(item, index) in cardList" :key="index" @click="toDetail(index)">
+          <li v-for="(item, index) in cardList" :key="index" @click="toDetail(item.id)">
             <div class="top"><img :src="item.logo" alt="" /></div>
             <div class="center">
               <div>
@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import { nftworks } from "@/mock/nftworks";
+import { shikastudio, zw, akiha, negoro } from "@/mock/nftworks";
 export default {
   name: "ARTISTDetails",
   data() {
@@ -97,8 +97,10 @@ export default {
   },
   created() {
     if (Object.keys(this.$route.query).length > 0) {
-      nftworks.forEach((element) => {
-        if (element.id === this.$route.query.id) {
+      const id = this.$route.query.id;
+      const arr = [shikastudio, zw, akiha, negoro];
+      arr.forEach((element) => {
+        if (element.id === id) {
           this.detail = element;
           this.cardList = element.works;
         }
@@ -109,19 +111,19 @@ export default {
     goBack() {
       history.go(-1);
     },
-    toDetail(index) {
+    toDetail(id) {
       switch (this.$route.query.id) {
         // case "zw":
-        //   this.$router.push({ path: "/artist-details-zw", query: { id: index } });
+        //   this.$router.push({ path: "/artist-details-zw", query: { id: id } });
         //   break;
         // case "akiha":
-        //   this.$router.push({ path: "/artist-details-akiha", query: { id: index } });
+        //   this.$router.push({ path: "/artist-details-akiha", query: { id: id } });
         //   break;
         // case "negoro":
-        //   this.$router.push({ path: "/artist-details-negoro", query: { id: index } });
+        //   this.$router.push({ path: "/artist-details-negoro", query: { id: id } });
         //   break;
         case "shikastudio":
-          this.$router.push({ path: "/artist-details-shikastudio", query: { id: index } });
+          this.$router.push({ path: "/artist-details-shikastudio", query: { id: id } });
           break;
         default:
           this.$message({ message: this.$t("tips.text12") });

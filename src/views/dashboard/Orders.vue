@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { nftworks } from "@/mock/nftworks";
+import { shikastudio } from "@/mock/nftworks";
 import NoData from "@/components/NoData.vue";
 export default {
   components: { NoData },
@@ -100,13 +100,13 @@ export default {
       this.cardList = [];
       switch (this.switchIndex1) {
         case 0:
-          if (this.switchIndex2 == 0) this.cardList = nftworks.find((item) => item.id === "shikastudio").works;
+          if (this.switchIndex2 == 0) this.cardList = shikastudio.works;
           break;
         case 1:
-          if (this.switchIndex2 == 0) this.cardList = nftworks.find((item) => item.id === "shikastudio").works;
+          if (this.switchIndex2 == 0) this.cardList = shikastudio.works;
           break;
         case 2:
-          if (this.switchIndex2 == 0) this.cardList = nftworks.find((item) => item.id === "shikastudio").works;
+          if (this.switchIndex2 == 0) this.cardList = shikastudio.works;
           break;
         default:
           break;

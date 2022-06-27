@@ -117,13 +117,6 @@ export default {
       starlevel: "LV1",
       works: [
         {
-          name: "Lord",
-          attribute: "Heat",
-          worddes: "A high level Executor of the P.T.H. Group and one of the ten Governors who control the Group.",
-          nftdes:
-            "A smiling tyrant.She is an extreme control freak who speaks calmly and treats people politely.She is a high level Executor of the P.T.H. Group and one of the ten Governors who control the Group.She's never exposed her true strength. Her behaviors may seem casual and unpredictable, but she actually plans her every move very carefully.",
-        },
-        {
           name: "Katarina",
           attribute: "Heat",
           worddes: "A commander of the United Council's Search Team and also a second level stalker approved by the United Council.",
@@ -131,11 +124,18 @@ export default {
             "A ruthless and cold-blooded stalker.\n She never doubts the accuracy of an order.\n She's a commander of the United Council's Search Team and also a second level stalker approved by the United Council.\n As Koubu's most trusted ally, she never doubts Koubu's actions and decisions. She considers Koubu the only person who can command her.\n And she despises most other people serving under Koubu. She is willing to follow Koubu wherever she goes.",
         },
         {
-          name: "Mia",
-          attribute: "Wind",
-          worddes: "The deputy captain of the New 3rd Corps Mobile Division under the United Council.",
+          name: "Asuka",
+          attribute: "Volt",
+          worddes: "A protector who offers firepower support, with a rare long-range firepower ability.",
           nftdes:
-            "A young lady who bluffs all the time. Under that energetic appearance, hides an unconfident heart.\n She is the deputy captain of the New 3rd Corps Mobile Division under the United Council. And she has followed her sister to fight against the invading Order.\n She is considered a failure as deputy captain due to her incompetence. To make up for the talents she lack, she always takes extra trainings, hoping that others will recognize her one day soon.\n She believes that her sister is capable of handling any situation, so she looks up to her sister.",
+            " A protector who offers firepower support.\n She is somewhat naive and muddle-headed. She's the best friend of Carol and one of the few people dearly trusted by the Pontiff.\n She possesses the rare long-range firepower and is valued by the Order because of it. She usually works alone.\n However, she often loses her way on a solo mission due to her muddle-headed nature.",
+        },
+        {
+          name: "Carol",
+          attribute: "Light",
+          worddes: "A protector of the Kluto Order, loves singing and longing for love.",
+          nftdes:
+            "An online singer who fantasizes about a beautiful, romantic relationship.\n She's an outgoing person who loves singing. She's also Uiha's best friend.\n She's a protector of the Kluto Order, but she doesn't seem interested in her jobs or the Order.\n She's always fantasized about a romantic love relationship, but she never knows what exactly a \"romantic love relationship\" is.",
         },
         {
           name: "Una",
@@ -152,18 +152,11 @@ export default {
             "A greedy stalker.\n She's not young, but deep down, she's still a little girl who's gluttonous and greedy.\n She is very good at disguising herself. The weapon she made for herself can adjust and adapt based on what opponents she is fighting.\n Throughout her professional career, she's never messed things up. And so she claims to be the best stalker there is.",
         },
         {
-          name: "Ichika",
-          attribute: "Volt",
-          worddes: 'A girl with a unique personality who always make the "beeping" voice, member of the Kluto Order.',
+          name: "Shino",
+          attribute: "Light",
+          worddes: "A member of the Squad Special Task Force 202 under the P.T.H. Group, in charge of logistics works.",
           nftdes:
-            " A young lady with unique personalities.\n She is a silly girl who has a poker face and loves eating pizza and sweets.\n She's a member of the Kluto Order and the niece of the Order's protector. She's also one of the few who has seen the Pontiff's real face.\n When she's making the \"beeping\" voice, few people can understand her.",
-        },
-        {
-          name: "Asuka",
-          attribute: "Volt",
-          worddes: "A protector who offers firepower support, with a rare long-range firepower ability.",
-          nftdes:
-            " A protector who offers firepower support.\n She is somewhat naive and muddle-headed. She's the best friend of Carol and one of the few people dearly trusted by the Pontiff.\n She possesses the rare long-range firepower and is valued by the Order because of it. She usually works alone.\n However, she often loses her way on a solo mission due to her muddle-headed nature.",
+            "An organized quartermaster who does things slowly.\n She's a gentle and forgiving person who loves reading and drinking tea.\n She is a member of the Squad Special Task Force 202 under the P.T.H. Group.\n She's in charge of logistics works and making sure that all her teammates' needs are satisfied and supported.",
         },
         {
           name: "Rika",
@@ -173,13 +166,6 @@ export default {
             "A young girl who loves little animals. She does whatever she likes and speaks whatever she wants. And she likes to tell people that she's a genius.\n She's a commander of the United Council's Search Team and also a direct subordinate of Koubu.\n She considers Koubu a competent, hard-working, and rational superior. She will not hesitate to give her thoughts or opinions to Koubu.",
         },
         {
-          name: "Kasey",
-          attribute: "Tide",
-          worddes: "A member of the Security Committee under the United Council, specializes in the research on human-mind robots.",
-          nftdes:
-            "A young lady born in a political family.\n She's bossy, stubborn, and afraid of nothing.\n She is a member of the Security Committee under the United Council and also an enemy of many other councilors.\n She did it all to revive her father who died during the Gene Crisis and advance the research on human-mind robots one day. The butler robot named Alpha that follows her around is a fruit borne out of this project.",
-        },
-        {
           name: "Maki",
           attribute: "Tide",
           worddes: "A member of the United Council's Recruit Team.",
@@ -187,25 +173,11 @@ export default {
             "She's a reserved member of the United Council's Recruit Team.\n Judging by her appearance, she seems to be a nice beautiful lady, but she actually speaks a toxic language.\n She doesn't seem to notice her toxic language so she pushes people around her further away and often causes unnecessary misunderstandings.\n Her family relationship is very unique and she never actively brings up her family to anyone.",
         },
         {
-          name: "Shino",
-          attribute: "Light",
-          worddes: "A member of the Squad Special Task Force 202 under the P.T.H. Group, in charge of logistics works.",
-          nftdes:
-            "An organized quartermaster who does things slowly.\n She's a gentle and forgiving person who loves reading and drinking tea.\n She is a member of the Squad Special Task Force 202 under the P.T.H. Group.\n She's in charge of logistics works and making sure that all her teammates' needs are satisfied and supported.",
-        },
-        {
           name: "Tina",
           attribute: "Light",
           worddes: "A trainee at the Human Gene Enhancement, now a criminal at large.",
           nftdes:
             "A vigorous high school girl. This trainee at the Human Gene Enhancement Center dreams to become a righteous hero. She's determined to protect the weak and fight against the evil.\n An orphan from the Gene Crisis War who was raised by the United Council and later became recruit of the Oasis Human Gene Enhancement Center and received trainings.\n She's now a criminal at large because people found that she was an \"Sensate\".",
-        },
-        {
-          name: "Carol",
-          attribute: "Light",
-          worddes: "A protector of the Kluto Order, loves singing and longing for love.",
-          nftdes:
-            "An online singer who fantasizes about a beautiful, romantic relationship.\n She's an outgoing person who loves singing. She's also Uiha's best friend.\n She's a protector of the Kluto Order, but she doesn't seem interested in her jobs or the Order.\n She's always fantasized about a romantic love relationship, but she never knows what exactly a \"romantic love relationship\" is.",
         },
         {
           name: "Kate",
@@ -220,6 +192,34 @@ export default {
           worddes: "An Information Security Inspector of the P.T.H. Group with unparalleled hacking techiniques.",
           nftdes:
             "She was originally a hacker and now an Information Security Inspector of the P.T.H. Group.\n She's a very arrogant person who hates working and following to orders.\n Though her hacking techniques are second to none, she doesn't know how to take care of herself.",
+        },
+        {
+          name: "Lord",
+          attribute: "Heat",
+          worddes: "A high level Executor of the P.T.H. Group and one of the ten Governors who control the Group.",
+          nftdes:
+            "A smiling tyrant.She is an extreme control freak who speaks calmly and treats people politely.She is a high level Executor of the P.T.H. Group and one of the ten Governors who control the Group.She's never exposed her true strength. Her behaviors may seem casual and unpredictable, but she actually plans her every move very carefully.",
+        },
+        {
+          name: "Mia",
+          attribute: "Wind",
+          worddes: "The deputy captain of the New 3rd Corps Mobile Division under the United Council.",
+          nftdes:
+            "A young lady who bluffs all the time. Under that energetic appearance, hides an unconfident heart.\n She is the deputy captain of the New 3rd Corps Mobile Division under the United Council. And she has followed her sister to fight against the invading Order.\n She is considered a failure as deputy captain due to her incompetence. To make up for the talents she lack, she always takes extra trainings, hoping that others will recognize her one day soon.\n She believes that her sister is capable of handling any situation, so she looks up to her sister.",
+        },
+        {
+          name: "Ichika",
+          attribute: "Volt",
+          worddes: 'A girl with a unique personality who always make the "beeping" voice, member of the Kluto Order.',
+          nftdes:
+            " A young lady with unique personalities.\n She is a silly girl who has a poker face and loves eating pizza and sweets.\n She's a member of the Kluto Order and the niece of the Order's protector. She's also one of the few who has seen the Pontiff's real face.\n When she's making the \"beeping\" voice, few people can understand her.",
+        },
+        {
+          name: "Kasey",
+          attribute: "Tide",
+          worddes: "A member of the Security Committee under the United Council, specializes in the research on human-mind robots.",
+          nftdes:
+            "A young lady born in a political family.\n She's bossy, stubborn, and afraid of nothing.\n She is a member of the Security Committee under the United Council and also an enemy of many other councilors.\n She did it all to revive her father who died during the Gene Crisis and advance the research on human-mind robots one day. The butler robot named Alpha that follows her around is a fruit borne out of this project.",
         },
       ],
     },

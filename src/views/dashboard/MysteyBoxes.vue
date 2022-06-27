@@ -60,6 +60,8 @@
 </template>
 
 <script>
+import { cb } from "funtopia-sdk";
+import { mapGetters } from "vuex";
 import NoData from "@/components/NoData.vue";
 export default {
   components: { NoData },
@@ -75,10 +77,56 @@ export default {
       cardList: [],
     };
   },
+  computed: { ...mapGetters(["getWalletAccount"]) },
+  watch: {
+    getWalletAccount: {
+      handler(newVal) {
+        if (newVal) {
+          this.tokensOfOwnerBySize();
+        }
+      },
+      deep: true, // 深度监听
+      immediate: true, // 立即执行  oval 为undefined  newVal 为data中的初始值
+    },
+  },
   created() {
     this.switchTab(0);
   },
+  mounted() {
+    // event SpawnCns(address user, uint256 amount, uint256[] cnIds)
+    /**监听开盲盒结果，获取某用户开出来的英雄的数量和ID数组 用户钱包地址，生成英雄数量，英雄ID数组 */
+    cb().on("SpawnCns", (user, amount, cnIds) => {
+      console.log("监听开盲盒结果", user, amount, cnIds);
+    });
+  },
   methods: {
+    /**
+     * tokensOfOwnerBySize(address user, uint256 cursor, uint256 size)
+     * 获取某用户基于指针（从0开始）和数量的盲盒ID数组，以及最后一个数据的指针
+     * 入参：用户钱包地址，指针，数量(秒)
+     * 出参：盲盒ID数组，最后指针
+     */
+    tokensOfOwnerBySize() {
+      cb()
+        .tokensOfOwnerBySize(this.getWalletAccount, 0, 10000)
+        .then((res) => {
+          this.nftArr = res[0];
+          this.nextPageId = Number(res[1]._hex);
+          console.log("获取盲盒", this.nftArr, this.nextPageId);
+        })
+        .catch((err) => {
+          console.error("tokensOfOwnerBySize", err);
+        });
+    },
+
+    // openBoxes(uint256[] cbIds)
+    /**用户开盲盒，传入盲盒ID数组 入参：盲盒ID数组  */
+    // openBoxes(cbIds) {
+    //   console.log(cbIds);
+    // },
+    /**获取某ID的盲盒的类型 入参：盲盒ID 出参：盲盒类型 */
+    // cbIdToType() {},
+
     switchTab(index) {
       this.switchIndex = index;
       this.cardList = [];

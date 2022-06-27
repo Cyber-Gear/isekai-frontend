@@ -13,8 +13,8 @@
         Select all/Unselect
       </div>
     </div>
-    <ul class="card_list" v-if="cardList.length > 0">
-      <li v-for="(item, index) in cardList" :key="index">
+    <ul class="card_list" v-if="newCardList.length > 0">
+      <li v-for="(item, index) in newCardList" :key="index">
         <div class="card">
           <div class="top"><img :src="item.logo" alt="" /></div>
           <div class="center">
@@ -39,14 +39,15 @@
         </div>
       </li>
     </ul>
-    <NoData v-if="cardList.length == 0"></NoData>
+    <NoData v-if="newCardList.length == 0"></NoData>
   </div>
 </template>
 
 <script>
-import { nftworks } from "@/mock/nftworks";
+import { cn } from "funtopia-sdk";
+import { mapGetters } from "vuex";
+import { shikastudio } from "@/mock/nftworks";
 import NoData from "@/components/NoData.vue";
-
 export default {
   components: { NoData },
   name: "NFTAsstet",
@@ -58,23 +59,75 @@ export default {
         { label: "Collection", total: 0 },
         { label: "On sale", total: 0 },
       ],
-      cardList: [],
+      cardList: shikastudio.works,
+      newCardList: [],
     };
   },
-  created() {
-    this.switchTab(0);
+  computed: { ...mapGetters(["getWalletAccount"]) },
+  watch: {
+    getWalletAccount: {
+      handler(newVal, oldVal) {
+        console.log(newVal, oldVal);
+        if (newVal) this.switchTab(this.switchIndex);
+      },
+      deep: true, // 深度监听
+      immediate: true, // 立即执行  oval 为undefined  newVal 为data中的初始值
+    },
   },
+  // created() {
+  //   this.switchTab(0);
+  // },
   methods: {
     switchTab(index) {
       this.switchIndex = index;
-      this.cardList = [];
       if (index == 0) {
         this.isShowCheck = false;
-        this.cardList = nftworks.find((item) => item.id === "shikastudio").works;
+        this.newCardList = [];
+        this.tokensOfOwnerBySize();
       } else {
         this.isShowCheck = true;
-        this.cardList = nftworks.find((item) => item.id === "shikastudio").works;
       }
+    },
+    /**
+     * tokensOfOwnerBySize(address user, uint256 cursor, uint256 size)
+     * returns(uint256[] cnIds, uint256 cursor)
+     * 获取某用户基于指针（从0开始）和数量的英雄ID数组，以及最后一个数据的指针
+     * 入参：用户钱包地址，指针，数量
+     * 出参：英雄ID数组，最后指针
+     */
+    tokensOfOwnerBySize() {
+      cn()
+        .tokensOfOwnerBySize(this.getWalletAccount, 0, 10000)
+        .then((res) => {
+          // console.log("获取NFTs", res[0], Number(res[1]._hex));
+          const cnIds = res[0];
+          cnIds.forEach((element) => {
+            this.getHeroId(Number(element._hex));
+          });
+        })
+        .catch((err) => {
+          console.error("tokensOfOwnerBySize", err);
+        });
+    },
+    /**
+     * data(uint256 cnId, string slot)
+     * returns(uint256 characterId)
+     * 获取某英雄的某单数据字段的数据；查询某英雄的角色的字段名为hero，返回1-15，分别对应15个角色
+     * 入参：英雄ID，字段名
+     * 出参：角色ID
+     */
+    getHeroId(cnId) {
+      cn()
+        .data(cnId, "hero")
+        .then((res) => {
+          // console.log("获取某英雄的某单数据字段的数据", res, Number(res._hex));
+          const heroId = Number(res._hex);
+          const obj = this.cardList.find((item) => item.id == heroId);
+          this.newCardList.push(obj);
+        })
+        .catch((err) => {
+          console.error("data", err);
+        });
     },
   },
 };

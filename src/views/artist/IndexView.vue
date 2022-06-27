@@ -27,12 +27,12 @@
 </template>
 
 <script>
-import { nftworks } from "@/mock/nftworks";
+import { shikastudio, zw, akiha, negoro } from "@/mock/nftworks";
 export default {
   name: "ARTIST",
   data() {
     return {
-      cardList: nftworks,
+      cardList: [shikastudio, zw, akiha, negoro],
     };
   },
   methods: {

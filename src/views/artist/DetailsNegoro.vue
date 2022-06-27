@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { nftworks } from "@/mock/nftworks";
+import { negoro } from "@/mock/nftworks";
 export default {
   name: "DetailsNegoro",
   data() {
@@ -20,11 +20,8 @@ export default {
   },
   created() {
     if (Object.keys(this.$route.query).length > 0) {
-      nftworks.forEach((element) => {
-        if (element.id === "negoro") {
-          this.card = element.works[this.$route.query.id];
-        }
-      });
+      const id = this.$route.query.id;
+      this.card = negoro.works.find((item) => item.id == id);
     }
   },
   methods: {

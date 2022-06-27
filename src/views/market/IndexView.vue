@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import { nftworks } from "@/mock/nftworks";
+import { shikastudio } from "@/mock/nftworks";
 export default {
   name: "MARKET",
   data() {
@@ -139,11 +139,7 @@ export default {
   },
 
   created() {
-    nftworks.forEach((element) => {
-      if (element.id === "shikastudio") {
-        this.cardList = element.works;
-      }
-    });
+    this.cardList = shikastudio.works;
   },
   methods: {
     openSelectionList() {

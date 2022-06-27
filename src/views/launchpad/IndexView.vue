@@ -137,7 +137,7 @@
 <script>
 import { cb, util, getSigner, erc20, token } from "funtopia-sdk";
 import { mapGetters } from "vuex";
-import ApprovePopup from "../../components/ApprovePopup";
+import ApprovePopup from "@/components/ApprovePopup";
 
 export default {
   name: "LAUNCHPAD",
@@ -176,12 +176,13 @@ export default {
     };
   },
   computed: { ...mapGetters(["getWalletAccount"]), ...mapGetters(["getApprovePopup"]) },
-
   watch: {
     getWalletAccount: {
       handler(newVal) {
         if (newVal) {
-          if (this.isOpenWhitelist) this.getWhiteListExistence();
+          // console.log(newVal);
+          this.getAmount();
+          this.getPriceAddrs();
           this.getUserHourlyBoxesLeftSupply();
           this.getBalanceOf();
         }
@@ -202,8 +203,8 @@ export default {
     },
   },
   created() {
-    this.getAmount();
-    this.getPriceAddrs();
+    // this.getAmount();
+    // this.getPriceAddrs();
   },
   beforeDestroy() {
     clearTimeout(this.countdownTimer);
@@ -271,12 +272,12 @@ export default {
         .connect(getSigner())
         .buyBoxes(this.inputAmount, this.boxType)
         .then((res) => {
-          // console.log("购买成功", res);
+          console.log("购买成功", res);
           if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
           this.$message({ message: this.$t("购买成功") });
           this.buyloading = false;
           this.inputAmount = null;
-          this.$router.push("/dashboard");
+          // this.$router.push({ path: "/dashboard/mystey-boxes", query: { id: id } });
           // setTimeout(() => {
           //   if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
           //   this.$message({ message: this.$t("购买成功") });
@@ -409,6 +410,7 @@ export default {
         .then((res) => {
           this.isOpenWhitelist = res;
           // console.log("获取某类型的盲盒是否开启白名单", this.isOpenWhitelist);
+          if (this.isOpenWhitelist) this.getWhiteListExistence();
         })
         .catch((err) => {
           console.error("whiteListFlags", err);
@@ -463,13 +465,6 @@ export default {
     },
     /**返回该类型盲盒某角色的出现概率，除1e4*100% 入参：盲盒类型，角色ID 出参：概率 */
     // heroProbabilities() {},
-    /**获取某ID的盲盒的类型 入参：盲盒ID 出参：盲盒类型 */
-    // cbIdToType() {},
-    /**获取某用户基于指针（从0开始）和数量的盲盒ID数组，以及最后一个数据的指针 入参：用户钱包地址，指针，数量(秒) 出参：盲盒ID数组，最后指针 */
-    // tokensOfOwnerBySize() {},
-    /**监听开盲盒结果，获取某用户开出来的英雄的数量和ID数组 用户钱包地址，生成英雄数量，英雄ID数组 */
-    // event SpawnCns(address user, uint256 amount, uint256[] cnIds)
-
     // changeSteps(item, index) {
     //   this.nowStatusText = item.title;
     //   this.nowStatusIndex = index + 1;

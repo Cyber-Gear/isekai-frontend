@@ -14,8 +14,8 @@
 import { mapGetters } from "vuex";
 import HeaderLayout from "./layout/HeaderLayout.vue";
 import FooterLayout from "./layout/FooterLayout.vue";
-import WalletListPopup from "./components/WalletListPopup.vue";
-import WalletConnectPopup from "./components/WalletConnectPopup.vue";
+import WalletListPopup from "@/components/WalletListPopup.vue";
+import WalletConnectPopup from "@/components/WalletConnectPopup.vue";
 
 export default {
   components: { HeaderLayout, FooterLayout, WalletListPopup, WalletConnectPopup },

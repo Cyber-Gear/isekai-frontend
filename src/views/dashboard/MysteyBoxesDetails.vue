@@ -3,25 +3,25 @@
     <div class="title">Mystey Boxes Details</div>
     <div class="back_titlebox">
       <i class="iconfont icon-fanhui" @click="goBack"></i>
-      Bir Mystery Box ({{ cardList.length }})
+      {{ blindBoxSeries.label }} ({{ blindBoxSeries.list.length }})
     </div>
     <ul class="card_list">
-      <li v-for="(item, index) in cardList" :key="index">
+      <li v-for="(item, index) in blindBoxSeries.list" :key="index" @click="openBoxes(item)">
         <div class="card">
           <div class="top"><img :src="`${$urlImages}blindbox.webp`" alt="" /></div>
           <div class="center">
             <div class="row1">
               <div>
-                <span>{{ item.name1 }}</span>
+                <span>{{ item.cbId }}</span>
                 <img :src="`${$urlImages}icon1.webp`" alt="" />
               </div>
               <div>
-                <span>{{ item.num1 }}busd</span>
+                <span>{{ item.cbId }}busd</span>
               </div>
             </div>
             <div class="row2">
-              <div>{{ item.name2 }}</div>
-              <div>上次成交{{ item.num2 }}busd</div>
+              <div>{{ item.cbId }}</div>
+              <div>上次成交{{ item.cbId }}busd</div>
             </div>
           </div>
         </div>
@@ -31,28 +31,53 @@
 </template>
 
 <script>
+import { cb, getSigner } from "funtopia-sdk";
+import { mapGetters } from "vuex";
 export default {
   name: "MysteyBoxesDetails",
   data() {
     return {
+      blindBoxSeries: null,
       cardList: [],
     };
   },
+  computed: { ...mapGetters(["getWalletAccount"]) },
+  watch: {
+    getWalletAccount: {
+      handler(newVal) {
+        if (newVal) history.go(-1);
+      },
+      // immediate: true, // 页面初始化后立即执行
+    },
+  },
   created() {
-    const arr = [
-      { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
-      { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
-      { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
-      { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
-      { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
-      { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
-      { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
-      { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
-      { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
-    ];
-    this.cardList = arr;
+    if (Object.keys(this.$route.query).length > 0) {
+      const id = this.$route.query.id;
+      const arr = JSON.parse(sessionStorage.getItem("blindBoxSeries"));
+      arr.forEach((element) => {
+        if (element.boxType == id) {
+          this.blindBoxSeries = element;
+        }
+      });
+    }
   },
   methods: {
+    /**
+     * openBoxes(uint256[] cbIds)
+     * 用户开盲盒，传入盲盒ID数组
+     * 入参：盲盒ID数组
+     */
+    openBoxes(item) {
+      cb()
+        .connect(getSigner())
+        .openBoxes([item.cbId])
+        .then((res) => {
+          console.log("开盲盒", res);
+        })
+        .catch((err) => {
+          console.error("openBoxes", err);
+        });
+    },
     goBack() {
       history.go(-1);
     },
@@ -104,16 +129,24 @@ export default {
     float: left;
     width: 2.1rem;
     margin: 0 0.1rem 0.1rem 0;
+    cursor: pointer;
     &:nth-child(4n) {
       margin-right: 0;
+    }
+    &:hover,
+    &.active {
+      .card {
+        background: rgba(51, 52, 60, 0.57);
+      }
     }
     .card {
       width: 100%;
       padding: 0.1rem;
       background: rgba(0, 0, 0, 0.38);
-      border: 0.01rem solid #3f3e43;
-      backdrop-filter: blur(4px);
-      border-radius: 0.08rem;
+      backdrop-filter: blur(0.04rem);
+      border-radius: 0.1rem;
+      border: 1px solid #3f3e43;
+      transition: all 0.3s;
       .top {
         width: 100%;
         padding: 0.3rem 0;

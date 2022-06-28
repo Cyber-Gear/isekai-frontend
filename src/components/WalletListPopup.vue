@@ -8,7 +8,6 @@
     :destroy-on-close="true"
     @close="closePopup"
   >
-    <!-- :visible.sync="getwalletstatus" -->
     <div class="popupbox">
       <div class="title">{{ $t("walletPopup.text6") }}<span>Fun Topia</span></div>
       <ul>
@@ -25,7 +24,7 @@
 import { mapGetters } from "vuex";
 export default {
   name: "WalletListPopup",
-  computed: { ...mapGetters(["getWalletListPopup"]), ...mapGetters(["getWalletAccount"]) },
+  computed: { ...mapGetters(["getWalletAccount"]), ...mapGetters(["getWalletListPopup"]) },
   data() {
     return {
       walletArr: [

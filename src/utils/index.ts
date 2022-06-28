@@ -80,6 +80,11 @@ export default {
     store.commit("setWalletAccount", "");
   },
 
+  /**数组根据某个字段排序 */
+  unique(arr: any, val: string) {
+    const res = new Map();
+    return arr.filter((item: any) => !res.has(item[val]) && res.set(item[val], 1));
+  },
   /**
    * 格式化时间
    * 调用 FormatDate(strDate, "yyyy-MM-dd HH:mm:ss")

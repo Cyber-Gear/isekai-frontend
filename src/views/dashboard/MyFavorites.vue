@@ -72,16 +72,26 @@ export default {
     float: left;
     width: 2.05rem;
     margin: 0 0.15rem 0.15rem 0;
+    cursor: pointer;
     &:nth-child(4n) {
       margin-right: 0;
     }
+    &:hover,
+    &.active {
+      .card {
+        background: rgba(51, 52, 60, 0.57);
+        box-shadow: 5px 8px 10px 0px rgba(0, 0, 0, 0.5);
+        .angle2 {
+          opacity: 1;
+        }
+      }
+    }
     .card {
-      border: 1px solid #3f3e43;
-      backdrop-filter: blur(0.04rem);
       background: rgba(0, 0, 0, 0.38);
+      backdrop-filter: blur(0.04rem);
+      border: 1px solid #3f3e43;
       border-radius: 0.1rem;
       transition: all 0.3s;
-      cursor: pointer;
       .top {
         width: 100%;
         height: auto;
@@ -136,16 +146,6 @@ export default {
         right: 0.1rem;
         bottom: 0.1rem;
         opacity: 0;
-      }
-    }
-    &:hover,
-    &.active {
-      .card {
-        background: rgba(51, 52, 60, 0.57);
-        box-shadow: 5px 8px 10px 0px rgba(0, 0, 0, 0.5);
-        .angle2 {
-          opacity: 1;
-        }
       }
     }
   }

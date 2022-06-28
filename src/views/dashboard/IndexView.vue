@@ -82,6 +82,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "DASHBOARD",
   data() {
@@ -106,9 +107,16 @@ export default {
       tagList: [{ label: "video favor" }, { label: "singer" }, { label: "cool" }, { label: "artist" }, { label: "love" }],
     };
   },
+  computed: { ...mapGetters(["getWalletAccount"]) },
   watch: {
     $route(to) {
       this.getDefaultActive(to.path);
+    },
+    getWalletAccount: {
+      handler(newVal) {
+        if (newVal) console.log("获取钱包", newVal);
+      },
+      immediate: true, // 页面初始化后立即执行
     },
   },
   created() {

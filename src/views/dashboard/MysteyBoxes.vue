@@ -14,7 +14,7 @@
       </div>
     </div>
     <ul class="box_list" v-if="switchIndex == 0 && cardList.length > 0">
-      <li v-for="(item, index) in cardList" :key="index" @click="toDetail(index)">
+      <li v-for="(item, index) in cardList" :key="index" @click="toDetail(item)">
         <div class="leftbox">
           <img :src="`${$urlImages}blindbox.webp`" alt="" />
         </div>
@@ -22,7 +22,7 @@
           <div>
             <p>{{ item.label }}</p>
             <p>
-              Total: <span>{{ item.total }}</span>
+              Total: <span>{{ item.list.length }}</span>
             </p>
           </div>
           <div>View All <i class="iconfont icon-fuxuankuang-quanxuan"></i></div>
@@ -74,23 +74,20 @@ export default {
         { label: "Collection", total: 0 },
         { label: "On sale", total: 0 },
       ],
+
+      idArr: [],
       cardList: [],
+      requestTimer: null,
     };
   },
   computed: { ...mapGetters(["getWalletAccount"]) },
   watch: {
     getWalletAccount: {
       handler(newVal) {
-        if (newVal) {
-          this.tokensOfOwnerBySize();
-        }
+        if (newVal) this.switchTab(this.switchIndex);
       },
-      deep: true, // 深度监听
-      immediate: true, // 立即执行  oval 为undefined  newVal 为data中的初始值
+      immediate: true, // 页面初始化后立即执行
     },
-  },
-  created() {
-    this.switchTab(0);
   },
   mounted() {
     // event SpawnCns(address user, uint256 amount, uint256[] cnIds)
@@ -100,45 +97,13 @@ export default {
     });
   },
   methods: {
-    /**
-     * tokensOfOwnerBySize(address user, uint256 cursor, uint256 size)
-     * 获取某用户基于指针（从0开始）和数量的盲盒ID数组，以及最后一个数据的指针
-     * 入参：用户钱包地址，指针，数量(秒)
-     * 出参：盲盒ID数组，最后指针
-     */
-    tokensOfOwnerBySize() {
-      cb()
-        .tokensOfOwnerBySize(this.getWalletAccount, 0, 10000)
-        .then((res) => {
-          this.nftArr = res[0];
-          this.nextPageId = Number(res[1]._hex);
-          console.log("获取盲盒", this.nftArr, this.nextPageId);
-        })
-        .catch((err) => {
-          console.error("tokensOfOwnerBySize", err);
-        });
-    },
-
-    // openBoxes(uint256[] cbIds)
-    /**用户开盲盒，传入盲盒ID数组 入参：盲盒ID数组  */
-    // openBoxes(cbIds) {
-    //   console.log(cbIds);
-    // },
-    /**获取某ID的盲盒的类型 入参：盲盒ID 出参：盲盒类型 */
-    // cbIdToType() {},
-
     switchTab(index) {
       this.switchIndex = index;
+      this.idArr = [];
       this.cardList = [];
       if (index == 0) {
         this.isShowCheck = false;
-        const arr = [
-          { label: "Bir Mystery Box", total: 0, id: 0 },
-          { label: "Bir Mystery Box", total: 1, id: 1 },
-          { label: "Bir Mystery Box", total: 2, id: 2 },
-          { label: "Bir Mystery Box", total: 3, id: 3 },
-        ];
-        this.cardList = arr;
+        this.tokensOfOwnerBySize();
       } else {
         this.isShowCheck = true;
         const arr = [
@@ -155,8 +120,82 @@ export default {
         this.cardList = arr;
       }
     },
-    toDetail(id) {
-      this.$router.push({ path: "/dashboard/mystey-boxes-details", query: { id: id } });
+    /**
+     * tokensOfOwnerBySize(address user, uint256 cursor, uint256 size)
+     * 获取某用户基于指针（从0开始）和数量的盲盒ID数组，以及最后一个数据的指针
+     * 入参：用户钱包地址，指针，数量(秒)
+     * 出参：盲盒ID数组，最后指针
+     */
+    tokensOfOwnerBySize() {
+      cb()
+        .tokensOfOwnerBySize(this.getWalletAccount, 0, 10000)
+        .then((res) => {
+          // console.log("获取用户已购买的盲盒", res[0], Number(res[1]._hex));
+          const cbIds = res[0];
+          this.switchList[0].total = cbIds.length;
+          cbIds.forEach((element) => {
+            this.cbIdToType(Number(element));
+          });
+          this.restructuring(cbIds);
+        })
+        .catch((err) => {
+          console.error("tokensOfOwnerBySize", err);
+        });
+    },
+    /**筛选类型重组 */
+    restructuring(cbIds) {
+      this.requestTimer = setInterval(() => {
+        if (this.idArr.length === cbIds.length) {
+          clearInterval(this.requestTimer);
+          this.requestTimer = null;
+          const arr = this.$utils.unique(this.idArr, "boxType");
+          if (arr.length > 1) {
+            arr.sort((a, b) => {
+              return a.boxType > b.boxType ? 1 : -1;
+            });
+          }
+          arr.forEach((element) => {
+            const obj = {
+              boxType: element.boxType,
+              label: "",
+              list: this.idArr.filter((item) => {
+                return item.boxType == element.boxType;
+              }),
+            };
+            switch (element.boxType) {
+              case 0:
+                obj.label = "Bir Mystery Box";
+                break;
+              default:
+                break;
+            }
+
+            this.cardList.push(obj);
+          });
+          sessionStorage.setItem("blindBoxSeries", JSON.stringify(this.cardList));
+        }
+      }, 200);
+    },
+    /**
+     * cbIdToType(uint256 cbId)
+     * returns(uint256 boxType)
+     * 获取某ID的盲盒的类型 入参：盲盒ID 出参：盲盒类型
+     */
+    cbIdToType(cbId) {
+      cb()
+        .cbIdToType(cbId)
+        .then((res) => {
+          // console.log("获取某ID的盲盒的类型", Number(res), Number(res._hex));
+          this.idArr.push({ cbId: cbId, boxType: Number(res) });
+        })
+        .catch((err) => {
+          console.error("cbIdToType", err);
+          clearInterval(this.requestTimer);
+          this.requestTimer = null;
+        });
+    },
+    toDetail(item) {
+      if (item.list.length > 0) this.$router.push({ path: "/dashboard/mystey-boxes-details", query: { id: item.boxType } });
     },
   },
 };
@@ -222,15 +261,20 @@ export default {
     float: left;
     width: 4.2rem;
     margin: 0 0.2rem 0.2rem 0;
-    background: rgba(129, 129, 151, 0.19);
-    border-radius: 0.1rem;
-    border: 0.01rem solid #555555;
-    backdrop-filter: blur(7px);
     padding: 0.2rem 0.1rem;
     display: flex;
+    background: rgba(0, 0, 0, 0.38);
+    backdrop-filter: blur(0.04rem);
+    border-radius: 0.1rem;
+    border: 1px solid #3f3e43;
+    transition: all 0.3s;
     cursor: pointer;
     &:nth-child(2n) {
       margin-right: 0;
+    }
+    &:hover,
+    &.active {
+      background: rgba(51, 52, 60, 0.57);
     }
     .leftbox {
       width: 50%;
@@ -259,9 +303,11 @@ export default {
               color: #ffffff;
             }
             &:nth-child(2) {
-              font-size: 0.15rem;
+              font-size: 0.2rem;
               color: #ffffff;
+              margin-top: 0.2rem;
               span {
+                font-size: 0.3rem;
                 font-weight: bold;
               }
             }
@@ -280,7 +326,6 @@ export default {
     }
   }
 }
-
 .card_list {
   width: 100%;
   height: 8rem;
@@ -289,16 +334,27 @@ export default {
     float: left;
     width: 2.1rem;
     margin: 0 0.1rem 0.1rem 0;
+    cursor: pointer;
     &:nth-child(4n) {
       margin-right: 0;
+    }
+    &:hover,
+    &.active {
+      .card {
+        background: rgba(51, 52, 60, 0.57);
+      }
+      .cancel_box {
+        background: rgba(51, 52, 60, 0.57);
+      }
     }
     .card {
       width: 100%;
       padding: 0.1rem;
       background: rgba(0, 0, 0, 0.38);
-      border: 0.01rem solid #3f3e43;
-      backdrop-filter: blur(4px);
-      border-radius: 0.08rem;
+      backdrop-filter: blur(0.04rem);
+      border-radius: 0.1rem;
+      border: 1px solid #3f3e43;
+      transition: all 0.3s;
       .top {
         width: 100%;
         padding: 0.3rem 0;
@@ -351,6 +407,7 @@ export default {
       justify-content: space-between;
       margin-top: 0.05rem;
       padding-left: 0.1rem;
+      transition: all 0.3s;
       span {
         font-size: 0.15rem;
         font-weight: 400;

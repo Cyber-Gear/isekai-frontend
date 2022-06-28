@@ -61,28 +61,24 @@ export default {
       ],
       cardList: shikastudio.works,
       newCardList: [],
+      requestTimer: null,
     };
   },
   computed: { ...mapGetters(["getWalletAccount"]) },
   watch: {
     getWalletAccount: {
-      handler(newVal, oldVal) {
-        console.log(newVal, oldVal);
+      handler(newVal) {
         if (newVal) this.switchTab(this.switchIndex);
       },
-      deep: true, // 深度监听
-      immediate: true, // 立即执行  oval 为undefined  newVal 为data中的初始值
+      immediate: true, // 页面初始化后立即执行
     },
   },
-  // created() {
-  //   this.switchTab(0);
-  // },
   methods: {
     switchTab(index) {
       this.switchIndex = index;
+      this.newCardList = [];
       if (index == 0) {
         this.isShowCheck = false;
-        this.newCardList = [];
         this.tokensOfOwnerBySize();
       } else {
         this.isShowCheck = true;
@@ -99,11 +95,18 @@ export default {
       cn()
         .tokensOfOwnerBySize(this.getWalletAccount, 0, 10000)
         .then((res) => {
-          // console.log("获取NFTs", res[0], Number(res[1]._hex));
+          // console.log("获取NFTs", res[0], Number(res[1]));
           const cnIds = res[0];
+          this.switchList[0].total = cnIds.length;
           cnIds.forEach((element) => {
-            this.getHeroId(Number(element._hex));
+            this.getHeroId(Number(element));
           });
+          // this.requestTimer = setInterval(() => {
+          //   if (this.newCardList.length === cnIds.length) {
+          //     clearInterval(this.requestTimer);
+          //     this.requestTimer = null;
+          //   }
+          // }, 200);
         })
         .catch((err) => {
           console.error("tokensOfOwnerBySize", err);
@@ -120,13 +123,14 @@ export default {
       cn()
         .data(cnId, "hero")
         .then((res) => {
-          // console.log("获取某英雄的某单数据字段的数据", res, Number(res._hex));
-          const heroId = Number(res._hex);
-          const obj = this.cardList.find((item) => item.id == heroId);
+          // console.log("获取某英雄的某单数据字段的数据", res, Number(res));
+          const obj = this.cardList.find((item) => item.id == Number(res));
           this.newCardList.push(obj);
         })
         .catch((err) => {
           console.error("data", err);
+          // clearInterval(this.requestTimer);
+          // this.requestTimer = null;
         });
     },
   },
@@ -193,16 +197,28 @@ export default {
     float: left;
     width: 2.05rem;
     margin: 0 0.15rem 0.15rem 0;
+    cursor: pointer;
     &:nth-child(4n) {
       margin-right: 0;
     }
+    &:hover,
+    &.active {
+      .card {
+        background: rgba(51, 52, 60, 0.57);
+        .angle2 {
+          opacity: 1;
+        }
+      }
+      .cancel_box {
+        background: rgba(51, 52, 60, 0.57);
+      }
+    }
     .card {
-      border: 1px solid #3f3e43;
-      backdrop-filter: blur(0.04rem);
       background: rgba(0, 0, 0, 0.38);
+      backdrop-filter: blur(0.04rem);
+      border: 1px solid #3f3e43;
       border-radius: 0.1rem;
       transition: all 0.3s;
-      cursor: pointer;
       .top {
         width: 100%;
         height: auto;
@@ -249,7 +265,6 @@ export default {
           font-size: 0.25rem;
         }
       }
-
       .angle2 {
         width: 0.1rem;
         height: auto;
@@ -257,19 +272,6 @@ export default {
         right: 0.1rem;
         bottom: 0.1rem;
         opacity: 0;
-      }
-    }
-    &:hover,
-    &.active {
-      .card {
-        background: rgba(51, 52, 60, 0.57);
-        box-shadow: 5px 8px 10px 0px rgba(0, 0, 0, 0.5);
-        .angle2 {
-          opacity: 1;
-        }
-      }
-      .cancel_box {
-        background: rgba(51, 52, 60, 0.57);
       }
     }
     .cancel_box {

@@ -12,17 +12,17 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import HeaderLayout from "./layout/HeaderLayout.vue";
-import FooterLayout from "./layout/FooterLayout.vue";
+import HeaderLayout from "@/layout/HeaderLayout.vue";
+import FooterLayout from "@/layout/FooterLayout.vue";
 import WalletListPopup from "@/components/WalletListPopup.vue";
 import WalletConnectPopup from "@/components/WalletConnectPopup.vue";
 
 export default {
   components: { HeaderLayout, FooterLayout, WalletListPopup, WalletConnectPopup },
-  computed: { ...mapGetters(["isEnLang"]) },
   data() {
     return {};
   },
+  computed: { ...mapGetters(["isEnLang"]) },
   mounted() {
     window.addEventListener("load", () => {
       this.resetRem();

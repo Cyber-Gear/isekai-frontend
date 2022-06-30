@@ -3,23 +3,17 @@
     <div class="title">My Favorites</div>
     <ul class="card_list">
       <li v-for="(item, index) in cardList" :key="index">
-        <div class="card">
-          <div class="top"><img :src="item.logo" alt="" /></div>
-          <div class="center">
-            <div>
-              <span>{{ $t(item.name) }}</span>
-              <img :src="`${$urlImages}icon1.webp`" alt="" />
-            </div>
-            <div>
-              <span>{{ $t(item.title) }}</span>
-              <span>88busd</span>
-            </div>
-            <div>{{ $t("artist.text10") }}77busd</div>
+        <div class="top"><img :src="item.logo" alt="" /></div>
+        <div class="center">
+          <div>
+            <span>{{ $t(item.name) }}</span>
+            <img :src="`${$urlImages}icon1.webp`" alt="" />
           </div>
-          <div class="bottom">
-            <i class="iconfont icon-favorites"></i>
+          <div>
+            <span>{{ $t(item.title) }}</span>
+            <span>88busd</span>
           </div>
-          <img class="angle2" :src="`${$urlImages}angle2.webp`" alt="" />
+          <div>{{ $t("artist.text10") }}77busd</div>
         </div>
       </li>
     </ul>
@@ -67,85 +61,57 @@ export default {
 .card_list {
   width: 100%;
   height: 8rem;
+  padding-right: 0.05rem;
   overflow-y: auto;
   li {
     float: left;
-    width: 2.05rem;
+    width: 2.06rem;
     margin: 0 0.15rem 0.15rem 0;
+    background: rgba(0, 0, 0, 0.38);
+    border-radius: 0.1rem;
+    border: 0.01rem solid #3f3e43;
+    backdrop-filter: blur(4px);
+    transition: all 0.3s;
     cursor: pointer;
     &:nth-child(4n) {
       margin-right: 0;
     }
-    &:hover,
-    &.active {
-      .card {
-        background: rgba(51, 52, 60, 0.57);
-        box-shadow: 5px 8px 10px 0px rgba(0, 0, 0, 0.5);
-        .angle2 {
-          opacity: 1;
-        }
+    &:hover {
+      background: rgba(51, 52, 60, 0.57);
+      box-shadow: 0.05rem 0.08rem 0.1rem 0rem rgba(0, 0, 0, 0.5);
+    }
+    .top {
+      width: 100%;
+      height: auto;
+      img {
+        width: 100%;
+        height: 100%;
       }
     }
-    .card {
-      background: rgba(0, 0, 0, 0.38);
-      backdrop-filter: blur(0.04rem);
-      border: 1px solid #3f3e43;
-      border-radius: 0.1rem;
-      transition: all 0.3s;
-      .top {
-        width: 100%;
-        height: auto;
-        img {
-          width: 100%;
-          height: 100%;
-        }
-      }
-      .center {
-        width: 100%;
-        border-bottom: 1px solid rgba(132, 125, 125, 0.2);
-        div {
-          display: flex;
-          align-items: center;
-          padding: 0.05rem;
-          font-size: 0.12rem;
-          font-weight: bold;
-          &:nth-child(1) {
-            color: #00b1ff;
-            img {
-              width: 0.24rem;
-              height: auto;
-              margin-left: 0.1rem;
-            }
-          }
-          &:nth-child(2) {
-            justify-content: space-between;
-          }
-          &:nth-child(3) {
-            justify-content: flex-end;
-            font-weight: 600;
-            color: #6c6a71;
-          }
-        }
-      }
-      .bottom {
-        width: 100%;
-        padding: 0.05rem 0.2rem;
+    .center {
+      width: 100%;
+      div {
         display: flex;
         align-items: center;
-        justify-content: flex-end;
-        i {
-          color: #6c6a71;
-          font-size: 0.25rem;
+        padding: 0.05rem;
+        font-size: 0.12rem;
+        font-weight: bold;
+        &:nth-child(1) {
+          color: #00b1ff;
+          img {
+            width: 0.24rem;
+            height: auto;
+            margin-left: 0.1rem;
+          }
         }
-      }
-
-      .angle2 {
-        width: 0.1rem;
-        height: auto;
-        position: absolute;
-        right: 0.1rem;
-        bottom: 0.1rem;
-        opacity: 0;
+        &:nth-child(2) {
+          justify-content: space-between;
+        }
+        &:nth-child(3) {
+          justify-content: flex-end;
+          font-weight: 600;
+          color: #6c6a71;
+        }
       }
     }
   }

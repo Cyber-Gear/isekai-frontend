@@ -8,13 +8,13 @@
         </li>
       </ul>
       <div v-show="isShowCheck">
-        <i class="iconfont icon-fuxuankuang-quanxuan"></i>
-        <i class="iconfont icon-fuxuankuang-weiquanxuan"></i>
+        <i class="iconfont pcfuxuankuang-quanxuan"></i>
+        <i class="iconfont pcfuxuankuang-weiquanxuan"></i>
         Select all/Unselect
       </div>
     </div>
-    <ul class="box_list" v-if="switchIndex == 0 && cardList.length > 0">
-      <li v-for="(item, index) in cardList" :key="index" @click="toDetail(item)">
+    <ul class="box_list" v-if="switchIndex == 0 && boxList.length > 0">
+      <li v-for="(item, index) in boxList" :key="index" @click="toDetail(item)">
         <div class="leftbox">
           <img :src="`${$urlImages}blindbox.webp`" alt="" />
         </div>
@@ -25,7 +25,7 @@
               Total: <span>{{ item.list.length }}</span>
             </p>
           </div>
-          <div>View All <i class="iconfont icon-fuxuankuang-quanxuan"></i></div>
+          <div>View All <i class="iconfont pcfuxuankuang-quanxuan"></i></div>
         </div>
       </li>
     </ul>
@@ -74,9 +74,9 @@ export default {
         { label: "Collection", total: 0 },
         { label: "On sale", total: 0 },
       ],
-
       idArr: [],
       cardList: [],
+      boxList: [],
       requestTimer: null,
     };
   },
@@ -89,35 +89,26 @@ export default {
       immediate: true, // 页面初始化后立即执行
     },
   },
-  mounted() {
-    // event SpawnCns(address user, uint256 amount, uint256[] cnIds)
-    /**监听开盲盒结果，获取某用户开出来的英雄的数量和ID数组 用户钱包地址，生成英雄数量，英雄ID数组 */
-    cb().on("SpawnCns", (user, amount, cnIds) => {
-      console.log("监听开盲盒结果", user, amount, cnIds);
-    });
+  beforeDestroy() {
+    clearTimeout(this.requestTimer);
+    this.requestTimer = null;
   },
   methods: {
     switchTab(index) {
       this.switchIndex = index;
-      this.idArr = [];
-      this.cardList = [];
       if (index == 0) {
         this.isShowCheck = false;
-        this.tokensOfOwnerBySize();
+        this.switchList[0].total = 0;
+        if (sessionStorage.getItem("MysteyBoxes")) {
+          this.boxList = JSON.parse(sessionStorage.getItem("MysteyBoxes"));
+          this.boxList.forEach((element) => {
+            this.switchList[0].total += element.list.length;
+          });
+        } else {
+          this.tokensOfOwnerBySize();
+        }
       } else {
         this.isShowCheck = true;
-        const arr = [
-          { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
-          { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
-          { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
-          { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
-          { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
-          { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
-          { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
-          { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
-          { name1: "aaaaaa", name2: "sss", num1: 88, num2: 88, num3: 90, id: 0 },
-        ];
-        this.cardList = arr;
       }
     },
     /**
@@ -148,20 +139,20 @@ export default {
         if (this.idArr.length === cbIds.length) {
           clearInterval(this.requestTimer);
           this.requestTimer = null;
-          const arr = this.$utils.unique(this.idArr, "boxType");
+          this.idArr.sort((a, b) => {
+            return a.cbId > b.cbId ? 1 : -1;
+          });
+          const arr = this.$utils.unique(this.idArr, "boxType"); // 去重
           if (arr.length > 1) {
             arr.sort((a, b) => {
               return a.boxType > b.boxType ? 1 : -1;
             });
           }
           arr.forEach((element) => {
-            const obj = {
-              boxType: element.boxType,
-              label: "",
-              list: this.idArr.filter((item) => {
-                return item.boxType == element.boxType;
-              }),
-            };
+            const list = this.idArr.filter((item) => {
+              return item.boxType == element.boxType;
+            });
+            const obj = { boxType: element.boxType, label: "", list: list, checked: false };
             switch (element.boxType) {
               case 0:
                 obj.label = "Bir Mystery Box";
@@ -169,10 +160,9 @@ export default {
               default:
                 break;
             }
-
-            this.cardList.push(obj);
+            this.boxList.push(obj);
           });
-          sessionStorage.setItem("blindBoxSeries", JSON.stringify(this.cardList));
+          sessionStorage.setItem("MysteyBoxes", JSON.stringify(this.boxList));
         }
       }, 200);
     },
@@ -256,10 +246,11 @@ export default {
 .box_list {
   width: 100%;
   height: 8rem;
+  padding-right: 0.05rem;
   overflow-y: auto;
   li {
     float: left;
-    width: 4.2rem;
+    width: 4.27rem;
     margin: 0 0.2rem 0.2rem 0;
     padding: 0.2rem 0.1rem;
     display: flex;
@@ -329,31 +320,31 @@ export default {
 .card_list {
   width: 100%;
   height: 8rem;
+  padding-right: 0.05rem;
   overflow-y: auto;
   li {
     float: left;
-    width: 2.1rem;
-    margin: 0 0.1rem 0.1rem 0;
+    width: 2.06rem;
+    margin: 0 0.15rem 0.15rem 0;
     cursor: pointer;
     &:nth-child(4n) {
       margin-right: 0;
     }
     &:hover,
     &.active {
-      .card {
-        background: rgba(51, 52, 60, 0.57);
-      }
+      .card,
       .cancel_box {
         background: rgba(51, 52, 60, 0.57);
+        box-shadow: 0.05rem 0.08rem 0.1rem 0rem rgba(0, 0, 0, 0.5);
       }
     }
     .card {
       width: 100%;
       padding: 0.1rem;
       background: rgba(0, 0, 0, 0.38);
-      backdrop-filter: blur(0.04rem);
       border-radius: 0.1rem;
-      border: 1px solid #3f3e43;
+      border: 0.01rem solid #3f3e43;
+      backdrop-filter: blur(4px);
       transition: all 0.3s;
       .top {
         width: 100%;

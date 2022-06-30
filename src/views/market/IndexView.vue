@@ -3,8 +3,8 @@
     <div class="box" :class="{ hidden: !isShowSelectionList }">
       <div class="selectionlist">
         <div class="title">
-          <i class="iconfont icon-conditions" @click="openSelectionList"></i>
-          <i class="iconfont icon-jiantou_qiehuanzuo" @click="closeSelectionList"></i>
+          <i class="iconfont pcconditions" @click="openSelectionList"></i>
+          <i class="iconfont pcjiantou_qiehuanzuo" @click="closeSelectionList"></i>
         </div>
         <div class="list">
           <el-collapse accordion v-model="activeName" @change="changeSelectionList">
@@ -25,8 +25,8 @@
                   <ul class="checkbox_content" v-else>
                     <li v-for="(ite, ind) in item.checkboxList" :key="ind" @click="checkboxClick(ite)">
                       <div class="input">
-                        <i class="iconfont icon-fuxuankuang-quanxuan" v-show="ite.isChecked"></i>
-                        <i class="iconfont icon-fuxuankuang-weiquanxuan" v-show="!ite.isChecked"></i>
+                        <i class="iconfont pcfuxuankuang-quanxuan" v-show="ite.isChecked"></i>
+                        <i class="iconfont pcfuxuankuang-weiquanxuan" v-show="!ite.isChecked"></i>
                       </div>
                       <div class="label">{{ ite.label }}</div>
                     </li>
@@ -59,12 +59,6 @@
               </div>
               <div>{{ $t("artist.text10") }}77busd</div>
             </div>
-            <div class="bottom">
-              <i class="iconfont icon-favorites"></i>
-              <!-- <i class="iconfont icon-favorites-fill"></i>
-              <span>3</span> -->
-            </div>
-            <img class="angle2" :src="`${$urlImages}angle2.webp`" alt="" />
           </li>
         </ul>
       </div>
@@ -82,7 +76,7 @@ export default {
       selectionList: [
         {
           title: "合集筛选",
-          icon: "iconfont icon-nav-list",
+          icon: "iconfont pcnav-list",
           checkboxList: [
             { label: "Cybergear", isChecked: false },
             { label: "Puck", isChecked: false },
@@ -91,12 +85,12 @@ export default {
         },
         {
           title: "价格筛选",
-          icon: "iconfont icon-dollar",
+          icon: "iconfont pcdollar",
           checkboxList: [{ label: "价格范围", min: 0, max: 0 }],
         },
         {
           title: "币种筛选",
-          icon: "iconfont icon-zijin",
+          icon: "iconfont pczijin",
           checkboxList: [
             { label: "FUN", isChecked: false },
             { label: "USDT", isChecked: false },
@@ -105,7 +99,7 @@ export default {
         },
         {
           title: "类型筛选",
-          icon: "iconfont icon-all",
+          icon: "iconfont pcall",
           checkboxList: [
             { label: "盲盒", isChecked: false },
             { label: "角色", isChecked: false },
@@ -114,7 +108,7 @@ export default {
         },
         {
           title: "稀有度筛选",
-          icon: "iconfont icon-dengji",
+          icon: "iconfont pcdengji",
           checkboxList: [
             { label: "MR", isChecked: false },
             { label: "UR", isChecked: false },
@@ -124,7 +118,7 @@ export default {
         },
         {
           title: "属性筛选",
-          icon: "iconfont icon-shuxingchaxun",
+          icon: "iconfont pcshuxingchaxun",
           checkboxList: [
             { label: "职业", isChecked: false },
             { label: "等级", isChecked: false },
@@ -221,7 +215,13 @@ export default {
       width: calc(100% - 0.25rem);
       .card_list {
         li {
-          margin: 0 0.2rem 0.2rem 0;
+          width: 2.08rem;
+          &:nth-child(4n) {
+            margin-right: 0.15rem;
+          }
+          &:nth-child(5n) {
+            margin-right: 0;
+          }
         }
       }
     }
@@ -323,7 +323,7 @@ export default {
 }
 .boxlist {
   width: calc(100% - 2.5rem);
-  padding-left: 0.2rem;
+  padding-left: 0.15rem;
   transition: all 0.3s;
   .title {
     width: 100%;
@@ -367,20 +367,25 @@ export default {
   .card_list {
     width: 100%;
     height: 10rem;
+    padding-right: 0.05rem;
     overflow-y: auto;
     li {
       float: left;
-      width: 2rem;
-      margin: 0 0.2rem 0.2rem 0;
-      border: 1px solid #3f3e43;
-      backdrop-filter: blur(0.04rem);
+      width: 2.07rem;
+      margin: 0 0.15rem 0.15rem 0;
       background: rgba(0, 0, 0, 0.38);
       border-radius: 0.1rem;
+      border: 0.01rem solid #3f3e43;
+      backdrop-filter: blur(4px);
       transition: all 0.3s;
       overflow: hidden;
       cursor: pointer;
       &:nth-child(4n) {
         margin-right: 0;
+      }
+      &:hover {
+        background: rgba(51, 52, 60, 0.57);
+        box-shadow: 0.05rem 0.08rem 0.1rem 0rem rgba(0, 0, 0, 0.5);
       }
       .top {
         width: 100%;
@@ -392,7 +397,6 @@ export default {
       }
       .center {
         width: 100%;
-        border-bottom: 1px solid rgba(132, 125, 125, 0.2);
         div {
           display: flex;
           align-items: center;
@@ -419,36 +423,6 @@ export default {
             font-weight: 600;
             color: #6c6a71;
           }
-        }
-      }
-      .bottom {
-        width: 100%;
-        height: 0.35rem;
-        padding: 0 0.2rem;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        font-size: 0.1rem;
-        font-weight: 600;
-        color: #6c6a71;
-        i {
-          font-size: 0.25rem;
-          margin-right: 0.1rem;
-        }
-      }
-      .angle2 {
-        width: 0.1rem;
-        height: auto;
-        position: absolute;
-        right: 0.1rem;
-        bottom: 0.1rem;
-        opacity: 0;
-      }
-      &:hover {
-        background: rgba(51, 52, 60, 0.57);
-        box-shadow: 5px 8px 10px 0px rgba(0, 0, 0, 0.5);
-        .angle2 {
-          opacity: 1;
         }
       }
     }

@@ -69,18 +69,19 @@ export default {
     width: 2.75rem;
     height: 4rem;
     margin: 0 0.15rem 0.15rem 0;
+    background: rgba(0, 0, 0, 0.38);
     border-radius: 0.1rem;
-    border: 1px solid #514f4f;
-    position: relative;
+    border: 0.01rem solid #3f3e43;
+    backdrop-filter: blur(4px);
     transition: all 0.3s;
+    position: relative;
     cursor: pointer;
     &:nth-child(4n) {
       margin-right: 0;
     }
     &:hover {
-      background: #2f2e38;
-      box-shadow: 0.08rem 0.1rem 0.1rem 0px #000000;
-      backdrop-filter: blur(0.04rem);
+      background: rgba(51, 52, 60, 0.57);
+      box-shadow: 0.05rem 0.08rem 0.1rem 0rem rgba(0, 0, 0, 0.5);
       .angle2 {
         opacity: 1;
       }

@@ -40,22 +40,22 @@
             <ul>
               <li>
                 <el-tooltip class="item" effect="dark" :content="$t('launchpad.text7')" placement="top">
-                  <div><i class="iconfont icon-chakan2"></i></div>
+                  <div><i class="iconfont pcchakan1"></i></div>
                 </el-tooltip>
               </li>
               <li>
                 <el-tooltip class="item" effect="dark" :content="$t('launchpad.text8')" placement="top">
-                  <div><i class="iconfont icon-fenxiang"></i></div>
+                  <div><i class="iconfont pcfenxiang"></i></div>
                 </el-tooltip>
               </li>
               <li>
                 <el-tooltip class="item" effect="dark" :content="$t('launchpad.text9')" placement="top">
-                  <div><i class="iconfont icon-shequn"></i></div>
+                  <div><i class="iconfont pcshequn"></i></div>
                 </el-tooltip>
               </li>
               <li>
                 <el-tooltip class="item" effect="dark" :content="$t('launchpad.text10')" placement="top">
-                  <div><i class="iconfont icon-weiguanwang-"></i></div>
+                  <div><i class="iconfont pcweiguanwang-"></i></div>
                 </el-tooltip>
               </li>
             </ul>
@@ -95,10 +95,10 @@
                 <div class="left">
                   <div>{{ $t("launchpad.text17") }}</div>
                   <div class="inputbox">
-                    <span class="span1"><i class="iconfont icon-jianhao" @click="subtraction"></i></span>
+                    <span class="span1"><i class="iconfont pcjianhao" @click="subtraction"></i></span>
                     <!-- <el-input oninput ="value=value.replace(/[^0-9.]/g,'')" placeholder="请输入(整数或者小数)金额" v-model="form.ysje"></el-input> -->
                     <input type="number" v-model="inputAmount" oninput="value=value.replace(/^(0+)|[^\d]+/g,'')" :disabled="buyloading" />
-                    <span class="span2"><i class="iconfont icon-jiahao" @click="addition"></i></span>
+                    <span class="span2"><i class="iconfont pcjiahao" @click="addition"></i></span>
                   </div>
                   <div>
                     <span>{{ $t("launchpad.text18") }} {{ totalPrice | numberThousands }} U</span>
@@ -180,15 +180,13 @@ export default {
     getWalletAccount: {
       handler(newVal) {
         if (newVal) {
-          // console.log(newVal);
           this.getAmount();
           this.getPriceAddrs();
           this.getUserHourlyBoxesLeftSupply();
           this.getBalanceOf();
         }
       },
-      deep: true, // 深度监听
-      immediate: true, // 立即执行  oval 为undefined  newVal 为data中的初始值
+      immediate: true,
     },
     inputAmount: {
       handler(newVal) {
@@ -199,13 +197,9 @@ export default {
           this.totalPrice = 0;
         }
       },
-      deep: true, // 深度监听
     },
   },
-  created() {
-    // this.getAmount();
-    // this.getPriceAddrs();
-  },
+
   beforeDestroy() {
     clearTimeout(this.countdownTimer);
     this.countdownTimer = null;

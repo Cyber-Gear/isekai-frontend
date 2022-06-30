@@ -793,13 +793,13 @@ export default {
   position: relative;
   .box_content {
     .cardList4 {
-      width: 80%;
+      width: 11.5rem;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
       > li {
-        width: 2.4rem;
+        width: 2.75rem;
         margin-bottom: 0.5rem;
         &:hover .box_border2 {
           background: rgba(8, 8, 9, 0);
@@ -1241,7 +1241,7 @@ export default {
       .cardList4 {
         width: 80%;
         > li {
-          width: 1.4rem;
+          width: 1.45rem;
           margin-bottom: 0.2rem;
           .box_border1 {
             .box_border2 {

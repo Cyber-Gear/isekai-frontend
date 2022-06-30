@@ -2,7 +2,7 @@
   <div class="page">
     <div class="banner">
       <div class="back_box" @click="goBack">
-        <i class="iconfont icon-fanhui"></i>
+        <i class="iconfont pcfanhui"></i>
         <span>{{ $t("btns.text1") }}</span>
       </div>
     </div>
@@ -26,8 +26,8 @@
           <div class="mask" v-if="oldProposalsInfo.length > 5">
             <el-button @click="showMoreProposalsInfo">
               <!-- {{ isShowMoreProposalsInfo ? $t("dao.text38") : $t("dao.text37") }} -->
-              <i class="iconfont icon-arrow-up" v-show="isShowMoreProposalsInfo"></i>
-              <i class="iconfont icon-arrow-down" v-show="!isShowMoreProposalsInfo"></i>
+              <i class="iconfont pcarrow-up" v-show="isShowMoreProposalsInfo"></i>
+              <i class="iconfont pcarrow-down" v-show="!isShowMoreProposalsInfo"></i>
             </el-button>
           </div>
         </div>
@@ -99,7 +99,7 @@
             </li>
             <li>
               <div>{{ $t("dao.text28") }}</div>
-              <div @click="ipfsLink">#{{ someProposals.ipfs | ellipsisNormal }}<i class="iconfont icon-chakan"></i></div>
+              <div @click="ipfsLink">#{{ someProposals.ipfs | ellipsisNormal }}<i class="iconfont pcchakan"></i></div>
             </li>
             <li>
               <div>{{ $t("dao.text29") }}</div>

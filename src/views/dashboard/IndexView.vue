@@ -18,11 +18,11 @@
             <img src="http://cdn.funtopia.io/funtopia_assets_test/images/Akiha/avatar.webp" alt="" />
             <p>0x4590.....890345</p>
           </div>
-          <div class="iconbtn" v-if="!isShowDrawer" @click="openDrawer"><i class="iconfont icon-category"></i></div>
+          <div class="iconbtn" v-if="!isShowDrawer" @click="openDrawer"><i class="iconfont pccategory"></i></div>
         </div>
         <div class="nftbox">
           <div class="leftbox">
-            <div class="title"><i class="iconfont icon-category"></i>MY NFT</div>
+            <div class="title"><i class="iconfont pccategory"></i>MY NFT</div>
             <div class="list">
               <el-menu class="el-menu-dashboard" :default-active="defaultActive" :default-openeds="defaultOpeneds" active-text-color="#00B5FF" router>
                 <el-submenu v-for="(item, index) in menuList" :key="index" :index="item.index">
@@ -44,28 +44,28 @@
         <div class="drawer_box">
           <div class="title">
             <span>Register/Login/Logout</span>
-            <span @click="closeDrawer"><i class="iconfont icon-guanbi"></i></span>
+            <span @click="closeDrawer"><i class="iconfont pcguanbi"></i></span>
           </div>
           <div class="box1">
             <img src="http://cdn.funtopia.io/funtopia_assets_test/images/Akiha/avatar.webp" alt="" />
             <div>
               <div class="textbox">
                 <span>zhaochangpeng</span>
-                <i class="iconfont icon-fuxuankuang-weiquanxuan"></i>
+                <i class="iconfont pchenggang"></i>
               </div>
               <div class="inputbox">
                 <input type="text" value="zhaochangpeng" />
-                <i class="iconfont icon-fuxuankuang-weiquanxuan"></i>
+                <i class="iconfont pcgou"></i>
               </div>
             </div>
             <div>
               <div class="textbox">
                 <span>bsc ceo ,working web3.0</span>
-                <i class="iconfont icon-fuxuankuang-weiquanxuan"></i>
+                <i class="iconfont pchenggang"></i>
               </div>
               <div class="inputbox">
                 <input type="text" value="bsc ceo ,working web3.0" />
-                <i class="iconfont icon-fuxuankuang-weiquanxuan"></i>
+                <i class="iconfont pcgou"></i>
               </div>
             </div>
           </div>
@@ -93,7 +93,7 @@ export default {
       menuList: [
         {
           index: "asstet",
-          icon: "icon-bussiness-man",
+          icon: "pcshequn",
           label: "Asstet",
           children: [
             { index: "nft-asstet", label: "NFT Asstet" },
@@ -101,8 +101,8 @@ export default {
             { index: "crypto-asstet", label: "Crypto Asstet" },
           ],
         },
-        { index: "history", icon: "icon-bussiness-man", label: "History", children: [{ index: "orders", label: "Orders" }] },
-        { index: "favorites", icon: "icon-favorites", label: "Favorites", children: [{ index: "my-favorites", label: "My Favorites" }] },
+        { index: "history", icon: "pchistory", label: "History", children: [{ index: "orders", label: "Orders" }] },
+        // { index: "favorites", icon: "pcfavorites", label: "Favorites", children: [{ index: "my-favorites", label: "My Favorites" }] },
       ],
       tagList: [{ label: "video favor" }, { label: "singer" }, { label: "cool" }, { label: "artist" }, { label: "love" }],
     };
@@ -114,14 +114,15 @@ export default {
     },
     getWalletAccount: {
       handler(newVal) {
-        if (newVal) console.log("获取钱包", newVal);
+        this.getDefaultActive(this.$route.path);
+        if (newVal) {
+          console.log("获取钱包", newVal);
+        }
       },
       immediate: true, // 页面初始化后立即执行
     },
   },
-  created() {
-    this.getDefaultActive(this.$route.path);
-  },
+
   methods: {
     getDefaultActive(path) {
       const str = path.replace("/dashboard/", "");

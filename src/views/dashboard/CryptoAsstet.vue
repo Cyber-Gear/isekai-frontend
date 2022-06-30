@@ -3,30 +3,33 @@
     <div class="title">Crypto Asstet</div>
     <div class="topbox">
       <div>
-        Balance
-        <i class="iconfont icon-chakan1" v-show="!isShow" @click="isShow = true"></i>
-        <i class="iconfont icon-block" v-show="isShow" @click="isShow = false"></i>
+        Balance余额
+        <i class="iconfont pcchakan1" v-show="!isShow" @click="isShow = true"></i>
+        <i class="iconfont pcNotvisible" v-show="isShow" @click="isShow = false"></i>
       </div>
-      <div>{{ isShow ? balanceText : "******" }}</div>
+      <div>{{ "Balance余额" }}</div>
     </div>
     <ul class="card_list">
       <li v-for="(item, index) in cardList" :key="index">
         <ul>
           <li>
             <div><img :src="`${$urlImages}coin_FUN.webp`" alt="" /> FUN</div>
-            <div>{{ item.num1 | numberToFixed(12) }}</div>
+            <div>{{ item.num1 }}</div>
           </li>
           <li>
             <div></div>
-            <div>=${{ item.num2 | numberToFixed(5) }}</div>
+            <div>=${{ item.num2 }}</div>
           </li>
           <li>
             <div>Available</div>
             <div>Contract</div>
           </li>
           <li>
-            <div>{{ isShow ? item.num3 : "******" }}</div>
-            <div>{{ item.num4 | ellipsisWallet }}</div>
+            <div>{{ item.num3 }}</div>
+            <div>
+              <span>{{ item.num4 }}</span>
+              <span><i class="iconfont pcjiahao"></i></span>
+            </div>
           </li>
         </ul>
       </li>
@@ -35,21 +38,63 @@
 </template>
 
 <script>
+import { util, erc20, token } from "funtopia-sdk";
+import { mapGetters } from "vuex";
 export default {
   name: "CryptoAsstet",
+  computed: { ...mapGetters(["getWalletAccount"]), ...mapGetters(["getApprovePopup"]) },
+  watch: {
+    getWalletAccount: {
+      handler(newVal) {
+        if (newVal) {
+          this.getBalanceOf();
+        }
+      },
+      immediate: true,
+    },
+  },
   data() {
     return {
       isShow: false,
       balanceText: "experienceexp",
       cardList: [
-        { num1: 0.000000001777, num2: 0.0000395, num3: 21212, num4: "121212343413312" },
+        { num1: "币个数", num2: "总价值", num3: "可用余额", num4: "币的合约地址" },
         { num1: 0.000000001777, num2: 0.0000395, num3: 21212, num4: "121212343413312" },
         { num1: 0.000000001777, num2: 0.0000395, num3: 21212, num4: "121212343413312" },
         { num1: 0.000000001777, num2: 0.0000395, num3: 21212, num4: "121212343413312" },
       ],
     };
   },
-  methods: {},
+
+  methods: {
+    /**钱包余额 */
+    getBalanceOf() {
+      erc20(token().USDT)
+        .balanceOf(this.getWalletAccount)
+        .then((res) => {
+          console.log("钱包余额USDT", Number(util.formatEther(res._hex)));
+        })
+        .catch((err) => {
+          console.error("erc20(token().USDC).balanceOf", err);
+        });
+      erc20(token().FUN)
+        .balanceOf(this.getWalletAccount)
+        .then((res) => {
+          console.log("钱包余额FUN", Number(util.formatEther(res._hex)));
+        })
+        .catch((err) => {
+          console.error("erc20(token().USDC).balanceOf", err);
+        });
+      erc20(token().WAVAX)
+        .balanceOf(this.getWalletAccount)
+        .then((res) => {
+          console.log("钱包余额WAVAX", Number(util.formatEther(res._hex)));
+        })
+        .catch((err) => {
+          console.error("erc20(token().USDC).balanceOf", err);
+        });
+    },
+  },
 };
 </script>
 
@@ -96,19 +141,25 @@ export default {
   }
 }
 .card_list {
+  width: 100%;
+  height: auto;
   margin-top: 0.2rem;
   > li {
-    width: 2.1rem;
     float: left;
-    background: rgba(129, 129, 151, 0.19);
-    border-radius: 0.09rem;
-    border: 0.01rem solid #555555;
-    backdrop-filter: blur(7px);
+    width: 2.1rem;
     padding: 0.1rem;
     margin: 0 0.13rem 0.13rem 0;
+    background: rgba(51, 52, 60, 0.57);
+    border-radius: 0.1rem;
+    border: 0.01rem solid #3f3e43;
+    backdrop-filter: blur(4px);
     &:nth-child(4n) {
       margin-right: 0;
     }
+    // &:hover {
+    //   background: rgba(51, 52, 60, 0.57);
+    //   box-shadow: 0.05rem 0.08rem 0.1rem 0rem rgba(0, 0, 0, 0.5);
+    // }
     ul {
       li {
         display: flex;
@@ -156,6 +207,27 @@ export default {
         &:nth-child(4) {
           font-size: 0.12rem;
           color: #ffffff;
+          div {
+            &:nth-child(2) {
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: right;
+              span {
+                &:nth-child(2) {
+                  background: rgba(40, 38, 38, 0.8);
+                  border-radius: 0.03rem;
+                  margin-left: 0.05rem;
+                  &:hover {
+                    background: rgba(51, 52, 60, 0.57);
+                  }
+                  i {
+                    font-size: 0.2rem;
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

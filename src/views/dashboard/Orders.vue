@@ -35,10 +35,6 @@
             </div>
             <div>{{ $t("artist.text10") }}77busd</div>
           </div>
-          <div class="bottom">
-            <i class="iconfont icon-favorites"></i>
-          </div>
-          <img class="angle2" :src="`${$urlImages}angle2.webp`" alt="" />
         </div>
       </li>
     </ul>
@@ -175,11 +171,13 @@ export default {
 .card_list {
   width: 100%;
   height: 8rem;
+  padding-right: 0.05rem;
   overflow-y: auto;
   li {
     float: left;
-    width: 2.05rem;
+    width: 2.06rem;
     margin: 0 0.15rem 0.15rem 0;
+    cursor: pointer;
     &:nth-child(4n) {
       margin-right: 0;
     }
@@ -187,19 +185,15 @@ export default {
     &.active {
       .card {
         background: rgba(51, 52, 60, 0.57);
-        box-shadow: 5px 8px 10px 0px rgba(0, 0, 0, 0.5);
-        .angle2 {
-          opacity: 1;
-        }
+        box-shadow: 0.05rem 0.08rem 0.1rem 0rem rgba(0, 0, 0, 0.5);
       }
     }
     .card {
-      border: 1px solid #3f3e43;
-      backdrop-filter: blur(0.04rem);
       background: rgba(0, 0, 0, 0.38);
       border-radius: 0.1rem;
+      border: 0.01rem solid #3f3e43;
+      backdrop-filter: blur(4px);
       transition: all 0.3s;
-      cursor: pointer;
       .top {
         width: 100%;
         height: auto;
@@ -210,7 +204,6 @@ export default {
       }
       .center {
         width: 100%;
-        border-bottom: 1px solid rgba(132, 125, 125, 0.2);
         div {
           display: flex;
           align-items: center;
@@ -234,26 +227,6 @@ export default {
             color: #6c6a71;
           }
         }
-      }
-      .bottom {
-        width: 100%;
-        padding: 0.05rem 0.2rem;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        i {
-          color: #6c6a71;
-          font-size: 0.25rem;
-        }
-      }
-
-      .angle2 {
-        width: 0.1rem;
-        height: auto;
-        position: absolute;
-        right: 0.1rem;
-        bottom: 0.1rem;
-        opacity: 0;
       }
     }
   }

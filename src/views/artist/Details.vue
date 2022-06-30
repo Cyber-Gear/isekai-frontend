@@ -3,7 +3,7 @@
     <div class="banner">
       <img :src="detail.banner" alt="" />
       <div class="back_box" @click="goBack">
-        <i class="iconfont icon-fanhui"></i>
+        <i class="iconfont pcfanhui"></i>
         <span>{{ $t("btns.text1") }}</span>
       </div>
     </div>
@@ -13,19 +13,19 @@
       </div>
       <div class="box1">
         <div class="linkbox">
-          <div><i class="iconfont icon-telegram"></i></div>
-          <div><i class="iconfont icon-tuite"></i></div>
-          <div><i class="iconfont icon-discord"></i></div>
-          <div><i class="iconfont icon-medium"></i></div>
+          <div><i class="iconfont pctelegram"></i></div>
+          <div><i class="iconfont pctuite"></i></div>
+          <div><i class="iconfont pcdiscord"></i></div>
+          <div><i class="iconfont pcmedium"></i></div>
         </div>
       </div>
       <div class="box2">
         <ul>
           <li>{{ $t(detail.title) }}</li>
           <li>
-            <i class="iconfont icon-assessed-badge"></i>
-            <i class="iconfont icon-gouxuan"></i>
-            <i class="iconfont icon-assessed-badge"></i>
+            <i class="iconfont pcassessed-badge"></i>
+            <i class="iconfont pcgouxuan"></i>
+            <i class="iconfont pcassessed-badge"></i>
           </li>
           <li>
             <div>
@@ -73,10 +73,6 @@
               </div>
               <div>{{ $t("artist.text10") }}77busd</div>
             </div>
-            <div class="bottom">
-              <i class="iconfont icon-favorites"></i>
-            </div>
-            <img class="angle2" :src="`${$urlImages}angle2.webp`" alt="" />
           </li>
         </ul>
       </div>
@@ -237,10 +233,10 @@ export default {
           color: #c9c9c9;
           margin: 0 0.05rem;
         }
-        .icon-assessed-badge {
+        .pcassessed-badge {
           font-size: 0.4rem;
         }
-        .icon-gouxuan {
+        .pcgouxuan {
           font-size: 0.3rem;
         }
       }
@@ -303,20 +299,24 @@ export default {
 .card_list {
   width: 100%;
   height: 10rem;
+  padding-right: 0.05rem;
   overflow-y: auto;
   li {
     float: left;
-    width: 2.7rem;
+    width: 2.735rem;
     margin: 0 0.15rem 0.15rem 0;
-    border-radius: 0.1rem;
-    overflow: hidden;
-    border: 1px solid #3f3e43;
-    backdrop-filter: blur(0.04rem);
     background: rgba(0, 0, 0, 0.38);
+    border-radius: 0.1rem;
+    border: 0.01rem solid #3f3e43;
+    backdrop-filter: blur(4px);
     transition: all 0.3s;
     cursor: pointer;
     &:nth-child(4n) {
       margin-right: 0;
+    }
+    &:hover {
+      background: rgba(51, 52, 60, 0.57);
+      box-shadow: 0.05rem 0.08rem 0.1rem 0rem rgba(0, 0, 0, 0.5);
     }
     .top {
       width: 100%;
@@ -328,7 +328,6 @@ export default {
     }
     .center {
       width: 100%;
-      border-bottom: 1px solid rgba(132, 125, 125, 0.2);
       div {
         display: flex;
         align-items: center;
@@ -351,32 +350,6 @@ export default {
           font-weight: 600;
           color: #6c6a71;
         }
-      }
-    }
-    .bottom {
-      width: 100%;
-      padding: 0.05rem 0.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      i {
-        color: #6c6a71;
-        font-size: 0.25rem;
-      }
-    }
-    .angle2 {
-      width: 0.1rem;
-      height: auto;
-      position: absolute;
-      right: 0.1rem;
-      bottom: 0.1rem;
-      opacity: 0;
-    }
-    &:hover {
-      background: rgba(51, 52, 60, 0.57);
-      box-shadow: 5px 8px 10px 0px rgba(0, 0, 0, 0.5);
-      .angle2 {
-        opacity: 1;
       }
     }
   }
@@ -429,10 +402,10 @@ export default {
             color: #c9c9c9;
             margin: 0 0.05rem;
           }
-          .icon-assessed-badge {
+          .pcassessed-badge {
             font-size: 0.2rem;
           }
-          .icon-gouxuan {
+          .pcgouxuan {
             font-size: 0.15rem;
           }
         }
@@ -475,6 +448,7 @@ export default {
   .card_list {
     width: 100%;
     height: 4rem;
+    padding-right: 0.05rem;
     li {
       width: 1.6rem;
       margin: 0 0.1rem 0.1rem 0;
@@ -499,23 +473,6 @@ export default {
             color: #6c6a71;
           }
         }
-      }
-      .bottom {
-        width: 100%;
-        padding: 0.05rem 0.1rem;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        i {
-          color: #6c6a71;
-          font-size: 0.12rem;
-        }
-      }
-      .angle2 {
-        width: 0.08rem;
-        height: auto;
-        right: 0.05rem;
-        bottom: 0.05rem;
       }
     }
   }

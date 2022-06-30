@@ -2,7 +2,7 @@
   <div class="page">
     <div class="banner">
       <div class="back_box" @click="goBack">
-        <i class="iconfont icon-fanhui"></i>
+        <i class="iconfont pcfanhui"></i>
         <span>{{ $t("btns.text1") }}</span>
       </div>
     </div>
@@ -16,7 +16,7 @@
         <div class="workbox">
           <div class="titlebtn">
             <div>
-              <i class="iconfont icon-integral-fill"></i>
+              <i class="iconfont pcintegral-fill"></i>
               {{ $t("artist.text4") }}
             </div>
           </div>
@@ -32,19 +32,19 @@
           <ul class="introbox1">
             <li>{{ $t(card.name) }}</li>
             <li>
-              <div><i class="iconfont icon-shuxingchaxun"></i>{{ $t("artist.text5") }}</div>
+              <div><i class="iconfont pcshuxingchaxun"></i>{{ $t("artist.text5") }}</div>
               {{ $t(card.attribute) }}
             </li>
             <li>
-              <div><i class="iconfont icon-pingfendengjiRating11"></i>{{ $t("artist.text6") }}</div>
+              <div><i class="iconfont pcpingfendengjiRating11"></i>{{ $t("artist.text6") }}</div>
               {{ $t(card.level) }}
             </li>
             <li>
-              <div><i class="iconfont icon-pingfendengjiRating15"></i>{{ $t("artist.text7") }}</div>
+              <div><i class="iconfont pcpingfendengjiRating15"></i>{{ $t("artist.text7") }}</div>
               {{ $t(card.starlevel) }}
             </li>
             <li>
-              <div><i class="iconfont icon-dengji"></i>{{ $t("artist.text8") }}</div>
+              <div><i class="iconfont pcdengji"></i>{{ $t("artist.text8") }}</div>
               {{ card.rarity }}
             </li>
           </ul>

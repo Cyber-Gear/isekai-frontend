@@ -2,7 +2,7 @@
   <div class="page">
     <div class="banner">
       <div class="back_box" @click="goBack">
-        <i class="iconfont icon-fanhui"></i>
+        <i class="iconfont pcfanhui"></i>
         <span>{{ $t("btns.text1") }}</span>
       </div>
     </div>

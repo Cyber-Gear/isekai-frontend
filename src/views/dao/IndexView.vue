@@ -6,15 +6,15 @@
           <div class="avatar">
             <img :src="`${$urlImages}logo1.webp`" alt="" />
           </div>
-          <div class="title"><span>FUN TOPIA</span><i class="iconfont icon-telegram"></i></div>
+          <div class="title"><span>FUN TOPIA</span><i class="iconfont pctelegram"></i></div>
           <div class="linkbox">
-            <div><i class="iconfont icon-telegram"></i></div>
-            <div><i class="iconfont icon-tuite"></i></div>
-            <div><i class="iconfont icon-discord"></i></div>
-            <div><i class="iconfont icon-medium"></i></div>
+            <div><i class="iconfont pctelegram"></i></div>
+            <div><i class="iconfont pctuite"></i></div>
+            <div><i class="iconfont pcdiscord"></i></div>
+            <div><i class="iconfont pcmedium"></i></div>
           </div>
           <div class="lis">
-            <div><i class="iconfont icon-Customermanagement-fill"></i>{{ $t("dao.text2") }}</div>
+            <div><i class="iconfont pcCustomermanagement-fill"></i>{{ $t("dao.text2") }}</div>
             <div>{{ spaceObj.members.length }}</div>
           </div>
           <div class="btn">
@@ -81,7 +81,6 @@ export default {
       ],
     };
   },
-
   created() {
     this.getSpace();
     this.selectChange(1);

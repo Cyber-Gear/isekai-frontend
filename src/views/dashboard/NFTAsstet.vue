@@ -8,8 +8,8 @@
         </li>
       </ul>
       <div v-show="isShowCheck">
-        <i class="iconfont icon-fuxuankuang-quanxuan"></i>
-        <i class="iconfont icon-fuxuankuang-weiquanxuan"></i>
+        <i class="iconfont pcfuxuankuang-quanxuan"></i>
+        <i class="iconfont pcfuxuankuang-weiquanxuan"></i>
         Select all/Unselect
       </div>
     </div>
@@ -28,10 +28,6 @@
             </div>
             <div>{{ $t("artist.text10") }}77busd</div>
           </div>
-          <div class="bottom">
-            <i class="iconfont icon-favorites"></i>
-          </div>
-          <img class="angle2" :src="`${$urlImages}angle2.webp`" alt="" />
         </div>
         <div class="cancel_box" v-if="isShowCheck">
           <span>90 BUSD</span>
@@ -60,6 +56,7 @@ export default {
         { label: "On sale", total: 0 },
       ],
       cardList: shikastudio.works,
+      heroIdList: [],
       newCardList: [],
       requestTimer: null,
     };
@@ -73,13 +70,26 @@ export default {
       immediate: true, // 页面初始化后立即执行
     },
   },
+  beforeDestroy() {
+    clearTimeout(this.requestTimer);
+    this.requestTimer = null;
+  },
   methods: {
     switchTab(index) {
       this.switchIndex = index;
-      this.newCardList = [];
       if (index == 0) {
         this.isShowCheck = false;
-        this.tokensOfOwnerBySize();
+        this.newCardList = [];
+        if (sessionStorage.getItem("NFTAsstet")) {
+          this.heroIdList = JSON.parse(sessionStorage.getItem("NFTAsstet"));
+          this.heroIdList.forEach((element) => {
+            const obj = this.cardList.find((item) => item.id == element);
+            this.newCardList.push(obj);
+          });
+          this.switchList[0].total = this.newCardList.length;
+        } else {
+          this.tokensOfOwnerBySize();
+        }
       } else {
         this.isShowCheck = true;
       }
@@ -97,16 +107,21 @@ export default {
         .then((res) => {
           // console.log("获取NFTs", res[0], Number(res[1]));
           const cnIds = res[0];
-          this.switchList[0].total = cnIds.length;
           cnIds.forEach((element) => {
             this.getHeroId(Number(element));
           });
-          // this.requestTimer = setInterval(() => {
-          //   if (this.newCardList.length === cnIds.length) {
-          //     clearInterval(this.requestTimer);
-          //     this.requestTimer = null;
-          //   }
-          // }, 200);
+          this.requestTimer = setInterval(() => {
+            if (this.heroIdList.length === cnIds.length) {
+              clearInterval(this.requestTimer);
+              this.requestTimer = null;
+              this.heroIdList.forEach((element) => {
+                const obj = this.cardList.find((item) => item.id == element);
+                this.newCardList.push(obj);
+              });
+              this.switchList[0].total = this.newCardList.length;
+              sessionStorage.setItem("NFTAsstet", JSON.stringify(this.heroIdList));
+            }
+          }, 200);
         })
         .catch((err) => {
           console.error("tokensOfOwnerBySize", err);
@@ -124,13 +139,12 @@ export default {
         .data(cnId, "hero")
         .then((res) => {
           // console.log("获取某英雄的某单数据字段的数据", res, Number(res));
-          const obj = this.cardList.find((item) => item.id == Number(res));
-          this.newCardList.push(obj);
+          this.heroIdList.push(Number(res));
         })
         .catch((err) => {
           console.error("data", err);
-          // clearInterval(this.requestTimer);
-          // this.requestTimer = null;
+          clearInterval(this.requestTimer);
+          this.requestTimer = null;
         });
     },
   },
@@ -192,10 +206,11 @@ export default {
 .card_list {
   width: 100%;
   height: 8rem;
+  padding-right: 0.05rem;
   overflow-y: auto;
   li {
     float: left;
-    width: 2.05rem;
+    width: 2.06rem;
     margin: 0 0.15rem 0.15rem 0;
     cursor: pointer;
     &:nth-child(4n) {
@@ -203,21 +218,17 @@ export default {
     }
     &:hover,
     &.active {
-      .card {
-        background: rgba(51, 52, 60, 0.57);
-        .angle2 {
-          opacity: 1;
-        }
-      }
+      .card,
       .cancel_box {
         background: rgba(51, 52, 60, 0.57);
+        box-shadow: 0.05rem 0.08rem 0.1rem 0rem rgba(0, 0, 0, 0.5);
       }
     }
     .card {
       background: rgba(0, 0, 0, 0.38);
-      backdrop-filter: blur(0.04rem);
-      border: 1px solid #3f3e43;
       border-radius: 0.1rem;
+      border: 0.01rem solid #3f3e43;
+      backdrop-filter: blur(4px);
       transition: all 0.3s;
       .top {
         width: 100%;
@@ -229,7 +240,6 @@ export default {
       }
       .center {
         width: 100%;
-        border-bottom: 1px solid rgba(132, 125, 125, 0.2);
         div {
           display: flex;
           align-items: center;
@@ -253,25 +263,6 @@ export default {
             color: #6c6a71;
           }
         }
-      }
-      .bottom {
-        width: 100%;
-        padding: 0.05rem 0.2rem;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        i {
-          color: #6c6a71;
-          font-size: 0.25rem;
-        }
-      }
-      .angle2 {
-        width: 0.1rem;
-        height: auto;
-        position: absolute;
-        right: 0.1rem;
-        bottom: 0.1rem;
-        opacity: 0;
       }
     }
     .cancel_box {

@@ -150,24 +150,19 @@ export default {
 }
 .title {
   width: 100%;
-  height: 0.6rem;
-  line-height: 0.6rem;
+  height: 0.5rem;
+  line-height: 0.5rem;
   font-size: 0.3rem;
   font-weight: bold;
   background: rgba(129, 129, 151, 0.19);
   border-radius: 0.08rem;
   backdrop-filter: blur(7px);
   padding: 0 0.1rem;
-  margin-bottom: 0.2rem;
-  i {
-    font-size: 0.3rem;
-    margin-right: 0.1rem;
-  }
 }
 .back_titlebox {
   width: 100%;
-  height: 0.6rem;
-  line-height: 0.6rem;
+  height: 0.5rem;
+  line-height: 0.5rem;
   font-size: 0.2rem;
   font-weight: bold;
   i {
@@ -229,11 +224,15 @@ export default {
           div {
             font-size: 0.12rem;
             font-weight: bold;
-            color: #ffffff;
             &:nth-child(1) {
               color: #00b1ff;
               display: flex;
               align-items: center;
+              img {
+                width: 0.24rem;
+                height: auto;
+                margin-left: 0.1rem;
+              }
             }
           }
         }
@@ -241,7 +240,6 @@ export default {
           div {
             font-size: 0.12rem;
             font-weight: bold;
-            color: #ffffff;
             &:nth-child(2) {
               color: #6c6a71;
               text-align: right;
@@ -264,6 +262,84 @@ export default {
     font-size: 0.15rem;
     font-weight: 600;
     color: #999999;
+  }
+}
+@media screen and (max-width: 750px) {
+  .title {
+    width: 100%;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    border-radius: 0.04rem;
+    font-size: 0.12rem;
+    font-weight: 600;
+    padding: 0 0.2rem;
+  }
+  .switch_box {
+    width: 100%;
+    height: 0.4rem;
+    ul {
+      li {
+        height: 0.25rem;
+        line-height: 0.25rem;
+        padding: 0 0.05rem;
+        font-size: 0.12rem;
+        font-weight: 600;
+        border-radius: 0.04rem;
+      }
+    }
+  }
+  .back_titlebox {
+    width: 100%;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    font-size: 0.12rem;
+    font-weight: 600;
+    i {
+      font-size: 0.15rem;
+      margin-right: 0.05rem;
+    }
+  }
+  .card_list {
+    width: 100%;
+    height: 5.5rem;
+    li {
+      width: 1.6rem;
+      margin: 0 0.1rem 0.1rem 0;
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+      .card {
+        width: 100%;
+        padding: 0.05rem;
+        border-radius: 0.04rem;
+        .top {
+          width: 100%;
+          padding: 0.2rem 0;
+          border-radius: 0.04rem;
+        }
+        .center {
+          .row1 {
+            div {
+              font-size: 0.12rem;
+              font-weight: 400;
+              &:nth-child(1) {
+                img {
+                  width: 0.12rem;
+                  height: auto;
+                  margin-left: 0.05rem;
+                }
+              }
+            }
+          }
+          .row2 {
+            div {
+              font-size: 0.12rem;
+              font-weight: 400;
+            }
+          }
+        }
+      }
+    }
   }
 }
 </style>

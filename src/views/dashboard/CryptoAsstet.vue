@@ -26,7 +26,7 @@
             <div></div>
             <div>
               <span v-show="isShow">=${{ item.totalPirce }}</span>
-              <span v-show="!isShow">******</span>
+              <span v-show="!isShow">=$******</span>
             </div>
           </li>
           <li>
@@ -38,9 +38,10 @@
               <span v-show="isShow">{{ item.availableBalance | numberToFixed | numberTally }}</span>
               <span v-show="!isShow">******</span>
             </div>
-            <div>
-              <span @click="$utils.handleCopy(item.coinAddr)">{{ item.coinAddr | ellipsisWallet }}</span>
-              <span v-show="item.isShowAdd" @click="addAddress(item)"><i class="iconfont pcjiahao"></i></span>
+            <div class="btns">
+              <span>{{ item.coinAddr | ellipsisWallet }}</span>
+              <span class="btn" v-show="item.isShowAdd" @click="addAddress(item)"><i class="iconfont pcjiahao"></i></span>
+              <span class="btn" v-show="!item.isShowAdd" @click="$utils.handleCopy(item.coinAddr)"><i class="iconfont pcchakan"></i></span>
             </div>
           </li>
         </ul>
@@ -142,61 +143,48 @@ export default {
 }
 .title {
   width: 100%;
-  height: 0.6rem;
-  line-height: 0.6rem;
+  height: 0.5rem;
+  line-height: 0.5rem;
   font-size: 0.3rem;
   font-weight: bold;
   background: rgba(129, 129, 151, 0.19);
   border-radius: 0.08rem;
   backdrop-filter: blur(7px);
   padding: 0 0.1rem;
-  i {
-    font-size: 0.3rem;
-    margin-right: 0.1rem;
-  }
 }
 .topbox {
   width: 100%;
-  margin-top: 0.2rem;
-  > div {
-    height: 0.5rem;
-    line-height: 0.5rem;
-    &:nth-child(1) {
-      display: flex;
-      align-items: center;
-      font-size: 0.2rem;
-      font-weight: bold;
-      i {
-        font-size: 0.25rem;
-        margin-left: 0.2rem;
-        cursor: pointer;
-      }
-    }
-    &:nth-child(2) {
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  div {
+    display: flex;
+    align-items: center;
+    font-size: 0.3rem;
+    font-weight: bold;
+    margin-right: 0.2rem;
+    i {
       font-size: 0.3rem;
+      margin-left: 0.2rem;
+      cursor: pointer;
     }
   }
 }
 .card_list {
   width: 100%;
-  height: auto;
-  margin-top: 0.2rem;
+  height: fit-content;
   > li {
     float: left;
-    width: 2.1rem;
+    width: 2.83rem;
     padding: 0.1rem;
-    margin: 0 0.13rem 0.13rem 0;
+    margin: 0 0.15rem 0.15rem 0;
     background: rgba(51, 52, 60, 0.57);
     border-radius: 0.1rem;
     border: 0.01rem solid #3f3e43;
     backdrop-filter: blur(4px);
-    &:nth-child(4n) {
+    &:nth-child(3n) {
       margin-right: 0;
     }
-    // &:hover {
-    //   background: rgba(51, 52, 60, 0.57);
-    //   box-shadow: 0.05rem 0.08rem 0.1rem 0rem rgba(0, 0, 0, 0.5);
-    // }
     ul {
       li {
         display: flex;
@@ -216,7 +204,6 @@ export default {
             &:nth-child(1) {
               font-size: 0.15rem;
               font-weight: bold;
-              color: #ffffff;
               display: flex;
               align-items: center;
               img {
@@ -226,42 +213,116 @@ export default {
               }
             }
             &:nth-child(2) {
-              font-size: 0.12rem;
+              font-size: 0.15rem;
               font-weight: bold;
-              color: #ffffff;
             }
           }
         }
         &:nth-child(2) {
-          font-size: 0.12rem;
+          font-size: 0.15rem;
           color: #a7a7a7;
           margin-bottom: 0.1rem;
         }
         &:nth-child(3) {
-          font-size: 0.12rem;
+          font-size: 0.15rem;
           color: #a7a7a7;
+          margin-bottom: 0.1rem;
         }
         &:nth-child(4) {
-          font-size: 0.12rem;
-          color: #ffffff;
-          div {
-            &:nth-child(2) {
-              cursor: pointer;
-              display: flex;
-              align-items: center;
-              justify-content: right;
-              span {
-                &:nth-child(2) {
-                  background: rgba(40, 38, 38, 0.8);
-                  border-radius: 0.03rem;
-                  margin-left: 0.05rem;
-                  &:hover {
-                    background: rgba(51, 52, 60, 0.57);
-                  }
-                  i {
-                    font-size: 0.2rem;
-                  }
-                }
+          font-size: 0.15rem;
+        }
+        .btns {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: right;
+          .btn {
+            background: rgba(40, 38, 38, 0.8);
+            border-radius: 0.04rem;
+            margin-left: 0.1rem;
+            i {
+              font-size: 0.2rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 750px) {
+  .title {
+    width: 100%;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    border-radius: 0.04rem;
+    font-size: 0.12rem;
+    font-weight: 600;
+    padding: 0 0.2rem;
+  }
+  .switch_box {
+    width: 100%;
+    height: 0.4rem;
+    ul {
+      li {
+        height: 0.25rem;
+        line-height: 0.25rem;
+        padding: 0 0.05rem;
+        font-size: 0.12rem;
+        font-weight: 600;
+        border-radius: 0.04rem;
+      }
+    }
+  }
+  .topbox {
+    width: 100%;
+    height: 0.8rem;
+    div {
+      font-size: 0.15rem;
+      font-weight: bold;
+      margin-right: 0.1rem;
+      i {
+        font-size: 0.2rem;
+        margin-left: 0.1rem;
+      }
+    }
+  }
+  .card_list {
+    > li {
+      width: 100%;
+      padding: 0.05rem 0.1rem;
+      margin: 0 0 0.1rem 0;
+      background: rgba(51, 52, 60, 0.57);
+      border-radius: 0.04rem;
+      ul {
+        li {
+          &:nth-child(1) {
+            div {
+              &:nth-child(1) {
+                font-size: 0.15rem;
+                font-weight: bold;
+              }
+              &:nth-child(2) {
+                font-size: 0.15rem;
+                font-weight: bold;
+              }
+            }
+          }
+          &:nth-child(2) {
+            font-size: 0.15rem;
+            margin-bottom: 0.05rem;
+          }
+          &:nth-child(3) {
+            font-size: 0.15rem;
+            margin-bottom: 0.05rem;
+          }
+          &:nth-child(4) {
+            font-size: 0.15rem;
+          }
+          .btns {
+            .btn {
+              margin-left: 0.05rem;
+              i {
+                font-size: 0.15rem;
               }
             }
           }

@@ -16,13 +16,12 @@
           </ul>
           <div class="info2">
             <img src="http://cdn.funtopia.io/funtopia_assets_test/images/Akiha/avatar.webp" alt="" />
-            <p>0x4590.....890345</p>
+            <p @click="$utils.handleCopy(addr)">{{ addr | ellipsisWallet }}</p>
           </div>
           <div class="iconbtn" v-if="!isShowDrawer" @click="openDrawer"><i class="iconfont pccategory"></i></div>
         </div>
         <div class="nftbox">
           <div class="leftbox">
-            <div class="title"><i class="iconfont pccategory"></i>MY NFT</div>
             <div class="list">
               <el-menu class="el-menu-dashboard" :default-active="defaultActive" :default-openeds="defaultOpeneds" active-text-color="#00B5FF" router>
                 <el-submenu v-for="(item, index) in menuList" :key="index" :index="item.index">
@@ -30,7 +29,13 @@
                     <i class="iconfont" :class="item.icon"></i>
                     <span>{{ item.label }}</span>
                   </template>
-                  <el-menu-item v-for="(ite, ind) in item.children" :key="ind" :index="ite.index">{{ ite.label }}</el-menu-item>
+                  <el-submenu v-for="(item2, index2) in item.children" :key="index2" :index="item2.index">
+                    <template slot="title">
+                      <i class="iconfont" :class="item2.icon"></i>
+                      <span>{{ item2.label }}</span>
+                    </template>
+                    <el-menu-item v-for="(item3, index3) in item2.children" :key="index3" :index="item3.index">{{ item3.label }}</el-menu-item>
+                  </el-submenu>
                 </el-submenu>
               </el-menu>
             </div>
@@ -82,27 +87,36 @@
 </template>
 
 <script>
+import { token } from "funtopia-sdk";
 import { mapGetters } from "vuex";
 export default {
   name: "DASHBOARD",
   data() {
     return {
       defaultActive: "",
-      defaultOpeneds: ["asstet", "history", "favorites"],
+      defaultOpeneds: ["mynft", "asstet", "history", "favorites"],
       isShowDrawer: false,
+      addr: "",
       menuList: [
         {
-          index: "asstet",
-          icon: "pcshequn",
-          label: "Asstet",
+          index: "mynft",
+          icon: "pccategory",
+          label: "MY NFT",
           children: [
-            { index: "nft-asstet", label: "NFT Asstet" },
-            { index: "mystey-boxes", label: "Mystey Boxes" },
-            { index: "crypto-asstet", label: "Crypto Asstet" },
+            {
+              index: "asstet",
+              icon: "pcshequn",
+              label: "Asstet",
+              children: [
+                { index: "nft-asstet", label: "NFT Asstet" },
+                { index: "mystey-boxes", label: "Mystey Boxes" },
+                { index: "crypto-asstet", label: "Crypto Asstet" },
+              ],
+            },
+            { index: "history", icon: "pchistory", label: "History", children: [{ index: "orders", label: "Orders" }] },
+            // { index: "favorites", icon: "pcfavorites", label: "Favorites", children: [{ index: "my-favorites", label: "My Favorites" }] },
           ],
         },
-        { index: "history", icon: "pchistory", label: "History", children: [{ index: "orders", label: "Orders" }] },
-        // { index: "favorites", icon: "pcfavorites", label: "Favorites", children: [{ index: "my-favorites", label: "My Favorites" }] },
       ],
       tagList: [{ label: "video favor" }, { label: "singer" }, { label: "cool" }, { label: "artist" }, { label: "love" }],
     };
@@ -110,13 +124,13 @@ export default {
   computed: { ...mapGetters(["getWalletAccount"]) },
   watch: {
     $route(to) {
-      this.getDefaultActive(to.path);
+      this.initPage(to.path);
     },
     getWalletAccount: {
       handler(newVal) {
-        this.getDefaultActive(this.$route.path);
+        this.initPage(this.$route.path);
         if (newVal) {
-          console.log("获取钱包", newVal);
+          // console.log("获取钱包", newVal);
         }
       },
       immediate: true, // 页面初始化后立即执行
@@ -124,9 +138,10 @@ export default {
   },
 
   methods: {
-    getDefaultActive(path) {
+    initPage(path) {
       const str = path.replace("/dashboard/", "");
       this.defaultActive = str == "mystey-boxes-details" ? "mystey-boxes" : str;
+      this.addr = token().FUN;
     },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
@@ -152,24 +167,25 @@ export default {
   background-size: 100% 100%;
 }
 .box {
+  width: 11.5rem;
+  margin: 0 auto;
   .box_title {
     margin: 0.5rem 0;
   }
   .box_content {
-    width: fit-content;
-    margin: 0 auto;
-    // padding: 0.5rem 0;
+    width: 100%;
   }
 }
 .info {
   position: relative;
-  width: 11.5rem;
+  width: 100%;
   height: auto;
   background: rgba(129, 129, 151, 0.19);
   border-radius: 0.08rem;
   border: 0.01rem solid #436e77;
   backdrop-filter: blur(7px);
   padding: 0.1rem 0.2rem;
+  margin-top: 0.8rem;
   ul {
     width: 100%;
     li {
@@ -189,6 +205,7 @@ export default {
         width: 100%;
         display: flex;
         justify-content: flex-end;
+        flex-wrap: wrap;
         div {
           width: fit-content;
           height: 0.3rem;
@@ -208,15 +225,19 @@ export default {
     }
   }
   .info2 {
+    width: fit-content;
     text-align: center;
     position: absolute;
-    top: -35%;
-    left: 45%;
+    top: -1rem;
+    left: 0;
+    right: 0;
+    margin: auto;
     img {
       width: 2rem;
       height: 2rem;
     }
     p {
+      cursor: pointer;
       font-size: 0.15rem;
       font-weight: bold;
       line-height: 0.5rem;
@@ -241,25 +262,13 @@ export default {
   }
 }
 .nftbox {
-  width: 11.5rem;
+  width: 100%;
   min-height: 5rem;
   margin: 0.2rem 0;
   display: flex;
   justify-content: space-between;
   .leftbox {
     width: 2.5rem;
-    .title {
-      width: 100%;
-      height: 0.6rem;
-      line-height: 0.6rem;
-      font-size: 0.3rem;
-      font-weight: bold;
-      margin-bottom: 0.2rem;
-      i {
-        font-size: 0.3rem;
-        margin-right: 0.1rem;
-      }
-    }
   }
   .rightbox {
     width: calc(100% - 2.5rem);
@@ -340,6 +349,124 @@ export default {
         &:hover,
         &.active {
           background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 750px) {
+  .page {
+    width: 100%;
+    padding: 0.5rem 0;
+  }
+  .box {
+    width: 90%;
+    .box_title {
+      margin: 0.2rem 0;
+    }
+  }
+  .info {
+    padding: 0.5rem 0.1rem 0.1rem 0.1rem;
+    margin-top: 0.5rem;
+    ul {
+      li {
+        width: 100%;
+        margin: 0.1rem 0;
+        &:nth-child(1) {
+          font-size: 0.25rem;
+          line-height: 0.32rem;
+        }
+        &:nth-child(2) {
+          font-size: 0.15rem;
+          line-height: 0.3rem;
+        }
+        &:nth-child(3) {
+          justify-content: flex-start;
+          div {
+            height: 0.24rem;
+            line-height: 0.24rem;
+            font-size: 0.12rem;
+            font-weight: 600;
+            padding: 0 0.05rem;
+            margin-right: 0.05rem;
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+      }
+    }
+    .info2 {
+      top: -0.4rem;
+      img {
+        width: 0.8rem;
+        height: 0.8rem;
+      }
+      p {
+        font-size: 0.12rem;
+        line-height: 0.3rem;
+      }
+    }
+    .iconbtn {
+      width: 0.3rem;
+      height: 0.3rem;
+      line-height: 0.3rem;
+      right: 0;
+      top: -0.5rem;
+      i {
+        font-size: 0.25rem;
+      }
+    }
+  }
+  .nftbox {
+    width: 100%;
+    margin: 0.1rem 0;
+    flex-wrap: wrap;
+    .leftbox {
+      width: 100%;
+    }
+    .rightbox {
+      width: 100%;
+      padding-left: 0;
+      margin-top: 0.1rem;
+    }
+  }
+  .drawer_box {
+    padding: 0.8rem 0.2rem;
+    .title {
+      i {
+        font-size: 0.2rem;
+      }
+    }
+    .box1 {
+      img {
+        width: 1rem;
+        height: 1rem;
+      }
+      > div {
+        .textbox,
+        .inputbox {
+          height: 0.3rem;
+          line-height: 0.3rem;
+          margin: 0.05rem auto;
+          i {
+            width: 0.3rem;
+            font-size: 0.15rem;
+          }
+        }
+      }
+    }
+    .box2 {
+      > div {
+        margin: 0.1rem 0;
+      }
+      ul {
+        li {
+          height: 0.24rem;
+          line-height: 0.24rem;
+          border-radius: 0.04rem;
+          padding: 0 0.1rem;
+          margin: 0 0.1rem 0.1rem 0;
         }
       }
     }

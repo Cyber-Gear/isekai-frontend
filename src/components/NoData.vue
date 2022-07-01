@@ -9,7 +9,6 @@
 </template>
 
 <script>
-
 export default {
   name: "NoData",
   data() {
@@ -40,6 +39,24 @@ export default {
         span {
           color: #00b7ff;
           cursor: pointer;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 750px) {
+  .nodata {
+    i {
+      font-size: 1rem;
+    }
+    div {
+      p {
+        margin-top: 0.05rem;
+        &:nth-child(1) {
+          font-size: 0.15rem;
+        }
+        &:nth-child(2) {
+          font-size: 0.12rem;
         }
       }
     }

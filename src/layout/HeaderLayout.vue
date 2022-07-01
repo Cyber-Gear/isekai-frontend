@@ -112,10 +112,9 @@ export default {
   transition: all 0.5s;
   border-bottom: 1px solid #29a7e1;
   .nav_inset {
-    width: 100%;
+    width: 11.5rem;
     height: 100%;
     margin: 0 auto;
-    padding: 0 5vw;
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -16,7 +16,7 @@
           </div>
         </div>
         <div class="rightbox">
-          <div>{{$t(card.title)}} - {{$t(card.name)}}</div>
+          <div>{{ $t(card.title) }} - {{ $t(card.name) }}</div>
           <div>
             <span>{{ $t("artist.text2") }} </span>
             <span> {{ name }}</span>
@@ -81,6 +81,9 @@
         </div>
       </div>
     </div>
+    <el-dialog center top="0" :title="$t(card.name)" :visible.sync="isShowPopup" :modal-append-to-body="false" :destroy-on-close="true">
+      <PaintingVideo :videoUrl="card.video"></PaintingVideo>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -88,11 +91,12 @@ import PaintingVideo from "@/components/PaintingVideo.vue";
 import { shikastudio } from "@/mock/nftworks";
 export default {
   name: "MarketDetails",
-    components: { PaintingVideo },
+  components: { PaintingVideo },
   data() {
     return {
       card: null,
       name: null,
+      isShowPopup: false,
     };
   },
   created() {
@@ -100,16 +104,11 @@ export default {
       const id = this.$route.query.id;
       this.card = shikastudio.works.find((item) => item.id == id);
       this.name = shikastudio.name;
-      // console.log(shikastudio.name);
     }
   },
   methods: {
     openVideo() {
-      this.$store.commit("setPlayVideoPopup", {
-        isShow: true,
-        name: this.$t(this.card.name),
-        url: this.card.video,
-      });
+      this.isShowPopup = true;
     },
     goBack() {
       history.go(-1);

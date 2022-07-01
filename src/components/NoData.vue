@@ -1,6 +1,6 @@
 <template>
   <div class="nodata">
-    <i class="iconfont icon-chakan"></i>
+    <i class="iconfont pcchakan"></i>
     <div>
       <p>No items</p>
       <p>Browse items available for purchase on the <span>Market</span></p>

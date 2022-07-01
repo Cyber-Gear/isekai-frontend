@@ -267,20 +267,20 @@ export default {
         .buyBoxes(this.inputAmount, this.boxType)
         .then((res) => {
           console.log("购买成功", res);
-          if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
-          this.$message({ message: this.$t("购买成功") });
-          this.buyloading = false;
-          this.inputAmount = null;
+          // if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
+          // this.$message({ message: this.$t("购买成功") });
+          // this.buyloading = false;
+          // this.inputAmount = null;
           // this.$router.push({ path: "/dashboard/mystey-boxes", query: { id: id } });
-          // setTimeout(() => {
-          //   if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
-          //   this.$message({ message: this.$t("购买成功") });
-          //   this.buyloading = false;
-          //   this.inputAmount = null;
-          //   this.getAmount();
-          //   this.getUserHourlyBoxesLeftSupply();
-          //   this.getBalanceOf();
-          // }, 2000);
+          setTimeout(() => {
+            if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
+            this.$message({ message: this.$t("购买成功") });
+            this.buyloading = false;
+            this.inputAmount = null;
+            this.getAmount();
+            this.getUserHourlyBoxesLeftSupply();
+            this.getBalanceOf();
+          }, 2000);
         })
         .catch((err) => {
           this.buyloading = false;

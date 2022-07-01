@@ -42,13 +42,13 @@
             </div>
             <div>
               <div>
-                <div><img :src="`${$urlImages}logo_ETH.webp`" alt="" />10.0k</div>
+                <div><img :src="`${$urlImages}coin.webp`" alt="" />10.0k</div>
                 <div>{{ $t("artist.items[2]") }}</div>
               </div>
             </div>
             <div>
               <div>
-                <div><img :src="`${$urlImages}logo_ETH.webp`" alt="" />10.0k</div>
+                <div><img :src="`${$urlImages}coin.webp`" alt="" />10.0k</div>
                 <div>{{ $t("artist.items[3]") }}</div>
               </div>
             </div>

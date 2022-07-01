@@ -24,7 +24,7 @@
           <transition name="showDisconnect" appear>
             <div v-show="showDisconnect" class="disconnect" @click="clickDisconnect">
               <span>{{ $t("nav.text7") }}</span>
-              <i class="iconfont icon-block"></i>
+              <i class="iconfont pcblock"></i>
             </div>
           </transition>
         </div>

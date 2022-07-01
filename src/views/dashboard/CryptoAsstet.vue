@@ -3,32 +3,44 @@
     <div class="title">Crypto Asstet</div>
     <div class="topbox">
       <div>
-        Balance余额
-        <i class="iconfont pcchakan1" v-show="!isShow" @click="isShow = true"></i>
-        <i class="iconfont pcNotvisible" v-show="isShow" @click="isShow = false"></i>
+        Balance
+        <i class="iconfont pcNotvisible" v-show="!isShow" @click="isShow = true"></i>
+        <i class="iconfont pcchakan1" v-show="isShow" @click="isShow = false"></i>
       </div>
-      <div>{{ "Balance余额" }}</div>
+      <div>
+        <span v-show="isShow">{{ balanceAmount | numberToFixed | numberTally }}</span>
+        <span v-show="!isShow">******</span>
+      </div>
     </div>
     <ul class="card_list">
       <li v-for="(item, index) in cardList" :key="index">
         <ul>
           <li>
-            <div><img :src="`${$urlImages}coin_FUN.webp`" alt="" /> FUN</div>
-            <div>{{ item.num1 }}</div>
+            <div><img :src="`${$urlImages}${item.logo}.webp`" alt="" /> {{ item.label }}</div>
+            <div>
+              <span v-show="isShow">{{ item.totalCoin | numberToFixed | numberTally }}</span>
+              <span v-show="!isShow">******</span>
+            </div>
           </li>
           <li>
             <div></div>
-            <div>=${{ item.num2 }}</div>
+            <div>
+              <span v-show="isShow">=${{ item.totalPirce }}</span>
+              <span v-show="!isShow">******</span>
+            </div>
           </li>
           <li>
             <div>Available</div>
             <div>Contract</div>
           </li>
           <li>
-            <div>{{ item.num3 }}</div>
             <div>
-              <span>{{ item.num4 }}</span>
-              <span><i class="iconfont pcjiahao"></i></span>
+              <span v-show="isShow">{{ item.availableBalance | numberToFixed | numberTally }}</span>
+              <span v-show="!isShow">******</span>
+            </div>
+            <div>
+              <span @click="$utils.handleCopy(item.coinAddr)">{{ item.coinAddr | ellipsisWallet }}</span>
+              <span v-show="item.isShowAdd" @click="addAddress(item)"><i class="iconfont pcjiahao"></i></span>
             </div>
           </li>
         </ul>
@@ -38,7 +50,7 @@
 </template>
 
 <script>
-import { util, erc20, token } from "funtopia-sdk";
+import { util, erc20, token, wallet } from "funtopia-sdk";
 import { mapGetters } from "vuex";
 export default {
   name: "CryptoAsstet",
@@ -56,43 +68,68 @@ export default {
   data() {
     return {
       isShow: false,
-      balanceText: "experienceexp",
-      cardList: [
-        { num1: "币个数", num2: "总价值", num3: "可用余额", num4: "币的合约地址" },
-        { num1: 0.000000001777, num2: 0.0000395, num3: 21212, num4: "121212343413312" },
-        { num1: 0.000000001777, num2: 0.0000395, num3: 21212, num4: "121212343413312" },
-        { num1: 0.000000001777, num2: 0.0000395, num3: 21212, num4: "121212343413312" },
-      ],
+      balanceAmount: null,
+      cardList: [],
     };
   },
-
   methods: {
-    /**钱包余额 */
+    // fun,avax,usdc,usdt
     getBalanceOf() {
       erc20(token().USDT)
         .balanceOf(this.getWalletAccount)
         .then((res) => {
-          console.log("钱包余额USDT", Number(util.formatEther(res._hex)));
+          this.balanceAmount = Number(util.formatEther(res._hex));
+          const obj = {
+            label: "USDT",
+            logo: "coin-usdt",
+            totalCoin: Number(util.formatEther(res._hex)), //币个数
+            totalPirce: null, //总价值
+            availableBalance: Number(util.formatEther(res._hex)), //可用余额
+            coinAddr: token().USDT,
+            isShowAdd: false,
+          };
+          this.cardList.push(obj);
         })
         .catch((err) => {
-          console.error("erc20(token().USDC).balanceOf", err);
+          console.error("erc20(token().USDT).balanceOf", err);
         });
       erc20(token().FUN)
         .balanceOf(this.getWalletAccount)
         .then((res) => {
-          console.log("钱包余额FUN", Number(util.formatEther(res._hex)));
+          const obj = {
+            label: "FUN",
+            logo: "coin-fun",
+            totalCoin: Number(util.formatEther(res._hex)),
+            totalPirce: null,
+            availableBalance: Number(util.formatEther(res._hex)),
+            coinAddr: token().FUN,
+            isShowAdd: true,
+          };
+          this.cardList.push(obj);
         })
         .catch((err) => {
-          console.error("erc20(token().USDC).balanceOf", err);
+          console.error("erc20(token().FUN).balanceOf", err);
         });
       erc20(token().WAVAX)
         .balanceOf(this.getWalletAccount)
         .then((res) => {
-          console.log("钱包余额WAVAX", Number(util.formatEther(res._hex)));
+          const obj = {
+            label: "WAVAX",
+            logo: "coin-avax",
+            totalCoin: Number(util.formatEther(res._hex)),
+            totalPirce: null,
+            availableBalance: Number(util.formatEther(res._hex)),
+            coinAddr: token().WAVAX,
+            isShowAdd: false,
+          };
+          this.cardList.push(obj);
         })
         .catch((err) => {
-          console.error("erc20(token().USDC).balanceOf", err);
+          console.error("erc20(token().WAVAX).balanceOf", err);
         });
+    },
+    addAddress(item) {
+      wallet.addFUN(`${this.$urlImages}${item.logo}.webp`);
     },
   },
 };

@@ -10,8 +10,8 @@
   >
     <div class="popupbox">
       <div>
-        <i class="iconfont icon-qianbao2-mianxing"></i>
-        <i class="iconfont icon-block"></i>
+        <i class="iconfont pcqianbao2-mianxing"></i>
+        <i class="iconfont pcblock"></i>
       </div>
       <p>{{ $t("walletPopup.text2") }}</p>
     </div>

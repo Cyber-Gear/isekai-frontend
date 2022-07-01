@@ -10,8 +10,6 @@ export default new Vuex.Store({
     showApprovePopup: false,
     showWalletListPopup: false,
     showWalletConnectPopup: false,
-    showPlayVideoPopup: { isShow: false, name: "", url: "" },
-
     walletAccount: "",
   },
   getters: {
@@ -27,10 +25,6 @@ export default new Vuex.Store({
     getWalletConnectPopup(state) {
       return state.showWalletConnectPopup;
     },
-    getPlayVideoPopup(state) {
-      return state.showPlayVideoPopup;
-    },
-
     getWalletAccount(state) {
       return state.walletAccount;
     },
@@ -45,10 +39,6 @@ export default new Vuex.Store({
     setWalletConnectPopup(state, data) {
       state.showWalletConnectPopup = data;
     },
-    setPlayVideoPopup(state, data) {
-      state.showPlayVideoPopup = data;
-    },
-
     setWalletAccount(state, data) {
       state.walletAccount = data;
     },

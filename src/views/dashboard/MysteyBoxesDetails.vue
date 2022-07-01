@@ -35,9 +35,9 @@
       top="0"
       :title="'打开盲盒详情'"
       :visible.sync="isShowPopup"
-      @close="closePopup"
       :modal-append-to-body="false"
       :destroy-on-close="true"
+      @close="closePopup"
     >
       <BlindResultsPopup v-if="isShowPopup" :openedCnIds="openedCnIds"></BlindResultsPopup>
     </el-dialog>

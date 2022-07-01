@@ -153,10 +153,10 @@ export default {
   }
   .card_list {
     width: 90%;
-    height: 5.5rem;
+    height: 5rem;
     li {
       width: 1.6rem;
-      height: 2.6rem;
+      height: 2.4rem;
       margin: 0 0.1rem 0.1rem 0;
       border-radius: 0.05rem;
       &:nth-child(2n) {

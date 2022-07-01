@@ -186,8 +186,9 @@ export default {
         });
       });
     },
-    toDetail(index) {
-      console.log(index);
+    toDetail(id) {
+      console.log(id);
+      this.$router.push({ path: "/market-details", query: {id: id+1}});
     },
   },
 };

@@ -65,6 +65,16 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/market/IndexView.vue"),
   },
   {
+    path: "/market-details",
+    name: "MARKETDetails",
+    component: () => import("../views/market/Details.vue"),
+  },
+  {
+    path: "/market-order",
+    name: "MARKETOrder",
+    component: () => import("../views/market/Order.vue"),
+  },
+  {
     path: "/dashboard",
     // name: "DASHBOARD",
     component: () => import("../views/dashboard/IndexView.vue"),

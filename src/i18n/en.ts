@@ -198,7 +198,7 @@ export default {
           attribute: "Heat",
           worddes: "A high level Executor of the P.T.H. Group and one of the ten Governors who control the Group.",
           nftdes:
-            "A smiling tyrant.She is an extreme control freak who speaks calmly and treats people politely.She is a high level Executor of the P.T.H. Group and one of the ten Governors who control the Group.She's never exposed her true strength. Her behaviors may seem casual and unpredictable, but she actually plans her every move very carefully.",
+            "A smiling tyrant.She is an extreme control freak who speaks calmly and treats people politely.\nShe is a high level Executor of the P.T.H. Group and one of the ten Governors who control the Group.\nShe's never exposed her true strength. Her behaviors may seem casual and unpredictable, but she actually plans her every move very carefully.",
         },
         {
           name: "Mia",

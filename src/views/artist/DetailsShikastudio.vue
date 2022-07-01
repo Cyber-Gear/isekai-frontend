@@ -59,7 +59,9 @@
         </div>
       </div>
     </div>
-    <PaintingVideo></PaintingVideo>
+    <el-dialog center top="0" :title="$t(card.name)" :visible.sync="isShowPopup" :modal-append-to-body="false" :destroy-on-close="true">
+      <PaintingVideo :videoUrl="card.video"></PaintingVideo>
+    </el-dialog>
   </div>
 </template>
 
@@ -72,6 +74,7 @@ export default {
   data() {
     return {
       card: null,
+      isShowPopup: false,
     };
   },
   created() {
@@ -82,7 +85,7 @@ export default {
   },
   methods: {
     openVideo() {
-      this.$store.commit("setPlayVideoPopup", { isShow: true, name: this.$t(this.card.name), url: this.card.video });
+      this.isShowPopup = true;
     },
     goBack() {
       history.go(-1);

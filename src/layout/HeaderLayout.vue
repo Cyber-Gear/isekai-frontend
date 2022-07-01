@@ -24,20 +24,14 @@
           <transition name="showDisconnect" appear>
             <div v-show="showDisconnect" class="disconnect" @click="clickDisconnect">
               <span>{{ $t("nav.text7") }}</span>
-              <i class="iconfont icon-block"></i>
+              <i class="iconfont pcblock"></i>
             </div>
           </transition>
         </div>
-        <div class="lang_box" @mouseover="showLangSelect = true" @mouseleave="showLangSelect = false">
-          <span>{{ $i18n.locale.toUpperCase() }}</span>
-          <img class="angle" :src="`${$urlImages}angle.webp`" alt="" />
-          <transition name="showLangSelect" appear>
-            <ul v-show="showLangSelect">
-              <li v-for="(item, index) in langArr" :key="index" @click="selectLang(item)">
-                <span> {{ item.toUpperCase() }}</span>
-              </li>
-            </ul>
-          </transition>
+        <div class="lang_box">
+          <el-select v-model="$i18n.locale" @change="changeLang">
+            <el-option v-for="item in langArr" :key="item" :label="item.toUpperCase()" :value="item"></el-option>
+          </el-select>
         </div>
       </div>
     </div>
@@ -51,14 +45,13 @@ export default {
     return {
       navActive: 0,
       navArr: [
-        { label: "nav.text1", icon: "icon-home", link: "/home", isOpen: true },
-        { label: "nav.text2", icon: "icon-bussiness-man", link: "/artist", isOpen: true },
-        { label: "nav.text3", icon: "icon-qukuailian", link: "/dao", isOpen: true },
-        { label: "nav.text4", icon: "icon-boxhezi", link: "/launchpad", isOpen: true },
-        { label: "nav.text5", icon: "icon-tradingvolume", link: "/market", isOpen: true },
-        { label: "nav.text8", icon: "icon-tradingvolume", link: "/dashboard", isOpen: true },
+        { label: "nav.text1", icon: "pchome", link: "/home", isOpen: true },
+        { label: "nav.text2", icon: "pcbussiness-man", link: "/artist", isOpen: true },
+        { label: "nav.text3", icon: "pcwenjuantoupiao", link: "/dao", isOpen: true },
+        { label: "nav.text4", icon: "pchuojianjiasu", link: "/launchpad", isOpen: true },
+        { label: "nav.text5", icon: "pcyingyongshichang", link: "/market", isOpen: true },
+        { label: "nav.text8", icon: "pcjinrongquan", link: "/dashboard", isOpen: true },
       ],
-      showLangSelect: false,
       showDisconnect: false,
       langArr: ["en", "zh"],
     };
@@ -86,12 +79,10 @@ export default {
       if (item.isOpen) this.$router.push(item.link);
       else this.$message({ message: this.$t("tips.text1") });
     },
-    selectLang(item) {
-      if (this.$i18n.locale == item) return (this.showLangSelect = false);
-      // this.showLangSelect = false;
-      // this.$i18n.locale = item;
+    changeLang(item) {
+      this.$i18n.locale = item;
       this.$utils.setCookie("LANG", item);
-      location.reload();
+      // location.reload();
     },
     openWalletPopup() {
       this.$store.commit("setWalletListPopup", true);
@@ -137,6 +128,7 @@ export default {
       align-items: center;
       .connect {
         cursor: pointer;
+        height: 0.35rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -161,48 +153,19 @@ export default {
         }
       }
       .lang_box {
-        cursor: pointer;
-        padding: 0.05rem 0.1rem;
-        background: url($urlImages + "btn_bg2.webp") no-repeat;
-        background-size: 100% 100%;
-        position: relative;
-        margin-left: 0.2rem;
-        display: flex;
-        align-items: center;
-        font-size: 0.15rem;
-        img {
-          width: 0.2rem;
-          height: auto;
-        }
-        ul {
-          width: 100%;
-          background: rgba(0, 0, 0, 0.5);
-          text-align: center;
-          position: absolute;
-          top: 100%;
-          left: 0;
-          z-index: 99;
-          transition: transform 0.3s;
-          transform-origin: top center;
-          li {
-            padding: 0.1rem 0;
-            &:hover {
-              background: #000;
-            }
-          }
+        margin-left: 0.1rem;
+        .el-select {
+          width: 0.7rem;
+          height: 0.35rem;
         }
       }
     }
   }
 
-  .showLangSelect-enter,
-  .showLangSelect-leave-to,
   .showDisconnect-enter,
   .showDisconnect-leave-to {
     transform: scaleY(0);
   }
-  .showLangSelect-enter-to,
-  .showLangSelect-leave,
   .showDisconnect-enter-to,
   .showDisconnect-leave {
     transform: scaleY(1);
@@ -270,6 +233,7 @@ export default {
       }
       .connect_lang {
         .connect {
+          height: 0.25rem;
           font-size: 0.12rem;
           font-weight: 400;
           padding: 0.05rem 0.1rem;
@@ -279,17 +243,10 @@ export default {
           }
         }
         .lang_box {
-          font-size: 0.12rem;
-          padding: 0.05rem 0.1rem;
-          margin-left: 0.1rem;
-          img {
-            width: 0.2rem;
-            height: auto;
-          }
-          ul {
-            li {
-              padding: 0.05rem 0;
-            }
+          margin-left: 0.05rem;
+          .el-select {
+            width: 0.5rem;
+            height: 0.25rem;
           }
         }
       }

@@ -55,7 +55,7 @@
         </div>
       </li>
     </ul>
-    <NoData v-if="cardList.length == 0"></NoData>
+    <NoData v-if="switchIndex == 1 && cardList.length == 0"></NoData>
   </div>
 </template>
 
@@ -198,19 +198,14 @@ export default {
 }
 .title {
   width: 100%;
-  height: 0.6rem;
-  line-height: 0.6rem;
+  height: 0.5rem;
+  line-height: 0.5rem;
   font-size: 0.3rem;
   font-weight: bold;
   background: rgba(129, 129, 151, 0.19);
   border-radius: 0.08rem;
   backdrop-filter: blur(7px);
   padding: 0 0.1rem;
-  margin-bottom: 0.2rem;
-  i {
-    font-size: 0.3rem;
-    margin-right: 0.1rem;
-  }
 }
 .switch_box {
   width: 100%;
@@ -245,16 +240,13 @@ export default {
 }
 .box_list {
   width: 100%;
-  height: 8rem;
-  padding-right: 0.05rem;
-  overflow-y: auto;
   li {
     float: left;
     width: 4.27rem;
     margin: 0 0.2rem 0.2rem 0;
     padding: 0.2rem 0.1rem;
     display: flex;
-    background: rgba(0, 0, 0, 0.38);
+    background: rgba(51, 52, 60, 0.57);
     backdrop-filter: blur(0.04rem);
     border-radius: 0.1rem;
     border: 1px solid #3f3e43;
@@ -263,13 +255,9 @@ export default {
     &:nth-child(2n) {
       margin-right: 0;
     }
-    &:hover,
-    &.active {
-      background: rgba(51, 52, 60, 0.57);
-    }
     .leftbox {
       width: 50%;
-      padding: 0.3rem 0;
+      padding: 0.2rem 0;
       text-align: center;
       background: rgba(0, 0, 0, 0.32);
       border-radius: 0.1rem;
@@ -291,11 +279,9 @@ export default {
             &:nth-child(1) {
               font-size: 0.2rem;
               font-weight: bold;
-              color: #ffffff;
             }
             &:nth-child(2) {
               font-size: 0.2rem;
-              color: #ffffff;
               margin-top: 0.2rem;
               span {
                 font-size: 0.3rem;
@@ -306,7 +292,6 @@ export default {
         }
         &:nth-child(2) {
           font-size: 0.12rem;
-          color: #ffffff;
           text-align: right;
           cursor: pointer;
           i {
@@ -408,6 +393,162 @@ export default {
         height: 0.4rem;
         font-size: 0.15rem;
         font-weight: 400;
+      }
+    }
+  }
+}
+@media screen and (max-width: 750px) {
+  .title {
+    width: 100%;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    border-radius: 0.04rem;
+    font-size: 0.12rem;
+    font-weight: 600;
+    padding: 0 0.2rem;
+  }
+  .switch_box {
+    width: 100%;
+    height: 0.4rem;
+    ul {
+      li {
+        height: 0.25rem;
+        line-height: 0.25rem;
+        padding: 0 0.05rem;
+        font-size: 0.12rem;
+        font-weight: 600;
+        border-radius: 0.04rem;
+      }
+    }
+  }
+  .box_list {
+    width: 100%;
+    li {
+      width: 100%;
+      margin: 0 0 0.2rem 0;
+      padding: 0.1rem 0.05rem;
+      border-radius: 0.04rem;
+      .leftbox {
+        width: 50%;
+        padding: 0.1rem 0;
+        border-radius: 0.04rem;
+        img {
+          width: 80%;
+          height: auto;
+        }
+      }
+      .rightbox {
+        div {
+          &:nth-child(1) {
+            p {
+              &:nth-child(1) {
+                font-size: 0.15rem;
+              }
+              &:nth-child(2) {
+                font-size: 0.15rem;
+                margin-top: 0.1rem;
+                span {
+                  font-size: 0.25rem;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .card_list {
+    width: 100%;
+    height: 8rem;
+    padding-right: 0.05rem;
+    overflow-y: auto;
+    li {
+      float: left;
+      width: 2.06rem;
+      margin: 0 0.15rem 0.15rem 0;
+      cursor: pointer;
+      &:nth-child(4n) {
+        margin-right: 0;
+      }
+      &:hover,
+      &.active {
+        .card,
+        .cancel_box {
+          background: rgba(51, 52, 60, 0.57);
+          box-shadow: 0.05rem 0.08rem 0.1rem 0rem rgba(0, 0, 0, 0.5);
+        }
+      }
+      .card {
+        width: 100%;
+        padding: 0.1rem;
+        background: rgba(0, 0, 0, 0.38);
+        border-radius: 0.1rem;
+        border: 0.01rem solid #3f3e43;
+        backdrop-filter: blur(4px);
+        transition: all 0.3s;
+        .top {
+          width: 100%;
+          padding: 0.3rem 0;
+          text-align: center;
+          background: radial-gradient(circle, #342c56 0%, #1c395a 33%, rgba(96, 78, 157, 0.72) 100%);
+          border-radius: 0.08rem;
+          img {
+            width: 70%;
+            height: auto;
+          }
+        }
+        .center {
+          padding: 0.05rem 0;
+          > div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          }
+          .row1 {
+            div {
+              font-size: 0.12rem;
+              font-weight: bold;
+              color: #ffffff;
+              &:nth-child(1) {
+                color: #00b1ff;
+                display: flex;
+                align-items: center;
+              }
+            }
+          }
+          .row2 {
+            div {
+              font-size: 0.12rem;
+              font-weight: bold;
+              color: #ffffff;
+              &:nth-child(2) {
+                color: #6c6a71;
+              }
+            }
+          }
+        }
+      }
+      .cancel_box {
+        width: 100%;
+        height: 0.4rem;
+        line-height: 0.4rem;
+        background: rgba(0, 0, 0, 0.38);
+        border-radius: 0.08rem;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.05rem;
+        padding-left: 0.1rem;
+        transition: all 0.3s;
+        span {
+          font-size: 0.15rem;
+          font-weight: 400;
+        }
+        .el-button {
+          width: 0.75rem;
+          height: 0.4rem;
+          font-size: 0.15rem;
+          font-weight: 400;
+        }
       }
     }
   }

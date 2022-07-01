@@ -15,7 +15,7 @@
           <template slot="icon">
             <div class="normal_icon">
               <div class="icon1">
-                <div><i class="iconfont icon-bussiness-man"></i></div>
+                <div><i class="iconfont pcshouquan"></i></div>
               </div>
             </div>
           </template>
@@ -36,7 +36,7 @@
             <div class="normal_icon">
               <div class="icon2" :class="{ active: $parent.popupActive == 2 }">
                 <div>
-                  <div><i class="iconfont icon-qianbao2-mianxing"></i></div>
+                  <div><i class="iconfont pcqianbao2-mianxing"></i></div>
                 </div>
               </div>
             </div>
@@ -54,18 +54,6 @@
           </template>
         </el-step>
       </el-steps>
-      <!-- <el-steps direction="vertical" :active="$parent.popupActive">
-        <el-step>
-          <template slot="description">
-            <el-button type="primary" :disabled="$parent.popupActive == 2" :loading="$parent.approvedloading" @click="toApprove">授权</el-button>
-          </template>
-        </el-step>
-        <el-step>
-          <template slot="description">
-            <el-button type="primary" :disabled="$parent.popupActive == 1" :loading="$parent.buyloading" @click="toBuy">购买</el-button>
-          </template>
-        </el-step>
-      </el-steps> -->
     </div>
   </el-dialog>
 </template>

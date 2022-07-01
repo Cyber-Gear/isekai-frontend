@@ -119,20 +119,17 @@ export default {
 }
 .title {
   width: 100%;
-  height: 0.6rem;
-  line-height: 0.6rem;
+  height: 0.5rem;
+  line-height: 0.5rem;
+  font-size: 0.3rem;
+  font-weight: bold;
   background: rgba(129, 129, 151, 0.19);
   border-radius: 0.08rem;
   backdrop-filter: blur(7px);
   padding: 0 0.1rem;
-  margin-bottom: 0.2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  .left {
-    font-size: 0.3rem;
-    font-weight: bold;
-  }
   .right {
     display: flex;
     align-items: center;
@@ -142,16 +139,15 @@ export default {
       line-height: 0.35rem;
       margin-right: 0.1rem;
     }
-    .el-date-editor {
-    }
   }
 }
 .switch_list1,
 .switch_list2 {
   width: 100%;
   height: 0.5rem;
+  display: flex;
+  align-items: center;
   li {
-    float: left;
     cursor: pointer;
     width: fit-content;
     height: 0.3rem;
@@ -225,6 +221,63 @@ export default {
             justify-content: flex-end;
             font-weight: 600;
             color: #6c6a71;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 750px) {
+  .title {
+    width: 100%;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    border-radius: 0.04rem;
+    font-size: 0.12rem;
+    font-weight: 600;
+    padding: 0 0.2rem;
+    .right {
+      .el-select {
+        width: 0.8rem;
+        height: 0.3rem;
+        line-height: 0.3rem;
+        margin-right: 0.05rem;
+      }
+    }
+  }
+  .switch_list1,
+  .switch_list2 {
+    width: 100%;
+    height: 0.4rem;
+    li {
+      height: 0.25rem;
+      line-height: 0.25rem;
+      padding: 0 0.05rem;
+      font-size: 0.12rem;
+      font-weight: 600;
+      border-radius: 0.04rem;
+    }
+  }
+  .card_list {
+    width: 100%;
+    height: 5.5rem;
+    li {
+      width: 1.6rem;
+      margin: 0 0.1rem 0.1rem 0;
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+      .card {
+        .center {
+          div {
+            padding: 0 0.05rem;
+            &:nth-child(1) {
+              img {
+                width: 0.12rem;
+                height: auto;
+                margin-left: 0.05rem;
+              }
+            }
           }
         }
       }

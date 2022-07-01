@@ -158,19 +158,14 @@ export default {
 }
 .title {
   width: 100%;
-  height: 0.6rem;
-  line-height: 0.6rem;
+  height: 0.5rem;
+  line-height: 0.5rem;
   font-size: 0.3rem;
   font-weight: bold;
   background: rgba(129, 129, 151, 0.19);
   border-radius: 0.08rem;
   backdrop-filter: blur(7px);
   padding: 0 0.1rem;
-  margin-bottom: 0.2rem;
-  i {
-    font-size: 0.3rem;
-    margin-right: 0.1rem;
-  }
 }
 .switch_box {
   width: 100%;
@@ -226,7 +221,7 @@ export default {
     }
     .card {
       background: rgba(0, 0, 0, 0.38);
-      border-radius: 0.1rem;
+      border-radius: 0.08rem;
       border: 0.01rem solid #3f3e43;
       backdrop-filter: blur(4px);
       transition: all 0.3s;
@@ -284,6 +279,72 @@ export default {
         height: 0.4rem;
         font-size: 0.15rem;
         font-weight: 400;
+      }
+    }
+  }
+}
+@media screen and (max-width: 750px) {
+  .title {
+    width: 100%;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    border-radius: 0.04rem;
+    font-size: 0.12rem;
+    font-weight: 600;
+    padding: 0 0.2rem;
+  }
+  .switch_box {
+    width: 100%;
+    height: 0.4rem;
+    ul {
+      li {
+        height: 0.25rem;
+        line-height: 0.25rem;
+        padding: 0 0.05rem;
+        font-size: 0.12rem;
+        font-weight: 600;
+        border-radius: 0.04rem;
+      }
+    }
+  }
+  .card_list {
+    width: 100%;
+    height: 5.5rem;
+    li {
+      width: 1.6rem;
+      margin: 0 0.1rem 0.1rem 0;
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+      .card {
+        .center {
+          div {
+            padding: 0 0.05rem;
+            &:nth-child(1) {
+              img {
+                width: 0.12rem;
+                height: auto;
+                margin-left: 0.05rem;
+              }
+            }
+          }
+        }
+      }
+      .cancel_box {
+        width: 100%;
+        height: 0.3rem;
+        line-height: 0.3rem;
+        padding-left: 0.05rem;
+        span {
+          font-size: 0.12rem;
+          font-weight: 400;
+        }
+        .el-button {
+          width: 0.5rem;
+          height: 0.3rem;
+          font-size: 0.12rem;
+          font-weight: 400;
+        }
       }
     }
   }

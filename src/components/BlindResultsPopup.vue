@@ -4,17 +4,22 @@
       <li v-for="(item, index) in newCardList" :key="index">
         <img :src="item.card" alt="" />
         <span>{{ $t(item.name) }}</span>
-        <div class="btn" :class="item.rarity">{{ $t("artist.text11") }}</div>
+        <div class="btn" :class="item.rarity" @click="openVideo(item)">{{ $t("artist.text11") }}</div>
       </li>
     </ul>
+    <el-dialog center top="0" :title="$t(videoInfo.name)" :visible.sync="isShowPopup" :destroy-on-close="true" append-to-body>
+      <PaintingVideo :videoUrl="videoInfo.videoUrl"></PaintingVideo>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import { cn } from "funtopia-sdk";
 import { shikastudio } from "@/mock/nftworks";
+import PaintingVideo from "@/components/PaintingVideo.vue";
 export default {
   name: "BlindResultsPopup",
+  components: { PaintingVideo },
   props: {
     openedCnIds: {
       type: Array,
@@ -25,13 +30,14 @@ export default {
     return {
       cardList: shikastudio.works,
       newCardList: [],
+      isShowPopup: false,
+      videoInfo: { name: "", videoUrl: "" },
     };
   },
   created() {
     this.openedCnIds.forEach((element) => {
       this.getHeroId(element);
     });
-    console.log(this.newCardList);
   },
   methods: {
     /**
@@ -53,6 +59,11 @@ export default {
           console.error("data", err);
         });
     },
+    openVideo(item) {
+      this.isShowPopup = true;
+      this.videoInfo.name = item.name;
+      this.videoInfo.videoUrl = item.video;
+    },
   },
 };
 </script>
@@ -60,16 +71,18 @@ export default {
 <style lang="scss" scoped>
 .popupbox {
   .card_list {
-    max-width: 10rem;
-    max-height: 6.5rem;
+    min-width: 5rem;
+    min-height: 5rem;
+    max-width: 11.5rem;
+    max-height: 8rem;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     overflow-y: auto;
     li {
-      width: 2rem;
-      height: 3rem;
+      width: 2.4rem;
+      height: auto;
       position: relative;
       margin: 0.1rem;
       font-size: 0.15rem;

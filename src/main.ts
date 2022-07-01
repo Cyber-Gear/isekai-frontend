@@ -8,8 +8,8 @@ import "./styles/global.scss";
 import "./assets/iconfonts/iconfont.css";
 
 const isProd = process.env.NODE_ENV == "production";
-const cdn = isProd ? "//cdn.funtopia.io/funtopia_assets_main/" : "//cdn.funtopia.io/funtopia_assets_test/";
-Vue.prototype.$urlNfts = "//cdn.funtopia.io/nfts/";
+const cdn = isProd ? "https://cdn.funtopia.io/funtopia_assets_main/" : "https://cdn.funtopia.io/funtopia_assets_test/";
+Vue.prototype.$urlNfts = "https://cdn.funtopia.io/nfts/";
 Vue.prototype.$urlImages = cdn + "images/";
 Vue.prototype.$urlVideos = cdn + "videos/";
 

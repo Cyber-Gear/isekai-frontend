@@ -72,7 +72,7 @@ export default {
       switchIndex: 0,
       switchList: [
         { label: "Collection", total: 0 },
-        { label: "On sale", total: 0 },
+        // { label: "On sale", total: 0 },
       ],
       idArr: [],
       cardList: [],
@@ -99,8 +99,8 @@ export default {
       if (index == 0) {
         this.isShowCheck = false;
         this.switchList[0].total = 0;
-        if (sessionStorage.getItem("MysteyBoxes")) {
-          this.boxList = JSON.parse(sessionStorage.getItem("MysteyBoxes"));
+        if (sessionStorage.getItem("MysteyBoxesList")) {
+          this.boxList = JSON.parse(sessionStorage.getItem("MysteyBoxesList"));
           this.boxList.forEach((element) => {
             this.switchList[0].total += element.list.length;
           });
@@ -162,7 +162,7 @@ export default {
             }
             this.boxList.push(obj);
           });
-          sessionStorage.setItem("MysteyBoxes", JSON.stringify(this.boxList));
+          sessionStorage.setItem("MysteyBoxesList", JSON.stringify(this.boxList));
         }
       }, 200);
     },

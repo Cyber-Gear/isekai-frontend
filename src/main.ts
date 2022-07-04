@@ -10,6 +10,7 @@ import "./assets/iconfonts/iconfont.css";
 const isProd = process.env.NODE_ENV == "production";
 const cdn = isProd ? "https://cdn.funtopia.io/funtopia_assets_main/" : "https://cdn.funtopia.io/funtopia_assets_test/";
 Vue.prototype.$urlNfts = "https://cdn.funtopia.io/nfts/";
+Vue.prototype.$urlBlindBox = "https://cdn.funtopia.io/blind_box_animation/";
 Vue.prototype.$urlImages = cdn + "images/";
 Vue.prototype.$urlVideos = cdn + "videos/";
 
@@ -19,6 +20,9 @@ import filters from "./utils/filters";
 Object.keys(filters).forEach((key) => {
   Vue.filter(key, filters[key]);
 });
+
+import api from "./api/api";
+Vue.prototype.$api = api;
 
 import VueAwesomeSwiper from "vue-awesome-swiper";
 import "swiper/dist/css/swiper.css";
@@ -44,6 +48,7 @@ import {
   MenuItem,
   MenuItemGroup,
   DatePicker,
+  // Loading,
 } from "element-ui";
 Vue.use(Icon);
 Vue.use(Button);
@@ -63,7 +68,6 @@ Vue.use(Submenu);
 Vue.use(MenuItem);
 Vue.use(MenuItemGroup);
 Vue.use(DatePicker);
-
 Vue.prototype.$message = (option: any) => {
   // option.duration = 0;
   // option.offset = 100;
@@ -74,6 +78,7 @@ Vue.prototype.$message = (option: any) => {
   // this.$message({ message: this.$t("message.tips.text12"), type: "error" });
   return Message(option);
 };
+// Vue.prototype.$loading = Loading.service({ lock: true, text: "Loading", spinner: "el-icon-loading", background: "rgba(0, 0, 0, 0.7)" });
 
 Vue.config.productionTip = false;
 new Vue({

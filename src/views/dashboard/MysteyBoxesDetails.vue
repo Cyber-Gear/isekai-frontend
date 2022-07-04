@@ -37,7 +37,6 @@
       :visible.sync="isShowPopup"
       :modal-append-to-body="false"
       :destroy-on-close="true"
-      @close="closePopup"
     >
       <BlindResultsPopup v-if="isShowPopup" :openedCnIds="openedCnIds"></BlindResultsPopup>
     </el-dialog>
@@ -70,9 +69,9 @@ export default {
     },
   },
   created() {
-    if (Object.keys(this.$route.query).length > 0 && sessionStorage.getItem("MysteyBoxes")) {
+    if (Object.keys(this.$route.query).length > 0 && sessionStorage.getItem("MysteyBoxesList")) {
       const id = this.$route.query.id;
-      this.boxList = JSON.parse(sessionStorage.getItem("MysteyBoxes"));
+      this.boxList = JSON.parse(sessionStorage.getItem("MysteyBoxesList"));
       this.boxList.forEach((element) => {
         if (element.boxType == id) this.boxInfo = element;
       });
@@ -92,6 +91,23 @@ export default {
       });
       this.isShowPopup = true;
       console.log("关闭动画，打开弹窗", Number(amount), this.openedCnIds);
+      this.checkList.forEach((element) => {
+        this.boxInfo.list = this.boxInfo.list.filter((item) => {
+          return item.cbId !== element;
+        });
+      });
+      this.boxList.forEach((element) => {
+        if (element.boxType == this.boxInfo.boxType) {
+          element = this.boxInfo;
+          sessionStorage.setItem("MysteyBoxesList", JSON.stringify(this.boxList));
+          if (sessionStorage.getItem("NFTAsstetCnIds")) {
+            const cnIds = JSON.parse(sessionStorage.getItem("NFTAsstetCnIds"));
+            const arr = [...cnIds, ...this.openedCnIds].sort((a, b) => a - b);
+            sessionStorage.setItem("NFTAsstetCnIds", JSON.stringify(arr));
+          }
+          this.checkList = [];
+        }
+      });
     });
   },
   methods: {
@@ -110,7 +126,6 @@ export default {
      * 入参：盲盒ID数组
      */
     openBoxes() {
-      console.log(this.checkList);
       cb()
         .connect(getSigner())
         .openBoxes(this.checkList)
@@ -120,21 +135,6 @@ export default {
         .catch((err) => {
           console.error("openBoxes", err);
         });
-    },
-    closePopup() {
-      this.checkList.forEach((element) => {
-        this.boxInfo.list = this.boxInfo.list.filter((item) => {
-          return item.cbId !== element;
-        });
-      });
-      this.boxList.forEach((element) => {
-        if (element.boxType == this.boxInfo.boxType) {
-          element = this.boxInfo;
-          sessionStorage.setItem("MysteyBoxes", JSON.stringify(this.boxList));
-        }
-      });
-      this.isShowPopup = false;
-      this.checkList = [];
     },
     goBack() {
       history.go(-1);

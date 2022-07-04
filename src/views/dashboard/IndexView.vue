@@ -113,7 +113,7 @@ export default {
                 { index: "crypto-asstet", label: "Crypto Asstet" },
               ],
             },
-            { index: "history", icon: "pchistory", label: "History", children: [{ index: "orders", label: "Orders" }] },
+            // { index: "history", icon: "pchistory", label: "History", children: [{ index: "orders", label: "Orders" }] },
             // { index: "favorites", icon: "pcfavorites", label: "Favorites", children: [{ index: "my-favorites", label: "My Favorites" }] },
           ],
         },
@@ -142,6 +142,8 @@ export default {
       const str = path.replace("/dashboard/", "");
       this.defaultActive = str == "mystey-boxes-details" ? "mystey-boxes" : str;
       this.addr = token().FUN;
+
+      // console.log(this.$loading);
     },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);

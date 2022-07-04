@@ -53,7 +53,7 @@ export default {
       switchIndex: 0,
       switchList: [
         { label: "Collection", total: 0 },
-        { label: "On sale", total: 0 },
+        // { label: "On sale", total: 0 },
       ],
       cardList: shikastudio.works,
       heroIdList: [],
@@ -80,13 +80,9 @@ export default {
       if (index == 0) {
         this.isShowCheck = false;
         this.newCardList = [];
-        if (sessionStorage.getItem("NFTAsstet")) {
-          this.heroIdList = JSON.parse(sessionStorage.getItem("NFTAsstet"));
-          this.heroIdList.forEach((element) => {
-            const obj = this.cardList.find((item) => item.id == element);
-            this.newCardList.push(obj);
-          });
-          this.switchList[0].total = this.newCardList.length;
+        if (sessionStorage.getItem("NFTAsstetCnIds")) {
+          const cnIds = JSON.parse(sessionStorage.getItem("NFTAsstetCnIds"));
+          this.getHeroList(cnIds);
         } else {
           this.tokensOfOwnerBySize();
         }
@@ -106,26 +102,31 @@ export default {
         .tokensOfOwnerBySize(this.getWalletAccount, 0, 10000)
         .then((res) => {
           // console.log("获取NFTs", res[0], Number(res[1]));
-          const cnIds = res[0];
-          cnIds.forEach((element) => {
-            this.getHeroId(Number(element));
+          const cnIds = res[0].map((item) => {
+            return Number(item);
           });
-          this.requestTimer = setInterval(() => {
-            if (this.heroIdList.length === cnIds.length) {
-              clearInterval(this.requestTimer);
-              this.requestTimer = null;
-              this.heroIdList.forEach((element) => {
-                const obj = this.cardList.find((item) => item.id == element);
-                this.newCardList.push(obj);
-              });
-              this.switchList[0].total = this.newCardList.length;
-              sessionStorage.setItem("NFTAsstet", JSON.stringify(this.heroIdList));
-            }
-          }, 200);
+          sessionStorage.setItem("NFTAsstetCnIds", JSON.stringify(cnIds));
+          this.getHeroList(cnIds);
         })
         .catch((err) => {
           console.error("tokensOfOwnerBySize", err);
         });
+    },
+    getHeroList(cnIds) {
+      cnIds.forEach((element) => {
+        this.getHeroId(element);
+      });
+      this.requestTimer = setInterval(() => {
+        if (this.heroIdList.length === cnIds.length) {
+          clearInterval(this.requestTimer);
+          this.requestTimer = null;
+          this.heroIdList.forEach((element) => {
+            const obj = this.cardList.find((item) => item.id == element);
+            this.newCardList.push(obj);
+          });
+          this.switchList[0].total = this.newCardList.length;
+        }
+      }, 200);
     },
     /**
      * data(uint256 cnId, string slot)

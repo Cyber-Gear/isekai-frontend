@@ -25,7 +25,7 @@
           <li>
             <div></div>
             <div>
-              <span v-show="isShow">=${{ item.totalPirce }}</span>
+              <span v-show="isShow">=${{ item.totalPrice }}</span>
               <span v-show="!isShow">=$******</span>
             </div>
           </li>
@@ -59,9 +59,7 @@ export default {
   watch: {
     getWalletAccount: {
       handler(newVal) {
-        if (newVal) {
-          this.getBalanceOf();
-        }
+        if (newVal) this.getBalanceOf();
       },
       immediate: true,
     },
@@ -73,26 +71,65 @@ export default {
       cardList: [],
     };
   },
+
   methods: {
     // fun,avax,usdc,usdt
     getBalanceOf() {
+      // https://www.coingecko.com/zh/api/documentation
+      // this.$api.getCoinPrice("").then((res) => {
+      //   console.log("fun", res.data[""]);
+      //   const index = this.cardList.findIndex((item) => {
+      //     item.coinAddr == token().FUN;
+      //   });
+      //   this.cardList[index].totalPrice = res.data[""] * this.cardList[index].totalCoin;
+      // });
+      // this.$api.getCoinPrice("sealem-token").then((res) => {
+      //   console.log("st", res.data["sealem-token"]);
+      // });
       erc20(token().USDT)
         .balanceOf(this.getWalletAccount)
         .then((res) => {
           this.balanceAmount = Number(util.formatEther(res._hex));
-          const obj = {
-            label: "USDT",
-            logo: "coin-usdt",
-            totalCoin: Number(util.formatEther(res._hex)), //币个数
-            totalPirce: null, //总价值
-            availableBalance: Number(util.formatEther(res._hex)), //可用余额
-            coinAddr: token().USDT,
-            isShowAdd: false,
-          };
-          this.cardList.push(obj);
+          this.$api.getCoinPrice("tether").then((res2) => {
+            console.log("USDT", res2.data["tether"]);
+            const price = res2.data["tether"].usd;
+            const totalCoin = Number(util.formatEther(res._hex));
+            const obj = {
+              label: "USDT",
+              logo: "coin-usdt",
+              totalCoin: totalCoin, //币个数
+              totalPrice: price * totalCoin, //总价值
+              availableBalance: totalCoin, //可用余额
+              coinAddr: token().USDT,
+              isShowAdd: false,
+            };
+            this.cardList.push(obj);
+          });
         })
         .catch((err) => {
           console.error("erc20(token().USDT).balanceOf", err);
+        });
+      erc20(token().WAVAX)
+        .balanceOf(this.getWalletAccount)
+        .then((res) => {
+          this.$api.getCoinPrice("avalanche-2").then((res2) => {
+            console.log("WAVAX", res2.data["avalanche-2"]);
+            const price = res2.data["avalanche-2"].usd;
+            const totalCoin = Number(util.formatEther(res._hex));
+            const obj = {
+              label: "WAVAX",
+              logo: "coin-avax",
+              totalCoin: totalCoin, //币个数
+              totalPrice: price * totalCoin, //总价值
+              availableBalance: totalCoin, //可用余额
+              coinAddr: token().WAVAX,
+              isShowAdd: false,
+            };
+            this.cardList.push(obj);
+          });
+        })
+        .catch((err) => {
+          console.error("erc20(token().WAVAX).balanceOf", err);
         });
       erc20(token().FUN)
         .balanceOf(this.getWalletAccount)
@@ -101,7 +138,7 @@ export default {
             label: "FUN",
             logo: "coin-fun",
             totalCoin: Number(util.formatEther(res._hex)),
-            totalPirce: null,
+            totalPrice: null,
             availableBalance: Number(util.formatEther(res._hex)),
             coinAddr: token().FUN,
             isShowAdd: true,
@@ -110,23 +147,6 @@ export default {
         })
         .catch((err) => {
           console.error("erc20(token().FUN).balanceOf", err);
-        });
-      erc20(token().WAVAX)
-        .balanceOf(this.getWalletAccount)
-        .then((res) => {
-          const obj = {
-            label: "WAVAX",
-            logo: "coin-avax",
-            totalCoin: Number(util.formatEther(res._hex)),
-            totalPirce: null,
-            availableBalance: Number(util.formatEther(res._hex)),
-            coinAddr: token().WAVAX,
-            isShowAdd: false,
-          };
-          this.cardList.push(obj);
-        })
-        .catch((err) => {
-          console.error("erc20(token().WAVAX).balanceOf", err);
         });
     },
     addAddress(item) {

@@ -4,7 +4,7 @@
     <div class="box">
       <div class="leftbox">
         <div class="blindbox">
-          <img :src="`${$urlImages}blindbox.webp`" alt="" />
+          <BlindBoxAnimation></BlindBoxAnimation>
         </div>
         <div class="info">
           <div>
@@ -138,10 +138,11 @@
 import { cb, util, getSigner, erc20, token } from "funtopia-sdk";
 import { mapGetters } from "vuex";
 import ApprovePopup from "@/components/ApprovePopup";
+import BlindBoxAnimation from "@/components/BlindBoxAnimation";
 
 export default {
   name: "LAUNCHPAD",
-  components: { ApprovePopup },
+  components: { ApprovePopup, BlindBoxAnimation },
   data() {
     return {
       boxType: 0,
@@ -502,7 +503,7 @@ export default {
   height: auto;
   .blindbox {
     width: 100%;
-    height: 5rem;
+    height: 4.2rem;
     background: rgba(129, 129, 151, 0.19);
     border-radius: 8px;
     border: 1px solid #436e77;
@@ -511,10 +512,10 @@ export default {
     align-items: center;
     justify-content: center;
     margin-bottom: 0.4rem;
-    img {
-      width: 2.3rem;
-      height: auto;
-    }
+    // img {
+    //   width: 2.3rem;
+    //   height: auto;
+    // }
   }
 
   .info {
@@ -821,10 +822,10 @@ export default {
       width: 1.5rem;
       height: 1.5rem;
       margin-bottom: 0;
-      img {
-        width: 1.07rem;
-        height: auto;
-      }
+      // img {
+      //   width: 1.07rem;
+      //   height: auto;
+      // }
     }
     .info {
       width: 1.7rem;

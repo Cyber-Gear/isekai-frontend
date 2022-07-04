@@ -401,7 +401,7 @@ body {
     .el-drawer {
       width: 4.5rem !important;
       background-color: rgba(129, 129, 151, 0.19);
-      border-radius: 0.08rem;
+      border-radius: 0.08rem 0 0 0.08rem;
       backdrop-filter: blur(7px);
     }
   }
@@ -485,6 +485,18 @@ body {
     td.end-date span {
       background-color: #696969;
       background: linear-gradient(90deg, #44819d 0%, #7a649e 100%);
+    }
+  }
+}
+.el-loading-mask {
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(7px);
+  .el-loading-spinner {
+    .el-icon-loading {
+      font-size: 0.45rem;
+    }
+    .el-loading-text {
+      font-size: 0.2rem;
     }
   }
 }
@@ -604,7 +616,6 @@ body {
       background-color: transparent;
       border-bottom: 1px solid transparent;
       .el-collapse-item__arrow {
-        color: #ffffff;
         font-size: 0.25rem;
       }
     }
@@ -620,9 +631,6 @@ body {
     font-size: 0.12rem;
     border-radius: 0.07rem;
     margin-right: 0.1rem;
-    .el-tag__close {
-      color: #ffffff;
-    }
   }
   .el-menu-dashboard {
     .el-submenu {
@@ -631,7 +639,6 @@ body {
         line-height: 0.4rem;
         font-size: 0.2rem;
         i {
-          color: #ffffff;
           font-size: 0.2rem;
           &:nth-child(1) {
             margin-right: 0.05rem;
@@ -665,6 +672,16 @@ body {
     .el-range__icon,
     .el-range__close-icon {
       line-height: 0.28rem;
+    }
+  }
+  .el-loading-mask {
+    .el-loading-spinner {
+      .el-icon-loading {
+        font-size: 0.3rem;
+      }
+      .el-loading-text {
+        font-size: 0.15rem;
+      }
     }
   }
 }

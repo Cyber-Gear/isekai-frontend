@@ -8,7 +8,7 @@
         <i class="iconfont pcchakan1" v-show="isShow" @click="isShow = false"></i>
       </div>
       <div>
-        <span v-show="isShow">{{ balanceAmount | numberToFixed | numberTally }}</span>
+        <span v-show="isShow">{{ balanceAmount | numberToFixed(2) }}</span>
         <span v-show="!isShow">******</span>
       </div>
     </div>
@@ -18,14 +18,14 @@
           <li>
             <div><img :src="`${$urlImages}${item.logo}.webp`" alt="" /> {{ item.label }}</div>
             <div>
-              <span v-show="isShow">{{ item.totalCoin | numberToFixed | numberTally }}</span>
+              <span v-show="isShow">{{ item.totalCoin | numberToFixed(2) }}</span>
               <span v-show="!isShow">******</span>
             </div>
           </li>
           <li>
             <div></div>
             <div>
-              <span v-show="isShow">=${{ item.totalPrice }}</span>
+              <span v-show="isShow">=${{ item.totalPrice | numberToFixed(2) }}</span>
               <span v-show="!isShow">=$******</span>
             </div>
           </li>
@@ -35,7 +35,7 @@
           </li>
           <li>
             <div>
-              <span v-show="isShow">{{ item.availableBalance | numberToFixed | numberTally }}</span>
+              <span v-show="isShow">{{ item.availableBalance | numberToFixed(2) }}</span>
               <span v-show="!isShow">******</span>
             </div>
             <div class="btns">
@@ -91,7 +91,7 @@ export default {
         .then((res) => {
           this.balanceAmount = Number(util.formatEther(res._hex));
           this.$api.getCoinPrice("tether").then((res2) => {
-            console.log("USDT", res2.data["tether"]);
+            // console.log("USDT", res2.data["tether"]);
             const price = res2.data["tether"].usd;
             const totalCoin = Number(util.formatEther(res._hex));
             const obj = {
@@ -113,7 +113,7 @@ export default {
         .balanceOf(this.getWalletAccount)
         .then((res) => {
           this.$api.getCoinPrice("avalanche-2").then((res2) => {
-            console.log("WAVAX", res2.data["avalanche-2"]);
+            // console.log("WAVAX", res2.data["avalanche-2"]);
             const price = res2.data["avalanche-2"].usd;
             const totalCoin = Number(util.formatEther(res._hex));
             const obj = {

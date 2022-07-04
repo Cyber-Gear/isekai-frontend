@@ -4,7 +4,7 @@
     <div class="box">
       <div class="leftbox">
         <div class="blindbox">
-          <BlindBoxAnimation></BlindBoxAnimation>
+          <LottieAnimation></LottieAnimation>
         </div>
         <div class="info">
           <div>
@@ -138,11 +138,11 @@
 import { cb, util, getSigner, erc20, token } from "funtopia-sdk";
 import { mapGetters } from "vuex";
 import ApprovePopup from "@/components/ApprovePopup";
-import BlindBoxAnimation from "@/components/BlindBoxAnimation";
+import LottieAnimation from "@/components/LottieAnimation";
 
 export default {
   name: "LAUNCHPAD",
-  components: { ApprovePopup, BlindBoxAnimation },
+  components: { ApprovePopup, LottieAnimation },
   data() {
     return {
       boxType: 0,
@@ -268,11 +268,6 @@ export default {
         .buyBoxes(this.inputAmount, this.boxType)
         .then((res) => {
           console.log("购买成功", res);
-          // if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
-          // this.$message({ message: this.$t("购买成功") });
-          // this.buyloading = false;
-          // this.inputAmount = null;
-          // this.$router.push({ path: "/dashboard/mystey-boxes", query: { id: id } });
           setTimeout(() => {
             if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
             this.$message({ message: this.$t("购买成功") });

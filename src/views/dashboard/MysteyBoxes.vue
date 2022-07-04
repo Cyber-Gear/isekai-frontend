@@ -16,7 +16,7 @@
     <ul class="box_list" v-if="switchIndex == 0 && boxList.length > 0">
       <li v-for="(item, index) in boxList" :key="index" @click="toDetail(item)">
         <div class="leftbox">
-          <img :src="`${$urlImages}blindbox.webp`" alt="" />
+          <LottieAnimation></LottieAnimation>
         </div>
         <div class="rightbox">
           <div>
@@ -32,7 +32,9 @@
     <ul class="card_list" v-if="switchIndex == 1 && cardList.length > 0">
       <li v-for="(item, index) in cardList" :key="index">
         <div class="card">
-          <div class="top"><img :src="`${$urlImages}blindbox.webp`" alt="" /></div>
+          <div class="top">
+            <LottieAnimation></LottieAnimation>
+          </div>
           <div class="center">
             <div class="row1">
               <div>
@@ -63,8 +65,9 @@
 import { cb } from "funtopia-sdk";
 import { mapGetters } from "vuex";
 import NoData from "@/components/NoData.vue";
+import LottieAnimation from "@/components/LottieAnimation";
 export default {
-  components: { NoData },
+  components: { NoData, LottieAnimation },
   name: "MysteyBoxes",
   data() {
     return {
@@ -139,15 +142,9 @@ export default {
         if (this.idArr.length === cbIds.length) {
           clearInterval(this.requestTimer);
           this.requestTimer = null;
-          this.idArr.sort((a, b) => {
-            return a.cbId > b.cbId ? 1 : -1;
-          });
+          this.idArr.sort((a, b) => a.cbId - b.cbId);
           const arr = this.$utils.unique(this.idArr, "boxType"); // 去重
-          if (arr.length > 1) {
-            arr.sort((a, b) => {
-              return a.boxType > b.boxType ? 1 : -1;
-            });
-          }
+          if (arr.length > 1) arr.sort((a, b) => a.boxType - b.boxType);
           arr.forEach((element) => {
             const list = this.idArr.filter((item) => {
               return item.boxType == element.boxType;

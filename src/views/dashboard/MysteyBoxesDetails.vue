@@ -8,7 +8,9 @@
     <ul class="card_list">
       <li v-for="(item, index) in boxInfo.list" :key="index" @click="selectBox(item)" :class="{ active: item.checked }">
         <div class="card">
-          <div class="top"><img :src="`${$urlImages}blindbox.webp`" alt="" /></div>
+          <div class="top">
+            <LottieAnimation></LottieAnimation>
+          </div>
           <div class="center">
             <div class="row1">
               <div>
@@ -16,12 +18,12 @@
                 <img :src="`${$urlImages}icon1.webp`" alt="" />
               </div>
               <div>
-                <span>{{ item.cbId }}busd</span>
+                <!-- <span>88busd</span> -->
               </div>
             </div>
             <div class="row2">
               <div>{{ boxInfo.label + " #" + item.cbId }}</div>
-              <div>上次成交{{ item.cbId }}busd</div>
+              <!-- <div>上次成交88busd</div> -->
             </div>
           </div>
         </div>
@@ -30,14 +32,7 @@
     <div class="btn">
       <el-button :disabled="checkList.length == 0" @click="openBoxes"> {{ "Open" }}({{ checkList.length }}) </el-button>
     </div>
-    <el-dialog
-      center
-      top="0"
-      :title="'打开盲盒详情'"
-      :visible.sync="isShowPopup"
-      :modal-append-to-body="false"
-      :destroy-on-close="true"
-    >
+    <el-dialog center top="0" :title="'Blind box results'" :visible.sync="isShowPopup" :modal-append-to-body="false" :destroy-on-close="true">
       <BlindResultsPopup v-if="isShowPopup" :openedCnIds="openedCnIds"></BlindResultsPopup>
     </el-dialog>
   </div>
@@ -47,9 +42,10 @@
 import { cb, getSigner } from "funtopia-sdk";
 import { mapGetters } from "vuex";
 import BlindResultsPopup from "@/components/BlindResultsPopup.vue";
+import LottieAnimation from "@/components/LottieAnimation";
 export default {
   name: "MysteyBoxesDetails",
-  components: { BlindResultsPopup },
+  components: { BlindResultsPopup, LottieAnimation },
   data() {
     return {
       boxList: null,
@@ -57,6 +53,7 @@ export default {
       checkList: [],
       openedCnIds: [],
       isShowPopup: false,
+      loadingFullScreen: null,
     };
   },
   computed: { ...mapGetters(["getWalletAccount"]) },
@@ -86,11 +83,13 @@ export default {
      * 用户钱包地址，生成英雄数量，英雄ID数组
      */
     cb().on("SpawnCns", (user, amount, cnIds) => {
+      if (this.isShowPopup) return;
+      if (this.loadingFullScreen) this.loadingFullScreen.close();
+      this.isShowPopup = true;
+      // console.log("关闭动画，打开弹窗", Number(amount), this.openedCnIds);
       this.openedCnIds = cnIds.map((item) => {
         return Number(item);
       });
-      this.isShowPopup = true;
-      console.log("关闭动画，打开弹窗", Number(amount), this.openedCnIds);
       this.checkList.forEach((element) => {
         this.boxInfo.list = this.boxInfo.list.filter((item) => {
           return item.cbId !== element;
@@ -130,7 +129,14 @@ export default {
         .connect(getSigner())
         .openBoxes(this.checkList)
         .then((res) => {
-          console.log("播放开盲盒动画", res);
+          // console.log("播放开盲盒动画", res);
+          this.loadingFullScreen = this.$loading({
+            target: "#container",
+            lock: true,
+            text: "Loading",
+            spinner: "el-icon-loading",
+            background: "rgba(0, 0, 0, 0.8)",
+          });
         })
         .catch((err) => {
           console.error("openBoxes", err);

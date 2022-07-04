@@ -10,7 +10,7 @@ import "./assets/iconfonts/iconfont.css";
 const isProd = process.env.NODE_ENV == "production";
 const cdn = isProd ? "https://cdn.funtopia.io/funtopia_assets_main/" : "https://cdn.funtopia.io/funtopia_assets_test/";
 Vue.prototype.$urlNfts = "https://cdn.funtopia.io/nfts/";
-Vue.prototype.$urlBlindBox = "https://cdn.funtopia.io/blind_box_animation/";
+Vue.prototype.$urlBlindBoxs = "https://cdn.funtopia.io/blindboxs/";
 Vue.prototype.$urlImages = cdn + "images/";
 Vue.prototype.$urlVideos = cdn + "videos/";
 
@@ -48,7 +48,7 @@ import {
   MenuItem,
   MenuItemGroup,
   DatePicker,
-  // Loading,
+  Loading,
 } from "element-ui";
 Vue.use(Icon);
 Vue.use(Button);
@@ -78,7 +78,8 @@ Vue.prototype.$message = (option: any) => {
   // this.$message({ message: this.$t("message.tips.text12"), type: "error" });
   return Message(option);
 };
-// Vue.prototype.$loading = Loading.service({ lock: true, text: "Loading", spinner: "el-icon-loading", background: "rgba(0, 0, 0, 0.7)" });
+Vue.use(Loading);    // 使用服务方式的话，只安装Loading即可
+Vue.use(Loading.directive);  //  指令方式(v-loading)的话这两行都得有
 
 Vue.config.productionTip = false;
 new Vue({

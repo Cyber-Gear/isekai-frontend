@@ -24,9 +24,9 @@
             </div>
             <div>
               <span>{{ $t(item.title) }}</span>
-              <span>88busd</span>
+              <!-- <span>88busd</span> -->
             </div>
-            <div>{{ $t("artist.text10") }}77busd</div>
+            <!-- <div>{{ $t("artist.text10") }}77busd</div> -->
           </div>
         </div>
         <div class="cancel_box" v-if="isShowCheck">
@@ -49,6 +49,7 @@ export default {
   name: "NFTAsstet",
   data() {
     return {
+      isloading: false,
       isShowCheck: false,
       switchIndex: 0,
       switchList: [

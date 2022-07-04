@@ -4,18 +4,19 @@
 
 <script>
 import lottie from "lottie-web";
-import dataJson from "@/assets/lottie/data.json";
+import dataJson from "@/assets/lottiejson/data.json";
 export default {
+  name: "LottieAnimation",
   data() {
     return {
-      //   animation: null,
+      // animation: null,
     };
   },
   mounted() {
     const animationData = JSON.parse(JSON.stringify(dataJson));
     animationData.assets.forEach((element) => {
       delete element.u;
-      element.p = this.$urlBlindBox + element.p;
+      element.p = this.$urlBlindBoxs + element.p;
     });
     // if (this.animation) this.animation.destroy();
     lottie.loadAnimation({

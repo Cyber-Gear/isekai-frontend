@@ -225,7 +225,7 @@ export default {
     width: 100vw;
     height: 0.5rem;
     .nav_inset {
-      padding: 0 0.3rem;
+      width: 90%;
       .logo {
         width: 0.44rem;
         height: auto;

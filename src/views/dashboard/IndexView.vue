@@ -65,7 +65,7 @@
             </div>
             <div>
               <div class="textbox">
-                <span>bsc ceo ,working web3.0</span>
+                <span>bsc ceo, working web3.0</span>
                 <i class="iconfont pchenggang"></i>
               </div>
               <div class="inputbox">
@@ -75,7 +75,7 @@
             </div>
           </div>
           <div class="box2">
-            <div>标签</div>
+            <div>TAG</div>
             <ul>
               <li v-for="(item, index) in tagList" :key="index">#{{ item.label }}</li>
             </ul>
@@ -142,14 +142,6 @@ export default {
       const str = path.replace("/dashboard/", "");
       this.defaultActive = str == "mystey-boxes-details" ? "mystey-boxes" : str;
       this.addr = token().FUN;
-
-      // console.log(this.$loading);
-    },
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
     },
     openDrawer() {
       this.isShowDrawer = true;

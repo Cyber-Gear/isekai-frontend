@@ -1,12 +1,9 @@
 import axios from "axios";
 // import service from "./service";
-// const BASE_API = process.env.VUE_APP_BASE_API;
-const COIN_API = process.env.VUE_APP_COIN_API;
-console.log(COIN_API);
 export default {
   // 获取币的价格
   getCoinPrice: (data: any) => {
-    return axios.get(`${COIN_API}/api/v3/simple/price/?ids=${data}&vs_currencies=usd`);
+    return axios.get(`https://api.coingecko.com/api/v3/simple/price/?ids=${data}&vs_currencies=usd`);
   },
   // accountRegister: (data: any) => {
   //   return service.post(`${BASE_API}comm/create`, data);

@@ -1,8 +1,8 @@
 import axios from "axios";
 import qs from "qs";
 const service = axios.create({
-  // baseURL: process.env.VUE_APP_BASE_API,
-  // withCredentials: true
+  baseURL: process.env.VUE_APP_BASE_API,
+  withCredentials: true
 });
 service.defaults.withCredentials = true; //让ajax携带cookie
 service.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";

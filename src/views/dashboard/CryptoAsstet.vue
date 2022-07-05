@@ -41,7 +41,7 @@
             <div class="btns">
               <span>{{ item.coinAddr | ellipsisWallet }}</span>
               <span class="btn" v-show="item.isShowAdd" @click="addAddress(item)"><i class="iconfont pcjiahao"></i></span>
-              <span class="btn" v-show="!item.isShowAdd" @click="$utils.handleCopy(item.coinAddr)"><i class="iconfont pcchakan"></i></span>
+              <span class="btn" v-show="!item.isShowAdd" @click="$utils.handleCopy(item.coinAddr)"><i class="iconfont pcfuzhi"></i></span>
             </div>
           </li>
         </ul>

@@ -254,7 +254,6 @@ export default {
     }
     .leftbox {
       width: 50%;
-      padding: 0.2rem 0;
       text-align: center;
       background: rgba(0, 0, 0, 0.32);
       border-radius: 0.1rem;
@@ -427,7 +426,6 @@ export default {
       border-radius: 0.04rem;
       .leftbox {
         width: 50%;
-        padding: 0.1rem 0;
         border-radius: 0.04rem;
         img {
           width: 80%;

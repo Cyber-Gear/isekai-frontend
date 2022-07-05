@@ -223,24 +223,24 @@ export default {
     /**购买 */
     buyBoxesBefore() {
       if (!this.getWalletAccount) return this.$store.commit("setWalletConnectPopup", true);
-      if (!this.inputAmount) return this.$message({ message: this.$t("请输入购买数量") });
+      if (!this.inputAmount) return this.$message({ message: this.$t("tips.text6") });
       // 库存检查
       if (this.inputAmount > this.remainingAmount) {
         this.inputAmount = this.remainingAmount;
-        return this.$message({ message: this.$t("库存检查失败，请重新输入") });
+        return this.$message({ message: this.$t("tips.text7") });
       }
       // 余额检查
       if (this.totalPrice > this.balanceAmount) {
         this.inputAmount = this.balanceAmount / this.boxPrice;
-        return this.$message({ message: this.$t("余额不足") });
+        return this.$message({ message: this.$t("tips.text8") });
       }
       // 频控检查
       if (this.inputAmount > this.hourRemainingAmount) {
         this.inputAmount = this.hourRemainingAmount;
-        return this.$message({ message: this.$t("某用户某小时剩余购买数量不足") });
+        return this.$message({ message: this.$t("tips.text9") });
       }
       // 白名单检查
-      if (!this.isWhite) return this.$message({ message: this.$t("用户不在白名单中") });
+      if (!this.isWhite) return this.$message({ message: this.$t("tips.text10") });
       // 授权检查
       erc20(token().USDT)
         .allowance(this.getWalletAccount, token().CB)
@@ -267,10 +267,9 @@ export default {
         .connect(getSigner())
         .buyBoxes(this.inputAmount, this.boxType)
         .then((res) => {
-          console.log("购买成功", res);
           setTimeout(() => {
             if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
-            this.$message({ message: this.$t("购买成功") });
+            this.$message({ message: this.$t("tips.text11") });
             this.buyloading = false;
             this.inputAmount = null;
             this.getAmount();

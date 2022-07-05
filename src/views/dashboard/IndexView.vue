@@ -56,7 +56,7 @@
             <div>
               <div class="textbox">
                 <span>zhaochangpeng</span>
-                <i class="iconfont pchenggang"></i>
+                <i class="iconfont pcxiugai"></i>
               </div>
               <div class="inputbox">
                 <input type="text" value="zhaochangpeng" />
@@ -66,7 +66,7 @@
             <div>
               <div class="textbox">
                 <span>bsc ceo, working web3.0</span>
-                <i class="iconfont pchenggang"></i>
+                <i class="iconfont pcxiugai"></i>
               </div>
               <div class="inputbox">
                 <input type="text" value="bsc ceo ,working web3.0" />

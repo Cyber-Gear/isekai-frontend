@@ -210,7 +210,6 @@ export default {
       transition: all 0.3s;
       .top {
         width: 100%;
-        padding: 0.3rem 0;
         text-align: center;
         background: radial-gradient(circle, #342c56 0%, #1c395a 33%, rgba(96, 78, 157, 0.72) 100%);
         border-radius: 0.08rem;
@@ -320,7 +319,6 @@ export default {
         border-radius: 0.04rem;
         .top {
           width: 100%;
-          padding: 0.2rem 0;
           border-radius: 0.04rem;
         }
         .center {

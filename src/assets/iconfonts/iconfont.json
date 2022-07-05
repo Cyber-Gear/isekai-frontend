@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2815710",
+      "name": "复制",
+      "font_class": "fuzhi",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
       "icon_id": "12011692",
       "name": "account",
       "font_class": "account",

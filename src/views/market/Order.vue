@@ -21,8 +21,8 @@
           <el-select v-model="value" placeholder="all" v-show="true">
           </el-select>
         </div>
-        <div class="selectAll">
-          <span class="input" @click="checkHandler">
+        <div class="selectAll" @click="allCheckHandler">
+          <span class="input">
             <i
               class="iconfont pcfuxuankuang-quanxuan"
               v-show="isAllChecked"
@@ -54,28 +54,12 @@
           </span>
           <img :src="item.card" alt="" />
           <span>{{ $t(item.name) }}</span>
-          <div class="btn" :class="item.rarity" @click="openVideo">
-            {{ $t("artist.text11") }}
-          </div>
-          <el-dialog
-            center
-            top="0"
-            :title="$t(item.name)"
-            :visible.sync="isShowPopup"
-            :modal-append-to-body="false"
-            :destroy-on-close="true"
-          >
-            <PaintingVideo :videoUrl="item.video"></PaintingVideo>
-          </el-dialog>
         </div>
       </div>
       <div class="confirm">
         <el-button @click="openOrder">确定</el-button>
       </div>
     </div>
-    <!-- <el-dialog center top="0" :title="$t(card.name)" :visible.sync="isShowPopup" :modal-append-to-body="false" :destroy-on-close="true">
-      <PaintingVideo :videoUrl="card.video"></PaintingVideo>
-    </el-dialog> -->
     <el-dialog
       center
       top="0"
@@ -120,20 +104,21 @@ import PaintingVideo from "@/components/PaintingVideo.vue";
 import { shikastudio } from "@/mock/nftworks";
 
 export default {
-  name: "MARKETOrder",
+  name: "MarketOrder",
   components: { PaintingVideo },
   data() {
     return {
       cardList: null,
       name: null,
       isShowPopup: false,
-      isShowOrder: true,
+      isShowOrder: false,
       isAllChecked: false,
+      value: null,
     };
   },
   created() {
     let work = null;
-    for(work of shikastudio.works){
+    for (work of shikastudio.works) {
       work.isChecked = false;
     }
     this.cardList = shikastudio.works;
@@ -143,16 +128,22 @@ export default {
     openVideo() {
       this.isShowPopup = true;
     },
-    checkHandler() {
-      console.log(this.isAllChecked);
+    allCheckHandler() {
+      let item = null;
       this.isAllChecked = !this.isAllChecked;
-      // console.log(item);
-      // item.isChecked = !item.isChecked;
-      // console.log(this.cardList);
+      for (item of this.cardList) {
+        item.isChecked = !item.isChecked;
+      }
+    },
+    checkHandler(item) {
+      console.log(item);
+      item.isChecked = !item.isChecked;
     },
     openOrder() {
-      console.log(111);
       this.isShowOrder = true;
+    },
+    goBack() {
+      history.go(-1);
     },
   },
 };
@@ -162,12 +153,14 @@ export default {
 .page {
   width: 100%;
   padding-top: 0.8rem;
+    background: url($urlImages + "bg7.webp") no-repeat;
+  background-size: 100% 100%;
 }
 .banner {
   width: 100%;
   height: 1rem;
   position: relative;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
   .back_box {
     top: -1rem;
     left: 1.84rem;
@@ -175,13 +168,12 @@ export default {
   .box_title {
     margin: 1.5rem 0 1.5rem 0.2rem;
     span {
-      font-size: 0.45rem;
-      font-weight: 500;
-      margin-left: 0.01rem;
-      margin-bottom: 0.03rem;
+      font-size: 0.35rem;
+      margin-left: 0.17rem;
+      margin-bottom: 0.1rem;
       &::before {
-        top: 0.44rem;
-        left: 0.18rem;
+        top: 0.37rem;
+        left: 0.1rem;
         background-size: 110%;
       }
     }
@@ -192,26 +184,21 @@ export default {
 }
 
 .content_box {
-  width: 15.37rem;
-  height: 11.5rem;
+  width: 11.5rem;
+  height: 7.8rem;
   //   background-color: grey;
   margin: 0 auto 2rem auto;
   .filter {
     width: 100%;
-    height: 0.6rem;
+    height: 0.27rem;
     .select {
       float: left;
-      width: 5.8rem;
+      width: 4.2rem;
       display: flex;
       justify-content: space-between;
       .el-select {
-        width: 1.7rem;
-        height: 0.38rem;
-        border: 2px solid;
-        border-image: linear-gradient(to left, #366371, #5f466e) 1;
-        > .el-input > .el-input__inner {
-          border-radius: 0.2rem !important;
-        }
+        width: 1.2rem;
+        height: 0.27rem;
       }
     }
     .selectAll {
@@ -219,9 +206,8 @@ export default {
       width: 1.21rem;
       height: 100%;
       float: right;
-      font-size: 0.2rem;
+      font-size: 0.16rem;
       color: #adadb2;
-      font-weight: 600;
       i {
         font-size: 0.2rem;
         margin-right: 0.05rem;
@@ -230,26 +216,26 @@ export default {
   }
   .card_list {
     width: 100%;
-    height: 9rem;
+    height: 7rem;
     overflow-y: auto;
     // background-color: green;
-    margin-top: 0.75rem;
+    margin-top: 0.69rem;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 0 0.2rem;
     .card {
       cursor: pointer;
-      width: 2.8rem;
-      height: 4.3rem;
+      width: 2rem;
+      height: 3.12rem;
       position: relative;
       margin-bottom: 0.45rem;
       .input {
         position: absolute;
         top: 2%;
-        left: -8%;
+        left: -8.2%;
         i {
-          font-size: 0.2rem;
+          font-size: 0.16rem;
           font-weight: 600;
           color: #939597;
         }
@@ -262,10 +248,10 @@ export default {
         height: 100%;
       }
       span {
-        font-size: 0.15rem;
+        font-size: 0.12rem;
         position: absolute;
-        left: 0.3rem;
-        top: 0.33rem;
+        left: 0.2rem;
+        top: 0.22rem;
       }
       .btn {
         cursor: pointer;
@@ -305,18 +291,19 @@ export default {
 
   .confirm {
     width: 100%;
-    height: 1.2rem;
+    height: 1rem;
     position: relative;
     .el-button {
       font-size: 0.17rem;
       font-weight: 600;
-      width: 1.29rem;
-      height: 0.53rem;
+      width: 1rem;
+      height: 0.4rem;
       position: absolute;
+      border-radius: 0.06rem;
       top: 50%;
       left: 50%;
       transform: translate(-50%, 0);
-      background-image: linear-gradient(to right, #366371, #5f466e);
+      background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
       color: #d5dbe1;
     }
   }
@@ -353,7 +340,7 @@ export default {
         border-radius: 0.08rem;
         border: 2px solid #414040;
         background-color: #181819;
-        
+
         input {
           width: 2.5rem;
           height: 100%;
@@ -364,12 +351,11 @@ export default {
         span {
           font-size: 0.17rem;
           font-weight: 500;
-          
         }
       }
     }
-    .el-button{
-            font-weight: 600;
+    .el-button {
+      font-weight: 600;
       width: 1.29rem;
       height: 0.53rem;
       margin: 0 auto;

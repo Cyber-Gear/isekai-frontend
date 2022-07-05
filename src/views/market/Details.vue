@@ -26,6 +26,7 @@
             <i class="iconfont pcdollar"></i>
             <span>价格</span>
             <span>50BUSD</span>
+            <el-button @click="toOrder">挂单</el-button>
           </div>
           <div>
             <span>属于</span>
@@ -81,7 +82,14 @@
         </div>
       </div>
     </div>
-    <el-dialog center top="0" :title="$t(card.name)" :visible.sync="isShowPopup" :modal-append-to-body="false" :destroy-on-close="true">
+    <el-dialog
+      center
+      top="0"
+      :title="$t(card.name)"
+      :visible.sync="isShowPopup"
+      :modal-append-to-body="false"
+      :destroy-on-close="true"
+    >
       <PaintingVideo :videoUrl="card.video"></PaintingVideo>
     </el-dialog>
   </div>
@@ -110,6 +118,9 @@ export default {
     openVideo() {
       this.isShowPopup = true;
     },
+    toOrder() {
+      this.$router.push({ path: "/market-order" });
+    },
     goBack() {
       history.go(-1);
     },
@@ -129,24 +140,24 @@ export default {
   position: relative;
 }
 .content-box {
-  width: 14.94rem;
-  height: 10.17rem;
-  margin: 0.8rem auto 1.65rem auto;
+  width: 11.5rem;
+  height: 7.7rem;
+  margin: 0.7rem auto 1.65rem auto;
   .character {
     width: 100%;
-    height: 6.17rem;
+    height: 4.8rem;
     background-color: #2a2a32;
-    border-radius: 0.15rem;
-    border: 3px solid #2f464d;
+    border-radius: 0.1rem;
+    border: 0.01rem solid #436e77;
     margin-bottom: 0.36rem;
     position: relative;
     .leftbox {
-      width: 3.8rem;
-      height: 6rem;
-      position: absolute;
-      transform: translate(0, -50%);
-      margin-left: 1.8rem;
-      top: 50%;
+      width: 2.95rem;
+      height: 4.7rem;
+      position: relative;
+      float: left;
+      margin-left: 1.35rem;
+      margin-top: 0.08rem;
       > img {
         width: 100%;
         height: 100%;
@@ -154,8 +165,8 @@ export default {
       span {
         font-size: 0.15rem;
         position: absolute;
-        left: 0.3rem;
-        top: 0.5rem;
+        left: 0.25rem;
+        top: 0.35rem;
       }
       .btn {
         cursor: pointer;
@@ -193,22 +204,19 @@ export default {
     }
 
     .rightbox {
-      width: 6.6rem;
-      height: 5rem;
-      position: absolute;
-      top: 46%;
-      left: 45%;
-      transform: translate(0, -50%);
-      margin-left: 0.56rem;
+      width: 5rem;
+      height: 100%;
+      float: right;
+      margin: 0.26rem 0.77rem auto 0.33rem;
       > div {
         &:nth-child(1) {
-          font-size: 0.3rem;
+          font-size: 0.25rem;
           font-weight: 600;
         }
         &:nth-child(2) {
-          margin-top: 0.11rem;
+          margin-top: 0.15rem;
           margin-left: 0.11rem;
-          font-size: 0.17rem;
+          font-size: 0.13rem;
           font-weight: bold;
           span {
             &:nth-child(2) {
@@ -218,36 +226,42 @@ export default {
           }
         }
         &:nth-child(3) {
-          width: 6.6rem;
+          width: 5rem;
           height: 0.02rem;
           border-radius: 0.01rem;
           background-image: linear-gradient(to right, #5f466e, #366371);
-          margin: 0.1rem 0 0.34rem 0;
+          margin: 0.1rem 0 0.26rem 0;
         }
         &:nth-child(4) {
-          margin-bottom: 0.35rem;
+          margin-bottom: 0.26rem;
           i {
-            font-size: 0.36rem;
-            vertical-align: bottom;
+            font-size: 0.25rem;
             margin-right: 0.05rem;
           }
           span {
-            font-size: 0.26rem;
-            font-weight: 600;
+            font-size: 0.2rem;
             &:nth-child(3) {
               color: #13aac2;
               margin-left: 0.4rem;
             }
           }
+          .el-button {
+            width: 1.06rem;
+            height: 0.36rem;
+            border-radius: 0.015rem;
+            font-size: 0.18rem;
+            margin-right: 0.5rem;
+            background-image: linear-gradient(to right, #366371, #5f466e);
+            color: #d5dbe1;
+          }
         }
         &:nth-child(5) {
           display: flex;
           align-items: center;
-          font-size: 0.2rem;
-          font-weight: 600;
+          font-size: 0.15rem;
           color: #5e5d5e;
           width: 100%;
-          height: 0.5rem;
+          height: 0.43rem;
           border-radius: 0.065rem;
           padding: 0 0.1rem 0 0.15rem;
           background-color: #1d1d22;
@@ -257,42 +271,43 @@ export default {
             }
           }
           .el-button {
-            width: 1.06rem;
-            height: 0.36rem;
+            width: 0.84rem;
+            height: 0.31rem;
             border-radius: 0.015rem;
-            font-size: 0.18rem;
+            font-size: 0.15rem;
             margin-left: auto;
             background-image: linear-gradient(to right, #366371, #5f466e);
             color: #d5dbe1;
           }
         }
         &:nth-child(6) {
-          margin: 0.24rem 0;
-          font-size: 0.26rem;
-          font-weight: 600;
+          margin: 0.16rem 0 0.1rem 0;
+          font-size: 0.22rem;
           i {
-            font-size: 0.27rem;
+            font-size: 0.175rem;
             margin: 0 0.11rem 0 0.07rem;
+          }
+          span {
+            font-size: 0.2rem;
           }
         }
       }
       .attr_content {
         width: 100%;
-        height: 2.07rem;
+        height: 1.6rem;
         background-color: #1d1d22;
         border-radius: 0.085rem;
         display: flex;
         justify-content: space-between;
         .left_box {
           width: 1.82rem;
-          height: 2.05rem;
+          height: 100%;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           padding: 0.15rem;
           li {
-            font-size: 0.17rem;
-            font-weight: bold;
+            font-size: 0.12rem;
             span {
               &:nth-child(1) {
                 margin-right: 0.67rem;
@@ -306,34 +321,32 @@ export default {
 
   .introduction {
     float: left;
-    width: 7.17rem;
-    height: 2.97rem;
+    width: 5.4rem;
+    height: 2.25rem;
     span {
       display: inline-block;
       text-align: right;
-      width: 1.33rem;
-      height: 0.33rem;
-      border-left: #12b2cb solid 0.05rem;
+      width: 1rem;
+      height: 0.28rem;
+      border-left: #12b2cb solid 0.02rem;
       margin-bottom: 0.28rem;
-      font-size: 0.26rem;
-      font-weight: 600;
+      font-size: 0.2rem;
     }
     .content {
       width: 100%;
-      height: 3rem;
+      height: 100%;
       background-color: #2a2a32;
-      border-radius: 0.15rem;
-      border: 3px solid #2f464d;
-      padding: 0.3rem 0.35rem 0.3rem 0;
+      border-radius: 0.1rem;
+      border: 0.01rem solid #436e77;
+      padding: 0.21rem 0.27rem 0.2rem 0;
       div {
         height: 100%;
         overflow-y: auto;
-        padding: 0.2rem;
+        padding: 0.18rem;
         pre {
           color: #aeaeb1;
-          font-size: 0.17rem;
-          font-weight: 600;
-          line-height: 0.24rem;
+          font-size: 0.15rem;
+          line-height: 0.18rem;
         }
       }
     }
@@ -341,25 +354,24 @@ export default {
 
   .history {
     float: right;
-    width: 7.17rem;
-    height: 2.97rem;
+    width: 5.4rem;
+    height: 2.25rem;
     > span {
       display: inline-block;
       text-align: right;
-      width: 1.33rem;
-      height: 0.33rem;
-      border-left: #12b2cb solid 0.05rem;
+      width: 1rem;
+      height: 0.28rem;
+      border-left: #12b2cb solid 0.02rem;
       margin-bottom: 0.28rem;
-      font-size: 0.26rem;
-      font-weight: 600;
+      font-size: 0.2rem;
     }
     .content {
       width: 100%;
-      height: 3rem;
+      height: 100%;
       background-color: #2a2a32;
-      border-radius: 0.15rem;
-      border: 3px solid #2f464d;
-      padding: 0.3rem 0.2rem 0.3rem 0.3rem;
+      border-radius: 0.1rem;
+      border: 0.01rem solid #436e77;
+      padding: 0.23rem 0.2rem 0.2rem 0.26rem;
 
       ul {
         height: 100%;
@@ -367,16 +379,15 @@ export default {
         flex-direction: column;
         overflow-y: auto;
         li {
-          font-size: 0.19rem;
-          font-weight: 600;
+          font-size: 0.15rem;
           color: #bdbdbf;
-          margin-bottom: 0.4rem;
+          margin-bottom: 0.22rem;
           span {
             &:nth-child(1) {
-              margin-right: 0.63rem;
+              margin-right: 0.6rem;
             }
             &:nth-child(3) {
-              margin: 0 1.1rem;
+              margin: 0 0.7rem;
             }
             &:nth-child(4) {
               margin-left: 0.25rem;

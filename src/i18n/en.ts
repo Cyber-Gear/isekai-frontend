@@ -321,6 +321,10 @@ export default {
     text3: "step 1",
     text4: "step 2",
   },
+  orderPopup:{
+    text1: "Pending order",
+    text2: ""
+  },
   status: {
     text1: "On Launchpad",
     text2: "On sale",

@@ -302,6 +302,11 @@ export default {
     text3: "第一步",
     text4: "第二步",
   },
+  orderPopup:{
+    text1: "挂单",
+    text2: ""
+
+  },
   status: {
     text1: "已上架",
     text2: "开始发售",

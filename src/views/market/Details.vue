@@ -154,8 +154,8 @@ export default {
       span {
         font-size: 0.15rem;
         position: absolute;
-        left: 0.2rem;
-        top: 0.4rem;
+        left: 0.3rem;
+        top: 0.5rem;
       }
       .btn {
         cursor: pointer;

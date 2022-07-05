@@ -8,6 +8,7 @@ import "./styles/global.scss";
 import "./assets/iconfonts/iconfont.css";
 
 const isProd = process.env.NODE_ENV == "production";
+Vue.prototype.$isProd = isProd;
 const cdn = isProd ? "https://cdn.funtopia.io/funtopia_assets_main/" : "https://cdn.funtopia.io/funtopia_assets_test/";
 Vue.prototype.$urlNfts = "https://cdn.funtopia.io/nfts/";
 Vue.prototype.$urlBlindBoxs = "https://cdn.funtopia.io/blindboxs/";

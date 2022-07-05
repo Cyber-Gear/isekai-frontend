@@ -49,8 +49,8 @@ export default {
         { label: "nav.text2", icon: "pcbussiness-man", link: "/artist", isOpen: true },
         { label: "nav.text3", icon: "pcwenjuantoupiao", link: "/dao", isOpen: true },
         { label: "nav.text4", icon: "pchuojianjiasu", link: "/launchpad", isOpen: true },
-        { label: "nav.text5", icon: "pcyingyongshichang", link: "/market", isOpen: false },
-        { label: "nav.text8", icon: "pcjinrongquan", link: "/dashboard", isOpen: false },
+        { label: "nav.text5", icon: "pcyingyongshichang", link: "/market", isOpen: !this.$isProd },
+        { label: "nav.text8", icon: "pcjinrongquan", link: "/dashboard", isOpen: !this.$isProd },
       ],
       showDisconnect: false,
       langArr: ["en", "zh"],
@@ -181,7 +181,7 @@ export default {
     cursor: pointer;
     display: flex;
     align-items: center;
-    padding: 0 2vw;
+    padding: 0 1.5vw;
     border-right: 1px solid;
     border-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #29a7e1, rgba(0, 0, 0, 0)) 1 1;
     &:last-child {

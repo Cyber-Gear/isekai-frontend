@@ -153,7 +153,7 @@ export default {
 .page {
   width: 100%;
   padding-top: 0.8rem;
-    background: url($urlImages + "bg7.webp") no-repeat;
+  background: url($urlImages + "bg7.webp") no-repeat;
   background-size: 100% 100%;
 }
 .banner {
@@ -361,6 +361,92 @@ export default {
       margin: 0 auto;
       background-image: linear-gradient(to right, #366371, #5f466e);
       color: #d5dbe1;
+    }
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .page {
+    width: 100%;
+    padding-top: 0.5rem;
+  }
+  .banner {
+    width: 100%;
+    height: 0.5rem;
+    margin-bottom: 0.42rem;
+    .back_box {
+      top: -0.3rem;
+      left: 0.2rem;
+    }
+    .box_title {
+      margin-top: 0.5rem;
+      span {
+        font-size: 0.2rem;
+        margin-left: 0.05rem;
+        &::before {
+          top: 0.2rem;
+          left: 0rem;
+          background-size: 110%;
+        }
+      }
+      img {
+        width: 1.8rem;
+        margin-left: -1.2rem;
+      }
+    }
+  }
+
+  .content_box {
+    width: 3.15rem;
+    margin-bottom: 0.8rem;
+    .filter {
+      height: 0.2rem;
+      .select {
+        width: 2.1rem;
+        .el-select {
+          width: 0.66rem;
+          height: 0.2rem;
+        }
+      }
+      .selectAll {
+        width: 0.71rem;
+        font-size: 0.12rem;
+        i {
+          font-size: 0.12rem;
+        }
+      }
+    }
+
+    .card_list {
+      padding: 0 0 0 0.12rem;
+      margin-top: 0.25rem;
+      .card {
+        width: 1.46rem;
+        height: 2.25rem;
+        margin-bottom: 0.15rem;
+        .input {
+          top: 2%;
+          left: -7.2%;
+          i {
+            font-size: 0.12rem;
+          }
+        }
+        span {
+          font-size: 0.1rem;
+          left: 0.15rem;
+          top: 0.15rem;
+        }
+      }
+    }
+
+    .confirm {
+      height: 0.5rem;
+
+      .el-button {
+        width: 0.85rem;
+        height: 0.35rem;
+        font-size: 0.12rem;
+      }
     }
   }
 }

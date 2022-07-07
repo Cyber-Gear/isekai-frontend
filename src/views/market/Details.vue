@@ -131,7 +131,7 @@
               </el-button>
             </div>
             <div>
-              <el-button>
+              <el-button @click="toOrder">
                 <i class="iconfont pcdollar"></i>
                 <span>Make offer</span>
               </el-button>

@@ -32,7 +32,8 @@
               v-show="!isAllChecked"
             ></i>
           </span>
-          <span>全部选择</span>
+          <span v-show="!isAllChecked">全部选择</span>
+          <span v-show="isAllChecked">取消选择</span>
         </div>
       </div>
       <div class="card_list">
@@ -73,14 +74,24 @@
           <div class="row">
             <span>挂单价格</span>
             <div>
-              <input type="text" placeholder="请输入价格" />
+              <input
+                type="text"
+                v-model="fee"
+                placeholder="请输入价格"
+                @input="fee = fee.replace(/[^\d]/g, '')"
+              />
               <span>BUSD</span>
             </div>
           </div>
           <div class="row">
             <span>手续费</span>
             <div>
-              <input type="text" placeholder="请输入价格" />
+              <input
+                type="text"
+                v-model="price"
+                placeholder="请输入价格"
+                @input="price = price.replace(/[^\d]/g, '')"
+              />
               <span>BUSD</span>
             </div>
           </div>
@@ -113,6 +124,8 @@ export default {
       isShowPopup: false,
       isShowOrder: false,
       isAllChecked: false,
+      price: null,
+      fee: null,
       value: null,
     };
   },
@@ -441,10 +454,48 @@ export default {
 
     .confirm {
       height: 0.5rem;
-
       .el-button {
         width: 0.85rem;
         height: 0.35rem;
+        font-size: 0.12rem;
+      }
+    }
+  }
+
+  .popupbox {
+    width: 3.15rem;
+    height: 2.23rem;
+    .box_body {
+      width: 2.7rem;
+      height: 100%;
+      margin-top: 0.02rem;
+      .row {
+        width: 2.6rem;
+        height: 0.4rem;
+        > span {
+          width: 0.65rem;
+          font-size: 0.12rem;
+        }
+
+        div {
+          width: 1.87rem;
+          height: 0.4rem;
+          border-radius: 0.04rem;
+          border: 0;
+          input {
+            width: 1.4rem;
+            font-size: 0.12rem;
+            color: #fff;
+          }
+
+          span {
+            font-size: 0.12rem;
+          }
+        }
+      }
+      .el-button {
+        width: 0.8rem;
+        height: 0.3rem;
         font-size: 0.12rem;
       }
     }

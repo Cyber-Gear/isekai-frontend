@@ -116,13 +116,76 @@
         </ul>
       </div>
     </div>
-    <el-drawer :visible.sync="isShowDrawer" :with-header="false" direction="ltr">
+    <el-drawer
+      :visible.sync="isShowDrawer"
+      :with-header="false"
+      direction="ltr"
+    >
       <div class="drawer_box">
         <div class="title">
           <span>Register/Login/Logout</span>
           <span @click="closeDrawer"><i class="iconfont pcguanbi"></i></span>
         </div>
-        
+        <div class="list">
+          <el-collapse
+            accordion
+            v-model="activeName"
+            @change="changeSelectionList"
+          >
+            <el-collapse-item
+              v-for="(item, index) in selectionList"
+              :key="index"
+              :name="index.toString()"
+            >
+              <template slot="title">
+                <div class="checkbox_title">
+                  <i :class="item.icon"></i> {{ item.title }}
+                </div>
+              </template>
+              <div class="gradient_border">
+                <div>
+                  <div class="input_list" v-if="index == 1">
+                    <div class="inputbox">
+                      <input
+                        type="number"
+                        placeholder="min"
+                        v-model="item.checkboxList[0].min"
+                      />
+                      <span>-</span>
+                      <input
+                        type="number"
+                        placeholder="max"
+                        v-model="item.checkboxList[0].max"
+                      />
+                    </div>
+                    <div class="btn" @click="clickOK(item.checkboxList[0])">
+                      OK
+                    </div>
+                  </div>
+                  <ul class="checkbox_content" v-else>
+                    <li
+                      v-for="(ite, ind) in item.checkboxList"
+                      :key="ind"
+                      @click="checkboxClick(ite)"
+                    >
+                      <div class="input">
+                        <i
+                          class="iconfont pcfuxuankuang-quanxuan"
+                          v-show="ite.isChecked"
+                        ></i>
+                        <i
+                          class="iconfont pcfuxuankuang-weiquanxuan"
+                          v-show="!ite.isChecked"
+                        ></i>
+                      </div>
+                      <div class="label">{{ ite.label }}</div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </el-collapse-item>
+          </el-collapse>
+        </div>
       </div>
     </el-drawer>
   </div>
@@ -320,6 +383,7 @@ export default {
       cursor: pointer;
     }
   }
+}
   .list {
     width: 2.5rem;
     .checkbox_title {
@@ -395,7 +459,7 @@ export default {
       }
     }
   }
-}
+
 .boxlist {
   width: calc(100% - 2.5rem);
   padding-left: 0.15rem;
@@ -521,6 +585,9 @@ export default {
       display: none;
     }
 
+    .list{
+      color: #fff;
+    }
     .boxlist {
       width: 3.15rem;
       .title {
@@ -541,6 +608,10 @@ export default {
 
     .checkedbox {
       height: 0.41rem;
+      .btn{
+        height: 0.5rem;
+        line-height: 0.5rem;
+      }
     }
     .card_list {
       li {

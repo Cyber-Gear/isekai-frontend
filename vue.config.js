@@ -3,7 +3,7 @@ module.exports = {
   publicPath: "/",
   devServer: { disableHostCheck: true },
   lintOnSave: true,
-  productionSourceMap: false,
+  productionSourceMap: isProd ? false : true, // 生产环境去掉后缀为.map的文件
   chainWebpack(config) {
     config.module.rule("scss").oneOfs.store.forEach((item) => {
       item
@@ -24,7 +24,9 @@ module.exports = {
       }
     : {},
   configureWebpack: (config) => {
+    config.optimization.minimizer[0].options.terserOptions.compress.warnings = false;
     config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
+    config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger   = true;
     config.optimization = {
       runtimeChunk: "single",
       splitChunks: {

@@ -4,29 +4,62 @@
       <div class="selectionlist">
         <div class="title">
           <i class="iconfont pcconditions" @click="openSelectionList"></i>
-          <i class="iconfont pcjiantou_qiehuanzuo" @click="closeSelectionList"></i>
+          <i
+            class="iconfont pcjiantou_qiehuanzuo"
+            @click="closeSelectionList"
+          ></i>
         </div>
         <div class="list">
-          <el-collapse accordion v-model="activeName" @change="changeSelectionList">
-            <el-collapse-item v-for="(item, index) in selectionList" :key="index" :name="index.toString()">
+          <el-collapse
+            accordion
+            v-model="activeName"
+            @change="changeSelectionList"
+          >
+            <el-collapse-item
+              v-for="(item, index) in selectionList"
+              :key="index"
+              :name="index.toString()"
+            >
               <template slot="title">
-                <div class="checkbox_title"><i :class="item.icon"></i> {{ item.title }}</div>
+                <div class="checkbox_title">
+                  <i :class="item.icon"></i> {{ item.title }}
+                </div>
               </template>
               <div class="gradient_border">
                 <div>
                   <div class="input_list" v-if="index == 1">
                     <div class="inputbox">
-                      <input type="number" placeholder="min" v-model="item.checkboxList[0].min" />
+                      <input
+                        type="number"
+                        placeholder="min"
+                        v-model="item.checkboxList[0].min"
+                      />
                       <span>-</span>
-                      <input type="number" placeholder="max" v-model="item.checkboxList[0].max" />
+                      <input
+                        type="number"
+                        placeholder="max"
+                        v-model="item.checkboxList[0].max"
+                      />
                     </div>
-                    <div class="btn" @click="clickOK(item.checkboxList[0])">OK</div>
+                    <div class="btn" @click="clickOK(item.checkboxList[0])">
+                      OK
+                    </div>
                   </div>
                   <ul class="checkbox_content" v-else>
-                    <li v-for="(ite, ind) in item.checkboxList" :key="ind" @click="checkboxClick(ite)">
+                    <li
+                      v-for="(ite, ind) in item.checkboxList"
+                      :key="ind"
+                      @click="checkboxClick(ite)"
+                    >
                       <div class="input">
-                        <i class="iconfont pcfuxuankuang-quanxuan" v-show="ite.isChecked"></i>
-                        <i class="iconfont pcfuxuankuang-weiquanxuan" v-show="!ite.isChecked"></i>
+                        <i
+                          class="iconfont pcfuxuankuang-quanxuan"
+                          v-show="ite.isChecked"
+                        ></i>
+                        <i
+                          class="iconfont pcfuxuankuang-weiquanxuan"
+                          v-show="!ite.isChecked"
+                        ></i>
                       </div>
                       <div class="label">{{ ite.label }}</div>
                     </li>
@@ -38,15 +71,35 @@
         </div>
       </div>
       <div class="boxlist">
-        <div class="title">9，914，463 results</div>
+        <div class="title">
+          <i
+            class="iconfont pcconditions"
+            v-if="!isShowDrawer"
+            @click="openDrawer"
+          ></i>
+          <span> 9，914，463 results </span>
+        </div>
         <div class="checkedbox">
           <div class="taglist">
-            <el-tag closable v-for="(item, index) in tagList" :key="index" @close="clearTag(item, index)"> {{ item.label }} </el-tag>
+            <el-tag
+              closable
+              v-for="(item, index) in tagList"
+              :key="index"
+              @close="clearTag(item, index)"
+            >
+              {{ item.label }}
+            </el-tag>
           </div>
-          <div class="btn" v-show="tagList.length > 0"><span @click="clearAllTag">Clear All</span></div>
+          <div class="btn" v-show="tagList.length > 0">
+            <span @click="clearAllTag">Clear All</span>
+          </div>
         </div>
         <ul class="card_list">
-          <li v-for="(item, index) in cardList" :key="index" @click="toDetail(index)">
+          <li
+            v-for="(item, index) in cardList"
+            :key="index"
+            @click="toDetail(index)"
+          >
             <div class="top"><img :src="item.logo" alt="" /></div>
             <div class="center">
               <div>
@@ -63,6 +116,15 @@
         </ul>
       </div>
     </div>
+    <el-drawer :visible.sync="isShowDrawer" :with-header="false" direction="ltr">
+      <div class="drawer_box">
+        <div class="title">
+          <span>Register/Login/Logout</span>
+          <span @click="closeDrawer"><i class="iconfont pcguanbi"></i></span>
+        </div>
+        
+      </div>
+    </el-drawer>
   </div>
 </template>
 
@@ -129,6 +191,7 @@ export default {
       cardList: [],
       tagList: [],
       isShowSelectionList: true,
+      isShowDrawer: false,
     };
   },
 
@@ -144,6 +207,12 @@ export default {
       setTimeout(() => {
         this.isShowSelectionList = false;
       }, 300);
+    },
+    openDrawer() {
+      this.isShowDrawer = true;
+    },
+    closeDrawer() {
+      this.isShowDrawer = false;
     },
     changeSelectionList(activeNames) {
       // console.log(activeNames);
@@ -188,7 +257,7 @@ export default {
     },
     toDetail(id) {
       console.log(id);
-      this.$router.push({ path: "/market-details", query: {id: id+1}});
+      this.$router.push({ path: "/market-details", query: { id: id + 1 } });
     },
   },
 };
@@ -240,7 +309,12 @@ export default {
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid;
-    border-image: linear-gradient(135deg, rgba(212, 135, 241, 0.44), rgba(82, 224, 255, 0.44)) 1 1;
+    border-image: linear-gradient(
+        135deg,
+        rgba(212, 135, 241, 0.44),
+        rgba(82, 224, 255, 0.44)
+      )
+      1 1;
     i {
       font-size: 0.25rem;
       cursor: pointer;
@@ -331,10 +405,18 @@ export default {
     height: 0.9rem;
     line-height: 0.9rem;
     border-bottom: 1px solid;
-    border-image: linear-gradient(135deg, rgba(212, 135, 241, 0.44), rgba(82, 224, 255, 0.44)) 1 1;
+    border-image: linear-gradient(
+        135deg,
+        rgba(212, 135, 241, 0.44),
+        rgba(82, 224, 255, 0.44)
+      )
+      1 1;
     font-size: 0.15rem;
     font-weight: 600;
     color: #828282;
+    i {
+      display: none;
+    }
   }
   .checkedbox {
     width: 100%;
@@ -424,6 +506,49 @@ export default {
             font-weight: 600;
             color: #6c6a71;
           }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .box {
+    width: 100%;
+    margin-top: 0;
+
+    .selectionlist {
+      display: none;
+    }
+
+    .boxlist {
+      width: 3.15rem;
+      .title {
+        height: 0.3rem;
+        font-size: 0.12rem;
+        line-height: 0.14rem;
+        i {
+          width: 0.27rem;
+          display: inline-block;
+          color: #fff;
+          font-size: 0.25rem;
+        }
+        span {
+          float: right;
+        }
+      }
+    }
+
+    .checkedbox {
+      height: 0.41rem;
+    }
+    .card_list {
+      li {
+        width: 1.29rem;
+        height: 1.83rem;
+        margin: 0 0.25rem 0.19rem 0;
+        &:nth-child(2n) {
+          margin-right: 0;
         }
       }
     }

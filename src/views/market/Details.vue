@@ -103,12 +103,11 @@
       </div>
 
       <div class="cardbox">
-        <div class="header"></div>
-        <div class="box_content">
-          <img :src="card.logo" alt="" />
-          <div class="btn" :class="card.rarity" @click="openVideo">
-            {{ $t("artist.text11") }}
-          </div>
+        <!-- <div class="header"></div> -->
+        <img :src="card.card" alt="" />
+        <span>{{ $t(card.name) }}</span>
+        <div class="btn" :class="card.rarity" @click="openVideo">
+          {{ $t("artist.text11") }}
         </div>
       </div>
       <div class="purchase box">
@@ -673,26 +672,27 @@ export default {
     }
   }
   .cardbox {
-    width: 100%;
-    height: auto;
+    width: 2.72rem;
+    height: 4.22rem;
     position: relative;
-    margin-top: 0.05rem;
-    border: 0.01rem solid #5a5a5a;
-    border-radius: 0.04rem;
+    margin: 0.05rem auto 0 auto;
+    > img {
+      width: 100%;
+      height: 100%;
+    }
 
-    .header {
-      width: 100%;
-      height: 0.5rem;
-      border-bottom: 0.01rem solid #5a5a5a;
+    span {
+      font-size: 0.12rem;
+      position: absolute;
+      left: 0.2rem;
+      top: 0.4rem;
     }
-    .box_content {
-      width: 100%;
-      height: auto;
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
+    // .header {
+    //   width: 100%;
+    //   height: 0.5rem;
+    //   border-bottom: 0.01rem solid #5a5a5a;
+    // }
+
     .btn {
       padding: 0 0 0.05rem 0.2rem;
       width: 1.8rem;

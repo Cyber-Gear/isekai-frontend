@@ -1,6 +1,6 @@
 const isProd = process.env.NODE_ENV == "production";
 module.exports = {
-  publicPath: "/",
+  publicPath: "./",
   devServer: { disableHostCheck: true },
   lintOnSave: true,
   productionSourceMap: isProd ? false : true, // 生产环境去掉后缀为.map的文件

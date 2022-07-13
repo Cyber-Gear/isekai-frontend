@@ -93,7 +93,7 @@
             <img :src="`${$urlImages}icon1.webp`" alt="" />
           </div>
           <div class="row_right">
-            <img :src="`${$urlImages}contact1.webp`" alt="" />
+            <img :src="`${$urlImages}contact11.webp`" alt="" />
             <img :src="`${$urlImages}contact2.webp`" alt="" />
             <img :src="`${$urlImages}contact3.webp`" alt="" />
             <img :src="`${$urlImages}contact4.webp`" alt="" />

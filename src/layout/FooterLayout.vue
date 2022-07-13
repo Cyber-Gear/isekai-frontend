@@ -6,7 +6,7 @@
         <img :src="`${$urlImages}logo2.webp`" alt="" />
         <div class="linklist">
           <a href="https://funtopia.gitbook.io/fun-topia/create-a-fun-metaverse/about-fun-topia">
-            <img :src="`${$urlImages}contact1.webp`" alt="" />
+            <img :src="`${$urlImages}contact11.webp`" alt="" />
           </a>
           <a href="https://twitter.com/FuntopiaNFT"><img :src="`${$urlImages}contact2.webp`" alt="" /></a>
           <a href="https://discord.gg/Gtq9JsPcPN"><img :src="`${$urlImages}contact3.webp`" alt="" /></a>

@@ -49,8 +49,8 @@ export default {
         { label: "nav.text2", icon: "pcbussiness-man", link: "/artist", isOpen: true },
         { label: "nav.text3", icon: "pcwenjuantoupiao", link: "/dao", isOpen: true },
         { label: "nav.text4", icon: "pchuojianjiasu", link: "/launchpad", isOpen: true },
-        { label: "nav.text5", icon: "pcyingyongshichang", link: "/market", isOpen: !this.$isProd },
-        { label: "nav.text8", icon: "pcjinrongquan", link: "/dashboard", isOpen: !this.$isProd },
+        { label: "nav.text5", icon: "pcyingyongshichang", link: "/market", isOpen: false },
+        { label: "nav.text8", icon: "pcjinrongquan", link: "/dashboard", isOpen: false },
       ],
       showDisconnect: false,
       langArr: ["en", "zh"],
@@ -82,7 +82,7 @@ export default {
     changeLang(item) {
       this.$i18n.locale = item;
       this.$utils.setCookie("LANG", item);
-      // location.reload();
+      location.reload();
     },
     openWalletPopup() {
       this.$store.commit("setWalletListPopup", true);

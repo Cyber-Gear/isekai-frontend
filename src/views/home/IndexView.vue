@@ -23,11 +23,13 @@
         <li>{{ $t("home.text2") }}</li>
         <li>
           <div>{{ $t("home.text4") }}</div>
-          <div>
-            <img :src="`${$urlImages}contact1.webp`" alt="" />
-            <img :src="`${$urlImages}contact2.webp`" alt="" />
-            <img :src="`${$urlImages}contact3.webp`" alt="" />
-            <img :src="`${$urlImages}contact4.webp`" alt="" />
+          <div class="linklist">
+            <a href="https://funtopia.gitbook.io/fun-topia/create-a-fun-metaverse/about-fun-topia">
+              <img :src="`${$urlImages}contact1.webp`" alt="" />
+            </a>
+            <a href="https://twitter.com/FuntopiaNFT"><img :src="`${$urlImages}contact2.webp`" alt="" /></a>
+            <a href="https://discord.gg/Gtq9JsPcPN"><img :src="`${$urlImages}contact3.webp`" alt="" /></a>
+            <a href="https://medium.com/@funtopiagame"><img :src="`${$urlImages}contact4.webp`" alt="" /></a>
           </div>
         </li>
         <li>
@@ -459,6 +461,13 @@ export default {
   align-items: flex-end;
   padding-top: 0.8rem;
   position: relative;
+  .linklist {
+    img {
+      width: 0.5rem;
+      height: 0.5rem;
+      margin: 0 0.05rem;
+    }
+  }
   ul {
     width: calc(100% - 6.45rem);
     li {
@@ -491,14 +500,6 @@ export default {
             background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
             border: 1px solid;
             border-image: linear-gradient(320deg, rgba(219, 98, 255, 1), rgba(136, 253, 238, 0)) 1 1;
-          }
-          &:nth-child(2) {
-            img {
-              width: 0.5rem;
-              height: 0.5rem;
-              margin: 0 0.05rem;
-              cursor: pointer;
-            }
           }
         }
       }
@@ -1025,6 +1026,13 @@ export default {
     width: 100%;
     height: 3rem;
     padding-top: 0.5rem;
+    .linklist {
+      img {
+        width: 0.18rem;
+        height: 0.18rem;
+        margin: 0 0.02rem;
+      }
+    }
     ul {
       width: calc(100% - 1.48rem);
       li {
@@ -1047,13 +1055,6 @@ export default {
             &:nth-child(1) {
               padding: 0 0.1rem;
               margin-right: 0.1rem;
-            }
-            &:nth-child(2) {
-              img {
-                width: 0.18rem;
-                height: 0.18rem;
-                margin: 0 0.02rem;
-              }
             }
           }
         }

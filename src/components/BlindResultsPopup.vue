@@ -65,8 +65,9 @@ export default {
       this.videoInfo.videoUrl = item.video;
     },
     closeVideo() {
-      this.videoInfo = { name: "", videoUrl: "" };
       this.isShowPopup = false;
+      this.videoInfo.name = "";
+      this.videoInfo.videoUrl = "";
     },
   },
 };

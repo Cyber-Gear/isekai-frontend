@@ -64,8 +64,11 @@ export default {
   computed: { ...mapGetters(["getWalletAccount"]) },
   watch: {
     getWalletAccount: {
-      handler(newVal) {
-        if (newVal) this.switchTab(this.switchIndex);
+      handler(newVal, oldVal) {
+        if (newVal) {
+          if (newVal !== oldVal) sessionStorage.removeItem("NFTAsstetList");
+          this.switchTab(this.switchIndex);
+        }
       },
       immediate: true, // 页面初始化后立即执行
     },
@@ -99,10 +102,13 @@ export default {
         .tokensOfOwnerBySize(this.getWalletAccount, 0, 10000)
         .then((res) => {
           // console.log("获取NFTs", res[0], Number(res[1]));
-          const cnIds = res[0].map((item) => {
-            return Number(item);
-          });
-          this.getHeroList(cnIds);
+          this.switchList[0].total = res[0].length;
+          if (res[0].length > 0) {
+            const cnIds = res[0].map((item) => {
+              return Number(item);
+            });
+            this.getHeroList(cnIds);
+          }
         })
         .catch((err) => {
           console.error("tokensOfOwnerBySize", err);
@@ -121,7 +127,6 @@ export default {
             this.newCardList.push(obj);
           });
           sessionStorage.setItem("NFTAsstetList", JSON.stringify(this.newCardList));
-          this.switchList[0].total = this.newCardList.length;
         }
       }, 200);
     },

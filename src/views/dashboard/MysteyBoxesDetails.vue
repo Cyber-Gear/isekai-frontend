@@ -84,7 +84,12 @@ export default {
      */
     cb().on("SpawnCns", (user, amount, cnIds) => {
       if (this.isShowPopup) return;
-      if (this.loadingFullScreen) this.loadingFullScreen.close();
+      if (this.loadingFullScreen) {
+        this.$nextTick(() => {
+          this.loadingFullScreen.close(); // 以服务的方式调用的 Loading 需要异步关闭
+          this.loadingFullScreen = null;
+        });
+      }
       this.isShowPopup = true;
       // console.log("关闭动画，打开弹窗", Number(amount), this.openedCnIds);
       this.openedCnIds = cnIds.map((item) => {
@@ -127,8 +132,8 @@ export default {
         .then((res) => {
           // console.log("播放开盲盒动画", res);
           this.loadingFullScreen = this.$loading({
-            target: "#container",
-            lock: true,
+            target: "#app",
+            lock: true, // 禁止页面滚动，必须要挂载在#app上，其他不生效
             text: "Loading",
             spinner: "el-icon-loading",
             background: "rgba(0, 0, 0, 0.8)",

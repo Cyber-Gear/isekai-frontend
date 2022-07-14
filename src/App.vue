@@ -54,10 +54,6 @@ export default {
 </script>
 
 <style lang="scss">
-// #container {
-//   #container_body {
-//   }
-// }
 @media screen and (max-width: 750px) {
   #container {
     #container_body {

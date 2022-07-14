@@ -5,12 +5,9 @@
       <div class="top">
         <img :src="`${$urlImages}logo2.webp`" alt="" />
         <div class="linklist">
-          <a href="https://funtopia.gitbook.io/fun-topia/create-a-fun-metaverse/about-fun-topia">
-            <img :src="`${$urlImages}contact11.webp`" alt="" />
+          <a v-for="(item, index) in linkList" :key="index" :href="item.href">
+            <img :src="item.image" alt="" />
           </a>
-          <a href="https://twitter.com/FuntopiaNFT"><img :src="`${$urlImages}contact2.webp`" alt="" /></a>
-          <a href="https://discord.gg/Gtq9JsPcPN"><img :src="`${$urlImages}contact3.webp`" alt="" /></a>
-          <a href="https://medium.com/@funtopiagame"><img :src="`${$urlImages}contact4.webp`" alt="" /></a>
         </div>
       </div>
       <p>{{ $t("footer.text1") }}</p>
@@ -21,7 +18,14 @@
 export default {
   name: "FooterLayout",
   data() {
-    return {};
+    return {
+      linkList: [
+        { image: this.$urlImages + "contact_Gitbook.webp", href: "https://funtopia.gitbook.io/fun-topia/create-a-fun-metaverse/about-fun-topia" },
+        { image: this.$urlImages + "contact_Twitter.webp", href: "https://twitter.com/FuntopiaNFT" },
+        { image: this.$urlImages + "contact_Discord.webp", href: "https://discord.gg/Gtq9JsPcPN" },
+        { image: this.$urlImages + "contact_Medium.webp", href: "https://medium.com/@funtopiagame" },
+      ],
+    };
   },
 };
 </script>
@@ -55,10 +59,20 @@ export default {
         height: 0.5rem;
       }
       .linklist {
-        img {
+        display: flex;
+        a {
           width: 0.5rem;
           height: 0.5rem;
           margin: 0 0.05rem;
+          background: url($urlImages + "contact_border.webp") no-repeat;
+          background-size: 100% 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          img {
+            width: 55%;
+            height: auto;
+          }
         }
       }
     }
@@ -88,7 +102,7 @@ export default {
           height: 0.13rem;
         }
         .linklist {
-          img {
+          a {
             width: 0.18rem;
             height: 0.18rem;
             margin: 0 0.01rem;

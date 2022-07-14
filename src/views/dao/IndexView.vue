@@ -7,11 +7,10 @@
             <img :src="`${$urlImages}logo1.webp`" alt="" />
           </div>
           <div class="title"><span>FUN TOPIA</span><i class="iconfont pctelegram"></i></div>
-          <div class="linkbox">
-            <div><i class="iconfont pctelegram"></i></div>
-            <div><i class="iconfont pctuite"></i></div>
-            <div><i class="iconfont pcdiscord"></i></div>
-            <div><i class="iconfont pcmedium"></i></div>
+          <div class="linklist">
+            <a v-for="(item, index) in linkList" :key="index" :href="item.href">
+              <img :src="item.image" alt="" />
+            </a>
           </div>
           <div class="lis">
             <div><i class="iconfont pcCustomermanagement-fill"></i>{{ $t("dao.text2") }}</div>
@@ -78,6 +77,12 @@ export default {
         { value: 3, label: "status.text7" },
         { value: 4, label: "status.text8" },
         { value: 5, label: "status.text9" },
+      ],
+      linkList: [
+        { image: this.$urlImages + "contact_Gitbook.webp", href: "https://funtopia.gitbook.io/fun-topia/create-a-fun-metaverse/about-fun-topia" },
+        { image: this.$urlImages + "contact_Twitter.webp", href: "https://twitter.com/FuntopiaNFT" },
+        { image: this.$urlImages + "contact_Discord.webp", href: "https://discord.gg/Gtq9JsPcPN" },
+        { image: this.$urlImages + "contact_Medium.webp", href: "https://medium.com/@funtopiagame" },
       ],
     };
   },
@@ -234,15 +239,14 @@ export default {
         margin-left: 0.1rem;
       }
     }
-    .linkbox {
+    .linklist {
       width: fit-content;
       margin: 0.2rem auto;
       display: flex;
       align-items: center;
       border-radius: 0.15rem;
       overflow: hidden;
-      > div {
-        cursor: pointer;
+      a {
         width: 0.55rem;
         height: 0.35rem;
         background: rgba(255, 255, 255, 0.21);
@@ -251,8 +255,9 @@ export default {
         align-items: center;
         justify-content: center;
         margin-right: 0.05rem;
-        i {
-          font-size: 0.22rem;
+        img {
+          width: 50%;
+          height: auto;
         }
         &:last-child {
           margin-right: 0;
@@ -413,16 +418,13 @@ export default {
           margin-left: 0.1rem;
         }
       }
-      .linkbox {
+      .linklist {
         width: fit-content;
         margin: 0.1rem auto;
-        > div {
-          width: 0.4rem;
-          height: 0.2rem;
+        a {
+          width: 0.25rem;
+          height: 0.15rem;
           margin-right: 0.02rem;
-          i {
-            font-size: 0.15rem;
-          }
         }
       }
       .lis {

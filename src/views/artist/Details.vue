@@ -12,11 +12,10 @@
         <div><img :src="detail.avatar" alt="" /></div>
       </div>
       <div class="box1">
-        <div class="linkbox">
-          <div><i class="iconfont pctelegram"></i></div>
-          <div><i class="iconfont pctuite"></i></div>
-          <div><i class="iconfont pcdiscord"></i></div>
-          <div><i class="iconfont pcmedium"></i></div>
+        <div class="linklist">
+          <a v-for="(item, index) in linkList" :key="index" :href="item.href">
+            <img :src="item.image" alt="" />
+          </a>
         </div>
       </div>
       <div class="box2">
@@ -89,6 +88,12 @@ export default {
       detail: null,
       cardList: [],
       isShowIntroduce: false,
+      linkList: [
+        { image: this.$urlImages + "contact_Gitbook.webp", href: "https://funtopia.gitbook.io/fun-topia/create-a-fun-metaverse/about-fun-topia" },
+        { image: this.$urlImages + "contact_Twitter.webp", href: "https://twitter.com/FuntopiaNFT" },
+        { image: this.$urlImages + "contact_Discord.webp", href: "https://discord.gg/Gtq9JsPcPN" },
+        { image: this.$urlImages + "contact_Medium.webp", href: "https://medium.com/@funtopiagame" },
+      ],
     };
   },
   created() {
@@ -183,13 +188,12 @@ export default {
   justify-content: flex-end;
   margin: 0 auto;
   padding: 0.2rem 0;
-  .linkbox {
+  .linklist {
     display: flex;
     align-items: center;
     border-radius: 0.15rem;
     overflow: hidden;
-    > div {
-      cursor: pointer;
+    a {
       width: 0.55rem;
       height: 0.35rem;
       background: rgba(255, 255, 255, 0.21);
@@ -198,8 +202,9 @@ export default {
       align-items: center;
       justify-content: center;
       margin-right: 0.05rem;
-      i {
-        font-size: 0.22rem;
+      img {
+        width: 50%;
+        height: auto;
       }
       &:last-child {
         margin-right: 0;
@@ -383,6 +388,13 @@ export default {
         i {
           font-size: 0.12rem;
         }
+      }
+    }
+    .linklist {
+      a {
+        width: 0.25rem;
+        height: 0.15rem;
+        margin-right: 0.02rem;
       }
     }
   }

@@ -24,12 +24,9 @@
         <li>
           <div>{{ $t("home.text4") }}</div>
           <div class="linklist">
-            <a href="https://funtopia.gitbook.io/fun-topia/create-a-fun-metaverse/about-fun-topia">
-              <img :src="`${$urlImages}contact11.webp`" alt="" />
+            <a v-for="(item, index) in linkList" :key="index" :href="item.href">
+              <img :src="item.image" alt="" />
             </a>
-            <a href="https://twitter.com/FuntopiaNFT"><img :src="`${$urlImages}contact2.webp`" alt="" /></a>
-            <a href="https://discord.gg/Gtq9JsPcPN"><img :src="`${$urlImages}contact3.webp`" alt="" /></a>
-            <a href="https://medium.com/@funtopiagame"><img :src="`${$urlImages}contact4.webp`" alt="" /></a>
           </div>
         </li>
         <li>
@@ -317,6 +314,12 @@ export default {
         this.$urlImages + "collaborators15.webp",
         this.$urlImages + "collaborators16.webp",
       ],
+      linkList: [
+        { image: this.$urlImages + "contact_Gitbook.webp", href: "https://funtopia.gitbook.io/fun-topia/create-a-fun-metaverse/about-fun-topia" },
+        { image: this.$urlImages + "contact_Twitter.webp", href: "https://twitter.com/FuntopiaNFT" },
+        { image: this.$urlImages + "contact_Discord.webp", href: "https://discord.gg/Gtq9JsPcPN" },
+        { image: this.$urlImages + "contact_Medium.webp", href: "https://medium.com/@funtopiagame" },
+      ],
     };
   },
   methods: {
@@ -348,7 +351,6 @@ export default {
   padding-bottom: 1rem;
   overflow: hidden;
 }
-
 .absolute1 {
   width: 0.57rem;
   height: auto;
@@ -462,10 +464,20 @@ export default {
   padding-top: 0.8rem;
   position: relative;
   .linklist {
-    img {
+    display: flex;
+    a {
       width: 0.5rem;
       height: 0.5rem;
       margin: 0 0.05rem;
+      background: url($urlImages + "contact_border.webp") no-repeat;
+      background-size: 100% 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        width: 55%;
+        height: auto;
+      }
     }
   }
   ul {
@@ -1027,10 +1039,10 @@ export default {
     height: 3rem;
     padding-top: 0.5rem;
     .linklist {
-      img {
+      a {
         width: 0.18rem;
         height: 0.18rem;
-        margin: 0 0.02rem;
+        margin: 0 0.01rem;
       }
     }
     ul {

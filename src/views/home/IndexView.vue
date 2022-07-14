@@ -4,12 +4,12 @@
     <img class="absolute2" :src="`${$urlImages}absolute2.webp`" alt="" />
     <img class="absolute3" :src="`${$urlImages}absolute3.webp`" alt="" />
     <img class="absolute4" :src="`${$urlImages}absolute4.webp`" alt="" />
-    <img class="absolute5" :src="`${$urlImages}absolute5.webp`" alt="" />
-    <img class="absolute6" :src="`${$urlImages}absolute6.webp`" alt="" />
+    <!-- <img class="absolute5" :src="`${$urlImages}absolute5.webp`" alt="" /> -->
+    <!-- <img class="absolute6" :src="`${$urlImages}absolute6.webp`" alt="" /> -->
     <img class="absolute7" :src="`${$urlImages}absolute2.webp`" alt="" />
     <img class="absolute8" :src="`${$urlImages}absolute2.webp`" alt="" />
     <img class="absolute9" :src="`${$urlImages}absolute9.webp`" alt="" />
-    <img class="absolute11" :src="`${$urlImages}absolute11.webp`" alt="" />
+    <!-- <img class="absolute11" :src="`${$urlImages}absolute11.webp`" alt="" /> -->
     <img class="absolute12" :src="`${$urlImages}absolute2.webp`" alt="" />
     <img class="absolute13" :src="`${$urlImages}absolute13.webp`" alt="" />
     <img class="absolute14" :src="`${$urlImages}absolute14.webp`" alt="" />
@@ -28,9 +28,6 @@
               <img :src="item.image" alt="" />
             </a>
           </div>
-        </li>
-        <li>
-          <img :src="`${$urlImages}logo3.webp`" alt="" />
         </li>
       </ul>
       <img class="banner_img" :src="`${$urlImages}img1.webp`" alt="" />
@@ -461,8 +458,8 @@ export default {
   background-size: 100% 100%;
   display: flex;
   align-items: flex-end;
-  padding-top: 0.8rem;
   position: relative;
+  padding: 0.8rem 0;
   .linklist {
     display: flex;
     a {
@@ -513,13 +510,6 @@ export default {
             border: 1px solid;
             border-image: linear-gradient(320deg, rgba(219, 98, 255, 1), rgba(136, 253, 238, 0)) 1 1;
           }
-        }
-      }
-      &:nth-child(5) {
-        padding-left: 0;
-        img {
-          width: 8rem;
-          height: auto;
         }
       }
     }
@@ -1037,7 +1027,7 @@ export default {
   .box1 {
     width: 100%;
     height: 3rem;
-    padding-top: 0.5rem;
+    padding: 0.5rem 0;
     .linklist {
       a {
         width: 0.18rem;
@@ -1068,12 +1058,6 @@ export default {
               padding: 0 0.1rem;
               margin-right: 0.1rem;
             }
-          }
-        }
-        &:nth-child(5) {
-          img {
-            width: 2.11rem;
-            height: 0.36rem;
           }
         }
       }

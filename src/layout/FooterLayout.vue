@@ -3,7 +3,7 @@
     <img :src="`${$urlImages}footer_bg1.webp`" alt="" />
     <div class="center">
       <div class="top">
-        <img :src="`${$urlImages}logo2.webp`" alt="" />
+        <img class="logo2" :src="`${$urlImages}logo2.webp`" alt="" />
         <div class="linklist">
           <a v-for="(item, index) in linkList" :key="index" :href="item.href">
             <img :src="item.image" alt="" />
@@ -48,14 +48,14 @@ export default {
     left: 0;
   }
   .center {
-    width: 7rem;
+    width: 6rem;
     margin: 0 auto;
     .top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      > img {
-        width: 3rem;
+      .logo2 {
+        width: auto;
         height: 0.5rem;
       }
       .linklist {
@@ -97,9 +97,9 @@ export default {
       width: 1.8rem;
       left: 1rem;
       .top {
-        > img {
-          width: 0.78rem;
-          height: 0.13rem;
+        .logo2 {
+          width: auto;
+          height: 0.2rem;
         }
         .linklist {
           a {

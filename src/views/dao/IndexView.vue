@@ -224,8 +224,8 @@ export default {
       right: 0;
       margin: auto;
       img {
-        width: 100%;
-        height: auto;
+        width: auto;
+        height: 80%;
       }
     }
     .title {

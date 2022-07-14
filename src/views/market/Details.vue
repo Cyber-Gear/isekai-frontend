@@ -296,7 +296,6 @@
 <script>
 import PaintingVideo from "@/components/PaintingVideo.vue";
 import { shikastudio } from "@/mock/nftworks";
-import { Descriptions } from "element-ui";
 export default {
   name: "MarketDetails",
   components: { PaintingVideo },

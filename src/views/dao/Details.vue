@@ -635,8 +635,8 @@ export default {
             display: flex;
             align-items: center;
             img {
-              width: 0.5rem;
-              height: auto;
+              width: auto;
+              height: 0.25rem;
             }
             i {
               font-size: 0.25rem;

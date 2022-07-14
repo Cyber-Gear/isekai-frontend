@@ -161,7 +161,7 @@ export default {
       balanceAmount: 0,
       stepsArr: [
         { title: "status.text1", des: "2022/06/12 15:00" },
-        { title: "status.text2", des: "2022/06/21 15:00" },
+        { title: "status.text2", des: "" },
         { title: "status.text3", des: "" },
       ],
       countdownObj: { d: 0, h: 0, m: 0, s: 0 },

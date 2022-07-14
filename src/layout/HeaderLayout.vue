@@ -119,8 +119,8 @@ export default {
     align-items: center;
     justify-content: space-between;
     .logo {
-      width: 0.7rem;
-      height: auto;
+      width: auto;
+      height: 60%;
     }
     .connect_lang {
       display: flex;
@@ -226,10 +226,6 @@ export default {
     height: 0.5rem;
     .nav_inset {
       width: 90%;
-      .logo {
-        width: 0.44rem;
-        height: auto;
-      }
       .connect_lang {
         .connect {
           height: 0.25rem;

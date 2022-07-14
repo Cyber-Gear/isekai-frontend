@@ -7,7 +7,7 @@
         <div class="btn" :class="item.rarity" @click="openVideo(item)">{{ $t("artist.text11") }}</div>
       </li>
     </ul>
-    <el-dialog center top="0" :title="$t(videoInfo.name)" :visible.sync="isShowPopup" :destroy-on-close="true" append-to-body>
+    <el-dialog center top="0" :title="$t(videoInfo.name)" :visible.sync="isShowPopup" :destroy-on-close="true" append-to-body @close="closeVideo">
       <PaintingVideo :videoUrl="videoInfo.videoUrl"></PaintingVideo>
     </el-dialog>
   </div>
@@ -63,6 +63,10 @@ export default {
       this.isShowPopup = true;
       this.videoInfo.name = item.name;
       this.videoInfo.videoUrl = item.video;
+    },
+    closeVideo() {
+      this.videoInfo = { name: "", videoUrl: "" };
+      this.isShowPopup = false;
     },
   },
 };

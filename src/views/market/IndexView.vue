@@ -4,62 +4,29 @@
       <div class="selectionlist">
         <div class="title">
           <i class="iconfont pcconditions" @click="openSelectionList"></i>
-          <i
-            class="iconfont pcjiantou_qiehuanzuo"
-            @click="closeSelectionList"
-          ></i>
+          <i class="iconfont pcjiantou_qiehuanzuo" @click="closeSelectionList"></i>
         </div>
         <div class="list">
-          <el-collapse
-            accordion
-            v-model="activeName"
-            @change="changeSelectionList"
-          >
-            <el-collapse-item
-              v-for="(item, index) in selectionList"
-              :key="index"
-              :name="index.toString()"
-            >
+          <el-collapse accordion v-model="activeName" @change="changeSelectionList">
+            <el-collapse-item v-for="(item, index) in selectionList" :key="index" :name="index.toString()">
               <template slot="title">
-                <div class="checkbox_title">
-                  <i :class="item.icon"></i> {{ item.title }}
-                </div>
+                <div class="checkbox_title"><i :class="item.icon"></i> {{ item.title }}</div>
               </template>
               <div class="gradient_border">
                 <div>
                   <div class="input_list" v-if="index == 1">
                     <div class="inputbox">
-                      <input
-                        type="number"
-                        placeholder="min"
-                        v-model="item.checkboxList[0].min"
-                      />
+                      <input type="number" placeholder="min" v-model="item.checkboxList[0].min" />
                       <span>-</span>
-                      <input
-                        type="number"
-                        placeholder="max"
-                        v-model="item.checkboxList[0].max"
-                      />
+                      <input type="number" placeholder="max" v-model="item.checkboxList[0].max" />
                     </div>
-                    <div class="btn" @click="clickOK(item.checkboxList[0])">
-                      OK
-                    </div>
+                    <div class="btn" @click="clickOK(item.checkboxList[0])">OK</div>
                   </div>
                   <ul class="checkbox_content" v-else>
-                    <li
-                      v-for="(ite, ind) in item.checkboxList"
-                      :key="ind"
-                      @click="checkboxClick(ite)"
-                    >
-                      <div class="input">
-                        <i
-                          class="iconfont pcfuxuankuang-quanxuan"
-                          v-show="ite.isChecked"
-                        ></i>
-                        <i
-                          class="iconfont pcfuxuankuang-weiquanxuan"
-                          v-show="!ite.isChecked"
-                        ></i>
+                    <li v-for="(ite, ind) in item.checkboxList" :key="ind" @click="checkboxClick(ite)">
+                      <div class="check">
+                        <i class="iconfont pcfuxuankuang-quanxuan" v-show="ite.isChecked"></i>
+                        <i class="iconfont pcfuxuankuang-weiquanxuan" v-show="!ite.isChecked"></i>
                       </div>
                       <div class="label">{{ ite.label }}</div>
                     </li>
@@ -70,23 +37,15 @@
           </el-collapse>
         </div>
       </div>
+
       <div class="boxlist">
         <div class="title">
-          <i
-            class="iconfont pcconditions"
-            v-if="!isShowDrawer"
-            @click="openDrawer"
-          ></i>
+          <i class="iconfont pcconditions" v-if="!isShowDrawer" @click="openDrawer"></i>
           <span> 9，914，463 results </span>
         </div>
         <div class="checkedbox">
           <div class="taglist">
-            <el-tag
-              closable
-              v-for="(item, index) in tagList"
-              :key="index"
-              @close="clearTag(item, index)"
-            >
+            <el-tag closable v-for="(item, index) in tagList" :key="index" @close="clearTag(item, index)">
               {{ item.label }}
             </el-tag>
           </div>
@@ -95,11 +54,7 @@
           </div>
         </div>
         <ul class="card_list">
-          <li
-            v-for="(item, index) in cardList"
-            :key="index"
-            @click="toDetail(index)"
-          >
+          <li v-for="(item, index) in cardList" :key="index" @click="toDetail(index)">
             <div class="top"><img :src="item.logo" alt="" /></div>
             <div class="center">
               <div>
@@ -108,75 +63,41 @@
               </div>
               <div>
                 <span>{{ $t(item.title) }}</span>
-                <span>88busd</span>
+                <!-- <span>88busd</span> -->
               </div>
-              <div>{{ $t("artist.text10") }}77busd</div>
+              <!-- <div>{{ $t("artist.text10") }}77busd</div> -->
             </div>
           </li>
         </ul>
       </div>
     </div>
-    <el-drawer
-      :visible.sync="isShowDrawer"
-      :with-header="false"
-      direction="ltr"
-    >
-      <div class="drawer_box">
+    <el-drawer :visible.sync="isShowDrawer" :with-header="false" direction="ltr" class="market_drawer">
+      <div class="selectionlist">
         <div class="title">
-          <span>Register/Login/Logout</span>
-          <span @click="closeDrawer"><i class="iconfont pcguanbi"></i></span>
+          <i class="iconfont pcconditions"></i>
+          <i class="iconfont pcjiantou_qiehuanzuo" @click="isShowDrawer = false"></i>
         </div>
         <div class="list">
-          <el-collapse
-            accordion
-            v-model="activeName"
-            @change="changeSelectionList"
-          >
-            <el-collapse-item
-              v-for="(item, index) in selectionList"
-              :key="index"
-              :name="index.toString()"
-            >
+          <el-collapse accordion v-model="activeName" @change="changeSelectionList">
+            <el-collapse-item v-for="(item, index) in selectionList" :key="index" :name="index.toString()">
               <template slot="title">
-                <div class="checkbox_title">
-                  <i :class="item.icon"></i> {{ item.title }}
-                </div>
+                <div class="checkbox_title"><i :class="item.icon"></i> {{ item.title }}</div>
               </template>
               <div class="gradient_border">
                 <div>
                   <div class="input_list" v-if="index == 1">
                     <div class="inputbox">
-                      <input
-                        type="number"
-                        placeholder="min"
-                        v-model="item.checkboxList[0].min"
-                      />
+                      <input type="number" placeholder="min" v-model="item.checkboxList[0].min" />
                       <span>-</span>
-                      <input
-                        type="number"
-                        placeholder="max"
-                        v-model="item.checkboxList[0].max"
-                      />
+                      <input type="number" placeholder="max" v-model="item.checkboxList[0].max" />
                     </div>
-                    <div class="btn" @click="clickOK(item.checkboxList[0])">
-                      OK
-                    </div>
+                    <div class="btn" @click="clickOK(item.checkboxList[0])">OK</div>
                   </div>
                   <ul class="checkbox_content" v-else>
-                    <li
-                      v-for="(ite, ind) in item.checkboxList"
-                      :key="ind"
-                      @click="checkboxClick(ite)"
-                    >
-                      <div class="input">
-                        <i
-                          class="iconfont pcfuxuankuang-quanxuan"
-                          v-show="ite.isChecked"
-                        ></i>
-                        <i
-                          class="iconfont pcfuxuankuang-weiquanxuan"
-                          v-show="!ite.isChecked"
-                        ></i>
+                    <li v-for="(ite, ind) in item.checkboxList" :key="ind" @click="checkboxClick(ite)">
+                      <div class="check">
+                        <i class="iconfont pcfuxuankuang-quanxuan" v-show="ite.isChecked"></i>
+                        <i class="iconfont pcfuxuankuang-weiquanxuan" v-show="!ite.isChecked"></i>
                       </div>
                       <div class="label">{{ ite.label }}</div>
                     </li>
@@ -366,24 +287,18 @@ export default {
   transition: all 0.3s;
   .title {
     width: 2.5rem;
-    height: 0.9rem;
-    line-height: 0.9rem;
+    height: 0.5rem;
+    line-height: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid;
-    border-image: linear-gradient(
-        135deg,
-        rgba(212, 135, 241, 0.44),
-        rgba(82, 224, 255, 0.44)
-      )
-      1 1;
+    border-image: linear-gradient(135deg, rgba(212, 135, 241, 0.44), rgba(82, 224, 255, 0.44)) 1 1;
     i {
       font-size: 0.25rem;
       cursor: pointer;
     }
   }
-}
   .list {
     width: 2.5rem;
     .checkbox_title {
@@ -410,7 +325,7 @@ export default {
         font-weight: 600;
         color: #ffffff;
         padding: 0.1rem;
-        .input {
+        .check {
           margin-right: 0.2rem;
         }
       }
@@ -459,6 +374,7 @@ export default {
       }
     }
   }
+}
 
 .boxlist {
   width: calc(100% - 2.5rem);
@@ -466,15 +382,10 @@ export default {
   transition: all 0.3s;
   .title {
     width: 100%;
-    height: 0.9rem;
-    line-height: 0.9rem;
+    height: 0.5rem;
+    line-height: 0.5rem;
     border-bottom: 1px solid;
-    border-image: linear-gradient(
-        135deg,
-        rgba(212, 135, 241, 0.44),
-        rgba(82, 224, 255, 0.44)
-      )
-      1 1;
+    border-image: linear-gradient(135deg, rgba(212, 135, 241, 0.44), rgba(82, 224, 255, 0.44)) 1 1;
     font-size: 0.15rem;
     font-weight: 600;
     color: #828282;
@@ -544,6 +455,7 @@ export default {
       }
       .center {
         width: 100%;
+        padding: 0.05rem 0;
         div {
           display: flex;
           align-items: center;
@@ -552,7 +464,6 @@ export default {
             font-size: 0.12rem;
             font-weight: bold;
             color: #00b1ff;
-            padding: 0.05rem;
             img {
               width: 0.24rem;
               height: auto;
@@ -577,49 +488,102 @@ export default {
 }
 
 @media screen and (max-width: 750px) {
+  .page {
+    width: 100%;
+    min-height: calc(100vh - 1rem);
+    padding: 0.5rem 0;
+  }
   .box {
     width: 100%;
-    margin-top: 0;
-
+    margin-top: 0.2rem;
     .selectionlist {
       display: none;
     }
-
-    .list{
+    .list {
       color: #fff;
     }
     .boxlist {
-      width: 3.15rem;
+      width: 90%;
+      padding-left: 0;
       .title {
         height: 0.3rem;
+        line-height: 0.3rem;
         font-size: 0.12rem;
-        line-height: 0.14rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         i {
-          width: 0.27rem;
-          display: inline-block;
-          color: #fff;
+          display: block;
           font-size: 0.25rem;
-        }
-        span {
-          float: right;
+          color: #fff;
         }
       }
     }
-
     .checkedbox {
-      height: 0.41rem;
-      .btn{
-        height: 0.5rem;
-        line-height: 0.5rem;
+      height: 0.5rem;
+      line-height: 0.5rem;
+      .taglist {
+        max-width: calc(100% - 0.6rem);
+      }
+      .btn {
+        width: 0.6rem;
       }
     }
     .card_list {
+      width: 100%;
+      height: 5rem;
+      padding-right: 0.05rem;
       li {
-        width: 1.29rem;
-        height: 1.83rem;
-        margin: 0 0.25rem 0.19rem 0;
+        width: 1.6rem;
+        margin: 0 0.1rem 0.1rem 0;
         &:nth-child(2n) {
           margin-right: 0;
+        }
+      }
+    }
+  }
+  .market_drawer {
+    .selectionlist {
+      display: block;
+      width: 100%;
+      .list {
+        width: 100%;
+        .checkbox_title {
+          width: 100%;
+          font-size: 0.18rem;
+          i {
+            font-size: 0.2rem;
+            margin-right: 0.05rem;
+          }
+        }
+        .checkbox_content {
+          width: 100%;
+          padding: 0.05rem;
+          li {
+            padding: 0.05rem;
+            .check {
+              margin-right: 0.1rem;
+            }
+          }
+        }
+        .input_list {
+          width: 100%;
+          padding: 0.05rem;
+          .inputbox {
+            input {
+              width: 35%;
+              height: 0.3rem;
+            }
+            span {
+              margin: 0 0.1rem;
+            }
+          }
+          .btn {
+            width: 40%;
+            height: 0.3rem;
+            font-size: 0.15rem;
+            margin-top: 0.05rem;
+          }
         }
       }
     }

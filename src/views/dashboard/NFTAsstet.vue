@@ -7,7 +7,7 @@
           {{ item.label }}({{ item.total }})
         </li>
       </ul>
-      <div v-show="isShowCheck">
+      <div v-show="switchIndex == 1">
         <i class="iconfont pcfuxuankuang-quanxuan"></i>
         <i class="iconfont pcfuxuankuang-weiquanxuan"></i>
         Select all/Unselect
@@ -29,7 +29,7 @@
             <!-- <div>{{ $t("artist.text10") }}77busd</div> -->
           </div>
         </div>
-        <div class="cancel_box" v-if="isShowCheck">
+        <div class="cancel_box" v-if="switchIndex == 1">
           <span>90 BUSD</span>
           <el-button type="primary">Cancel</el-button>
         </div>
@@ -50,11 +50,10 @@ export default {
   data() {
     return {
       isloading: false,
-      isShowCheck: false,
       switchIndex: 0,
       switchList: [
         { label: "Collection", total: 0 },
-        // { label: "On sale", total: 0 },
+        { label: "On sale", total: 0 },
       ],
       cardList: shikastudio.works,
       heroIdList: [],
@@ -78,17 +77,14 @@ export default {
   methods: {
     switchTab(index) {
       this.switchIndex = index;
+      this.newCardList = [];
       if (index == 0) {
-        this.isShowCheck = false;
-        this.newCardList = [];
-        if (sessionStorage.getItem("NFTAsstetCnIds")) {
-          const cnIds = JSON.parse(sessionStorage.getItem("NFTAsstetCnIds"));
-          this.getHeroList(cnIds);
+        if (sessionStorage.getItem("NFTAsstetList")) {
+          this.newCardList = JSON.parse(sessionStorage.getItem("NFTAsstetList"));
+          this.switchList[0].total = this.newCardList.length;
         } else {
           this.tokensOfOwnerBySize();
         }
-      } else {
-        this.isShowCheck = true;
       }
     },
     /**
@@ -106,7 +102,6 @@ export default {
           const cnIds = res[0].map((item) => {
             return Number(item);
           });
-          sessionStorage.setItem("NFTAsstetCnIds", JSON.stringify(cnIds));
           this.getHeroList(cnIds);
         })
         .catch((err) => {
@@ -125,6 +120,7 @@ export default {
             const obj = this.cardList.find((item) => item.id == element);
             this.newCardList.push(obj);
           });
+          sessionStorage.setItem("NFTAsstetList", JSON.stringify(this.newCardList));
           this.switchList[0].total = this.newCardList.length;
         }
       }, 200);
@@ -237,10 +233,10 @@ export default {
       }
       .center {
         width: 100%;
+        padding: 0.05rem;
         div {
           display: flex;
           align-items: center;
-          padding: 0.05rem;
           font-size: 0.12rem;
           font-weight: bold;
           &:nth-child(1) {
@@ -320,8 +316,8 @@ export default {
       }
       .card {
         .center {
+          padding: 0.05rem;
           div {
-            padding: 0 0.05rem;
             &:nth-child(1) {
               img {
                 width: 0.12rem;

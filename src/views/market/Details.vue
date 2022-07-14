@@ -92,12 +92,6 @@
             <span>{{ name }}</span>
             <img :src="`${$urlImages}icon1.webp`" alt="" />
           </div>
-          <div class="row_right">
-            <img :src="`${$urlImages}contact11.webp`" alt="" />
-            <img :src="`${$urlImages}contact2.webp`" alt="" />
-            <img :src="`${$urlImages}contact3.webp`" alt="" />
-            <img :src="`${$urlImages}contact4.webp`" alt="" />
-          </div>
         </div>
         <div class="row2">{{ $t(card.title) }} - {{ $t(card.name) }}</div>
       </div>
@@ -139,21 +133,11 @@
         </div>
       </div>
       <div class="attribute box">
-        <div class="header" @click="clickHandler1">
+        <div class="header">
           <i class="iconfont pcshuxingchaxun"></i>
           <span>属性</span>
-          <span class="arrow">
-            <i
-              class="el-collapse-item__arrow el-icon-arrow-right"
-              v-show="!contentBox[0].isActived"
-            ></i>
-            <i
-              class="el-collapse-item__arrow el-icon-arrow-right is-active"
-              v-show="contentBox[0].isActived"
-            ></i>
-          </span>
         </div>
-        <div class="attr_body" v-show="contentBox[0].isCollapase">
+        <div class="attr_body">
           <ul>
             <li>
               <i class="iconfont pcshuxingchaxun"></i>
@@ -180,21 +164,11 @@
       </div>
 
       <div class="description box">
-        <div class="header" @click="clickHandler2">
+        <div class="header">
           <i class="iconfont pcshuxingchaxun"></i>
           <span>NFT介绍</span>
-          <span class="arrow">
-            <i
-              class="el-collapse-item__arrow el-icon-arrow-right"
-              v-show="!contentBox[1].isActived"
-            ></i>
-            <i
-              class="el-collapse-item__arrow el-icon-arrow-right is-active"
-              v-show="contentBox[1].isActived"
-            ></i>
-          </span>
         </div>
-        <div class="des_body" v-show="contentBox[1].isCollapase">
+        <div class="des_body">
           <div>
             <pre>{{ $t(card.nftdes) }}</pre>
           </div>
@@ -202,21 +176,11 @@
       </div>
 
       <div class="history box">
-        <div class="header" @click="clickHandler3">
+        <div class="header">
           <i class="iconfont pcshuxingchaxun"></i>
           <span>交易记录</span>
-          <span class="arrow">
-            <i
-              class="el-collapse-item__arrow el-icon-arrow-right"
-              v-show="!contentBox[2].isActived"
-            ></i>
-            <i
-              class="el-collapse-item__arrow el-icon-arrow-right is-active"
-              v-show="contentBox[2].isActived"
-            ></i>
-          </span>
         </div>
-        <div class="his_body" v-show="contentBox[2].isCollapase">
+        <div class="his_body">
           <ul>
             <li v-for="index of 10" :key="index">
               <span>From</span>
@@ -227,68 +191,8 @@
           </ul>
         </div>
       </div>
-      <!-- <el-collapse>
-        <el-collapse-item>
-          <template slot="title">
-            <div class="header">
-              <i class="iconfont pcshuxingchaxun"></i>
-              <span>属性</span>
-            </div>
-          </template>
-          <ul class="box">
-            <li>
-              <i class="iconfont pcshuxingchaxun"></i>
-              <span>属性</span>
-              <span>{{ $t(card.attribute) }}</span>
-            </li>
-            <li>
-              <i class="iconfont pcshuxingchaxun"></i>
-              <span>等级</span>
-              <span>一级</span>
-            </li>
-            <li>
-              <i class="iconfont pcshuxingchaxun"></i>
-              <span>星级</span>
-              <span>一级</span>
-            </li>
-            <li>
-              <i class="iconfont pcshuxingchaxun"></i>
-              <span>稀有度</span>
-              <span>{{ $t(card.rarity) }}</span>
-            </li>
-          </ul>
-        </el-collapse-item>
-        <el-collapse-item>
-          <template slot="title">
-            <i class="header-icon el-icon-info"></i>NFT介绍
-          </template>
-          <div class="description">
-            <pre>{{ $t(card.nftdes) }}</pre>
-          </div>
-        </el-collapse-item>
-        <el-collapse-item>
-          <template slot="title">
-            <i class="iconfont pcshuxingchaxun"></i>交易记录
-          </template>
-          <ul>
-            <li v-for="index of 10" :key="index">
-              <span>From</span>
-              <span>0x23...56e4</span>
-              <span>to</span>
-              <span>0x45...4e53</span>
-            </li>
-          </ul>
-        </el-collapse-item>
-      </el-collapse> -->
     </div>
-    <el-dialog
-      center
-      top="0"
-      :title="$t(card.name)"
-      :visible.sync="isShowPopup"
-      :modal-append-to-body="false"
-      :destroy-on-close="true"
-    >
+    <el-dialog center top="0" :title="$t(card.name)" :visible.sync="isShowPopup" :modal-append-to-body="false" :destroy-on-close="true">
       <PaintingVideo :videoUrl="card.video"></PaintingVideo>
     </el-dialog>
   </div>
@@ -304,11 +208,6 @@ export default {
       card: null,
       name: null,
       isShowPopup: false,
-      contentBox: [
-        { title: "attribute", isCollapase: false, isActived: false },
-        { title: "description", isCollapase: false, isActived: false },
-        { title: "history", isCollapase: false, isActived: false },
-      ],
     };
   },
   created() {
@@ -324,19 +223,6 @@ export default {
     },
     toOrder() {
       this.$router.push({ path: "/market-order" });
-    },
-
-    clickHandler1() {
-      this.contentBox[0].isCollapase = !this.contentBox[0].isCollapase;
-      this.contentBox[0].isActived = !this.contentBox[0].isActived;
-    },
-    clickHandler2() {
-      this.contentBox[1].isCollapase = !this.contentBox[1].isCollapase;
-      this.contentBox[1].isActived = !this.contentBox[1].isActived;
-    },
-    clickHandler3() {
-      this.contentBox[2].isCollapase = !this.contentBox[2].isCollapase;
-      this.contentBox[2].isActived = !this.contentBox[2].isActived;
     },
     goBack() {
       history.go(-1);
@@ -422,7 +308,6 @@ export default {
         }
       }
     }
-
     .rightbox {
       width: 5rem;
       height: 100%;
@@ -547,7 +432,6 @@ export default {
       width: 5.4rem;
       height: 2.25rem;
       max-width: 100%;
-
       span {
         display: inline-block;
         text-align: right;
@@ -630,7 +514,6 @@ export default {
   width: 3.15rem;
   height: auto;
   margin: 0.2rem auto;
-  // background-color: PINK;
   flex-direction: column;
   justify-content: space-between;
   .title {
@@ -651,16 +534,6 @@ export default {
           width: 0.15rem;
           height: 0.15rem;
           margin: 0.025rem 0 0 0.05rem;
-        }
-      }
-      .row_right {
-        display: flex;
-        justify-content: space-between;
-        width: 0.95rem;
-        img {
-          width: 0.2rem;
-          height: 0.2rem;
-          vertical-align: middle;
         }
       }
     }
@@ -686,12 +559,6 @@ export default {
       left: 0.2rem;
       top: 0.4rem;
     }
-    // .header {
-    //   width: 100%;
-    //   height: 0.5rem;
-    //   border-bottom: 0.01rem solid #5a5a5a;
-    // }
-
     .btn {
       padding: 0 0 0.05rem 0.2rem;
       width: 1.8rem;
@@ -745,11 +612,6 @@ export default {
         height: 100%;
         font-size: 0.15rem;
         vertical-align: top;
-      }
-      .arrow {
-        float: right;
-        margin-right: 0.2rem;
-        font-size: 0.15rem;
       }
     }
   }
@@ -821,12 +683,10 @@ export default {
       }
     }
   }
-
   .attribute {
     height: auto;
     .attr_body {
       padding: 0.1rem 0.4rem;
-
       ul {
         height: 1.25rem;
         display: flex;
@@ -846,17 +706,15 @@ export default {
       }
     }
   }
-
   .description {
     height: auto;
     .des_body {
-      width: 3.15rem;
-      height: 1.87rem;
-      padding: 0.16rem 0.12rem;
+      width: 100%;
+      height: fit-content;
+      padding: 0.1rem;
       div {
         height: 100%;
         overflow-y: auto;
-        padding: 0.18rem;
         pre {
           font-size: 0.12rem;
           line-height: 0.18rem;
@@ -864,15 +722,12 @@ export default {
       }
     }
   }
-
   .history {
     height: auto;
-    margin-bottom: 0.37rem;
-
     .his_body {
       width: 100%;
-      height: 0.84rem;
-      padding: 0.15rem 0.1rem 0.15rem 0.16rem;
+      height: 2rem;
+      padding: 0.1rem;
       ul {
         height: 100%;
         font-size: 0.12rem;
@@ -880,7 +735,6 @@ export default {
         flex-direction: column;
         justify-content: space-between;
         overflow-y: auto;
-
         li {
           margin-bottom: 0.04rem;
           span {
@@ -895,53 +749,12 @@ export default {
       }
     }
   }
-  // .el-collapse {
-
-  //   .el-collapse-item{
-  //     height: auto;
-  //     >>>.el-collapse-item__header{
-  //       height: 0.4rem !important;
-  //     }
-  //   }
-
-  //   .box {
-  //     width: 100%;
-  //     height: 100%;
-  //     font-size: 0.12rem;
-  //     background: rgba(24, 24, 28, 0.8);
-  //     padding: 0.1rem 0.39rem;
-  //     color: #fff;
-  //     display: flex;
-  //     flex-direction: column;
-  //     justify-content: space-between;
-  //     li {
-  //       i {
-  //         font-size: 0.15rem;
-  //       }
-  //       span {
-  //         &:nth-child(2) {
-  //           margin: 0 1.59rem 0 0.1rem;
-  //         }
-  //       }
-  //     }
-  //   }
-  //   .description {
-  //     pad pre {
-  //       background: rgba(24, 24, 28, 0.8);
-  //     }
-  //   }
-  // }
-  // .el-collapse {
-  //   .el-collapse-item__content {
-  //     display: flex;
-  //   }
-  // }
 }
 
 @media screen and (max-width: 750px) {
   .page {
     width: 100%;
-    padding-top: 0.5rem;
+    padding: 0.5rem 0;
   }
   .banner {
     width: 100%;

@@ -45,7 +45,7 @@
           </div>
         </div>
       </div>
-      <el-drawer :visible.sync="isShowDrawer" :with-header="false">
+      <el-drawer :visible.sync="isShowDrawer" :with-header="false" class="dashboard_drawer">
         <div class="drawer_box">
           <div class="title">
             <span>Register/Login/Logout</span>
@@ -257,7 +257,8 @@ export default {
 }
 .nftbox {
   width: 100%;
-  min-height: 5rem;
+  // min-height: 5rem;
+  height: fit-content;
   margin: 0.2rem 0;
   display: flex;
   justify-content: space-between;
@@ -269,85 +270,88 @@ export default {
     padding-left: 0.2rem;
   }
 }
-.drawer_box {
-  padding: 0.8rem 0.2rem;
-  .title {
-    font-size: 0.15rem;
-    font-weight: bold;
-    color: #acacac;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    i {
-      cursor: pointer;
-      font-size: 0.35rem;
-    }
-  }
-  .box1 {
-    text-align: center;
-    margin: 0.2rem 0;
-    img {
-      width: 1.55rem;
-      height: 1.55rem;
-    }
-    > div {
-      .textbox,
-      .inputbox {
-        width: fit-content;
-        height: 0.35rem;
-        line-height: 0.35rem;
-        margin: 0.1rem auto;
-        color: #ffffff;
-        display: flex;
-        i {
-          cursor: pointer;
-          width: 0.3rem;
-          font-size: 0.2rem;
-        }
-      }
-      .textbox {
-        font-size: 0.15rem;
-        font-weight: bold;
-      }
-      .inputbox {
-        background: rgba(24, 24, 28, 0.8);
-        border-radius: 0.04rem;
-        border: 1px solid #606060;
-        input {
-          font-size: 0.15rem;
-          color: #ffffff;
-        }
-      }
-    }
-  }
-  .box2 {
-    > div {
+.dashboard_drawer {
+  .drawer_box {
+    padding: 0.8rem 0.2rem;
+    .title {
       font-size: 0.15rem;
-      font-weight: 500;
-      margin: 0.2rem 0;
-    }
-    ul {
-      li {
-        float: left;
-        width: fit-content;
-        height: 0.3rem;
-        line-height: 0.3rem;
-        font-size: 0.12rem;
-        font-weight: 600;
-        background: rgba(255, 255, 255, 0.19);
-        border-radius: 0.07rem;
-        backdrop-filter: blur(7px);
-        padding: 0 0.1rem;
-        margin: 0 0.1rem 0.1rem 0;
+      font-weight: bold;
+      color: #acacac;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      i {
         cursor: pointer;
-        &:hover,
-        &.active {
-          background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
+        font-size: 0.35rem;
+      }
+    }
+    .box1 {
+      text-align: center;
+      margin: 0.2rem 0;
+      img {
+        width: 1.55rem;
+        height: 1.55rem;
+      }
+      > div {
+        .textbox,
+        .inputbox {
+          width: fit-content;
+          height: 0.35rem;
+          line-height: 0.35rem;
+          margin: 0.1rem auto;
+          color: #ffffff;
+          display: flex;
+          i {
+            cursor: pointer;
+            width: 0.3rem;
+            font-size: 0.2rem;
+          }
+        }
+        .textbox {
+          font-size: 0.15rem;
+          font-weight: bold;
+        }
+        .inputbox {
+          background: rgba(24, 24, 28, 0.8);
+          border-radius: 0.04rem;
+          border: 1px solid #606060;
+          input {
+            font-size: 0.15rem;
+            color: #ffffff;
+          }
+        }
+      }
+    }
+    .box2 {
+      > div {
+        font-size: 0.15rem;
+        font-weight: 500;
+        margin: 0.2rem 0;
+      }
+      ul {
+        li {
+          float: left;
+          width: fit-content;
+          height: 0.3rem;
+          line-height: 0.3rem;
+          font-size: 0.12rem;
+          font-weight: 600;
+          background: rgba(255, 255, 255, 0.19);
+          border-radius: 0.07rem;
+          backdrop-filter: blur(7px);
+          padding: 0 0.1rem;
+          margin: 0 0.1rem 0.1rem 0;
+          cursor: pointer;
+          &:hover,
+          &.active {
+            background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
+          }
         }
       }
     }
   }
 }
+
 @media screen and (max-width: 750px) {
   .page {
     width: 100%;
@@ -425,42 +429,44 @@ export default {
       margin-top: 0.1rem;
     }
   }
-  .drawer_box {
-    padding: 0.8rem 0.2rem;
-    .title {
-      i {
-        font-size: 0.2rem;
+  .dashboard_drawer {
+    .drawer_box {
+      padding: 0.8rem 0.2rem;
+      .title {
+        i {
+          font-size: 0.2rem;
+        }
       }
-    }
-    .box1 {
-      img {
-        width: 1rem;
-        height: 1rem;
-      }
-      > div {
-        .textbox,
-        .inputbox {
-          height: 0.3rem;
-          line-height: 0.3rem;
-          margin: 0.05rem auto;
-          i {
-            width: 0.3rem;
-            font-size: 0.15rem;
+      .box1 {
+        img {
+          width: 1rem;
+          height: 1rem;
+        }
+        > div {
+          .textbox,
+          .inputbox {
+            height: 0.3rem;
+            line-height: 0.3rem;
+            margin: 0.05rem auto;
+            i {
+              width: 0.3rem;
+              font-size: 0.15rem;
+            }
           }
         }
       }
-    }
-    .box2 {
-      > div {
-        margin: 0.1rem 0;
-      }
-      ul {
-        li {
-          height: 0.24rem;
-          line-height: 0.24rem;
-          border-radius: 0.04rem;
-          padding: 0 0.1rem;
-          margin: 0 0.1rem 0.1rem 0;
+      .box2 {
+        > div {
+          margin: 0.1rem 0;
+        }
+        ul {
+          li {
+            height: 0.24rem;
+            line-height: 0.24rem;
+            border-radius: 0.04rem;
+            padding: 0 0.1rem;
+            margin: 0 0.1rem 0.1rem 0;
+          }
         }
       }
     }

@@ -38,10 +38,10 @@
               <span v-show="isShow">{{ item.availableBalance | numberToFixed(2) }}</span>
               <span v-show="!isShow">******</span>
             </div>
-            <div class="btns">
+            <div class="btns" @click="$utils.handleCopy(item.coinAddr)">
               <span>{{ item.coinAddr | ellipsisWallet }}</span>
-              <span class="btn" v-show="item.isShowAdd" @click="addAddress(item)"><i class="iconfont pcjiahao"></i></span>
-              <span class="btn" v-show="!item.isShowAdd" @click="$utils.handleCopy(item.coinAddr)"><i class="iconfont pcfuzhi"></i></span>
+              <span class="btn" v-show="item.isShowAdd" @click.stop="addAddress(item)"><i class="iconfont pcjiahao"></i></span>
+              <span class="btn" v-show="!item.isShowAdd"><i class="iconfont pcfuzhi"></i></span>
             </div>
           </li>
         </ul>
@@ -68,7 +68,26 @@ export default {
     return {
       isShow: false,
       balanceAmount: null,
-      cardList: [],
+      cardList: [
+        {
+          label: "USDT",
+          logo: "coin-usdt",
+          coinAddr: token().USDT,
+          isShowAdd: false,
+        },
+        {
+          label: "WAVAX",
+          logo: "coin-avax",
+          coinAddr: token().WAVAX,
+          isShowAdd: false,
+        },
+        {
+          label: "FUN",
+          logo: "coin-fun",
+          coinAddr: token().FUN,
+          isShowAdd: true,
+        },
+      ],
     };
   },
 
@@ -94,16 +113,9 @@ export default {
             // console.log("USDT", res2.data["tether"]);
             const price = res2.data["tether"].usd;
             const totalCoin = Number(util.formatEther(res._hex));
-            const obj = {
-              label: "USDT",
-              logo: "coin-usdt",
-              totalCoin: totalCoin, //币个数
-              totalPrice: price * totalCoin, //总价值
-              availableBalance: totalCoin, //可用余额
-              coinAddr: token().USDT,
-              isShowAdd: false,
-            };
-            this.cardList.push(obj);
+            this.cardList[0].totalCoin = totalCoin; //币个数
+            this.cardList[0].totalPrice = price * totalCoin; //总价值
+            this.cardList[0].availableBalance = totalCoin; //可用余额
           });
         })
         .catch((err) => {
@@ -116,16 +128,9 @@ export default {
             // console.log("WAVAX", res2.data["avalanche-2"]);
             const price = res2.data["avalanche-2"].usd;
             const totalCoin = Number(util.formatEther(res._hex));
-            const obj = {
-              label: "WAVAX",
-              logo: "coin-avax",
-              totalCoin: totalCoin, //币个数
-              totalPrice: price * totalCoin, //总价值
-              availableBalance: totalCoin, //可用余额
-              coinAddr: token().WAVAX,
-              isShowAdd: false,
-            };
-            this.cardList.push(obj);
+            this.cardList[1].totalCoin = totalCoin;
+            this.cardList[1].totalPrice = price * totalCoin;
+            this.cardList[1].availableBalance = totalCoin;
           });
         })
         .catch((err) => {
@@ -134,16 +139,9 @@ export default {
       erc20(token().FUN)
         .balanceOf(this.getWalletAccount)
         .then((res) => {
-          const obj = {
-            label: "FUN",
-            logo: "coin-fun",
-            totalCoin: Number(util.formatEther(res._hex)),
-            totalPrice: null,
-            availableBalance: Number(util.formatEther(res._hex)),
-            coinAddr: token().FUN,
-            isShowAdd: true,
-          };
-          this.cardList.push(obj);
+          this.cardList[2].totalCoin = Number(util.formatEther(res._hex));
+          this.cardList[2].totalPrice = null;
+          this.cardList[2].availableBalance = Number(util.formatEther(res._hex));
         })
         .catch((err) => {
           console.error("erc20(token().FUN).balanceOf", err);

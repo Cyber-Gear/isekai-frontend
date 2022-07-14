@@ -7,7 +7,7 @@
           {{ item.label }}({{ item.total }})
         </li>
       </ul>
-      <div v-show="isShowCheck">
+      <div v-show="switchIndex == 1">
         <i class="iconfont pcfuxuankuang-quanxuan"></i>
         <i class="iconfont pcfuxuankuang-weiquanxuan"></i>
         Select all/Unselect
@@ -75,7 +75,7 @@ export default {
       switchIndex: 0,
       switchList: [
         { label: "Collection", total: 0 },
-        // { label: "On sale", total: 0 },
+        { label: "On sale", total: 0 },
       ],
       idArr: [],
       cardList: [],
@@ -100,7 +100,6 @@ export default {
     switchTab(index) {
       this.switchIndex = index;
       if (index == 0) {
-        this.isShowCheck = false;
         this.switchList[0].total = 0;
         if (sessionStorage.getItem("MysteyBoxesList")) {
           this.boxList = JSON.parse(sessionStorage.getItem("MysteyBoxesList"));
@@ -111,7 +110,7 @@ export default {
           this.tokensOfOwnerBySize();
         }
       } else {
-        this.isShowCheck = true;
+        this.cardList = [];
       }
     },
     /**

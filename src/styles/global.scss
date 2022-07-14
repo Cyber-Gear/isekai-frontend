@@ -371,6 +371,9 @@ body {
   .el-collapse-item__wrap {
     background-color: transparent;
     border-bottom: 1px solid transparent;
+    .el-collapse-item__content {
+      padding-bottom: 0;
+    }
   }
 }
 .el-tag {
@@ -399,13 +402,20 @@ body {
 .el-drawer__wrapper {
   .el-drawer__container {
     .el-drawer {
-      width: 4.5rem !important;
       background-color: rgba(129, 129, 151, 0.19);
       border-radius: 0.08rem 0 0 0.08rem;
       backdrop-filter: blur(7px);
     }
   }
 }
+.dashboard_drawer {
+  .el-drawer__container {
+    .el-drawer {
+      width: 4.5rem !important;
+    }
+  }
+}
+
 .el-menu-dashboard {
   border-right: 0;
   background-color: transparent;
@@ -653,10 +663,27 @@ body {
       }
     }
   }
-  .el-drawer__wrapper {
+  .dashboard_drawer {
     .el-drawer__container {
       .el-drawer {
         width: 80vw !important;
+      }
+    }
+  }
+  .market_drawer {
+    .el-drawer__container {
+      .el-drawer {
+        width: 80vw !important;
+        padding: 0 5vw;
+        .el-collapse {
+          .el-collapse-item__header {
+            height: 0.5rem;
+            line-height: 0.5rem;
+            .el-collapse-item__arrow {
+              font-size: 0.18rem;
+            }
+          }
+        }
       }
     }
   }

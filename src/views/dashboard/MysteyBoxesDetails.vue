@@ -29,8 +29,8 @@
         </div>
       </li>
     </ul>
-    <div class="btn">
-      <el-button :disabled="checkList.length == 0" @click="openBoxes"> {{ "Open" }}({{ checkList.length }}) </el-button>
+    <div class="btn" v-show="checkList.length > 0">
+      <el-button type="primary" @click="openBoxes"> {{ "Open" }}({{ checkList.length }}) </el-button>
     </div>
     <el-dialog center top="0" :title="'Blind box results'" :visible.sync="isShowPopup" :modal-append-to-body="false" :destroy-on-close="true">
       <BlindResultsPopup v-if="isShowPopup" :openedCnIds="openedCnIds"></BlindResultsPopup>
@@ -98,13 +98,9 @@ export default {
       this.boxList.forEach((element) => {
         if (element.boxType == this.boxInfo.boxType) {
           element = this.boxInfo;
-          sessionStorage.setItem("MysteyBoxesList", JSON.stringify(this.boxList));
-          if (sessionStorage.getItem("NFTAsstetCnIds")) {
-            const cnIds = JSON.parse(sessionStorage.getItem("NFTAsstetCnIds"));
-            const arr = [...cnIds, ...this.openedCnIds].sort((a, b) => a - b);
-            sessionStorage.setItem("NFTAsstetCnIds", JSON.stringify(arr));
-          }
           this.checkList = [];
+          sessionStorage.setItem("MysteyBoxesList", JSON.stringify(this.boxList));
+          if (sessionStorage.getItem("NFTAsstetList")) sessionStorage.removeItem("NFTAsstetList");
         }
       });
     });
@@ -153,6 +149,7 @@ export default {
 .box {
   width: 100%;
   height: auto;
+  position: relative;
 }
 .title {
   width: 100%;
@@ -198,11 +195,14 @@ export default {
       .card {
         background: rgba(51, 52, 60, 0.57);
         box-shadow: 0.05rem 0.08rem 0.1rem 0rem rgba(0, 0, 0, 0.5);
+        .top {
+          background: radial-gradient(circle, #342c56 0%, #1c395a 33%, rgba(96, 78, 157, 0.72) 100%);
+        }
       }
     }
     .card {
       width: 100%;
-      padding: 0.1rem;
+      padding: 0.1rem 0.1rem 0 0.1rem;
       background: rgba(0, 0, 0, 0.38);
       border-radius: 0.1rem;
       border: 0.01rem solid #3f3e43;
@@ -211,7 +211,6 @@ export default {
       .top {
         width: 100%;
         text-align: center;
-        background: radial-gradient(circle, #342c56 0%, #1c395a 33%, rgba(96, 78, 157, 0.72) 100%);
         border-radius: 0.08rem;
         img {
           width: 70%;
@@ -256,17 +255,18 @@ export default {
   }
 }
 .btn {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 0.3rem;
+  width: fit-content;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.5rem;
+  margin: auto;
   .el-button {
-    width: 3.6rem;
+    width: 3.5rem;
     height: 0.45rem;
     line-height: 0.45rem;
     font-size: 0.15rem;
     font-weight: 600;
-    color: #999999;
   }
 }
 @media screen and (max-width: 750px) {
@@ -315,13 +315,14 @@ export default {
       }
       .card {
         width: 100%;
-        padding: 0.05rem;
+        padding: 0.05rem 0.05rem 0 0.05rem;
         border-radius: 0.04rem;
         .top {
           width: 100%;
           border-radius: 0.04rem;
         }
         .center {
+          padding: 0.05rem 0;
           .row1 {
             div {
               font-size: 0.12rem;

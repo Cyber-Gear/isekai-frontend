@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <div class="title">Mystey Boxes Details</div>
+    <div class="title">{{ $t("dashboard.text27") }}</div>
     <div class="back_titlebox">
       <i class="iconfont pcfanhui" @click="goBack"></i>
       {{ boxInfo.label }} ({{ boxInfo.list.length }})
@@ -30,9 +30,9 @@
       </li>
     </ul>
     <div class="btn" v-show="checkList.length > 0">
-      <el-button type="primary" @click="openBoxes"> {{ "Open" }}({{ checkList.length }}) </el-button>
+      <el-button type="primary" @click="openBoxes"> {{ $t("dashboard.text28") }} ({{ checkList.length }}) </el-button>
     </div>
-    <el-dialog center top="0" :title="'Blind box results'" :visible.sync="isShowPopup" :modal-append-to-body="false" :destroy-on-close="true">
+    <el-dialog center top="0" :title="$t('dashboard.text19')" :visible.sync="isShowPopup" :modal-append-to-body="false" :destroy-on-close="true">
       <BlindResultsPopup v-if="isShowPopup" :openedCnIds="openedCnIds"></BlindResultsPopup>
     </el-dialog>
   </div>
@@ -134,7 +134,7 @@ export default {
           this.loadingFullScreen = this.$loading({
             target: "#app",
             lock: true, // 禁止页面滚动，必须要挂载在#app上，其他不生效
-            text: "Loading",
+            text: this.$t("tips.text13"),
             spinner: "el-icon-loading",
             background: "rgba(0, 0, 0, 0.8)",
           });

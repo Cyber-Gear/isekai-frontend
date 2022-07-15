@@ -1,23 +1,23 @@
 <template>
   <div class="box">
     <div class="title">
-      <div class="left">Orders</div>
+      <div class="left">{{ $t("dashboard.text8") }}</div>
       <div class="right">
-        <el-select v-model="selectKey" @change="selectChange">
+        <!-- <el-select v-model="selectKey" @change="selectChange">
           <el-option v-for="item in selectOptions" :key="item.value" :label="$t(item.label)" :value="item.value"></el-option>
-        </el-select>
-        <el-date-picker v-model="dateTime" type="daterange" range-separator="-" start-placeholder="YYYY-MM-DD" end-placeholder="YYYY-MM-DD">
-        </el-date-picker>
+        </el-select> -->
+        <!-- <el-date-picker v-model="dateTime" type="daterange" range-separator="-" start-placeholder="YYYY-MM-DD" end-placeholder="YYYY-MM-DD">
+        </el-date-picker> -->
       </div>
     </div>
     <ul class="switch_list1">
       <li v-for="(item, index) in switchList1" :key="index" :class="{ active: switchIndex1 == index }" @click="switchTab1(index)">
-        {{ item.label }}
+        {{ $t(item.label) }}
       </li>
     </ul>
     <ul class="switch_list2">
       <li v-for="(item, index) in switchList2" :key="index" :class="{ active: switchIndex2 == index }" @click="switchTab2(index)">
-        {{ item.label }}
+        {{ $t(item.label) }}
       </li>
     </ul>
     <ul class="card_list" v-if="cardList.length > 0">
@@ -60,8 +60,8 @@ export default {
         { value: 5, label: "status.text9" },
       ],
       dateTime: "",
-      switchList1: [{ label: "Purchase History" }, { label: "Sales History" }, { label: "Selling Order" }],
-      switchList2: [{ label: "NFTs(Marketplace)" }, { label: "Mastery Boxes" }],
+      switchList1: [{ label: "dashboard.text23" }, { label: "dashboard.text24" }, { label: "dashboard.text25" }],
+      switchList2: [{ label: "dashboard.text26" }, { label: "dashboard.text27" }],
       switchIndex1: 0,
       switchIndex2: 0,
       cardList: [],

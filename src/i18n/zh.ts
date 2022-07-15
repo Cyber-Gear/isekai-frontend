@@ -234,7 +234,6 @@ export default {
     text15: "投出您的票",
     text16: "投票数",
     text17: "讨论",
-    // text22: "项目通过审计并启动锁仓计划。投资者可以通过智能合约对您的资金进行锁仓且支持本项目",
     text25: "投票",
     text26: "信息",
     text27: "策略",
@@ -287,6 +286,33 @@ export default {
   },
   dashboard: {
     text1: "Dashboard",
+    text2: "MY NFT",
+    text3: "Asstet",
+    text4: "NFT Asstet",
+    text5: "Mastery Boxes",
+    text6: "Crypto Asstet",
+    text7: "History",
+    text8: "Orders",
+    text9: "Favorites",
+    text10: "My Favorites",
+    text11: "TAG",
+    text12: "Collection",
+    text13: "On sale",
+    text14: "Select All",
+    text15: "Unselect",
+    text16: "Cancel",
+    text17: "Total",
+    text18: "View All",
+    text19: "Blind box results",
+    text20: "Balance",
+    text21: "Available",
+    text22: "Contract",
+    text23: "Purchase History",
+    text24: "Sales History",
+    text25: "Selling Order",
+    text26: "NFTs(Marketplace)",
+    text27: "Mastery Boxes Details",
+    text28: "Open",
   },
   walletPopup: {
     text1: "未连接钱包",
@@ -302,10 +328,9 @@ export default {
     text3: "第一步",
     text4: "第二步",
   },
-  orderPopup:{
+  orderPopup: {
     text1: "挂单",
-    text2: ""
-
+    text2: "",
   },
   status: {
     text1: "已上架",
@@ -333,6 +358,7 @@ export default {
     text10: "您不在白名单中",
     text11: "购买成功",
     text12: "未上传作品",
+    text13: "请稍等",
   },
   btns: {
     text1: "返回",

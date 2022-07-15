@@ -4,13 +4,13 @@
     <div class="switch_box">
       <ul class="switch_list">
         <li v-for="(item, index) in switchList" :key="index" :class="{ active: switchIndex == index }" @click="switchTab(index)">
-          {{ item.label }}({{ item.total }})
+          {{ $t(item.label) }}({{ item.total }})
         </li>
       </ul>
       <div v-show="switchIndex == 1">
         <i class="iconfont pcfuxuankuang-quanxuan"></i>
         <i class="iconfont pcfuxuankuang-weiquanxuan"></i>
-        Select all/Unselect
+        {{ $t("dashboard.text14") }}/{{ $t("dashboard.text15") }}
       </div>
     </div>
     <ul class="box_list" v-if="switchIndex == 0 && boxList.length > 0">
@@ -22,10 +22,10 @@
           <div>
             <p>{{ item.label }}</p>
             <p>
-              Total: <span>{{ item.list.length }}</span>
+              {{ $t("dashboard.text17") }}: <span>{{ item.list.length }}</span>
             </p>
           </div>
-          <div>View All <i class="iconfont pcfuxuankuang-quanxuan"></i></div>
+          <div>{{ $t("dashboard.text18") }} <i class="iconfont pcfuxuankuang-quanxuan"></i></div>
         </div>
       </li>
     </ul>
@@ -42,12 +42,12 @@
                 <img :src="`${$urlImages}icon1.webp`" alt="" />
               </div>
               <div>
-                <span>{{ item.num1 }}busd</span>
+                <!-- <span>{{ item.num1 }}busd</span> -->
               </div>
             </div>
             <div class="row2">
               <div>{{ item.name2 }}</div>
-              <div>上次成交{{ item.num2 }}busd</div>
+              <!-- <div>上次成交{{ item.num2 }}busd</div> -->
             </div>
           </div>
         </div>
@@ -74,8 +74,8 @@ export default {
       isShowCheck: false,
       switchIndex: 0,
       switchList: [
-        { label: "Collection", total: 0 },
-        { label: "On sale", total: 0 },
+        { label: "dashboard.text12", total: 0 },
+        { label: "dashboard.text13", total: 0 },
       ],
       idArr: [],
       cardList: [],

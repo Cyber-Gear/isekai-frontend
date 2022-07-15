@@ -246,8 +246,6 @@ export default {
     text15: "Cast your vote",
     text16: "Votes",
     text17: "Discuss",
-    // text22:
-    // "The project passes the audit and starts the lock-in plan. The investors can lock the fund through the smart contract and support the project",
     text25: "Vote",
     text26: "Info",
     text27: "Strategy",
@@ -300,12 +298,33 @@ export default {
   },
   dashboard: {
     text1: "Dashboard",
-    text2:"Welcome back Zhaochangpeng!",
-    text3:"See you once again, Let's participate in more activities!",
-    text4:"Register/Login/Logout",
-    text5:"bsc ceo, working web3.0",
-    text6:"TAG",
-
+    text2: "MY NFT",
+    text3: "Asstet",
+    text4: "NFT Asstet",
+    text5: "Mastery Boxes",
+    text6: "Crypto Asstet",
+    text7: "History",
+    text8: "Orders",
+    text9: "Favorites",
+    text10: "My Favorites",
+    text11: "TAG",
+    text12: "Collection",
+    text13: "On sale",
+    text14: "Select All",
+    text15: "Unselect",
+    text16: "Cancel",
+    text17: "Total",
+    text18: "View All",
+    text19: "Blind box results",
+    text20: "Balance",
+    text21: "Available",
+    text22: "Contract",
+    text23: "Purchase History",
+    text24: "Sales History",
+    text25: "Selling Order",
+    text26: "NFTs(Marketplace)",
+    text27: "Mastery Boxes Details",
+    text28: "Open",
   },
   walletPopup: {
     text1: "Wallet Connected",
@@ -321,9 +340,9 @@ export default {
     text3: "step 1",
     text4: "step 2",
   },
-  orderPopup:{
+  orderPopup: {
     text1: "Pending order",
-    text2: ""
+    text2: "",
   },
   status: {
     text1: "On Launchpad",
@@ -351,6 +370,7 @@ export default {
     text10: "You are not on the whitelist",
     text11: "Successful purchase",
     text12: "Not uploaded yet",
+    text13: "Loading",
   },
   btns: {
     text1: "Back",

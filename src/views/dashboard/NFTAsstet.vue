@@ -1,16 +1,16 @@
 <template>
   <div class="box">
-    <div class="title">NFT Asstet</div>
+    <div class="title">{{ $t("dashboard.text4") }}</div>
     <div class="switch_box">
       <ul class="switch_list">
         <li v-for="(item, index) in switchList" :key="index" :class="{ active: switchIndex == index }" @click="switchTab(index)">
-          {{ item.label }}({{ item.total }})
+          {{ $t(item.label) }}({{ item.total }})
         </li>
       </ul>
       <div v-show="switchIndex == 1">
         <i class="iconfont pcfuxuankuang-quanxuan"></i>
         <i class="iconfont pcfuxuankuang-weiquanxuan"></i>
-        Select all/Unselect
+        {{ $t("dashboard.text14") }}/{{ $t("dashboard.text15") }}
       </div>
     </div>
     <ul class="card_list" v-if="newCardList.length > 0">
@@ -52,8 +52,8 @@ export default {
       isloading: false,
       switchIndex: 0,
       switchList: [
-        { label: "Collection", total: 0 },
-        { label: "On sale", total: 0 },
+        { label: "dashboard.text12", total: 0 },
+        { label: "dashboard.text13", total: 0 },
       ],
       cardList: shikastudio.works,
       heroIdList: [],

@@ -1,9 +1,9 @@
 <template>
   <div class="box">
-    <div class="title">Crypto Asstet</div>
+    <div class="title">{{ $t("dashboard.text6") }}</div>
     <div class="topbox">
       <div>
-        Balance
+        {{ $t("dashboard.text20") }}
         <i class="iconfont pcNotvisible" v-show="!isShow" @click="isShow = true"></i>
         <i class="iconfont pcchakan1" v-show="isShow" @click="isShow = false"></i>
       </div>
@@ -30,8 +30,8 @@
             </div>
           </li>
           <li>
-            <div>Available</div>
-            <div>Contract</div>
+            <div>{{ $t("dashboard.text21") }}</div>
+            <div>{{ $t("dashboard.text22") }}</div>
           </li>
           <li>
             <div>

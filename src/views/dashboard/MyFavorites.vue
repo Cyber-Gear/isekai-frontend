@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <div class="title">My Favorites</div>
+    <div class="title">{{ $t("dashboard.text10") }}</div>
     <ul class="card_list">
       <li v-for="(item, index) in cardList" :key="index">
         <div class="top"><img :src="item.logo" alt="" /></div>

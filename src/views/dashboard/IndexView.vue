@@ -27,14 +27,14 @@
                 <el-submenu v-for="(item, index) in menuList" :key="index" :index="item.index">
                   <template slot="title">
                     <i class="iconfont" :class="item.icon"></i>
-                    <span>{{ item.label }}</span>
+                    <span>{{ $t(item.label) }}</span>
                   </template>
                   <el-submenu v-for="(item2, index2) in item.children" :key="index2" :index="item2.index">
                     <template slot="title">
                       <i class="iconfont" :class="item2.icon"></i>
-                      <span>{{ item2.label }}</span>
+                      <span>{{ $t(item2.label) }}</span>
                     </template>
-                    <el-menu-item v-for="(item3, index3) in item2.children" :key="index3" :index="item3.index">{{ item3.label }}</el-menu-item>
+                    <el-menu-item v-for="(item3, index3) in item2.children" :key="index3" :index="item3.index">{{ $t(item3.label) }}</el-menu-item>
                   </el-submenu>
                 </el-submenu>
               </el-menu>
@@ -75,7 +75,7 @@
             </div>
           </div>
           <div class="box2">
-            <div>TAG</div>
+            <div>{{ $t("dashboard.text11") }}</div>
             <ul>
               <li v-for="(item, index) in tagList" :key="index">#{{ item.label }}</li>
             </ul>
@@ -101,20 +101,20 @@ export default {
         {
           index: "mynft",
           icon: "pccategory",
-          label: "MY NFT",
+          label: "dashboard.text2",
           children: [
             {
               index: "asstet",
               icon: "pcshequn",
-              label: "Asstet",
+              label: "dashboard.text3",
               children: [
-                { index: "nft-asstet", label: "NFT Asstet" },
-                { index: "mystey-boxes", label: "Mystey Boxes" },
-                { index: "crypto-asstet", label: "Crypto Asstet" },
+                { index: "nft-asstet", label: "dashboard.text4" },
+                { index: "mystey-boxes", label: "dashboard.text5" },
+                { index: "crypto-asstet", label: "dashboard.text6" },
               ],
             },
-            // { index: "history", icon: "pchistory", label: "History", children: [{ index: "orders", label: "Orders" }] },
-            // { index: "favorites", icon: "pcfavorites", label: "Favorites", children: [{ index: "my-favorites", label: "My Favorites" }] },
+            { index: "history", icon: "pchistory", label: "dashboard.text7", children: [{ index: "orders", label: "dashboard.text8" }] },
+            // { index: "favorites", icon: "pcfavorites", label: "dashboard.text9", children: [{ index: "my-favorites", label: "dashboard.text10" }] },
           ],
         },
       ],

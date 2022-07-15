@@ -110,13 +110,11 @@
 </template>
 
 <script>
-import PaintingVideo from "@/components/PaintingVideo.vue";
-
+// import PaintingVideo from "@/components/PaintingVideo.vue";
 import { shikastudio } from "@/mock/nftworks";
-
 export default {
   name: "MarketOrder",
-  components: { PaintingVideo },
+  // components: { PaintingVideo },
   data() {
     return {
       cardList: null,

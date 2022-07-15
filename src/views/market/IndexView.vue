@@ -375,7 +375,6 @@ export default {
     }
   }
 }
-
 .boxlist {
   width: calc(100% - 2.5rem);
   padding-left: 0.15rem;
@@ -496,27 +495,46 @@ export default {
   .box {
     width: 100%;
     margin-top: 0.2rem;
-    .selectionlist {
-      display: none;
-    }
-    .list {
-      color: #fff;
-    }
-    .boxlist {
-      width: 90%;
-      padding-left: 0;
-      .title {
-        height: 0.3rem;
-        line-height: 0.3rem;
-        font-size: 0.12rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        i {
-          display: block;
-          font-size: 0.25rem;
-          color: #fff;
+    &.hidden {
+      .selectionlist {
+        display: none;
+      }
+      .boxlist {
+        width: 90%;
+        .card_list {
+          li {
+            width: 1.6rem;
+            &:nth-child(4n) {
+              margin-right: 0;
+            }
+            &:nth-child(odd) {
+              margin-right: 0.1rem;
+            } //奇数行
+            &:nth-child(even) {
+              margin-right: 0;
+            } //偶数行
+          }
         }
+      }
+    }
+  }
+  .selectionlist {
+    display: none;
+  }
+  .boxlist {
+    width: 90%;
+    padding-left: 0;
+    .title {
+      height: 0.3rem;
+      line-height: 0.3rem;
+      font-size: 0.12rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      i {
+        display: block;
+        font-size: 0.25rem;
+        color: #fff;
       }
     }
     .checkedbox {
@@ -536,9 +554,12 @@ export default {
       li {
         width: 1.6rem;
         margin: 0 0.1rem 0.1rem 0;
-        &:nth-child(2n) {
+        &:nth-child(odd) {
+          margin-right: 0.1rem;
+        } //奇数行
+        &:nth-child(even) {
           margin-right: 0;
-        }
+        } //偶数行
       }
     }
   }

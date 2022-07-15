@@ -308,6 +308,7 @@ export default {
       let now = Date.parse(new Date());
       let time1 = Date.parse(this.stepsArr[0].des);
       let time2 = Date.parse(this.stepsArr[1].des);
+      if (!time2) return;
       let index = now > time1 && now < time2 ? 0 : 1;
       await cb()
         .getBoxesLeftSupply(this.boxType)
@@ -506,10 +507,6 @@ export default {
     align-items: center;
     justify-content: center;
     margin-bottom: 0.4rem;
-    // img {
-    //   width: 2.3rem;
-    //   height: auto;
-    // }
   }
 
   .info {

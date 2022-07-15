@@ -57,7 +57,7 @@
         </div>
       </li>
     </ul>
-    <NoData v-if="switchIndex == 1 && cardList.length == 0"></NoData>
+    <NoData v-if="(switchIndex == 0 && boxList.length == 0) || (switchIndex == 1 && cardList.length == 0)"></NoData>
   </div>
 </template>
 
@@ -86,8 +86,11 @@ export default {
   computed: { ...mapGetters(["getWalletAccount"]) },
   watch: {
     getWalletAccount: {
-      handler(newVal) {
-        if (newVal) this.switchTab(this.switchIndex);
+      handler(newVal, oldVal) {
+        if (newVal !== oldVal) sessionStorage.removeItem("MysteyBoxesList");
+        if (newVal) {
+          this.switchTab(this.switchIndex);
+        }
       },
       immediate: true, // 页面初始化后立即执行
     },
@@ -99,6 +102,7 @@ export default {
   methods: {
     switchTab(index) {
       this.switchIndex = index;
+      this.boxList = [];
       if (index == 0) {
         this.switchList[0].total = 0;
         if (sessionStorage.getItem("MysteyBoxesList")) {
@@ -110,7 +114,7 @@ export default {
           this.tokensOfOwnerBySize();
         }
       } else {
-        this.cardList = [];
+        this.switchList[1].total = 0;
       }
     },
     /**
@@ -124,12 +128,13 @@ export default {
         .tokensOfOwnerBySize(this.getWalletAccount, 0, 10000)
         .then((res) => {
           // console.log("获取用户已购买的盲盒", res[0], Number(res[1]._hex));
-          const cbIds = res[0];
-          this.switchList[0].total = cbIds.length;
-          cbIds.forEach((element) => {
-            this.cbIdToType(Number(element));
-          });
-          this.restructuring(cbIds);
+          this.switchList[0].total = res[0].length;
+          if (res[0].length > 0) {
+            res[0].forEach((element) => {
+              this.cbIdToType(Number(element));
+            });
+            this.restructuring(res[0]);
+          }
         })
         .catch((err) => {
           console.error("tokensOfOwnerBySize", err);

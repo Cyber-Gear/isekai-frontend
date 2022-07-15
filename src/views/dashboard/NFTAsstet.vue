@@ -65,8 +65,8 @@ export default {
   watch: {
     getWalletAccount: {
       handler(newVal, oldVal) {
+        if (newVal !== oldVal) sessionStorage.removeItem("NFTAsstetList");
         if (newVal) {
-          if (newVal !== oldVal) sessionStorage.removeItem("NFTAsstetList");
           this.switchTab(this.switchIndex);
         }
       },
@@ -82,12 +82,15 @@ export default {
       this.switchIndex = index;
       this.newCardList = [];
       if (index == 0) {
+        this.switchList[0].total = 0;
         if (sessionStorage.getItem("NFTAsstetList")) {
           this.newCardList = JSON.parse(sessionStorage.getItem("NFTAsstetList"));
           this.switchList[0].total = this.newCardList.length;
         } else {
           this.tokensOfOwnerBySize();
         }
+      } else {
+        this.switchList[1].total = 0;
       }
     },
     /**

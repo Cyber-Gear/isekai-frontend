@@ -59,8 +59,8 @@ export default {
   computed: { ...mapGetters(["getWalletAccount"]) },
   watch: {
     getWalletAccount: {
-      handler(newVal) {
-        if (newVal) history.go(-1);
+      handler() {
+        history.go(-1);
       },
       // immediate: true, // 页面初始化后立即执行
     },

@@ -7,10 +7,8 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 export default {
   name: "PaintingVideo",
-  computed: { ...mapGetters(["getPlayVideoPopup"]) },
   props: {
     videoUrl: {
       type: String,

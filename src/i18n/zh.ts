@@ -6,7 +6,7 @@ export default {
     text3: "DAO",
     text4: "LAUNCHPAD",
     text5: "MARKET",
-    text6: "未连接",
+    text6: "连接",
     text7: "断开连接",
     text8: "DASHBOARD",
   },

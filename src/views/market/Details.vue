@@ -26,7 +26,6 @@
             <i class="iconfont pcdollar"></i>
             <span>价格</span>
             <span>50BUSD</span>
-            <el-button @click="toOrder">挂单</el-button>
           </div>
           <div>
             <span>属于</span>
@@ -86,16 +85,6 @@
     </div>
 
     <div class="mobile-content-box mobile">
-      <div class="title">
-        <div class="row1">
-          <div class="row_left">
-            <span>{{ name }}</span>
-            <img :src="`${$urlImages}icon1.webp`" alt="" />
-          </div>
-        </div>
-        <div class="row2">{{ $t(card.title) }} - {{ $t(card.name) }}</div>
-      </div>
-
       <div class="cardbox">
         <!-- <div class="header"></div> -->
         <img :src="card.card" alt="" />
@@ -104,32 +93,31 @@
           {{ $t("artist.text11") }}
         </div>
       </div>
+
+      <div class="title">
+        <div class="row1">{{ $t(card.title) }} - {{ $t(card.name) }}</div>
+        <div class="row2">
+          <div class="row_left">
+            <span>{{ name }}</span>
+            <img :src="`${$urlImages}icon1.webp`" alt="" />
+          </div>
+        </div>
+      </div>
       <div class="purchase box">
         <div class="header">
           <i class="iconfont pcqianbao2-mianxing"></i>
-          <span>Sale ends July 15, 2022 at 4:48pm GMT+8 </span>
+          <span>Current price</span>
         </div>
         <div class="pur_body">
-          <div>Current price</div>
           <div>
             <img :src="`${$urlImages}coin.webp`" alt="" />
             <span>12</span>
             <span>($123)</span>
           </div>
-          <div class="btn_list">
-            <div>
-              <el-button>
-                <i class="iconfont pcqianbao2-mianxing"></i>
-                <span>Buy now</span>
-              </el-button>
-            </div>
-            <div>
-              <el-button @click="toOrder">
-                <i class="iconfont pcdollar"></i>
-                <span>Make offer</span>
-              </el-button>
-            </div>
-          </div>
+          <el-button>
+            <i class="iconfont pcqianbao2-mianxing"></i>
+            <span>Buy now</span>
+          </el-button>
         </div>
       </div>
       <div class="attribute box">
@@ -192,7 +180,14 @@
         </div>
       </div>
     </div>
-    <el-dialog center top="0" :title="$t(card.name)" :visible.sync="isShowPopup" :modal-append-to-body="false" :destroy-on-close="true">
+    <el-dialog
+      center
+      top="0"
+      :title="$t(card.name)"
+      :visible.sync="isShowPopup"
+      :modal-append-to-body="false"
+      :destroy-on-close="true"
+    >
       <PaintingVideo :videoUrl="card.video"></PaintingVideo>
     </el-dialog>
   </div>
@@ -220,9 +215,6 @@ export default {
   methods: {
     openVideo() {
       this.isShowPopup = true;
-    },
-    toOrder() {
-      this.$router.push({ path: "/market-order" });
     },
     goBack() {
       history.go(-1);
@@ -513,14 +505,19 @@ export default {
 .mobile-content-box {
   width: 3.15rem;
   height: auto;
-  margin: 0.2rem auto;
+  margin: 0 auto 0.2rem auto;
   flex-direction: column;
   justify-content: space-between;
   .title {
     .row1 {
+      width: 2.62rem;
+      height: 0.32rem;
+      font-size: 0.25rem;
+      margin-bottom: 0.03rem;
+    }
+    .row2 {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 0.12rem;
 
       .row_left {
         width: 1.82rem;
@@ -537,27 +534,22 @@ export default {
         }
       }
     }
-    .row2 {
-      width: 2.62rem;
-      height: 0.32rem;
-      font-size: 0.25rem;
-    }
   }
   .cardbox {
-    width: 2.72rem;
-    height: 4.22rem;
+    width: 3.07rem;
+    height: 4.79rem;
     position: relative;
-    margin: 0.05rem auto 0 auto;
+    margin: 0 auto;
     > img {
       width: 100%;
       height: 100%;
     }
 
     span {
-      font-size: 0.12rem;
+      font-size: 0.14rem;
       position: absolute;
       left: 0.2rem;
-      top: 0.4rem;
+      top: 0.37rem;
     }
     .btn {
       padding: 0 0 0.05rem 0.2rem;
@@ -570,7 +562,7 @@ export default {
       position: absolute;
       left: 0;
       right: 0;
-      bottom: 0.18rem;
+      bottom: 0.32rem;
       margin: auto;
       background-repeat: no-repeat;
       background-size: 100% 100%;
@@ -617,6 +609,7 @@ export default {
   }
 
   .purchase {
+    height: 1.7rem;
     .header {
       span {
         font-size: 0.12rem;
@@ -628,57 +621,43 @@ export default {
       padding: 0 0.14rem 0 0.18rem;
       div {
         font-size: 0.12rem;
-        &:nth-child(1) {
-          margin: 0.13rem 0;
+        width: 100%;
+        height: 0.5rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        img {
+          width: 0.15rem;
+          height: 0.21rem;
         }
-        &:nth-child(2) {
-          img {
-            width: 0.15rem;
-            height: 100%;
+        span {
+          display: inline-block;
+          vertical-align: top;
+          &:nth-child(2) {
+            font-size: 0.2rem;
+            margin: 0 0.1rem 0 0.07rem;
           }
-          > span {
-            display: inline-block;
-            vertical-align: top;
-            &:nth-child(2) {
-              font-size: 0.2rem;
-              margin: 0 0.08rem;
-            }
-            &:nth-child(3) {
-              margin-top: 0.045rem;
-            }
+          &:nth-child(3) {
+            margin-top: 0.045rem;
           }
         }
       }
-      .btn_list {
-        width: 100%;
-        height: 0.92rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
+
+      .el-button {
+        width: 2.84rem;
+        height: 0.45rem;
+        margin: 0 auto;
         margin-top: 0.07rem;
-        div {
-          .el-button {
-            width: 2.84rem;
-            height: 0.45rem;
-            margin: 0 auto;
-            i {
-              font-size: 0.2rem;
-              margin-right: 0.12rem;
-            }
-            span {
-              display: inline-block;
-              margin-bottom: 0.045rem;
-              vertical-align: middle;
-            }
-          }
-          &:nth-child(2) {
-            .el-button {
-              background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
-              i {
-                margin-right: 0.02rem;
-              }
-            }
-          }
+        background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
+
+        i {
+          font-size: 0.2rem;
+          margin-right: 0.12rem;
+        }
+        span {
+          display: inline-block;
+          margin-bottom: 0.045rem;
+          vertical-align: middle;
         }
       }
     }

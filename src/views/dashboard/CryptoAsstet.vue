@@ -96,6 +96,15 @@ export default {
           totalPrice: 0,
           availableBalance: 0,
         },
+        // {
+        //   label: "ETH",
+        //   logo: "coin-eth",
+        //   coinAddr: "",
+        //   isShowAdd: false,
+        //   totalCoin: 0,
+        //   totalPrice: 0,
+        //   availableBalance: 0,
+        // },
       ],
     };
   },
@@ -103,28 +112,19 @@ export default {
   methods: {
     // fun,avax,usdc,usdt
     getBalanceOf() {
+      // https://www.coingecko.com/zh
       // https://www.coingecko.com/zh/api/documentation
-      // this.$api.getCoinPrice("").then((res) => {
-      //   console.log("fun", res.data[""]);
-      //   const index = this.cardList.findIndex((item) => {
-      //     item.coinAddr == token().FUN;
-      //   });
-      //   this.cardList[index].totalPrice = res.data[""] * this.cardList[index].totalCoin;
-      // });
-      // this.$api.getCoinPrice("sealem-token").then((res) => {
-      //   console.log("st", res.data["sealem-token"]);
-      // });
       erc20(token().USDT)
         .balanceOf(this.getWalletAccount)
         .then((res) => {
-          this.balanceAmount = Number(util.formatEther(res._hex));
+          const totalCoin = Number(util.formatEther(res._hex));
+          // console.log("USDT", totalCoin);
+          this.balanceAmount = totalCoin;
+          this.cardList[0].totalCoin = totalCoin; //币个数
+          this.cardList[0].availableBalance = totalCoin; //可用余额
           this.$api.getCoinPrice("tether").then((res2) => {
-            // console.log("USDT", res2.data["tether"]);
             const price = res2.data["tether"].usd;
-            const totalCoin = Number(util.formatEther(res._hex));
-            this.cardList[0].totalCoin = totalCoin; //币个数
             this.cardList[0].totalPrice = price * totalCoin; //总价值
-            this.cardList[0].availableBalance = totalCoin; //可用余额
           });
         })
         .catch((err) => {
@@ -133,13 +133,13 @@ export default {
       erc20(token().WAVAX)
         .balanceOf(this.getWalletAccount)
         .then((res) => {
+          const totalCoin = Number(util.formatEther(res._hex));
+          // console.log("WAVAX", totalCoin);
+          this.cardList[1].totalCoin = totalCoin; //币个数
+          this.cardList[1].availableBalance = totalCoin; //可用余额
           this.$api.getCoinPrice("avalanche-2").then((res2) => {
-            // console.log("WAVAX", res2.data["avalanche-2"]);
             const price = res2.data["avalanche-2"].usd;
-            const totalCoin = Number(util.formatEther(res._hex));
-            this.cardList[1].totalCoin = totalCoin;
-            this.cardList[1].totalPrice = price * totalCoin;
-            this.cardList[1].availableBalance = totalCoin;
+            this.cardList[1].totalPrice = price * totalCoin; //总价值
           });
         })
         .catch((err) => {
@@ -148,14 +148,30 @@ export default {
       erc20(token().FUN)
         .balanceOf(this.getWalletAccount)
         .then((res) => {
-          this.cardList[2].totalCoin = Number(util.formatEther(res._hex));
-          this.cardList[2].totalPrice = null;
-          this.cardList[2].availableBalance = Number(util.formatEther(res._hex));
+          const totalCoin = Number(util.formatEther(res._hex));
+          // console.log("FUN", totalCoin);
+          this.cardList[2].totalCoin = totalCoin; //币个数
+          this.cardList[2].availableBalance = totalCoin; //可用余额
+          const price = 0;
+          this.cardList[2].totalPrice = price * totalCoin; //总价值
         })
         .catch((err) => {
           console.error("erc20(token().FUN).balanceOf", err);
         });
+
+      // erc20(token().ETH)
+      //   .balanceOf(this.getWalletAccount)
+      //   .then((res) => {
+      //     const totalCoin = Number(util.formatEther(res._hex));
+      //     this.$api.getCoinPrice("ethereum").then((res2) => {
+      //       const price = res2.data["ethereum"].usd;
+      //     });
+      //   })
+      //   .catch((err) => {
+      //     console.error("erc20(token().ETH).balanceOf", err);
+      //   });
     },
+
     addAddress(item) {
       wallet.addFUN(`${this.$urlImages}${item.logo}.webp`);
     },

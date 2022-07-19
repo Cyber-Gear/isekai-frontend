@@ -113,7 +113,7 @@ export default {
                 { index: "crypto-asstet", label: "dashboard.text6" },
               ],
             },
-            { index: "history", icon: "pchistory", label: "dashboard.text7", children: [{ index: "orders", label: "dashboard.text8" }] },
+            // { index: "history", icon: "pchistory", label: "dashboard.text7", children: [{ index: "orders", label: "dashboard.text8" }] },
             // { index: "favorites", icon: "pcfavorites", label: "dashboard.text9", children: [{ index: "my-favorites", label: "dashboard.text10" }] },
           ],
         },
@@ -267,6 +267,7 @@ export default {
   }
   .rightbox {
     width: calc(100% - 2.5rem);
+    min-height: 5rem;
     padding-left: 0.2rem;
   }
 }
@@ -425,6 +426,7 @@ export default {
     }
     .rightbox {
       width: 100%;
+      min-height: fit-content;
       padding-left: 0;
       margin-top: 0.1rem;
     }

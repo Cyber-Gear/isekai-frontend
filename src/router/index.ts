@@ -112,6 +112,7 @@ const routes: Array<RouteConfig> = [
       },
     ],
   },
+  { path: "*", redirect: "/home" },
 ];
 
 const router = new VueRouter({
@@ -119,7 +120,7 @@ const router = new VueRouter({
 });
 
 // 跳转后返回顶部
-router.afterEach(() => {
-  window.scrollTo(0, 0);
-});
+// router.afterEach(() => {
+//   window.scrollTo(0, 0);
+// });
 export default router;

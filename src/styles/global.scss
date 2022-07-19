@@ -295,6 +295,12 @@ pre {
   }
 }
 .el-step {
+  .el-step__head {
+    .el-step__icon {
+      border: none;
+      background: transparent;
+    }
+  }
   .el-step__main {
     .el-step__title,
     .el-step__description {

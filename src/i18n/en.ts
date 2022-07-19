@@ -356,6 +356,7 @@ export default {
     text9: "Closed",
     text10: "In Progress",
     text11: "Complete",
+    text12: "Not On Launchpad",
   },
   tips: {
     text1: "Comming Soon",

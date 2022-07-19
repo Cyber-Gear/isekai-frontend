@@ -344,6 +344,7 @@ export default {
     text9: "已关闭",
     text10: "进行中",
     text11: "完成",
+    text12: "暂未上架",
   },
   tips: {
     text1: "敬请期待",

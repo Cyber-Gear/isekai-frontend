@@ -23,12 +23,12 @@
       <div class="rightbox">
         <div class="stepsbox">
           <el-steps :active="nowStatusIndex" align-center>
-            <el-step v-for="(item, index) in stepsArr" :key="index" :title="$t(item.title)" :description="item.des">
+            <el-step v-for="(item, index) in stepsArr" :key="index" :title="$t(item.label)" :description="item.time">
               <template slot="icon">
                 <!-- <div @click="changeSteps(item, index)"> -->
                 <div>
-                  <img v-if="index < nowStatusIndex" :src="`${$urlImages}progress_img_active.webp`" alt="" />
-                  <img v-else :src="`${$urlImages}progress_img_normal.webp`" alt="" />
+                  <img class="stepsbox_img" v-if="index < nowStatusIndex" :src="`${$urlImages}progress_img_active.webp`" alt="" />
+                  <img class="stepsbox_img" v-else :src="`${$urlImages}progress_img_normal.webp`" alt="" />
                 </div>
               </template>
             </el-step>
@@ -96,7 +96,6 @@
                   <div>{{ $t("launchpad.text17") }}</div>
                   <div class="inputbox">
                     <span class="span1"><i class="iconfont pcjianhao" @click="subtraction"></i></span>
-                    <!-- <el-input oninput ="value=value.replace(/[^0-9.]/g,'')" placeholder="请输入(整数或者小数)金额" v-model="form.ysje"></el-input> -->
                     <input type="number" v-model="inputAmount" oninput="value=value.replace(/^(0+)|[^\d]+/g,'')" :disabled="buyloading" />
                     <span class="span2"><i class="iconfont pcjiahao" @click="addition"></i></span>
                   </div>
@@ -105,10 +104,10 @@
                   </div>
                 </div>
                 <div class="right">
-                  <el-button type="primary" :loading="buyloading" @click="buyBoxesBefore">{{ $t(btnText) }}</el-button>
+                  <el-button type="primary" :loading="buyloading" @click="buyBoxesBefore">{{ $t("launchpad.text19") }}</el-button>
                 </div>
               </div>
-              <div class="progress_bar_box" v-if="nowStatusIndex !== 1 && progressWidth">
+              <div class="progress_bar_box" v-if="nowStatusIndex !== 1">
                 <div>
                   <div>{{ $t("launchpad.text21") }}</div>
                   <div class="progress_bar">
@@ -160,17 +159,16 @@ export default {
       totalPrice: 0,
       balanceAmount: 0,
       stepsArr: [
-        { title: "status.text1", des: "2022/06/12 15:00" },
-        { title: "status.text2", des: "" },
-        { title: "status.text3", des: "" },
+        { label: "status.text1", time: "2022/07/10 15:00" },
+        { label: "status.text2", time: "2022/07/19 18:31" },
+        { label: "status.text3", time: "" },
       ],
       countdownObj: { d: 0, h: 0, m: 0, s: 0 },
       countdownTimer: null,
-      nowStatusText: "status.text1",
+      nowStatusText: "",
       nowStatusIndex: 0,
       progressWidth: 0,
       isApproved: false,
-      btnText: "launchpad.text19",
       popupActive: 1,
       approvedloading: false,
       buyloading: false,
@@ -180,9 +178,9 @@ export default {
   watch: {
     getWalletAccount: {
       handler(newVal) {
+        this.getAmount();
+        this.getPriceAddrs();
         if (newVal) {
-          this.getAmount();
-          this.getPriceAddrs();
           this.getUserHourlyBoxesLeftSupply();
           this.getBalanceOf();
         }
@@ -206,145 +204,61 @@ export default {
     this.countdownTimer = null;
   },
   methods: {
-    subtraction() {
-      if (this.buyloading) return;
-      if (this.inputAmount > 0) this.inputAmount--;
-    },
-    addition() {
-      if (this.buyloading) return;
-      if (this.inputAmount < this.remainingAmount) this.inputAmount++;
-    },
-    // 用户购买某种类型的盲盒，需要通过以下检查才可购买；
-    // 频控检查：单次购买盲盒数量必须大于0小于等于该用户该盲盒类型当前小时剩余购买数量；
-    // 余额检查：前端要将盲盒数量乘该盲盒支付代币单价和用户的该盲盒支付代币余额比较，不要让他输入超过最大余额的盲盒数量，且至少余额要大于1个盲盒的价格才能从0变成1；
-    // 库存检查：购买要求盲盒剩余可销售数量要大于等于用户要购买的数量，不要让用户输入超过剩余数量；
-    // 白名单检查：如果某类型的盲盒开启了白名单，则需要用户在白名单中才可购买；
-    // 授权检查：需要先去该盲盒支付代币合约授权；
-    /**购买 */
-    buyBoxesBefore() {
-      if (!this.getWalletAccount) return this.$store.commit("setWalletConnectPopup", true);
-      if (!this.inputAmount) return this.$message({ message: this.$t("tips.text6") });
-      // 库存检查
-      if (this.inputAmount > this.remainingAmount) {
-        this.inputAmount = this.remainingAmount;
-        return this.$message({ message: this.$t("tips.text7") });
-      }
-      // 余额检查
-      if (this.totalPrice > this.balanceAmount) {
-        this.inputAmount = this.balanceAmount / this.boxPrice;
-        return this.$message({ message: this.$t("tips.text8") });
-      }
-      // 频控检查
-      if (this.inputAmount > this.hourRemainingAmount) {
-        this.inputAmount = this.hourRemainingAmount;
-        return this.$message({ message: this.$t("tips.text9") });
-      }
-      // 白名单检查
-      if (!this.isWhite) return this.$message({ message: this.$t("tips.text10") });
-      // 授权检查
-      erc20(token().USDT)
-        .allowance(this.getWalletAccount, token().CB)
-        .then((res) => {
-          // Number(res._hex) 可付款额度
-          this.isApproved = Number(res._hex) > this.totalPrice;
-          if (this.isApproved) {
-            this.buyBoxes();
-          } else {
-            this.$store.commit("setApprovePopup", true);
-          }
-        })
-        .catch((err) => {
-          console.error("allowance", err);
-          this.isApproved = false;
-        });
-    },
-
-    /**用户购买某种类型的盲盒 */
-    buyBoxes() {
-      // buyBoxes(uint256 amount, uint256 boxType, {value: avaxAmount})
-      this.buyloading = true;
-      cb()
-        .connect(getSigner())
-        .buyBoxes(this.inputAmount, this.boxType)
-        .then((res) => {
-          setTimeout(() => {
-            if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
-            this.$message({ message: this.$t("tips.text11") });
-            this.buyloading = false;
-            this.inputAmount = null;
-            this.getAmount();
-            this.getUserHourlyBoxesLeftSupply();
-            this.getBalanceOf();
-          }, 2000);
-        })
-        .catch((err) => {
-          this.buyloading = false;
-          console.error("buyBoxes", err);
-        });
-    },
-    /**去授权 */
-    async toApprove() {
-      this.approvedloading = true;
-      try {
-        const tx = await erc20(token().USDT).connect(getSigner()).approve(token().CB, util.parseUnits((1e10).toString()));
-        await tx.wait();
-        // const etReceipt = await tx.wait();
-        this.approvedloading = false;
-        this.isApproved = true;
-        this.popupActive = 2;
-      } catch (err) {
-        console.error("approve", err);
-        this.approvedloading = false;
-        this.isApproved = false;
-        this.popupActive = 1;
-      }
-    },
     /**
      * @boxesMaxSupply 获取某类型的盲盒的总销售数量 入参：盲盒类型 出参：总数量
      * @totalBoxesLength 获取某类型的盲盒的已售出数量 入参：盲盒类型 出参：已售出数量
      * @getBoxesLeftSupply 获取某类型的盲盒的剩余可销售数量 入参：盲盒类型 出参：剩余数量
      */
-    async getAmount() {
+    getAmount() {
+      this.nowStatusText = "status.text12";
+      this.nowStatusIndex = 0;
+      if (!this.stepsArr[0].time) return; // 未上架
+
+      this.nowStatusText = this.stepsArr[0].label;
+      this.nowStatusIndex = 1;
+      if (!this.stepsArr[1].time) return; // 已上架，未发售
+
       let now = Date.parse(new Date());
-      let time1 = Date.parse(this.stepsArr[0].des);
-      let time2 = Date.parse(this.stepsArr[1].des);
-      if (!time2) return;
-      let index = now > time1 && now < time2 ? 0 : 1;
-      await cb()
-        .getBoxesLeftSupply(this.boxType)
-        .then((res) => {
-          this.remainingAmount = Number(res._hex);
-          if (this.remainingAmount == 0) index = 2;
-          // console.log("获取某类型的盲盒的剩余可销售数量", this.remainingAmount);
-        })
-        .catch((err) => {
-          console.error("getBoxesLeftSupply", err);
-        });
-      this.nowStatusText = this.stepsArr[index].title;
-      this.nowStatusIndex = index + 1;
-      await cb()
+      let time = Date.parse(this.stepsArr[1].time);
+      if (now < time) return this.countdownFun(time); // 未发售，开始倒计时
+
+      this.nowStatusText = this.stepsArr[1].label; // 开始发售
+      this.nowStatusIndex = 2;
+
+      cb()
         .boxesMaxSupply(this.boxType)
         .then((res) => {
+          // console.log("获取某类型的盲盒的总销售数量", Number(res._hex));
           this.totalAmount = Number(res._hex);
-          // console.log("获取某类型的盲盒的总销售数量", this.totalAmount);
+          cb()
+            .getBoxesLeftSupply(this.boxType)
+            .then((res2) => {
+              // console.log("获取某类型的盲盒的剩余可销售数量", Number(res2._hex));
+              this.remainingAmount = Number(res2._hex);
+              if (this.remainingAmount) {
+                this.soldAmount = this.totalAmount - this.remainingAmount;
+                this.progressWidth = ((this.soldAmount / this.totalAmount) * 100).toFixed(0);
+              } else {
+                this.nowStatusText = this.stepsArr[2].label; // 售罄
+                this.nowStatusIndex = 3;
+              }
+            })
+            .catch((err2) => {
+              console.error("getBoxesLeftSupply", err2);
+            });
         })
         .catch((err) => {
           console.error("boxesMaxSupply", err);
         });
-      await cb()
-        .totalBoxesLength(this.boxType)
-        .then((res) => {
-          this.soldAmount = Number(res._hex);
-          // console.log("获取某类型的盲盒的已售出数量", this.soldAmount);
-        })
-        .catch((err) => {
-          console.error("totalBoxesLength", err);
-        });
-      if (this.nowStatusIndex == 1) {
-        this.countdownFun(time2);
-      } else {
-        this.progressWidth = ((this.soldAmount / this.totalAmount) * 100).toFixed(0);
-      }
+      // cb()
+      //   .totalBoxesLength(this.boxType)
+      //   .then((res) => {
+      //     // console.log("获取某类型的盲盒的已售出数量", Number(res._hex));
+      //     this.soldAmount = Number(res._hex);
+      //   })
+      //   .catch((err) => {
+      //     console.error("totalBoxesLength", err);
+      //   });
     },
     /**开售倒计时 */
     countdownFun(end) {
@@ -363,6 +277,7 @@ export default {
         if (d == 0 && h == 0 && m == 0 && s == 0) {
           clearTimeout(this.countdownTimer);
           this.countdownTimer = null;
+          this.getAmount();
         } else {
           this.countdownTimer = setTimeout(() => {
             this.countdownFun(end);
@@ -370,6 +285,7 @@ export default {
         }
       }
     },
+
     /**
      * @boxTokenPrices 获取某类型的盲盒的支付代币单价 入参：盲盒类型 出参：盲盒单价
      * @tokenAddrs 获取某类型的盲盒的支付代币地址 入参：盲盒类型 出参：支付代币地址
@@ -415,19 +331,6 @@ export default {
           console.error("hourlyBuyLimits", err);
         });
     },
-    /**判断某用户是否在某类型的盲盒的白名单 入参：盲盒类型，用户钱包地址 出参：是否在白名单 */
-    getWhiteListExistence() {
-      cb()
-        .getWhiteListExistence(this.boxType, this.getWalletAccount)
-        .then((res) => {
-          this.isWhite = res;
-          // console.log("判断某用户是否在某类型的盲盒的白名单", this.isWhite);
-          if (!this.isWhite) return this.$message({ message: this.$t("用户不在白名单中") });
-        })
-        .catch((err) => {
-          console.error("getWhiteListExistence", err);
-        });
-    },
     /**获取某类型的盲盒下某用户某小时剩余购买数量 入参：盲盒类型，用户钱包地址，时间戳(秒) 出参：剩余数量 */
     getUserHourlyBoxesLeftSupply() {
       const timestamp = Date.parse(new Date()); //精度秒
@@ -452,6 +355,114 @@ export default {
         .catch((err) => {
           console.error("erc20(token().USDC).balanceOf", err);
         });
+    },
+    /**判断某用户是否在某类型的盲盒的白名单 入参：盲盒类型，用户钱包地址 出参：是否在白名单 */
+    getWhiteListExistence() {
+      cb()
+        .getWhiteListExistence(this.boxType, this.getWalletAccount)
+        .then((res) => {
+          this.isWhite = res;
+          // console.log("判断某用户是否在某类型的盲盒的白名单", this.isWhite);
+          if (!this.isWhite) return this.$message({ message: this.$t("用户不在白名单中") });
+        })
+        .catch((err) => {
+          console.error("getWhiteListExistence", err);
+        });
+    },
+
+    /**去授权 */
+    async toApprove() {
+      this.approvedloading = true;
+      try {
+        const tx = await erc20(token().USDT).connect(getSigner()).approve(token().CB, util.parseUnits((1e10).toString()));
+        await tx.wait();
+        // const etReceipt = await tx.wait();
+        this.approvedloading = false;
+        this.isApproved = true;
+        this.popupActive = 2;
+      } catch (err) {
+        console.error("approve", err);
+        this.approvedloading = false;
+        this.isApproved = false;
+        this.popupActive = 1;
+      }
+    },
+    // 用户购买某种类型的盲盒，需要通过以下检查才可购买；
+    // 频控检查：单次购买盲盒数量必须大于0小于等于该用户该盲盒类型当前小时剩余购买数量；
+    // 余额检查：前端要将盲盒数量乘该盲盒支付代币单价和用户的该盲盒支付代币余额比较，不要让他输入超过最大余额的盲盒数量，且至少余额要大于1个盲盒的价格才能从0变成1；
+    // 库存检查：购买要求盲盒剩余可销售数量要大于等于用户要购买的数量，不要让用户输入超过剩余数量；
+    // 白名单检查：如果某类型的盲盒开启了白名单，则需要用户在白名单中才可购买；
+    // 授权检查：需要先去该盲盒支付代币合约授权；
+    /**购买 */
+    buyBoxesBefore() {
+      if (!this.getWalletAccount) return this.$store.commit("setWalletConnectPopup", true);
+      if (!this.inputAmount) return this.$message({ message: this.$t("tips.text6") });
+      // 库存检查
+      if (this.inputAmount > this.remainingAmount) {
+        this.inputAmount = this.remainingAmount;
+        return this.$message({ message: this.$t("tips.text7") });
+      }
+      // 余额检查
+      if (this.totalPrice > this.balanceAmount) {
+        this.inputAmount = this.balanceAmount / this.boxPrice;
+        return this.$message({ message: this.$t("tips.text8") });
+      }
+      // 频控检查
+      if (this.inputAmount > this.hourRemainingAmount) {
+        this.inputAmount = this.hourRemainingAmount;
+        return this.$message({ message: this.$t("tips.text9") });
+      }
+      // 白名单检查
+      if (!this.isWhite) return this.$message({ message: this.$t("tips.text10") });
+      // 授权检查
+      erc20(token().USDT)
+        .allowance(this.getWalletAccount, token().CB)
+        .then((res) => {
+          // Number(res._hex) 可付款额度
+          this.isApproved = Number(res._hex) > this.totalPrice;
+          if (this.isApproved) {
+            this.buyBoxes();
+          } else {
+            this.$store.commit("setApprovePopup", true);
+          }
+        })
+        .catch((err) => {
+          console.error("allowance", err);
+          this.isApproved = false;
+        });
+    },
+    /**用户购买某种类型的盲盒 */
+    buyBoxes() {
+      // buyBoxes(uint256 amount, uint256 boxType, {value: avaxAmount})
+      this.buyloading = true;
+      cb()
+        .connect(getSigner())
+        .buyBoxes(this.inputAmount, this.boxType)
+        .then((res) => {
+          setTimeout(() => {
+            if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
+            this.$message({ message: this.$t("tips.text11") });
+            // location.reload();
+            this.buyloading = false;
+            this.inputAmount = null;
+            this.getAmount();
+            this.getUserHourlyBoxesLeftSupply();
+            this.getBalanceOf();
+          }, 2000);
+        })
+        .catch((err) => {
+          this.buyloading = false;
+          console.error("buyBoxes", err);
+        });
+    },
+
+    subtraction() {
+      if (this.buyloading) return;
+      if (this.inputAmount > 0) this.inputAmount--;
+    },
+    addition() {
+      if (this.buyloading) return;
+      if (this.inputAmount < this.remainingAmount) this.inputAmount++;
     },
     /**返回该类型盲盒某角色的出现概率，除1e4*100% 入参：盲盒类型，角色ID 出参：概率 */
     // heroProbabilities() {},
@@ -540,6 +551,10 @@ export default {
   padding-left: 0.2rem;
   .stepsbox {
     margin-bottom: 0.4rem;
+    .stepsbox_img {
+      width: 0.3rem;
+      height: 0.3rem;
+    }
   }
   .box1 {
     width: 100%;
@@ -773,7 +788,6 @@ export default {
     }
     .content {
       width: 100%;
-      height: 4rem;
       padding: 0.2rem 0.5rem;
       font-size: 0.15rem;
       font-weight: 600;
@@ -811,12 +825,8 @@ export default {
     margin-bottom: 0.2rem;
     .blindbox {
       width: 1.5rem;
-      height: 1.5rem;
+      height: 1.8rem;
       margin-bottom: 0;
-      // img {
-      //   width: 1.07rem;
-      //   height: auto;
-      // }
     }
     .info {
       width: 1.7rem;
@@ -834,6 +844,10 @@ export default {
     padding-left: 0;
     .stepsbox {
       margin-bottom: 0.2rem;
+      .stepsbox_img {
+        width: 0.2rem;
+        height: 0.2rem;
+      }
     }
     .box1 {
       margin-bottom: 0.2rem;
@@ -962,7 +976,6 @@ export default {
       }
       .content {
         width: 100%;
-        height: 3rem;
         padding: 0.1rem 0.2rem;
         font-size: 0.12rem;
       }

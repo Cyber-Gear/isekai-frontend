@@ -1,7 +1,7 @@
 <template>
   <div class="nav">
     <div class="nav_inset">
-      <img class="logo" :src="`${$urlImages}logo1.webp`" alt="" />
+      <img class="logo" :src="`${$urlImages}logo1.webp`" alt="" @click="toHome" />
       <ul class="menu_pc pc">
         <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item)">
           <span>{{ $t(item.label) }}</span>
@@ -58,7 +58,10 @@ export default {
   },
   computed: { ...mapGetters(["getWalletAccount"]) },
   watch: {
-    $route(to) {
+    $route(to, from) {
+      if (from.matched.length && to.matched[0].path !== from.matched[0].path) {
+        window.scrollTo(0, 0);
+      }
       if (to.path == "/home") {
         this.navActive = 0;
       } else if (to.path.indexOf("/artist") !== -1) {
@@ -75,6 +78,9 @@ export default {
     },
   },
   methods: {
+    toHome() {
+      this.$router.push("/home");
+    },
     toRoute(item) {
       if (item.isOpen) this.$router.push(item.link);
       else this.$message({ message: this.$t("tips.text1") });

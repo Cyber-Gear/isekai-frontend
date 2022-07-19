@@ -442,13 +442,14 @@ export default {
           setTimeout(() => {
             if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
             this.$message({ message: this.$t("tips.text11") });
-            // location.reload();
+            sessionStorage.removeItem("MysteyBoxesList");
             this.buyloading = false;
             this.inputAmount = null;
             this.getAmount();
             this.getUserHourlyBoxesLeftSupply();
             this.getBalanceOf();
           }, 2000);
+          // location.reload();
         })
         .catch((err) => {
           this.buyloading = false;

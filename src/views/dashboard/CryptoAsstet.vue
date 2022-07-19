@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { util, erc20, token, wallet } from "funtopia-sdk";
+import { util, erc20, token, wallet, getProvider } from "funtopia-sdk";
 import { mapGetters } from "vuex";
 export default {
   name: "CryptoAsstet",

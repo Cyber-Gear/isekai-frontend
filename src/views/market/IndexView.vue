@@ -85,8 +85,8 @@
 
           <el-button @click="toOrder">SELL</el-button>
         </div>
-        <div class="checkedbox_group">
-          <div class="result">9，914，463 results</div>
+        <div class="result">{{cardList.length}} results</div>
+        <div class="checkedbox_group" v-show="tagList.length > 0">
           <div class="checkedbox">
             <div class="taglist">
               <el-tag
@@ -98,7 +98,7 @@
                 {{ item.label }}
               </el-tag>
             </div>
-            <div class="btn" v-show="tagList.length > 0">
+            <div class="btn">
               <span @click="clearAllTag">Clear All</span>
             </div>
           </div>
@@ -526,29 +526,22 @@ export default {
       border-radius: 0.2rem;
     }
   }
+  .result {
+    height: 0.4rem;
+    line-height: 0.4rem;
+    font-size: 0.15rem;
+    font-weight: 600;
+    color: #828282;
+  }
   .checkedbox_group {
-    height: auto;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    margin: 0.1rem 0 0.15rem 0;
-    .result {
-      width: 2.43rem;
-      height: 0.21rem;
-      line-height: 0.21rem;
-      font-size: 0.15rem;
-      font-weight: 600;
-      color: #828282;
-    }
-
+    height: 0.4rem;
+    line-height: 0.4rem;
     .checkedbox {
       width: 100%;
       height: auto;
       display: flex;
       align-items: center;
-      margin-top: 0.09rem;
-
       .taglist {
         max-width: calc(100% - 0.8rem);
         height: 100%;
@@ -563,7 +556,8 @@ export default {
       }
       .btn {
         width: 0.8rem;
-        height: 100%;
+        height: 0.4rem;
+        line-height: 0.4rem;
         text-align: center;
         span {
           font-size: 0.12rem;
@@ -708,28 +702,21 @@ export default {
         font-size: 0.14rem;
       }
     }
-
+    .result {
+      height: 0.3rem;
+      line-height: 0.3rem;
+      font-size: 0.12rem;
+    }
     .checkedbox_group {
-      flex-direction: row-reverse;
-      align-items: center;
-      justify-content: flex-end;
-      .result {
-        width: 1.2rem;
-        font-size: 0.12rem;
-        margin-left: 0.05rem;
-      }
       .checkedbox {
-        width: auto;
-        margin: 0;
         .taglist {
-          max-width: 1.5rem;
+          max-width: calc(100% - 0.6rem);
         }
         .btn {
           width: 0.6rem;
         }
       }
     }
-
     .card_list {
       width: 100%;
       height: 5rem;

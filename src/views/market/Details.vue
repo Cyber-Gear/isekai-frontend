@@ -26,7 +26,6 @@
             <i class="iconfont pcdollar"></i>
             <span>价格</span>
             <span>50BUSD</span>
-            <el-button @click="toOrder">挂单</el-button>
           </div>
           <div>
             <span>属于</span>
@@ -220,9 +219,6 @@ export default {
   methods: {
     openVideo() {
       this.isShowPopup = true;
-    },
-    toOrder() {
-      this.$router.push({ path: "/market-order" });
     },
     goBack() {
       history.go(-1);

@@ -516,6 +516,7 @@ export default {
         height: 100%;
         margin-left: 0.11rem;
         font-size: 0.14rem;
+        color: #ffffff;
       }
     }
     .el-button {
@@ -532,7 +533,6 @@ export default {
     flex-direction: column;
     justify-content: space-around;
     margin: 0.1rem 0 0.15rem 0;
-
     .result {
       width: 2.43rem;
       height: 0.21rem;
@@ -722,7 +722,7 @@ export default {
         width: auto;
         margin: 0;
         .taglist {
-          max-width: calc(100% - 0.6rem);
+          max-width: 1.5rem;
         }
         .btn {
           width: 0.6rem;

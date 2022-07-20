@@ -4,64 +4,31 @@
       <div class="selectionlist">
         <div class="title">
           <i class="iconfont pcconditions" @click="openSelectionList"></i>
-          <i
-            class="iconfont pcjiantou_qiehuanzuo"
-            @click="closeSelectionList"
-          ></i>
+          <i class="iconfont pcjiantou_qiehuanzuo" @click="closeSelectionList"></i>
         </div>
         <div class="list">
-          <el-collapse
-            accordion
-            v-model="activeName"
-            @change="changeSelectionList"
-          >
-            <el-collapse-item
-              v-for="(item, index) in selectionList"
-              :key="index"
-              :name="index.toString()"
-            >
+          <el-collapse accordion v-model="activeName" @change="changeSelectionList">
+            <el-collapse-item v-for="(item, index) in selectionList" :key="index" :name="index.toString()">
               <template slot="title">
-                <div class="checkbox_title">
-                  <i :class="item.icon"></i> {{ item.title }}
-                </div>
+                <div class="checkbox_title"><i :class="item.icon"></i> {{ $t(item.title) }}</div>
               </template>
               <div class="gradient_border">
                 <div>
                   <div class="input_list" v-if="index == 1">
                     <div class="inputbox">
-                      <input
-                        type="number"
-                        placeholder="min"
-                        v-model="item.checkboxList[0].min"
-                      />
+                      <input type="number" placeholder="min" v-model="item.checkboxList[0].min" />
                       <span>-</span>
-                      <input
-                        type="number"
-                        placeholder="max"
-                        v-model="item.checkboxList[0].max"
-                      />
+                      <input type="number" placeholder="max" v-model="item.checkboxList[0].max" />
                     </div>
-                    <div class="btn" @click="clickOK(item.checkboxList[0])">
-                      OK
-                    </div>
+                    <div class="btn" @click="clickOK(item.checkboxList[0])">OK</div>
                   </div>
                   <ul class="checkbox_content" v-else>
-                    <li
-                      v-for="(ite, ind) in item.checkboxList"
-                      :key="ind"
-                      @click="checkboxClick(ite)"
-                    >
+                    <li v-for="(ite, ind) in item.checkboxList" :key="ind" @click="checkboxClick(ite)">
                       <div class="check">
-                        <i
-                          class="iconfont pcfuxuankuang-quanxuan"
-                          v-show="ite.isChecked"
-                        ></i>
-                        <i
-                          class="iconfont pcfuxuankuang-weiquanxuan"
-                          v-show="!ite.isChecked"
-                        ></i>
+                        <i class="iconfont pcfuxuankuang-quanxuan" v-show="ite.isChecked"></i>
+                        <i class="iconfont pcfuxuankuang-weiquanxuan" v-show="!ite.isChecked"></i>
                       </div>
-                      <div class="label">{{ ite.label }}</div>
+                      <div class="label">{{ $t(ite.label) }}</div>
                     </li>
                   </ul>
                 </div>
@@ -73,43 +40,28 @@
 
       <div class="boxlist">
         <div class="title">
-          <i
-            class="iconfont pcconditions"
-            v-if="!isShowDrawer"
-            @click="openDrawer"
-          ></i>
+          <i class="iconfont pcconditions" v-if="!isShowDrawer" @click="openDrawer"></i>
           <div class="input_group">
             <i class="iconfont pcsousuo"></i>
-            <input type="text" placeholder="搜索" />
+            <input type="text" :placeholder="$t('market.text7')" />
           </div>
 
-          <el-button @click="toOrder">SELL</el-button>
+          <el-button @click="toOrder">{{ $t("market.text8") }}</el-button>
         </div>
-        <div class="result">{{cardList.length}} results</div>
-        <div class="checkedbox_group" v-show="tagList.length > 0">
-          <div class="checkedbox">
-            <div class="taglist">
-              <el-tag
-                closable
-                v-for="(item, index) in tagList"
-                :key="index"
-                @close="clearTag(item, index)"
-              >
-                {{ item.label }}
-              </el-tag>
-            </div>
-            <div class="btn">
-              <span @click="clearAllTag">Clear All</span>
-            </div>
+        <div class="result">{{ cardList.length }} {{ $t("market.text9") }}</div>
+        <div class="checkedbox" v-show="tagList.length > 0">
+          <div class="taglist">
+            <el-tag closable v-for="(item, index) in tagList" :key="index" @close="clearTag(item, index)">
+              {{ $t(item.label) }}
+            </el-tag>
+          </div>
+          <div class="btn">
+            <span @click="clearAllTag">{{ $t("market.text25") }}</span>
           </div>
         </div>
 
         <ul class="card_list">
-          <li
-            v-for="(item, index) in cardList"
-            :key="index"
-            @click="toDetail(index)"
-          >
+          <li v-for="(item, index) in cardList" :key="index" @click="toDetail(index)">
             <div class="top"><img :src="item.logo" alt="" /></div>
             <div class="center">
               <div>
@@ -126,73 +78,35 @@
         </ul>
       </div>
     </div>
-    <el-drawer
-      :visible.sync="isShowDrawer"
-      :with-header="false"
-      direction="ltr"
-      class="market_drawer"
-    >
+    <el-drawer :visible.sync="isShowDrawer" :with-header="false" direction="ltr" class="market_drawer">
       <div class="selectionlist">
         <div class="title">
           <i class="iconfont pcconditions"></i>
-          <i
-            class="iconfont pcjiantou_qiehuanzuo"
-            @click="isShowDrawer = false"
-          ></i>
+          <i class="iconfont pcjiantou_qiehuanzuo" @click="isShowDrawer = false"></i>
         </div>
         <div class="list">
-          <el-collapse
-            accordion
-            v-model="activeName"
-            @change="changeSelectionList"
-          >
-            <el-collapse-item
-              v-for="(item, index) in selectionList"
-              :key="index"
-              :name="index.toString()"
-            >
+          <el-collapse accordion v-model="activeName" @change="changeSelectionList">
+            <el-collapse-item v-for="(item, index) in selectionList" :key="index" :name="index.toString()">
               <template slot="title">
-                <div class="checkbox_title">
-                  <i :class="item.icon"></i> {{ item.title }}
-                </div>
+                <div class="checkbox_title"><i :class="item.icon"></i> {{ $t(item.title) }}</div>
               </template>
               <div class="gradient_border">
                 <div>
                   <div class="input_list" v-if="index == 1">
                     <div class="inputbox">
-                      <input
-                        type="number"
-                        placeholder="min"
-                        v-model="item.checkboxList[0].min"
-                      />
+                      <input type="number" placeholder="min" v-model="item.checkboxList[0].min" />
                       <span>-</span>
-                      <input
-                        type="number"
-                        placeholder="max"
-                        v-model="item.checkboxList[0].max"
-                      />
+                      <input type="number" placeholder="max" v-model="item.checkboxList[0].max" />
                     </div>
-                    <div class="btn" @click="clickOK(item.checkboxList[0])">
-                      OK
-                    </div>
+                    <div class="btn" @click="clickOK(item.checkboxList[0])">OK</div>
                   </div>
                   <ul class="checkbox_content" v-else>
-                    <li
-                      v-for="(ite, ind) in item.checkboxList"
-                      :key="ind"
-                      @click="checkboxClick(ite)"
-                    >
+                    <li v-for="(ite, ind) in item.checkboxList" :key="ind" @click="checkboxClick(ite)">
                       <div class="check">
-                        <i
-                          class="iconfont pcfuxuankuang-quanxuan"
-                          v-show="ite.isChecked"
-                        ></i>
-                        <i
-                          class="iconfont pcfuxuankuang-weiquanxuan"
-                          v-show="!ite.isChecked"
-                        ></i>
+                        <i class="iconfont pcfuxuankuang-quanxuan" v-show="ite.isChecked"></i>
+                        <i class="iconfont pcfuxuankuang-weiquanxuan" v-show="!ite.isChecked"></i>
                       </div>
-                      <div class="label">{{ ite.label }}</div>
+                      <div class="label">{{ $t(ite.label) }}</div>
                     </li>
                   </ul>
                 </div>
@@ -214,7 +128,7 @@ export default {
       activeName: "0",
       selectionList: [
         {
-          title: "合集筛选",
+          title: "market.text1",
           icon: "iconfont pcnav-list",
           checkboxList: [
             { label: "Cybergear", isChecked: false },
@@ -223,12 +137,12 @@ export default {
           ],
         },
         {
-          title: "价格筛选",
+          title: "market.text2",
           icon: "iconfont pcdollar",
           checkboxList: [{ label: "价格范围", min: 0, max: 0 }],
         },
         {
-          title: "币种筛选",
+          title: "market.text3",
           icon: "iconfont pczijin",
           checkboxList: [
             { label: "FUN", isChecked: false },
@@ -237,16 +151,16 @@ export default {
           ],
         },
         {
-          title: "类型筛选",
+          title: "market.text4[0]",
           icon: "iconfont pcall",
           checkboxList: [
-            { label: "盲盒", isChecked: false },
-            { label: "角色", isChecked: false },
-            { label: "碎片", isChecked: false },
+            { label: "market.text4[1]", isChecked: false },
+            { label: "market.text4[2]", isChecked: false },
+            { label: "market.text4[3]", isChecked: false },
           ],
         },
         {
-          title: "稀有度筛选",
+          title: "market.text5",
           icon: "iconfont pcdengji",
           checkboxList: [
             { label: "MR", isChecked: false },
@@ -256,12 +170,12 @@ export default {
           ],
         },
         {
-          title: "属性筛选",
+          title: "market.text6[0]",
           icon: "iconfont pcshuxingchaxun",
           checkboxList: [
-            { label: "职业", isChecked: false },
-            { label: "等级", isChecked: false },
-            { label: "角色", isChecked: false },
+            { label: "market.text6[1]", isChecked: false },
+            { label: "market.text6[2]", isChecked: false },
+            { label: "market.text6[3]", isChecked: false },
           ],
         },
       ],
@@ -389,12 +303,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid;
-    border-image: linear-gradient(
-        135deg,
-        rgba(212, 135, 241, 0.44),
-        rgba(82, 224, 255, 0.44)
-      )
-      1 1;
+    border-image: linear-gradient(135deg, rgba(212, 135, 241, 0.44), rgba(82, 224, 255, 0.44)) 1 1;
     i {
       font-size: 0.25rem;
       cursor: pointer;
@@ -427,7 +336,7 @@ export default {
         color: #ffffff;
         padding: 0.1rem;
         .check {
-          margin-right: 0.2rem;
+          margin-right: 0.12rem;
         }
       }
     }
@@ -459,7 +368,7 @@ export default {
         height: 0.3rem;
         background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
         border-radius: 0.08rem;
-        font-size: 0.2rem;
+        font-size: 0.15 rem;
         font-weight: 400;
         margin: 0 auto;
         display: flex;
@@ -487,12 +396,7 @@ export default {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid;
-    border-image: linear-gradient(
-        135deg,
-        rgba(212, 135, 241, 0.44),
-        rgba(82, 224, 255, 0.44)
-      )
-      1 1;
+    border-image: linear-gradient(135deg, rgba(212, 135, 241, 0.44), rgba(82, 224, 255, 0.44)) 1 1;
     font-size: 0.15rem;
     font-weight: 600;
     color: #828282;
@@ -533,37 +437,33 @@ export default {
     font-weight: 600;
     color: #828282;
   }
-  .checkedbox_group {
+  .checkedbox {
     width: 100%;
-    height: 0.4rem;
-    line-height: 0.4rem;
-    .checkedbox {
-      width: 100%;
-      height: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.1rem;
+    .taglist {
+      max-width: calc(100% - 0.8rem);
+      height: 100%;
+      overflow-x: auto;
       display: flex;
       align-items: center;
-      .taglist {
-        max-width: calc(100% - 0.8rem);
-        height: 100%;
-        overflow-x: auto;
-        display: flex;
-        align-items: center;
-        flex-wrap: nowrap;
-        &::-webkit-scrollbar {
-          width: 0;
-          height: 0;
-        }
+      flex-wrap: nowrap;
+      &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
       }
-      .btn {
-        width: 0.8rem;
-        height: 0.4rem;
-        line-height: 0.4rem;
-        text-align: center;
-        span {
-          font-size: 0.12rem;
-          font-weight: bold;
-          cursor: pointer;
-        }
+    }
+    .btn {
+      width: 0.8rem;
+      height: 0.4rem;
+      line-height: 0.4rem;
+      text-align: center;
+      span {
+        font-size: 0.12rem;
+        font-weight: bold;
+        cursor: pointer;
       }
     }
   }
@@ -707,16 +607,17 @@ export default {
       line-height: 0.3rem;
       font-size: 0.12rem;
     }
-    .checkedbox_group {
-      .checkedbox {
-        .taglist {
-          max-width: calc(100% - 0.6rem);
-        }
-        .btn {
-          width: 0.6rem;
-        }
+    .checkedbox {
+      margin-bottom: 0.09rem;
+      height: 0.22rem;
+      .taglist {
+        max-width: calc(100% - 0.6rem);
+      }
+      .btn {
+        width: 0.6rem;
       }
     }
+
     .card_list {
       width: 100%;
       height: 5rem;

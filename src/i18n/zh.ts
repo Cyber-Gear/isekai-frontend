@@ -1,5 +1,5 @@
 /* eslint-disable no-irregular-whitespace */
-export default {
+export default { 
   nav: {
     text1: "HOME",
     text2: "ARTIST",
@@ -284,6 +284,38 @@ export default {
     
     Cyber​​gear计划于今年Q2上线，玩家可以通过拥有、制作、交易、竞技等方式获得奖励。`,
   },
+  market:{
+    text1: "合集筛选",
+    text2: "价格筛选",
+    text3: "币种筛选",
+    text4: ["类型筛选","盲盒","角色","碎片"],
+    text5: "稀有度筛选",
+    text6: ["属性筛选","职业","等级","角色"],
+    text7: "搜索",
+    text8: "出售",
+    text9: "条查询结果",
+    text10: "价格",
+    text11: "购买",
+    text12: "属性",
+    text13: "等级",
+    text14: "星级",
+    text15: "稀有度",
+    text16: "人物介绍",
+    text17: "交易记录",
+    text18: "挂单",
+    text19: "全部选择",
+    text20: "确定",
+    text21: "挂单价格",
+    text22: "手续费",
+    text23: "实际收益",
+    text24: "属于",
+    text25: "清除全部",
+    text26: "取消选择",
+    text27: "立即购买",
+    text28: "现价"
+  },
+
+
   dashboard: {
     text1: "Dashboard",
     text2: "MY NFT",
@@ -360,6 +392,7 @@ export default {
     text11: "购买成功",
     text12: "未上传作品",
     text13: "请稍等",
+    text14: "请输入价格",
   },
   btns: {
     text1: "返回",

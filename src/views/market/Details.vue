@@ -24,34 +24,34 @@
           <div></div>
           <div>
             <i class="iconfont pcdollar"></i>
-            <span>价格</span>
-            <span>50BUSD</span>
+            <span>{{ $t("market.text10") }}</span>
+            <span>50 BUSD</span>
           </div>
           <div>
-            <span>属于</span>
+            <span>{{ $t("market.text24") }}</span>
             <span>0x88...98g7</span>
-            <el-button>购买</el-button>
+            <el-button>{{ $t("market.text11") }}</el-button>
           </div>
           <div>
             <i class="iconfont pcshuxingchaxun"></i>
-            <span>属性</span>
+            <span>{{ $t("market.text12") }}</span>
           </div>
           <div class="attr_content">
             <ul class="left_box">
               <li>
-                <span>属性</span>
+                <span>{{ $t("market.text12") }}</span>
                 <span>{{ $t(card.attribute) }}</span>
               </li>
               <li>
-                <span>等级</span>
+                <span>{{ $t("market.text13") }}</span>
                 <span>一级</span>
               </li>
               <li>
-                <span>星级</span>
+                <span>{{ $t("market.text14") }}</span>
                 <span>一级</span>
               </li>
               <li>
-                <span>稀有度</span>
+                <span>{{ $t("market.text15") }}</span>
                 <span>{{ $t(card.rarity) }}</span>
               </li>
             </ul>
@@ -60,7 +60,7 @@
       </div>
       <div class="description">
         <div class="introduction">
-          <span>人物介绍</span>
+          <span>{{ $t("market.text16") }}</span>
           <div class="content">
             <div>
               <pre>{{ $t(card.nftdes) }}</pre>
@@ -69,7 +69,7 @@
         </div>
 
         <div class="history">
-          <span>交易记录</span>
+          <span>{{ $t("market.text17") }}</span>
           <div class="content">
             <ul>
               <li v-for="index of 10" :key="index">
@@ -106,7 +106,7 @@
       <div class="purchase box">
         <div class="header">
           <i class="iconfont pcqianbao2-mianxing"></i>
-          <span>Current price</span>
+          <span>{{ $t("market.text28")}}</span>
         </div>
         <div class="pur_body">
           <div>
@@ -116,35 +116,35 @@
           </div>
           <el-button>
             <i class="iconfont pcqianbao2-mianxing"></i>
-            <span>Buy now</span>
+            <span>{{ $t("market.text27") }}</span>
           </el-button>
         </div>
       </div>
       <div class="attribute box">
         <div class="header">
           <i class="iconfont pcshuxingchaxun"></i>
-          <span>属性</span>
+          <span>{{ $t("market.text12") }}</span>
         </div>
         <div class="attr_body">
           <ul>
             <li>
               <i class="iconfont pcshuxingchaxun"></i>
-              <span>属性</span>
+              <span>{{ $t("market.text12") }}</span>
               <span>{{ $t(card.attribute) }}</span>
             </li>
             <li>
               <i class="iconfont pcshuxingchaxun"></i>
-              <span>等级</span>
+              <span>{{ $t("market.text13") }}</span>
               <span>一级</span>
             </li>
             <li>
               <i class="iconfont pcshuxingchaxun"></i>
-              <span>星级</span>
+              <span>{{ $t("market.text14") }}</span>
               <span>一级</span>
             </li>
             <li>
               <i class="iconfont pcshuxingchaxun"></i>
-              <span>稀有度</span>
+              <span>{{ $t("market.text15") }}</span>
               <span>{{ $t(card.rarity) }}</span>
             </li>
           </ul>
@@ -154,7 +154,7 @@
       <div class="description box">
         <div class="header">
           <i class="iconfont pcshuxingchaxun"></i>
-          <span>NFT介绍</span>
+          <span>{{ $t("market.text16") }}</span>
         </div>
         <div class="des_body">
           <div>
@@ -166,7 +166,7 @@
       <div class="history box">
         <div class="header">
           <i class="iconfont pcshuxingchaxun"></i>
-          <span>交易记录</span>
+          <span>{{ $t("market.text17") }}</span>
         </div>
         <div class="his_body">
           <ul>
@@ -180,14 +180,7 @@
         </div>
       </div>
     </div>
-    <el-dialog
-      center
-      top="0"
-      :title="$t(card.name)"
-      :visible.sync="isShowPopup"
-      :modal-append-to-body="false"
-      :destroy-on-close="true"
-    >
+    <el-dialog center top="0" :title="$t(card.name)" :visible.sync="isShowPopup" :modal-append-to-body="false" :destroy-on-close="true">
       <PaintingVideo :videoUrl="card.video"></PaintingVideo>
     </el-dialog>
   </div>
@@ -283,6 +276,7 @@ export default {
         background-size: 100% 100%;
         background-position: center center;
         transition: all 0.3s;
+        padding-bottom: 0.05rem;
         &:hover {
           transform: scale(0.8);
         }
@@ -329,6 +323,9 @@ export default {
           margin: 0.1rem 0 0.26rem 0;
         }
         &:nth-child(4) {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
           margin-bottom: 0.26rem;
           i {
             font-size: 0.25rem;
@@ -406,7 +403,8 @@ export default {
             font-size: 0.12rem;
             span {
               &:nth-child(1) {
-                margin-right: 0.67rem;
+                display: inline-block;
+                width: 1.2rem;
               }
             }
           }
@@ -427,9 +425,9 @@ export default {
       span {
         display: inline-block;
         text-align: right;
-        width: 1rem;
         height: 0.28rem;
         border-left: #12b2cb solid 0.02rem;
+        padding-left: 0.16rem;
         margin-bottom: 0.28rem;
         font-size: 0.2rem;
       }
@@ -461,9 +459,9 @@ export default {
       > span {
         display: inline-block;
         text-align: right;
-        width: 1rem;
         height: 0.28rem;
         border-left: #12b2cb solid 0.02rem;
+        padding-left: 0.16rem;
         margin-bottom: 0.28rem;
         font-size: 0.2rem;
       }
@@ -665,7 +663,7 @@ export default {
   .attribute {
     height: auto;
     .attr_body {
-      padding: 0.1rem 0.4rem;
+      padding: 0.1rem 0.41rem;
       ul {
         height: 1.25rem;
         display: flex;
@@ -679,7 +677,9 @@ export default {
         }
         span {
           &:nth-child(2) {
-            margin: 0 1.5rem 0 0.1rem;
+            display: inline-block;
+            width: 1.59rem;
+            margin-left:0.1rem;
           }
         }
       }

@@ -296,6 +296,38 @@ export default {
   
   Developers, communities, players and investors work together to create, manage, advance game development, and gain continuous revenue. Cybergear is planned to launch in Q2 this year, and players can get rewards by owning, crafting, trading, and competing.`,
   },
+  market:{
+    text1: "Series",
+    text2: "Price",
+    text3: "Token",
+    text4: ["Type","Mystery box","Character","Shard"],
+    text5: "Rarity",
+    text6: ["Property","职业","Grade","Character"],
+    text7: "Research",
+    text8: "Sell",
+    text9: "results",
+    text10: "Price",
+    text11: "Buy",
+    text12: "Property",
+    text13: "Grade",
+    text14: "Stars",
+    text15: "Rarity",
+    text16: "Introduction",
+    text17: "Transaction Record",
+    text18: "Pending Order",
+    text19: "Select All",
+    text20: "Confirm",
+    text21: "Price",
+    text22: "Fee",
+    text23: "Income",
+    text24: "Owned by",
+    text25: "Clear All",
+    text26: "Cancel",
+    text27: "Buy now",
+    text28: "Current price"
+
+  },
+
   dashboard: {
     text1: "Dashboard",
     text2: "MY NFT",
@@ -372,6 +404,7 @@ export default {
     text11: "Successful purchase",
     text12: "Not uploaded yet",
     text13: "Loading",
+    text14: "Please enter price",
   },
   btns: {
     text1: "Back",

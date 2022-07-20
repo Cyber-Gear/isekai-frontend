@@ -7,7 +7,7 @@
       </div>
       <div class="box_title">
         <img :src="`${$urlImages}box_title1.webp`" alt="" />
-        <span>挂单</span>
+        <span>{{$t("market.text18")}}</span>
       </div>
     </div>
 
@@ -32,8 +32,8 @@
               v-show="!isAllChecked"
             ></i>
           </span>
-          <span v-show="!isAllChecked">全部选择</span>
-          <span v-show="isAllChecked">取消选择</span>
+          <span v-show="!isAllChecked">{{$t("market.text19")}}</span>
+          <span v-show="isAllChecked">{{$t("market.text26")}}</span>
         </div>
       </div>
       <div class="card_list">
@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class="confirm">
-        <el-button @click="openOrder">确定</el-button>
+        <el-button @click="openOrder">{{$t("market.text20")}}</el-button>
       </div>
     </div>
     <el-dialog
@@ -72,37 +72,37 @@
       <div class="popupbox">
         <div class="box_body">
           <div class="row">
-            <span>挂单价格</span>
+            <span>{{$t("market.text21")}}</span>
             <div>
               <input
                 type="text"
                 v-model="fee"
-                placeholder="请输入价格"
+                :placeholder="$t('tips.text14')"
                 @input="fee = fee.replace(/[^\d]/g, '')"
               />
               <span>BUSD</span>
             </div>
           </div>
           <div class="row">
-            <span>手续费</span>
+            <span>{{$t("market.text22")}}</span>
             <div>
               <input
                 type="text"
                 v-model="price"
-                placeholder="请输入价格"
+                :placeholder="$t('tips.text14')"
                 @input="price = price.replace(/[^\d]/g, '')"
               />
               <span>BUSD</span>
             </div>
           </div>
           <div class="row">
-            <span>实际收益</span>
+            <span>{{$t("market.text23")}}</span>
             <div>
               <input type="text" disabled />
               <span>BUSD</span>
             </div>
           </div>
-          <el-button>确定</el-button>
+          <el-button>{{$t("market.text20")}}</el-button>
         </div>
       </div>
     </el-dialog>

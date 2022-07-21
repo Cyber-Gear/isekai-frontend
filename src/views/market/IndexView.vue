@@ -10,7 +10,7 @@
           <el-collapse accordion v-model="activeName" @change="changeSelectionList">
             <el-collapse-item v-for="(item, index) in selectionList" :key="index" :name="index.toString()">
               <template slot="title">
-                <div class="checkbox_title"><i :class="item.icon"></i> {{ $t(item.title) }}</div>
+                <div class="checkbox_title"><i :class="item.icon"></i> {{ item.title }}</div>
               </template>
               <div class="gradient_border">
                 <div>
@@ -28,7 +28,7 @@
                         <i class="iconfont pcfuxuankuang-quanxuan" v-show="ite.isChecked"></i>
                         <i class="iconfont pcfuxuankuang-weiquanxuan" v-show="!ite.isChecked"></i>
                       </div>
-                      <div class="label">{{ $t(ite.label) }}</div>
+                      <div class="label">{{ ite.label }}</div>
                     </li>
                   </ul>
                 </div>
@@ -56,7 +56,7 @@
             </el-tag>
           </div>
           <div class="btn">
-            <span @click="clearAllTag">{{ $t("market.text25") }}</span>
+            <span @click="clearAllTag">{{ $t("market.text26") }}</span>
           </div>
         </div>
 
@@ -88,7 +88,7 @@
           <el-collapse accordion v-model="activeName" @change="changeSelectionList">
             <el-collapse-item v-for="(item, index) in selectionList" :key="index" :name="index.toString()">
               <template slot="title">
-                <div class="checkbox_title"><i :class="item.icon"></i> {{ $t(item.title) }}</div>
+                <div class="checkbox_title"><i :class="item.icon"></i> {{ item.title }}</div>
               </template>
               <div class="gradient_border">
                 <div>
@@ -106,7 +106,7 @@
                         <i class="iconfont pcfuxuankuang-quanxuan" v-show="ite.isChecked"></i>
                         <i class="iconfont pcfuxuankuang-weiquanxuan" v-show="!ite.isChecked"></i>
                       </div>
-                      <div class="label">{{ $t(ite.label) }}</div>
+                      <div class="label">{{ ite.label }}</div>
                     </li>
                   </ul>
                 </div>
@@ -128,7 +128,7 @@ export default {
       activeName: "0",
       selectionList: [
         {
-          title: "market.text1",
+          title: this.$t("market.text1"),
           icon: "iconfont pcnav-list",
           checkboxList: [
             { label: "Cybergear", isChecked: false },
@@ -137,30 +137,30 @@ export default {
           ],
         },
         {
-          title: "market.text2",
+          title: this.$t("market.text2"),
           icon: "iconfont pcdollar",
           checkboxList: [{ label: "价格范围", min: 0, max: 0 }],
         },
         {
-          title: "market.text3",
+          title: this.$t("market.text3"),
           icon: "iconfont pczijin",
           checkboxList: [
             { label: "FUN", isChecked: false },
             { label: "USDT", isChecked: false },
-            { label: "AVAX", isChecked: false },
+            { label: "ETH", isChecked: false },
           ],
         },
         {
-          title: "market.text4[0]",
+          title: this.$t("market.text4[0]"),
           icon: "iconfont pcall",
           checkboxList: [
-            { label: "market.text4[1]", isChecked: false },
-            { label: "market.text4[2]", isChecked: false },
-            { label: "market.text4[3]", isChecked: false },
+            { label: this.$t("market.text4[1]"), isChecked: false },
+            { label: this.$t("market.text4[2]"), isChecked: false },
+            { label: this.$t("market.text4[3]"), isChecked: false },
           ],
         },
         {
-          title: "market.text5",
+          title: this.$t("market.text5"),
           icon: "iconfont pcdengji",
           checkboxList: [
             { label: "MR", isChecked: false },
@@ -170,12 +170,12 @@ export default {
           ],
         },
         {
-          title: "market.text6[0]",
+          title: this.$t("market.text6[0]"),
           icon: "iconfont pcshuxingchaxun",
           checkboxList: [
-            { label: "market.text6[1]", isChecked: false },
-            { label: "market.text6[2]", isChecked: false },
-            { label: "market.text6[3]", isChecked: false },
+            { label: this.$t("market.text6[1]"), isChecked: false },
+            { label: this.$t("market.text6[2]"), isChecked: false },
+            { label: this.$t("market.text6[3]"), isChecked: false },
           ],
         },
       ],

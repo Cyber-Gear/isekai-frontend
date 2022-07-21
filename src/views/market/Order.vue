@@ -7,7 +7,7 @@
       </div>
       <div class="box_title">
         <img :src="`${$urlImages}box_title1.webp`" alt="" />
-        <span>{{$t("market.text18")}}</span>
+        <span>{{$t("market.text19")}}</span>
       </div>
     </div>
 
@@ -32,8 +32,8 @@
               v-show="!isAllChecked"
             ></i>
           </span>
-          <span v-show="!isAllChecked">{{$t("market.text19")}}</span>
-          <span v-show="isAllChecked">{{$t("market.text26")}}</span>
+          <span v-show="!isAllChecked">{{$t("market.text20")}}</span>
+          <span v-show="isAllChecked">{{$t("market.text27")}}</span>
         </div>
       </div>
       <div class="card_list">
@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class="confirm">
-        <el-button @click="openOrder">{{$t("market.text20")}}</el-button>
+        <el-button @click="openOrder">{{$t("market.text21")}}</el-button>
       </div>
     </div>
     <el-dialog
@@ -72,7 +72,7 @@
       <div class="popupbox">
         <div class="box_body">
           <div class="row">
-            <span>{{$t("market.text21")}}</span>
+            <span>{{$t("market.text22")}}</span>
             <div>
               <input
                 type="text"
@@ -84,7 +84,7 @@
             </div>
           </div>
           <div class="row">
-            <span>{{$t("market.text22")}}</span>
+            <span>{{$t("market.text23")}}</span>
             <div>
               <input
                 type="text"
@@ -96,13 +96,13 @@
             </div>
           </div>
           <div class="row">
-            <span>{{$t("market.text23")}}</span>
+            <span>{{$t("market.text24")}}</span>
             <div>
               <input type="text" disabled />
               <span>BUSD</span>
             </div>
           </div>
-          <el-button>{{$t("market.text20")}}</el-button>
+          <el-button>{{$t("market.text21")}}</el-button>
         </div>
       </div>
     </el-dialog>

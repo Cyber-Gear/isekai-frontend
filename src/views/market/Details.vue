@@ -28,7 +28,7 @@
             <span>50 BUSD</span>
           </div>
           <div>
-            <span>{{ $t("market.text24") }}</span>
+            <span>{{ $t("market.text25") }}</span>
             <span>0x88...98g7</span>
             <el-button>{{ $t("market.text11") }}</el-button>
           </div>
@@ -39,12 +39,8 @@
           <div class="attr_content">
             <ul class="left_box">
               <li>
-                <span>{{ $t("market.text12") }}</span>
-                <span>{{ $t(card.attribute) }}</span>
-              </li>
-              <li>
                 <span>{{ $t("market.text13") }}</span>
-                <span>一级</span>
+                <span>{{ $t(card.attribute) }}</span>
               </li>
               <li>
                 <span>{{ $t("market.text14") }}</span>
@@ -52,7 +48,11 @@
               </li>
               <li>
                 <span>{{ $t("market.text15") }}</span>
-                <span>{{ $t(card.rarity) }}</span>
+                <span>一级</span>
+              </li>
+              <li>
+                <span>{{ $t("market.text16") }}</span>
+                <span>{{ card.rarity }}</span>
               </li>
             </ul>
           </div>
@@ -60,7 +60,7 @@
       </div>
       <div class="description">
         <div class="introduction">
-          <span>{{ $t("market.text16") }}</span>
+          <span>{{ $t("market.text17") }}</span>
           <div class="content">
             <div>
               <pre>{{ $t(card.nftdes) }}</pre>
@@ -69,7 +69,7 @@
         </div>
 
         <div class="history">
-          <span>{{ $t("market.text17") }}</span>
+          <span>{{ $t("market.text18") }}</span>
           <div class="content">
             <ul>
               <li v-for="index of 10" :key="index">
@@ -106,7 +106,7 @@
       <div class="purchase box">
         <div class="header">
           <i class="iconfont pcqianbao2-mianxing"></i>
-          <span>{{ $t("market.text28")}}</span>
+          <span>{{ $t("market.text29")}}</span>
         </div>
         <div class="pur_body">
           <div>
@@ -116,7 +116,7 @@
           </div>
           <el-button>
             <i class="iconfont pcqianbao2-mianxing"></i>
-            <span>{{ $t("market.text27") }}</span>
+            <span>{{ $t("market.text28") }}</span>
           </el-button>
         </div>
       </div>
@@ -129,13 +129,8 @@
           <ul>
             <li>
               <i class="iconfont pcshuxingchaxun"></i>
-              <span>{{ $t("market.text12") }}</span>
-              <span>{{ $t(card.attribute) }}</span>
-            </li>
-            <li>
-              <i class="iconfont pcshuxingchaxun"></i>
               <span>{{ $t("market.text13") }}</span>
-              <span>一级</span>
+              <span>{{ $t(card.attribute) }}</span>
             </li>
             <li>
               <i class="iconfont pcshuxingchaxun"></i>
@@ -145,7 +140,12 @@
             <li>
               <i class="iconfont pcshuxingchaxun"></i>
               <span>{{ $t("market.text15") }}</span>
-              <span>{{ $t(card.rarity) }}</span>
+              <span>一级</span>
+            </li>
+            <li>
+              <i class="iconfont pcshuxingchaxun"></i>
+              <span>{{ $t("market.text16") }}</span>
+              <span>{{ card.rarity }}</span>
             </li>
           </ul>
         </div>
@@ -154,7 +154,7 @@
       <div class="description box">
         <div class="header">
           <i class="iconfont pcshuxingchaxun"></i>
-          <span>{{ $t("market.text16") }}</span>
+          <span>{{ $t("market.text17") }}</span>
         </div>
         <div class="des_body">
           <div>
@@ -166,7 +166,7 @@
       <div class="history box">
         <div class="header">
           <i class="iconfont pcshuxingchaxun"></i>
-          <span>{{ $t("market.text17") }}</span>
+          <span>{{ $t("market.text18") }}</span>
         </div>
         <div class="his_body">
           <ul>

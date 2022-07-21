@@ -31,17 +31,17 @@
           </li>
           <li>
             <div>{{ $t("dashboard.text21") }}</div>
-            <div>{{ $t("dashboard.text22") }}</div>
+            <div v-if="item.coinAddr">{{ $t("dashboard.text22") }}</div>
           </li>
           <li>
             <div>
               <span v-show="isShow">{{ item.availableBalance | numberToFixed(2) }}</span>
               <span v-show="!isShow">******</span>
             </div>
-            <div class="btns" @click="$utils.handleCopy(item.coinAddr)">
+            <div class="btns" v-if="item.coinAddr" @click="$utils.handleCopy(item.coinAddr)">
               <span>{{ item.coinAddr | ellipsisWallet }}</span>
-              <span class="btn" v-show="item.isShowAdd" @click.stop="addAddress(item)"><i class="iconfont pcjiahao"></i></span>
-              <span class="btn" v-show="!item.isShowAdd"><i class="iconfont pcfuzhi"></i></span>
+              <span class="btn" v-if="item.label == 'FUN'" @click.stop="addAddress(item)"><i class="iconfont pcjiahao"></i></span>
+              <span class="btn" v-else><i class="iconfont pcfuzhi"></i></span>
             </div>
           </li>
         </ul>
@@ -59,7 +59,11 @@ export default {
   watch: {
     getWalletAccount: {
       handler(newVal) {
-        if (newVal) this.getBalanceOf();
+        if (newVal) {
+          this.getUSDT();
+          this.getETH();
+          this.getFUN();
+        }
       },
       immediate: true,
     },
@@ -73,16 +77,14 @@ export default {
           label: "USDT",
           logo: "coin-usdt",
           coinAddr: token().USDT,
-          isShowAdd: false,
           totalCoin: 0,
           totalPrice: 0,
           availableBalance: 0,
         },
         {
-          label: "WAVAX",
-          logo: "coin-avax",
-          coinAddr: token().WAVAX,
-          isShowAdd: false,
+          label: "ETH",
+          logo: "coin-eth",
+          coinAddr: "",
           totalCoin: 0,
           totalPrice: 0,
           availableBalance: 0,
@@ -91,29 +93,18 @@ export default {
           label: "FUN",
           logo: "coin-fun",
           coinAddr: token().FUN,
-          isShowAdd: true,
           totalCoin: 0,
           totalPrice: 0,
           availableBalance: 0,
         },
-        // {
-        //   label: "ETH",
-        //   logo: "coin-eth",
-        //   coinAddr: "",
-        //   isShowAdd: false,
-        //   totalCoin: 0,
-        //   totalPrice: 0,
-        //   availableBalance: 0,
-        // },
       ],
     };
   },
 
   methods: {
-    // fun,avax,usdc,usdt
-    getBalanceOf() {
-      // https://www.coingecko.com/zh
-      // https://www.coingecko.com/zh/api/documentation
+    // https://www.coingecko.com/zh
+    // https://www.coingecko.com/zh/api/documentation
+    getUSDT() {
       erc20(token().USDT)
         .balanceOf(this.getWalletAccount)
         .then((res) => {
@@ -128,23 +119,27 @@ export default {
           });
         })
         .catch((err) => {
-          console.error("erc20(token().USDT).balanceOf", err);
+          console.error("getUSDT", err);
         });
-      erc20(token().WAVAX)
-        .balanceOf(this.getWalletAccount)
+    },
+    getETH() {
+      getProvider()
+        .getBalance(this.getWalletAccount)
         .then((res) => {
           const totalCoin = Number(util.formatEther(res._hex));
-          // console.log("WAVAX", totalCoin);
+          // console.log("ETH", totalCoin);
           this.cardList[1].totalCoin = totalCoin; //币个数
           this.cardList[1].availableBalance = totalCoin; //可用余额
-          this.$api.getCoinPrice("avalanche-2").then((res2) => {
-            const price = res2.data["avalanche-2"].usd;
+          this.$api.getCoinPrice("ethereum").then((res2) => {
+            const price = res2.data["ethereum"].usd;
             this.cardList[1].totalPrice = price * totalCoin; //总价值
           });
         })
         .catch((err) => {
-          console.error("erc20(token().WAVAX).balanceOf", err);
+          console.error("getETH", err);
         });
+    },
+    getFUN() {
       erc20(token().FUN)
         .balanceOf(this.getWalletAccount)
         .then((res) => {
@@ -156,22 +151,9 @@ export default {
           this.cardList[2].totalPrice = price * totalCoin; //总价值
         })
         .catch((err) => {
-          console.error("erc20(token().FUN).balanceOf", err);
+          console.error("getFUN", err);
         });
-
-      // erc20(token().ETH)
-      //   .balanceOf(this.getWalletAccount)
-      //   .then((res) => {
-      //     const totalCoin = Number(util.formatEther(res._hex));
-      //     this.$api.getCoinPrice("ethereum").then((res2) => {
-      //       const price = res2.data["ethereum"].usd;
-      //     });
-      //   })
-      //   .catch((err) => {
-      //     console.error("erc20(token().ETH).balanceOf", err);
-      //   });
     },
-
     addAddress(item) {
       wallet.addFUN(`${this.$urlImages}${item.logo}.webp`);
     },

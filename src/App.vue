@@ -22,7 +22,7 @@ export default {
   data() {
     return {};
   },
-  computed: { ...mapGetters(["isEnLang"]) },
+  computed: { ...mapGetters(["isEnLang"]), ...mapGetters(["getWalletAccount"]) },
   mounted() {
     window.addEventListener("load", () => {
       this.resetRem();
@@ -31,6 +31,9 @@ export default {
       this.resetRem();
     });
     this.$utils.addEventListenerFun();
+    // setTimeout(() => {
+    //   if (this.getWalletAccount) this.$utils.handleChainChanged();
+    // }, 1000);
   },
   beforeDestroy() {
     window.removeEventListener("load", this.resetRem());

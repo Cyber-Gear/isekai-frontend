@@ -222,7 +222,7 @@ export default {
     text8: "稀有度",
     text9: "NFT介绍",
     text10: "上次成交",
-    text11: "查看全身立绘",
+    text11: "查看立绘",
     items: ["作品", "拥有者", "作品", "作品"],
   },
   dao: {
@@ -394,6 +394,7 @@ export default {
     text12: "未上传作品",
     text13: "请稍等",
     text14: "请输入价格",
+    text15: "购买失败",
   },
   btns: {
     text1: "返回",

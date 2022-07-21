@@ -176,7 +176,40 @@ pre {
     overflow: hidden;
   }
 }
-
+.level_btn {
+  cursor: pointer;
+  width: 45%;
+  height: auto;
+  font-size: 0.15rem;
+  line-height: 0.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.4rem;
+  margin: auto;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center center;
+  transition: all 0.3s;
+  &:hover {
+    transform: scale(0.8);
+  }
+  &.MR {
+    background-image: url($urlImages + "ShikaStudio/z-btn-MR.webp");
+  }
+  &.R {
+    background-image: url($urlImages + "ShikaStudio/z-btn-R.webp");
+  }
+  &.SR {
+    background-image: url($urlImages + "ShikaStudio/z-btn-SR.webp");
+  }
+  &.UR {
+    background-image: url($urlImages + "ShikaStudio/z-btn-UR.webp");
+  }
+}
 // 重置组件样式
 .el-message {
   min-width: 1rem;
@@ -558,6 +591,11 @@ pre {
       font-size: 0.15rem;
       font-weight: bold;
     }
+  }
+  .level_btn {
+    width: 55%;
+    bottom: 0.3rem;
+    font-size: 0.12rem;
   }
   // 重置组件样式
   .el-message {

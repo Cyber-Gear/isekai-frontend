@@ -72,7 +72,7 @@ export default {
   data() {
     return {
       isShowCheck: false,
-      switchIndex: 0,
+      switchIndex: null,
       switchList: [
         { label: "dashboard.text12", total: 0 },
         // { label: "dashboard.text13", total: 0 },
@@ -88,9 +88,7 @@ export default {
     getWalletAccount: {
       handler(newVal, oldVal) {
         if (newVal !== oldVal) sessionStorage.removeItem("MysteyBoxesList");
-        if (newVal) {
-          this.switchTab(this.switchIndex);
-        }
+        if (newVal) this.switchTab(0);
       },
       immediate: true, // 页面初始化后立即执行
     },
@@ -101,6 +99,7 @@ export default {
   },
   methods: {
     switchTab(index) {
+      if (this.switchIndex == index) return;
       this.switchIndex = index;
       this.boxList = [];
       if (index == 0) {

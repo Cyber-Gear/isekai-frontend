@@ -9,10 +9,10 @@ export const shikastudio = {
   // des 画师描述
   id: "shikastudio",
   name: "Shika studio",
-  banner: urlImages + "ShikaStudio/banner.webp",
-  logo: urlImages + "ShikaStudio/logo.webp",
-  avatar: urlImages + "ShikaStudio/avatar.webp",
-  avatar2: urlImages + "ShikaStudio/avatar2.webp",
+  banner: urlImages + "ShikaStudio/z-banner.webp",
+  logo: urlImages + "ShikaStudio/z-logo.webp",
+  avatar: urlImages + "ShikaStudio/z-avatar.webp",
+  avatar2: urlImages + "ShikaStudio/z-avatar2.webp",
   title: "nftworks.shikastudio.title",
   des: "nftworks.shikastudio.des",
   works: [
@@ -256,10 +256,10 @@ export const shikastudio = {
 export const zw = {
   id: "zw",
   name: "Z.W.",
-  banner: urlImages + "ZW/banner.webp",
-  logo: urlImages + "ZW/logo.webp",
-  avatar: urlImages + "ZW/avatar.webp",
-  avatar2: urlImages + "ZW/avatar2.webp",
+  banner: urlImages + "ZW/z-banner.webp",
+  logo: urlImages + "ZW/z-logo.webp",
+  avatar: urlImages + "ZW/z-avatar.webp",
+  avatar2: urlImages + "ZW/z-avatar2.webp",
   title: "nftworks.zw.title",
   des: "nftworks.zw.des",
   works: [
@@ -280,10 +280,10 @@ export const zw = {
 export const akiha = {
   id: "akiha",
   name: "Akiha",
-  banner: urlImages + "Akiha/banner.webp",
-  logo: urlImages + "Akiha/logo.webp",
-  avatar: urlImages + "Akiha/avatar.webp",
-  avatar2: urlImages + "Akiha/avatar2.webp",
+  banner: urlImages + "Akiha/z-banner.webp",
+  logo: urlImages + "Akiha/z-logo.webp",
+  avatar: urlImages + "Akiha/z-avatar.webp",
+  avatar2: urlImages + "Akiha/z-avatar2.webp",
   title: "nftworks.akiha.title",
   des: "nftworks.akiha.des",
   works: [
@@ -328,10 +328,10 @@ export const akiha = {
 export const negoro = {
   id: "negoro",
   name: "Negoro",
-  banner: urlImages + "Negoro/banner.webp",
-  logo: urlImages + "Negoro/logo.webp",
-  avatar: urlImages + "Negoro/avatar.webp",
-  avatar2: urlImages + "Negoro/avatar2.webp",
+  banner: urlImages + "Negoro/z-banner.webp",
+  logo: urlImages + "Negoro/z-logo.webp",
+  avatar: urlImages + "Negoro/z-avatar.webp",
+  avatar2: urlImages + "Negoro/z-avatar2.webp",
   title: "nftworks.negoro.title",
   des: "nftworks.negoro.des",
   works: [

@@ -88,26 +88,26 @@ export default {
         this.$nextTick(() => {
           this.loadingFullScreen.close(); // 以服务的方式调用的 Loading 需要异步关闭
           this.loadingFullScreen = null;
+          this.isShowPopup = true;
+          // console.log("关闭动画，打开弹窗", Number(amount), this.openedCnIds);
+          this.openedCnIds = cnIds.map((item) => {
+            return Number(item);
+          });
+          this.checkList.forEach((element) => {
+            this.boxInfo.list = this.boxInfo.list.filter((item) => {
+              return item.cbId !== element;
+            });
+          });
+          this.boxList.forEach((element) => {
+            if (element.boxType == this.boxInfo.boxType) {
+              element = this.boxInfo;
+              this.checkList = [];
+              sessionStorage.setItem("MysteyBoxesList", JSON.stringify(this.boxList));
+              if (sessionStorage.getItem("NFTAsstetList")) sessionStorage.removeItem("NFTAsstetList");
+            }
+          });
         });
       }
-      this.isShowPopup = true;
-      // console.log("关闭动画，打开弹窗", Number(amount), this.openedCnIds);
-      this.openedCnIds = cnIds.map((item) => {
-        return Number(item);
-      });
-      this.checkList.forEach((element) => {
-        this.boxInfo.list = this.boxInfo.list.filter((item) => {
-          return item.cbId !== element;
-        });
-      });
-      this.boxList.forEach((element) => {
-        if (element.boxType == this.boxInfo.boxType) {
-          element = this.boxInfo;
-          this.checkList = [];
-          sessionStorage.setItem("MysteyBoxesList", JSON.stringify(this.boxList));
-          if (sessionStorage.getItem("NFTAsstetList")) sessionStorage.removeItem("NFTAsstetList");
-        }
-      });
     });
   },
   methods: {
@@ -349,6 +349,14 @@ export default {
           }
         }
       }
+    }
+  }
+  .btn {
+    bottom: 0.1rem;
+    .el-button {
+      width: 50vw;
+      height: 0.35rem;
+      line-height: 0.35rem;
     }
   }
 }

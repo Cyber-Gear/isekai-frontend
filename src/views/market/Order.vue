@@ -264,39 +264,6 @@ export default {
         left: 0.2rem;
         top: 0.22rem;
       }
-      .btn {
-        cursor: pointer;
-        width: 1.8rem;
-        height: 0.4rem;
-        font-size: 0.15rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0.4rem;
-        margin: auto;
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        background-position: center center;
-        transition: all 0.3s;
-        &:hover {
-          transform: scale(0.8);
-        }
-        &.MR {
-          background-image: url($urlImages + "ShikaStudio/btn-MR.webp");
-        }
-        &.R {
-          background-image: url($urlImages + "ShikaStudio/btn-R.webp");
-        }
-        &.SR {
-          background-image: url($urlImages + "ShikaStudio/btn-SR.webp");
-        }
-        &.UR {
-          background-image: url($urlImages + "ShikaStudio/btn-UR.webp");
-        }
-      }
     }
   }
 

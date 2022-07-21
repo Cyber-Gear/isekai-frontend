@@ -432,31 +432,36 @@ export default {
         });
     },
     /**用户购买某种类型的盲盒 */
-    buyBoxes() {
+    async buyBoxes() {
       // buyBoxes(uint256 amount, uint256 boxType, {value: avaxAmount})
       this.buyloading = true;
-      cb()
-        .connect(getSigner())
-        .buyBoxes(this.inputAmount, this.boxType)
-        .then((res) => {
-          setTimeout(() => {
-            if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
-            this.$message({ message: this.$t("tips.text11") });
-            sessionStorage.removeItem("MysteyBoxesList");
-            this.buyloading = false;
-            this.inputAmount = null;
-            this.getAmount();
-            this.getUserHourlyBoxesLeftSupply();
-            this.getBalanceOf();
-          }, 2000);
-          // location.reload();
-        })
-        .catch((err) => {
-          this.buyloading = false;
-          console.error("buyBoxes", err);
-        });
+      try {
+        const tx = await cb().connect(getSigner()).buyBoxes(this.inputAmount, this.boxType);
+        // const etReceipt = await tx.wait(); // 请求已发出，等待矿工打包进块，交易成功，返回交易收据
+        // console.log("交易收据", etReceipt);
+        await tx.wait();
+        if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
+        this.$message({ message: this.$t("tips.text11") });
+        sessionStorage.removeItem("MysteyBoxesList");
+        this.buyloading = false;
+        this.inputAmount = null;
+        this.getAmount();
+        this.getUserHourlyBoxesLeftSupply();
+        this.getBalanceOf();
+        // const et = await cb().connect(getSigner()).buyBoxes(this.inputAmount, this.boxType);// 等待用户操作
+        // console.log("-----Auto Minting-----");
+        // console.log("ET Auto Mint Start @", new Date().toLocaleString("chinese", { hour12: false }));
+        // const etTransction = await et.autoMint(); // 用户已操作，自动开始交易请求
+        // console.log("ET Auto Mint Transction is Pending, Txid:", etTransction.hash);
+        // console.log("Waiting for Block Confirmations...");
+        // const etReceipt = await etTransction.wait(15);// 等待矿工打包进区块，交易成功，返回交易收据
+        // console.log(etReceipt.confirmations, "Blocks Confirmations");
+        // console.log("ET Auto Mint Done @", new Date().toLocaleString("chinese", { hour12: false }));
+      } catch (err) {
+        this.buyloading = false;
+        console.error("buyBoxes", err);
+      }
     },
-
     subtraction() {
       if (this.buyloading) return;
       if (this.inputAmount > 0) this.inputAmount--;

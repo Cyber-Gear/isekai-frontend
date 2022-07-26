@@ -23,6 +23,10 @@ body {
   color: #ffffff;
   background: #16161a;
 }
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
 .pc {
   display: flex !important;
 }
@@ -238,9 +242,11 @@ pre {
 .el-button {
   padding: 0;
   color: #ffffff;
-  background-color: #211f24;
-  border-color: #413f3f;
-  border-radius: 0.1rem;
+  background-color: rgba(101, 101, 111, 0.58);
+  border-radius: 0.06rem;
+  border: none;
+  // background-color: #211f24;
+  // border-color: #413f3f;
   &:focus,
   &:hover {
     color: #ffffff;

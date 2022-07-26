@@ -1,9 +1,8 @@
 <template>
   <div class="footer_box">
-    <img :src="`${$urlImages}footer_bg1.webp`" alt="" />
     <div class="center">
-      <div class="top">
-        <img class="logo2" :src="`${$urlImages}logo2.webp`" alt="" />
+      <div>
+        <img class="logo" src="@/assets/images/logo2.webp" alt="" />
         <div class="linklist">
           <a v-for="(item, index) in linkList" :key="index" :href="item.href">
             <img :src="item.image" alt="" />
@@ -33,55 +32,43 @@ export default {
 .footer_box {
   width: 100%;
   height: 4rem;
-  background: url($urlImages + "footer_bg2.webp") no-repeat;
+  background: url("~@/assets/images/bg11.webp") no-repeat;
   background-size: 100% auto;
-  text-align: center;
-  border-top: 2px solid #244647;
   display: flex;
   align-items: center;
-  position: relative;
-  > img {
-    width: 3.9rem;
-    height: auto;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
+  justify-content: center;
   .center {
-    width: 6rem;
-    margin: 0 auto;
-    .top {
+    p {
+      font-size: 0.15rem;
+      font-weight: bold;
+      line-height: 0.5rem;
+      letter-spacing: 0.06rem;
+    }
+    > div {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      .logo2 {
-        width: auto;
-        height: 0.5rem;
+      .logo {
+        width: 2.95rem;
+        height: auto;
       }
       .linklist {
         display: flex;
         a {
-          width: 0.5rem;
-          height: 0.5rem;
-          margin: 0 0.05rem;
-          background: url($urlImages + "contact_border.webp") no-repeat;
-          background-size: 100% 100%;
+          width: 0.35rem;
+          height: 0.35rem;
+          background: linear-gradient(90deg, rgba(143, 179, 234, 0.53) 0%, rgba(97, 103, 195, 0.53) 100%);
+          border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
+          margin: 0 0.1rem;
           img {
-            width: 55%;
+            width: 60%;
             height: auto;
           }
         }
       }
-    }
-    p {
-      margin: 0.3rem auto;
-      font-size: 0.15rem;
-      font-weight: bold;
-      color: #c1c3c5;
-      letter-spacing: 0.05rem;
     }
   }
 }

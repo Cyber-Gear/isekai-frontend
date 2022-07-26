@@ -1,5 +1,5 @@
 /* eslint-disable no-irregular-whitespace */
-export default { 
+export default {
   nav: {
     text1: "HOME",
     text2: "ARTIST",
@@ -14,22 +14,23 @@ export default {
     text1: "COPYRIGHT © 2022 FUNTOPIA, All rights Reserved",
   },
   home: {
-    text1: "创建一个有趣的元宇宙",
-    text2: "以MAG和加密技术的紧密联系来降低加密货币进入的门槛",
+    // text1: "创建一个有趣的元宇宙",
+    text1: "CREATE A FUN METAVERSE FOR ALL !",
+    // text2: "以MAG和加密技术的紧密联系来降低加密货币进入的门槛",
     text3: "NFT艺术家shika工作室为在Funtopia平台上发布的NFT进行了角色美术设计，将用于Cybergear的游戏场景中。",
     text4: "WHITE PAGE",
-    text5: "DAO",
-    text6: "LAUNCHPAD",
-    text7: "MARKET",
-    text8: "MEDIA",
-    text9: "INVESTOR&PARTNER",
+    // // text5: "DAO",
+    // // text6: "LAUNCHPAD",
+    // // text7: "MARKET",
+    // // text8: "MEDIA",
+    // // text9: "INVESTOR&PARTNER",
     text10: "TAG",
-    list1: [
+    forms: [
       { text1: "提交艺术家信息", text2: "用你优秀的二次创作来获得奖励" },
       { text1: "提交合作信息", text2: "创建你的NFT、游戏、活动，我们会与你联系" },
       { text1: "投票表决", text2: "为您喜欢的艺术家、KOL、游戏和作品投票并获得奖励" },
     ],
-    list3: [
+    daos: [
       { text1: "通知", text2: "请关注关于Funtopia的通知（邮件，手机通知等）来确保您不会错过Funtopia为您准备的信息", text3: "详情" },
       {
         text1: "Funtopia治理投票",
@@ -38,7 +39,7 @@ export default {
       },
       { text1: "发布第一款游戏", text2: "Funtopia旗下有非常多适合GameFi用户的游戏。第一款推出的游戏将由用户投票决定。", text3: "详情" },
     ],
-    list4: [{ text1: "2022.04.13", text2: "Cybergear即将进入发布游戏候选，敬请期待" }],
+    medias: [{ text: "Cybergear即将进入发布游戏候选，敬请期待" }],
   },
   nftworks: {
     zw: {
@@ -284,13 +285,13 @@ export default {
     
     Cyber​​gear计划于今年Q2上线，玩家可以通过拥有、制作、交易、竞技等方式获得奖励。`,
   },
-  market:{
+  market: {
     text1: "合集筛选",
     text2: "价格筛选",
     text3: "币种筛选",
-    text4: ["类型筛选","盲盒","角色","碎片"],
+    text4: ["类型筛选", "盲盒", "角色", "碎片"],
     text5: "稀有度筛选",
-    text6: ["属性筛选","职业","等级","角色"],
+    text6: ["属性筛选", "职业", "等级", "角色"],
     text7: "搜索",
     text8: "出售",
     text9: "条查询结果",
@@ -313,9 +314,8 @@ export default {
     text26: "清除全部",
     text27: "取消选择",
     text28: "立即购买",
-    text29: "当前价格"
+    text29: "当前价格",
   },
-
 
   dashboard: {
     text1: "Dashboard",

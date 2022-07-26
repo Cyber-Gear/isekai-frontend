@@ -1,242 +1,218 @@
 <template>
   <div class="home">
-    <img class="absolute1" :src="`${$urlImages}absolute1.webp`" alt="" />
-    <img class="absolute2" :src="`${$urlImages}absolute2.webp`" alt="" />
-    <img class="absolute3" :src="`${$urlImages}absolute3.webp`" alt="" />
-    <img class="absolute4" :src="`${$urlImages}absolute4.webp`" alt="" />
-    <!-- <img class="absolute5" :src="`${$urlImages}absolute5.webp`" alt="" /> -->
-    <!-- <img class="absolute6" :src="`${$urlImages}absolute6.webp`" alt="" /> -->
-    <img class="absolute7" :src="`${$urlImages}absolute2.webp`" alt="" />
-    <img class="absolute8" :src="`${$urlImages}absolute2.webp`" alt="" />
-    <img class="absolute9" :src="`${$urlImages}absolute9.webp`" alt="" />
-    <!-- <img class="absolute11" :src="`${$urlImages}absolute11.webp`" alt="" /> -->
-    <img class="absolute12" :src="`${$urlImages}absolute2.webp`" alt="" />
-    <img class="absolute13" :src="`${$urlImages}absolute13.webp`" alt="" />
-    <img class="absolute14" :src="`${$urlImages}absolute14.webp`" alt="" />
-    <img class="absolute15" :src="`${$urlImages}bg4.webp`" alt="" />
-    <div class="box1">
-      <ul>
-        <li>
-          {{ $t("home.text1") }}
-        </li>
-        <li><div></div></li>
-        <li>{{ $t("home.text2") }}</li>
-        <li>
-          <div>{{ $t("home.text4") }}</div>
+    <div class="row1">
+      <div class="info">
+        <p>{{ $t("home.text1") }}</p>
+        <div>
+          <div class="tag">{{ $t("home.text4") }}</div>
           <div class="linklist">
             <a v-for="(item, index) in linkList" :key="index" :href="item.href">
               <img :src="item.image" alt="" />
             </a>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="row2">
+      <div class="item" v-for="(item, index) in formsList" :key="index" @click="toOtherPage(item.href)">
+        <div class="top">
+          <img :src="item.img" alt="" />
+          <i class="iconfont" :class="item.icon"></i>
+        </div>
+        <div class="box">
+          <div class="radialbg"></div>
+          <div class="item_title">{{ $t(item.text1) }}</div>
+          <p>{{ $t(item.text2) }}</p>
+        </div>
+      </div>
+    </div>
+    <!-- INTRODUCTION -->
+    <div class="row3">
+      <div class="row_title">INTRODUCTION</div>
+      <ul>
+        <li
+          v-for="(item, index) in infoList"
+          :key="index"
+          @click="switchInfo(index)"
+          :class="{ active: infoIndex == index }"
+          :style="infoIndex == index ? { backgroundImage: `url(${$urlImages}ShikaStudio/z-logo.webp)` } : {}"
+        >
+          <img :src="item.avatar" alt="" />
+          <div>{{ item.name }}</div>
+          <pre>
+            {{ $t(item.des) }}
+          </pre>
         </li>
       </ul>
-      <img class="banner_img" :src="`${$urlImages}img1.webp`" alt="" />
-    </div>
-    <!-- ARTIST -->
-    <div class="box2">
-      <div class="box_content">
-        <ul class="card_list1">
-          <li v-for="(item, index) in cardList1" :key="index" @click="submitInfo(index)">
-            <div>
-              <p>{{ $t(item.text1) }}</p>
-              <p>{{ $t(item.text2) }}</p>
-            </div>
-          </li>
-        </ul>
-        <img class="img_bg3" :src="`${$urlImages}img3.webp`" alt="" />
-        <ul class="card_list2">
-          <li v-for="(item, index) in cardList2" :key="index" @click="toArtistPage(item.id)">
-            <div class="box_border1">
-              <div class="box_border2">
-                <div class="box_border1">
-                  <div class="box_border2">
-                    <div class="box_item">
-                      <pre class="text_ellipsis_row_5">{{ $t(item.des) }}</pre>
-                    </div>
-                    <div class="box_top">
-                      <img :src="item.avatar2" alt="" />
-                      <span>{{ item.name }}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
     </div>
     <!-- DAO -->
-    <div class="box3">
-      <div class="box_title">
-        <img :src="`${$urlImages}box_title1.webp`" alt="" />
-        <span>{{ $t("home.text5") }}</span>
-      </div>
-      <div class="box_content">
-        <ul class="cardList3">
-          <li v-for="(item, index) in cardList3" :key="index">
-            <div class="box_border1">
-              <div class="box_border2">
-                <div class="box_item">
-                  <div>{{ $t(item.text1) }}</div>
-                  <div>{{ $t(item.text2) }}</div>
-                  <div>
-                    <div class="btn">
-                      <div class="box_border1">
-                        <div class="box_border2">{{ $t(item.text3) }}</div>
-                      </div>
-                    </div>
-                    <div class="progress_bar">
-                      <div :style="{ width: item.progress }">{{ item.progress }}</div>
-                    </div>
-                  </div>
-                </div>
+    <div class="row4">
+      <div class="row_title">DAO</div>
+      <ul class="list">
+        <li v-for="(item, index) in daoList" :key="index">
+          <div class="radialbg"></div>
+          <p>
+            {{ $t(item.text1) }}
+            <span>已完成</span>
+          </p>
+          <pre>{{ $t(item.text2) }}</pre>
+          <div class="btn">
+            <el-button>{{ $t(item.text3) }}</el-button>
+            <div class="progress_bar">
+              <div :style="{ width: item.progress }">
+                <span>{{ item.progress }}</span>
               </div>
             </div>
-          </li>
-        </ul>
-      </div>
+          </div>
+        </li>
+      </ul>
     </div>
     <!-- LAUNCHPAD -->
-    <div class="box4">
-      <div class="box_title">
-        <img :src="`${$urlImages}box_title1.webp`" alt="" />
-        <span>{{ $t("home.text6") }}</span>
+    <div class="row5">
+      <div class="row_title">LAUNCHPAD</div>
+      <div class="titlebox">
+        <img src="@/assets/images/img7.webp" alt="" />
+        <pre>{{ $t("home.text3") }}</pre>
       </div>
-      <div class="box_content">
-        <div class="top">
-          <div class="box_border1">
-            <div class="box_border2">
-              <span>
-                {{ $t("home.text3") }}
-              </span>
-              <img :src="`${$urlImages}img7.webp`" alt="" />
-            </div>
-          </div>
-        </div>
-        <div class="bottom">
-          <div class="left">
-            <div class="box_border1">
-              <div class="box_border2">
-                <img :src="`${$urlImages}img8.webp`" alt="" />
-              </div>
-            </div>
-          </div>
-          <div class="right">
-            <div><img :src="`${$urlImages}img9.webp`" alt="" /></div>
-            <div><img :src="`${$urlImages}img10.webp`" alt="" /></div>
-          </div>
+      <div class="contentbox">
+        <img src="@/assets/images/img8.webp" alt="" />
+        <div>
+          <img src="@/assets/images/img9.webp" alt="" />
+          <img src="@/assets/images/img10.webp" alt="" />
         </div>
       </div>
     </div>
     <!-- MARKET -->
-    <div class="box5">
-      <div class="box_title">
-        <img :src="`${$urlImages}box_title1.webp`" alt="" />
-        <span>{{ $t("home.text7") }}</span>
-      </div>
-      <div class="box_content">
-        <ul class="cardList4">
-          <li v-for="(item, index) in cardList4" :key="index">
-            <div class="box_border1">
-              <div class="box_border2">
-                <ul>
-                  <li><img :src="item.image" alt="" /></li>
-                  <li>{{ item.name1 }}</li>
-                  <li>{{ item.name2 }}</li>
-                  <li>
-                    <img :src="item.logo" alt="" /><span>{{ item.num }}</span>
-                  </li>
-                  <li>
-                    <div>
-                      <div class="connected" v-if="item.offer">
-                        <span>{{ item.offer.name }}</span>
-                        <img :src="item.logo" alt="" />
-                        <span>{{ item.offer.num }}</span>
-                      </div>
-                      <div class="no_connect" v-else>connect</div>
-                    </div>
-                    <div class="btn">
-                      <img :src="`${$urlImages}img15.webp`" alt="" />
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
+    <div class="row6">
+      <div class="row_title">MARKET</div>
+      <swiper class="market_swiper" :options="marketOption" ref="mySwiper">
+        <swiper-slide v-for="(item, index) in marketList" :key="index">
+          <img :src="item.card" alt="" />
+        </swiper-slide>
+        <div class="swiper-pagination" slot="pagination"></div>
+      </swiper>
     </div>
     <!-- MEDIA -->
-    <div class="box6">
-      <div class="box_title">
-        <img :src="`${$urlImages}box_title1.webp`" alt="" />
-        <span>{{ $t("home.text8") }}</span>
+    <div class="row7">
+      <div class="row_title">MEDIA</div>
+      <div class="titlebox">
+        <img src="@/assets/images/img11.webp" alt="" />
       </div>
-      <div class="box_content">
-        <img class="title_img" :src="`${$urlImages}img4.webp`" alt="" />
-        <ul class="cardList5">
-          <li v-for="(item, index) in cardList5" :key="index">
-            <div>
-              <div>{{ $t("home.text10") }}</div>
-              <span>{{ $t(item.time) }}</span>
-              <img :src="`${$urlImages}img5.webp`" alt="" />
-            </div>
-            <span class="text_ellipsis_row_2">{{ $t(item.text) }}</span>
-          </li>
-        </ul>
-      </div>
+      <ul class="list">
+        <li class="active" v-for="(item, index) in mediasList" :key="index">
+          <div class="tag">{{ $t("home.text10") }}</div>
+          <div class="time">{{ item.time }}</div>
+          <div class="round"></div>
+          <div class="text">{{ $t(item.text) }}</div>
+        </li>
+      </ul>
     </div>
     <!-- INVESTOR&PARTNER -->
-    <!-- <div class="box7">
-      <div class="box_title">
-        <img :src="`${$urlImages}box_title1.webp`" alt="" />
-        <span>{{ $t("home.text9") }}</span>
-      </div>
-      <div class="box_content">
-        <ul class="cardList6">
-          <li v-for="(item, index) in cardList6" :key="index">
-            <img :src="item" alt="" />
-          </li>
-        </ul>
-      </div>
+    <!-- <div class="row8">
+      <div class="row_title">INVESTOR&PARTNER</div>
+      <ul>
+        <li v-for="(item, index) in cardList6" :key="index">
+          <img :src="item" alt="" />
+        </li>
+      </ul>
     </div> -->
   </div>
 </template>
 
 <script>
+import { swiper, swiperSlide } from "vue-awesome-swiper";
+import { mapGetters } from "vuex";
 import { shikastudio, zw, akiha, negoro } from "@/mock/nftworks";
 export default {
   name: "HOME",
+  components: { swiper, swiperSlide },
+
   data() {
     return {
-      cardList1: [
-        { text1: "home.list1[0].text1", text2: "home.list1[0].text2" },
-        { text1: "home.list1[1].text1", text2: "home.list1[1].text2" },
-        { text1: "home.list1[2].text1", text2: "home.list1[2].text2" },
+      linkList: [
+        { image: this.$urlImages + "contact_Gitbook.webp", href: "https://funtopia.gitbook.io/fun-topia/create-a-fun-metaverse/about-fun-topia" },
+        { image: this.$urlImages + "contact_Twitter.webp", href: "https://twitter.com/FuntopiaNFT" },
+        { image: this.$urlImages + "contact_Discord.webp", href: "https://discord.gg/Gtq9JsPcPN" },
+        { image: this.$urlImages + "contact_Medium.webp", href: "https://medium.com/@funtopiagame" },
       ],
-      cardList2: [shikastudio, zw, akiha, negoro],
-      cardList3: [
+      formsList: [
         {
-          text1: "home.list3[0].text1",
-          text2: "home.list3[0].text2",
-          text3: "home.list3[0].text3",
+          href: "https://forms.gle/zZDWkvZgGMS69LHx5",
+          img: require("@/assets/images/info1.webp"),
+          icon: "pcbussiness-man",
+          text1: "home.forms[0].text1",
+          text2: "home.forms[0].text2",
+        },
+        {
+          href: "https://forms.gle/K9QLDqwe1m3Np7LV8",
+          img: require("@/assets/images/info2.webp"),
+          icon: "pchezuo",
+          text1: "home.forms[1].text1",
+          text2: "home.forms[1].text2",
+        },
+        {
+          href: "",
+          img: require("@/assets/images/info3.webp"),
+          icon: "pctoupiao",
+          text1: "home.forms[2].text1",
+          text2: "home.forms[2].text2",
+        },
+      ],
+      infoIndex: 1,
+      infoList: [shikastudio, zw, akiha, negoro],
+
+      marketList: shikastudio.works,
+      marketIndex: 0,
+      marketOption: {
+        // loop: true,
+        initialSlide: 0,
+        effect: "coverflow",
+        centeredSlides: true,
+        slidesPerView: 5,
+        // grabCursor: true,
+        pagination: {
+          el: ".swiper-pagination",
+          bulletClass: "my_pagination",
+          bulletActiveClass: "my_pagination_active",
+          clickable: true,
+        },
+        coverflow: {
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        },
+      },
+      daoList: [
+        {
+          text1: "home.daos[0].text1",
+          text2: "home.daos[0].text2",
+          text3: "home.daos[0].text3",
           link: "",
           progress: "88%",
         },
         {
-          text1: "home.list3[1].text1",
-          text2: "home.list3[1].text2",
-          text3: "home.list3[1].text3",
+          text1: "home.daos[1].text1",
+          text2: "home.daos[1].text2",
+          text3: "home.daos[1].text3",
           link: "",
           progress: "68%",
         },
         {
-          text1: "home.list3[2].text1",
-          text2: "home.list3[2].text2",
-          text3: "home.list3[2].text3",
+          text1: "home.daos[2].text1",
+          text2: "home.daos[2].text2",
+          text3: "home.daos[2].text3",
           link: "",
           progress: "68%",
         },
+      ],
+      mediasList: [{ time: "2022.04.13", text: "home.medias[0].text" }],
+
+      cardList1: [
+        { text1: "home.list1[0].text1", text2: "home.list1[0].text2" },
+        { text1: "home.list1[1].text1", text2: "home.list1[1].text2" },
+        { text1: "home.list1[2].text1", text2: "home.list1[2].text2" },
       ],
       cardList4: [
         {
@@ -311,29 +287,21 @@ export default {
         this.$urlImages + "collaborators15.webp",
         this.$urlImages + "collaborators16.webp",
       ],
-      linkList: [
-        { image: this.$urlImages + "contact_Gitbook.webp", href: "https://funtopia.gitbook.io/fun-topia/create-a-fun-metaverse/about-fun-topia" },
-        { image: this.$urlImages + "contact_Twitter.webp", href: "https://twitter.com/FuntopiaNFT" },
-        { image: this.$urlImages + "contact_Discord.webp", href: "https://discord.gg/Gtq9JsPcPN" },
-        { image: this.$urlImages + "contact_Medium.webp", href: "https://medium.com/@funtopiagame" },
-      ],
     };
   },
+  computed: { ...mapGetters(["isEnLang"]), ...mapGetters(["getWalletAccount"]) },
+
+  // computed: {
+  //   swiper() {
+  //     return this.$refs.mySwiper.swiper;
+  //   },
+  // },
   methods: {
-    submitInfo(index) {
-      switch (index) {
-        case 0:
-          window.location.href = "https://forms.gle/zZDWkvZgGMS69LHx5";
-          break;
-        case 1:
-          window.location.href = "https://forms.gle/K9QLDqwe1m3Np7LV8";
-          break;
-        default:
-          break;
-      }
+    toOtherPage(href) {
+      if (href) window.location.href = href;
     },
-    toArtistPage(id) {
-      this.$router.push({ path: "/artist-details", query: { id: id } });
+    switchInfo(index) {
+      this.infoIndex = index;
     },
   },
 };
@@ -342,633 +310,422 @@ export default {
 .home {
   width: 100%;
   position: relative;
-  background: url($urlImages + "bg2.webp") no-repeat;
-  background-size: 100% auto;
-  background-position: 0% 15%;
-  padding-bottom: 1rem;
-  overflow: hidden;
-}
-.absolute1 {
-  width: 0.57rem;
-  height: auto;
-  position: absolute;
-  left: 0;
-  top: 13rem;
-}
-.absolute2 {
-  width: 0.11rem;
-  height: auto;
-  position: absolute;
-  left: 0.3rem;
-  top: 16rem;
-}
-.absolute3 {
-  width: 1.36rem;
-  height: auto;
-  position: absolute;
-  right: 0;
-  top: 14rem;
-}
-.absolute4 {
-  width: 2.8rem;
-  height: auto;
-  position: absolute;
-  left: 0;
-  top: 19rem;
-}
-.absolute5 {
-  width: 1.5rem;
-  height: auto;
-  position: absolute;
-  right: 0;
-  top: 19rem;
-}
-.absolute6 {
-  width: 1.57rem;
-  height: auto;
-  position: absolute;
-  left: 0;
-  top: 27rem;
-  z-index: 2;
-}
-.absolute7 {
-  width: 0.07rem;
-  height: auto;
-  opacity: 0.3;
-  transform: rotateY(180deg);
-  position: absolute;
-  left: 0.5rem;
-  top: 34rem;
-  z-index: 1;
-}
-.absolute8 {
-  width: 0.18rem;
-  height: auto;
-  position: absolute;
-  right: 0.5rem;
-  top: 35rem;
-}
-.absolute9 {
-  width: 0.85rem;
-  height: auto;
-  position: absolute;
-  left: 0;
-  top: 38rem;
-}
-
-.absolute11 {
-  width: 1.24rem;
-  height: auto;
-  position: absolute;
-  right: 0;
-  top: 36rem;
-}
-.absolute12 {
-  width: 0.18rem;
-  height: auto;
-  position: absolute;
-  left: 0.5rem;
-  top: 55rem;
-}
-.absolute13 {
-  width: 0.75rem;
-  height: auto;
-  position: absolute;
-  right: 0;
-  top: 51rem;
-}
-.absolute14 {
-  width: 0.75rem;
-  height: auto;
-  position: absolute;
-  left: 0;
-  top: 62rem;
-}
-.absolute15 {
-  width: 100%;
-  height: auto;
-  position: absolute;
-  left: 0;
-  top: 35rem;
-}
-.box1 {
-  width: 100%;
-  height: 9.5rem;
-  background: url($urlImages + "bg1.webp") no-repeat;
+  // background: url($urlImages + "bg2.webp") no-repeat;
+  background: url("~@/assets/images/bg10.webp") no-repeat;
   background-size: 100% 100%;
-  display: flex;
-  align-items: flex-end;
-  position: relative;
   padding: 0.8rem 0;
-  .linklist {
-    display: flex;
-    a {
-      width: 0.5rem;
-      height: 0.5rem;
-      margin: 0 0.05rem;
-      background: url($urlImages + "contact_border.webp") no-repeat;
-      background-size: 100% 100%;
+}
+.row1 {
+  width: 11.5rem;
+  padding-top: 3.35rem;
+  margin: 1.5rem auto;
+  .info {
+    width: 7rem;
+    > p {
+      font-size: 0.48rem;
+      font-weight: bold;
+      line-height: 0.6rem;
+    }
+    > div {
       display: flex;
       align-items: center;
-      justify-content: center;
-      img {
-        width: 55%;
-        height: auto;
+      justify-content: space-between;
+      margin-top: 0.2rem;
+      .tag {
+        width: 2.3rem;
+        height: 0.4rem;
+        line-height: 0.4rem;
+        text-align: center;
+        background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
+        border-radius: 0.18rem;
+        font-size: 0.24rem;
+        font-weight: 500;
+        margin-right: 0.2rem;
       }
-    }
-  }
-  ul {
-    width: calc(100% - 6.45rem);
-    li {
-      font-size: 0.2rem;
-      font-weight: bold;
-      padding-left: 0.5rem;
-      &:nth-child(1) {
-        font-size: 0.5rem;
-        span {
-          color: #74ceff;
-        }
-      }
-      &:nth-child(2) {
-        div {
-          width: 0.4rem;
-          height: 0.05rem;
-          background: #53d0ff;
-          margin: 0.2rem 0;
-        }
-      }
-      &:nth-child(4) {
-        margin: 0.2rem 0;
+      .linklist {
         display: flex;
-        align-items: center;
-        div {
-          &:nth-child(1) {
-            width: fit-content;
-            padding: 0 0.3rem;
-            margin-right: 0.5rem;
-            background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
-            border: 1px solid;
-            border-image: linear-gradient(320deg, rgba(219, 98, 255, 1), rgba(136, 253, 238, 0)) 1 1;
+        a {
+          width: 0.35rem;
+          height: 0.35rem;
+          background: linear-gradient(90deg, rgba(143, 179, 234, 0.53) 0%, rgba(97, 103, 195, 0.53) 100%);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 0.1rem;
+          img {
+            width: 60%;
+            height: auto;
           }
         }
       }
     }
   }
-  .banner_img {
-    width: 6.45rem;
-    height: 8.55rem;
-    position: absolute;
-    top: 1.2rem;
-    right: 0;
+}
+.row2 {
+  width: 11.5rem;
+  margin: 1.5rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .item {
+    cursor: pointer;
+    width: 3.2rem;
+    height: 1.5rem;
+    background: #2d2d35;
+    border-radius: 0.2rem;
+    backdrop-filter: blur(0.3rem);
+    position: relative;
+    &:nth-child(1) {
+      .top {
+        position: absolute;
+        top: -0.34rem;
+        left: -0.2rem;
+        img {
+          width: 0.96rem;
+          height: 0.68rem;
+        }
+        .iconfont {
+          font-size: 0.35rem;
+          position: absolute;
+          top: 0.05rem;
+          left: 0.3rem;
+        }
+      }
+    }
+    &:nth-child(2),
+    &:nth-child(3) {
+      .top {
+        position: absolute;
+        top: -0.34rem;
+        left: -0.2rem;
+        img {
+          width: 0.72rem;
+          height: 0.69rem;
+        }
+        .iconfont {
+          font-size: 0.4rem;
+          position: absolute;
+          top: 0.12rem;
+          left: 0.15rem;
+        }
+      }
+    }
+    &:nth-child(2) .box .radialbg {
+      background-image: radial-gradient(circle, #6a1f67 0%, rgba(44, 44, 51, 0.34) 62%, rgba(45, 45, 53, 0) 100%);
+    }
+    &:nth-child(3) .box .radialbg {
+      background-image: radial-gradient(circle, #684214 0%, rgba(44, 44, 51, 0.4) 77%, rgba(45, 45, 53, 0) 100%);
+    }
+    .box {
+      position: relative;
+      padding: 0.1rem;
+      overflow: hidden;
+      .radialbg {
+        width: 1.6rem;
+        height: 1.6rem;
+        background-image: radial-gradient(circle, #3a519e 0%, #2a3764 40%, #2b2d3b 64%, #2c2c33 81%, #2d2d35 100%);
+        position: absolute;
+        top: -0.5rem;
+        left: -0.5rem;
+        z-index: -1;
+      }
+      .item_title {
+        font-size: 0.2rem;
+        font-weight: bold;
+        line-height: 0.3rem;
+        margin-top: 0.4rem;
+      }
+      p {
+        font-size: 0.14rem;
+        font-weight: 500;
+        line-height: 0.2rem;
+      }
+    }
   }
 }
-.box_border1,
-.box_border2 {
-  width: 100%;
-  height: 100%;
-  border-radius: 0.05rem;
+.row_title {
+  text-align: center;
+  font-size: 0.36rem;
+  font-weight: bold;
+  color: #53d0ff;
+  margin-bottom: 0.5rem;
 }
-.box_border1 {
-  padding: 1px;
-}
-.box_border2 {
-  padding: 0;
-  background: rgba(8, 8, 9, 1);
-  transition: all 1s;
-}
-.box2 {
-  width: 100%;
-  margin: 0 auto;
-  position: relative;
-  .box_content {
-    width: 80%;
-    margin: 0 auto;
-    padding: 1rem 0;
-  }
-  .card_list1 {
+.row3 {
+  width: 11.5rem;
+  margin: 1.5rem auto;
+  ul {
     width: 100%;
-    margin-bottom: 1rem;
+    height: 4.5rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-
     li {
       cursor: pointer;
-      width: 3.2rem;
-      height: 1.4rem;
-      background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
-      position: relative;
+      width: 25%;
+      height: 2.5rem;
+      background: linear-gradient(180deg, #2d2d35 0%, #2d2d35 100%);
+      border-radius: 0.14rem;
+      border: 0.01rem solid #5b5b6c;
+      backdrop-filter: blur(31px);
+      padding: 0.2rem;
       transition: all 0.3s;
-      opacity: 0.8;
-      border-radius: 0.05rem;
-      &:hover {
-        opacity: 1;
-        transform: scale(1.1);
+      img {
+        width: 0.4rem;
+        height: 0.4rem;
       }
       div {
-        padding: 0.2rem;
-        p {
-          font-size: 0.12rem;
-          font-weight: bold;
-          &:nth-child(1) {
-            font-size: 0.2rem;
-            color: #000000;
-            margin-bottom: 0.08rem;
-          }
+        font-size: 0.21rem;
+        font-weight: bold;
+        color: #757582;
+        line-height: 0.28rem;
+        margin: 0.1rem 0;
+      }
+      pre {
+        font-size: 0.14rem;
+        font-weight: 600;
+        color: #757582;
+        line-height: 0.2rem;
+      }
+      &.active {
+        border: none;
+        height: 100%;
+        padding-top: 0.8rem;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        img {
+          width: 0.5rem;
+          height: 0.5rem;
+        }
+        div {
+          color: #ffffff;
+        }
+        pre {
+          color: #ffffff;
         }
       }
     }
   }
-  .img_bg3 {
-    width: 100%;
-    height: auto;
-    margin-bottom: 1rem;
-  }
-  .card_list2 {
-    width: 100%;
-    margin: 0.5rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+}
+.row4 {
+  width: 9.5rem;
+  margin: 1.5rem auto;
+  .list {
     li {
-      width: 2.5rem;
+      background: #2d2d35;
+      box-shadow: 0rem 0.14rem 0.27rem -0.08rem rgba(0, 0, 0, 0.49);
+      border-radius: 0.2rem;
+      backdrop-filter: blur(31px);
+      padding: 0.2rem 0.4rem;
+      margin-bottom: 0.4rem;
       position: relative;
-      cursor: pointer;
-      .box_border1 {
-        background-image: linear-gradient(
-          to right bottom,
-          rgba(0, 211, 255, 0.5),
-          rgba(0, 211, 255, 0.5),
-          rgba(0, 211, 255, 0),
-          rgba(233, 150, 255, 0.5)
+      overflow: hidden;
+      .radialbg {
+        width: 2.4rem;
+        height: 2.4rem;
+        background-image: radial-gradient(
+          circle,
+          rgba(58, 81, 158, 1),
+          rgba(58, 81, 158, 0.6),
+          rgba(58, 81, 158, 0.4),
+          rgba(44, 44, 51, 0),
+          rgba(44, 44, 51, 0)
         );
-        .box_border2 {
-          padding: 0.1rem;
-          .box_border1 {
-            background-image: linear-gradient(
-              to left bottom,
-              rgba(0, 211, 255, 0.5),
-              rgba(0, 211, 255, 0.5),
-              rgba(0, 211, 255, 0),
-              rgba(233, 150, 255, 0.5)
-            );
-            .box_border2 {
-              padding: 0;
-            }
-          }
-        }
+        position: absolute;
+        top: -1.2rem;
+        left: 0.2rem;
+        z-index: -1;
       }
-      &:hover .box_item {
-        color: #000000;
-        background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
-      }
-      .box_item {
-        width: 100%;
-        height: 100%;
-        font-size: 0.12rem;
-        font-weight: 600;
-        padding: 0.3rem 0.2rem;
-        transition: all 0.3s;
-      }
-      .box_top {
+      p {
+        font-size: 0.2rem;
+        font-weight: bold;
+        line-height: 0.3rem;
         display: flex;
         align-items: center;
-        position: absolute;
-        top: -0.55rem;
-        left: -0.4rem;
-        img {
-          width: 1rem;
-          height: 1rem;
-        }
+        justify-content: space-between;
         span {
-          font-size: 0.2rem;
-          font-weight: bold;
-          color: #00fdff;
-          margin-left: 0.1rem;
-          margin-bottom: 0.2rem;
+          font-size: 0.12rem;
+          font-weight: 400;
+          color: #53d0ff;
         }
       }
-    }
-  }
-}
-.box3 {
-  width: 100%;
-  margin-bottom: 1rem;
-  position: relative;
-  background: url($urlImages + "bg3.webp") no-repeat;
-  background-size: 100% 50%;
-  background-position: center bottom;
-  .box_content {
-    width: 9.8rem;
-    margin: 0 auto;
-    .cardList3 {
-      li {
-        width: 100%;
-        margin-bottom: 0.5rem;
-        .box_border1 {
-          background-image: linear-gradient(150deg, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5));
-        }
-        .box_item {
-          width: 100%;
-          height: 100%;
-          padding: 0.2rem 0.4rem;
-          > div {
-            font-size: 0.2rem;
-            font-weight: bold;
-            &:nth-child(2) {
-              font-size: 0.12rem;
-              margin: 0.2rem 0;
-            }
-            &:nth-child(3) {
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-              .btn {
-                cursor: pointer;
-                font-size: 0.15rem;
-                font-weight: bold;
-                &:hover .box_border2 {
-                  background: linear-gradient(180deg, #02aed3 0%, rgba(8, 8, 9, 0.58) 100%);
-                }
-                .box_border1 {
-                  background-image: linear-gradient(
-                    120deg,
-                    rgba(0, 211, 255, 0.5),
-                    rgba(0, 211, 255, 0),
-                    rgba(233, 150, 255, 0),
-                    rgba(233, 150, 255, 0.5)
-                  );
-                  .box_border2 {
-                    padding: 0.1rem 0.5rem;
-                  }
-                }
-              }
-              .progress_bar {
-                width: 2rem;
-                height: auto;
-                div {
-                  border-radius: 0.1rem;
-                  text-align: right;
-                  font-size: 0.1rem;
-                  font-weight: bold;
-                  background-image: linear-gradient(to right, rgba(0, 211, 255, 0.5), rgba(176, 108, 198, 1));
-                }
-              }
-            }
-          }
-        }
+      pre {
+        font-size: 0.14rem;
+        font-weight: 500;
+        line-height: 0.2rem;
+        margin: 0.2rem 0;
       }
-    }
-  }
-}
-.box4 {
-  width: 100%;
-  margin-bottom: 1rem;
-  position: relative;
-  .box_content {
-    width: 9.5rem;
-    margin: 0 auto;
-    .top {
-      width: 100%;
-      margin-bottom: 0.5rem;
-      position: relative;
-      .box_border1 {
-        background-image: linear-gradient(120deg, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5));
-        .box_border2 {
-          width: 100%;
-          padding: 0.2rem;
-          display: flex;
+      .btn {
+        margin-top: 0.1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .el-button {
+          width: 1.5rem;
+          height: 0.3rem;
         }
-      }
-      span {
-        font-size: 0.2rem;
-        margin-left: 1.2rem;
-      }
-      img {
-        width: 2rem;
-        height: auto;
-        position: absolute;
-        left: -5%;
-        top: 0;
-        bottom: 0;
-        margin: auto;
-      }
-    }
-    .bottom {
-      display: flex;
-      justify-content: space-between;
-      .left {
-        width: 3.8rem;
-        height: 5.5rem;
-        .box_border1 {
-          background-image: linear-gradient(150deg, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0.5), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5));
-          .box_border2 {
-            padding: 0.24rem;
-          }
-        }
-        img {
-          width: 100%;
-          height: 100%;
-        }
-      }
-      .right {
-        div {
-          width: 5.07rem;
-          height: 2.72rem;
-          &:nth-child(1) {
-            margin-bottom: 0.1rem;
-          }
-          img {
-            width: 100%;
+        .progress_bar {
+          width: 2.5rem;
+          height: 0.05rem;
+          div {
+            position: relative;
+            width: 80%;
             height: 100%;
+            background: linear-gradient(134deg, rgba(0, 211, 255, 1), rgba(176, 108, 198, 1));
+            border-radius: 0.05rem;
+            span {
+              position: absolute;
+              right: 0;
+              bottom: 0.05rem;
+              font-size: 0.12rem;
+            }
           }
         }
       }
     }
   }
 }
-.box5 {
+.row5 {
+  width: 9.5rem;
+  margin: 1.5rem auto;
+  .titlebox {
+    width: 100%;
+    padding: 0.2rem 0.4rem;
+    display: flex;
+    align-items: center;
+    background: #2d2d35;
+    box-shadow: 0rem 0.14rem 0.27rem -0.08rem rgba(0, 0, 0, 0.49);
+    border-radius: 0.2rem;
+    backdrop-filter: blur(31px);
+    margin-bottom: 0.5rem;
+    img {
+      width: 2rem;
+      height: auto;
+    }
+    pre {
+      font-size: 0.2rem;
+      font-weight: 500;
+      line-height: 0.27rem;
+    }
+  }
+  .contentbox {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    > img {
+      width: 4.1rem;
+      height: 5.5rem;
+    }
+    > div {
+      width: fit-content;
+      img {
+        display: block;
+        width: 5.05rem;
+        height: 2.7rem;
+        &:nth-child(1) {
+          margin-bottom: 0.1rem;
+        }
+      }
+    }
+  }
+}
+.row6 {
   width: 100%;
-  height: 12rem;
-  margin-bottom: 1rem;
-  position: relative;
-  .box_content {
-    .cardList4 {
-      width: 11.5rem;
-      margin: 0 auto;
+  margin: 1.5rem auto;
+  .market_swiper {
+    width: 100%;
+    height: 6rem;
+    .swiper-slide {
+      width: fit-content;
+      height: fit-content;
+      img {
+        width: 3.4rem;
+        height: 5.3rem;
+      }
+    }
+    /deep/ .swiper-pagination {
       display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      > li {
-        width: 2.75rem;
-        margin-bottom: 0.5rem;
-        &:hover .box_border2 {
-          background: rgba(8, 8, 9, 0);
-        }
-        .box_border1 {
-          background-image: linear-gradient(150deg, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0.5), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5));
-          .box_border2 {
-            padding: 0.12rem 0.12rem 0 0.12rem;
-          }
-        }
-        ul {
-          li {
-            font-size: 0.2rem;
-            font-weight: bold;
-            &:nth-child(1) {
-              img {
-                width: 100%;
-                height: auto;
-              }
-            }
-            &:nth-child(2) {
-              padding: 0 0.1rem;
-              color: #979797;
-            }
-            &:nth-child(3) {
-              padding: 0 0.1rem;
-            }
-            &:nth-child(4) {
-              padding: 0.1rem;
-              border-bottom: 1px solid;
-              border-image: linear-gradient(63deg, rgba(7, 209, 229, 1), rgba(152, 90, 173, 1)) 1 1;
-              display: flex;
-              align-items: center;
-              img {
-                width: auto;
-                height: 0.18rem;
-              }
-              span {
-                font-size: 0.18rem;
-                font-weight: bold;
-                margin-left: 0.1rem;
-              }
-            }
-            &:nth-child(5) {
-              padding: 0.1rem;
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-              > div {
-                font-size: 0.14rem;
-                font-weight: bold;
-                .no_connect {
-                  color: #965aab;
-                }
-                .connected {
-                  img {
-                    width: auto;
-                    height: 0.14rem;
-                    margin: 0 0.1rem;
-                  }
-                }
-              }
-              > .btn {
-                width: 0.38rem;
-                height: 0.38rem;
-                background: rgba(0, 0, 0, 0.24);
-                border-radius: 0.1rem;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                img {
-                  width: 65%;
-                  height: auto;
-                }
-              }
-            }
-          }
-        }
+      justify-content: center;
+      .my_pagination {
+        cursor: pointer;
+        width: 0.4rem;
+        height: 0.1rem;
+        background: #636370;
+        border-radius: 0.1rem;
+        margin: 0 0.1rem;
+      }
+      .my_pagination_active {
+        background: linear-gradient(90deg, rgba(228, 138, 255, 1), rgba(79, 149, 255, 1));
       }
     }
   }
 }
-.box6 {
-  width: 100%;
-  margin-bottom: 1rem;
-  .box_content {
-    width: 9.8rem;
-    height: auto;
-    margin: 0 auto;
-    .title_img {
+
+.row7 {
+  width: 9.5rem;
+  margin: 1.5rem auto;
+  .titlebox {
+    img {
       width: 100%;
       height: auto;
     }
-    .cardList5 {
+  }
+  .list {
+    li {
       width: 100%;
-      height: 4rem;
-      overflow-y: auto;
-      li {
-        width: 100%;
-        height: 0.5rem;
-        display: flex;
-        align-items: center;
-        font-size: 0.15rem;
-        font-weight: bold;
-        border-bottom: 1px solid #979797;
-        cursor: pointer;
-        > div {
-          height: 50%;
-          display: flex;
-          align-items: center;
-          transition: all 1s;
-          div {
-            width: 0;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
-            transition: all 0.5s;
-          }
-          span {
-            margin-right: 0.2rem;
-          }
-          img {
-            width: 0;
-            height: auto;
-            transition: all 0.5s;
-          }
+      height: 0.5rem;
+      line-height: 0.5rem;
+      display: flex;
+      align-items: center;
+      border-bottom: 0.01rem solid #979797;
+      font-size: 0.15rem;
+      font-weight: bold;
+      .time {
+        margin-right: 0.1rem;
+      }
+      .tag {
+        overflow: hidden;
+        width: 0;
+        height: 0.35rem;
+        line-height: 0.35rem;
+        text-align: center;
+        background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
+        border-radius: 0.18rem;
+      }
+      .round {
+        width: 0;
+        height: 0.17rem;
+        background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
+        border-radius: 50%;
+      }
+      &.active {
+        .tag {
+          width: 1.6rem;
+          margin-right: 0.1rem;
         }
-        &:hover > div {
-          div {
-            width: 1rem;
-            margin-right: 0.2rem;
-            border: 1px solid;
-            border-image: linear-gradient(320deg, rgba(219, 98, 255, 1), rgba(136, 253, 238, 0)) 1 1;
-          }
-          img {
-            width: 0.3rem;
-            margin-right: 0.2rem;
-          }
+        .round {
+          width: 0.17rem;
+          margin-right: 0.1rem;
         }
       }
     }
   }
 }
-.box7 {
-  width: 100%;
-  .box_content {
-    width: 80%;
-    margin: 0 auto;
-    .cardList6 {
-      position: relative;
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      li {
-        width: 25%;
-        padding: 0.2rem;
-        img {
-          max-width: 100%;
-          max-height: 100%;
-          width: auto;
-          height: auto;
-        }
+.row8 {
+  width: 9.5rem;
+  margin: 0 auto;
+  ul {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    li {
+      width: 25%;
+      padding: 0.2rem;
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
       }
     }
   }
@@ -978,354 +735,8 @@ export default {
   .home {
     width: 100%;
     position: relative;
-    background: url($urlImages + "bg2.webp") no-repeat;
-    background-size: 100% auto;
     background-position: 0% 15%;
     padding-bottom: 1rem;
-  }
-  .absolute1,
-  .absolute3,
-  .absolute4,
-  .absolute5,
-  .absolute6,
-  .absolute8,
-  .absolute9,
-  .absolute11,
-  .absolute12,
-  .absolute13,
-  .absolute14 {
-    width: 0;
-    height: 0;
-    left: 0;
-    top: 0;
-  }
-  .absolute2 {
-    width: 0.08rem;
-    height: auto;
-    position: absolute;
-    left: 0.15rem;
-    top: 60vh;
-  }
-  .absolute7 {
-    width: 0.04rem;
-    height: auto;
-    opacity: 0.3;
-    transform: rotateY(180deg);
-    position: absolute;
-    left: 0.2rem;
-    top: 175vh;
-    z-index: 1;
-  }
-  .absolute15 {
-    width: 100%;
-    height: auto;
-    position: absolute;
-    left: 0;
-    top: 245vh;
-  }
-
-  .box1 {
-    width: 100%;
-    height: 3rem;
-    padding: 0.5rem 0;
-    .linklist {
-      a {
-        width: 0.18rem;
-        height: 0.18rem;
-        margin: 0 0.01rem;
-      }
-    }
-    ul {
-      width: calc(100% - 1.48rem);
-      li {
-        font-size: 0.12rem;
-        font-weight: bold;
-        padding-left: 0.2rem;
-        &:nth-child(1) {
-          font-size: 0.15rem;
-        }
-        &:nth-child(2) {
-          div {
-            width: 0.1rem;
-            height: 0.01rem;
-            margin: 0.05rem 0;
-          }
-        }
-        &:nth-child(4) {
-          margin: 0.2rem 0;
-          div {
-            &:nth-child(1) {
-              padding: 0 0.1rem;
-              margin-right: 0.1rem;
-            }
-          }
-        }
-      }
-    }
-    .banner_img {
-      width: 1.48rem;
-      height: 2.29rem;
-      top: 0.5rem;
-    }
-  }
-  .box_border1,
-  .box_border2 {
-    width: 100%;
-    height: 100%;
-    border-radius: 0.05rem;
-  }
-  .box_border1 {
-    padding: 1px;
-  }
-  .box_border2 {
-    padding: 0;
-    background: rgba(8, 8, 9, 1);
-    transition: all 1s;
-  }
-  .box2 {
-    .box_content {
-      width: 100%;
-      padding: 0.2rem 0;
-    }
-    .card_list1 {
-      width: 100%;
-      padding: 0 10%;
-      margin-bottom: 0;
-      li {
-        width: 100%;
-        height: 0.7rem;
-        border-radius: 0.05rem;
-        margin-bottom: 0.2rem;
-        div {
-          padding: 0.1rem;
-          p {
-            font-size: 0.12rem;
-            &:nth-child(1) {
-              font-size: 0.12rem;
-              margin-bottom: 0.08rem;
-            }
-          }
-        }
-      }
-    }
-    .img_bg3 {
-      margin-bottom: 0.2rem;
-    }
-    .card_list2 {
-      width: 100%;
-      margin: 0.2rem 0;
-      padding: 0 0.35rem;
-      li {
-        width: 1.33rem;
-        margin-bottom: 0.35rem;
-        .box_border1 {
-          .box_border2 {
-            padding: 0.05rem;
-            .box_border1 {
-              .box_border2 {
-                padding: 0;
-              }
-            }
-          }
-        }
-        .box_item {
-          font-size: 0.12rem;
-          font-weight: 600;
-          padding: 0.1rem 0.1rem;
-        }
-        .box_top {
-          top: -0.25rem;
-          left: -0.25rem;
-          img {
-            width: 0.4rem;
-            height: 0.5rem;
-          }
-          span {
-            font-size: 0.16rem;
-            font-weight: bold;
-            margin-left: 0.05rem;
-            margin-bottom: 0.2rem;
-          }
-        }
-      }
-    }
-  }
-  .box3 {
-    width: 100%;
-    margin-bottom: 0.5rem;
-    .box_content {
-      width: 80%;
-      .cardList3 {
-        li {
-          margin-bottom: 0.2rem;
-          .box_item {
-            padding: 0.2rem;
-            > div {
-              font-size: 0.16rem;
-              font-weight: bold;
-              &:nth-child(2) {
-                font-size: 0.12rem;
-                margin: 0.1rem 0;
-              }
-              &:nth-child(3) {
-                .btn {
-                  font-size: 0.12rem;
-                  font-weight: bold;
-                  .box_border1 {
-                    .box_border2 {
-                      padding: 0.05rem 0.2rem;
-                    }
-                  }
-                }
-                .progress_bar {
-                  width: 1.5rem;
-                  height: auto;
-                  div {
-                    border-radius: 0.1rem;
-                    font-size: 0.12rem;
-                    font-weight: bold;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  .box4 {
-    margin-bottom: 0.5rem;
-    .box_content {
-      width: 80%;
-      .top {
-        margin-bottom: 0.2rem;
-        span {
-          font-size: 0.12rem;
-          margin-left: 0.4rem;
-        }
-        img {
-          width: 0.95rem;
-          left: -10%;
-        }
-      }
-      .bottom {
-        .left {
-          width: 1.2rem;
-          height: 1.85rem;
-          .box_border1 {
-            .box_border2 {
-              padding: 0.05rem;
-            }
-          }
-        }
-        .right {
-          div {
-            width: 1.7rem;
-            height: 0.9rem;
-            &:nth-child(1) {
-              margin-bottom: 0.05rem;
-            }
-          }
-        }
-      }
-    }
-  }
-  .box5 {
-    width: 100%;
-    height: 5.5rem;
-    margin-bottom: 0.5rem;
-    .box_content {
-      .cardList4 {
-        width: 80%;
-        > li {
-          width: 1.45rem;
-          margin-bottom: 0.2rem;
-          .box_border1 {
-            .box_border2 {
-              padding: 0.05rem 0.05rem 0 0.05rem;
-            }
-          }
-          ul {
-            li {
-              font-size: 0.12rem;
-              font-weight: bold;
-              &:nth-child(2) {
-                padding: 0 0.05rem;
-              }
-              &:nth-child(3) {
-                padding: 0 0.05rem;
-              }
-              &:nth-child(4) {
-                padding: 0.05rem;
-                img {
-                  width: auto;
-                  height: 0.1rem;
-                }
-                span {
-                  font-size: 0.12rem;
-                  font-weight: bold;
-                  margin-left: 0.05rem;
-                }
-              }
-              &:nth-child(5) {
-                padding: 0.05rem;
-                > div {
-                  font-size: 0.12rem;
-                  font-weight: bold;
-                  .no_connect {
-                    color: #965aab;
-                  }
-                  .connected {
-                    img {
-                      width: auto;
-                      height: 0.1rem;
-                      margin: 0 0.05rem;
-                    }
-                  }
-                }
-                > .btn {
-                  width: 0.21rem;
-                  height: 0.21rem;
-                  border-radius: 0.1rem;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  .box6 {
-    width: 100%;
-    margin-bottom: 0.5rem;
-    .box_content {
-      width: 80%;
-      .cardList5 {
-        width: 100%;
-        height: 2rem;
-        li {
-          width: 100%;
-          height: 0.5rem;
-          font-size: 0.12rem;
-          font-weight: bold;
-          > div {
-            span {
-              margin-right: 0.05rem;
-            }
-          }
-          &:hover > div {
-            div {
-              width: 0.5rem;
-              margin-right: 0.05rem;
-            }
-            img {
-              width: 0.2rem;
-              margin-right: 0.05rem;
-            }
-          }
-        }
-      }
-    }
   }
   .box7 {
     .box_content {

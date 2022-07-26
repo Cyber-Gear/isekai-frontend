@@ -111,12 +111,11 @@ export default {
 .nav {
   width: 100vw;
   height: 0.8rem;
-  background: rgba(0, 0, 0, 0.5);
+  background: #212124;
   position: fixed;
   top: 0;
   z-index: 999;
   transition: all 0.5s;
-  border-bottom: 1px solid #29a7e1;
   .nav_inset {
     width: 11.5rem;
     height: 100%;
@@ -134,14 +133,15 @@ export default {
       .connect {
         cursor: pointer;
         height: 0.35rem;
+        line-height: 0.35rem;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 0.15rem;
         font-weight: 400;
-        padding: 0.05rem 0.1rem;
+        padding: 0 0.1rem;
         background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
-        border-radius: 0.03rem;
+        border-radius: 0.05rem;
         position: relative;
         .disconnect {
           width: 100%;
@@ -150,7 +150,7 @@ export default {
           align-items: center;
           justify-content: space-around;
           background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
-          border-radius: 0.03rem;
+          border-radius: 0.05rem;
           position: absolute;
           top: 110%;
           transition: transform 0.3s;
@@ -188,16 +188,8 @@ export default {
     display: flex;
     align-items: center;
     padding: 0 1.5vw;
-    border-right: 1px solid;
-    border-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #29a7e1, rgba(0, 0, 0, 0)) 1 1;
-    &:last-child {
-      border-right: 0;
-    }
     &.active {
       color: #29a7e1;
-      background: url($urlImages + "nav_active.webp") no-repeat;
-      background-size: 75% auto;
-      background-position: center;
     }
   }
 }

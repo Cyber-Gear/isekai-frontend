@@ -6,6 +6,41 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "9594790",
+      "name": "下载",
+      "font_class": "xiazai",
+      "unicode": "4e0b",
+      "unicode_decimal": 19979
+    },
+    {
+      "icon_id": "18655287",
+      "name": "合作",
+      "font_class": "hezuo",
+      "unicode": "5408",
+      "unicode_decimal": 21512
+    },
+    {
+      "icon_id": "17700",
+      "name": "成功",
+      "font_class": "chenggong",
+      "unicode": "6210",
+      "unicode_decimal": 25104
+    },
+    {
+      "icon_id": "579898",
+      "name": "赠送",
+      "font_class": "zengsong",
+      "unicode": "8d60",
+      "unicode_decimal": 36192
+    },
+    {
+      "icon_id": "20587707",
+      "name": "投票",
+      "font_class": "toupiao",
+      "unicode": "e6da",
+      "unicode_decimal": 59098
+    },
+    {
       "icon_id": "5387553",
       "name": "搜索",
       "font_class": "sousuo",

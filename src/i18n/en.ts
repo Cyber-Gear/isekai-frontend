@@ -13,23 +13,24 @@ export default {
     text1: "COPYRIGHT © 2022 FUNTOPIA, All rights Reserved",
   },
   home: {
-    text1: "CREATE A FUN METAVERSE",
-    text2: "Metaverse is coming, our vision is to create a fun metaverse for all users, potential for the market in NFT, Game, Social Network etc.",
+    // text1: "CREATE A FUN METAVERSE",
+    text1: "CREATE A FUN METAVERSE FOR ALL !",
+    // text2: "Metaverse is coming, our vision is to create a fun metaverse for all users, potential for the market in NFT, Game, Social Network etc.",
     text3:
       "NFT artist shika studio provided the character artwork for the release of NFT on the FUNTOPIA platform, which was used in Cybergear's game scenes.",
     text4: "WHITE PAGE",
-    text5: "DAO",
-    text6: "LAUNCHPAD",
-    text7: "MARKET",
-    text8: "MEDIA",
-    text9: "INVESTOR&PARTNER",
+    // text5: "DAO",
+    // text6: "LAUNCHPAD",
+    // text7: "MARKET",
+    // text8: "MEDIA",
+    // text9: "INVESTOR&PARTNER",
     text10: "TAG",
-    list1: [
+    forms: [
       { text1: "Submit Artist Info", text2: "Start the journey of secondary creation and get rewarded" },
       { text1: "Submit cooperation Info", text2: "Create your NFT、Game、Event，we will contact with you" },
       { text1: "Polling vote", text2: "Vote for your favorite artists, KOLs, games and works and get rewarded" },
     ],
-    list3: [
+    daos: [
       {
         text1: "Notification",
         text2:
@@ -49,7 +50,7 @@ export default {
         text3: "detail",
       },
     ],
-    list4: [{ text1: "2022.04.13", text2: "cybergear will soon be on the Gamedao board, please look forward to it!" }],
+    medias: [{ text: "cybergear will soon be on the Gamedao board, please look forward to it!" }],
   },
   nftworks: {
     zw: {

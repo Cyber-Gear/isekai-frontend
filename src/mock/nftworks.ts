@@ -11,6 +11,7 @@ export const shikastudio = {
   name: "Shika studio",
   banner: urlImages + "ShikaStudio/z-banner.webp",
   logo: urlImages + "ShikaStudio/z-logo.webp",
+  logo2: urlImages + "ShikaStudio/z-logo2.webp",
   avatar: urlImages + "ShikaStudio/z-avatar.webp",
   avatar2: urlImages + "ShikaStudio/z-avatar2.webp",
   title: "nftworks.shikastudio.title",

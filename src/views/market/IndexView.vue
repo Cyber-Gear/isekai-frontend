@@ -120,9 +120,23 @@
 </template>
 
 <script>
+import { cn, marketInfo, market, util, getSigner, erc20, token } from "funtopia-sdk";
+import { mapGetters } from "vuex";
 import { shikastudio } from "@/mock/nftworks";
 export default {
   name: "MARKET",
+  computed: { ...mapGetters(["getWalletAccount"]) },
+  watch: {
+    getWalletAccount: {
+      handler(newVal) {
+        this.getCardInfo();
+        if (newVal) {
+          
+        }
+      },
+      immediate: true,
+    },
+  },
   data() {
     return {
       activeName: "0",
@@ -179,13 +193,22 @@ export default {
           ],
         },
       ],
-      cardList: [],
+      cardList: [
+        // { label: "buyer_address", buyer: [] },
+        // { label: "seller_address", seller: [] },
+        // { label: "nft_address", nft: [] },
+        // { label: "nft_Id", nftId: [] },
+        // { label: "token", token_addr: "" },
+        // { label: "token_address", token: "" },
+        // { label: "price", price: 0 },
+        // { label: "fee", fee: 0 },
+        // { label: "feeAmount", feeAmount: 0 },
+      ],
       tagList: [],
       isShowSelectionList: true,
       isShowDrawer: false,
     };
   },
-
   created() {
     this.cardList = shikastudio.works;
   },
@@ -251,7 +274,20 @@ export default {
       this.$router.push({ path: "/market-details", query: { id: id + 1 } });
     },
     toOrder() {
-      this.$router.push({ path: "/market-order" });
+      if (!this.getWalletAccount) return this.$store.commit("setWalletConnectPopup", true);
+      else this.$router.push({ path: "/market-order" });
+    },
+
+    // Contract
+    getCardInfo() {
+      // let market_addr = market().address;
+      // console.log(token().CB);
+      // marketInfo.getBuyInfos(1,1,token().CB,'des')
+      // .then((res)=>{
+      //   console.log(res);
+      // });
+
+      // console.log(cn().);
     },
   },
 };
@@ -336,7 +372,7 @@ export default {
         color: #ffffff;
         padding: 0.1rem;
         .check {
-          margin-right: 0.12rem;
+          margin-right: 0.08rem;
         }
       }
     }

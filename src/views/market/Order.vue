@@ -108,7 +108,7 @@ export default {
           options: [
             {
               value: 0,
-              label: "Mystery box",
+              label: "Box",
             },
             {
               value: 1,
@@ -369,11 +369,11 @@ export default {
     height: 0.27rem;
     .select {
       float: left;
-      width: 5.7rem;
+      width: 5.5rem;
       display: flex;
       justify-content: space-between;
       .el-select {
-        width: 1.29rem;
+        width: 1.22rem;
         height: 0.27rem;
         >>> .input {
           font-size: 1rem;
@@ -518,7 +518,6 @@ export default {
   }
 }
 
-
 @media screen and (max-width: 750px) {
   .page {
     width: 100%;
@@ -550,7 +549,7 @@ export default {
     .filter {
       height: 0.2rem;
       .select {
-        width: 2.1rem;
+        width: 2.4rem;
         .el-select {
           width: 0.66rem;
           height: 0.2rem;
@@ -569,9 +568,10 @@ export default {
       padding: 0 0 0 0.12rem;
       margin-top: 0.25rem;
       .card {
-        width: 1.46rem;
-        height: 2.25rem;
+        width: 1.4rem;
+        height: 2.2rem;
         margin-bottom: 0.15rem;
+        margin-right: 0.1rem;
         .input {
           top: 2%;
           left: -7.2%;
@@ -583,6 +583,9 @@ export default {
           font-size: 0.1rem;
           left: 0.15rem;
           top: 0.15rem;
+        }
+        &:nth-child(5n) {
+          margin-right: 0.1rem;
         }
       }
     }

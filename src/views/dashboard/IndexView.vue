@@ -15,7 +15,7 @@
             </li>
           </ul>
           <div class="info2">
-            <img src="http://cdn.funtopia.io/funtopia_assets_test/images/Akiha/z-avatar.webp" alt="" />
+            <img :src="$urlArtists + 'Akiha/z-avatar.webp'" alt="" />
             <p @click="$utils.handleCopy(addr)">{{ addr | ellipsisWallet }}</p>
           </div>
           <div class="iconbtn" v-if="!isShowDrawer" @click="openDrawer"><i class="iconfont pccategory"></i></div>
@@ -52,7 +52,7 @@
             <span @click="closeDrawer"><i class="iconfont pcguanbi"></i></span>
           </div>
           <div class="box1">
-            <img src="http://cdn.funtopia.io/funtopia_assets_test/images/Akiha/z-avatar.webp" alt="" />
+            <img :src="$urlArtists + 'Akiha/z-avatar.webp'" alt="" />
             <div>
               <div class="textbox">
                 <span>zhaochangpeng</span>

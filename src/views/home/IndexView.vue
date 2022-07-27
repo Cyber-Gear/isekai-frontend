@@ -83,9 +83,12 @@
     <!-- MARKET -->
     <div class="row6">
       <div class="row_title">MARKET</div>
-      <swiper class="market_swiper" :options="marketOption" ref="mySwiper">
+      <swiper class="market_swiper" :options="marketOption" ref="marketSwiper">
         <swiper-slide v-for="(item, index) in marketList" :key="index">
-          <img :src="item.card" alt="" />
+          <div class="card">
+            <img :src="item.card" alt="" />
+            <span>{{ $t(item.name) }}</span>
+          </div>
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
@@ -160,9 +163,11 @@ export default {
       marketOption: {
         loop: true,
         initialSlide: 0,
-        effect: "coverflow",
+        effect: "slide",
+        // effect: "coverflow",
         centeredSlides: true,
         slidesPerView: 5,
+        // spaceBetween: "1%",
         grabCursor: true,
         pagination: {
           el: ".swiper-pagination",
@@ -176,6 +181,11 @@ export default {
           depth: 100,
           modifier: 1,
           slideShadows: true,
+        },
+        on: {
+          slideChange: () => {
+            this.marketIndex = this.$refs.marketSwiper.swiper.activeIndex;
+          },
         },
       },
       daoList: [
@@ -415,7 +425,7 @@ export default {
         font-size: 0.14rem;
         font-weight: 600;
         color: #757582;
-        line-height: 0.2rem;
+        line-height: 0.18rem;
       }
       &.active {
         border: none;
@@ -559,13 +569,33 @@ export default {
   margin: 1.5rem auto;
   .market_swiper {
     width: 100%;
-    height: 6rem;
+    height: 5rem;
     .swiper-slide {
       width: fit-content;
       height: fit-content;
-      img {
-        width: 3.4rem;
-        height: 5.3rem;
+      transition: all 0.3s;
+      transform: scale(0.7);
+      &.swiper-slide-next,
+      &.swiper-slide-prev {
+        transform: scale(0.8);
+      }
+      &.swiper-slide-active {
+        transform: scale(1);
+      }
+      .card {
+        // width: 3.4rem;
+        // height: 5.3rem;
+        position: relative;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+        span {
+          font-size: 0.15rem;
+          position: absolute;
+          top: 8%;
+          left: 8%;
+        }
       }
     }
     /deep/ .swiper-pagination {
@@ -573,7 +603,7 @@ export default {
       justify-content: center;
       .my_pagination {
         cursor: pointer;
-        width: 0.4rem;
+        width: 0.1rem;
         height: 0.1rem;
         background: #636370;
         border-radius: 0.1rem;

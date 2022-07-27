@@ -15,7 +15,7 @@
               <span>{{ $t("artist.text2") }} </span>
               <span> {{ item.name }}</span>
             </div>
-            <div class="text_ellipsis_row_5">
+            <div class="text_ellipsis_row_3">
               <pre>{{ $t(item.des) }}</pre>
             </div>
           </div>
@@ -67,7 +67,7 @@ export default {
   li {
     float: left;
     width: 2.75rem;
-    height: 4rem;
+    height: 3.6rem;
     margin: 0 0.15rem 0.15rem 0;
     background: rgba(0, 0, 0, 0.38);
     border-radius: 0.1rem;

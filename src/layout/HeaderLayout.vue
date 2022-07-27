@@ -126,6 +126,7 @@ export default {
     .logo {
       width: auto;
       height: 60%;
+      cursor: pointer;
     }
     .connect_lang {
       display: flex;
@@ -204,11 +205,9 @@ export default {
   position: fixed;
   bottom: 0;
   left: 0;
-  padding: 0 0.2rem;
+  padding: 2vw;
   li {
     font-size: 0.12rem;
-    font-weight: 400;
-    color: #ffffff;
     i {
       font-size: 0.25rem;
     }

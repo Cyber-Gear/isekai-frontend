@@ -38,12 +38,8 @@ export default {
   align-items: center;
   justify-content: center;
   .center {
-    p {
-      font-size: 0.15rem;
-      font-weight: bold;
-      line-height: 0.5rem;
-      letter-spacing: 0.06rem;
-    }
+    width: 6.5rem;
+    text-align: center;
     > div {
       display: flex;
       align-items: center;
@@ -70,37 +66,37 @@ export default {
         }
       }
     }
+    p {
+      font-size: 0.15rem;
+      font-weight: bold;
+      line-height: 0.4rem;
+      letter-spacing: 0.03rem;
+    }
   }
 }
 @media screen and (max-width: 750px) {
   .footer_box {
     width: 100%;
     height: 1rem;
-    > img {
-      width: 1rem;
-      height: 1.2rem;
-    }
     .center {
-      width: 1.8rem;
-      left: 1rem;
-      .top {
-        .logo2 {
-          width: auto;
-          height: 0.2rem;
+      width: 80vw;
+      > div {
+        .logo {
+          width: 1.5rem;
+          height: auto;
         }
         .linklist {
           a {
-            width: 0.18rem;
-            height: 0.18rem;
-            margin: 0 0.01rem;
+            width: 0.2rem;
+            height: 0.2rem;
+            margin: 0 0.05rem;
           }
         }
       }
       p {
-        margin: 0.05rem auto;
         font-size: 0.12rem;
-        font-weight: bold;
-        letter-spacing: 0.01rem;
+        line-height: 0.2rem;
+        letter-spacing: 0;
       }
     }
   }

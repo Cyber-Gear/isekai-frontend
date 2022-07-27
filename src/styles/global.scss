@@ -1,4 +1,3 @@
-// 字体样式
 @font-face {
   font-family: "PingFang";
   src: url($urlFonts + "PingFang.ttf");
@@ -9,11 +8,11 @@
 }
 // 中文常规
 .fontfamily_zh {
-  font-family: PingFang;
+  font-family: PingFang !important;
 }
 // 英文常规
 .fontfamily_en {
-  font-family: Futura;
+  font-family: Futura !important;
 }
 html,
 body {
@@ -22,6 +21,7 @@ body {
   position: relative;
   color: #ffffff;
   background: #16161a;
+  font-family: Futura, PingFang;
 }
 a {
   color: #ffffff;
@@ -51,6 +51,7 @@ input {
   outline: none;
   border: 0px;
   caret-color: white;
+  font-family: Futura, PingFang;
   &[type="number"] {
     -moz-appearance: textfield;
     &::-webkit-inner-spin-button,
@@ -74,36 +75,13 @@ pre {
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
 }
-.text_ellipsis_row_2 {
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
+
 .text_ellipsis_row_3 {
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-}
-.text_ellipsis_row_4 {
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-}
-.text_ellipsis_row_5 {
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
 }
 

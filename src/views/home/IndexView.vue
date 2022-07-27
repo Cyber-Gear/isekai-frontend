@@ -253,7 +253,7 @@ export default {
 }
 .row1 {
   width: 11.5rem;
-  padding-top: 3.35rem;
+  padding-top: 1rem;
   margin: 1.5rem auto;
   .info {
     width: 6.5rem;

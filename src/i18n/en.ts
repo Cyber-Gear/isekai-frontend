@@ -13,9 +13,7 @@ export default {
     text1: "COPYRIGHT © 2022 FUNTOPIA, All rights Reserved",
   },
   home: {
-    // text1: "CREATE A FUN METAVERSE",
     text1: "CREATE A FUN METAVERSE FOR ALL !",
-    // text2: "Metaverse is coming, our vision is to create a fun metaverse for all users, potential for the market in NFT, Game, Social Network etc.",
     text3:
       "NFT artist shika studio provided the character artwork for the release of NFT on the FUNTOPIA platform, which was used in Cybergear's game scenes.",
     text4: "WHITE PAGE",
@@ -328,7 +326,6 @@ export default {
     text28: "Buy now",
     text29: "Current price",
   },
-
   dashboard: {
     text1: "Dashboard",
     text2: "MY NFT",

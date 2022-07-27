@@ -2,7 +2,7 @@
   <div class="footer_box">
     <div class="center">
       <div>
-        <img class="logo" src="@/assets/images/logo2.webp" alt="" />
+        <img class="logo" src="@/assets/cdn/images/logo2.webp" alt="" />
         <div class="linklist">
           <a v-for="(item, index) in linkList" :key="index" :href="item.href">
             <img :src="item.image" alt="" />
@@ -32,7 +32,7 @@ export default {
 .footer_box {
   width: 100%;
   height: 4rem;
-  background: url("~@/assets/images/bg11.webp") no-repeat;
+  background: url("~@/assets/cdn/images/bg11.webp") no-repeat;
   background-size: 100% auto;
   display: flex;
   align-items: center;

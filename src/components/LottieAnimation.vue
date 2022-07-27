@@ -4,7 +4,7 @@
 
 <script>
 import lottie from "lottie-web";
-import dataJson from "@/assets/lottiejson/data.json";
+import dataJson from "@/assets/local/lottiejson/data.json";
 export default {
   name: "LottieAnimation",
   data() {

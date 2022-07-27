@@ -4,8 +4,8 @@
   src: url($urlFonts + "PingFang.ttf");
 }
 @font-face {
-  font-family: "CaviarDreams";
-  src: url($urlFonts + "CaviarDreams.ttf");
+  font-family: "Futura";
+  src: url($urlFonts + "Futura.ttc");
 }
 // 中文常规
 .fontfamily_zh {
@@ -13,7 +13,7 @@
 }
 // 英文常规
 .fontfamily_en {
-  font-family: CaviarDreams;
+  font-family: Futura;
 }
 html,
 body {
@@ -129,18 +129,6 @@ pre {
       top: 0.35rem;
       left: 0;
     }
-  }
-}
-.box_title2 {
-  &::before {
-    content: "";
-    width: 0.15rem;
-    height: 0.15rem;
-    background: url($urlImages + "box_title3.webp") no-repeat;
-    background-size: 100% auto;
-    position: absolute;
-    top: 0.08rem;
-    left: -0.3rem;
   }
 }
 .back_box {

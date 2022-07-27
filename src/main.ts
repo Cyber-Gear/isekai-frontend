@@ -5,13 +5,14 @@ import store from "./store";
 import i18n from "./i18n";
 import "./styles/reset.scss";
 import "./styles/global.scss";
-import "./assets/iconfonts/iconfont.css";
+import "./assets/local/iconfonts/iconfont.css";
 
 const isProd = process.env.NODE_ENV == "production";
 Vue.prototype.$isProd = isProd;
-const cdn = isProd ? "https://cdn.funtopia.io/funtopia_assets_main/" : "https://cdn.funtopia.io/funtopia_assets_test/";
 Vue.prototype.$urlNfts = "https://cdn.funtopia.io/nfts/";
-Vue.prototype.$urlBlindBoxs = "https://cdn.funtopia.io/blindboxs/";
+Vue.prototype.$urlBlindBoxs = "https://cdn.funtopia.io/z_blindboxs/";
+Vue.prototype.$urlArtists = "https://cdn.funtopia.io/z_artists/";
+const cdn = isProd ? "https://cdn.funtopia.io/funtopia_assets_main/" : "https://cdn.funtopia.io/funtopia_assets_test/";
 Vue.prototype.$urlImages = cdn + "images/";
 Vue.prototype.$urlVideos = cdn + "videos/";
 
@@ -73,14 +74,14 @@ Vue.prototype.$message = (option: any) => {
   // option.duration = 0;
   // option.offset = 100;
   option.customClass = i18n.locale == "en" ? "fontfamily_en" : "fontfamily_zh";
-  // this.$message({ message: this.$t("message.tips.text12") });
-  // this.$message({ message: this.$t("message.tips.text12"), type: "success" });
-  // this.$message({ message: this.$t("message.tips.text12"), type: "warning" });
-  // this.$message({ message: this.$t("message.tips.text12"), type: "error" });
+  // this.$message({ message: this.$t("tips.text12") });
+  // this.$message({ message: this.$t("tips.text12"), type: "success" });
+  // this.$message({ message: this.$t("tips.text12"), type: "warning" });
+  // this.$message({ message: this.$t("tips.text12"), type: "error" });
   return Message(option);
 };
-Vue.use(Loading);    // 使用服务方式的话，只安装Loading即可
-Vue.use(Loading.directive);  //  指令方式(v-loading)的话这两行都得有
+Vue.use(Loading); // 使用服务方式的话，只安装Loading即可
+Vue.use(Loading.directive); //  指令方式(v-loading)的话这两行都得有
 
 Vue.config.productionTip = false;
 new Vue({

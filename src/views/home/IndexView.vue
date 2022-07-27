@@ -35,13 +35,11 @@
           :key="index"
           @click="switchInfo(index)"
           :class="{ active: infoIndex == index }"
-          :style="infoIndex == index ? { backgroundImage: `url(${$urlImages}ShikaStudio/z-logo.webp)` } : {}"
+          :style="infoIndex == index ? { backgroundImage: `url(${item.logo2})` } : {}"
         >
           <img :src="item.avatar" alt="" />
           <div>{{ item.name }}</div>
-          <pre>
-            {{ $t(item.des) }}
-          </pre>
+          <pre :class="{ text_ellipsis_row_3: infoIndex !== index }">{{ $t(item.des) }}</pre>
         </li>
       </ul>
     </div>
@@ -53,7 +51,7 @@
           <div class="radialbg"></div>
           <p>
             {{ $t(item.text1) }}
-            <span>已完成</span>
+            <span>{{ $t("status.text9") }}</span>
           </p>
           <pre>{{ $t(item.text2) }}</pre>
           <div class="btn">
@@ -71,14 +69,14 @@
     <div class="row5">
       <div class="row_title">LAUNCHPAD</div>
       <div class="titlebox">
-        <img src="@/assets/images/img7.webp" alt="" />
+        <img src="@/assets/cdn/images/img7.webp" alt="" />
         <pre>{{ $t("home.text3") }}</pre>
       </div>
       <div class="contentbox">
-        <img src="@/assets/images/img8.webp" alt="" />
+        <img src="@/assets/cdn/images/img8.webp" alt="" />
         <div>
-          <img src="@/assets/images/img9.webp" alt="" />
-          <img src="@/assets/images/img10.webp" alt="" />
+          <img src="@/assets/cdn/images/img9.webp" alt="" />
+          <img src="@/assets/cdn/images/img10.webp" alt="" />
         </div>
       </div>
     </div>
@@ -96,7 +94,7 @@
     <div class="row7">
       <div class="row_title">MEDIA</div>
       <div class="titlebox">
-        <img src="@/assets/images/img11.webp" alt="" />
+        <img src="@/assets/cdn/images/img4.webp" alt="" />
       </div>
       <ul class="list">
         <li class="active" v-for="(item, index) in mediasList" :key="index">
@@ -111,7 +109,7 @@
     <!-- <div class="row8">
       <div class="row_title">INVESTOR&PARTNER</div>
       <ul>
-        <li v-for="(item, index) in cardList6" :key="index">
+        <li v-for="(item, index) in partnerList" :key="index">
           <img :src="item" alt="" />
         </li>
       </ul>
@@ -120,13 +118,10 @@
 </template>
 
 <script>
-import { swiper, swiperSlide } from "vue-awesome-swiper";
 import { mapGetters } from "vuex";
 import { shikastudio, zw, akiha, negoro } from "@/mock/nftworks";
 export default {
   name: "HOME",
-  components: { swiper, swiperSlide },
-
   data() {
     return {
       linkList: [
@@ -138,38 +133,37 @@ export default {
       formsList: [
         {
           href: "https://forms.gle/zZDWkvZgGMS69LHx5",
-          img: require("@/assets/images/info1.webp"),
+          img: require("@/assets/cdn/images/info1.webp"),
           icon: "pcbussiness-man",
           text1: "home.forms[0].text1",
           text2: "home.forms[0].text2",
         },
         {
           href: "https://forms.gle/K9QLDqwe1m3Np7LV8",
-          img: require("@/assets/images/info2.webp"),
+          img: require("@/assets/cdn/images/info2.webp"),
           icon: "pchezuo",
           text1: "home.forms[1].text1",
           text2: "home.forms[1].text2",
         },
         {
           href: "",
-          img: require("@/assets/images/info3.webp"),
+          img: require("@/assets/cdn/images/info3.webp"),
           icon: "pctoupiao",
           text1: "home.forms[2].text1",
           text2: "home.forms[2].text2",
         },
       ],
-      infoIndex: 1,
+      infoIndex: 0,
       infoList: [shikastudio, zw, akiha, negoro],
-
       marketList: shikastudio.works,
       marketIndex: 0,
       marketOption: {
-        // loop: true,
+        loop: true,
         initialSlide: 0,
         effect: "coverflow",
         centeredSlides: true,
         slidesPerView: 5,
-        // grabCursor: true,
+        grabCursor: true,
         pagination: {
           el: ".swiper-pagination",
           bulletClass: "my_pagination",
@@ -208,68 +202,7 @@ export default {
         },
       ],
       mediasList: [{ time: "2022.04.13", text: "home.medias[0].text" }],
-
-      cardList1: [
-        { text1: "home.list1[0].text1", text2: "home.list1[0].text2" },
-        { text1: "home.list1[1].text1", text2: "home.list1[1].text2" },
-        { text1: "home.list1[2].text1", text2: "home.list1[2].text2" },
-      ],
-      cardList4: [
-        {
-          image: this.$urlImages + "img11.webp",
-          name1: "name1",
-          name2: "name2",
-          logo: this.$urlImages + "coin.webp",
-          num: 10,
-          offer: {
-            name: "offer",
-            logo: this.$urlImages + "coin.webp",
-            num: 10,
-          },
-        },
-        {
-          image: this.$urlImages + "img12.webp",
-          name1: "name1",
-          name2: "name2",
-          logo: this.$urlImages + "coin.webp",
-          num: 10,
-          offer: {
-            name: "offer",
-            logo: this.$urlImages + "coin.webp",
-            num: 10,
-          },
-        },
-        {
-          image: this.$urlImages + "img13.webp",
-          name1: "name1",
-          name2: "name2",
-          logo: this.$urlImages + "coin.webp",
-          num: 10,
-          offer: {
-            name: "offer",
-            logo: this.$urlImages + "coin.webp",
-            num: 10,
-          },
-        },
-        {
-          image: this.$urlImages + "img14.webp",
-          name1: "name1",
-          name2: "name2",
-          logo: this.$urlImages + "coin.webp",
-          num: 10,
-          offer: {
-            name: "offer",
-            logo: this.$urlImages + "coin.webp",
-            num: 10,
-          },
-        },
-      ],
-      cardList5: [
-        { time: "home.list4[0].text1", text: "home.list4[0].text2" },
-        { time: "home.list4[0].text1", text: "home.list4[0].text2" },
-        { time: "home.list4[0].text1", text: "home.list4[0].text2" },
-      ],
-      cardList6: [
+      partnerList: [
         this.$urlImages + "collaborators1.webp",
         this.$urlImages + "collaborators2.webp",
         this.$urlImages + "collaborators3.webp",
@@ -289,13 +222,7 @@ export default {
       ],
     };
   },
-  computed: { ...mapGetters(["isEnLang"]), ...mapGetters(["getWalletAccount"]) },
-
-  // computed: {
-  //   swiper() {
-  //     return this.$refs.mySwiper.swiper;
-  //   },
-  // },
+  computed: { ...mapGetters(["isEnLang"]) },
   methods: {
     toOtherPage(href) {
       if (href) window.location.href = href;
@@ -311,7 +238,7 @@ export default {
   width: 100%;
   position: relative;
   // background: url($urlImages + "bg2.webp") no-repeat;
-  background: url("~@/assets/images/bg10.webp") no-repeat;
+  background: url("~@/assets/cdn/images/bg10.webp") no-repeat;
   background-size: 100% 100%;
   padding: 0.8rem 0;
 }
@@ -464,21 +391,25 @@ export default {
       width: 25%;
       height: 2.5rem;
       background: linear-gradient(180deg, #2d2d35 0%, #2d2d35 100%);
-      border-radius: 0.14rem;
       border: 0.01rem solid #5b5b6c;
       backdrop-filter: blur(31px);
-      padding: 0.2rem;
+      padding: 0.3rem 0.2rem;
       transition: all 0.3s;
+      &:nth-child(1) {
+        border-radius: 0.14rem 0 0 0.14rem;
+      }
+      &:nth-child(4) {
+        border-radius: 0 0.14rem 0.14rem 0;
+      }
       img {
-        width: 0.4rem;
-        height: 0.4rem;
+        width: 0.5rem;
+        height: 0.5rem;
       }
       div {
         font-size: 0.21rem;
         font-weight: bold;
         color: #757582;
-        line-height: 0.28rem;
-        margin: 0.1rem 0;
+        line-height: 0.5rem;
       }
       pre {
         font-size: 0.14rem;
@@ -489,16 +420,11 @@ export default {
       &.active {
         border: none;
         height: 100%;
-        padding-top: 0.8rem;
+        padding: 0.2rem;
         background-repeat: no-repeat;
         background-size: 100% 100%;
-        img {
-          width: 0.5rem;
-          height: 0.5rem;
-        }
-        div {
-          color: #ffffff;
-        }
+        border-radius: 0;
+        div,
         pre {
           color: #ffffff;
         }

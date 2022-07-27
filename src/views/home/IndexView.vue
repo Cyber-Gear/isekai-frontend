@@ -2,7 +2,7 @@
   <div class="home">
     <div class="row1">
       <div class="info">
-        <p>{{ $t("home.text1") }}</p>
+        <pre>{{ $t("home.text1") }}</pre>
         <div>
           <div class="tag">{{ $t("home.text4") }}</div>
           <div class="linklist">
@@ -69,14 +69,14 @@
     <div class="row5">
       <div class="row_title">LAUNCHPAD</div>
       <div class="titlebox">
-        <img src="@/assets/cdn/images/img7.webp" alt="" />
+        <img :src="`${$urlImages}img7.webp`" alt="" />
         <pre>{{ $t("home.text3") }}</pre>
       </div>
       <div class="contentbox">
-        <img src="@/assets/cdn/images/img8.webp" alt="" />
+        <img :src="`${$urlImages}img8.webp`" alt="" />
         <div>
-          <img src="@/assets/cdn/images/img9.webp" alt="" />
-          <img src="@/assets/cdn/images/img10.webp" alt="" />
+          <img :src="`${$urlImages}img9.webp`" alt="" />
+          <img :src="`${$urlImages}img10.webp`" alt="" />
         </div>
       </div>
     </div>
@@ -97,14 +97,14 @@
     <div class="row7">
       <div class="row_title">MEDIA</div>
       <div class="titlebox">
-        <img src="@/assets/cdn/images/img4.webp" alt="" />
+        <img :src="`${$urlImages}img4.webp`" alt="" />
       </div>
       <ul class="list">
-        <li class="active" v-for="(item, index) in mediasList" :key="index">
+        <li v-for="(item, index) in mediasList" :key="index">
           <div class="tag">{{ $t("home.text10") }}</div>
           <div class="time">{{ item.time }}</div>
           <div class="round"></div>
-          <div class="text">{{ $t(item.text) }}</div>
+          <div class="text text_ellipsis">{{ $t(item.text) }}</div>
         </li>
       </ul>
     </div>
@@ -136,21 +136,21 @@ export default {
       formsList: [
         {
           href: "https://forms.gle/zZDWkvZgGMS69LHx5",
-          img: require("@/assets/cdn/images/info1.webp"),
+          img: this.$urlImages + "info1.webp",
           icon: "pcbussiness-man",
           text1: "home.forms[0].text1",
           text2: "home.forms[0].text2",
         },
         {
           href: "https://forms.gle/K9QLDqwe1m3Np7LV8",
-          img: require("@/assets/cdn/images/info2.webp"),
+          img: this.$urlImages + "info2.webp",
           icon: "pchezuo",
           text1: "home.forms[1].text1",
           text2: "home.forms[1].text2",
         },
         {
           href: "",
-          img: require("@/assets/cdn/images/info3.webp"),
+          img: this.$urlImages + "info3.webp",
           icon: "pctoupiao",
           text1: "home.forms[2].text1",
           text2: "home.forms[2].text2",
@@ -247,8 +247,7 @@ export default {
 .home {
   width: 100%;
   position: relative;
-  // background: url($urlImages + "bg2.webp") no-repeat;
-  background: url("~@/assets/cdn/images/bg10.webp") no-repeat;
+  background: url($urlImages + "bg10.webp") no-repeat;
   background-size: 100% 100%;
   padding: 0.8rem 0;
 }
@@ -257,11 +256,12 @@ export default {
   padding-top: 3.35rem;
   margin: 1.5rem auto;
   .info {
-    width: 7rem;
-    > p {
+    width: 6.5rem;
+    > pre {
       font-size: 0.48rem;
       font-weight: bold;
       line-height: 0.6rem;
+      letter-spacing: 0.07rem;
     }
     > div {
       display: flex;
@@ -635,6 +635,7 @@ export default {
       border-bottom: 0.01rem solid #979797;
       font-size: 0.15rem;
       font-weight: bold;
+      cursor: pointer;
       .time {
         margin-right: 0.1rem;
       }
@@ -646,13 +647,16 @@ export default {
         text-align: center;
         background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
         border-radius: 0.18rem;
+        transition: all 0.3s;
       }
       .round {
         width: 0;
         height: 0.17rem;
         background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
         border-radius: 50%;
+        transition: all 0.3s;
       }
+      &:hover,
       &.active {
         .tag {
           width: 1.6rem;

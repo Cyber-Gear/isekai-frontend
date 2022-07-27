@@ -14,7 +14,7 @@ export default {
     text1: "COPYRIGHT © 2022 FUNTOPIA, All rights Reserved",
   },
   home: {
-    text1: "CREATE A FUN METAVERSE FOR ALL !",
+    text1: "为所有人创建一个有趣的元宇宙!",
     text3: "NFT艺术家shika工作室为在Funtopia平台上发布的NFT进行了角色美术设计，将用于Cybergear的游戏场景中。",
     text4: "WHITE PAGE",
     // // text5: "DAO",

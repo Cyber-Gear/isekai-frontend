@@ -2,7 +2,7 @@
   <div class="footer_box">
     <div class="center">
       <div>
-        <img class="logo" src="@/assets/cdn/images/logo2.webp" alt="" />
+        <img class="logo" :src="`${$urlImages}logo2.webp`" alt="" />
         <div class="linklist">
           <a v-for="(item, index) in linkList" :key="index" :href="item.href">
             <img :src="item.image" alt="" />
@@ -31,9 +31,8 @@ export default {
 <style lang="scss" scoped>
 .footer_box {
   width: 100%;
-  height: 4rem;
-  background: url("~@/assets/cdn/images/bg11.webp") no-repeat;
-  background-size: 100% auto;
+  height: 3rem;
+  background: linear-gradient(180deg, #252637 0%, #0f0f12 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,8 +68,8 @@ export default {
     p {
       font-size: 0.15rem;
       font-weight: bold;
-      line-height: 0.4rem;
-      letter-spacing: 0.03rem;
+      line-height: 0.5rem;
+      letter-spacing: 0.06rem;
     }
   }
 }
@@ -95,7 +94,7 @@ export default {
       }
       p {
         font-size: 0.12rem;
-        line-height: 0.2rem;
+        line-height: 0.3rem;
         letter-spacing: 0;
       }
     }

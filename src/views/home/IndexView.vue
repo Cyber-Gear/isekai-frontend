@@ -569,7 +569,7 @@ export default {
   margin: 1.5rem auto;
   .market_swiper {
     width: 100%;
-    height: 5rem;
+    padding-bottom: 0.5rem;
     .swiper-slide {
       width: fit-content;
       height: fit-content;

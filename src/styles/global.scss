@@ -113,27 +113,31 @@ pre {
   }
 }
 .back_box {
+  width: 11.5rem;
   position: absolute;
   top: 0.5rem;
-  left: 1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  &:hover {
+  left: 0;
+  right: 0;
+  margin: auto;
+  div:hover {
     color: #53ddfc;
     span {
       border-bottom: 1px solid #53ddfc;
     }
   }
-  span {
-    font-size: 0.2rem;
-    font-weight: bold;
-    border-bottom: 1px solid #ffffff;
-    margin-left: 0.05rem;
-  }
-  i {
-    font-size: 0.2rem;
-    font-weight: bold;
+  div {
+    width: fit-content;
+    cursor: pointer;
+    span {
+      font-size: 0.2rem;
+      font-weight: bold;
+      border-bottom: 1px solid #ffffff;
+      margin-left: 0.05rem;
+    }
+    i {
+      font-size: 0.2rem;
+      font-weight: bold;
+    }
   }
 }
 .gradient_border {
@@ -555,16 +559,18 @@ pre {
     }
   }
   .back_box {
+    width: 90%;
     top: 0.2rem;
-    left: 0.2rem;
-    span {
-      font-size: 0.12rem;
-      font-weight: bold;
-      margin-left: 0.05rem;
-    }
-    i {
-      font-size: 0.15rem;
-      font-weight: bold;
+    div {
+      span {
+        font-size: 0.12rem;
+        font-weight: bold;
+        margin-left: 0.05rem;
+      }
+      i {
+        font-size: 0.15rem;
+        font-weight: bold;
+      }
     }
   }
   .level_btn {

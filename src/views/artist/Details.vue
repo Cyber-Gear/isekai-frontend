@@ -2,9 +2,10 @@
   <div class="page">
     <div class="banner">
       <img :src="detail.banner" alt="" />
-      <div class="back_box" @click="goBack">
-        <i class="iconfont pcfanhui"></i>
-        <span>{{ $t("btns.text1") }}</span>
+      <div class="back_box">
+        <div @click="goBack">
+          <i class="iconfont pcfanhui"></i><span>{{ $t("btns.text1") }}</span>
+        </div>
       </div>
     </div>
     <div class="content">

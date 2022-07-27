@@ -1,16 +1,17 @@
 <template>
   <div class="page">
     <div class="banner">
-      <div class="back_box" @click="goBack">
-        <i class="iconfont pcfanhui"></i>
-        <span>{{ $t("btns.text1") }}</span>
+      <div class="back_box">
+        <div @click="goBack">
+          <i class="iconfont pcfanhui"></i><span>{{ $t("btns.text1") }}</span>
+        </div>
       </div>
+
+    </div>
       <div class="box_title">
         <img :src="`${$urlImages}box_title1.webp`" alt="" />
         <span>{{$t("market.text19")}}</span>
       </div>
-    </div>
-
     <div class="content_box">
       <div class="filter">
         <div class="select">
@@ -171,13 +172,9 @@ export default {
   width: 100%;
   height: 1rem;
   position: relative;
-  margin-bottom: 0.8rem;
-  .back_box {
-    top: -1rem;
-    left: 1.84rem;
-  }
+
+}
   .box_title {
-    margin: 1.5rem 0 1.5rem 0.2rem;
     span {
       font-size: 0.35rem;
       margin-left: 0.17rem;
@@ -192,8 +189,6 @@ export default {
       width: 3.75rem;
     }
   }
-}
-
 .content_box {
   width: 11.5rem;
   height: 7.8rem;
@@ -351,13 +346,8 @@ export default {
   .banner {
     width: 100%;
     height: 0.5rem;
-    margin-bottom: 0.42rem;
-    .back_box {
-      top: -0.3rem;
-      left: 0.2rem;
-    }
-    .box_title {
-      margin-top: 0.5rem;
+  }
+  .box_title {
       span {
         font-size: 0.2rem;
         margin-left: 0.05rem;
@@ -372,7 +362,6 @@ export default {
         margin-left: -1.2rem;
       }
     }
-  }
 
   .content_box {
     width: 3.15rem;

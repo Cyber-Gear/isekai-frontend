@@ -107,7 +107,7 @@
                   <el-button type="primary" :loading="buyloading" @click="buyBoxesBefore">{{ $t("launchpad.text19") }}</el-button>
                 </div>
               </div>
-              <div class="progress_bar_box" v-if="nowStatusIndex !== 1">
+              <div class="progress_bar_box" v-if="nowStatusIndex > 1">
                 <div>
                   <div>{{ $t("launchpad.text21") }}</div>
                   <div class="progress_bar">
@@ -159,8 +159,8 @@ export default {
       totalPrice: 0,
       balanceAmount: 0,
       stepsArr: [
-        { label: "status.text1", time: "2022/07/10 15:00" },
-        { label: "status.text2", time: "2022/07/19 18:30" },
+        { label: "status.text1", time: "" },
+        { label: "status.text2", time: "" },
         { label: "status.text3", time: "" },
       ],
       countdownObj: { d: 0, h: 0, m: 0, s: 0 },

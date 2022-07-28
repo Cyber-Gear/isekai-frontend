@@ -94,6 +94,7 @@ export default {
       }
       p {
         font-size: 0.12rem;
+        font-weight: 400;
         line-height: 0.3rem;
         letter-spacing: 0;
       }

@@ -60,6 +60,10 @@ input {
       margin: 0;
     }
   }
+  &::placeholder {
+    color: #504e4e !important;
+    font-weight: 400;
+  }
 }
 button {
   font-family: Futura, PingFang;
@@ -170,21 +174,17 @@ pre {
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center center;
-  transition: all 0.3s;
-  &:hover {
-    transform: scale(0.8);
-  }
   &.MR {
-    background-image: url($urlImages + "ShikaStudio/z-btn-MR.webp");
+    background-image: url($urlArtists + "ShikaStudio/z-btn-MR.webp");
   }
   &.R {
-    background-image: url($urlImages + "ShikaStudio/z-btn-R.webp");
+    background-image: url($urlArtists + "ShikaStudio/z-btn-R.webp");
   }
   &.SR {
-    background-image: url($urlImages + "ShikaStudio/z-btn-SR.webp");
+    background-image: url($urlArtists + "ShikaStudio/z-btn-SR.webp");
   }
   &.UR {
-    background-image: url($urlImages + "ShikaStudio/z-btn-UR.webp");
+    background-image: url($urlArtists + "ShikaStudio/z-btn-UR.webp");
   }
 }
 // 重置组件样式

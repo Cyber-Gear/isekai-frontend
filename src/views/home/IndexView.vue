@@ -168,6 +168,7 @@ export default {
         centeredSlides: true,
         slidesPerView: 5,
         // spaceBetween: "1%",
+        freeMode: true,
         grabCursor: true,
         pagination: {
           el: ".swiper-pagination",
@@ -548,14 +549,14 @@ export default {
     display: flex;
     justify-content: space-between;
     > img {
-      width: 4.1rem;
+      width: 44%;
       height: 5.5rem;
     }
     > div {
-      width: fit-content;
+      width: 54%;
       img {
         display: block;
-        width: 5.05rem;
+        width: 100%;
         height: 2.7rem;
         &:nth-child(1) {
           margin-bottom: 0.1rem;
@@ -693,16 +694,423 @@ export default {
 
 @media screen and (max-width: 750px) {
   .home {
-    width: 100%;
-    position: relative;
-    background-position: 0% 15%;
-    padding-bottom: 1rem;
+    padding: 0.5rem 0;
   }
-  .box7 {
-    .box_content {
-      .cardList6 {
-        li {
-          padding: 0.05rem;
+  .row1 {
+    width: 90vw;
+    margin: 0.5rem auto;
+    padding-top: 0.5rem;
+    .info {
+      width: 100%;
+      > pre {
+        font-size: 0.2rem;
+        line-height: 0.2rem;
+        letter-spacing: 0.06rem;
+      }
+      > div {
+        margin-top: 0.2rem;
+        .tag {
+          width: 1.5rem;
+          height: 0.3rem;
+          line-height: 0.3rem;
+          border-radius: 0.3rem;
+          font-size: 0.15rem;
+          margin-right: 0.1rem;
+        }
+        .linklist {
+          a {
+            width: 0.3rem;
+            height: 0.3rem;
+            margin: 0 0.05rem;
+          }
+        }
+      }
+    }
+  }
+  .row2 {
+    width: 90vw;
+    margin: 0.5rem auto;
+    justify-content: center;
+    flex-wrap: wrap;
+    .item {
+      cursor: pointer;
+      width: 90%;
+      height: 1.5rem;
+      margin-bottom: 0.4rem;
+      &:nth-child(1) {
+        .top {
+          position: absolute;
+          top: -0.34rem;
+          left: -0.2rem;
+          img {
+            width: 0.96rem;
+            height: 0.68rem;
+          }
+          .iconfont {
+            font-size: 0.35rem;
+            position: absolute;
+            top: 0.05rem;
+            left: 0.3rem;
+          }
+        }
+      }
+      &:nth-child(2),
+      &:nth-child(3) {
+        .top {
+          position: absolute;
+          top: -0.34rem;
+          left: -0.2rem;
+          img {
+            width: 0.72rem;
+            height: 0.69rem;
+          }
+          .iconfont {
+            font-size: 0.4rem;
+            position: absolute;
+            top: 0.12rem;
+            left: 0.15rem;
+          }
+        }
+      }
+      &:nth-child(2) .box .radialbg {
+        background-image: radial-gradient(circle, #6a1f67 0%, rgba(44, 44, 51, 0.34) 62%, rgba(45, 45, 53, 0) 100%);
+      }
+      &:nth-child(3) .box .radialbg {
+        background-image: radial-gradient(circle, #684214 0%, rgba(44, 44, 51, 0.4) 77%, rgba(45, 45, 53, 0) 100%);
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+      .box {
+        position: relative;
+        padding: 0.1rem;
+        overflow: hidden;
+        .radialbg {
+          width: 1.6rem;
+          height: 1.6rem;
+          background-image: radial-gradient(circle, #3a519e 0%, #2a3764 40%, #2b2d3b 64%, #2c2c33 81%, #2d2d35 100%);
+          position: absolute;
+          top: -0.5rem;
+          left: -0.5rem;
+          z-index: -1;
+        }
+        .item_title {
+          font-size: 0.2rem;
+          font-weight: bold;
+          line-height: 0.3rem;
+          margin-top: 0.4rem;
+        }
+        p {
+          font-size: 0.14rem;
+          font-weight: 500;
+          line-height: 0.2rem;
+        }
+      }
+    }
+  }
+  .row_title {
+    text-align: center;
+    font-size: 0.25rem;
+    font-weight: bold;
+    color: #53d0ff;
+    margin-bottom: 0.3rem;
+  }
+  .row3 {
+    width: 90vw;
+    margin: 0.5rem auto;
+    ul {
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      li {
+        cursor: pointer;
+        width: 100%;
+        height: 2.5rem;
+        background: linear-gradient(180deg, #2d2d35 0%, #2d2d35 100%);
+        border: none;
+        backdrop-filter: blur(31px);
+        padding: 0.3rem 0.2rem;
+        transition: all 0.3s;
+        &:nth-child(1) {
+          border-radius: 0.14rem;
+        }
+        &:nth-child(4) {
+          border-radius: 0.14rem;
+        }
+        img {
+          width: 0.5rem;
+          height: 0.5rem;
+        }
+        div {
+          font-size: 0.21rem;
+          font-weight: bold;
+          color: #757582;
+          line-height: 0.5rem;
+        }
+        pre {
+          font-size: 0.14rem;
+          font-weight: 600;
+          color: #757582;
+          line-height: 0.18rem;
+        }
+        &.active {
+          border: none;
+          height: 100%;
+          padding: 0.2rem;
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+          border-radius: 0;
+          div,
+          pre {
+            color: #ffffff;
+          }
+        }
+      }
+    }
+  }
+  .row4 {
+    width: 90vw;
+    margin: 0.5rem auto;
+    .list {
+      li {
+        background: #2d2d35;
+        box-shadow: 0rem 0.14rem 0.27rem -0.08rem rgba(0, 0, 0, 0.49);
+        border-radius: 0.2rem;
+        backdrop-filter: blur(31px);
+        padding: 0.2rem 0.4rem;
+        margin-bottom: 0.4rem;
+        position: relative;
+        overflow: hidden;
+        .radialbg {
+          width: 2.4rem;
+          height: 2.4rem;
+          background-image: radial-gradient(
+            circle,
+            rgba(58, 81, 158, 1),
+            rgba(58, 81, 158, 0.6),
+            rgba(58, 81, 158, 0.4),
+            rgba(44, 44, 51, 0),
+            rgba(44, 44, 51, 0)
+          );
+          position: absolute;
+          top: -1.2rem;
+          left: 0.2rem;
+          z-index: -1;
+        }
+        p {
+          font-size: 0.2rem;
+          font-weight: bold;
+          line-height: 0.3rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          span {
+            font-size: 0.12rem;
+            font-weight: 400;
+            color: #53d0ff;
+          }
+        }
+        pre {
+          font-size: 0.14rem;
+          font-weight: 500;
+          line-height: 0.2rem;
+          margin: 0.2rem 0;
+        }
+        .btn {
+          margin-top: 0.1rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          .el-button {
+            width: 1.5rem;
+            height: 0.3rem;
+          }
+          .progress_bar {
+            width: 2.5rem;
+            height: 0.05rem;
+            div {
+              position: relative;
+              width: 80%;
+              height: 100%;
+              background: linear-gradient(134deg, rgba(0, 211, 255, 1), rgba(176, 108, 198, 1));
+              border-radius: 0.05rem;
+              span {
+                position: absolute;
+                right: 0;
+                bottom: 0.05rem;
+                font-size: 0.12rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .row5 {
+    width: 90vw;
+    margin: 0.5rem auto;
+    .titlebox {
+      width: 100%;
+      padding: 0.2rem 0.4rem;
+      display: flex;
+      align-items: center;
+      background: #2d2d35;
+      box-shadow: 0rem 0.14rem 0.27rem -0.08rem rgba(0, 0, 0, 0.49);
+      border-radius: 0.2rem;
+      backdrop-filter: blur(31px);
+      margin-bottom: 0.5rem;
+      img {
+        width: 2rem;
+        height: auto;
+      }
+      pre {
+        font-size: 0.2rem;
+        font-weight: 500;
+        line-height: 0.27rem;
+      }
+    }
+    .contentbox {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      > img {
+        height: 2rem;
+      }
+      > div {
+        img {
+          display: block;
+          height: 1rem;
+          &:nth-child(1) {
+            margin-bottom: 0.1rem;
+          }
+        }
+      }
+    }
+  }
+  .row6 {
+    width: 100vw;
+    margin: 0.5rem auto;
+    .market_swiper {
+      width: 100%;
+      padding-bottom: 0.5rem;
+      .swiper-slide {
+        width: fit-content;
+        height: fit-content;
+        transition: all 0.3s;
+        transform: scale(0.7);
+        &.swiper-slide-next,
+        &.swiper-slide-prev {
+          transform: scale(0.8);
+        }
+        &.swiper-slide-active {
+          transform: scale(1);
+        }
+        .card {
+          // width: 3.4rem;
+          // height: 5.3rem;
+          position: relative;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+          span {
+            font-size: 0.15rem;
+            position: absolute;
+            top: 8%;
+            left: 8%;
+          }
+        }
+      }
+      /deep/ .swiper-pagination {
+        display: flex;
+        justify-content: center;
+        .my_pagination {
+          cursor: pointer;
+          width: 0.1rem;
+          height: 0.1rem;
+          background: #636370;
+          border-radius: 0.1rem;
+          margin: 0 0.05rem;
+        }
+        .my_pagination_active {
+          background: linear-gradient(90deg, rgba(228, 138, 255, 1), rgba(79, 149, 255, 1));
+        }
+      }
+    }
+  }
+
+  .row7 {
+    width: 90vw;
+    margin: 0.5rem auto;
+    .titlebox {
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+    .list {
+      li {
+        width: 100%;
+        height: 0.5rem;
+        line-height: 0.5rem;
+        display: flex;
+        align-items: center;
+        border-bottom: 0.01rem solid #979797;
+        font-size: 0.15rem;
+        font-weight: bold;
+        cursor: pointer;
+        .time {
+          margin-right: 0.1rem;
+        }
+        .tag {
+          overflow: hidden;
+          width: 0;
+          height: 0.35rem;
+          line-height: 0.35rem;
+          text-align: center;
+          background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
+          border-radius: 0.18rem;
+          transition: all 0.3s;
+        }
+        .round {
+          width: 0;
+          height: 0.17rem;
+          background: linear-gradient(136deg, #68cfe7 0%, #68cfe6 18%, #50b9d8 58%, #5967ce 100%);
+          border-radius: 50%;
+          transition: all 0.3s;
+        }
+        &:hover,
+        &.active {
+          .tag {
+            width: 1.6rem;
+            margin-right: 0.1rem;
+          }
+          .round {
+            width: 0.17rem;
+            margin-right: 0.1rem;
+          }
+        }
+      }
+    }
+  }
+  .row8 {
+    width: 90vw;
+    margin: 0 auto;
+    ul {
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      li {
+        width: 25%;
+        padding: 0.2rem;
+        img {
+          max-width: 100%;
+          max-height: 100%;
+          width: auto;
+          height: auto;
         }
       }
     }

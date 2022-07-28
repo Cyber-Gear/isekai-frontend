@@ -372,6 +372,8 @@ export default {
     text2: "Approve",
     text3: "step 1",
     text4: "step 2",
+    text5: "Sell",
+
   },
   orderPopup: {
     text1: "Pending order",
@@ -407,6 +409,8 @@ export default {
     text13: "Loading",
     text14: "Please enter",
     text15: "Failed purchase",
+    text16: "Successful sale"
+
   },
   btns: {
     text1: "Back",

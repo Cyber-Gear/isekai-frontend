@@ -360,6 +360,8 @@ export default {
     text2: "授权",
     text3: "第一步",
     text4: "第二步",
+    text5: "出售",
+
   },
   orderPopup: {
     text1: "挂单",
@@ -395,6 +397,7 @@ export default {
     text13: "请稍等",
     text14: "请输入价格",
     text15: "购买失败",
+    text16: "挂单成功",
   },
   btns: {
     text1: "返回",

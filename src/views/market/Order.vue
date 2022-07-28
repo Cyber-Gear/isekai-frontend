@@ -34,20 +34,34 @@
             <i class="iconfont pcfuxuankuang-weiquanxuan" v-show="!item.isChecked"></i>
           </span>
           <img :src="item.cardInfo.card" alt="" />
-          <span>{{ $t(item.cardInfo.name) }}</span>
+          <span>{{ $t(item.name) }}</span>
         </div>
       </div>
       <div class="confirm">
         <el-button @click="openOrder" v-show="!disable">{{ $t("market.text21") }}</el-button>
       </div>
     </div>
-    <el-dialog center top="0" :title="$t('orderPopup.text1')" :visible.sync="isShowOrder" :modal-append-to-body="false" :destroy-on-close="true">
+    <el-dialog
+      center
+      top="0"
+      :title="$t('orderPopup.text1')"
+      :visible.sync="isShowOrder"
+      :modal-append-to-body="false"
+      :destroy-on-close="true"
+      @close="closeOrder"
+    >
       <div class="popupbox">
         <div class="box_body">
           <div class="row">
             <span>{{ $t("market.text22") }}</span>
             <div>
-              <input type="text" v-model="price" :placeholder="$t('tips.text14')" @input="price = price.replace(/[^\d]/g, '')" />
+              <input
+                type="text"
+                v-model="price"
+                :placeholder="$t('tips.text14')"
+                @input="price = price.replace(/[^\d]/g, '')"
+                :disabled="sellLoading"
+              />
               <span>USDT</span>
             </div>
           </div>
@@ -65,20 +79,24 @@
               <span>USDT</span>
             </div>
           </div>
-          <el-button @click="toSell">{{ $t("market.text21") }}</el-button>
+          <el-button :loading="sellLoading" @click="beforeSell('USDT')" :disabled="enabled">{{ $t("market.text21") }}</el-button>
         </div>
       </div>
     </el-dialog>
+    <ApprovePopup :operation="operation" :loading="sellLoading"></ApprovePopup>
   </div>
 </template>
 
 <script>
 // import PaintingVideo from "@/components/PaintingVideo.vue";
-import { cn, cb, market, util, getSigner, erc20, token } from "funtopia-sdk";
+import { cn, cb, market, util, getSigner, erc20, erc721, token, contract } from "funtopia-sdk";
 import { mapGetters } from "vuex";
+import ApprovePopup from "@/components/ApprovePopup";
 import { shikastudio } from "@/mock/nftworks";
 export default {
   name: "MarketOrder",
+  components: { ApprovePopup },
+
   // components: { PaintingVideo },
   data() {
     return {
@@ -167,11 +185,20 @@ export default {
         { label: "FUN", addr: token().FUN },
         { label: "ETH", addr: "" },
       ],
+      operation: {
+        name: this.$t("approvePopup.text5"),
+        func: "sellNfts",
+      },
+      sellList: {},
       name: null,
       isShowPopup: false,
       isShowOrder: false,
       isAllChecked: false,
-      price: null,
+      isApproved: false,
+      popupActive: 1,
+      approvedloading: false,
+      sellLoading: false,
+      price: "",
       fee: 0,
       value: "",
       balance: 0,
@@ -186,25 +213,21 @@ export default {
     income: function () {
       return this.price - this.fees;
     },
+    enabled: function () {
+      return this.price == "";
+    },
   },
   watch: {
     getWalletAccount: {
       handler(newVal, oldVal) {
         this.getFee();
-
         //有值即已登录状态
         if (newVal) {
           console.log("登陆状态下的跳转");
           if (sessionStorage.getItem("HeroAssetList")) {
             console.log("立即读取");
             this.heroIdList = JSON.parse(sessionStorage.getItem("HeroAssetList"));
-            this.heroIdList.forEach((element) => {
-              const obj = {};
-              obj.cardInfo = shikastudio.works.find((item) => item.id == element.id);
-              obj.nftId = element.nftId;
-              obj.isChecked = false;
-              this.cardList.push(obj);
-            });
+            this.cardListInit();
           } else {
             console.log("首次跳转到此页面 加载");
             this.tokensOfOwner();
@@ -213,7 +236,7 @@ export default {
         //未连接或断开操作
         else {
           sessionStorage.removeItem("HeroAssetList");
-          this.cardList = [];
+          // this.cardList = [];
           this.$router.push({ path: "/market" });
         }
       },
@@ -244,19 +267,31 @@ export default {
     },
 
     openOrder() {
-      let nfts = [];
+      this.sellList = {};
+      let data = {
+        nftIds: [],
+        types: [],
+        tokens: [],
+        prices: [],
+        total: 0,
+      };
       this.cardList.forEach((item) => {
-        if (item.isChecked) nfts.push(item);
+        if (item.isChecked) {
+          data.nftIds.push(item.nftId);
+          data.types.push(token().CN);
+          data.tokens.push(token().USDT);
+          data.total++;
+        }
       });
-
+      this.sellList = data;
       this.isShowOrder = true;
-      console.log(nfts);
+      console.log(this.sellList);
     },
 
-    toSell() {
-      if (true) {
-        return this.$message({ message: "挂单成功" });
-      }
+    closeOrder() {
+      this.price = "";
+      this.isShowOrder = false;
+      this.sellLoading = false;
     },
 
     goBack() {
@@ -274,6 +309,16 @@ export default {
     beforeDestroy() {
       clearTimeout(this.requestTimer);
       this.requestTimer = null;
+    },
+
+    cardListInit() {
+      this.heroIdList.forEach((element) => {
+        const obj = {};
+        obj.cardInfo = shikastudio.works.find((item) => item.id == element.id);
+        obj.nftId = element.nftId;
+        obj.isChecked = false;
+        this.cardList.push(obj);
+      });
     },
 
     // 获取钱包的所有NFT ids
@@ -297,7 +342,6 @@ export default {
 
     //获取所有nftId的角色id对应列表
     getHeroList(cnIds) {
-      console.log("ids", cnIds);
       cnIds.forEach((element) => {
         cn()
           .data(element, "hero")
@@ -319,14 +363,73 @@ export default {
         if (this.heroIdList.length === cnIds.length) {
           clearInterval(this.requestTimer);
           this.requestTimer = null;
-          this.heroIdList.forEach((element) => {
-            const obj = shikastudio.works.find((item) => item.id == element.id);
-            obj.isChecked = false;
-            this.cardList.push(obj);
-          });
+          this.cardListInit();
           sessionStorage.setItem("HeroAssetList", JSON.stringify(this.heroIdList));
         }
-      }, 200);
+      }, 100);
+    },
+
+    /**去授权 */
+    async toApprove() {
+      const tx = await erc721(token().CN).connect(getSigner()).setApprovalForAll(contract().Market, true);
+      await tx.wait();
+    },
+
+    beforeSell(whichToken) {
+      console.log(this.sellList);
+      let tokenAddr = "";
+      if (whichToken == "USDT") tokenAddr = token().USDT;
+      else if (whichToken == "FUN") tokenAddr = token().FUN;
+      console.log(tokenAddr);
+
+      this.sellLoading = true;
+      // this.$store.commit("setApprovePopup", true);
+
+      // 授权检查
+      cn()
+        .isApprovedForAll(this.getWalletAccount, contract().Market)
+        .then((res) => {
+          // Number(res._hex) 可付款额度
+          console.log("授权了吗", res);
+          // console.log("额度", this.price);
+          // this.isApproved = Number(res._hex) > this.totalPrice;
+          if (res) {
+            this.sellNfts();
+          } else {
+            // this.isShowOrder = false;
+            console.log("去授权");
+            this.sellLoading = false;
+            this.$store.commit("setApprovePopup", true);
+          }
+        })
+        .catch((err) => {
+          console.error("allowance", err);
+          this.isApproved = false;
+        });
+    },
+
+    async sellNfts() {
+      this.sellLoading = true;
+      for (let i = 0; i < this.sellList.total; i++) {
+        this.sellList.prices.push(this.price);
+      }
+      try {
+        const tx = await market().connect(getSigner()).sell(this.sellList.types, this.sellList.nftIds, this.sellList.tokens, this.sellList.prices);
+        // const etReceipt = await tx.wait(); // 请求已发出，等待矿工打包进块，交易成功，返回交易收据
+        // console.log("交易收据", etReceipt);
+        await tx.wait();
+        if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
+        this.$message({ message: this.$t("tips.text16") });
+        sessionStorage.removeItem("HeroAssetList");
+        // this.sellLoading = false;
+        // this.isShowOrder =false;
+        // this.sellList = {};
+        // this.isShowOrder =false;
+        location.reload();
+      } catch (err) {
+        this.sellLoading = false;
+        console.error("sellNfts", err);
+      }
     },
   },
 };
@@ -444,7 +547,7 @@ export default {
     height: 1rem;
     position: relative;
     .el-button {
-      font-size: 0.17rem;
+      font-size: 0.15rem;
       font-weight: 600;
       width: 1rem;
       height: 0.4rem;
@@ -510,7 +613,7 @@ export default {
     .el-button {
       font-weight: 600;
       width: 1.29rem;
-      height: 0.53rem;
+      height: 0.45rem;
       margin: 0 auto;
       background-image: linear-gradient(to right, #366371, #5f466e);
       color: #d5dbe1;

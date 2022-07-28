@@ -129,7 +129,7 @@
         </div>
       </div>
     </div>
-    <ApprovePopup></ApprovePopup>
+    <ApprovePopup :operation="operation" :loading="buyloading"></ApprovePopup>
   </div>
 </template>
 
@@ -163,6 +163,10 @@ export default {
         { label: "status.text2", time: "" },
         { label: "status.text3", time: "" },
       ],
+      operation: {
+        name: this.$t("approvePopup.text1"),
+        func: "buyBoxes",
+      },
       countdownObj: { d: 0, h: 0, m: 0, s: 0 },
       countdownTimer: null,
       nowStatusText: "",
@@ -372,21 +376,10 @@ export default {
 
     /**去授权 */
     async toApprove() {
-      this.approvedloading = true;
-      try {
-        const tx = await erc20(token().USDT).connect(getSigner()).approve(token().CB, util.parseUnits((1e10).toString()));
-        await tx.wait();
-        // const etReceipt = await tx.wait();
-        this.approvedloading = false;
-        this.isApproved = true;
-        this.popupActive = 2;
-      } catch (err) {
-        console.error("approve", err);
-        this.approvedloading = false;
-        this.isApproved = false;
-        this.popupActive = 1;
-      }
+      const tx = await erc20(token().USDT).connect(getSigner()).approve(token().CB, util.parseUnits((1e10).toString()));
+      await tx.wait();
     },
+
     // 用户购买某种类型的盲盒，需要通过以下检查才可购买；
     // 频控检查：单次购买盲盒数量必须大于0小于等于该用户该盲盒类型当前小时剩余购买数量；
     // 余额检查：前端要将盲盒数量乘该盲盒支付代币单价和用户的该盲盒支付代币余额比较，不要让他输入超过最大余额的盲盒数量，且至少余额要大于1个盲盒的价格才能从0变成1；
@@ -419,6 +412,7 @@ export default {
         .allowance(this.getWalletAccount, token().CB)
         .then((res) => {
           // Number(res._hex) 可付款额度
+           console.log(Number(res._hex));
           this.isApproved = Number(res._hex) > this.totalPrice;
           if (this.isApproved) {
             this.buyBoxes();

@@ -2,7 +2,7 @@
   <el-dialog
     center
     top="0"
-    :title="$t('approvePopup.text2') + '&' + $t('approvePopup.text1')"
+    :title="$t('approvePopup.text2') + '&' + operation.name"
     :visible="getApprovePopup"
     :modal-append-to-body="false"
     :close-on-click-modal="false"
@@ -10,7 +10,7 @@
     @close="closePopup"
   >
     <div class="popupbox">
-      <el-steps :active="$parent.popupActive" align-center>
+      <el-steps :active="popupActive" align-center>
         <el-step>
           <template slot="icon">
             <div class="normal_icon">
@@ -23,9 +23,9 @@
             <div class="normal_des active">
               <div class="title">{{ $t("approvePopup.text3") }}</div>
               <div class="status">
-                <div>{{ $parent.popupActive == 1 ? $t("status.text10") : $t("status.text11") }}</div>
+                <div>{{ popupActive == 1 ? $t("status.text10") : $t("status.text11") }}</div>
               </div>
-              <el-button type="primary" :loading="$parent.approvedloading" @click="toApprove">
+              <el-button type="primary" :loading="approvedLoading" @click="toApprove" :disabled="popupActive == 2">
                 {{ $t("approvePopup.text2") }}
               </el-button>
             </div>
@@ -34,7 +34,7 @@
         <el-step>
           <template slot="icon">
             <div class="normal_icon">
-              <div class="icon2" :class="{ active: $parent.popupActive == 2 }">
+              <div class="icon2" :class="{ active: popupActive == 2 }">
                 <div>
                   <div><i class="iconfont pcqianbao2-mianxing"></i></div>
                 </div>
@@ -45,10 +45,10 @@
             <div class="normal_des">
               <div class="title">{{ $t("approvePopup.text4") }}</div>
               <div class="status">
-                <div v-show="$parent.popupActive == 2">{{ $t("status.text10") }}</div>
+                <div v-show="popupActive == 2">{{ $t("status.text10") }}</div>
               </div>
-              <el-button type="primary" :disabled="$parent.popupActive == 1" :loading="$parent.buyloading" @click="toBuy">
-                {{ $t("approvePopup.text1") }}
+              <el-button type="primary" :disabled="popupActive == 1" :loading="loading" @click="toOperate">
+                {{ operation.name }}
               </el-button>
             </div>
           </template>
@@ -63,19 +63,48 @@ import { mapGetters } from "vuex";
 export default {
   name: "ApprovePopup",
   computed: { ...mapGetters(["getApprovePopup"]) },
+  props: ["operation", "loading"],
   data() {
-    return {};
+    return {
+      approvedLoading: false,
+      popupActive: 1, 
+    };
   },
 
   methods: {
-    toApprove() {
-      this.$parent.toApprove();
+    async toApprove() {
+      this.approvedLoading = true;
+      try {
+        //const tx = await erc20(token().USDT).connect(getSigner()).approve(token().CB, util.parseUnits((1e10).toString()));
+        // const tx = await erc721(token().CN).connect(getSigner()).setApprovalForAll(contract().Market,true);
+        await this.$parent.toApprove();
+        // const etReceipt = await tx.wait();
+
+        this.approvedLoading = false;
+        this.popupActive = 2;
+      } catch (err) {
+        console.error("approve", err);
+        this.approvedLoading = false;
+        this.popupActive = 1;
+      }
     },
     toBuy() {
       this.$parent.buyBoxes();
     },
+    toOperate() {
+      switch (this.operation.func) {
+        case "sellNfts":
+          this.$parent.sellNfts();
+          break;
+        case "buyBoxes":
+          this.$parent.buyBoxes();
+          break;
+      }
+      // this.isLoading = false;
+    },
     closePopup() {
       this.$store.commit("setApprovePopup", false);
+      this.popupActive = 1;
     },
   },
 };

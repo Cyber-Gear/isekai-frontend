@@ -9,6 +9,7 @@ export default {
     text6: "连接",
     text7: "断开连接",
     text8: "DASHBOARD",
+    text9: "更多",
   },
   footer: {
     text1: "COPYRIGHT © 2022 FUNTOPIA, All rights Reserved",

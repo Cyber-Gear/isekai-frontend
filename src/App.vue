@@ -60,7 +60,7 @@ export default {
 @media screen and (max-width: 750px) {
   #container {
     #container_body {
-      padding-bottom: 0.5rem;
+      padding-bottom: 0.6rem;
     }
   }
 }

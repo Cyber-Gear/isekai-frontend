@@ -53,6 +53,7 @@ import {
   MenuItemGroup,
   DatePicker,
   Loading,
+  Popover
 } from "element-ui";
 Vue.use(Icon);
 Vue.use(Button);
@@ -72,6 +73,7 @@ Vue.use(Submenu);
 Vue.use(MenuItem);
 Vue.use(MenuItemGroup);
 Vue.use(DatePicker);
+Vue.use(Popover);
 Vue.prototype.$message = (option: any) => {
   // option.duration = 0;
   // option.offset = 100;

@@ -8,11 +8,25 @@
         </li>
       </ul>
       <ul class="menu_mobile mobile">
-        <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item)">
-          <div>
+        <li v-for="(item, index) in navArr.slice(0, 4)" :key="index" :class="{ active: navActive == index }">
+          <div @click="toRoute(item)">
             <i class="iconfont" :class="item.icon"></i>
             <div>{{ $t(item.label) }}</div>
           </div>
+        </li>
+        <li :class="{ active: navActive > 3 }">
+          <el-popover placement="bottom" trigger="manual" v-model="isShowMore">
+            <div class="menu_mobile_more">
+              <div v-for="(item, index) in navArr.slice(4, 6)" :key="index" :class="{ active: navActive == index + 4 }" @click="toRoute(item)">
+                <i class="iconfont" :class="item.icon"></i>
+                <div>{{ $t(item.label) }}</div>
+              </div>
+            </div>
+            <div slot="reference" @click="openMore">
+              <i class="iconfont pcshenglvehao"></i>
+              <div>{{ $t("nav.text9") }}</div>
+            </div>
+          </el-popover>
         </li>
       </ul>
       <div class="connect_lang">
@@ -52,6 +66,7 @@ export default {
         { label: "nav.text5", icon: "pcyingyongshichang", link: "/market", isOpen: !this.$isProd },
         { label: "nav.text8", icon: "pcjinrongquan", link: "/dashboard", isOpen: !this.$isProd },
       ],
+      isShowMore: false,
       showDisconnect: false,
       langArr: ["en", "zh"],
     };
@@ -82,8 +97,12 @@ export default {
       this.$router.push("/home");
     },
     toRoute(item) {
+      if (this.isShowMore) this.isShowMore = false;
       if (item.isOpen) this.$router.push(item.link);
       else this.$message({ message: this.$t("tips.text1") });
+    },
+    openMore() {
+      this.isShowMore = !this.isShowMore;
     },
     changeLang(item) {
       this.$i18n.locale = item;
@@ -196,7 +215,7 @@ export default {
 }
 .menu_mobile {
   width: 100vw;
-  height: 0.5rem;
+  height: 0.6rem;
   background: #0a0a0d;
   display: flex;
   align-items: center;
@@ -205,7 +224,7 @@ export default {
   position: fixed;
   bottom: 0;
   left: 0;
-  padding: 2vw;
+  padding: 5vw;
   li {
     font-size: 0.12rem;
     i {
@@ -216,7 +235,22 @@ export default {
     }
   }
 }
-
+.menu_mobile_more {
+  > div {
+    display: flex;
+    align-items: center;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    padding: 0 0.1rem;
+    i {
+      margin-right: 0.1rem;
+    }
+    &.active {
+      background: #27272e;
+      color: #29a7e1;
+    }
+  }
+}
 @media screen and (max-width: 750px) {
   .nav {
     width: 100vw;

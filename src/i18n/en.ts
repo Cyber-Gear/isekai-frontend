@@ -328,6 +328,7 @@ export default {
     text27: "Cancel",
     text28: "Buy now",
     text29: "Current price",
+    text30: "Price"
   },
   dashboard: {
     text1: "Dashboard",

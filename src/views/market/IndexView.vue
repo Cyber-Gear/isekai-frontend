@@ -52,7 +52,7 @@
         <div class="checkedbox" v-show="tagList.length > 0">
           <div class="taglist">
             <el-tag closable v-for="(item, index) in tagList" :key="index" @close="clearTag(item, index)">
-              {{ $t(item.label) }}
+              {{ item.label }}
             </el-tag>
           </div>
           <div class="btn">
@@ -61,23 +61,52 @@
         </div>
 
         <ul class="card_list">
-          <li v-for="(item, index) in cardList" :key="index" @click="toDetail(item.nftId,item.data.id,item.price,item.seller,item.token)">
-            <div class="top"><img :src="item.data.logo" alt="" /></div>
-            <div class="center">
-              <div>
-                <span>{{ $t(item.data.name) }}</span>
-                <img :src="`${$urlImages}icon1.webp`" alt="" />
+          <li v-for="(item, index) in cardList" :key="index" @click="toDetail(item.nftId, item.data.id, item.price, item.seller, item.token)">
+            <div class="hero_card" v-if="item.nft == 'hero'">
+              <div class="top"><img :src="item.data.logo" alt="" /></div>
+              <div class="center">
+                <div>
+                  <span>{{ $t(item.data.name) }}</span>
+                  <img :src="`${$urlImages}icon1.webp`" alt="" />
+                </div>
+                <div>
+                  <span>{{ $t(item.data.title) }}</span>
+                  <span>{{ item.price }} {{ item.token }}</span>
+                </div>
+                <div>{{ $t("artist.text10") }} 77 BUSD</div>
+                <div></div>
               </div>
-              <div>
-                <span>{{ $t(item.data.title) }}</span>
-                <span>{{ item.price }} BUSD</span>
+              <div class="bottom">
+                <i class="iconfont pcaccount"></i>
+                <span>2</span>
               </div>
-              <div>{{ $t("artist.text10") }} 77 BUSD</div>
-              <div></div>
             </div>
-            <div class="bottom">
-              <i class="iconfont pcaccount"></i>
-              <span>2</span>
+            <div class="box_card" v-else-if="item.nft == 'box'">
+              <div class="top">
+                <LottieAnimation></LottieAnimation>
+              </div>
+              <div class="center">
+                <div class="row1">
+                  <div>
+                    <span>Cybergear</span>
+                    <img :src="`${$urlImages}icon1.webp`" alt="" />
+                  </div>
+                  <div></div>
+                </div>
+                <div class="row2">
+                  {{ "Bir Mystery Box " + " #" + item.nftId }}
+                </div>
+                <div class="row3">
+                  <div>{{ item.price }} {{ item.token }}</div>
+                </div>
+
+                <div class="row4">上次成交 88busd</div>
+                <div class="row5"></div>
+              </div>
+              <div class="bottom">
+                <i class="iconfont pcaccount"></i>
+                <span>2</span>
+              </div>
             </div>
           </li>
         </ul>
@@ -126,11 +155,13 @@
 
 <script>
 import { cn, marketInfo, market, util, getSigner, erc20, token } from "funtopia-sdk";
+import LottieAnimation from "@/components/LottieAnimation";
 import { mapGetters } from "vuex";
 import { shikastudio } from "@/mock/nftworks";
 import Vue from "vue";
 export default {
   name: "MARKET",
+  components: { LottieAnimation },
   computed: { ...mapGetters(["getWalletAccount"]) },
   data() {
     return {
@@ -140,32 +171,32 @@ export default {
           title: this.$t("market.text1"),
           icon: "iconfont pcnav-list",
           checkboxList: [
-            { label: "Cybergear", isChecked: false },
-            { label: "Puck", isChecked: false },
-            { label: "Moonbird", isChecked: false },
+            { label: "Cybergear", tagName: "cybergear", isChecked: false },
+            { label: "Puck", tagName: "puck", isChecked: false },
+            { label: "Moonbird", tagName: "moonbird", isChecked: false },
           ],
         },
         {
           title: this.$t("market.text2"),
           icon: "iconfont pcdollar",
-          checkboxList: [{ label: "价格范围", min: 0, max: 0 }],
+          checkboxList: [{ label: this.$t("market.text30"), min: 0, max: 0 }],
         },
         {
           title: this.$t("market.text3"),
           icon: "iconfont pczijin",
           checkboxList: [
-            { label: "FUN", isChecked: false },
-            { label: "USDT", isChecked: false },
-            { label: "ETH", isChecked: false },
+            { label: "FUN", tagName: "fun", isChecked: false },
+            { label: "USDT", tagName: "usdt", isChecked: false },
+            { label: "ETH", tagName: "eth", isChecked: false },
           ],
         },
         {
           title: this.$t("market.text4[0]"),
           icon: "iconfont pcall",
           checkboxList: [
-            { label: this.$t("market.text4[1]"), isChecked: false },
-            { label: this.$t("market.text4[2]"), isChecked: false },
-            { label: this.$t("market.text4[3]"), isChecked: false },
+            { label: this.$t("market.text4[1]"), tagName: "box", isChecked: false },
+            { label: this.$t("market.text4[2]"), tagName: "hero", isChecked: false },
+            { label: this.$t("market.text4[3]"), tagName: "shard", isChecked: false },
           ],
         },
         {
@@ -189,13 +220,28 @@ export default {
         },
       ],
       cardList: [],
+      tmpCardList: [],
       tagList: [],
       isShowSelectionList: true,
       isShowDrawer: false,
     };
   },
+  watch: {
+    tagList: {
+      handler(newVal) {
+        if (newVal) {
+          this.UpdateCardByFilter();
+        }
+      },
+      // deep:true,
+    },
+  },
+
   created() {
-    this.getCardInfo();
+    this.getCardInfo(30, 0, "sellTime", "desc");
+    this.cardList = this.tmpCardList;
+    console.log(this.cardList);
+    // this.tmpCardList = [];
     // this.cardList = shikastudio.works;
   },
   methods: {
@@ -227,6 +273,26 @@ export default {
     clickOK(item) {
       // console.log(item);
       // this.tagList.push(ite);
+      // marketInfo
+      //   .getSellInfos(30, 0, "sellTime", "desc", undefined, token().CN)
+      //   .then((res) => {
+      //     console.log(res);
+      //     let data = JSON.parse(JSON.stringify(res.data.sellInfos));
+      //     data.forEach((element) => {
+      //       element.data = shikastudio.works.find((item) => item.id == Number(element.hero) + 1);
+      //       if (element.token == token().USDT.toLowerCase()) element.token = "USDT";
+      //       else if (element.token == token().FUN.toLowerCase()) element.token = "FUN";
+      //       else element.token = "ETH";
+      //       if (element.nft == token().CN.toLowerCase()) element.nft = "hero";
+      //       else if (element.nft == token().CB.toLowerCase()) element.nft = "box";
+      //       else element.nft = "shard";
+      //     });
+      //     this.cardList = data;
+      //     console.log(this.cardList);
+      //   })
+      //   .catch((err) => {
+      //     console.error("getSellInfos", err);
+      //   });
     },
 
     checkboxClick(ite) {
@@ -255,9 +321,9 @@ export default {
         });
       });
     },
-    toDetail(nftId,id, price, seller,token) {
+    toDetail(nftId, id, price, seller, token) {
       console.log(id);
-      this.$router.push({ path: "/market-details", query: { nftId: nftId, id: id, price: price, seller: seller, token : token} });
+      this.$router.push({ path: "/market-details", query: { nftId: nftId, id: id, price: price, seller: seller, token: token } });
     },
     toOrder() {
       if (!this.getWalletAccount) return this.$store.commit("setWalletConnectPopup", true);
@@ -265,20 +331,44 @@ export default {
     },
 
     // Contract
-    getCardInfo() {
+    getCardInfo(first, skip, orderBy, orderDirection, seller, nft, toke_n, price_gte, price_lte, hero, rarity, boxType) {
       marketInfo
-        .getSellInfos(30, 0, "sellTime", "desc")
+        .getSellInfos(first, skip, orderBy, orderDirection, seller, nft, toke_n, price_gte, price_lte, hero, rarity, boxType)
         .then((res) => {
           let data = JSON.parse(JSON.stringify(res.data.sellInfos));
           data.forEach((element) => {
             element.data = shikastudio.works.find((item) => item.id == Number(element.hero) + 1);
+            if (element.token == token().USDT.toLowerCase()) element.token = "USDT";
+            else if (element.token == token().FUN.toLowerCase()) element.token = "FUN";
+            else element.token = "ETH";
+            if (element.nft == token().CN.toLowerCase()) element.nft = "hero";
+            else if (element.nft == token().CB.toLowerCase()) element.nft = "box";
+            else element.nft = "shard";
+            this.tmpCardList.push(element);
           });
-          this.cardList = data;
-          console.log(this.cardList);
+          // this.cardList = data;
         })
         .catch((err) => {
           console.error("getSellInfos", err);
         });
+    },
+
+    UpdateCardByFilter() {
+      console.log("tag", this.tagList);
+      if (!this.tagList.length) {
+        this.getCardInfo(30, 0, "sellTime", "desc");
+      }
+
+      if (this.tagList.find((item) => item.tagName == "cybergear") || this.tagList.find((item) => item.tagName == "hero")) {
+        this.getCardInfo(30, 0, "sellTime", "desc", undefined, token().CN);
+      }
+
+      if (this.tagList.find((item) => item.tagName == "cybergear") || this.tagList.find((item) => item.tagName == "box")) {
+        this.getCardInfo(30, 0, "sellTime", "desc", undefined, token().CB);
+      }
+
+      this.cardList = JSON.parse(JSON.stringify(this.tmpCardList));
+      this.tmpCardList = [];
     },
   },
 };
@@ -518,45 +608,135 @@ export default {
         background: rgba(51, 52, 60, 0.57);
         box-shadow: 0.05rem 0.08rem 0.1rem 0rem rgba(0, 0, 0, 0.5);
       }
-      .top {
-        width: 100%;
-        height: auto;
-        img {
+
+      .hero_card {
+        .top {
           width: 100%;
-          height: 100%;
+          height: auto;
+          img {
+            width: 100%;
+            height: 100%;
+          }
         }
-      }
-      .center {
-        width: 100%;
-        padding-top: 0.05rem;
-        div {
-          display: flex;
-          align-items: center;
-          padding: 0 0.05rem;
-          &:nth-child(1) {
-            font-size: 0.12rem;
-            font-weight: bold;
-            color: #00b1ff;
-            img {
-              width: 0.24rem;
-              height: auto;
-              margin-left: 0.1rem;
+        .center {
+          width: 100%;
+          padding-top: 0.05rem;
+          div {
+            display: flex;
+            align-items: center;
+            padding: 0 0.05rem;
+            &:nth-child(1) {
+              font-size: 0.12rem;
+              font-weight: bold;
+              color: #00b1ff;
+              img {
+                width: 0.24rem;
+                height: auto;
+                margin-left: 0.1rem;
+              }
+            }
+            &:nth-child(2) {
+              justify-content: space-between;
+              font-size: 0.12rem;
+              font-weight: bold;
+            }
+            &:nth-child(3) {
+              float: right;
+              font-size: 0.05rem;
+              transform: scale(0.8);
+              font-weight: 600;
+              color: #6c6a71;
+            }
+
+            &:nth-child(4) {
+              width: 2.68rem;
+              height: 0.01rem;
+              box-shadow: 0rem 0.02rem 0.06rem 0.03rem rgba(0, 0, 0, 0.5);
+              opacity: 0.19;
+              border: 0.01rem solid #847d7d;
             }
           }
-          &:nth-child(2) {
+        }
+        .bottom {
+          display: flex;
+          justify-content: flex-end;
+          width: 100%;
+          height: 0.36rem;
+          color: #6c6a71;
+          align-items: center;
+          i {
+            font-size: 0.2rem;
+            margin-right: 0.09rem;
+          }
+          span {
+            font-size: 0.1rem;
+            font-weight: 600;
+            margin-right: 0.2rem;
+          }
+        }
+      }
+
+      .box_card {
+        width: 100%;
+        padding: 0.1rem 0.1rem 0 0.1rem;
+        .top {
+          width: 100%;
+          text-align: center;
+          border-radius: 0.08rem;
+          img {
+            width: 70%;
+            height: auto;
+          }
+        }
+        .center {
+          padding: -0.05rem 0;
+          > div {
+            display: flex;
+            align-items: center;
             justify-content: space-between;
+          }
+          .row1 {
+            div {
+              font-size: 0.12rem;
+              font-weight: bold;
+              &:nth-child(1) {
+                color: #00b1ff;
+                display: flex;
+                align-items: center;
+                img {
+                  width: 0.24rem;
+                  height: auto;
+                  margin-left: 0.1rem;
+                }
+              }
+            }
+          }
+          .row2 {
             font-size: 0.12rem;
             font-weight: bold;
           }
-          &:nth-child(3) {
+          .row3 {
+            font-size: 0.12rem;
+            font-weight: bold;
+            width: 100%;
+            justify-content: flex-end;
+
+            // text-overflow: ellipsis
+            div {
+              max-width: 0.5rem;
+              max-height: 0.17rem;
+              overflow: hidden;
+            }
+          }
+
+          .row4 {
             float: right;
             font-size: 0.05rem;
             transform: scale(0.8);
             font-weight: 600;
             color: #6c6a71;
           }
-
-          &:nth-child(4) {
+          .row5 {
             width: 2.68rem;
             height: 0.01rem;
             box-shadow: 0rem 0.02rem 0.06rem 0.03rem rgba(0, 0, 0, 0.5);
@@ -564,22 +744,22 @@ export default {
             border: 0.01rem solid #847d7d;
           }
         }
-      }
-      .bottom {
-        display: flex;
-        justify-content: flex-end;
-        width: 100%;
-        height: 0.36rem;
-        color: #6c6a71;
-        align-items: center;
-        i {
-          font-size: 0.2rem;
-          margin-right: 0.09rem;
-        }
-        span {
-          font-size: 0.1rem;
-          font-weight: 600;
-          margin-right: 0.2rem;
+        .bottom {
+          display: flex;
+          justify-content: flex-end;
+          width: 100%;
+          height: 0.36rem;
+          color: #6c6a71;
+          align-items: center;
+          i {
+            font-size: 0.2rem;
+            margin-right: 0.09rem;
+          }
+          span {
+            font-size: 0.1rem;
+            font-weight: 600;
+            margin-right: 0.2rem;
+          }
         }
       }
     }

@@ -72,7 +72,8 @@
         <div class="history">
           <span>{{ $t("market.text18") }}</span>
           <div class="content">
-            <ul>
+            <div v-if="!history.length">No data</div>
+            <ul v-else>
               <li v-for="index of 10" :key="index">
                 <span>From</span>
                 <span>0x23...56e4</span>
@@ -169,7 +170,8 @@
           <span>{{ $t("market.text18") }}</span>
         </div>
         <div class="his_body">
-          <ul>
+          <div v-if="!history.length">No data</div>
+          <ul v-else>
             <li v-for="index of 10" :key="index">
               <span>From</span>
               <span>0x23...56e4</span>
@@ -200,7 +202,8 @@ export default {
       nftId: null,
       price: null,
       seller: null,
-      token: "ETH",
+      token: null,
+      history: [],
     };
   },
   created() {
@@ -213,8 +216,7 @@ export default {
       const tmp = this.$route.query.seller;
       this.seller = tmp.slice(0, 2) + tmp.slice(2, 4).toUpperCase() + "..." + tmp.slice(-4).toUpperCase();
       //this.token = this.$route.query.token == token().USDT ? "USDT" : (this.$route.query.token  == token().FUN ? "FUN" : "ETH");
-      if (this.$route.query.token == token().USDT.toLowerCase()) this.token = "USDT";
-      if (this.$route.query.token == token().FUN.toLowerCase()) this.token = "FUN";
+      this.token = this.$route.query.token;
     }
   },
   methods: {
@@ -444,13 +446,22 @@ export default {
         font-size: 0.2rem;
       }
       .content {
+        position: relative;
         width: 100%;
         height: 100%;
         background-color: #2a2a32;
         border-radius: 0.1rem;
         border: 0.01rem solid #436e77;
         padding: 0.23rem 0.2rem 0.2rem 0.26rem;
-
+        div {
+          position: absolute;
+          font-size: 0.3rem;
+          color: #aeaeb1;
+          font-weight: 600;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
         ul {
           height: 100%;
           display: flex;
@@ -652,9 +663,19 @@ export default {
   .history {
     height: auto;
     .his_body {
+      position: relative;
       width: 100%;
       height: 2rem;
       padding: 0.1rem;
+      div {
+        position: absolute;
+        font-size: 0.3rem;
+        color: #aeaeb1;
+        font-weight: 600;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
       ul {
         height: 100%;
         font-size: 0.12rem;

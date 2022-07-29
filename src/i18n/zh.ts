@@ -315,6 +315,7 @@ export default {
     text27: "取消选择",
     text28: "立即购买",
     text29: "当前价格",
+    text30: "价格范围",
   },
 
   dashboard: {
@@ -361,7 +362,6 @@ export default {
     text3: "第一步",
     text4: "第二步",
     text5: "出售",
-
   },
   orderPopup: {
     text1: "挂单",

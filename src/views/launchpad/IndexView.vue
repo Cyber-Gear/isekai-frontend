@@ -136,8 +136,8 @@
 <script>
 import { cb, util, getSigner, erc20, token } from "funtopia-sdk";
 import { mapGetters } from "vuex";
-import ApprovePopup from "@/components/ApprovePopup";
-import LottieAnimation from "@/components/LottieAnimation";
+import ApprovePopup from "@/components/ApprovePopup.vue";
+import LottieAnimation from "@/components/LottieAnimation.vue";
 
 export default {
   name: "LAUNCHPAD",

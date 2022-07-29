@@ -42,7 +42,7 @@
 import { cb, getSigner } from "funtopia-sdk";
 import { mapGetters } from "vuex";
 import BlindResultsPopup from "@/components/BlindResultsPopup.vue";
-import LottieAnimation from "@/components/LottieAnimation";
+import LottieAnimation from "@/components/LottieAnimation.vue";
 export default {
   name: "MysteyBoxesDetails",
   components: { BlindResultsPopup, LottieAnimation },

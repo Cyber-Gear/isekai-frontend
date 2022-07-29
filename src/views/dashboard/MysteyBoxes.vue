@@ -65,7 +65,7 @@
 import { cb } from "funtopia-sdk";
 import { mapGetters } from "vuex";
 import NoData from "@/components/NoData.vue";
-import LottieAnimation from "@/components/LottieAnimation";
+import LottieAnimation from "@/components/LottieAnimation.vue";
 export default {
   components: { NoData, LottieAnimation },
   name: "MysteyBoxes",

@@ -89,7 +89,7 @@
 
 <script>
 // import PaintingVideo from "@/components/PaintingVideo.vue";
-import { cn, cb, market, util, getSigner, erc20, erc721, token, contract } from "funtopia-sdk";
+import { cn, cb, market, util, getSigner, erc20, token, contract } from "funtopia-sdk";
 import { mapGetters } from "vuex";
 import ApprovePopup from "@/components/ApprovePopup";
 import { shikastudio } from "@/mock/nftworks";
@@ -371,7 +371,7 @@ export default {
 
     /**去授权 */
     async toApprove() {
-      const tx = await erc721(token().CN).connect(getSigner()).setApprovalForAll(contract().Market, true);
+      const tx = await cn().connect(getSigner()).setApprovalForAll(contract().Market, true);
       await tx.wait();
     },
 
@@ -464,7 +464,7 @@ export default {
 }
 .content_box {
   width: 11.5rem;
-  height: 7.8rem;
+  max-height: 7.8rem;
   //   background-color: grey;
   margin: 0 auto 2rem auto;
   .filter {
@@ -498,7 +498,7 @@ export default {
   }
   .card_list {
     width: 100%;
-    height: 7.2rem;
+    max-height: 7.2rem;
     overflow-y: auto;
     // background-color: green;
     margin-top: 0.69rem;

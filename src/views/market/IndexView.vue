@@ -61,18 +61,23 @@
         </div>
 
         <ul class="card_list">
-          <li v-for="(item, index) in cardList" :key="index" @click="toDetail(index)">
-            <div class="top"><img :src="item.logo" alt="" /></div>
+          <li v-for="(item, index) in cardList" :key="index" @click="toDetail(item.nftId,item.data.id,item.price,item.seller,item.token)">
+            <div class="top"><img :src="item.data.logo" alt="" /></div>
             <div class="center">
               <div>
-                <span>{{ $t(item.name) }}</span>
+                <span>{{ $t(item.data.name) }}</span>
                 <img :src="`${$urlImages}icon1.webp`" alt="" />
               </div>
               <div>
-                <span>{{ $t(item.title) }}</span>
-                <!-- <span>88busd</span> -->
+                <span>{{ $t(item.data.title) }}</span>
+                <span>{{ item.price }} BUSD</span>
               </div>
-              <!-- <div>{{ $t("artist.text10") }}77busd</div> -->
+              <div>{{ $t("artist.text10") }} 77 BUSD</div>
+              <div></div>
+            </div>
+            <div class="bottom">
+              <i class="iconfont pcaccount"></i>
+              <span>2</span>
             </div>
           </li>
         </ul>
@@ -123,20 +128,10 @@
 import { cn, marketInfo, market, util, getSigner, erc20, token } from "funtopia-sdk";
 import { mapGetters } from "vuex";
 import { shikastudio } from "@/mock/nftworks";
+import Vue from "vue";
 export default {
   name: "MARKET",
   computed: { ...mapGetters(["getWalletAccount"]) },
-  watch: {
-    getWalletAccount: {
-      handler(newVal) {
-        this.getCardInfo();
-        if (newVal) {
-          
-        }
-      },
-      immediate: true,
-    },
-  },
   data() {
     return {
       activeName: "0",
@@ -193,24 +188,15 @@ export default {
           ],
         },
       ],
-      cardList: [
-        // { label: "buyer_address", buyer: [] },
-        // { label: "seller_address", seller: [] },
-        // { label: "nft_address", nft: [] },
-        // { label: "nft_Id", nftId: [] },
-        // { label: "token", token_addr: "" },
-        // { label: "token_address", token: "" },
-        // { label: "price", price: 0 },
-        // { label: "fee", fee: 0 },
-        // { label: "feeAmount", feeAmount: 0 },
-      ],
+      cardList: [],
       tagList: [],
       isShowSelectionList: true,
       isShowDrawer: false,
     };
   },
   created() {
-    this.cardList = shikastudio.works;
+    this.getCardInfo();
+    // this.cardList = shikastudio.works;
   },
   methods: {
     openSelectionList() {
@@ -269,9 +255,9 @@ export default {
         });
       });
     },
-    toDetail(id) {
+    toDetail(nftId,id, price, seller,token) {
       console.log(id);
-      this.$router.push({ path: "/market-details", query: { id: id + 1 } });
+      this.$router.push({ path: "/market-details", query: { nftId: nftId, id: id, price: price, seller: seller, token : token} });
     },
     toOrder() {
       if (!this.getWalletAccount) return this.$store.commit("setWalletConnectPopup", true);
@@ -280,14 +266,19 @@ export default {
 
     // Contract
     getCardInfo() {
-      // let market_addr = market().address;
-      // console.log(token().CB);
-      // marketInfo.getBuyInfos(1,1,token().CB,'des')
-      // .then((res)=>{
-      //   console.log(res);
-      // });
-
-      // console.log(cn().);
+      marketInfo
+        .getSellInfos(30, 0, "sellTime", "desc")
+        .then((res) => {
+          let data = JSON.parse(JSON.stringify(res.data.sellInfos));
+          data.forEach((element) => {
+            element.data = shikastudio.works.find((item) => item.id == Number(element.hero) + 1);
+          });
+          this.cardList = data;
+          console.log(this.cardList);
+        })
+        .catch((err) => {
+          console.error("getSellInfos", err);
+        });
     },
   },
 };
@@ -537,7 +528,7 @@ export default {
       }
       .center {
         width: 100%;
-        padding: 0.05rem 0;
+        padding-top: 0.05rem;
         div {
           display: flex;
           align-items: center;
@@ -558,11 +549,37 @@ export default {
             font-weight: bold;
           }
           &:nth-child(3) {
-            justify-content: flex-end;
-            font-size: 0.1rem;
+            float: right;
+            font-size: 0.05rem;
+            transform: scale(0.8);
             font-weight: 600;
             color: #6c6a71;
           }
+
+          &:nth-child(4) {
+            width: 2.68rem;
+            height: 0.01rem;
+            box-shadow: 0rem 0.02rem 0.06rem 0.03rem rgba(0, 0, 0, 0.5);
+            opacity: 0.19;
+            border: 0.01rem solid #847d7d;
+          }
+        }
+      }
+      .bottom {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        height: 0.36rem;
+        color: #6c6a71;
+        align-items: center;
+        i {
+          font-size: 0.2rem;
+          margin-right: 0.09rem;
+        }
+        span {
+          font-size: 0.1rem;
+          font-weight: 600;
+          margin-right: 0.2rem;
         }
       }
     }

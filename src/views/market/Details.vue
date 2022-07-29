@@ -26,11 +26,11 @@
           <div>
             <i class="iconfont pcdollar"></i>
             <span>{{ $t("market.text10") }}</span>
-            <span>50 BUSD</span>
+            <span>{{ price }} {{ token }}</span>
           </div>
           <div>
             <span>{{ $t("market.text25") }}</span>
-            <span>0x88...98g7</span>
+            <span>{{ seller }}</span>
             <el-button>{{ $t("market.text11") }}</el-button>
           </div>
           <div>
@@ -106,7 +106,7 @@
       <div class="purchase box">
         <div class="header">
           <i class="iconfont pcqianbao2-mianxing"></i>
-          <span>{{ $t("market.text29")}}</span>
+          <span>{{ $t("market.text29") }}</span>
         </div>
         <div class="pur_body">
           <div>
@@ -186,6 +186,7 @@
   </div>
 </template>
 <script>
+import { cn, marketInfo, market, util, getSigner, erc20, token } from "funtopia-sdk";
 import PaintingVideo from "@/components/PaintingVideo.vue";
 import { shikastudio } from "@/mock/nftworks";
 export default {
@@ -196,6 +197,10 @@ export default {
       card: null,
       name: null,
       isShowPopup: false,
+      nftId: null,
+      price: null,
+      seller: null,
+      token: "ETH",
     };
   },
   created() {
@@ -203,6 +208,13 @@ export default {
       const id = this.$route.query.id;
       this.card = shikastudio.works.find((item) => item.id == id);
       this.name = shikastudio.name;
+      this.nftId = this.$route.query.nftId;
+      this.price = this.$route.query.price;
+      const tmp = this.$route.query.seller;
+      this.seller = tmp.slice(0, 2) + tmp.slice(2, 4).toUpperCase() + "..." + tmp.slice(-4).toUpperCase();
+      //this.token = this.$route.query.token == token().USDT ? "USDT" : (this.$route.query.token  == token().FUN ? "FUN" : "ETH");
+      if (this.$route.query.token == token().USDT.toLowerCase()) this.token = "USDT";
+      if (this.$route.query.token == token().FUN.toLowerCase()) this.token = "FUN";
     }
   },
   methods: {
@@ -615,7 +627,7 @@ export default {
           &:nth-child(2) {
             display: inline-block;
             width: 1.59rem;
-            margin-left:0.1rem;
+            margin-left: 0.1rem;
           }
         }
       }

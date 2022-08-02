@@ -77,13 +77,13 @@
                   <span>{{ $t(item.data.title) }}</span>
                   <span>{{ item.price }} {{ item.token_type }}</span>
                 </div>
-                <div>{{ $t("artist.text10") }} 77 BUSD</div>
+
+                <div v-if="item.lastPrice">{{ $t("artist.text10") }} {{ item.lastPrice.price }} {{ item.token_type }}</div>
+                <div v-else>{{ $t("artist.text10") }} ----</div>
                 <div></div>
               </div>
               <div class="bottom">
-                <el-button @click="cancel(item.nft, item.nftId)" :disabled="item.seller != getWalletAccount.toLowerCase()"
-                  >Cancel</el-button
-                >
+                <el-button @click="cancel(item.nft, item.nftId)" :disabled="item.seller != getWalletAccount.toLowerCase()">Cancel</el-button>
                 <i class="iconfont pcaccount"></i>
                 <span>2</span>
               </div>
@@ -103,11 +103,10 @@
                 <div class="row2">
                   {{ "Bir Mystery Box " + " #" + item.nftId }}
                 </div>
-                <div class="row3">
-                  <div>{{ item.price }} {{ item.token_type }}</div>
-                </div>
+                <div class="row3">{{ item.price }} {{ item.token_type }}</div>
 
-                <div class="row4">{{ $t("artist.text10") }} 88 BUSD</div>
+                <div v-if="item.lastPrice" class="row4">{{ $t("artist.text10") }} {{ item.lastPrice.price }} {{ item.token_type }}</div>
+                <div v-else class="row4">{{ $t("artist.text10") }} ----</div>
                 <div class="row5"></div>
               </div>
               <div class="bottom">
@@ -342,6 +341,16 @@ export default {
             if (element.nft == token().CN.toLowerCase()) element.nft_type = "hero";
             else if (element.nft == token().CB.toLowerCase()) element.nft_type = "box";
             else element.nft_type = "shard";
+            element.price = Number(util.formatEther(element.price));
+            marketInfo.getBuyInfos(1000, 0, "buyTime", "desc", undefined, undefined, element.nfts).then((res) => {
+              // console.log(res.data.buyInfos)
+              let data = JSON.parse(JSON.stringify(res.data.buyInfos)).find((item) => item.nftId == Number(element.nftId));
+              console.log(data);
+              if (data) {
+                data.price = Number(util.formatEther(data.price));
+                element.lastPrice = data;
+              }
+            });
             this.tmpCardList.push(element);
           });
           // console.log(JSON.stringify(this.tmpCardList));
@@ -377,7 +386,7 @@ export default {
 
     async cancel(nft, nftId) {
       try {
-        const tx = await market().connect(getSigner()).cancel([nft],[nftId]);
+        const tx = await market().connect(getSigner()).cancel([nft], [nftId]);
         // const etReceipt = await tx.wait(); // 请求已发出，等待矿工打包进块，交易成功，返回交易收据
         // console.log("交易收据", etReceipt);
         await tx.wait();
@@ -742,13 +751,6 @@ export default {
             font-weight: bold;
             width: 100%;
             justify-content: flex-end;
-
-            // text-overflow: ellipsis
-            div {
-              max-width: 0.5rem;
-              max-height: 0.17rem;
-              overflow: hidden;
-            }
           }
 
           .row4 {

@@ -411,7 +411,7 @@ export default {
     async sellNfts() {
       this.sellLoading = true;
       for (let i = 0; i < this.sellList.total; i++) {
-        this.sellList.prices.push(this.price);
+        this.sellList.prices.push(util.parseEther(this.price));
       }
       try {
         const tx = await market().connect(getSigner()).sell(this.sellList.types, this.sellList.nftIds, this.sellList.tokens, this.sellList.prices);

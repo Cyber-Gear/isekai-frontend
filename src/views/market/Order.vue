@@ -34,7 +34,7 @@
             <i class="iconfont pcfuxuankuang-weiquanxuan" v-show="!item.isChecked"></i>
           </span>
           <img :src="item.cardInfo.card" alt="" />
-          <span>{{ $t(item.name) }}</span>
+          <span>{{ $t(item.cardInfo.name) }}</span>
         </div>
       </div>
       <div class="confirm">
@@ -314,7 +314,7 @@ export default {
     cardListInit() {
       this.heroIdList.forEach((element) => {
         const obj = {};
-        obj.cardInfo = shikastudio.works.find((item) => item.id == element.id);
+        obj.cardInfo = shikastudio.works.find((item) => item.id == element.id+1);
         obj.nftId = element.nftId;
         obj.isChecked = false;
         this.cardList.push(obj);

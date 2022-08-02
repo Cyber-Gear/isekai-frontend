@@ -61,8 +61,12 @@
         </div>
 
         <ul class="card_list">
-          <li v-for="(item, index) in cardList" :key="index" @click="toDetail(item.nftId, item.data.id, item.price, item.seller, item.token)">
-            <div class="hero_card" v-if="item.nft == 'hero'">
+          <li
+            v-for="(item, index) in cardList"
+            :key="index"
+            @click="toDetail(item.nft, item.nft_type, item.nftId, item.data.id, item.price, item.seller, item.token, item.token_type)"
+          >
+            <div class="hero_card" v-if="item.nft_type == 'hero'">
               <div class="top"><img :src="item.data.logo" alt="" /></div>
               <div class="center">
                 <div>
@@ -71,17 +75,20 @@
                 </div>
                 <div>
                   <span>{{ $t(item.data.title) }}</span>
-                  <span>{{ item.price }} {{ item.token }}</span>
+                  <span>{{ item.price }} {{ item.token_type }}</span>
                 </div>
                 <div>{{ $t("artist.text10") }} 77 BUSD</div>
                 <div></div>
               </div>
               <div class="bottom">
+                <el-button @click="cancel(item.nft, item.nftId)" :disabled="item.seller != getWalletAccount.toLowerCase()"
+                  >Cancel</el-button
+                >
                 <i class="iconfont pcaccount"></i>
                 <span>2</span>
               </div>
             </div>
-            <div class="box_card" v-else-if="item.nft == 'box'">
+            <div class="box_card" v-else-if="item.nft_type == 'box'">
               <div class="top">
                 <LottieAnimation></LottieAnimation>
               </div>
@@ -97,10 +104,10 @@
                   {{ "Bir Mystery Box " + " #" + item.nftId }}
                 </div>
                 <div class="row3">
-                  <div>{{ item.price }} {{ item.token }}</div>
+                  <div>{{ item.price }} {{ item.token_type }}</div>
                 </div>
 
-                <div class="row4">上次成交 88busd</div>
+                <div class="row4">{{ $t("artist.text10") }} 88 BUSD</div>
                 <div class="row5"></div>
               </div>
               <div class="bottom">
@@ -239,9 +246,15 @@ export default {
 
   created() {
     this.getCardInfo(30, 0, "sellTime", "desc");
-    this.cardList = this.tmpCardList;
-    console.log(this.cardList);
-    // this.tmpCardList = [];
+    this.requestTimer = setInterval(() => {
+      if (this.tmpCardList.length) {
+        clearTimeout(this.requestTimer);
+        this.requestTimer = null;
+        // this.cardList = JSON.parse(JSON.stringify(this.tmpCardList));
+        this.cardList = this.tmpCardList;
+        this.tmpCardList = [];
+      }
+    }, 200);
     // this.cardList = shikastudio.works;
   },
   methods: {
@@ -270,30 +283,12 @@ export default {
       }
     },
 
-    clickOK(item) {
-      // console.log(item);
-      // this.tagList.push(ite);
-      // marketInfo
-      //   .getSellInfos(30, 0, "sellTime", "desc", undefined, token().CN)
-      //   .then((res) => {
-      //     console.log(res);
-      //     let data = JSON.parse(JSON.stringify(res.data.sellInfos));
-      //     data.forEach((element) => {
-      //       element.data = shikastudio.works.find((item) => item.id == Number(element.hero) + 1);
-      //       if (element.token == token().USDT.toLowerCase()) element.token = "USDT";
-      //       else if (element.token == token().FUN.toLowerCase()) element.token = "FUN";
-      //       else element.token = "ETH";
-      //       if (element.nft == token().CN.toLowerCase()) element.nft = "hero";
-      //       else if (element.nft == token().CB.toLowerCase()) element.nft = "box";
-      //       else element.nft = "shard";
-      //     });
-      //     this.cardList = data;
-      //     console.log(this.cardList);
-      //   })
-      //   .catch((err) => {
-      //     console.error("getSellInfos", err);
-      //   });
+    beforeDestroy() {
+      clearTimeout(this.requestTimer);
+      this.requestTimer = null;
     },
+
+    clickOK(item) {},
 
     checkboxClick(ite) {
       ite.isChecked = !ite.isChecked;
@@ -321,9 +316,12 @@ export default {
         });
       });
     },
-    toDetail(nftId, id, price, seller, token) {
+    toDetail(nft, nft_type, nftId, id, price, seller, token, token_type) {
       console.log(id);
-      this.$router.push({ path: "/market-details", query: { nftId: nftId, id: id, price: price, seller: seller, token: token } });
+      this.$router.push({
+        path: "/market-details",
+        query: { nft: nft, nft_type: nft_type, nftId: nftId, id: id, price: price, seller: seller, token: token, token_type: token_type },
+      });
     },
     toOrder() {
       if (!this.getWalletAccount) return this.$store.commit("setWalletConnectPopup", true);
@@ -338,15 +336,15 @@ export default {
           let data = JSON.parse(JSON.stringify(res.data.sellInfos));
           data.forEach((element) => {
             element.data = shikastudio.works.find((item) => item.id == Number(element.hero) + 1);
-            if (element.token == token().USDT.toLowerCase()) element.token = "USDT";
-            else if (element.token == token().FUN.toLowerCase()) element.token = "FUN";
-            else element.token = "ETH";
-            if (element.nft == token().CN.toLowerCase()) element.nft = "hero";
-            else if (element.nft == token().CB.toLowerCase()) element.nft = "box";
-            else element.nft = "shard";
+            if (element.token == token().USDT.toLowerCase()) element.token_type = "USDT";
+            else if (element.token == token().FUN.toLowerCase()) element.token_type = "FUN";
+            else element.token_type = "ETH";
+            if (element.nft == token().CN.toLowerCase()) element.nft_type = "hero";
+            else if (element.nft == token().CB.toLowerCase()) element.nft_type = "box";
+            else element.nft_type = "shard";
             this.tmpCardList.push(element);
           });
-          // this.cardList = data;
+          // console.log(JSON.stringify(this.tmpCardList));
         })
         .catch((err) => {
           console.error("getSellInfos", err);
@@ -367,8 +365,26 @@ export default {
         this.getCardInfo(30, 0, "sellTime", "desc", undefined, token().CB);
       }
 
-      this.cardList = JSON.parse(JSON.stringify(this.tmpCardList));
-      this.tmpCardList = [];
+      this.requestTimer = setInterval(() => {
+        if (this.tmpCardList.length) {
+          clearTimeout(this.requestTimer);
+          this.requestTimer = null;
+          this.cardList = this.tmpCardList;
+          this.tmpCardList = [];
+        }
+      }, 200);
+    },
+
+    async cancel(nft, nftId) {
+      try {
+        const tx = await market().connect(getSigner()).cancel([nft],[nftId]);
+        // const etReceipt = await tx.wait(); // 请求已发出，等待矿工打包进块，交易成功，返回交易收据
+        // console.log("交易收据", etReceipt);
+        await tx.wait();
+        location.reload();
+      } catch (err) {
+        console.error("sellNfts", err);
+      }
     },
   },
 };
@@ -664,6 +680,12 @@ export default {
           height: 0.36rem;
           color: #6c6a71;
           align-items: center;
+          .el-button {
+            width: 0.6rem;
+            height: 0.3rem;
+            background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
+            border-radius: 0.2rem;
+          }
           i {
             font-size: 0.2rem;
             margin-right: 0.09rem;

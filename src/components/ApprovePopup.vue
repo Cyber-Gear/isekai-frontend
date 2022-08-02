@@ -67,7 +67,7 @@ export default {
   data() {
     return {
       approvedLoading: false,
-      popupActive: 1, 
+      popupActive: 1,
     };
   },
 
@@ -98,6 +98,9 @@ export default {
           break;
         case "buyBoxes":
           this.$parent.buyBoxes();
+          break;
+        case "buyNfts":
+          this.$parent.buyNfts();
           break;
       }
       // this.isLoading = false;

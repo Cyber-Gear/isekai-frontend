@@ -26,12 +26,12 @@
           <div>
             <i class="iconfont pcdollar"></i>
             <span>{{ $t("market.text10") }}</span>
-            <span>{{ price }} {{ token }}</span>
+            <span>{{ price }} {{ token_type }}</span>
           </div>
           <div>
             <span>{{ $t("market.text25") }}</span>
             <span>{{ seller }}</span>
-            <el-button>{{ $t("market.text11") }}</el-button>
+            <el-button @click="beforeBuy" :loading="buyLoading">{{ $t("market.text11") }}</el-button>
           </div>
           <div>
             <i class="iconfont pcshuxingchaxun"></i>
@@ -74,11 +74,11 @@
           <div class="content">
             <div v-if="!history.length">No data</div>
             <ul v-else>
-              <li v-for="index of 10" :key="index">
+              <li v-for="(item, index) in history" :key="index">
                 <span>From</span>
-                <span>0x23...56e4</span>
+                <span>{{ item.seller2 }}</span>
                 <span>to</span>
-                <span>0x45...4e53</span>
+                <span>{{ item.buyer2 }}</span>
               </li>
             </ul>
           </div>
@@ -170,13 +170,14 @@
           <span>{{ $t("market.text18") }}</span>
         </div>
         <div class="his_body">
-          <div v-if="!history.length">No data</div>
-          <ul v-else>
-            <li v-for="index of 10" :key="index">
+          <ul>
+            <li v-if="!history.length">No data</li>
+
+            <li v-else v-for="(item, index) in history" :key="index">
               <span>From</span>
-              <span>0x23...56e4</span>
+              <span>{{ item.seller2 }}</span>
               <span>to</span>
-              <span>0x45...4e53</span>
+              <span>{{ item.buyer2 }}</span>
             </li>
           </ul>
         </div>
@@ -185,26 +186,49 @@
     <el-dialog center top="0" :title="$t(card.name)" :visible.sync="isShowPopup" :modal-append-to-body="false" :destroy-on-close="true">
       <PaintingVideo :videoUrl="card.video"></PaintingVideo>
     </el-dialog>
+    <ApprovePopup :operation="operation" :loading="buyLoading"></ApprovePopup>
   </div>
 </template>
 <script>
-import { cn, marketInfo, market, util, getSigner, erc20, token } from "funtopia-sdk";
+import { cn, marketInfo, market, util, getSigner, erc20, token, contract } from "funtopia-sdk";
 import PaintingVideo from "@/components/PaintingVideo.vue";
+import ApprovePopup from "@/components/ApprovePopup.vue";
 import { shikastudio } from "@/mock/nftworks";
+import { mapGetters } from "vuex";
+
 export default {
   name: "MarketDetails",
-  components: { PaintingVideo },
+  components: { PaintingVideo, ApprovePopup },
   data() {
     return {
       card: null,
       name: null,
       isShowPopup: false,
+      nft_type: null,
       nftId: null,
       price: null,
       seller: null,
-      token: null,
+      token_type: null,
+      token_addr: null,
+      nft_addr: null,
       history: [],
+      operation: {
+        name: this.$t("approvePopup.text1"),
+        func: "buyNfts",
+      },
+      buyLoading: false,
     };
+  },
+  computed: { ...mapGetters(["getWalletAccount"]), ...mapGetters(["getApprovePopup"]) },
+
+  watch: {
+    getWalletAccount: {
+      handler(newVal) {
+        if (newVal) {
+        }
+      },
+      immediate: true,
+    },
   },
   created() {
     if (Object.keys(this.$route.query).length > 0) {
@@ -212,11 +236,46 @@ export default {
       this.card = shikastudio.works.find((item) => item.id == id);
       this.name = shikastudio.name;
       this.nftId = this.$route.query.nftId;
+      this.nft_type = this.$route.query.nft_type;
       this.price = this.$route.query.price;
       const tmp = this.$route.query.seller;
       this.seller = tmp.slice(0, 2) + tmp.slice(2, 4).toUpperCase() + "..." + tmp.slice(-4).toUpperCase();
       //this.token = this.$route.query.token == token().USDT ? "USDT" : (this.$route.query.token  == token().FUN ? "FUN" : "ETH");
-      this.token = this.$route.query.token;
+      this.token_type = this.$route.query.token_type;
+      // if (this.token == "USDT") this.token_addr = token().USDT;
+      // if (this.token == "FUN") this.token_addr = token().FUN;
+      this.nft_addr = this.$route.query.nft;
+      this.token_addr = this.$route.query.token;
+
+      // if (this.nft_type == "hero") this.nft_addr = token().CN;
+      // if (this.nft_type == "box") this.nft_addr = token().CB;
+      // if (this.nft_type == "shard") this.nft_addr = token().CS;
+      marketInfo
+        .getBuyInfos(
+          30,
+          0,
+          "buyTime",
+          "desc",
+          undefined,
+          undefined,
+          this.nft_addr,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          this.$route.query.id - 1,
+        )
+        .then((res) => {
+          let data = JSON.parse(JSON.stringify(res.data.buyInfos));
+          this.history = data.filter((item) => item.nftId == this.nftId);
+          this.history.forEach((item) => {
+            item.buyer2 = item.buyer.slice(0, 2) + item.buyer.slice(2, 4).toUpperCase() + "..." + item.buyer.slice(-4).toUpperCase();
+            item.seller2 = item.seller.slice(0, 2) + item.seller.slice(2, 4).toUpperCase() + "..." + item.seller.slice(-4).toUpperCase();
+          });
+          // console.log(this.history);
+        });
     }
   },
   methods: {
@@ -225,6 +284,58 @@ export default {
     },
     goBack() {
       history.go(-1);
+    },
+
+    //contract
+    beforeBuy() {
+      if (!this.getWalletAccount) return this.$store.commit("setWalletConnectPopup", true);
+
+      this.buyLoading = true;
+      // 授权检查
+      if (this.token_addr) {
+        erc20(this.token_addr)
+          .allowance(this.getWalletAccount, contract().Market)
+          .then((res) => {
+            console.log(Number(res._hex));
+            console.log(this.price);
+            if (Number(res._hex) > this.price) {
+              this.buyNfts();
+            } else {
+              this.$store.commit("setApprovePopup", true);
+              this.buyLoading = false;
+            }
+          })
+          .catch((err) => {
+            console.error("allowance", err);
+            this.buyLoading = false;
+          });
+      }
+    },
+
+    /**去授权 */
+    async toApprove() {
+      const tx = await erc20(this.token_addr).connect(getSigner()).approve(contract().Market, util.parseUnits((1e10).toString()));
+      await tx.wait();
+    },
+
+    async buyNfts() {
+      this.buyLoading = true;
+      try {
+        const tx = this.token_addr
+          ? await market().connect(getSigner()).buy([this.nft_addr], [this.nftId])
+          : await market().connect(getSigner()).buy([this.nft_addr], [this.nftId], { value: this.price });
+
+        // const etReceipt = await tx.wait(); // 请求已发出，等待矿工打包进块，交易成功，返回交易收据
+        // console.log("交易收据", etReceipt);
+        await tx.wait();
+        if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
+        this.buyloading = false;
+        this.$message({ message: this.$t("tips.text11") });
+        this.$router.push({ path: "/market" });
+      } catch (err) {
+        this.buyloading = false;
+        console.error("buyNfts", err);
+      }
     },
   },
 };
@@ -665,11 +776,11 @@ export default {
     .his_body {
       position: relative;
       width: 100%;
-      height: 2rem;
+      max-height: 2rem;
       padding: 0.1rem;
       div {
         position: absolute;
-        font-size: 0.3rem;
+        font-size: 0.12rem;
         color: #aeaeb1;
         font-weight: 600;
         top: 50%;
@@ -684,6 +795,7 @@ export default {
         justify-content: space-between;
         overflow-y: auto;
         li {
+          margin: 0 auto;
           margin-bottom: 0.04rem;
           span {
             &:nth-child(2) {

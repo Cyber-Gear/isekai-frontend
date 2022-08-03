@@ -31,9 +31,6 @@ export default {
       this.resetRem();
     });
     this.$utils.addEventListenerFun();
-    // setTimeout(() => {
-    //   if (this.getWalletAccount) this.$utils.handleChainChanged();
-    // }, 1000);
   },
   beforeDestroy() {
     window.removeEventListener("load", this.resetRem());

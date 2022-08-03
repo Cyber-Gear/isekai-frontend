@@ -160,11 +160,10 @@
 </template>
 
 <script>
-import { cn, marketInfo, market, util, getSigner, erc20, token } from "funtopia-sdk";
+import { marketInfo, market, util, getSigner, token } from "funtopia-sdk";
 import LottieAnimation from "@/components/LottieAnimation";
 import { mapGetters } from "vuex";
 import { shikastudio } from "@/mock/nftworks";
-import Vue from "vue";
 export default {
   name: "MARKET",
   components: { LottieAnimation },
@@ -287,7 +286,9 @@ export default {
       this.requestTimer = null;
     },
 
-    clickOK(item) {},
+    clickOK(item) {
+      // 
+    },
 
     checkboxClick(ite) {
       ite.isChecked = !ite.isChecked;

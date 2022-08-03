@@ -190,7 +190,7 @@
   </div>
 </template>
 <script>
-import { cn, marketInfo, market, util, getSigner, erc20, token, contract } from "funtopia-sdk";
+import { marketInfo, market, util, getSigner, erc20, contract } from "funtopia-sdk";
 import PaintingVideo from "@/components/PaintingVideo.vue";
 import ApprovePopup from "@/components/ApprovePopup.vue";
 import { shikastudio } from "@/mock/nftworks";
@@ -224,8 +224,7 @@ export default {
   watch: {
     getWalletAccount: {
       handler(newVal) {
-        if (newVal) {
-        }
+        // if (newVal) { }
       },
       immediate: true,
     },

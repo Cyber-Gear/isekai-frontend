@@ -88,16 +88,13 @@
 </template>
 
 <script>
-// import PaintingVideo from "@/components/PaintingVideo.vue";
-import { cn, cb, market, util, getSigner, erc20, token, contract } from "funtopia-sdk";
+import { cn, market, util, getSigner, token, contract } from "funtopia-sdk";
 import { mapGetters } from "vuex";
-import ApprovePopup from "@/components/ApprovePopup";
+import ApprovePopup from "@/components/ApprovePopup.vue";
 import { shikastudio } from "@/mock/nftworks";
 export default {
   name: "MarketOrder",
   components: { ApprovePopup },
-
-  // components: { PaintingVideo },
   data() {
     return {
       cardList: [],
@@ -314,7 +311,7 @@ export default {
     cardListInit() {
       this.heroIdList.forEach((element) => {
         const obj = {};
-        obj.cardInfo = shikastudio.works.find((item) => item.id == element.id+1);
+        obj.cardInfo = shikastudio.works.find((item) => item.id == element.id + 1);
         obj.nftId = element.nftId;
         obj.isChecked = false;
         this.cardList.push(obj);

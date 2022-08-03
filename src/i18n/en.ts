@@ -328,7 +328,7 @@ export default {
     text27: "Cancel",
     text28: "Buy now",
     text29: "Current price",
-    text30: "Price"
+    text30: "Price",
   },
   dashboard: {
     text1: "Dashboard",
@@ -360,6 +360,11 @@ export default {
     text27: "Mastery Boxes Details",
     text28: "Open",
   },
+  nodata: {
+    text1: "No items",
+    text2: "Browse items available for purchase on the ",
+    text3: "Market",
+  },
   walletPopup: {
     text1: "Wallet Connected",
     text2: "No wallet is currently connected, please connect the wallet",
@@ -374,7 +379,6 @@ export default {
     text3: "step 1",
     text4: "step 2",
     text5: "Sell",
-
   },
   orderPopup: {
     text1: "Pending order",
@@ -410,8 +414,7 @@ export default {
     text13: "Loading",
     text14: "Please enter",
     text15: "Failed purchase",
-    text16: "Successful sale"
-
+    text16: "Successful sale",
   },
   btns: {
     text1: "Back",

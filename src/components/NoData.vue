@@ -2,8 +2,10 @@
   <div class="nodata">
     <i class="iconfont pcchakan"></i>
     <div>
-      <p>No items</p>
-      <p>Browse items available for purchase on the <span>Market</span></p>
+      <p>{{ $t("nodata.text1") }}</p>
+      <p>
+        {{ $t("nodata.text2") }}<span @click="toMarket">{{ $t("nodata.text3") }}</span>
+      </p>
     </div>
   </div>
 </template>
@@ -13,6 +15,11 @@ export default {
   name: "NoData",
   data() {
     return {};
+  },
+  methods: {
+    toMarket() {
+      this.$router.push("/market");
+    },
   },
 };
 </script>

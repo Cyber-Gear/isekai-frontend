@@ -16,8 +16,7 @@ export default {
   home: {
     text1: `CREATE A FUN
     METAVERSE FOR ALL !`,
-    text3: `NFT artist shika studio provided the character artwork for the release of NFT on the FUNTOPIA platform,
-    which was used in Cybergear's game scenes.`,
+    text3: `NFT artist shika studio provided the character artwork for the release of NFT on the FUNTOPIA platform, which was used in Cybergear's game scenes.`,
     text4: "WHITE PAGE",
     // text5: "DAO",
     // text6: "LAUNCHPAD",
@@ -27,7 +26,7 @@ export default {
     text10: "TAG",
     forms: [
       { text1: "Submit Artist Info", text2: "Start the journey of secondary creation and get rewarded" },
-      { text1: "Submit cooperation Info", text2: "Create your NFT、Game、Event，we will contact with you" },
+      { text1: "Submit cooperation Info", text2: "Create your NFT、Game、Event, we will contact with you" },
       { text1: "Polling vote", text2: "Vote for your favorite artists, KOLs, games and works and get rewarded" },
     ],
     daos: [
@@ -40,8 +39,7 @@ export default {
       },
       {
         text1: "Funtopia Governance Threshold",
-        text2: `This vote aims to determine intention as to whether a threshold is a legitimate alternative path to funtopia shareholders,
-        if so, what the appropriate threshold should be.`,
+        text2: `This vote aims to determine intention as to whether a threshold is a legitimate alternative path to funtopia shareholders, if so, what the appropriate threshold should be.`,
         text3: "detail",
       },
       {
@@ -349,7 +347,7 @@ export default {
     text16: "Cancel",
     text17: "Total",
     text18: "View All",
-    text19: "Blind box results",
+    text19: "Mystery Box Results",
     text20: "Balance",
     text21: "Available",
     text22: "Contract",
@@ -361,9 +359,8 @@ export default {
     text28: "Open",
   },
   nodata: {
-    text1: "No items",
-    text2: "Browse items available for purchase on the ",
-    text3: "Market",
+    text1: "No Items",
+    text2: "Browse items available for purchase on the Market",
   },
   walletPopup: {
     text1: "Wallet Connected",

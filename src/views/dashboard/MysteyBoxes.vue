@@ -72,7 +72,7 @@ export default {
   data() {
     return {
       isShowCheck: false,
-      switchIndex: null,
+      switchIndex: 0,
       switchList: [
         { label: "dashboard.text12", total: 0 },
         // { label: "dashboard.text13", total: 0 },

@@ -3,9 +3,7 @@
     <i class="iconfont pcchakan"></i>
     <div>
       <p>{{ $t("nodata.text1") }}</p>
-      <p>
-        {{ $t("nodata.text2") }}<span @click="toMarket">{{ $t("nodata.text3") }}</span>
-      </p>
+      <p @click="toMarket">{{ $t("nodata.text2") }}</p>
     </div>
   </div>
 </template>
@@ -43,10 +41,8 @@ export default {
       &:nth-child(2) {
         font-size: 0.15rem;
         font-weight: bold;
-        span {
-          color: #00b7ff;
-          cursor: pointer;
-        }
+        color: #00b7ff;
+        cursor: pointer;
       }
     }
   }

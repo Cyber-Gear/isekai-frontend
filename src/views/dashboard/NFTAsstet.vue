@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       isloading: false,
-      switchIndex: null,
+      switchIndex: 0,
       switchList: [
         { label: "dashboard.text12", total: 0 },
         // { label: "dashboard.text13", total: 0 },

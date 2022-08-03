@@ -37,9 +37,11 @@
           :class="{ active: infoIndex == index }"
           :style="infoIndex == index ? { backgroundImage: `url(${item.logo2})` } : {}"
         >
-          <img :src="item.avatar" alt="" />
-          <div>{{ item.name }}</div>
-          <pre :class="{ text_ellipsis_row_3: infoIndex !== index }">{{ $t(item.des) }}</pre>
+          <div>
+            <img :src="item.avatar" alt="" />
+            <div>{{ item.name }}</div>
+            <pre :class="{ text_ellipsis_row_3: infoIndex !== index }">{{ $t(item.des) }}</pre>
+          </div>
         </li>
       </ul>
       <div class="mobile tabbox">
@@ -54,9 +56,11 @@
           />
         </div>
         <div class="card" :style="{ backgroundImage: `url(${infoList[infoIndex].logo2})` }">
-          <img :src="infoList[infoIndex].avatar" alt="" />
-          <div>{{ infoList[infoIndex].name }}</div>
-          <pre>{{ $t(infoList[infoIndex].des) }}</pre>
+          <div>
+            <img :src="infoList[infoIndex].avatar" alt="" />
+            <div>{{ infoList[infoIndex].name }}</div>
+            <pre>{{ $t(infoList[infoIndex].des) }}</pre>
+          </div>
         </div>
       </div>
     </div>
@@ -420,8 +424,6 @@ export default {
       height: 2.5rem;
       background: linear-gradient(180deg, #2d2d35 0%, #2d2d35 100%);
       border: 0.01rem solid #5b5b6c;
-      backdrop-filter: blur(31px);
-      padding: 0.3rem 0.2rem;
       transition: all 0.3s;
       &:nth-child(1) {
         border-radius: 0.14rem 0 0 0.14rem;
@@ -429,32 +431,39 @@ export default {
       &:nth-child(4) {
         border-radius: 0 0.14rem 0.14rem 0;
       }
-      img {
-        width: 0.5rem;
-        height: 0.5rem;
-      }
-      div {
-        font-size: 0.21rem;
-        font-weight: bold;
-        color: #757582;
-        line-height: 0.5rem;
-      }
-      pre {
-        font-size: 0.14rem;
-        font-weight: 600;
-        color: #757582;
-        line-height: 0.18rem;
+      > div {
+        width: 100%;
+        height: 100%;
+        padding: 0.2rem;
+        img {
+          width: 0.5rem;
+          height: 0.5rem;
+        }
+        div {
+          font-size: 0.21rem;
+          font-weight: bold;
+          color: #757582;
+          line-height: 0.5rem;
+        }
+        pre {
+          font-size: 0.14rem;
+          font-weight: 600;
+          color: #757582;
+          line-height: 0.18rem;
+        }
       }
       &.active {
         border: none;
         height: 100%;
-        padding: 0.2rem;
         background-repeat: no-repeat;
         background-size: 100% 100%;
         border-radius: 0;
-        div,
-        pre {
-          color: #ffffff;
+        > div {
+          backdrop-filter: blur(0.05rem);
+          div,
+          pre {
+            color: #ffffff;
+          }
         }
       }
     }
@@ -519,6 +528,8 @@ export default {
         .progress_bar {
           width: 2.5rem;
           height: 0.05rem;
+          background: #000;
+          border-radius: 0.05rem;
           div {
             position: relative;
             width: 80%;
@@ -839,23 +850,28 @@ export default {
       .card {
         width: 100%;
         height: 3.8rem;
-        padding: 0.4rem 0.2rem;
         background-repeat: no-repeat;
         background-size: 100% 100%;
-        img {
-          width: 0.45rem;
-          height: auto;
-        }
-        div {
-          font-size: 0.12rem;
-          font-weight: bold;
-          line-height: 0.18rem;
-          margin-bottom: 0.1rem;
-        }
-        pre {
-          font-size: 0.12rem;
-          font-weight: 500;
-          line-height: 0.15rem;
+        > div {
+          width: 100%;
+          height: 100%;
+          padding: 0.4rem 0.2rem;
+          backdrop-filter: blur(0.05rem);
+          img {
+            width: 0.45rem;
+            height: auto;
+          }
+          div {
+            font-size: 0.12rem;
+            font-weight: bold;
+            line-height: 0.18rem;
+            margin-bottom: 0.1rem;
+          }
+          pre {
+            font-size: 0.12rem;
+            font-weight: 500;
+            line-height: 0.15rem;
+          }
         }
       }
     }

@@ -234,7 +234,7 @@ export default {
     text8: "Rarity",
     text9: "NFT Introduction",
     text10: "Last transaction",
-    text11: "View painting",
+    text11: "Check Display",
     items: ["items", "owners", "items", "items"],
   },
   dao: {

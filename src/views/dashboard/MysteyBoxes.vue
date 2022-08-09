@@ -94,12 +94,11 @@ export default {
     },
   },
   beforeDestroy() {
-    clearTimeout(this.requestTimer);
+    clearInterval(this.requestTimer);
     this.requestTimer = null;
   },
   methods: {
     switchTab(index) {
-      if (this.switchIndex == index) return;
       this.switchIndex = index;
       this.boxList = [];
       if (index == 0) {

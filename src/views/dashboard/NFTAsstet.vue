@@ -72,18 +72,19 @@ export default {
     },
   },
   beforeDestroy() {
-    clearTimeout(this.requestTimer);
+    clearInterval(this.requestTimer);
     this.requestTimer = null;
   },
   methods: {
     switchTab(index) {
-      if (this.switchIndex == index) return;
       this.switchIndex = index;
       this.newCardList = [];
+      console.log("switchTab");
       if (index == 0) {
         this.switchList[0].total = 0;
         if (sessionStorage.getItem("NFTAsstetList")) {
           this.newCardList = JSON.parse(sessionStorage.getItem("NFTAsstetList"));
+          console.log("NFTAsstetList", this.newCardList);
           this.switchList[0].total = this.newCardList.length;
         } else {
           this.tokensOfOwnerBySize();
@@ -128,6 +129,7 @@ export default {
             const obj = this.cardList.find((item) => item.id == element);
             this.newCardList.push(obj);
           });
+          console.log(this.newCardList);
           sessionStorage.setItem("NFTAsstetList", JSON.stringify(this.newCardList));
         }
       }, 200);

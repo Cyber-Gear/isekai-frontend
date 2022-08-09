@@ -309,6 +309,7 @@ export default {
 
     cardListInit() {
       this.heroIdList.forEach((element) => {
+        console.log(element);
         const obj = {};
         obj.cardInfo = shikastudio.works.find((item) => item.id == element.id);
         obj.nftId = element.nftId;

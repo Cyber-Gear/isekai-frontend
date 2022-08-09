@@ -316,6 +316,8 @@ export default {
     text28: "立即购买",
     text29: "当前价格",
     text30: "价格范围",
+    text31: "From",
+    text32: "To",
   },
   dashboard: {
     text1: "Dashboard",
@@ -350,6 +352,7 @@ export default {
   nodata: {
     text1: "无物品",
     text2: "在市场上浏览可购买物品",
+    text3: "无数据",
   },
   walletPopup: {
     text1: "未连接钱包",

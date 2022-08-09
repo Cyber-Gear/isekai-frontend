@@ -45,11 +45,11 @@
               </li>
               <li>
                 <span>{{ $t("market.text14") }}</span>
-                <span>一级</span>
+                <span>{{ $t(card.level) }}</span>
               </li>
               <li>
                 <span>{{ $t("market.text15") }}</span>
-                <span>一级</span>
+                <span>{{ $t(card.starlevel) }}</span>
               </li>
               <li>
                 <span>{{ $t("market.text16") }}</span>
@@ -68,16 +68,15 @@
             </div>
           </div>
         </div>
-
         <div class="history">
           <span>{{ $t("market.text18") }}</span>
           <div class="content">
-            <div v-if="!history.length">No data</div>
+            <div v-if="!history.length">{{ $t("nodata.text3") }}</div>
             <ul v-else>
               <li v-for="(item, index) in history" :key="index">
-                <span>From</span>
+                <span>{{ $t("market.text31") }}</span>
                 <span>{{ item.seller2 }}</span>
-                <span>to</span>
+                <span>{{ $t("market.text32") }}</span>
                 <span>{{ item.buyer2 }}</span>
               </li>
             </ul>
@@ -85,10 +84,8 @@
         </div>
       </div>
     </div>
-
     <div class="mobile-content-box mobile">
       <div class="cardbox">
-        <!-- <div class="header"></div> -->
         <img :src="card.card" alt="" />
         <span>{{ $t(card.name) }}</span>
         <div class="level_btn" :class="card.rarity" @click="openVideo">
@@ -136,12 +133,12 @@
             <li>
               <i class="iconfont pcshuxingchaxun"></i>
               <span>{{ $t("market.text14") }}</span>
-              <span>一级</span>
+              <span>{{ $t(card.level) }}</span>
             </li>
             <li>
               <i class="iconfont pcshuxingchaxun"></i>
               <span>{{ $t("market.text15") }}</span>
-              <span>一级</span>
+              <span>{{ $t(card.starlevel) }}</span>
             </li>
             <li>
               <i class="iconfont pcshuxingchaxun"></i>
@@ -151,7 +148,6 @@
           </ul>
         </div>
       </div>
-
       <div class="description box">
         <div class="header">
           <i class="iconfont pcshuxingchaxun"></i>
@@ -163,7 +159,6 @@
           </div>
         </div>
       </div>
-
       <div class="history box">
         <div class="header">
           <i class="iconfont pcshuxingchaxun"></i>
@@ -171,12 +166,11 @@
         </div>
         <div class="his_body">
           <ul>
-            <li v-if="!history.length">No data</li>
-
+            <li v-if="!history.length">{{ $t("nodata.text3") }}</li>
             <li v-else v-for="(item, index) in history" :key="index">
-              <span>From</span>
+              <span>{{ $t("market.text31") }}</span>
               <span>{{ item.seller2 }}</span>
-              <span>to</span>
+              <span>{{ $t("market.text32") }}</span>
               <span>{{ item.buyer2 }}</span>
             </li>
           </ul>
@@ -195,7 +189,6 @@ import PaintingVideo from "@/components/PaintingVideo.vue";
 import ApprovePopup from "@/components/ApprovePopup.vue";
 import { shikastudio } from "@/mock/nftworks";
 import { mapGetters } from "vuex";
-
 export default {
   name: "MarketDetails",
   components: { PaintingVideo, ApprovePopup },
@@ -220,13 +213,11 @@ export default {
     };
   },
   computed: { ...mapGetters(["getWalletAccount"]), ...mapGetters(["getApprovePopup"]) },
-
   watch: {
     getWalletAccount: {
       handler(newVal) {
         // if (newVal) { }
       },
-      immediate: true,
     },
   },
   created() {
@@ -245,7 +236,6 @@ export default {
       // if (this.token == "FUN") this.token_addr = token().FUN;
       this.nft_addr = this.$route.query.nft;
       this.token_addr = this.$route.query.token;
-
       // if (this.nft_type == "hero") this.nft_addr = token().CN;
       // if (this.nft_type == "box") this.nft_addr = token().CB;
       // if (this.nft_type == "shard") this.nft_addr = token().CS;
@@ -288,7 +278,6 @@ export default {
     //contract
     beforeBuy() {
       if (!this.getWalletAccount) return this.$store.commit("setWalletConnectPopup", true);
-
       this.buyLoading = true;
       // 授权检查
       if (this.token_addr) {
@@ -316,14 +305,12 @@ export default {
       const tx = await erc20(this.token_addr).connect(getSigner()).approve(contract().Market, util.parseUnits((1e10).toString()));
       await tx.wait();
     },
-
     async buyNfts() {
       this.buyLoading = true;
       try {
         const tx = this.token_addr
           ? await market().connect(getSigner()).buy([this.nft_addr], [this.nftId])
           : await market().connect(getSigner()).buy([this.nft_addr], [this.nftId], { value: this.price });
-
         // const etReceipt = await tx.wait(); // 请求已发出，等待矿工打包进块，交易成功，返回交易收据
         // console.log("交易收据", etReceipt);
         await tx.wait();

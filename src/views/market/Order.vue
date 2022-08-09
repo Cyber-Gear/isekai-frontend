@@ -33,8 +33,8 @@
             <i class="iconfont pcfuxuankuang-quanxuan" v-show="item.isChecked"></i>
             <i class="iconfont pcfuxuankuang-weiquanxuan" v-show="!item.isChecked"></i>
           </span>
-          <img :src="item.cardInfo.card" alt="" />
-          <span>{{ $t(item.cardInfo.name) }}</span>
+          <img v-if="item.cardInfo && item.cardInfo.card" :src="item.cardInfo.card" alt="" />
+          <span v-if="item.cardInfo && item.cardInfo.name">{{ $t(item.cardInfo.name) }}</span>
         </div>
       </div>
       <div class="confirm">
@@ -200,6 +200,7 @@ export default {
       value: "",
       balance: 0,
       disable: true,
+      requestTimer: null,
     };
   },
   computed: {
@@ -229,9 +230,8 @@ export default {
             console.log("首次跳转到此页面 加载");
             this.tokensOfOwner();
           }
-        }
-        //未连接或断开操作
-        else {
+        } else {
+          //未连接或断开操作
           sessionStorage.removeItem("HeroAssetList");
           // this.cardList = [];
           this.$router.push({ path: "/market" });
@@ -240,7 +240,10 @@ export default {
       immediate: true,
     },
   },
-
+  beforeDestroy() {
+    clearInterval(this.requestTimer);
+    this.requestTimer = null;
+  },
   methods: {
     openVideo() {
       this.isShowPopup = true;
@@ -303,19 +306,16 @@ export default {
           // console.log(this.fee);
         });
     },
-    beforeDestroy() {
-      clearTimeout(this.requestTimer);
-      this.requestTimer = null;
-    },
 
     cardListInit() {
       this.heroIdList.forEach((element) => {
         const obj = {};
-        obj.cardInfo = shikastudio.works.find((item) => item.id == element.id + 1);
+        obj.cardInfo = shikastudio.works.find((item) => item.id == element.id);
         obj.nftId = element.nftId;
         obj.isChecked = false;
         this.cardList.push(obj);
       });
+      console.log(this.cardList);
     },
 
     // 获取钱包的所有NFT ids
@@ -378,10 +378,8 @@ export default {
       if (whichToken == "USDT") tokenAddr = token().USDT;
       else if (whichToken == "FUN") tokenAddr = token().FUN;
       console.log(tokenAddr);
-
       this.sellLoading = true;
       // this.$store.commit("setApprovePopup", true);
-
       // 授权检查
       cn()
         .isApprovedForAll(this.getWalletAccount, contract().Market)
@@ -462,33 +460,28 @@ export default {
 .content_box {
   width: 11.5rem;
   max-height: 7.8rem;
-  //   background-color: grey;
   margin: 0 auto 2rem auto;
   .filter {
     width: 100%;
-    height: 0.27rem;
+    height: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     .select {
-      float: left;
       width: 5.5rem;
       display: flex;
       justify-content: space-between;
       .el-select {
-        width: 1.22rem;
-        height: 0.27rem;
-        >>> .input {
-          font-size: 1rem;
-        }
+        width: 1.2rem;
+        height: 0.3rem;
       }
     }
     .selectAll {
       cursor: pointer;
-      width: 1.21rem;
-      height: 100%;
-      float: right;
       font-size: 0.16rem;
       color: #adadb2;
       i {
-        font-size: 0.2rem;
+        font-size: 0.16rem;
         margin-right: 0.05rem;
       }
     }
@@ -497,7 +490,6 @@ export default {
     width: 100%;
     max-height: 7.2rem;
     overflow-y: auto;
-    // background-color: green;
     margin-top: 0.69rem;
     display: flex;
     justify-content: flex-start;

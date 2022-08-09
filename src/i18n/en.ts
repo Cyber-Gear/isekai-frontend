@@ -327,6 +327,8 @@ export default {
     text28: "Buy now",
     text29: "Current price",
     text30: "Price",
+    text31: "From",
+    text32: "To",
   },
   dashboard: {
     text1: "Dashboard",
@@ -361,6 +363,7 @@ export default {
   nodata: {
     text1: "No Items",
     text2: "Browse items available for purchase on the Market",
+    text3: "No Data",
   },
   walletPopup: {
     text1: "Wallet Connected",

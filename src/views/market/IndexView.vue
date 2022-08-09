@@ -77,10 +77,8 @@
                   <span>{{ $t(item.data.title) }}</span>
                   <span>{{ item.price }} {{ item.token_type }}</span>
                 </div>
-
-                <div v-if="item.lastPrice">{{ $t("artist.text10") }} {{ item.lastPrice.price }} {{ item.token_type }}</div>
+                <div v-if="item.lastPrice">{{ $t("artist.text10") }} {{ item.lastPrice }} {{ item.token_type }}</div>
                 <div v-else>{{ $t("artist.text10") }} ----</div>
-                <div></div>
               </div>
               <div class="bottom">
                 <el-button @click="cancel(item.nft, item.nftId)" :disabled="item.seller != getWalletAccount.toLowerCase()">Cancel</el-button>
@@ -93,21 +91,16 @@
                 <LottieAnimation></LottieAnimation>
               </div>
               <div class="center">
-                <div class="row1">
-                  <div>
-                    <span>Cybergear</span>
-                    <img :src="`${$urlImages}icon1.webp`" alt="" />
-                  </div>
-                  <div></div>
+                <div>
+                  <span>Cybergear</span>
+                  <img :src="`${$urlImages}icon1.webp`" alt="" />
                 </div>
-                <div class="row2">
-                  {{ "Bir Mystery Box " + " #" + item.nftId }}
+                <div>
+                  <span>{{ "Bir Mystery Box" + " #" + item.nftId }}</span>
+                  <span>{{ item.price }} {{ item.token_type }}</span>
                 </div>
-                <div class="row3">{{ item.price }} {{ item.token_type }}</div>
-
-                <div v-if="item.lastPrice" class="row4">{{ $t("artist.text10") }} {{ item.lastPrice.price }} {{ item.token_type }}</div>
-                <div v-else class="row4">{{ $t("artist.text10") }} ----</div>
-                <div class="row5"></div>
+                <div v-if="item.lastPrice">{{ $t("artist.text10") }} {{ item.lastPrice }} {{ item.token_type }}</div>
+                <div v-else>{{ $t("artist.text10") }} ----</div>
               </div>
               <div class="bottom">
                 <i class="iconfont pcaccount"></i>
@@ -229,6 +222,7 @@ export default {
       tagList: [],
       isShowSelectionList: true,
       isShowDrawer: false,
+      requestTimer: null,
     };
   },
   watch: {
@@ -246,7 +240,7 @@ export default {
     this.getCardInfo(30, 0, "sellTime", "desc");
     this.requestTimer = setInterval(() => {
       if (this.tmpCardList.length) {
-        clearTimeout(this.requestTimer);
+        clearInterval(this.requestTimer);
         this.requestTimer = null;
         // this.cardList = JSON.parse(JSON.stringify(this.tmpCardList));
         this.cardList = this.tmpCardList;
@@ -254,6 +248,10 @@ export default {
       }
     }, 200);
     // this.cardList = shikastudio.works;
+  },
+  beforeDestroy() {
+    clearInterval(this.requestTimer);
+    this.requestTimer = null;
   },
   methods: {
     openSelectionList() {
@@ -281,13 +279,8 @@ export default {
       }
     },
 
-    beforeDestroy() {
-      clearTimeout(this.requestTimer);
-      this.requestTimer = null;
-    },
-
     clickOK(item) {
-      // 
+      //
     },
 
     checkboxClick(ite) {
@@ -344,17 +337,15 @@ export default {
             else element.nft_type = "shard";
             element.price = Number(util.formatEther(element.price));
             marketInfo.getBuyInfos(1000, 0, "buyTime", "desc", undefined, undefined, element.nfts).then((res) => {
-              // console.log(res.data.buyInfos)
               let data = JSON.parse(JSON.stringify(res.data.buyInfos)).find((item) => item.nftId == Number(element.nftId));
-              console.log(data);
-              if (data) {
-                data.price = Number(util.formatEther(data.price));
-                element.lastPrice = data;
+              if (data && data.price) {
+                console.log("data.price", data.price, Number(util.formatEther(data.price)));
+                element.lastPrice = Number(util.formatEther(data.price));
               }
+              // console.log(element);
+              this.tmpCardList.push(element);
             });
-            this.tmpCardList.push(element);
           });
-          // console.log(JSON.stringify(this.tmpCardList));
         })
         .catch((err) => {
           console.error("getSellInfos", err);
@@ -377,7 +368,7 @@ export default {
 
       this.requestTimer = setInterval(() => {
         if (this.tmpCardList.length) {
-          clearTimeout(this.requestTimer);
+          clearInterval(this.requestTimer);
           this.requestTimer = null;
           this.cardList = this.tmpCardList;
           this.tmpCardList = [];
@@ -466,8 +457,6 @@ export default {
     .checkbox_content {
       width: 100%;
       padding: 0.1rem;
-      display: flex;
-      flex-wrap: wrap;
       li {
         cursor: pointer;
         width: 50%;
@@ -537,6 +526,7 @@ export default {
     height: 0.5rem;
     line-height: 0.5rem;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid;
     border-image: linear-gradient(135deg, rgba(212, 135, 241, 0.44), rgba(82, 224, 255, 0.44)) 1 1;
@@ -549,7 +539,7 @@ export default {
     .input_group {
       display: flex;
       align-items: center;
-      width: 7.14rem;
+      width: calc(100% - 2rem);
       height: 0.4rem;
       background: #3f3e3e;
       border-radius: 0.2rem;
@@ -559,7 +549,7 @@ export default {
         font-size: 0.2rem;
       }
       input {
-        width: 75%;
+        width: 100%;
         height: 100%;
         margin-left: 0.11rem;
         font-size: 0.14rem;
@@ -567,7 +557,7 @@ export default {
       }
     }
     .el-button {
-      width: 1.4rem;
+      width: 1.5rem;
       height: 0.4rem;
       background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
       border-radius: 0.2rem;
@@ -634,7 +624,6 @@ export default {
         background: rgba(51, 52, 60, 0.57);
         box-shadow: 0.05rem 0.08rem 0.1rem 0rem rgba(0, 0, 0, 0.5);
       }
-
       .hero_card {
         .top {
           width: 100%;
@@ -644,147 +633,70 @@ export default {
             height: 100%;
           }
         }
-        .center {
-          width: 100%;
-          padding-top: 0.05rem;
-          div {
-            display: flex;
-            align-items: center;
-            padding: 0 0.05rem;
-            &:nth-child(1) {
-              font-size: 0.12rem;
-              font-weight: bold;
-              color: #00b1ff;
-              img {
-                width: 0.24rem;
-                height: auto;
-                margin-left: 0.1rem;
-              }
-            }
-            &:nth-child(2) {
-              justify-content: space-between;
-              font-size: 0.12rem;
-              font-weight: bold;
-            }
-            &:nth-child(3) {
-              float: right;
-              font-size: 0.05rem;
-              transform: scale(0.8);
-              font-weight: 600;
-              color: #6c6a71;
-            }
-
-            &:nth-child(4) {
-              width: 2.68rem;
-              height: 0.01rem;
-              box-shadow: 0rem 0.02rem 0.06rem 0.03rem rgba(0, 0, 0, 0.5);
-              opacity: 0.19;
-              border: 0.01rem solid #847d7d;
-            }
-          }
-        }
-        .bottom {
-          display: flex;
-          justify-content: flex-end;
-          width: 100%;
-          height: 0.36rem;
-          color: #6c6a71;
-          align-items: center;
-          .el-button {
-            width: 0.6rem;
-            height: 0.3rem;
-            background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
-            border-radius: 0.2rem;
-          }
-          i {
-            font-size: 0.2rem;
-            margin-right: 0.09rem;
-          }
-          span {
-            font-size: 0.1rem;
-            font-weight: 600;
-            margin-right: 0.2rem;
-          }
-        }
       }
-
       .box_card {
-        width: 100%;
-        padding: 0.1rem 0.1rem 0 0.1rem;
         .top {
           width: 100%;
-          text-align: center;
-          border-radius: 0.08rem;
+          height: auto;
           img {
             width: 70%;
             height: auto;
           }
         }
-        .center {
-          padding: -0.05rem 0;
-          > div {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-          }
-          .row1 {
-            div {
-              font-size: 0.12rem;
-              font-weight: bold;
-              &:nth-child(1) {
-                color: #00b1ff;
-                display: flex;
-                align-items: center;
-                img {
-                  width: 0.24rem;
-                  height: auto;
-                  margin-left: 0.1rem;
-                }
-              }
+      }
+      .center {
+        width: 100%;
+        padding-top: 0.05rem;
+        div {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          padding: 0 0.05rem;
+          &:nth-child(1) {
+            font-size: 0.12rem;
+            font-weight: bold;
+            color: #00b1ff;
+            img {
+              width: 0.24rem;
+              height: auto;
+              margin-left: 0.1rem;
             }
           }
-          .row2 {
+          &:nth-child(2) {
+            justify-content: space-between;
             font-size: 0.12rem;
             font-weight: bold;
           }
-          .row3 {
-            font-size: 0.12rem;
-            font-weight: bold;
-            width: 100%;
+          &:nth-child(3) {
             justify-content: flex-end;
-          }
-
-          .row4 {
-            float: right;
-            font-size: 0.05rem;
-            transform: scale(0.8);
+            border-bottom: 0.01rem solid #3f3e43;
+            font-size: 0.12rem;
             font-weight: 600;
             color: #6c6a71;
           }
-          .row5 {
-            width: 2.68rem;
-            height: 0.01rem;
-            box-shadow: 0rem 0.02rem 0.06rem 0.03rem rgba(0, 0, 0, 0.5);
-            opacity: 0.19;
-            border: 0.01rem solid #847d7d;
-          }
         }
-        .bottom {
-          display: flex;
-          justify-content: flex-end;
-          width: 100%;
-          height: 0.36rem;
-          color: #6c6a71;
-          align-items: center;
-          i {
-            font-size: 0.2rem;
-            margin-right: 0.09rem;
-          }
-          span {
-            font-size: 0.1rem;
-            font-weight: 600;
-            margin-right: 0.2rem;
-          }
+      }
+      .bottom {
+        width: 100%;
+        height: 0.36rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        color: #6c6a71;
+        .el-button {
+          width: 0.6rem;
+          height: 0.3rem;
+          background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
+          border-radius: 0.2rem;
+        }
+        i {
+          font-size: 0.2rem;
+          margin-right: 0.09rem;
+        }
+        span {
+          font-size: 0.12rem;
+          font-weight: 600;
+          margin-right: 0.2rem;
         }
       }
     }

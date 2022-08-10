@@ -103,6 +103,7 @@
                 <div v-else>{{ $t("artist.text10") }} ----</div>
               </div>
               <div class="bottom">
+                <el-button @click="cancel(item.nft, item.nftId)" :disabled="item.seller != getWalletAccount.toLowerCase()">Cancel</el-button>
                 <i class="iconfont pcaccount"></i>
                 <span>2</span>
               </div>
@@ -647,30 +648,33 @@ export default {
       .center {
         width: 100%;
         padding-top: 0.05rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 0.12rem;
+
         div {
           width: 100%;
           display: flex;
           align-items: center;
           padding: 0 0.05rem;
+
           &:nth-child(1) {
-            font-size: 0.12rem;
             font-weight: bold;
             color: #00b1ff;
             img {
-              width: 0.24rem;
+              width: 0.22rem;
               height: auto;
               margin-left: 0.1rem;
             }
           }
           &:nth-child(2) {
             justify-content: space-between;
-            font-size: 0.12rem;
             font-weight: bold;
           }
           &:nth-child(3) {
             justify-content: flex-end;
             border-bottom: 0.01rem solid #3f3e43;
-            font-size: 0.12rem;
             font-weight: 600;
             color: #6c6a71;
           }
@@ -685,13 +689,13 @@ export default {
         color: #6c6a71;
         .el-button {
           width: 0.6rem;
-          height: 0.3rem;
+          height: 0.28rem;
           background: linear-gradient(90deg, #38697f 0%, #5d4c78 100%);
           border-radius: 0.2rem;
         }
         i {
           font-size: 0.2rem;
-          margin-right: 0.09rem;
+          margin: 0 0.05rem;
         }
         span {
           font-size: 0.12rem;
@@ -790,7 +794,7 @@ export default {
 
     .card_list {
       width: 100%;
-      height: 5rem;
+      height: 6rem;
       padding-right: 0.05rem;
       li {
         width: 1.6rem;
@@ -801,6 +805,9 @@ export default {
         &:nth-child(even) {
           margin-right: 0;
         } //偶数行
+        .center {
+          font-size: 0.1rem;
+        }
       }
     }
   }

@@ -7,11 +7,12 @@
         </div>
       </div>
     </div>
-    <div class="box_title">
-      <img :src="`${$urlImages}box_title1.webp`" alt="" />
-      <span>{{ $t("market.text19") }}</span>
-    </div>
+
     <div class="content_box">
+      <div class="box_title">
+        <img :src="`${$urlImages}box_title1.webp`" alt="" />
+        <span>{{ $t("market.text19") }}</span>
+      </div>
       <div class="filter">
         <div class="select">
           <el-select v-for="(filter, index) in filters" :key="index" v-model="filter.value" :placeholder="filter.name">
@@ -444,23 +445,11 @@ export default {
   position: relative;
 }
 .box_title {
-  span {
-    font-size: 0.35rem;
-    margin-left: 0.17rem;
-    margin-bottom: 0.1rem;
-    &::before {
-      top: 0.37rem;
-      left: 0.1rem;
-      background-size: 110%;
-    }
-  }
-  img {
-    width: 3.75rem;
-  }
+  margin: 0.4rem 0 0.6rem 0;
 }
 .content_box {
   width: 11.5rem;
-  max-height: 7.8rem;
+  max-height: 10rem;
   margin: 0 auto 2rem auto;
   .filter {
     width: 100%;
@@ -489,7 +478,7 @@ export default {
   }
   .card_list {
     width: 100%;
-    max-height: 7.2rem;
+    height: 7.5rem;
     overflow-y: auto;
     margin-top: 0.69rem;
     display: flex;
@@ -534,7 +523,6 @@ export default {
 
   .confirm {
     width: 100%;
-    height: 1rem;
     position: relative;
     .el-button {
       font-size: 0.15rem;
@@ -621,19 +609,7 @@ export default {
     height: 0.5rem;
   }
   .box_title {
-    span {
-      font-size: 0.2rem;
-      margin-left: 0.05rem;
-      &::before {
-        top: 0.2rem;
-        left: 0rem;
-        background-size: 110%;
-      }
-    }
-    img {
-      width: 1.8rem;
-      margin-left: -1.2rem;
-    }
+    margin: 0.1rem 0 0.35rem 0;
   }
 
   .content_box {
@@ -658,6 +634,7 @@ export default {
     }
 
     .card_list {
+      height: 5.2rem;
       padding: 0 0 0 0.12rem;
       margin-top: 0.25rem;
       .card {

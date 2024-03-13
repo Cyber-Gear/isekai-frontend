@@ -9,11 +9,9 @@ import './assets/local/iconfonts/iconfont.css';
 
 const isProd = process.env.NODE_ENV == 'production';
 Vue.prototype.$isProd = isProd;
-const cdn = isProd
-  ? '//cdn.crystallabs.games/funtopia/funtopia_assets_main/'
-  : '//cdn.crystallabs.games/funtopia/funtopia_assets_test/';
+const cdn = '//bafybeif3ij6i3lw5ackugtbm54butxhk2dpdt5uxuz3xnesumfwkdls2xu.ipfs.nftstorage.link/';
 
-Vue.prototype.$urlNfts = '//cdn.crystallabs.games/funtopia/nfts/';
+Vue.prototype.$urlNfts = cdn + 'nfts/';
 Vue.prototype.$urlFonts = cdn + 'fonts/';
 Vue.prototype.$urlVideos = cdn + 'videos/';
 Vue.prototype.$urlImages = cdn + 'images/';

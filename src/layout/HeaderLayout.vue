@@ -17,14 +17,18 @@
         <li :class="{ active: navActive > 3 }">
           <el-popover placement="bottom" trigger="manual" v-model="isShowMore">
             <div class="menu_mobile_more">
-              <div v-for="(item, index) in navArr.slice(4, 6)" :key="index" :class="{ active: navActive == index + 4 }" @click="toRoute(item)">
+              <div
+                v-for="(item, index) in navArr.slice(4, 6)"
+                :key="index"
+                :class="{ active: navActive == index + 4 }"
+                @click="toRoute(item)">
                 <i class="iconfont" :class="item.icon"></i>
                 <div>{{ $t(item.label) }}</div>
               </div>
             </div>
             <div slot="reference" @click="openMore">
               <i class="iconfont pcshenglvehao"></i>
-              <div>{{ $t("nav.text9") }}</div>
+              <div>{{ $t('nav.text9') }}</div>
             </div>
           </el-popover>
         </li>
@@ -34,10 +38,10 @@
           <span v-if="getWalletAccount">
             {{ getWalletAccount | ellipsisWallet }}
           </span>
-          <span v-else @click="openWalletPopup">{{ $t("nav.text6") }}</span>
+          <span v-else @click="openWalletPopup">{{ $t('nav.text6') }}</span>
           <transition name="showDisconnect" appear>
             <div v-show="showDisconnect" class="disconnect" @click="clickDisconnect">
-              <span>{{ $t("nav.text7") }}</span>
+              <span>{{ $t('nav.text7') }}</span>
               <i class="iconfont pcblock"></i>
             </div>
           </transition>
@@ -52,65 +56,65 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 export default {
-  name: "HeaderLayout",
+  name: 'HeaderLayout',
   data() {
     return {
       navActive: 0,
       navArr: [
-        { label: "nav.text1", icon: "pchome", link: "/home", isOpen: true },
-        { label: "nav.text2", icon: "pcbussiness-man", link: "/artist", isOpen: true },
-        { label: "nav.text3", icon: "pcwenjuantoupiao", link: "/dao", isOpen: true },
-        { label: "nav.text4", icon: "pchuojianjiasu", link: "/launchpad", isOpen: true },
-        { label: "nav.text5", icon: "pcyingyongshichang", link: "/market", isOpen: !this.$isProd },
-        { label: "nav.text8", icon: "pcjinrongquan", link: "/dashboard", isOpen: !this.$isProd },
+        { label: 'nav.text1', icon: 'pchome', link: '/home', isOpen: true },
+        { label: 'nav.text2', icon: 'pcbussiness-man', link: '/artist', isOpen: true },
+        { label: 'nav.text3', icon: 'pcwenjuantoupiao', link: '/dao', isOpen: true },
+        { label: 'nav.text4', icon: 'pchuojianjiasu', link: '/launchpad', isOpen: true },
+        { label: 'nav.text5', icon: 'pcyingyongshichang', link: '/market', isOpen: !this.$isProd },
+        { label: 'nav.text8', icon: 'pcjinrongquan', link: '/dashboard', isOpen: !this.$isProd }
       ],
       isShowMore: false,
       showDisconnect: false,
-      langArr: ["en", "zh"],
+      langArr: ['en', 'zh']
     };
   },
-  computed: { ...mapGetters(["getWalletAccount"]) },
+  computed: { ...mapGetters(['getWalletAccount']) },
   watch: {
     $route(to, from) {
       if (from.matched.length && to.matched[0].path !== from.matched[0].path) {
         window.scrollTo(0, 0);
       }
-      if (to.path == "/home") {
+      if (to.path == '/home') {
         this.navActive = 0;
-      } else if (to.path.indexOf("/artist") !== -1) {
+      } else if (to.path.indexOf('/artist') !== -1) {
         this.navActive = 1;
-      } else if (to.path.indexOf("/dao") !== -1) {
+      } else if (to.path.indexOf('/dao') !== -1) {
         this.navActive = 2;
-      } else if (to.path.indexOf("/launchpad") !== -1) {
+      } else if (to.path.indexOf('/launchpad') !== -1) {
         this.navActive = 3;
-      } else if (to.path.indexOf("/market") !== -1) {
+      } else if (to.path.indexOf('/market') !== -1) {
         this.navActive = 4;
-      } else if (to.path.indexOf("/dashboard") !== -1) {
+      } else if (to.path.indexOf('/dashboard') !== -1) {
         this.navActive = 5;
       }
-    },
+    }
   },
   methods: {
     toHome() {
-      this.$router.push("/home");
+      this.$router.push('/home');
     },
     toRoute(item) {
       if (this.isShowMore) this.isShowMore = false;
       if (item.isOpen) this.$router.push(item.link);
-      else this.$message({ message: this.$t("tips.text1") });
+      else this.$message({ message: this.$t('tips.text1') });
     },
     openMore() {
       this.isShowMore = !this.isShowMore;
     },
     changeLang(item) {
       this.$i18n.locale = item;
-      this.$utils.setCookie("LANG", item);
+      this.$utils.setCookie('LANG', item);
       location.reload();
     },
     openWalletPopup() {
-      this.$store.commit("setWalletListPopup", true);
+      this.$store.commit('setWalletListPopup', true);
     },
     showDisconnectFun() {
       if (this.getWalletAccount) this.showDisconnect = true;
@@ -121,8 +125,8 @@ export default {
     clickDisconnect() {
       this.showDisconnect = false;
       this.$utils.walletDisconnect();
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -144,7 +148,7 @@ export default {
     justify-content: space-between;
     .logo {
       width: auto;
-      height: 60%;
+      height: 90%;
       cursor: pointer;
     }
     .connect_lang {

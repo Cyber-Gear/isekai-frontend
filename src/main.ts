@@ -9,7 +9,7 @@ import './assets/local/iconfonts/iconfont.css';
 
 const isProd = process.env.NODE_ENV == 'production';
 Vue.prototype.$isProd = isProd;
-const cdn = '//bafybeif3ij6i3lw5ackugtbm54butxhk2dpdt5uxuz3xnesumfwkdls2xu.ipfs.nftstorage.link/';
+const cdn = '//bafybeidmvw2ksvwomravhmdhydaijcjtd3bzhylphc22knvu3xhmyejxqq.ipfs.nftstorage.link/';
 
 Vue.prototype.$urlNfts = cdn + 'nfts/';
 Vue.prototype.$urlFonts = cdn + 'fonts/';
@@ -76,12 +76,7 @@ Vue.use(DatePicker);
 Vue.use(Popover);
 Vue.prototype.$message = (option: any) => {
   // option.duration = 0;
-  // option.offset = 100;
   option.customClass = i18n.locale == 'en' ? 'fontfamily_en' : 'fontfamily_zh';
-  // this.$message({ message: this.$t("tips.text12") });
-  // this.$message({ message: this.$t("tips.text12"), type: "success" });
-  // this.$message({ message: this.$t("tips.text12"), type: "warning" });
-  // this.$message({ message: this.$t("tips.text12"), type: "error" });
   return Message(option);
 };
 Vue.use(Loading); // 使用服务方式的话，只安装Loading即可

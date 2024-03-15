@@ -95,7 +95,7 @@
             <li>
               <div>{{ $t("dao.text27") }}</div>
               <div>
-                <img v-if="someProposals.space.id == 'fun-topia.eth'" :src="`${$urlImages}logo1.webp`" alt="" />
+                <img v-if="someProposals.space.id == 'fun-topia.eth'" :src="`${$urlImages}logo.webp`" alt="" />
               </div>
             </li>
             <li>

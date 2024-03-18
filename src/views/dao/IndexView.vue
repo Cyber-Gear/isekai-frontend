@@ -6,7 +6,7 @@
           <div class="avatar">
             <img :src="`${$urlImages}logo1.webp`" alt="" />
           </div>
-          <div class="title"><span>FUN TOPIA</span><i class="iconfont pctelegram"></i></div>
+          <div class="title"><span>Merlingames</span><i class="iconfont pctelegram"></i></div>
           <div class="linklist">
             <a v-for="(item, index) in linkList" :key="index" :href="item.href">
               <img :src="item.image" alt="" />

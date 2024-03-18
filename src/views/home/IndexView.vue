@@ -180,7 +180,7 @@ export default {
         }
       ],
       infoIndex: 0,
-      infoList: [shikastudio, zw, akiha, negoro],
+      infoList: [shikastudio, merlingames, akiha, negoro],
       marketList: [...shikastudio.works, ...merlingames.works],
       marketIndex: 0,
       marketOption: {

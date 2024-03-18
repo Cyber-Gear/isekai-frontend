@@ -1,9 +1,3 @@
-import Vue from 'vue';
-// const urlNfts = Vue.prototype.$urlNfts;
-// const urlArtists = Vue.prototype.$urlArtists;
-const urlNfts = '@/assets/cdn/nfts/';
-const urlArtists = '@/assets/cdn/artists/';
-
 export const shikastudio = {
   // logo 作品集大图
   // avatar 画师头像

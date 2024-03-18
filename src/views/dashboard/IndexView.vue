@@ -3,7 +3,7 @@
     <div class="box">
       <div class="box_title">
         <img :src="`${$urlImages}box_title1.webp`" alt="" />
-        <span>{{ $t("dashboard.text1") }}</span>
+        <span>{{ $t('dashboard.text1') }}</span>
       </div>
       <div class="box_content">
         <div class="info">
@@ -15,7 +15,7 @@
             </li>
           </ul>
           <div class="info2">
-            <img :src="$urlArtists + 'Akiha/z-avatar.webp'" alt="" />
+            <img src="@/assets/cdn/artists/Akiha/z-avatar.webp" alt="" />
             <p @click="$utils.handleCopy(addr)">{{ addr | ellipsisWallet }}</p>
           </div>
           <div class="iconbtn" v-if="!isShowDrawer" @click="openDrawer"><i class="iconfont pccategory"></i></div>
@@ -23,7 +23,12 @@
         <div class="nftbox">
           <div class="leftbox">
             <div class="list">
-              <el-menu class="el-menu-dashboard" :default-active="defaultActive" :default-openeds="defaultOpeneds" active-text-color="#00B5FF" router>
+              <el-menu
+                class="el-menu-dashboard"
+                :default-active="defaultActive"
+                :default-openeds="defaultOpeneds"
+                active-text-color="#00B5FF"
+                router>
                 <el-submenu v-for="(item, index) in menuList" :key="index" :index="item.index">
                   <template slot="title">
                     <i class="iconfont" :class="item.icon"></i>
@@ -34,7 +39,9 @@
                       <i class="iconfont" :class="item2.icon"></i>
                       <span>{{ $t(item2.label) }}</span>
                     </template>
-                    <el-menu-item v-for="(item3, index3) in item2.children" :key="index3" :index="item3.index">{{ $t(item3.label) }}</el-menu-item>
+                    <el-menu-item v-for="(item3, index3) in item2.children" :key="index3" :index="item3.index">{{
+                      $t(item3.label)
+                    }}</el-menu-item>
                   </el-submenu>
                 </el-submenu>
               </el-menu>
@@ -52,7 +59,7 @@
             <span @click="closeDrawer"><i class="iconfont pcguanbi"></i></span>
           </div>
           <div class="box1">
-            <img :src="$urlArtists + 'Akiha/z-avatar.webp'" alt="" />
+            <img src="@/assets/cdn/artists/Akiha/z-avatar.webp" alt="" />
             <div>
               <div class="textbox">
                 <span>zhaochangpeng</span>
@@ -75,7 +82,7 @@
             </div>
           </div>
           <div class="box2">
-            <div>{{ $t("dashboard.text11") }}</div>
+            <div>{{ $t('dashboard.text11') }}</div>
             <ul>
               <li v-for="(item, index) in tagList" :key="index">#{{ item.label }}</li>
             </ul>
@@ -87,41 +94,47 @@
 </template>
 
 <script>
-import { token } from "funtopia-sdk";
-import { mapGetters } from "vuex";
+import { token } from 'funtopia-sdk';
+import { mapGetters } from 'vuex';
 export default {
-  name: "DASHBOARD",
+  name: 'DASHBOARD',
   data() {
     return {
-      defaultActive: "",
-      defaultOpeneds: ["mynft", "asstet", "history", "favorites"],
+      defaultActive: '',
+      defaultOpeneds: ['mynft', 'asstet', 'history', 'favorites'],
       isShowDrawer: false,
-      addr: "",
+      addr: '',
       menuList: [
         {
-          index: "mynft",
-          icon: "pccategory",
-          label: "dashboard.text2",
+          index: 'mynft',
+          icon: 'pccategory',
+          label: 'dashboard.text2',
           children: [
             {
-              index: "asstet",
-              icon: "pcshequn",
-              label: "dashboard.text3",
+              index: 'asstet',
+              icon: 'pcshequn',
+              label: 'dashboard.text3',
               children: [
-                { index: "nft-asstet", label: "dashboard.text4" },
-                { index: "mystey-boxes", label: "dashboard.text5" },
-                { index: "crypto-asstet", label: "dashboard.text6" },
-              ],
-            },
+                { index: 'nft-asstet', label: 'dashboard.text4' },
+                { index: 'mystey-boxes', label: 'dashboard.text5' },
+                { index: 'crypto-asstet', label: 'dashboard.text6' }
+              ]
+            }
             // { index: "history", icon: "pchistory", label: "dashboard.text7", children: [{ index: "orders", label: "dashboard.text8" }] },
             // { index: "favorites", icon: "pcfavorites", label: "dashboard.text9", children: [{ index: "my-favorites", label: "dashboard.text10" }] },
-          ],
-        },
+          ]
+        }
       ],
-      tagList: [{ label: "video favor" }, { label: "singer" }, { label: "cool" }, { label: "artist" }, { label: "love" }],
+      tagList: [
+        { label: 'video favor' },
+        { label: 'singer' },
+        { label: 'cool' },
+        { label: 'artist' },
+        { label: 'love' }
+      ]
     };
   },
-  computed: { ...mapGetters(["getWalletAccount"]) },
+  computed: { ...mapGetters(['getWalletAccount']) },
   watch: {
     $route(to) {
       this.initPage(to.path);
@@ -133,14 +146,14 @@ export default {
           // console.log("获取钱包", newVal);
         }
       },
-      immediate: true, // 页面初始化后立即执行
-    },
+      immediate: true // 页面初始化后立即执行
+    }
   },
 
   methods: {
     initPage(path) {
-      const str = path.replace("/dashboard/", "");
-      this.defaultActive = str == "mystey-boxes-details" ? "mystey-boxes" : str;
+      const str = path.replace('/dashboard/', '');
+      this.defaultActive = str == 'mystey-boxes-details' ? 'mystey-boxes' : str;
       this.addr = token().FUN;
     },
     openDrawer() {
@@ -148,8 +161,8 @@ export default {
     },
     closeDrawer() {
       this.isShowDrawer = false;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -157,7 +170,7 @@ export default {
 .page {
   width: 100%;
   padding: 0.8rem 0;
-  background: url($urlImages + "bg7.webp") no-repeat;
+  background: url($urlImages + 'bg7.webp') no-repeat;
   background-size: 100% 100%;
 }
 .box {

@@ -1,10 +1,10 @@
 @font-face {
-  font-family: "PingFang";
-  src: url($urlFonts + "PingFang.ttf");
+  font-family: 'PingFang';
+  src: url($urlFonts + 'PingFang.ttf');
 }
 @font-face {
-  font-family: "Futura";
-  src: url($urlFonts + "Futura.ttc");
+  font-family: 'Futura';
+  src: url($urlFonts + 'Futura.ttc');
 }
 // 中文常规
 .fontfamily_zh {
@@ -52,7 +52,7 @@ input {
   border: 0px;
   caret-color: white;
   font-family: Futura, PingFang;
-  &[type="number"] {
+  &[type='number'] {
     -moz-appearance: textfield;
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button {
@@ -105,10 +105,10 @@ pre {
     position: relative;
     left: 0.1rem;
     &::before {
-      content: "";
+      content: '';
       width: 0.5rem;
       height: 0.5rem;
-      background: url($urlImages + "box_title2.webp") no-repeat;
+      background: url($urlImages + 'box_title2.webp') no-repeat;
       background-size: 100% auto;
       position: absolute;
       top: 0.35rem;
@@ -147,7 +147,13 @@ pre {
 .gradient_border {
   border-radius: 0.05rem;
   padding: 1px;
-  background-image: linear-gradient(150deg, rgba(0, 211, 255, 0.5), rgba(0, 211, 255, 0), rgba(233, 150, 255, 0), rgba(233, 150, 255, 0.5));
+  background-image: linear-gradient(
+    150deg,
+    rgba(0, 211, 255, 0.5),
+    rgba(0, 211, 255, 0),
+    rgba(233, 150, 255, 0),
+    rgba(233, 150, 255, 0.5)
+  );
   > div {
     width: 100%;
     height: 100%;
@@ -175,16 +181,16 @@ pre {
   background-size: 100% 100%;
   background-position: center center;
   &.MR {
-    background-image: url($urlArtists + "ShikaStudio/z-btn-MR.webp");
+    background-image: url('~@/assets/cdn/artists/ShikaStudio/z-btn-MR.webp');
   }
   &.R {
-    background-image: url($urlArtists + "ShikaStudio/z-btn-R.webp");
+    background-image: url('~@/assets/cdn/artists/ShikaStudio/z-btn-R.webp');
   }
   &.SR {
-    background-image: url($urlArtists + "ShikaStudio/z-btn-SR.webp");
+    background-image: url('~@/assets/cdn/artists/ShikaStudio/z-btn-SR.webp');
   }
   &.UR {
-    background-image: url($urlArtists + "ShikaStudio/z-btn-UR.webp");
+    background-image: url('~@/assets/cdn/artists/ShikaStudio/z-btn-UR.webp');
   }
 }
 // 重置组件样式
@@ -291,8 +297,8 @@ pre {
     }
   }
 }
-.el-select-dropdown.el-popper[x-placement^="bottom"],
-.el-picker-panel.el-popper[x-placement^="bottom"] {
+.el-select-dropdown.el-popper[x-placement^='bottom'],
+.el-picker-panel.el-popper[x-placement^='bottom'] {
   .popper__arrow {
     border-bottom-color: transparent;
     &::after {
@@ -539,8 +545,8 @@ pre {
   font-size: 0.15rem;
   padding: 0;
 }
-.el-popper[x-placement^="top"] .popper__arrow,
-.el-popper[x-placement^="top"] .popper__arrow::after {
+.el-popper[x-placement^='top'] .popper__arrow,
+.el-popper[x-placement^='top'] .popper__arrow::after {
   border-top-color: #18181c;
 }
 @media screen and (max-width: 750px) {

@@ -2,9 +2,9 @@
   <div class="home">
     <div class="row1">
       <div class="info">
-        <pre>{{ $t("home.text1") }}</pre>
+        <pre>{{ $t('home.text1') }}</pre>
         <div>
-          <div class="tag">{{ $t("home.text4") }}</div>
+          <div class="tag">{{ $t('home.text4') }}</div>
           <div class="linklist">
             <a v-for="(item, index) in linkList" :key="index" :href="item.href">
               <img :src="item.image" alt="" />
@@ -35,8 +35,7 @@
           :key="index"
           @click="switchInfo(index)"
           :class="{ active: infoIndex == index }"
-          :style="infoIndex == index ? { backgroundImage: `url(${item.logo2})` } : {}"
-        >
+          :style="infoIndex == index ? { backgroundImage: `url(${item.logo2})` } : {}">
           <div>
             <img :src="item.avatar" alt="" />
             <div>{{ item.name }}</div>
@@ -52,8 +51,7 @@
             @click="switchInfo(index)"
             :class="{ active: infoIndex == index }"
             :src="item.avatar"
-            alt=""
-          />
+            alt="" />
         </div>
         <div class="card" :style="{ backgroundImage: `url(${infoList[infoIndex].logo2})` }">
           <div>
@@ -72,7 +70,7 @@
           <div class="radialbg"></div>
           <p>
             {{ $t(item.text1) }}
-            <span>{{ $t("status.text9") }}</span>
+            <span>{{ $t('status.text9') }}</span>
           </p>
           <pre>{{ $t(item.text2) }}</pre>
           <div class="btn">
@@ -91,7 +89,7 @@
       <div class="row_title">LAUNCHPAD</div>
       <div class="titlebox">
         <img :src="`${$urlImages}img7.webp`" alt="" />
-        <pre>{{ $t("home.text3") }}</pre>
+        <pre>{{ $t('home.text3') }}</pre>
       </div>
       <div class="contentbox">
         <img :src="`${$urlImages}img8.webp`" alt="" />
@@ -107,8 +105,9 @@
       <swiper class="market_swiper" :options="marketOption" ref="marketSwiper">
         <swiper-slide v-for="(item, index) in marketList" :key="index">
           <div class="card">
+            <!-- <img src="@/assets/newimages/body_2001.png" alt="" /> -->
             <img :src="item.card" alt="" />
-            <span>{{ $t(item.name) }}</span>
+            <span v-if="item.name">{{ $t(item.name) }}</span>
           </div>
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
@@ -122,7 +121,7 @@
       </div>
       <ul class="list">
         <li v-for="(item, index) in mediasList" :key="index">
-          <div class="tag">{{ $t("home.text10") }}</div>
+          <div class="tag">{{ $t('home.text10') }}</div>
           <div class="time">{{ item.time }}</div>
           <div class="round"></div>
           <div class="text text_ellipsis">{{ $t(item.text) }}</div>
@@ -142,49 +141,52 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { shikastudio, zw, akiha, negoro } from "@/mock/nftworks";
+import { mapGetters } from 'vuex';
+import { shikastudio, zw, akiha, negoro, merlingames } from '@/mock/nftworks';
 export default {
-  name: "HOME",
+  name: 'HOME',
   data() {
     return {
       linkList: [
-        { image: this.$urlImages + "contact_Gitbook.webp", href: "https://funtopia.gitbook.io/fun-topia/create-a-fun-metaverse/about-fun-topia" },
-        { image: this.$urlImages + "contact_Twitter.webp", href: "https://twitter.com/FuntopiaNFT" },
-        { image: this.$urlImages + "contact_Discord.webp", href: "https://discord.gg/Gtq9JsPcPN" },
-        { image: this.$urlImages + "contact_Medium.webp", href: "https://medium.com/@funtopiagame" },
+        {
+          image: this.$urlImages + 'contact_Gitbook.webp',
+          href: 'https://funtopia.gitbook.io/fun-topia/create-a-fun-metaverse/about-fun-topia'
+        },
+        { image: this.$urlImages + 'contact_Twitter.webp', href: 'https://twitter.com/FuntopiaNFT' },
+        { image: this.$urlImages + 'contact_Discord.webp', href: 'https://discord.gg/Gtq9JsPcPN' },
+        { image: this.$urlImages + 'contact_Medium.webp', href: 'https://medium.com/@funtopiagame' }
       ],
       formsList: [
         {
-          href: "https://forms.gle/zZDWkvZgGMS69LHx5",
-          img: this.$urlImages + "info1.webp",
-          icon: "pcbussiness-man",
-          text1: "home.forms[0].text1",
-          text2: "home.forms[0].text2",
+          href: 'https://forms.gle/zZDWkvZgGMS69LHx5',
+          img: this.$urlImages + 'info1.webp',
+          icon: 'pcbussiness-man',
+          text1: 'home.forms[0].text1',
+          text2: 'home.forms[0].text2'
         },
         {
-          href: "https://forms.gle/K9QLDqwe1m3Np7LV8",
-          img: this.$urlImages + "info2.webp",
-          icon: "pchezuo",
-          text1: "home.forms[1].text1",
-          text2: "home.forms[1].text2",
+          href: 'https://forms.gle/K9QLDqwe1m3Np7LV8',
+          img: this.$urlImages + 'info2.webp',
+          icon: 'pchezuo',
+          text1: 'home.forms[1].text1',
+          text2: 'home.forms[1].text2'
         },
         {
-          href: "",
-          img: this.$urlImages + "info3.webp",
-          icon: "pctoupiao",
-          text1: "home.forms[2].text1",
-          text2: "home.forms[2].text2",
-        },
+          href: '',
+          img: this.$urlImages + 'info3.webp',
+          icon: 'pctoupiao',
+          text1: 'home.forms[2].text1',
+          text2: 'home.forms[2].text2'
+        }
       ],
       infoIndex: 0,
       infoList: [shikastudio, zw, akiha, negoro],
-      marketList: shikastudio.works,
+      marketList: [...shikastudio.works, ...merlingames.works],
       marketIndex: 0,
       marketOption: {
         loop: true,
         initialSlide: 0,
-        effect: "slide",
+        effect: 'slide',
         // effect: "coverflow",
         centeredSlides: true,
         slidesPerView: 5,
@@ -192,84 +194,84 @@ export default {
         freeMode: true,
         grabCursor: true,
         pagination: {
-          el: ".swiper-pagination",
-          bulletClass: "my_pagination",
-          bulletActiveClass: "my_pagination_active",
-          clickable: true,
+          el: '.swiper-pagination',
+          bulletClass: 'my_pagination',
+          bulletActiveClass: 'my_pagination_active',
+          clickable: true
         },
         coverflow: {
           rotate: 50,
           stretch: 0,
           depth: 100,
           modifier: 1,
-          slideShadows: true,
+          slideShadows: true
         },
         on: {
           slideChange: () => {
             this.marketIndex = this.$refs.marketSwiper.swiper.activeIndex;
-          },
-        },
+          }
+        }
       },
       daoList: [
         {
-          text1: "home.daos[0].text1",
-          text2: "home.daos[0].text2",
-          text3: "home.daos[0].text3",
-          link: "",
-          progress: "88%",
+          text1: 'home.daos[0].text1',
+          text2: 'home.daos[0].text2',
+          text3: 'home.daos[0].text3',
+          link: '',
+          progress: '88%'
         },
         {
-          text1: "home.daos[1].text1",
-          text2: "home.daos[1].text2",
-          text3: "home.daos[1].text3",
-          link: "",
-          progress: "68%",
+          text1: 'home.daos[1].text1',
+          text2: 'home.daos[1].text2',
+          text3: 'home.daos[1].text3',
+          link: '',
+          progress: '68%'
         },
         {
-          text1: "home.daos[2].text1",
-          text2: "home.daos[2].text2",
-          text3: "home.daos[2].text3",
-          link: "",
-          progress: "68%",
-        },
+          text1: 'home.daos[2].text1',
+          text2: 'home.daos[2].text2',
+          text3: 'home.daos[2].text3',
+          link: '',
+          progress: '68%'
+        }
       ],
-      mediasList: [{ time: "2022.04.13", text: "home.medias[0].text" }],
+      mediasList: [{ time: '2022.04.13', text: 'home.medias[0].text' }],
       partnerList: [
-        this.$urlImages + "collaborators1.webp",
-        this.$urlImages + "collaborators2.webp",
-        this.$urlImages + "collaborators3.webp",
-        this.$urlImages + "collaborators4.webp",
-        this.$urlImages + "collaborators5.webp",
-        this.$urlImages + "collaborators6.webp",
-        this.$urlImages + "collaborators7.webp",
-        this.$urlImages + "collaborators8.webp",
-        this.$urlImages + "collaborators9.webp",
-        this.$urlImages + "collaborators10.webp",
-        this.$urlImages + "collaborators11.webp",
-        this.$urlImages + "collaborators12.webp",
-        this.$urlImages + "collaborators13.webp",
-        this.$urlImages + "collaborators14.webp",
-        this.$urlImages + "collaborators15.webp",
-        this.$urlImages + "collaborators16.webp",
-      ],
+        this.$urlImages + 'collaborators1.webp',
+        this.$urlImages + 'collaborators2.webp',
+        this.$urlImages + 'collaborators3.webp',
+        this.$urlImages + 'collaborators4.webp',
+        this.$urlImages + 'collaborators5.webp',
+        this.$urlImages + 'collaborators6.webp',
+        this.$urlImages + 'collaborators7.webp',
+        this.$urlImages + 'collaborators8.webp',
+        this.$urlImages + 'collaborators9.webp',
+        this.$urlImages + 'collaborators10.webp',
+        this.$urlImages + 'collaborators11.webp',
+        this.$urlImages + 'collaborators12.webp',
+        this.$urlImages + 'collaborators13.webp',
+        this.$urlImages + 'collaborators14.webp',
+        this.$urlImages + 'collaborators15.webp',
+        this.$urlImages + 'collaborators16.webp'
+      ]
     };
   },
-  computed: { ...mapGetters(["isEnLang"]) },
+  computed: { ...mapGetters(['isEnLang']) },
   methods: {
     toOtherPage(href) {
       if (href) window.location.href = href;
     },
     switchInfo(index) {
       this.infoIndex = index;
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
 .home {
   width: 100%;
   position: relative;
-  background: url($urlImages + "bg10.webp") no-repeat;
+  background: url($urlImages + 'bg10.webp') no-repeat;
   background-size: 100% 100%;
   padding: 0.8rem 0;
 }

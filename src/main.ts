@@ -5,7 +5,7 @@ import store from './store';
 import i18n from './i18n';
 import './styles/reset.scss';
 import './styles/global.scss';
-import './assets/local/iconfonts/iconfont.css';
+import './assets/iconfonts/iconfont.css';
 
 const isProd = process.env.NODE_ENV == 'production';
 Vue.prototype.$isProd = isProd;

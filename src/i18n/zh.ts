@@ -12,12 +12,12 @@ export default {
     text9: "更多",
   },
   footer: {
-    text1: "COPYRIGHT © 2022 FUNTOPIA, All rights Reserved",
+    text1: "COPYRIGHT © 2022 Merlingames, All rights Reserved",
   },
   home: {
     text1: `为所有人
     创建一个有趣的元宇宙！`,
-    text3: "NFT艺术家shika工作室为在Funtopia平台上发布的NFT进行了角色美术设计，将用于Cybergear的游戏场景中。",
+    text3: "NFT艺术家shika工作室为在Merlingames平台上发布的NFT进行了角色美术设计，将用于Cybergear的游戏场景中。",
     text4: "WHITE PAGE",
     // // text5: "DAO",
     // // text6: "LAUNCHPAD",
@@ -31,13 +31,13 @@ export default {
       { text1: "投票表决", text2: "为您喜欢的艺术家、KOL、游戏和作品投票并获得奖励" },
     ],
     daos: [
-      { text1: "通知", text2: "请关注关于Funtopia的通知（邮件，手机通知等）来确保您不会错过Funtopia为您准备的信息", text3: "详情" },
+      { text1: "通知", text2: "请关注关于Merlingames的通知（邮件，手机通知等）来确保您不会错过Merlingames为您准备的信息", text3: "详情" },
       {
-        text1: "Funtopia治理投票",
-        text2: "本次投票的目的是确定参与门槛是否对Funtopia股东来说是一个合法的选择途径，如果是，怎样的参与门槛是合适的。",
+        text1: "Merlingames治理投票",
+        text2: "本次投票的目的是确定参与门槛是否对Merlingames股东来说是一个合法的选择途径，如果是，怎样的参与门槛是合适的。",
         text3: "详情",
       },
-      { text1: "发布第一款游戏", text2: "Funtopia旗下有非常多适合GameFi用户的游戏。第一款推出的游戏将由用户投票决定。", text3: "详情" },
+      { text1: "发布第一款游戏", text2: "Merlingames旗下有非常多适合GameFi用户的游戏。第一款推出的游戏将由用户投票决定。", text3: "详情" },
     ],
     medias: [{ text: "Cybergear即将进入发布游戏候选，敬请期待" }],
   },

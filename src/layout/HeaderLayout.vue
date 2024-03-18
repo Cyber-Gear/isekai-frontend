@@ -1,7 +1,7 @@
 <template>
   <div class="nav">
     <div class="nav_inset">
-      <img class="logo" src="@/assets/cdn/images/logo.webp" alt="" @click="toHome" />
+      <img class="logo" src="@/assets/cdn/images/logo2.webp" alt="" @click="toHome" />
       <ul class="menu_pc pc">
         <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item)">
           <span>{{ $t(item.label) }}</span>
@@ -148,7 +148,7 @@ export default {
     justify-content: space-between;
     .logo {
       width: auto;
-      height: 90%;
+      height: 60%;
       cursor: pointer;
     }
     .connect_lang {

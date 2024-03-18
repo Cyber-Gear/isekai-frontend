@@ -1,7 +1,7 @@
 <template>
   <div class="nav">
     <div class="nav_inset">
-      <img class="logo" :src="`${$urlImages}logo.webp`" alt="" @click="toHome" />
+      <img class="logo" src="@/assets/cdn/images/logo.webp" alt="" @click="toHome" />
       <ul class="menu_pc pc">
         <li v-for="(item, index) in navArr" :key="index" :class="{ active: navActive == index }" @click="toRoute(item)">
           <span>{{ $t(item.label) }}</span>

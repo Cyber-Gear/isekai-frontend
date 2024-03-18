@@ -3,7 +3,7 @@
     <div class="banner">
       <div class="back_box">
         <div @click="goBack">
-          <i class="iconfont pcfanhui"></i><span>{{ $t("btns.text1") }}</span>
+          <i class="iconfont pcfanhui"></i><span>{{ $t('btns.text1') }}</span>
         </div>
       </div>
     </div>
@@ -13,9 +13,9 @@
           <div class="title">
             <span><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ someProposals.title }}</span>
             <span>
-              <template v-if="someProposals.state == 'active'"> {{ $t("status.text7") }} </template>
-              <template v-if="someProposals.state == 'pending'"> {{ $t("status.text8") }} </template>
-              <template v-if="someProposals.state == 'closed'"> {{ $t("status.text9") }} </template>
+              <template v-if="someProposals.state == 'active'"> {{ $t('status.text7') }} </template>
+              <template v-if="someProposals.state == 'pending'"> {{ $t('status.text8') }} </template>
+              <template v-if="someProposals.state == 'closed'"> {{ $t('status.text9') }} </template>
             </span>
           </div>
           <div class="content">
@@ -36,7 +36,7 @@
           <!-- Cast your vote -->
           <div class="box4" v-if="someProposals.state == 'active'">
             <div class="title">
-              <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t("dao.text15") }}</span>
+              <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t('dao.text15') }}</span>
             </div>
             <div class="check_boxs">
               <div
@@ -44,21 +44,22 @@
                 v-for="(item, index) in checkboxList"
                 :key="index"
                 @click="checkboxClick(item)"
-                :class="{ active: item.isChecked }"
-              >
+                :class="{ active: item.isChecked }">
                 <div>
                   <div class="text">{{ item.label }}</div>
                 </div>
               </div>
               <div class="btn">
-                <el-button type="primary" :disabled="voteBtnDisabled" @click="handleVote">{{ $t("dao.text25") }}</el-button>
+                <el-button type="primary" :disabled="voteBtnDisabled" @click="handleVote">{{
+                  $t('dao.text25')
+                }}</el-button>
               </div>
             </div>
           </div>
           <!-- Discuss -->
           <div class="box5">
             <div class="title">
-              <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t("dao.text17") }}</span>
+              <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t('dao.text17') }}</span>
             </div>
             <div class="linkbox">
               <a :href="someProposals.discussion">{{ someProposals.discussion }}</a>
@@ -67,22 +68,24 @@
           <!-- Votes -->
           <div class="box6" v-if="someProposals.state !== 'pending'">
             <div class="title">
-              <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t("dao.text16") }}</span>
+              <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t('dao.text16') }}</span>
               <div v-if="someProposals.votes">{{ someProposals.votes }}</div>
             </div>
             <ul class="list">
               <li v-for="(item, index) in votesList" :key="index">
                 <div class="address" @click="voterLink(item.voter)">{{ item.voter | ellipsisWallet }}</div>
                 <div>
-                  <template v-if="checkboxList.length > 0">{{ checkboxList[item.choice - 1] ? checkboxList[item.choice - 1].label : "" }}</template>
+                  <template v-if="checkboxList.length > 0">{{
+                    checkboxList[item.choice - 1] ? checkboxList[item.choice - 1].label : ''
+                  }}</template>
                 </div>
                 <div>{{ item.vp | numberTally }} FUN</div>
               </li>
               <li class="nothing" v-if="votesList.length == 0">
-                <div>{{ $t("dao.text39") }}</div>
+                <div>{{ $t('dao.text39') }}</div>
               </li>
               <li class="more" v-if="hasMore">
-                <span @click="getMore">{{ $t("dao.text37") }}</span>
+                <span @click="getMore">{{ $t('dao.text37') }}</span>
               </li>
             </ul>
           </div>
@@ -90,38 +93,38 @@
       </div>
       <div class="rightbox">
         <div class="box1">
-          <div class="title"><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("dao.text26") }}</div>
+          <div class="title"><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t('dao.text26') }}</div>
           <ul class="list">
             <li>
-              <div>{{ $t("dao.text27") }}</div>
+              <div>{{ $t('dao.text27') }}</div>
               <div>
-                <img v-if="someProposals.space.id == 'fun-topia.eth'" :src="`${$urlImages}logo.webp`" alt="" />
+                <img v-if="someProposals.space.id == 'fun-topia.eth'" src="@/assets/cdn/images/logo.webp" alt="" />
               </div>
             </li>
             <li>
-              <div>{{ $t("dao.text28") }}</div>
+              <div>{{ $t('dao.text28') }}</div>
               <div @click="ipfsLink">#{{ someProposals.ipfs | ellipsisNormal }}<i class="iconfont pcchakan"></i></div>
             </li>
             <li>
-              <div>{{ $t("dao.text29") }}</div>
-              <div>{{ $t("dao.text32") }}</div>
+              <div>{{ $t('dao.text29') }}</div>
+              <div>{{ $t('dao.text32') }}</div>
             </li>
             <li>
-              <div>{{ $t("dao.text30") }}</div>
+              <div>{{ $t('dao.text30') }}</div>
               <div>{{ $utils.formatDate(someProposals.start * 1000) }}</div>
             </li>
             <li>
-              <div>{{ $t("dao.text31") }}</div>
+              <div>{{ $t('dao.text31') }}</div>
               <div>{{ $utils.formatDate(someProposals.end * 1000) }}</div>
             </li>
             <li>
-              <div>{{ $t("dao.text36") }}</div>
+              <div>{{ $t('dao.text36') }}</div>
               <div>#{{ someProposals.snapshot | numberThousands }}</div>
             </li>
           </ul>
         </div>
         <div class="box1">
-          <div class="title"><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("dao.text35") }}</div>
+          <div class="title"><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t('dao.text35') }}</div>
           <ul class="progressbarlist">
             <li v-for="(item, index) in resultList" :key="index">
               <div>
@@ -141,16 +144,16 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { vote } from "funtopia-sdk";
+import { mapGetters } from 'vuex';
+import { vote } from 'funtopia-sdk';
 
 export default {
-  name: "DAODetails",
+  name: 'DAODetails',
   data() {
     return {
       someProposals: null,
-      proposalsParams: { first: 10, skip: 0, orderBy: "created", orderDirection: "desc" },
-      votesParams: { first: 10, skip: 0, orderBy: "created", orderDirection: "desc", proposal: "" },
+      proposalsParams: { first: 10, skip: 0, orderBy: 'created', orderDirection: 'desc' },
+      votesParams: { first: 10, skip: 0, orderBy: 'created', orderDirection: 'desc', proposal: '' },
       checkboxList: [],
       resultList: [],
       totalAmount: 0,
@@ -160,24 +163,24 @@ export default {
       voteBtnDisabled: true,
       oldProposalsInfo: [],
       proposalsInfo: [],
-      isShowMoreProposalsInfo: false,
+      isShowMoreProposalsInfo: false
     };
   },
-  computed: { ...mapGetters(["getWalletAccount"]) },
+  computed: { ...mapGetters(['getWalletAccount']) },
   watch: {
     checkboxList: {
       handler(newVal) {
         const isCheckedItem = newVal.find((item) => item.isChecked);
         if (isCheckedItem) this.voteBtnDisabled = false;
       },
-      deep: true,
+      deep: true
     },
     isShowMoreProposalsInfo: {
       handler(newVal) {
         this.proposalsInfo = newVal ? this.oldProposalsInfo : this.oldProposalsInfo.slice(0, 5);
       },
-      deep: true,
-    },
+      deep: true
+    }
   },
   created() {
     if (this.$route.query.id) this.getProposals(this.$route.query.id);
@@ -201,19 +204,19 @@ export default {
     /**字符串转换 */
     createTextAndImage(str) {
       this.oldProposalsInfo = [];
-      const arr = str.split("\n");
+      const arr = str.split('\n');
       arr.forEach((element) => {
-        const element1 = element.replaceAll("\n", "");
+        const element1 = element.replaceAll('\n', '');
         if (element1) {
           // ![logo.jpeg](ipfs://QmTSKrVxnzAyGzjKryWAyun7V5ZDqBCLPNfsXH9qmYZvwn)
           // https://snapshot.mypinata.cloud/ipfs/QmTSKrVxnzAyGzjKryWAyun7V5ZDqBCLPNfsXH9qmYZvwn
-          if (element1.indexOf("![") !== -1) {
-            const index1 = element1.indexOf("]");
+          if (element1.indexOf('![') !== -1) {
+            const index1 = element1.indexOf(']');
             const str1 = element1.substring(2, index1);
-            const str2 = "https://snapshot.mypinata.cloud/ipfs/" + element1.substring(index1 + 9, element1.length - 1);
-            this.oldProposalsInfo.push({ type: "image", text: str1, image: str2 });
+            const str2 = 'https://snapshot.mypinata.cloud/ipfs/' + element1.substring(index1 + 9, element1.length - 1);
+            this.oldProposalsInfo.push({ type: 'image', text: str1, image: str2 });
           } else {
-            this.oldProposalsInfo.push({ type: "text", text: element1 });
+            this.oldProposalsInfo.push({ type: 'text', text: element1 });
           }
         }
       });
@@ -246,7 +249,7 @@ export default {
         }
       }, 200);
       this.votesParams.skip = 0;
-      if (this.someProposals.state !== "pending") this.getVotes();
+      if (this.someProposals.state !== 'pending') this.getVotes();
     },
 
     /**获取投票纪录 */
@@ -281,9 +284,9 @@ export default {
     // 投票
     handleVote() {
       const isCheckedItem = this.checkboxList.find((item) => item.isChecked);
-      if (!isCheckedItem) return this.$message({ message: this.$t("tips.text5"), type: "warning" });
+      if (!isCheckedItem) return this.$message({ message: this.$t('tips.text5'), type: 'warning' });
 
-      if (!this.getWalletAccount) return this.$store.commit("setWalletConnectPopup", true);
+      if (!this.getWalletAccount) return this.$store.commit('setWalletConnectPopup', true);
       // account: string, proposal: string, choice: number
       vote
         .castVote(this.getWalletAccount, this.someProposals.id, isCheckedItem.choice + 1)
@@ -329,13 +332,13 @@ export default {
       window.location.href = `https://snapshot.mypinata.cloud/ipfs/${this.someProposals.ipfs}`;
     },
     goBack() {
-      localStorage.removeItem("someProposals");
+      localStorage.removeItem('someProposals');
       history.go(-1);
     },
     changeHash(idName) {
       document.querySelector(idName).scrollIntoView(true);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -343,7 +346,7 @@ export default {
 .page {
   width: 100%;
   padding: 0.8rem 0;
-  background: url($urlImages + "bg7.webp") no-repeat;
+  background: url($urlImages + 'bg7.webp') no-repeat;
   background-size: 100% 100%;
 }
 .banner {
@@ -459,7 +462,12 @@ export default {
         background: rgba(146, 146, 146, 0.4);
         cursor: pointer;
         &.active {
-          background-image: linear-gradient(to right, rgba(0, 255, 246, 0.7), rgba(255, 56, 148, 0.7), rgba(229, 108, 255, 0.7));
+          background-image: linear-gradient(
+            to right,
+            rgba(0, 255, 246, 0.7),
+            rgba(255, 56, 148, 0.7),
+            rgba(229, 108, 255, 0.7)
+          );
         }
         div {
           border-radius: 0.2rem;

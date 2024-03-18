@@ -1,3 +1,3 @@
-Merlingames
-https://github.com/fun-topia/funtopia-frontend/tree/merlingames
-https://merlingames.io/
+Pawlyfun
+https://github.com/fun-topia/funtopia-frontend/tree/pawlyfun
+https://www.pawlyfun.com/

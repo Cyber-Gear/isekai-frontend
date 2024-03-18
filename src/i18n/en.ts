@@ -11,12 +11,12 @@ export default {
     text9: 'MORE'
   },
   footer: {
-    text1: 'COPYRIGHT © 2022 Merlingames, All rights Reserved'
+    text1: 'COPYRIGHT © 2022 Pawlyfun, All rights Reserved'
   },
   home: {
     text1: `CREATE A FUN
     METAVERSE FOR ALL !`,
-    text3: `NFT artist shika studio provided the character artwork for the release of NFT on the Merlingames platform, which was used in Cybergear's game scenes.`,
+    text3: `NFT artist shika studio provided the character artwork for the release of NFT on the Pawlyfun platform, which was used in Cybergear's game scenes.`,
     text4: 'WHITE PAGE',
     // text5: "DAO",
     // text6: "LAUNCHPAD",
@@ -32,19 +32,19 @@ export default {
     daos: [
       {
         text1: 'Notification',
-        text2: `hello to all you Merlingames out there
+        text2: `hello to all you Pawlyfun out there
         lets put a notification option ( email , phone notification , ... )
-        so we won’t miss what Merlingames hold for us`,
+        so we won’t miss what Pawlyfun hold for us`,
         text3: 'detail'
       },
       {
-        text1: 'Merlingames Governance Threshold',
-        text2: `This vote aims to determine intention as to whether a threshold is a legitimate alternative path to Merlingames shareholders, if so, what the appropriate threshold should be.`,
+        text1: 'Pawlyfun Governance Threshold',
+        text2: `This vote aims to determine intention as to whether a threshold is a legitimate alternative path to Pawlyfun shareholders, if so, what the appropriate threshold should be.`,
         text3: 'detail'
       },
       {
         text1: 'Launched the Fist Game',
-        text2: `There are many games under Merlingames that are suitable for gamefi users.
+        text2: `There are many games under Pawlyfun that are suitable for gamefi users.
         The first game to be launched will be selected by users' votes.`,
         text3: 'detail'
       }

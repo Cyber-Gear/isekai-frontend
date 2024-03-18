@@ -535,8 +535,8 @@ export const merlingames = {
   logo2: require('@/assets/cdn/artists/ZW/z-logo2.webp'),
   avatar: require('@/assets/cdn/artists/ZW/z-avatar.webp'),
   avatar2: require('@/assets/cdn/artists/ZW/z-avatar2.webp'),
-  title: 'merlingames',
-  des: 'merlingames',
+  title: 'Pawlyfun',
+  des: 'Pawlyfun',
   works: [
     {
       id: 1,

@@ -105,7 +105,6 @@
       <swiper class="market_swiper" :options="marketOption" ref="marketSwiper">
         <swiper-slide v-for="(item, index) in marketList" :key="index">
           <div class="card">
-            <!-- <img src="@/assets/newimages/body_2001.png" alt="" /> -->
             <img :src="item.card" alt="" />
             <span v-if="item.name">{{ $t(item.name) }}</span>
           </div>

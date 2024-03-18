@@ -4,28 +4,32 @@
       <div class="leftbox" v-if="spaceObj">
         <div>
           <div class="avatar">
-            <img :src="`${$urlImages}logo1.webp`" alt="" />
+            <img src="@/assets/cdn/images/logo.webp" alt="" />
           </div>
-          <div class="title"><span>FUN TOPIA</span><i class="iconfont pctelegram"></i></div>
+          <div class="title"><span>Pawlyfun</span><i class="iconfont pctelegram"></i></div>
           <div class="linklist">
             <a v-for="(item, index) in linkList" :key="index" :href="item.href">
               <img :src="item.image" alt="" />
             </a>
           </div>
           <div class="lis">
-            <div><i class="iconfont pcCustomermanagement-fill"></i>{{ $t("dao.text2") }}</div>
+            <div><i class="iconfont pcCustomermanagement-fill"></i>{{ $t('dao.text2') }}</div>
             <div>{{ spaceObj.members.length }}</div>
           </div>
           <div class="btn">
-            <el-button :disabled="true" @click="aBill"> {{ $t("dao.text3") }} </el-button>
+            <el-button :disabled="true" @click="aBill"> {{ $t('dao.text3') }} </el-button>
           </div>
         </div>
       </div>
       <div class="rightbox">
         <div class="title">
-          <div>{{ $t("dao.text1") }}</div>
+          <div>{{ $t('dao.text1') }}</div>
           <el-select v-model="selectKey" @change="selectChange" v-show="spaceObj">
-            <el-option v-for="item in selectOptions" :key="item.value" :label="$t(item.label)" :value="item.value"></el-option>
+            <el-option
+              v-for="item in selectOptions"
+              :key="item.value"
+              :label="$t(item.label)"
+              :value="item.value"></el-option>
           </el-select>
         </div>
         <ul class="list">
@@ -33,12 +37,12 @@
             <ul>
               <li>
                 <div>
-                  {{ $t("dao.text4") }} <span>{{ item.author | ellipsisWallet }}</span> {{ $t("dao.text5") }}
+                  {{ $t('dao.text4') }} <span>{{ item.author | ellipsisWallet }}</span> {{ $t('dao.text5') }}
                 </div>
                 <div class="status">
-                  <template v-if="item.state == 'active'">{{ $t("status.text7") }} </template>
-                  <template v-if="item.state == 'pending'">{{ $t("status.text8") }} </template>
-                  <template v-if="item.state == 'closed'">{{ $t("status.text9") }} </template>
+                  <template v-if="item.state == 'active'">{{ $t('status.text7') }} </template>
+                  <template v-if="item.state == 'pending'">{{ $t('status.text8') }} </template>
+                  <template v-if="item.state == 'closed'">{{ $t('status.text9') }} </template>
                 </div>
               </li>
               <li>{{ item.title }} <img :src="`${$urlImages}box_title3.webp`" alt="" /></li>
@@ -59,31 +63,42 @@
 </template>
 
 <script>
-import { vote } from "funtopia-sdk";
+import { vote } from 'funtopia-sdk';
 
 export default {
-  name: "DAO",
+  name: 'DAO',
   data() {
     return {
       spaceObj: null,
-      oldProposalsParams: { first: 10, skip: 0, orderBy: "created", orderDirection: "desc", id: "", state: "", author: "" },
+      oldProposalsParams: {
+        first: 10,
+        skip: 0,
+        orderBy: 'created',
+        orderDirection: 'desc',
+        id: '',
+        state: '',
+        author: ''
+      },
       newProposalsParams: null,
       proposalsArr: [],
       selectKey: 1,
       selectOptions: [
-        { value: 1, label: "status.text4" },
-        { value: 2, label: "status.text5" },
+        { value: 1, label: 'status.text4' },
+        { value: 2, label: 'status.text5' },
         // { value: 3, label: "status.text6" },
-        { value: 3, label: "status.text7" },
-        { value: 4, label: "status.text8" },
-        { value: 5, label: "status.text9" },
+        { value: 3, label: 'status.text7' },
+        { value: 4, label: 'status.text8' },
+        { value: 5, label: 'status.text9' }
       ],
       linkList: [
-        { image: this.$urlImages + "contact_Gitbook.webp", href: "https://funtopia.gitbook.io/fun-topia/create-a-fun-metaverse/about-fun-topia" },
-        { image: this.$urlImages + "contact_Twitter.webp", href: "https://twitter.com/FuntopiaNFT" },
-        { image: this.$urlImages + "contact_Discord.webp", href: "https://discord.gg/Gtq9JsPcPN" },
-        { image: this.$urlImages + "contact_Medium.webp", href: "https://medium.com/@funtopiagame" },
-      ],
+        {
+          image: this.$urlImages + 'contact_Gitbook.webp',
+          href: 'https://funtopia.gitbook.io/fun-topia/create-a-fun-metaverse/about-fun-topia'
+        },
+        { image: this.$urlImages + 'contact_Twitter.webp', href: 'https://twitter.com/FuntopiaNFT' },
+        { image: this.$urlImages + 'contact_Discord.webp', href: 'https://discord.gg/Gtq9JsPcPN' },
+        { image: this.$urlImages + 'contact_Medium.webp', href: 'https://medium.com/@funtopiagame' }
+      ]
     };
   },
   created() {
@@ -93,7 +108,7 @@ export default {
   methods: {
     selectChange(e) {
       this.proposalsArr = [];
-      const author = "0x105A80A5Da83997c32818716846BB609C5Ffe35d"; // 全老板
+      const author = '0x105A80A5Da83997c32818716846BB609C5Ffe35d'; // 全老板
       this.newProposalsParams = JSON.parse(JSON.stringify(this.oldProposalsParams));
       switch (e) {
         case 1:
@@ -102,13 +117,13 @@ export default {
           this.newProposalsParams.author = author;
           break;
         case 3:
-          this.newProposalsParams.state = "active";
+          this.newProposalsParams.state = 'active';
           break;
         case 4:
-          this.newProposalsParams.state = "pending";
+          this.newProposalsParams.state = 'pending';
           break;
         case 5:
-          this.newProposalsParams.state = "closed";
+          this.newProposalsParams.state = 'closed';
           break;
         default:
           break;
@@ -141,7 +156,7 @@ export default {
         });
     },
     toDetail(item) {
-      this.$router.push({ path: "/dao-details", query: { id: item.id } });
+      this.$router.push({ path: '/dao-details', query: { id: item.id } });
     },
     /**DAO提案倒计时 */
     countdown(endTime) {
@@ -153,11 +168,11 @@ export default {
         let D = Math.floor((t / (24 * 60 * 60 * 1000)) % 30);
         let h = Math.floor((t / (60 * 60 * 1000)) % 24);
         let m = Math.floor((t / (60 * 1000)) % 60);
-        if (Y > 0) return `${this.$t("date.left") + " " + Y + " " + this.$t("date.year")}`;
-        if (M > 0) return `${this.$t("date.left") + " " + M + " " + this.$t("date.month")}`;
-        if (D > 0) return `${this.$t("date.left") + " " + D + " " + this.$t("date.day")}`;
-        if (h > 0) return `${this.$t("date.left") + " " + h + " " + this.$t("date.hour")}`;
-        if (m > 0) return `${this.$t("date.left") + " " + m + " " + this.$t("date.minute")}`;
+        if (Y > 0) return `${this.$t('date.left') + ' ' + Y + ' ' + this.$t('date.year')}`;
+        if (M > 0) return `${this.$t('date.left') + ' ' + M + ' ' + this.$t('date.month')}`;
+        if (D > 0) return `${this.$t('date.left') + ' ' + D + ' ' + this.$t('date.day')}`;
+        if (h > 0) return `${this.$t('date.left') + ' ' + h + ' ' + this.$t('date.hour')}`;
+        if (m > 0) return `${this.$t('date.left') + ' ' + m + ' ' + this.$t('date.minute')}`;
       }
     },
     /**发起提案 */
@@ -175,8 +190,8 @@ export default {
       //   .catch((err) => {
       //     console.log(err);
       //   });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -184,7 +199,7 @@ export default {
 .page {
   width: 100%;
   padding: 0.8rem 0;
-  background: url($urlImages + "bg7.webp") no-repeat;
+  background: url($urlImages + 'bg7.webp') no-repeat;
   background-size: 100% 100%;
 }
 .box {

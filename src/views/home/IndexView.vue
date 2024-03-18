@@ -100,7 +100,7 @@
       </div>
     </div>
     <!-- MARKET -->
-    <div class="row6">
+    <div class="row6" v-if="showSwiper">
       <div class="row_title">MARKET</div>
       <swiper class="market_swiper" :options="marketOption" ref="marketSwiper">
         <swiper-slide v-for="(item, index) in marketList" :key="index">
@@ -253,10 +253,16 @@ export default {
         this.$urlImages + 'collaborators14.webp',
         this.$urlImages + 'collaborators15.webp',
         this.$urlImages + 'collaborators16.webp'
-      ]
+      ],
+      showSwiper: false
     };
   },
   computed: { ...mapGetters(['isEnLang']) },
+  mounted() {
+    setTimeout(() => {
+      this.showSwiper = true;
+    }, 3000);
+  },
   methods: {
     toOtherPage(href) {
       if (href) window.location.href = href;

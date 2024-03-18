@@ -9,7 +9,7 @@ import './assets/local/iconfonts/iconfont.css';
 
 const isProd = process.env.NODE_ENV == 'production';
 Vue.prototype.$isProd = isProd;
-const cdn = '//bafybeidmvw2ksvwomravhmdhydaijcjtd3bzhylphc22knvu3xhmyejxqq.ipfs.nftstorage.link/';
+const cdn = '//bafybeif3ij6i3lw5ackugtbm54butxhk2dpdt5uxuz3xnesumfwkdls2xu.ipfs.nftstorage.link/';
 
 Vue.prototype.$urlNfts = cdn + 'nfts/';
 Vue.prototype.$urlFonts = cdn + 'fonts/';

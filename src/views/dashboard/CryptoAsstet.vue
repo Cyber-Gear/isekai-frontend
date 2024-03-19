@@ -1,9 +1,9 @@
 <template>
   <div class="box">
-    <div class="title">{{ $t("dashboard.text6") }}</div>
+    <div class="title">{{ $t('dashboard.text6') }}</div>
     <div class="topbox">
       <div>
-        {{ $t("dashboard.text20") }}
+        {{ $t('dashboard.text20') }}
         <i class="iconfont pcNotvisible" v-show="!isShow" @click="isShow = true"></i>
         <i class="iconfont pcchakan1" v-show="isShow" @click="isShow = false"></i>
       </div>
@@ -16,7 +16,7 @@
       <li v-for="(item, index) in cardList" :key="index">
         <ul>
           <li>
-            <div><img :src="`${$urlImages}${item.logo}.webp`" alt="" /> {{ item.label }}</div>
+            <div><img :src="`@/assets/cdn/images/${item.logo}.webp`" alt="" /> {{ item.label }}</div>
             <div>
               <span v-show="isShow">{{ item.totalCoin | numberToFixed(2) }}</span>
               <span v-show="!isShow">******</span>
@@ -30,8 +30,8 @@
             </div>
           </li>
           <li>
-            <div>{{ $t("dashboard.text21") }}</div>
-            <div v-if="item.coinAddr">{{ $t("dashboard.text22") }}</div>
+            <div>{{ $t('dashboard.text21') }}</div>
+            <div v-if="item.coinAddr">{{ $t('dashboard.text22') }}</div>
           </li>
           <li>
             <div>
@@ -40,7 +40,9 @@
             </div>
             <div class="btns" v-if="item.coinAddr" @click="$utils.handleCopy(item.coinAddr)">
               <span>{{ item.coinAddr | ellipsisWallet }}</span>
-              <span class="btn" v-if="item.label == 'FUN'" @click.stop="addAddress(item)"><i class="iconfont pcjiahao"></i></span>
+              <span class="btn" v-if="item.label == 'FUN'" @click.stop="addAddress(item)"
+                ><i class="iconfont pcjiahao"></i
+              ></span>
               <span class="btn" v-else><i class="iconfont pcfuzhi"></i></span>
             </div>
           </li>
@@ -51,11 +53,11 @@
 </template>
 
 <script>
-import { util, erc20, token, wallet, getProvider } from "funtopia-sdk";
-import { mapGetters } from "vuex";
+import { util, erc20, token, wallet, getProvider } from 'funtopia-sdk';
+import { mapGetters } from 'vuex';
 export default {
-  name: "CryptoAsstet",
-  computed: { ...mapGetters(["getWalletAccount"]), ...mapGetters(["getApprovePopup"]) },
+  name: 'CryptoAsstet',
+  computed: { ...mapGetters(['getWalletAccount']), ...mapGetters(['getApprovePopup']) },
   watch: {
     getWalletAccount: {
       handler(newVal) {
@@ -65,8 +67,8 @@ export default {
           this.getFUN();
         }
       },
-      immediate: true,
-    },
+      immediate: true
+    }
   },
   data() {
     return {
@@ -74,30 +76,30 @@ export default {
       balanceAmount: null,
       cardList: [
         {
-          label: "USDT",
-          logo: "coin-usdt",
+          label: 'USDT',
+          logo: 'coin-usdt',
           coinAddr: token().USDT,
           totalCoin: 0,
           totalPrice: 0,
-          availableBalance: 0,
+          availableBalance: 0
         },
         {
-          label: "ETH",
-          logo: "coin-eth",
-          coinAddr: "",
+          label: 'ETH',
+          logo: 'coin-eth',
+          coinAddr: '',
           totalCoin: 0,
           totalPrice: 0,
-          availableBalance: 0,
+          availableBalance: 0
         },
         {
-          label: "FUN",
-          logo: "coin-fun",
+          label: 'FUN',
+          logo: 'coin-fun',
           coinAddr: token().FUN,
           totalCoin: 0,
           totalPrice: 0,
-          availableBalance: 0,
-        },
-      ],
+          availableBalance: 0
+        }
+      ]
     };
   },
 
@@ -113,13 +115,13 @@ export default {
           this.balanceAmount = totalCoin;
           this.cardList[0].totalCoin = totalCoin; //币个数
           this.cardList[0].availableBalance = totalCoin; //可用余额
-          this.$api.getCoinPrice("tether").then((res2) => {
-            const price = res2.data["tether"].usd;
+          this.$api.getCoinPrice('tether').then((res2) => {
+            const price = res2.data['tether'].usd;
             this.cardList[0].totalPrice = price * totalCoin; //总价值
           });
         })
         .catch((err) => {
-          console.error("getUSDT", err);
+          console.error('getUSDT', err);
         });
     },
     getETH() {
@@ -130,13 +132,13 @@ export default {
           // console.log("ETH", totalCoin);
           this.cardList[1].totalCoin = totalCoin; //币个数
           this.cardList[1].availableBalance = totalCoin; //可用余额
-          this.$api.getCoinPrice("ethereum").then((res2) => {
-            const price = res2.data["ethereum"].usd;
+          this.$api.getCoinPrice('ethereum').then((res2) => {
+            const price = res2.data['ethereum'].usd;
             this.cardList[1].totalPrice = price * totalCoin; //总价值
           });
         })
         .catch((err) => {
-          console.error("getETH", err);
+          console.error('getETH', err);
         });
     },
     getFUN() {
@@ -151,13 +153,13 @@ export default {
           this.cardList[2].totalPrice = price * totalCoin; //总价值
         })
         .catch((err) => {
-          console.error("getFUN", err);
+          console.error('getFUN', err);
         });
     },
     addAddress(item) {
-      wallet.addFUN(`${this.$urlImages}${item.logo}.webp`);
-    },
-  },
+      wallet.addFUN(require(`@/assets/cdn/images/${item.logo}.webp`));
+    }
+  }
 };
 </script>
 

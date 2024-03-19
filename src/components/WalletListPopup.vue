@@ -6,10 +6,9 @@
     :visible="getWalletListPopup"
     :modal-append-to-body="false"
     :destroy-on-close="true"
-    @close="closePopup"
-  >
+    @close="closePopup">
     <div class="popupbox">
-      <div class="title">{{ $t("walletPopup.text6") }}<span>Fun Topia</span></div>
+      <div class="title">{{ $t('walletPopup.text6') }}<span>Fun Topia</span></div>
       <ul>
         <li v-for="(item, index) in walletArr" :key="index" @click="walletClick(item.walletType)">
           <img :src="item.image" alt="" />
@@ -21,17 +20,21 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 export default {
-  name: "WalletListPopup",
-  computed: { ...mapGetters(["getWalletAccount"]), ...mapGetters(["getWalletListPopup"]) },
+  name: 'WalletListPopup',
+  computed: { ...mapGetters(['getWalletAccount']), ...mapGetters(['getWalletListPopup']) },
   data() {
     return {
       walletArr: [
-        { name: "Metamask", walletType: "metamask", image: this.$urlImages + "wallet_MetaMaskFox.webp" }, //metamask
-        { name: "TokenPocet", walletType: "metamask", image: this.$urlImages + "wallet_TokenPocet.webp" }, //metamask
-        { name: "WalletConnect", walletType: "walletconnect", image: this.$urlImages + "wallet_WalletConnect.webp" }, //walletconnect
-      ],
+        { name: 'Metamask', walletType: 'metamask', image: require('@/assets/cdn/images/wallet_MetaMaskFox.webp') }, //metamask
+        { name: 'TokenPocet', walletType: 'metamask', image: require('@/assets/cdn/images/wallet_TokenPocet.webp') }, //metamask
+        {
+          name: 'WalletConnect',
+          walletType: 'walletconnect',
+          image: require('@/assets/cdn/images/wallet_WalletConnect.webp')
+        } //walletconnect
+      ]
     };
   },
   methods: {
@@ -40,9 +43,9 @@ export default {
       this.$utils.walletConnect(walletType);
     },
     closePopup() {
-      this.$store.commit("setWalletListPopup", false);
-    },
-  },
+      this.$store.commit('setWalletListPopup', false);
+    }
+  }
 };
 </script>
 

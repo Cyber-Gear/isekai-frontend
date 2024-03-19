@@ -9,14 +9,8 @@ import './assets/iconfonts/iconfont.css';
 
 const isProd = process.env.NODE_ENV == 'production';
 Vue.prototype.$isProd = isProd;
-const cdn = '//bafybeidmvw2ksvwomravhmdhydaijcjtd3bzhylphc22knvu3xhmyejxqq.ipfs.nftstorage.link/';
 
-Vue.prototype.$urlFonts = cdn + 'fonts/';
-Vue.prototype.$urlVideos = cdn + 'videos/';
-Vue.prototype.$urlImages = cdn + 'images/';
-Vue.prototype.$urlBlindBoxs = cdn + 'blindboxs/';
-
-import utils from './utils/index';
+import utils from './utils';
 Vue.prototype.$utils = utils;
 import filters from './utils/filters';
 Object.keys(filters).forEach((key) => {

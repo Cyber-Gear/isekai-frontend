@@ -2,30 +2,26 @@
   <div class="footer_box">
     <div class="center">
       <div>
-        <img class="logo" :src="`${$urlImages}logo2.webp`" alt="" />
+        <img class="logo" src="@/assets/cdn/images/logo2.webp" alt="" />
         <div class="linklist">
-          <a v-for="(item, index) in linkList" :key="index" :href="item.href">
+          <a v-for="(item, index) in linkList" :key="index" :href="item.href || '#'">
             <img :src="item.image" alt="" />
           </a>
         </div>
       </div>
-      <p>{{ $t("footer.text1") }}</p>
+      <p>{{ $t('footer.text1') }}</p>
     </div>
   </div>
 </template>
 <script>
+import { linkList } from '@/mock/staticdata';
 export default {
-  name: "FooterLayout",
+  name: 'FooterLayout',
   data() {
     return {
-      linkList: [
-        { image: this.$urlImages + "contact_Gitbook.webp", href: "https://funtopia.gitbook.io/fun-topia/create-a-fun-metaverse/about-fun-topia" },
-        { image: this.$urlImages + "contact_Twitter.webp", href: "https://twitter.com/FuntopiaNFT" },
-        { image: this.$urlImages + "contact_Discord.webp", href: "https://discord.gg/Gtq9JsPcPN" },
-        { image: this.$urlImages + "contact_Medium.webp", href: "https://medium.com/@funtopiagame" },
-      ],
+      linkList: linkList
     };
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>

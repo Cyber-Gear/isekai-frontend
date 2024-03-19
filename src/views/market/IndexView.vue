@@ -46,9 +46,9 @@
             <input type="text" :placeholder="$t('market.text7')" />
           </div>
 
-          <el-button @click="toOrder">{{ $t("market.text8") }}</el-button>
+          <el-button @click="toOrder">{{ $t('market.text8') }}</el-button>
         </div>
-        <div class="result">{{ cardList.length }} {{ $t("market.text9") }}</div>
+        <div class="result">{{ cardList.length }} {{ $t('market.text9') }}</div>
         <div class="checkedbox" v-show="tagList.length > 0">
           <div class="taglist">
             <el-tag closable v-for="(item, index) in tagList" :key="index" @close="clearTag(item, index)">
@@ -56,7 +56,7 @@
             </el-tag>
           </div>
           <div class="btn">
-            <span @click="clearAllTag">{{ $t("market.text26") }}</span>
+            <span @click="clearAllTag">{{ $t('market.text26') }}</span>
           </div>
         </div>
 
@@ -64,24 +64,38 @@
           <li
             v-for="(item, index) in cardList"
             :key="index"
-            @click="toDetail(item.nft, item.nft_type, item.nftId, item.data.id, item.price, item.seller, item.token, item.token_type)"
-          >
+            @click="
+              toDetail(
+                item.nft,
+                item.nft_type,
+                item.nftId,
+                item.data.id,
+                item.price,
+                item.seller,
+                item.token,
+                item.token_type
+              )
+            ">
             <div class="hero_card" v-if="item.nft_type == 'hero'">
               <div class="top"><img :src="item.data.logo" alt="" /></div>
               <div class="center">
                 <div>
                   <span>{{ $t(item.data.name) }}</span>
-                  <img :src="`${$urlImages}icon1.webp`" alt="" />
+                  <img src="@/assets/cdn/images/icon1.webp" alt="" />
                 </div>
                 <div>
                   <span>{{ $t(item.data.title) }}</span>
                   <span>{{ item.price }} {{ item.token_type }}</span>
                 </div>
-                <div v-if="item.lastPrice">{{ $t("artist.text10") }} {{ item.lastPrice }} {{ item.token_type }}</div>
-                <div v-else>{{ $t("artist.text10") }} ----</div>
+                <div v-if="item.lastPrice">{{ $t('artist.text10') }} {{ item.lastPrice }} {{ item.token_type }}</div>
+                <div v-else>{{ $t('artist.text10') }} ----</div>
               </div>
               <div class="bottom">
-                <el-button @click="cancel(item.nft, item.nftId)" :disabled="item.seller != getWalletAccount.toLowerCase()">Cancel</el-button>
+                <el-button
+                  @click="cancel(item.nft, item.nftId)"
+                  :disabled="item.seller != getWalletAccount.toLowerCase()"
+                  >Cancel</el-button
+                >
                 <i class="iconfont pcaccount"></i>
                 <span>2</span>
               </div>
@@ -93,17 +107,21 @@
               <div class="center">
                 <div>
                   <span>Cybergear</span>
-                  <img :src="`${$urlImages}icon1.webp`" alt="" />
+                  <img src="@/assets/cdn/images/icon1.webp" alt="" />
                 </div>
                 <div>
-                  <span>{{ "Bir Mystery Box" + " #" + item.nftId }}</span>
+                  <span>{{ 'Bir Mystery Box' + ' #' + item.nftId }}</span>
                   <span>{{ item.price }} {{ item.token_type }}</span>
                 </div>
-                <div v-if="item.lastPrice">{{ $t("artist.text10") }} {{ item.lastPrice }} {{ item.token_type }}</div>
-                <div v-else>{{ $t("artist.text10") }} ----</div>
+                <div v-if="item.lastPrice">{{ $t('artist.text10') }} {{ item.lastPrice }} {{ item.token_type }}</div>
+                <div v-else>{{ $t('artist.text10') }} ----</div>
               </div>
               <div class="bottom">
-                <el-button @click="cancel(item.nft, item.nftId)" :disabled="item.seller != getWalletAccount.toLowerCase()">Cancel</el-button>
+                <el-button
+                  @click="cancel(item.nft, item.nftId)"
+                  :disabled="item.seller != getWalletAccount.toLowerCase()"
+                  >Cancel</el-button
+                >
                 <i class="iconfont pcaccount"></i>
                 <span>2</span>
               </div>
@@ -154,76 +172,76 @@
 </template>
 
 <script>
-import { marketInfo, market, util, getSigner, token } from "funtopia-sdk";
-import LottieAnimation from "@/components/LottieAnimation";
-import { mapGetters } from "vuex";
-import { shikastudio } from "@/mock/nftworks";
+import { marketInfo, market, util, getSigner, token } from 'funtopia-sdk';
+import LottieAnimation from '@/components/LottieAnimation';
+import { mapGetters } from 'vuex';
+import { shikastudio } from '@/mock/nftworks';
 export default {
-  name: "MARKET",
+  name: 'MARKET',
   components: { LottieAnimation },
-  computed: { ...mapGetters(["getWalletAccount"]) },
+  computed: { ...mapGetters(['getWalletAccount']) },
   data() {
     return {
-      activeName: "0",
+      activeName: '0',
       selectionList: [
         {
-          title: this.$t("market.text1"),
-          icon: "iconfont pcnav-list",
+          title: this.$t('market.text1'),
+          icon: 'iconfont pcnav-list',
           checkboxList: [
-            { label: "Cybergear", tagName: "cybergear", isChecked: false },
-            { label: "Puck", tagName: "puck", isChecked: false },
-            { label: "Moonbird", tagName: "moonbird", isChecked: false },
-          ],
+            { label: 'Cybergear', tagName: 'cybergear', isChecked: false },
+            { label: 'Puck', tagName: 'puck', isChecked: false },
+            { label: 'Moonbird', tagName: 'moonbird', isChecked: false }
+          ]
         },
         {
-          title: this.$t("market.text2"),
-          icon: "iconfont pcdollar",
-          checkboxList: [{ label: this.$t("market.text30"), min: 0, max: 0 }],
+          title: this.$t('market.text2'),
+          icon: 'iconfont pcdollar',
+          checkboxList: [{ label: this.$t('market.text30'), min: 0, max: 0 }]
         },
         {
-          title: this.$t("market.text3"),
-          icon: "iconfont pczijin",
+          title: this.$t('market.text3'),
+          icon: 'iconfont pczijin',
           checkboxList: [
-            { label: "FUN", tagName: "fun", isChecked: false },
-            { label: "USDT", tagName: "usdt", isChecked: false },
-            { label: "ETH", tagName: "eth", isChecked: false },
-          ],
+            { label: 'FUN', tagName: 'fun', isChecked: false },
+            { label: 'USDT', tagName: 'usdt', isChecked: false },
+            { label: 'ETH', tagName: 'eth', isChecked: false }
+          ]
         },
         {
-          title: this.$t("market.text4[0]"),
-          icon: "iconfont pcall",
+          title: this.$t('market.text4[0]'),
+          icon: 'iconfont pcall',
           checkboxList: [
-            { label: this.$t("market.text4[1]"), tagName: "box", isChecked: false },
-            { label: this.$t("market.text4[2]"), tagName: "hero", isChecked: false },
-            { label: this.$t("market.text4[3]"), tagName: "shard", isChecked: false },
-          ],
+            { label: this.$t('market.text4[1]'), tagName: 'box', isChecked: false },
+            { label: this.$t('market.text4[2]'), tagName: 'hero', isChecked: false },
+            { label: this.$t('market.text4[3]'), tagName: 'shard', isChecked: false }
+          ]
         },
         {
-          title: this.$t("market.text5"),
-          icon: "iconfont pcdengji",
+          title: this.$t('market.text5'),
+          icon: 'iconfont pcdengji',
           checkboxList: [
-            { label: "MR", isChecked: false },
-            { label: "UR", isChecked: false },
-            { label: "SR", isChecked: false },
-            { label: "R", isChecked: false },
-          ],
+            { label: 'MR', isChecked: false },
+            { label: 'UR', isChecked: false },
+            { label: 'SR', isChecked: false },
+            { label: 'R', isChecked: false }
+          ]
         },
         {
-          title: this.$t("market.text6[0]"),
-          icon: "iconfont pcshuxingchaxun",
+          title: this.$t('market.text6[0]'),
+          icon: 'iconfont pcshuxingchaxun',
           checkboxList: [
-            { label: this.$t("market.text6[1]"), isChecked: false },
-            { label: this.$t("market.text6[2]"), isChecked: false },
-            { label: this.$t("market.text6[3]"), isChecked: false },
-          ],
-        },
+            { label: this.$t('market.text6[1]'), isChecked: false },
+            { label: this.$t('market.text6[2]'), isChecked: false },
+            { label: this.$t('market.text6[3]'), isChecked: false }
+          ]
+        }
       ],
       cardList: [],
       tmpCardList: [],
       tagList: [],
       isShowSelectionList: true,
       isShowDrawer: false,
-      requestTimer: null,
+      requestTimer: null
     };
   },
   watch: {
@@ -232,13 +250,13 @@ export default {
         if (newVal) {
           this.UpdateCardByFilter();
         }
-      },
+      }
       // deep:true,
-    },
+    }
   },
 
   created() {
-    this.getCardInfo(30, 0, "sellTime", "desc");
+    this.getCardInfo(30, 0, 'sellTime', 'desc');
     this.requestTimer = setInterval(() => {
       if (this.tmpCardList.length) {
         clearInterval(this.requestTimer);
@@ -259,7 +277,7 @@ export default {
       this.isShowSelectionList = true;
     },
     closeSelectionList() {
-      this.activeName = "";
+      this.activeName = '';
       setTimeout(() => {
         this.isShowSelectionList = false;
       }, 300);
@@ -313,34 +331,71 @@ export default {
     toDetail(nft, nft_type, nftId, id, price, seller, token, token_type) {
       console.log(id);
       this.$router.push({
-        path: "/market-details",
-        query: { nft: nft, nft_type: nft_type, nftId: nftId, id: id, price: price, seller: seller, token: token, token_type: token_type },
+        path: '/market-details',
+        query: {
+          nft: nft,
+          nft_type: nft_type,
+          nftId: nftId,
+          id: id,
+          price: price,
+          seller: seller,
+          token: token,
+          token_type: token_type
+        }
       });
     },
     toOrder() {
-      if (!this.getWalletAccount) return this.$store.commit("setWalletConnectPopup", true);
-      else this.$router.push({ path: "/market-order" });
+      if (!this.getWalletAccount) return this.$store.commit('setWalletConnectPopup', true);
+      else this.$router.push({ path: '/market-order' });
     },
 
     // Contract
-    getCardInfo(first, skip, orderBy, orderDirection, seller, nft, toke_n, price_gte, price_lte, hero, rarity, boxType) {
+    getCardInfo(
+      first,
+      skip,
+      orderBy,
+      orderDirection,
+      seller,
+      nft,
+      toke_n,
+      price_gte,
+      price_lte,
+      hero,
+      rarity,
+      boxType
+    ) {
       marketInfo
-        .getSellInfos(first, skip, orderBy, orderDirection, seller, nft, toke_n, price_gte, price_lte, hero, rarity, boxType)
+        .getSellInfos(
+          first,
+          skip,
+          orderBy,
+          orderDirection,
+          seller,
+          nft,
+          toke_n,
+          price_gte,
+          price_lte,
+          hero,
+          rarity,
+          boxType
+        )
         .then((res) => {
           let data = JSON.parse(JSON.stringify(res.data.sellInfos));
           data.forEach((element) => {
             element.data = shikastudio.works.find((item) => item.id == Number(element.hero) + 1);
-            if (element.token == token().USDT.toLowerCase()) element.token_type = "USDT";
-            else if (element.token == token().FUN.toLowerCase()) element.token_type = "FUN";
-            else element.token_type = "ETH";
-            if (element.nft == token().CN.toLowerCase()) element.nft_type = "hero";
-            else if (element.nft == token().CB.toLowerCase()) element.nft_type = "box";
-            else element.nft_type = "shard";
+            if (element.token == token().USDT.toLowerCase()) element.token_type = 'USDT';
+            else if (element.token == token().FUN.toLowerCase()) element.token_type = 'FUN';
+            else element.token_type = 'ETH';
+            if (element.nft == token().CN.toLowerCase()) element.nft_type = 'hero';
+            else if (element.nft == token().CB.toLowerCase()) element.nft_type = 'box';
+            else element.nft_type = 'shard';
             element.price = Number(util.formatEther(element.price));
-            marketInfo.getBuyInfos(1000, 0, "buyTime", "desc", undefined, undefined, element.nfts).then((res) => {
-              let data = JSON.parse(JSON.stringify(res.data.buyInfos)).find((item) => item.nftId == Number(element.nftId));
+            marketInfo.getBuyInfos(1000, 0, 'buyTime', 'desc', undefined, undefined, element.nfts).then((res) => {
+              let data = JSON.parse(JSON.stringify(res.data.buyInfos)).find(
+                (item) => item.nftId == Number(element.nftId)
+              );
               if (data && data.price) {
-                console.log("data.price", data.price, Number(util.formatEther(data.price)));
+                console.log('data.price', data.price, Number(util.formatEther(data.price)));
                 element.lastPrice = Number(util.formatEther(data.price));
               }
               // console.log(element);
@@ -349,22 +404,28 @@ export default {
           });
         })
         .catch((err) => {
-          console.error("getSellInfos", err);
+          console.error('getSellInfos', err);
         });
     },
 
     UpdateCardByFilter() {
-      console.log("tag", this.tagList);
+      console.log('tag', this.tagList);
       if (!this.tagList.length) {
-        this.getCardInfo(30, 0, "sellTime", "desc");
+        this.getCardInfo(30, 0, 'sellTime', 'desc');
       }
 
-      if (this.tagList.find((item) => item.tagName == "cybergear") || this.tagList.find((item) => item.tagName == "hero")) {
-        this.getCardInfo(30, 0, "sellTime", "desc", undefined, token().CN);
+      if (
+        this.tagList.find((item) => item.tagName == 'cybergear') ||
+        this.tagList.find((item) => item.tagName == 'hero')
+      ) {
+        this.getCardInfo(30, 0, 'sellTime', 'desc', undefined, token().CN);
       }
 
-      if (this.tagList.find((item) => item.tagName == "cybergear") || this.tagList.find((item) => item.tagName == "box")) {
-        this.getCardInfo(30, 0, "sellTime", "desc", undefined, token().CB);
+      if (
+        this.tagList.find((item) => item.tagName == 'cybergear') ||
+        this.tagList.find((item) => item.tagName == 'box')
+      ) {
+        this.getCardInfo(30, 0, 'sellTime', 'desc', undefined, token().CB);
       }
 
       this.requestTimer = setInterval(() => {
@@ -385,10 +446,10 @@ export default {
         await tx.wait();
         location.reload();
       } catch (err) {
-        console.error("sellNfts", err);
+        console.error('sellNfts', err);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -396,7 +457,7 @@ export default {
 .page {
   width: 100%;
   min-height: calc(100vh - 4rem);
-  background: url($urlImages + "bg5.webp") no-repeat;
+  background: url('~@/assets/cdn/images/bg5.webp') no-repeat;
   background-size: 100% 100%;
   padding-top: 0.8rem;
   padding-bottom: 1rem;

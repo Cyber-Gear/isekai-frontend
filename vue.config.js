@@ -4,17 +4,17 @@ module.exports = {
   devServer: { disableHostCheck: true },
   lintOnSave: true,
   productionSourceMap: isProd ? false : true, // 生产环境去掉后缀为.map的文件
-  chainWebpack(config) {
-    config.module.rule('scss').oneOfs.store.forEach((item) => {
-      item
-        .use('sass-resources-loader')
-        .loader('sass-resources-loader')
-        .options({
-          resources: 'src/styles/variables.scss'
-        })
-        .end();
-    });
-  },
+  // chainWebpack(config) {
+  //   config.module.rule('scss').oneOfs.store.forEach((item) => {
+  //     item
+  //       .use('sass-resources-loader')
+  //       .loader('sass-resources-loader')
+  //       .options({
+  //         resources: 'src/styles/variables.scss'
+  //       })
+  //       .end();
+  //   });
+  // },
   css: isProd
     ? {
         extract: {

@@ -1,16 +1,20 @@
 <template>
   <div class="box">
-    <div class="title">{{ $t("dashboard.text4") }}</div>
+    <div class="title">{{ $t('dashboard.text4') }}</div>
     <div class="switch_box">
       <ul class="switch_list">
-        <li v-for="(item, index) in switchList" :key="index" :class="{ active: switchIndex == index }" @click="switchTab(index)">
+        <li
+          v-for="(item, index) in switchList"
+          :key="index"
+          :class="{ active: switchIndex == index }"
+          @click="switchTab(index)">
           {{ $t(item.label) }}({{ item.total }})
         </li>
       </ul>
       <div v-show="switchIndex == 1">
         <i class="iconfont pcfuxuankuang-quanxuan"></i>
         <i class="iconfont pcfuxuankuang-weiquanxuan"></i>
-        {{ $t("dashboard.text14") }}/{{ $t("dashboard.text15") }}
+        {{ $t('dashboard.text14') }}/{{ $t('dashboard.text15') }}
       </div>
     </div>
     <ul class="card_list" v-if="newCardList.length > 0">
@@ -20,7 +24,7 @@
           <div class="center">
             <div>
               <span>{{ $t(item.name) }}</span>
-              <img :src="`${$urlImages}icon1.webp`" alt="" />
+              <img src="@/assets/cdn/images/icon1.webp" alt="" />
             </div>
             <div>
               <span>{{ $t(item.title) }}</span>
@@ -40,36 +44,36 @@
 </template>
 
 <script>
-import { cn } from "funtopia-sdk";
-import { mapGetters } from "vuex";
-import { shikastudio } from "@/mock/nftworks";
-import NoData from "@/components/NoData.vue";
+import { cn } from 'funtopia-sdk';
+import { mapGetters } from 'vuex';
+import { shikastudio } from '@/mock/nftworks';
+import NoData from '@/components/NoData.vue';
 export default {
   components: { NoData },
-  name: "NFTAsstet",
+  name: 'NFTAsstet',
   data() {
     return {
       isloading: false,
       switchIndex: 0,
       switchList: [
-        { label: "dashboard.text12", total: 0 },
+        { label: 'dashboard.text12', total: 0 }
         // { label: "dashboard.text13", total: 0 },
       ],
       cardList: shikastudio.works,
       heroIdList: [],
       newCardList: [],
-      requestTimer: null,
+      requestTimer: null
     };
   },
-  computed: { ...mapGetters(["getWalletAccount"]) },
+  computed: { ...mapGetters(['getWalletAccount']) },
   watch: {
     getWalletAccount: {
       handler(newVal, oldVal) {
-        if (newVal !== oldVal) sessionStorage.removeItem("NFTAsstetList");
+        if (newVal !== oldVal) sessionStorage.removeItem('NFTAsstetList');
         if (newVal) this.switchTab(0);
       },
-      immediate: true, // 页面初始化后立即执行
-    },
+      immediate: true // 页面初始化后立即执行
+    }
   },
   beforeDestroy() {
     clearInterval(this.requestTimer);
@@ -79,12 +83,12 @@ export default {
     switchTab(index) {
       this.switchIndex = index;
       this.newCardList = [];
-      console.log("switchTab");
+      console.log('switchTab');
       if (index == 0) {
         this.switchList[0].total = 0;
-        if (sessionStorage.getItem("NFTAsstetList")) {
-          this.newCardList = JSON.parse(sessionStorage.getItem("NFTAsstetList"));
-          console.log("NFTAsstetList", this.newCardList);
+        if (sessionStorage.getItem('NFTAsstetList')) {
+          this.newCardList = JSON.parse(sessionStorage.getItem('NFTAsstetList'));
+          console.log('NFTAsstetList', this.newCardList);
           this.switchList[0].total = this.newCardList.length;
         } else {
           this.tokensOfOwnerBySize();
@@ -114,7 +118,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.error("tokensOfOwnerBySize", err);
+          console.error('tokensOfOwnerBySize', err);
         });
     },
     getHeroList(cnIds) {
@@ -130,7 +134,7 @@ export default {
             this.newCardList.push(obj);
           });
           console.log(this.newCardList);
-          sessionStorage.setItem("NFTAsstetList", JSON.stringify(this.newCardList));
+          sessionStorage.setItem('NFTAsstetList', JSON.stringify(this.newCardList));
         }
       }, 200);
     },
@@ -143,18 +147,18 @@ export default {
      */
     getHeroId(cnId) {
       cn()
-        .data(cnId, "hero")
+        .data(cnId, 'hero')
         .then((res) => {
           // console.log("获取某英雄的某单数据字段的数据", res, Number(res));
           this.heroIdList.push(Number(res));
         })
         .catch((err) => {
-          console.error("data", err);
+          console.error('data', err);
           clearInterval(this.requestTimer);
           this.requestTimer = null;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

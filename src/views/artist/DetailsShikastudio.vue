@@ -3,7 +3,7 @@
     <div class="banner">
       <div class="back_box">
         <div @click="goBack">
-          <i class="iconfont pcfanhui"></i><span>{{ $t("btns.text1") }}</span>
+          <i class="iconfont pcfanhui"></i><span>{{ $t('btns.text1') }}</span>
         </div>
       </div>
     </div>
@@ -12,13 +12,13 @@
         <div class="cardbox">
           <img :src="card.card" alt="" />
           <span>{{ $t(card.name) }}</span>
-          <div class="level_btn" :class="card.rarity" @click="openVideo">{{ $t("artist.text11") }}</div>
+          <div class="level_btn" :class="card.rarity" @click="openVideo">{{ $t('artist.text11') }}</div>
         </div>
         <div class="workbox">
           <div class="titlebtn">
             <div>
               <i class="iconfont pcintegral-fill"></i>
-              {{ $t("artist.text4") }}
+              {{ $t('artist.text4') }}
             </div>
           </div>
           <div class="text">
@@ -33,24 +33,24 @@
           <ul class="introbox1">
             <li>{{ $t(card.name) }}</li>
             <li>
-              <div><i class="iconfont pcshuxingchaxun"></i>{{ $t("artist.text5") }}</div>
+              <div><i class="iconfont pcshuxingchaxun"></i>{{ $t('artist.text5') }}</div>
               {{ $t(card.attribute) }}
             </li>
             <li>
-              <div><i class="iconfont pcpingfendengjiRating11"></i>{{ $t("artist.text6") }}</div>
+              <div><i class="iconfont pcpingfendengjiRating11"></i>{{ $t('artist.text6') }}</div>
               {{ $t(card.level) }}
             </li>
             <li>
-              <div><i class="iconfont pcpingfendengjiRating15"></i>{{ $t("artist.text7") }}</div>
+              <div><i class="iconfont pcpingfendengjiRating15"></i>{{ $t('artist.text7') }}</div>
               {{ $t(card.starlevel) }}
             </li>
             <li>
-              <div><i class="iconfont pcdengji"></i>{{ $t("artist.text8") }}</div>
+              <div><i class="iconfont pcdengji"></i>{{ $t('artist.text8') }}</div>
               {{ card.rarity }}
             </li>
           </ul>
           <div class="introbox2">
-            <div class="title">{{ $t("artist.text9") }}</div>
+            <div class="title">{{ $t('artist.text9') }}</div>
             <div class="text">
               <div>
                 <pre>{{ $t(card.nftdes) }}</pre>
@@ -60,22 +60,28 @@
         </div>
       </div>
     </div>
-    <el-dialog center top="0" :title="$t(card.name)" :visible.sync="isShowPopup" :modal-append-to-body="false" :destroy-on-close="true">
+    <el-dialog
+      center
+      top="0"
+      :title="$t(card.name)"
+      :visible.sync="isShowPopup"
+      :modal-append-to-body="false"
+      :destroy-on-close="true">
       <PaintingVideo :videoUrl="card.video"></PaintingVideo>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import PaintingVideo from "@/components/PaintingVideo.vue";
-import { shikastudio } from "@/mock/nftworks";
+import PaintingVideo from '@/components/PaintingVideo.vue';
+import { shikastudio } from '@/mock/nftworks';
 export default {
-  name: "DetailsShikastudio",
+  name: 'DetailsShikastudio',
   components: { PaintingVideo },
   data() {
     return {
       card: null,
-      isShowPopup: false,
+      isShowPopup: false
     };
   },
   created() {
@@ -90,8 +96,8 @@ export default {
     },
     goBack() {
       history.go(-1);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -110,7 +116,7 @@ export default {
   align-items: flex-end;
   justify-content: center;
   flex-wrap: wrap;
-  background: url($urlImages + "bg6.webp") no-repeat;
+  background: url('~@/assets/cdn/images/bg6.webp') no-repeat;
   background-size: 100% auto;
   padding-bottom: 0.8rem;
 }

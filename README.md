@@ -1,3 +1,3 @@
-Merlingames
+Merlin Games
 https://github.com/fun-topia/funtopia-frontend/tree/merlingames
-https://merlingames.io/
+https://www.merlingames.io/

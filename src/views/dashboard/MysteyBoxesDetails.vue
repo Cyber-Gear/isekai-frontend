@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <div class="title">{{ $t("dashboard.text27") }}</div>
+    <div class="title">{{ $t('dashboard.text27') }}</div>
     <div class="back_titlebox">
       <i class="iconfont pcfanhui" @click="goBack"></i>
       {{ boxInfo.label }} ({{ boxInfo.list.length }})
@@ -15,14 +15,14 @@
             <div class="row1">
               <div>
                 <span>Cybergear</span>
-                <img :src="`${$urlImages}icon1.webp`" alt="" />
+                <img src="@/assets/cdn/images/icon1.webp" alt="" />
               </div>
               <div>
                 <!-- <span>88busd</span> -->
               </div>
             </div>
             <div class="row2">
-              <div>{{ boxInfo.label + " #" + item.cbId }}</div>
+              <div>{{ boxInfo.label + ' #' + item.cbId }}</div>
               <!-- <div>上次成交88busd</div> -->
             </div>
           </div>
@@ -30,21 +30,27 @@
       </li>
     </ul>
     <div class="btn" v-show="checkList.length > 0">
-      <el-button type="primary" @click="openBoxes"> {{ $t("dashboard.text28") }} ({{ checkList.length }}) </el-button>
+      <el-button type="primary" @click="openBoxes"> {{ $t('dashboard.text28') }} ({{ checkList.length }}) </el-button>
     </div>
-    <el-dialog center top="0" :title="$t('dashboard.text19')" :visible.sync="isShowPopup" :modal-append-to-body="false" :destroy-on-close="true">
+    <el-dialog
+      center
+      top="0"
+      :title="$t('dashboard.text19')"
+      :visible.sync="isShowPopup"
+      :modal-append-to-body="false"
+      :destroy-on-close="true">
       <BlindResultsPopup v-if="isShowPopup" :openedCnIds="openedCnIds"></BlindResultsPopup>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { cb, getSigner } from "funtopia-sdk";
-import { mapGetters } from "vuex";
-import BlindResultsPopup from "@/components/BlindResultsPopup.vue";
-import LottieAnimation from "@/components/LottieAnimation.vue";
+import { cb, getSigner } from 'funtopia-sdk';
+import { mapGetters } from 'vuex';
+import BlindResultsPopup from '@/components/BlindResultsPopup.vue';
+import LottieAnimation from '@/components/LottieAnimation.vue';
 export default {
-  name: "MysteyBoxesDetails",
+  name: 'MysteyBoxesDetails',
   components: { BlindResultsPopup, LottieAnimation },
   data() {
     return {
@@ -53,22 +59,22 @@ export default {
       checkList: [],
       openedCnIds: [],
       isShowPopup: false,
-      loadingFullScreen: null,
+      loadingFullScreen: null
     };
   },
-  computed: { ...mapGetters(["getWalletAccount"]) },
+  computed: { ...mapGetters(['getWalletAccount']) },
   watch: {
     getWalletAccount: {
       handler() {
         history.go(-1);
-      },
+      }
       // immediate: true, // 页面初始化后立即执行
-    },
+    }
   },
   created() {
-    if (Object.keys(this.$route.query).length > 0 && sessionStorage.getItem("MysteyBoxesList")) {
+    if (Object.keys(this.$route.query).length > 0 && sessionStorage.getItem('MysteyBoxesList')) {
       const id = this.$route.query.id;
-      this.boxList = JSON.parse(sessionStorage.getItem("MysteyBoxesList"));
+      this.boxList = JSON.parse(sessionStorage.getItem('MysteyBoxesList'));
       this.boxList.forEach((element) => {
         if (element.boxType == id) this.boxInfo = element;
       });
@@ -82,7 +88,7 @@ export default {
      * 监听开盲盒结果，获取某用户开出来的英雄的数量和ID数组
      * 用户钱包地址，生成英雄数量，英雄ID数组
      */
-    cb().on("SpawnCns", (user, amount, cnIds) => {
+    cb().on('SpawnCns', (user, amount, cnIds) => {
       if (this.isShowPopup) return;
       if (this.loadingFullScreen) {
         this.$nextTick(() => {
@@ -102,8 +108,8 @@ export default {
             if (element.boxType == this.boxInfo.boxType) {
               element = this.boxInfo;
               this.checkList = [];
-              sessionStorage.setItem("MysteyBoxesList", JSON.stringify(this.boxList));
-              if (sessionStorage.getItem("NFTAsstetList")) sessionStorage.removeItem("NFTAsstetList");
+              sessionStorage.setItem('MysteyBoxesList', JSON.stringify(this.boxList));
+              if (sessionStorage.getItem('NFTAsstetList')) sessionStorage.removeItem('NFTAsstetList');
             }
           });
         });
@@ -132,21 +138,21 @@ export default {
         .then((res) => {
           // console.log("播放开盲盒动画", res);
           this.loadingFullScreen = this.$loading({
-            target: "#app",
+            target: '#app',
             lock: true, // 禁止页面滚动，必须要挂载在#app上，其他不生效
-            text: this.$t("tips.text13"),
-            spinner: "el-icon-loading",
-            background: "rgba(0, 0, 0, 0.8)",
+            text: this.$t('tips.text13'),
+            spinner: 'el-icon-loading',
+            background: 'rgba(0, 0, 0, 0.8)'
           });
         })
         .catch((err) => {
-          console.error("openBoxes", err);
+          console.error('openBoxes', err);
         });
     },
     goBack() {
       history.go(-1);
-    },
-  },
+    }
+  }
 };
 </script>
 

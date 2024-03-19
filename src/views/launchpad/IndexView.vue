@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <div class="tip_box">{{ $t("launchpad.text1") }} {{ $t(nowStatusText) }}</div>
+    <div class="tip_box">{{ $t('launchpad.text1') }} {{ $t(nowStatusText) }}</div>
     <div class="box">
       <div class="leftbox">
         <div class="blindbox">
@@ -8,15 +8,15 @@
         </div>
         <div class="info">
           <div>
-            <span>{{ $t("launchpad.text3") }}</span>
-            <span>{{ remainingAmount }} {{ $t("launchpad.text11") }}</span>
+            <span>{{ $t('launchpad.text3') }}</span>
+            <span>{{ remainingAmount }} {{ $t('launchpad.text11') }}</span>
           </div>
           <div>
-            <span>{{ $t("launchpad.text4") }}</span> <span>{{ boxPrice }} U</span>
+            <span>{{ $t('launchpad.text4') }}</span> <span>{{ boxPrice }} U</span>
           </div>
           <div>
-            <span>{{ $t("launchpad.text5") }}</span>
-            <span>{{ hourlyBuyAmount }} {{ $t("launchpad.text11") }}</span>
+            <span>{{ $t('launchpad.text5') }}</span>
+            <span>{{ hourlyBuyAmount }} {{ $t('launchpad.text11') }}</span>
           </div>
         </div>
       </div>
@@ -27,8 +27,12 @@
               <template slot="icon">
                 <!-- <div @click="changeSteps(item, index)"> -->
                 <div>
-                  <img class="stepsbox_img" v-if="index < nowStatusIndex" :src="`${$urlImages}progress_img_active.webp`" alt="" />
-                  <img class="stepsbox_img" v-else :src="`${$urlImages}progress_img_normal.webp`" alt="" />
+                  <img
+                    class="stepsbox_img"
+                    v-if="index < nowStatusIndex"
+                    src="@/assets/cdn/images/progress_img_active.webp"
+                    alt="" />
+                  <img class="stepsbox_img" v-else src="@/assets/cdn/images/progress_img_normal.webp" alt="" />
                 </div>
               </template>
             </el-step>
@@ -36,7 +40,7 @@
         </div>
         <div class="box1">
           <div class="title">
-            <div><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("launchpad.text6") }}</div>
+            <div><img src="@/assets/cdn/images/box_title3.webp" alt="" />{{ $t('launchpad.text6') }}</div>
             <ul>
               <li>
                 <el-tooltip class="item" effect="dark" :content="$t('launchpad.text7')" placement="top">
@@ -62,56 +66,62 @@
           </div>
           <div class="box2">
             <div class="row">
-              <pre>{{ $t("launchpad.introduction1") }}</pre>
+              <pre>{{ $t('launchpad.introduction1') }}</pre>
             </div>
             <div class="row">
               <div class="hasbeenon" v-if="nowStatusIndex == 1">
                 <div class="buying">
-                  <span>{{ $t("launchpad.text12") }}</span>
+                  <span>{{ $t('launchpad.text12') }}</span>
                 </div>
                 <div class="times">
                   <div>
                     <p>{{ countdownObj.d }}</p>
-                    <p>{{ $t("launchpad.text13") }}</p>
+                    <p>{{ $t('launchpad.text13') }}</p>
                   </div>
                   <span>:</span>
                   <div>
                     <p>{{ countdownObj.h }}</p>
-                    <p>{{ $t("launchpad.text14") }}</p>
+                    <p>{{ $t('launchpad.text14') }}</p>
                   </div>
                   <span>:</span>
                   <div>
                     <p>{{ countdownObj.m }}</p>
-                    <p>{{ $t("launchpad.text15") }}</p>
+                    <p>{{ $t('launchpad.text15') }}</p>
                   </div>
                   <span>:</span>
                   <div>
                     <p>{{ countdownObj.s }}</p>
-                    <p>{{ $t("launchpad.text16") }}</p>
+                    <p>{{ $t('launchpad.text16') }}</p>
                   </div>
                 </div>
               </div>
               <div class="buy_box" v-if="nowStatusIndex == 2">
                 <div class="left">
-                  <div>{{ $t("launchpad.text17") }}</div>
+                  <div>{{ $t('launchpad.text17') }}</div>
                   <div class="inputbox">
                     <span class="span1"><i class="iconfont pcjianhao" @click="subtraction"></i></span>
-                    <input type="number" v-model="inputAmount" oninput="value=value.replace(/^(0+)|[^\d]+/g,'')" :disabled="buyloading" />
+                    <input
+                      type="number"
+                      v-model="inputAmount"
+                      oninput="value=value.replace(/^(0+)|[^\d]+/g,'')"
+                      :disabled="buyloading" />
                     <span class="span2"><i class="iconfont pcjiahao" @click="addition"></i></span>
                   </div>
                   <div>
-                    <span>{{ $t("launchpad.text18") }} {{ totalPrice | numberThousands }} U</span>
+                    <span>{{ $t('launchpad.text18') }} {{ totalPrice | numberThousands }} U</span>
                   </div>
                 </div>
                 <div class="right">
-                  <el-button type="primary" :loading="buyloading" @click="buyBoxesBefore">{{ $t("launchpad.text19") }}</el-button>
+                  <el-button type="primary" :loading="buyloading" @click="buyBoxesBefore">{{
+                    $t('launchpad.text19')
+                  }}</el-button>
                 </div>
               </div>
               <div class="progress_bar_box" v-if="nowStatusIndex > 1">
                 <div>
-                  <div>{{ $t("launchpad.text21") }}</div>
+                  <div>{{ $t('launchpad.text21') }}</div>
                   <div class="progress_bar">
-                    <div :style="{ width: progressWidth + '%' }">{{ progressWidth + "%" }}</div>
+                    <div :style="{ width: progressWidth + '%' }">{{ progressWidth + '%' }}</div>
                   </div>
                   <div>{{ soldAmount }} / {{ totalAmount }}</div>
                 </div>
@@ -121,10 +131,10 @@
         </div>
         <div class="box1">
           <div class="title">
-            <div><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t("launchpad.text22") }}</div>
+            <div><img src="@/assets/cdn/images/box_title3.webp" alt="" />{{ $t('launchpad.text22') }}</div>
           </div>
           <div class="content">
-            <pre>{{ $t("launchpad.introduction2") }}</pre>
+            <pre>{{ $t('launchpad.introduction2') }}</pre>
           </div>
         </div>
       </div>
@@ -134,13 +144,13 @@
 </template>
 
 <script>
-import { cb, util, getSigner, erc20, token } from "funtopia-sdk";
-import { mapGetters } from "vuex";
-import ApprovePopup from "@/components/ApprovePopup.vue";
-import LottieAnimation from "@/components/LottieAnimation.vue";
+import { cb, util, getSigner, erc20, token } from 'funtopia-sdk';
+import { mapGetters } from 'vuex';
+import ApprovePopup from '@/components/ApprovePopup.vue';
+import LottieAnimation from '@/components/LottieAnimation.vue';
 
 export default {
-  name: "LAUNCHPAD",
+  name: 'LAUNCHPAD',
   components: { ApprovePopup, LottieAnimation },
   data() {
     return {
@@ -152,33 +162,33 @@ export default {
 
       boxPrice: 0,
       hourlyBuyAmount: 0,
-      paymentAddress: "",
+      paymentAddress: '',
       isOpenWhitelist: false,
       isWhite: true,
       inputAmount: null,
       totalPrice: 0,
       balanceAmount: 0,
       stepsArr: [
-        { label: "status.text1", time: "" },
-        { label: "status.text2", time: "" },
-        { label: "status.text3", time: "" },
+        { label: 'status.text1', time: '' },
+        { label: 'status.text2', time: '' },
+        { label: 'status.text3', time: '' }
       ],
       operation: {
-        name: this.$t("approvePopup.text1"),
-        func: "buyBoxes",
+        name: this.$t('approvePopup.text1'),
+        func: 'buyBoxes'
       },
       countdownObj: { d: 0, h: 0, m: 0, s: 0 },
       countdownTimer: null,
-      nowStatusText: "",
+      nowStatusText: '',
       nowStatusIndex: 0,
       progressWidth: 0,
       isApproved: false,
       popupActive: 1,
       approvedloading: false,
-      buyloading: false,
+      buyloading: false
     };
   },
-  computed: { ...mapGetters(["getWalletAccount"]), ...mapGetters(["getApprovePopup"]) },
+  computed: { ...mapGetters(['getWalletAccount']), ...mapGetters(['getApprovePopup']) },
   watch: {
     getWalletAccount: {
       handler(newVal) {
@@ -189,7 +199,7 @@ export default {
           this.getBalanceOf();
         }
       },
-      immediate: true,
+      immediate: true
     },
     inputAmount: {
       handler(newVal) {
@@ -199,8 +209,8 @@ export default {
         } else {
           this.totalPrice = 0;
         }
-      },
-    },
+      }
+    }
   },
 
   beforeDestroy() {
@@ -214,7 +224,7 @@ export default {
      * @getBoxesLeftSupply 获取某类型的盲盒的剩余可销售数量 入参：盲盒类型 出参：剩余数量
      */
     getAmount() {
-      this.nowStatusText = "status.text12";
+      this.nowStatusText = 'status.text12';
       this.nowStatusIndex = 0;
       if (!this.stepsArr[0].time) return; // 未上架
 
@@ -248,11 +258,11 @@ export default {
               }
             })
             .catch((err2) => {
-              console.error("getBoxesLeftSupply", err2);
+              console.error('getBoxesLeftSupply', err2);
             });
         })
         .catch((err) => {
-          console.error("boxesMaxSupply", err);
+          console.error('boxesMaxSupply', err);
         });
       // cb()
       //   .totalBoxesLength(this.boxType)
@@ -272,10 +282,10 @@ export default {
       let h = parseInt((msec / 1000 / 60 / 60) % 24);
       let m = parseInt((msec / 1000 / 60) % 60);
       let s = parseInt((msec / 1000) % 60);
-      this.countdownObj.d = d > 9 ? d : "0" + d;
-      this.countdownObj.h = h > 9 ? h : "0" + h;
-      this.countdownObj.m = m > 9 ? m : "0" + m;
-      this.countdownObj.s = s > 9 ? s : "0" + s;
+      this.countdownObj.d = d > 9 ? d : '0' + d;
+      this.countdownObj.h = h > 9 ? h : '0' + h;
+      this.countdownObj.m = m > 9 ? m : '0' + m;
+      this.countdownObj.s = s > 9 ? s : '0' + s;
       // console.log("开售倒计时", this.countdownObj.s);
       if (d >= 0 && h >= 0 && m >= 0 && s >= 0) {
         if (d == 0 && h == 0 && m == 0 && s == 0) {
@@ -304,7 +314,7 @@ export default {
           // console.log("获取某类型的盲盒的支付代币单价", this.boxPrice);
         })
         .catch((err) => {
-          console.error("boxTokenPrices", err);
+          console.error('boxTokenPrices', err);
         });
       cb()
         .tokenAddrs(this.boxType)
@@ -313,7 +323,7 @@ export default {
           // console.log("获取某类型的盲盒的支付代币地址", this.paymentAddress);
         })
         .catch((err) => {
-          console.error("tokenAddrs", err);
+          console.error('tokenAddrs', err);
         });
       cb()
         .whiteListFlags(this.boxType)
@@ -323,7 +333,7 @@ export default {
           if (this.isOpenWhitelist) this.getWhiteListExistence();
         })
         .catch((err) => {
-          console.error("whiteListFlags", err);
+          console.error('whiteListFlags', err);
         });
       cb()
         .hourlyBuyLimits(this.boxType)
@@ -332,7 +342,7 @@ export default {
           // console.log("每小时限购数量", res, this.hourlyBuyAmount);
         })
         .catch((err) => {
-          console.error("hourlyBuyLimits", err);
+          console.error('hourlyBuyLimits', err);
         });
     },
     /**获取某类型的盲盒下某用户某小时剩余购买数量 入参：盲盒类型，用户钱包地址，时间戳(秒) 出参：剩余数量 */
@@ -345,7 +355,7 @@ export default {
           // console.log("某用户某小时剩余购买数量", this.hourRemainingAmount);
         })
         .catch((err) => {
-          console.error("getUserHourlyBoxesLeftSupply", err);
+          console.error('getUserHourlyBoxesLeftSupply', err);
         });
     },
     /**钱包余额 */
@@ -357,7 +367,7 @@ export default {
           // console.log("钱包余额", this.balanceAmount);
         })
         .catch((err) => {
-          console.error("erc20(token().USDC).balanceOf", err);
+          console.error('erc20(token().USDC).balanceOf', err);
         });
     },
     /**判断某用户是否在某类型的盲盒的白名单 入参：盲盒类型，用户钱包地址 出参：是否在白名单 */
@@ -367,10 +377,10 @@ export default {
         .then((res) => {
           this.isWhite = res;
           // console.log("判断某用户是否在某类型的盲盒的白名单", this.isWhite);
-          if (!this.isWhite) return this.$message({ message: this.$t("用户不在白名单中") });
+          if (!this.isWhite) return this.$message({ message: this.$t('用户不在白名单中') });
         })
         .catch((err) => {
-          console.error("getWhiteListExistence", err);
+          console.error('getWhiteListExistence', err);
         });
     },
 
@@ -388,40 +398,40 @@ export default {
     // 授权检查：需要先去该盲盒支付代币合约授权；
     /**购买 */
     buyBoxesBefore() {
-      if (!this.getWalletAccount) return this.$store.commit("setWalletConnectPopup", true);
-      if (!this.inputAmount) return this.$message({ message: this.$t("tips.text6") });
+      if (!this.getWalletAccount) return this.$store.commit('setWalletConnectPopup', true);
+      if (!this.inputAmount) return this.$message({ message: this.$t('tips.text6') });
       // 库存检查
       if (this.inputAmount > this.remainingAmount) {
         this.inputAmount = this.remainingAmount;
-        return this.$message({ message: this.$t("tips.text7") });
+        return this.$message({ message: this.$t('tips.text7') });
       }
       // 余额检查
       if (this.totalPrice > this.balanceAmount) {
         this.inputAmount = this.balanceAmount / this.boxPrice;
-        return this.$message({ message: this.$t("tips.text8") });
+        return this.$message({ message: this.$t('tips.text8') });
       }
       // 频控检查
       if (this.inputAmount > this.hourRemainingAmount) {
         this.inputAmount = this.hourRemainingAmount;
-        return this.$message({ message: this.$t("tips.text9") });
+        return this.$message({ message: this.$t('tips.text9') });
       }
       // 白名单检查
-      if (!this.isWhite) return this.$message({ message: this.$t("tips.text10") });
+      if (!this.isWhite) return this.$message({ message: this.$t('tips.text10') });
       // 授权检查
       erc20(token().USDT)
         .allowance(this.getWalletAccount, token().CB)
         .then((res) => {
           // Number(res._hex) 可付款额度
-           console.log(Number(res._hex));
+          console.log(Number(res._hex));
           this.isApproved = Number(res._hex) > this.totalPrice;
           if (this.isApproved) {
             this.buyBoxes();
           } else {
-            this.$store.commit("setApprovePopup", true);
+            this.$store.commit('setApprovePopup', true);
           }
         })
         .catch((err) => {
-          console.error("allowance", err);
+          console.error('allowance', err);
           this.isApproved = false;
         });
     },
@@ -434,9 +444,9 @@ export default {
         // const etReceipt = await tx.wait(); // 请求已发出，等待矿工打包进块，交易成功，返回交易收据
         // console.log("交易收据", etReceipt);
         await tx.wait();
-        if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
-        this.$message({ message: this.$t("tips.text11") });
-        sessionStorage.removeItem("MysteyBoxesList");
+        if (this.getApprovePopup) this.$store.commit('setApprovePopup', false);
+        this.$message({ message: this.$t('tips.text11') });
+        sessionStorage.removeItem('MysteyBoxesList');
         this.buyloading = false;
         this.inputAmount = null;
         this.getAmount();
@@ -453,7 +463,7 @@ export default {
         // console.log("ET Auto Mint Done @", new Date().toLocaleString("chinese", { hour12: false }));
       } catch (err) {
         this.buyloading = false;
-        console.error("buyBoxes", err);
+        console.error('buyBoxes', err);
       }
     },
     subtraction() {
@@ -463,14 +473,14 @@ export default {
     addition() {
       if (this.buyloading) return;
       if (this.inputAmount < this.remainingAmount) this.inputAmount++;
-    },
+    }
     /**返回该类型盲盒某角色的出现概率，除1e4*100% 入参：盲盒类型，角色ID 出参：概率 */
     // heroProbabilities() {},
     // changeSteps(item, index) {
     //   this.nowStatusText = item.title;
     //   this.nowStatusIndex = index + 1;
     // },
-  },
+  }
 };
 </script>
 
@@ -480,7 +490,7 @@ export default {
   min-height: calc(100vh - 4rem);
   padding: 0.8rem 0;
   overflow: hidden;
-  background: url($urlImages + "bg7.webp") no-repeat;
+  background: url('~@/assets/cdn/images/bg7.webp') no-repeat;
   background-size: 100% 100%;
 }
 .tip_box {
@@ -643,7 +653,7 @@ export default {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: url($urlImages + "bg8.webp") no-repeat;
+          background: url('~@/assets/cdn/images/bg8.webp') no-repeat;
           background-size: 100% 100%;
           span {
             font-size: 0.15rem;
@@ -658,7 +668,7 @@ export default {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: url($urlImages + "bg9.webp") no-repeat;
+          background: url('~@/assets/cdn/images/bg9.webp') no-repeat;
           background-size: 100% 100%;
           text-align: center;
           span {
@@ -691,7 +701,7 @@ export default {
               font-weight: bold;
               position: relative;
               &::before {
-                content: "";
+                content: '';
                 width: 0.02rem;
                 height: 100%;
                 background: linear-gradient(135deg, rgba(212, 135, 241, 0.44), rgba(82, 224, 255, 0.44));
@@ -722,7 +732,14 @@ export default {
             .span2 {
               width: 0.5rem;
               height: 80%;
-              border-image: linear-gradient(180deg, rgba(85, 85, 87, 0), rgba(85, 85, 87, 1), rgba(85, 85, 87, 1), rgba(85, 85, 87, 0)) 1 1;
+              border-image: linear-gradient(
+                  180deg,
+                  rgba(85, 85, 87, 0),
+                  rgba(85, 85, 87, 1),
+                  rgba(85, 85, 87, 1),
+                  rgba(85, 85, 87, 0)
+                )
+                1 1;
               display: flex;
               align-items: center;
               justify-content: center;

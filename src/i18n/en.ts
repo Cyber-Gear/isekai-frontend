@@ -1,7 +1,8 @@
 export default {
+  websiteName: 'Merlin Games',
   nav: {
     text1: 'HOME',
-    text2: 'ARTIST',
+    text2: 'GAMES',
     text3: 'DAO',
     text4: 'LAUNCHPAD',
     text5: 'MARKET',
@@ -11,12 +12,12 @@ export default {
     text9: 'MORE'
   },
   footer: {
-    text1: 'COPYRIGHT © 2022 Merlingames, All rights Reserved'
+    text1: 'COPYRIGHT © 2024 Merlin Games, All rights Reserved'
   },
   home: {
     text1: `CREATE A FUN
     METAVERSE FOR ALL !`,
-    text3: `NFT artist shika studio provided the character artwork for the release of NFT on the Merlingames platform, which was used in Cybergear's game scenes.`,
+    text3: `NFT artist shika studio provided the character artwork for the release of NFT on the Merlin Games platform, which was used in Cybergear's game scenes.`,
     text4: 'WHITE PAGE',
     // text5: "DAO",
     // text6: "LAUNCHPAD",
@@ -25,31 +26,31 @@ export default {
     // text9: "INVESTOR&PARTNER",
     text10: 'TAG',
     forms: [
-      { text1: 'Submit Artist Info', text2: 'Start the journey of secondary creation and get rewarded' },
-      { text1: 'Submit cooperation Info', text2: 'Create your NFT、Game、Event, we will contact with you' },
-      { text1: 'Polling vote', text2: 'Vote for your favorite artists, KOLs, games and works and get rewarded' }
+      { text1: 'Submit Your Team', text2: 'Come and join MerlinGames!' },
+      { text1: 'Launch Your Game', text2: 'Let the world see your game!' },
+      { text1: 'Polling vote', text2: 'Vote for your favorite games and detailed teams to get rewarded' }
     ],
     daos: [
       {
         text1: 'Notification',
-        text2: `hello to all you Merlingames out there
+        text2: `hello to all you Merlin Games out there
         lets put a notification option ( email , phone notification , ... )
-        so we won’t miss what Merlingames hold for us`,
+        so we won’t miss what Merlin Games hold for us`,
         text3: 'detail'
       },
       {
-        text1: 'Merlingames Governance Threshold',
-        text2: `This vote aims to determine intention as to whether a threshold is a legitimate alternative path to Merlingames shareholders, if so, what the appropriate threshold should be.`,
+        text1: 'Merlin Games Governance Threshold',
+        text2: `This vote aims to determine intention as to whether a threshold is a legitimate alternative path to Merlin Games shareholders, if so, what the appropriate threshold should be.`,
         text3: 'detail'
       },
       {
         text1: 'Launched the Fist Game',
-        text2: `There are many games under Merlingames that are suitable for gamefi users.
+        text2: `There are many games under Merlin Games that are suitable for gamefi users.
         The first game to be launched will be selected by users' votes.`,
         text3: 'detail'
       }
     ],
-    medias: [{ text: 'cybergear will soon be on the Gamedao board, please look forward to it!' }]
+    medias: [{ text: '2024.04.13 Bit Town will soon be a candidate for game release, so stay tuned' }]
   },
   nftworks: {
     zw: {
@@ -74,7 +75,7 @@ export default {
     akiha: {
       title: 'Secret of seasons',
       name: 'Akiha',
-      des: 'A Korean freelance illustrator who specializes in using unique colors and shadows to express his works. \n A very unique use of color and light and shadow of the artist, seems to be very fond of the combination of sailor suit, beautiful girls and Japanese swords. \n The distinctive style of painting light and shade and color are beautiful, and the characters in the illustrations are unforgettable with their changing demeanor. \n He has worked on several light novel works such as "The "Hentai" Prince and the Stony Cat" and "Sister Life".',
+      des: `Akiha's journey in game development is marked by a deep passion for storytelling and an innovative approach to game mechanics. With a solid foundation in both coding and design, Akiha brings to life gaming experiences that are both engaging and visually compelling.`,
       works: [
         { name: 'Armed girl' },
         { name: 'Crying in the gym' },
@@ -93,7 +94,7 @@ export default {
     negoro: {
       title: 'Fanart world',
       name: 'Negoro',
-      des: 'Illustrator and concept designer, once participated in the design of "Onmyoji" character painting. \n Featured with neat outline sketch and fresh color collocation. \n Keens on fanart creation. ',
+      des: `Negoro, hailing from Japan, is a distinguished game developer known for blending traditional Japanese aesthetics with innovative gameplay mechanics.`,
       works: [
         { name: 'The duel' },
         { name: 'Irelia' },

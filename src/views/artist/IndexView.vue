@@ -2,8 +2,8 @@
   <div class="page">
     <div class="box">
       <div class="box_title">
-        <img :src="`${$urlImages}box_title1.webp`" alt="" />
-        <span>{{ $t("artist.text1") }}</span>
+        <img src="@/assets/cdn/images/box_title1.webp" alt="" />
+        <span>{{ $t('artist.text1') }}</span>
       </div>
       <ul class="card_list">
         <li v-for="(item, index) in cardList" :key="index" @click="toDetail(item.id)">
@@ -12,14 +12,14 @@
           <div class="bottom">
             <div>{{ $t(item.title) }}</div>
             <div>
-              <span>{{ $t("artist.text2") }} </span>
+              <span>{{ $t('artist.text2') }} </span>
               <span> {{ item.name }}</span>
             </div>
             <div class="text_ellipsis_row_3">
               <pre>{{ $t(item.des) }}</pre>
             </div>
           </div>
-          <img class="angle2" :src="`${$urlImages}angle2.webp`" alt="" />
+          <img class="angle2" src="@/assets/cdn/images/angle2.webp" alt="" />
         </li>
       </ul>
     </div>
@@ -27,19 +27,19 @@
 </template>
 
 <script>
-import { shikastudio, zw, akiha, negoro } from "@/mock/nftworks";
+import { shikastudio, merlingames, zw, akiha, negoro } from '@/mock/nftworks';
 export default {
-  name: "ARTIST",
+  name: 'ARTIST',
   data() {
     return {
-      cardList: [shikastudio, zw, akiha, negoro],
+      cardList: [shikastudio, merlingames, zw, akiha, negoro]
     };
   },
   methods: {
     toDetail(id) {
-      this.$router.push({ path: "/artist-details", query: { id: id } });
-    },
-  },
+      this.$router.push({ path: '/artist-details', query: { id: id } });
+    }
+  }
 };
 </script>
 
@@ -47,7 +47,7 @@ export default {
 .page {
   width: 100%;
   padding: 0.8rem 0;
-  background: url($urlImages + "bg7.webp") no-repeat;
+  background: url('~@/assets/cdn/images/bg7.webp') no-repeat;
   background-size: 100% 100%;
 }
 .box {

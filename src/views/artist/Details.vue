@@ -4,7 +4,7 @@
       <img :src="detail.banner" alt="" />
       <div class="back_box">
         <div @click="goBack">
-          <i class="iconfont pcfanhui"></i><span>{{ $t("btns.text1") }}</span>
+          <i class="iconfont pcfanhui"></i><span>{{ $t('btns.text1') }}</span>
         </div>
       </div>
     </div>
@@ -14,7 +14,7 @@
       </div>
       <div class="box1">
         <div class="linklist">
-          <a v-for="(item, index) in linkList" :key="index" :href="item.href">
+          <a v-for="(item, index) in linkList" :key="index" :href="item.href || '#'">
             <img :src="item.image" alt="" />
           </a>
         </div>
@@ -31,25 +31,25 @@
             <div>
               <div>
                 <div><span>10.0k</span></div>
-                <div>{{ $t("artist.items[0]") }}</div>
+                <div>{{ $t('artist.items[0]') }}</div>
               </div>
             </div>
             <div>
               <div>
                 <div><span>10.0k</span></div>
-                <div>{{ $t("artist.items[1]") }}</div>
+                <div>{{ $t('artist.items[1]') }}</div>
               </div>
             </div>
             <div>
               <div>
-                <div><img :src="`${$urlImages}coin.webp`" alt="" />10.0k</div>
-                <div>{{ $t("artist.items[2]") }}</div>
+                <div><img src="@/assets/cdn/images/coin.webp" alt="" />10.0k</div>
+                <div>{{ $t('artist.items[2]') }}</div>
               </div>
             </div>
             <div>
               <div>
-                <div><img :src="`${$urlImages}coin.webp`" alt="" />10.0k</div>
-                <div>{{ $t("artist.items[3]") }}</div>
+                <div><img src="@/assets/cdn/images/coin.webp" alt="" />10.0k</div>
+                <div>{{ $t('artist.items[3]') }}</div>
               </div>
             </div>
           </li>
@@ -65,13 +65,13 @@
             <div class="center">
               <div>
                 <span>{{ $t(item.name) }}</span>
-                <img :src="`${$urlImages}icon1.webp`" alt="" />
+                <img src="@/assets/cdn/images/icon1.webp" alt="" />
               </div>
               <div>
                 <span>{{ $t(item.title) }}</span>
                 <span>88busd</span>
               </div>
-              <div>{{ $t("artist.text10") }}77busd</div>
+              <div>{{ $t('artist.text10') }}77busd</div>
             </div>
           </li>
         </ul>
@@ -81,20 +81,16 @@
 </template>
 
 <script>
-import { shikastudio, zw, akiha, negoro } from "@/mock/nftworks";
+import { shikastudio, zw, akiha, negoro } from '@/mock/nftworks';
+import { linkList } from '@/mock/staticdata';
 export default {
-  name: "ARTISTDetails",
+  name: 'ARTISTDetails',
   data() {
     return {
       detail: null,
       cardList: [],
       isShowIntroduce: false,
-      linkList: [
-        { image: this.$urlImages + "contact_Gitbook.webp", href: "https://funtopia.gitbook.io/fun-topia/create-a-fun-metaverse/about-fun-topia" },
-        { image: this.$urlImages + "contact_Twitter.webp", href: "https://twitter.com/FuntopiaNFT" },
-        { image: this.$urlImages + "contact_Discord.webp", href: "https://discord.gg/Gtq9JsPcPN" },
-        { image: this.$urlImages + "contact_Medium.webp", href: "https://medium.com/@funtopiagame" },
-      ],
+      linkList: linkList
     };
   },
   created() {
@@ -124,15 +120,15 @@ export default {
         // case "negoro":
         //   this.$router.push({ path: "/artist-details-negoro", query: { id: id } });
         //   break;
-        case "shikastudio":
-          this.$router.push({ path: "/artist-details-shikastudio", query: { id: id } });
+        case 'shikastudio':
+          this.$router.push({ path: '/artist-details-shikastudio', query: { id: id } });
           break;
         default:
-          this.$message({ message: this.$t("tips.text12") });
+          this.$message({ message: this.$t('tips.text12') });
           break;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -153,7 +149,7 @@ export default {
 .content {
   width: 100%;
   position: relative;
-  background: url($urlImages + "bg5.webp") no-repeat;
+  background: url('~@/assets/cdn/images/bg5.webp') no-repeat;
   background-size: 100% 100%;
   padding-bottom: 0.8rem;
 }

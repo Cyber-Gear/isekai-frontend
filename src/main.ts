@@ -14,7 +14,7 @@ import utils from './utils';
 Vue.prototype.$utils = utils;
 import filters from './utils/filters';
 Object.keys(filters).forEach((key) => {
-  Vue.filter(key, filters[key]);
+  Vue.filter(key, (filters as any)[key]);
 });
 
 import api from './api/api';

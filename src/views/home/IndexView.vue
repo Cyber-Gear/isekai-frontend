@@ -578,13 +578,15 @@ export default {
     > img {
       width: 44%;
       height: 5.5rem;
+      border-radius: 0.1rem;
     }
     > div {
       width: 54%;
       img {
-        display: block;
         width: 100%;
         height: 2.7rem;
+        border-radius: 0.1rem;
+        display: block;
         &:nth-child(1) {
           margin-bottom: 0.1rem;
         }
@@ -652,6 +654,7 @@ export default {
     img {
       width: 100%;
       height: auto;
+      border-radius: 0.1rem;
     }
   }
   .list {

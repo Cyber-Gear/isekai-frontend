@@ -27,18 +27,19 @@ export default {
 <style lang="scss" scoped>
 .footer_box {
   width: 100%;
-  height: 3rem;
+  height: 2rem;
   background: linear-gradient(180deg, #252637 0%, #0f0f12 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   .center {
-    width: 6.5rem;
+    width: 8rem;
     text-align: center;
     > div {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-bottom: 0.2rem;
       .logo {
         width: 2.95rem;
         height: auto;
@@ -64,8 +65,7 @@ export default {
     p {
       font-size: 0.15rem;
       font-weight: bold;
-      line-height: 0.5rem;
-      letter-spacing: 0.06rem;
+      letter-spacing: 0.02rem;
     }
   }
 }
@@ -74,7 +74,7 @@ export default {
     width: 100%;
     height: 1rem;
     .center {
-      width: 80vw;
+      width: 90vw;
       > div {
         .logo {
           width: 1.5rem;
@@ -91,7 +91,6 @@ export default {
       p {
         font-size: 0.12rem;
         font-weight: 400;
-        line-height: 0.3rem;
         letter-spacing: 0;
       }
     }

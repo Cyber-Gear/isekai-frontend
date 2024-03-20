@@ -76,6 +76,7 @@ export default {
     transition: all 0.3s;
     position: relative;
     cursor: pointer;
+    overflow: hidden;
     &:nth-child(4n) {
       margin-right: 0;
     }

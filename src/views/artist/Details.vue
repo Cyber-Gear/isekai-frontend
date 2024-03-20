@@ -25,30 +25,29 @@
           <li>
             <i class="iconfont pcassessed-badge"></i>
             <i class="iconfont pcgouxuan"></i>
-            <i class="iconfont pcassessed-badge"></i>
           </li>
           <li>
             <div>
               <div>
-                <div><span>10.0k</span></div>
+                <div><span>7k</span></div>
                 <div>{{ $t('artist.items[0]') }}</div>
               </div>
             </div>
             <div>
               <div>
-                <div><span>10.0k</span></div>
+                <div><span>8k</span></div>
                 <div>{{ $t('artist.items[1]') }}</div>
               </div>
             </div>
             <div>
               <div>
-                <div><img src="@/assets/cdn/images/coin.webp" alt="" />10.0k</div>
+                <div><span>9k</span></div>
                 <div>{{ $t('artist.items[2]') }}</div>
               </div>
             </div>
             <div>
               <div>
-                <div><img src="@/assets/cdn/images/coin.webp" alt="" />10.0k</div>
+                <div><img src="@/assets/cdn/images/coin.webp" alt="" /><span>10k</span></div>
                 <div>{{ $t('artist.items[3]') }}</div>
               </div>
             </div>
@@ -323,6 +322,7 @@ export default {
     .top {
       width: 100%;
       height: auto;
+      overflow: hidden;
       img {
         width: 100%;
         height: 100%;

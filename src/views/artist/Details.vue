@@ -21,11 +21,8 @@
       </div>
       <div class="box2">
         <ul>
-          <li>{{ $t(detail.title) }}</li>
-          <li>
-            <i class="iconfont pcassessed-badge"></i>
-            <i class="iconfont pcgouxuan"></i>
-          </li>
+          <li>{{ $t(detail.name) }}</li>
+          <li></li>
           <li>
             <div>
               <div>
@@ -60,7 +57,7 @@
       <div class="box3">
         <ul class="card_list">
           <li v-for="(item, index) in cardList" :key="index" @click="toDetail(item.id)">
-            <div class="top"><img :src="item.logo" alt="" /></div>
+            <div class="top"><img :src="detail.id == 'merlingames' ? item.card : item.logo" alt="" /></div>
             <div class="center">
               <div>
                 <span>{{ $t(item.name) }}</span>
@@ -80,7 +77,7 @@
 </template>
 
 <script>
-import { shikastudio, zw, akiha, negoro } from '@/mock/nftworks';
+import { shikastudio, zw, akiha, negoro, merlingames } from '@/mock/nftworks';
 import { linkList } from '@/mock/staticdata';
 export default {
   name: 'ARTISTDetails',
@@ -95,7 +92,7 @@ export default {
   created() {
     if (Object.keys(this.$route.query).length > 0) {
       const id = this.$route.query.id;
-      const arr = [shikastudio, zw, akiha, negoro];
+      const arr = [shikastudio, zw, akiha, negoro, merlingames];
       arr.forEach((element) => {
         if (element.id === id) {
           this.detail = element;
@@ -325,7 +322,7 @@ export default {
       overflow: hidden;
       img {
         width: 100%;
-        height: 100%;
+        height: auto;
       }
     }
     .center {

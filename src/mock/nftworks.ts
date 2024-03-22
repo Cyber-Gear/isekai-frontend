@@ -529,18 +529,18 @@ export const negoro = {
 
 export const merlingames = {
   id: 'merlingames',
-  name: 'Merlin Games',
-  banner: '',
+  name: 'Bit Town',
+  banner: require('@/assets/cdn/artists/merlingames/z-banner.webp'),
   logo: require('@/assets/cdn/artists/merlingames/z-logo.png'),
-  logo2: '',
-  avatar: '',
+  logo2: require('@/assets/cdn/artists/merlingames/z-logo.png'),
+  avatar: require('@/assets/cdn/artists/merlingames/z-avatar.webp'),
   avatar2: '',
-  title: 'Merlin Games',
+  title: 'Bit Town',
   des: 'The Merlin Games team, with its extensive background in both blockchain and game development, embarks on a new venture with their inaugural game, BitTown.',
   works: [
     {
       id: 1,
-      logo: '',
+      logo: require('@/assets/cdn/artists/merlingames/body_2023.png'),
       card2: '',
       card3: '',
       card4: '',
@@ -559,7 +559,7 @@ export const merlingames = {
     },
     {
       id: 2,
-      logo: '',
+      logo: require('@/assets/cdn/artists/merlingames/body_2032.png'),
       card2: '',
       card3: '',
       card4: '',
@@ -578,7 +578,7 @@ export const merlingames = {
     },
     {
       id: 3,
-      logo: '',
+      logo: require('@/assets/cdn/artists/merlingames/body_2022.png'),
       card2: '',
       card3: '',
       card4: '',
@@ -597,7 +597,7 @@ export const merlingames = {
     },
     {
       id: 4,
-      logo: '',
+      logo: require('@/assets/cdn/artists/merlingames/body_2029.png'),
       card2: '',
       card3: '',
       card4: '',
@@ -616,7 +616,7 @@ export const merlingames = {
     },
     {
       id: 5,
-      logo: '',
+      logo: require('@/assets/cdn/artists/merlingames/body_2021.png'),
       card2: '',
       card3: '',
       card4: '',
@@ -635,7 +635,7 @@ export const merlingames = {
     },
     {
       id: 6,
-      logo: '',
+      logo: require('@/assets/cdn/artists/merlingames/body_2030.png'),
       card2: '',
       card3: '',
       card4: '',
@@ -654,7 +654,7 @@ export const merlingames = {
     },
     {
       id: 7,
-      logo: '',
+      logo: require('@/assets/cdn/artists/merlingames/body_2034.png'),
       card2: '',
       card3: '',
       card4: '',
@@ -673,7 +673,7 @@ export const merlingames = {
     },
     {
       id: 8,
-      logo: '',
+      logo: require('@/assets/cdn/artists/merlingames/body_2014.png'),
       card2: '',
       card3: '',
       card4: '',

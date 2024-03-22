@@ -457,7 +457,8 @@ export default {
         height: 100%;
         background-repeat: no-repeat;
         background-size: 100% 100%;
-        border-radius: 0;
+        border-radius: 0.1rem;
+        overflow: hidden;
         > div {
           backdrop-filter: blur(0.05rem);
           div,

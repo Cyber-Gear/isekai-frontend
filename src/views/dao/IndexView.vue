@@ -4,11 +4,14 @@
       <div class="leftbox" v-if="spaceObj">
         <div>
           <div class="avatar">
-            <img src="@/assets/cdn/images/logo.webp" alt="" />
+            <img src="@/assets/cdn/images/logo1.webp" alt="" />
           </div>
-          <div class="title"><span>Pawlyfun</span><i class="iconfont pctelegram"></i></div>
+          <div class="title">
+            <span>{{ $t('websiteName') }}</span>
+            <i class="iconfont pctelegram"></i>
+          </div>
           <div class="linklist">
-            <a v-for="(item, index) in linkList" :key="index" :href="item.href">
+            <a v-for="(item, index) in linkList" :key="index" :href="item.href || '#'">
               <img :src="item.image" alt="" />
             </a>
           </div>
@@ -45,7 +48,7 @@
                   <template v-if="item.state == 'closed'">{{ $t('status.text9') }} </template>
                 </div>
               </li>
-              <li>{{ item.title }} <img :src="`${$urlImages}box_title3.webp`" alt="" /></li>
+              <li>{{ item.title }} <img src="@/assets/cdn/images/box_title3.webp" alt="" /></li>
               <li>
                 <pre class="text_ellipsis_row_3">{{ item.body }}</pre>
               </li>
@@ -64,6 +67,7 @@
 
 <script>
 import { vote } from 'funtopia-sdk';
+import { linkList } from '@/mock/staticdata';
 
 export default {
   name: 'DAO',
@@ -90,15 +94,7 @@ export default {
         { value: 4, label: 'status.text8' },
         { value: 5, label: 'status.text9' }
       ],
-      linkList: [
-        {
-          image: this.$urlImages + 'contact_Gitbook.webp',
-          href: 'https://funtopia.gitbook.io/fun-topia/create-a-fun-metaverse/about-fun-topia'
-        },
-        { image: this.$urlImages + 'contact_Twitter.webp', href: 'https://twitter.com/FuntopiaNFT' },
-        { image: this.$urlImages + 'contact_Discord.webp', href: 'https://discord.gg/Gtq9JsPcPN' },
-        { image: this.$urlImages + 'contact_Medium.webp', href: 'https://medium.com/@funtopiagame' }
-      ]
+      linkList: linkList
     };
   },
   created() {
@@ -199,7 +195,7 @@ export default {
 .page {
   width: 100%;
   padding: 0.8rem 0;
-  background: url($urlImages + 'bg7.webp') no-repeat;
+  background: url('~@/assets/cdn/images/bg7.webp') no-repeat;
   background-size: 100% 100%;
 }
 .box {

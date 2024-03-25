@@ -6,7 +6,7 @@
         <div>
           <div class="tag">{{ $t('home.text4') }}</div>
           <div class="linklist">
-            <a v-for="(item, index) in linkList" :key="index" :href="item.href">
+            <a v-for="(item, index) in linkList" :key="index" :href="item.href || '#'">
               <img :src="item.image" alt="" />
             </a>
           </div>
@@ -88,14 +88,14 @@
     <div class="row5">
       <div class="row_title">LAUNCHPAD</div>
       <div class="titlebox">
-        <img :src="`${$urlImages}img7.webp`" alt="" />
+        <img src="@/assets/cdn/images/img7.webp" alt="" />
         <pre>{{ $t('home.text3') }}</pre>
       </div>
       <div class="contentbox">
-        <img :src="`${$urlImages}img8.webp`" alt="" />
+        <img src="@/assets/cdn/images/img8.webp" alt="" />
         <div>
-          <img :src="`${$urlImages}img9.webp`" alt="" />
-          <img :src="`${$urlImages}img10.webp`" alt="" />
+          <img src="@/assets/cdn/images/img9.webp" alt="" />
+          <img src="@/assets/cdn/images/img10.webp" alt="" />
         </div>
       </div>
     </div>
@@ -116,7 +116,7 @@
     <div class="row7">
       <div class="row_title">MEDIA</div>
       <div class="titlebox">
-        <img :src="`${$urlImages}img4.webp`" alt="" />
+        <img src="@/assets/cdn/images/img4.webp" alt="" />
       </div>
       <ul class="list">
         <li v-for="(item, index) in mediasList" :key="index">
@@ -142,44 +142,37 @@
 <script>
 import { mapGetters } from 'vuex';
 import { shikastudio, zw, akiha, negoro, merlingames } from '@/mock/nftworks';
+import { linkList } from '@/mock/staticdata';
 export default {
   name: 'HOME',
   data() {
     return {
-      linkList: [
-        {
-          image: this.$urlImages + 'contact_Gitbook.webp',
-          href: 'https://funtopia.gitbook.io/fun-topia/create-a-fun-metaverse/about-fun-topia'
-        },
-        { image: this.$urlImages + 'contact_Twitter.webp', href: 'https://twitter.com/FuntopiaNFT' },
-        { image: this.$urlImages + 'contact_Discord.webp', href: 'https://discord.gg/Gtq9JsPcPN' },
-        { image: this.$urlImages + 'contact_Medium.webp', href: 'https://medium.com/@funtopiagame' }
-      ],
+      linkList: linkList,
       formsList: [
         {
-          href: 'https://forms.gle/zZDWkvZgGMS69LHx5',
-          img: this.$urlImages + 'info1.webp',
+          href: 'https://forms.gle/G8JXpBXZ7cKaVCpE8',
+          img: require('@/assets/cdn/images/info1.webp'),
           icon: 'pcbussiness-man',
           text1: 'home.forms[0].text1',
           text2: 'home.forms[0].text2'
         },
         {
-          href: 'https://forms.gle/K9QLDqwe1m3Np7LV8',
-          img: this.$urlImages + 'info2.webp',
+          href: 'https://forms.gle/eY1RyYAWFKQaoSn1A',
+          img: require('@/assets/cdn/images/info2.webp'),
           icon: 'pchezuo',
           text1: 'home.forms[1].text1',
           text2: 'home.forms[1].text2'
         },
         {
           href: '',
-          img: this.$urlImages + 'info3.webp',
+          img: require('@/assets/cdn/images/info3.webp'),
           icon: 'pctoupiao',
           text1: 'home.forms[2].text1',
           text2: 'home.forms[2].text2'
         }
       ],
       infoIndex: 0,
-      infoList: [shikastudio, merlingames, akiha, negoro],
+      infoList: [shikastudio, merlingames, zw, akiha, negoro],
       marketList: [...shikastudio.works, ...merlingames.works],
       marketIndex: 0,
       marketOption: {
@@ -236,22 +229,22 @@ export default {
       ],
       mediasList: [{ time: '2022.04.13', text: 'home.medias[0].text' }],
       partnerList: [
-        this.$urlImages + 'collaborators1.webp',
-        this.$urlImages + 'collaborators2.webp',
-        this.$urlImages + 'collaborators3.webp',
-        this.$urlImages + 'collaborators4.webp',
-        this.$urlImages + 'collaborators5.webp',
-        this.$urlImages + 'collaborators6.webp',
-        this.$urlImages + 'collaborators7.webp',
-        this.$urlImages + 'collaborators8.webp',
-        this.$urlImages + 'collaborators9.webp',
-        this.$urlImages + 'collaborators10.webp',
-        this.$urlImages + 'collaborators11.webp',
-        this.$urlImages + 'collaborators12.webp',
-        this.$urlImages + 'collaborators13.webp',
-        this.$urlImages + 'collaborators14.webp',
-        this.$urlImages + 'collaborators15.webp',
-        this.$urlImages + 'collaborators16.webp'
+        require('@/assets/cdn/images/collaborators1.webp'),
+        require('@/assets/cdn/images/collaborators2.webp'),
+        require('@/assets/cdn/images/collaborators3.webp'),
+        require('@/assets/cdn/images/collaborators4.webp'),
+        require('@/assets/cdn/images/collaborators5.webp'),
+        require('@/assets/cdn/images/collaborators6.webp'),
+        require('@/assets/cdn/images/collaborators7.webp'),
+        require('@/assets/cdn/images/collaborators8.webp'),
+        require('@/assets/cdn/images/collaborators9.webp'),
+        require('@/assets/cdn/images/collaborators10.webp'),
+        require('@/assets/cdn/images/collaborators11.webp'),
+        require('@/assets/cdn/images/collaborators12.webp'),
+        require('@/assets/cdn/images/collaborators13.webp'),
+        require('@/assets/cdn/images/collaborators14.webp'),
+        require('@/assets/cdn/images/collaborators15.webp'),
+        require('@/assets/cdn/images/collaborators16.webp')
       ],
       showSwiper: false
     };
@@ -276,7 +269,7 @@ export default {
 .home {
   width: 100%;
   position: relative;
-  background: url($urlImages + 'bg10.webp') no-repeat;
+  background: url('~@/assets/cdn/images/bg10.webp') no-repeat;
   background-size: 100% 100%;
   padding: 0.8rem 0;
 }
@@ -285,7 +278,7 @@ export default {
   margin: 1.5rem auto;
   padding-top: 1rem;
   .info {
-    width: 6.5rem;
+    width: 7rem;
     > pre {
       font-size: 0.48rem;
       font-weight: bold;
@@ -435,7 +428,7 @@ export default {
       &:nth-child(1) {
         border-radius: 0.14rem 0 0 0.14rem;
       }
-      &:nth-child(4) {
+      &:last-child {
         border-radius: 0 0.14rem 0.14rem 0;
       }
       > div {
@@ -464,7 +457,8 @@ export default {
         height: 100%;
         background-repeat: no-repeat;
         background-size: 100% 100%;
-        border-radius: 0;
+        border-radius: 0.1rem;
+        overflow: hidden;
         > div {
           backdrop-filter: blur(0.05rem);
           div,
@@ -585,13 +579,15 @@ export default {
     > img {
       width: 44%;
       height: 5.5rem;
+      border-radius: 0.1rem;
     }
     > div {
       width: 54%;
       img {
-        display: block;
         width: 100%;
         height: 2.7rem;
+        border-radius: 0.1rem;
+        display: block;
         &:nth-child(1) {
           margin-bottom: 0.1rem;
         }
@@ -659,6 +655,7 @@ export default {
     img {
       width: 100%;
       height: auto;
+      border-radius: 0.1rem;
     }
   }
   .list {

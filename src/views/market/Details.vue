@@ -3,7 +3,7 @@
     <div class="banner">
       <div class="back_box">
         <div @click="goBack">
-          <i class="iconfont pcfanhui"></i><span>{{ $t("btns.text1") }}</span>
+          <i class="iconfont pcfanhui"></i><span>{{ $t('btns.text1') }}</span>
         </div>
       </div>
     </div>
@@ -13,46 +13,46 @@
           <img :src="card.card" alt="" />
           <span>{{ $t(card.name) }}</span>
           <div class="level_btn" :class="card.rarity" @click="openVideo">
-            {{ $t("artist.text11") }}
+            {{ $t('artist.text11') }}
           </div>
         </div>
         <div class="rightbox">
           <div>{{ $t(card.title) }} - {{ $t(card.name) }}</div>
           <div>
-            <span>{{ $t("artist.text2") }} </span>
+            <span>{{ $t('artist.text2') }} </span>
             <span> {{ name }}</span>
           </div>
           <div></div>
           <div>
             <i class="iconfont pcdollar"></i>
-            <span>{{ $t("market.text10") }}</span>
+            <span>{{ $t('market.text10') }}</span>
             <span>{{ price }} {{ token_type }}</span>
           </div>
           <div>
-            <span>{{ $t("market.text25") }}</span>
+            <span>{{ $t('market.text25') }}</span>
             <span>{{ seller }}</span>
-            <el-button @click="beforeBuy" :loading="buyLoading">{{ $t("market.text11") }}</el-button>
+            <el-button @click="beforeBuy" :loading="buyLoading">{{ $t('market.text11') }}</el-button>
           </div>
           <div>
             <i class="iconfont pcshuxingchaxun"></i>
-            <span>{{ $t("market.text12") }}</span>
+            <span>{{ $t('market.text12') }}</span>
           </div>
           <div class="attr_content">
             <ul class="left_box">
               <li>
-                <span>{{ $t("market.text13") }}</span>
+                <span>{{ $t('market.text13') }}</span>
                 <span>{{ $t(card.attribute) }}</span>
               </li>
               <li>
-                <span>{{ $t("market.text14") }}</span>
+                <span>{{ $t('market.text14') }}</span>
                 <span>{{ $t(card.level) }}</span>
               </li>
               <li>
-                <span>{{ $t("market.text15") }}</span>
+                <span>{{ $t('market.text15') }}</span>
                 <span>{{ $t(card.starlevel) }}</span>
               </li>
               <li>
-                <span>{{ $t("market.text16") }}</span>
+                <span>{{ $t('market.text16') }}</span>
                 <span>{{ card.rarity }}</span>
               </li>
             </ul>
@@ -61,7 +61,7 @@
       </div>
       <div class="description">
         <div class="introduction">
-          <span>{{ $t("market.text17") }}</span>
+          <span>{{ $t('market.text17') }}</span>
           <div class="content">
             <div>
               <pre>{{ $t(card.nftdes) }}</pre>
@@ -69,14 +69,14 @@
           </div>
         </div>
         <div class="history">
-          <span>{{ $t("market.text18") }}</span>
+          <span>{{ $t('market.text18') }}</span>
           <div class="content">
-            <div v-if="!history.length">{{ $t("nodata.text3") }}</div>
+            <div v-if="!history.length">{{ $t('nodata.text3') }}</div>
             <ul v-else>
               <li v-for="(item, index) in history" :key="index">
-                <span>{{ $t("market.text31") }}</span>
+                <span>{{ $t('market.text31') }}</span>
                 <span>{{ item.seller2 }}</span>
-                <span>{{ $t("market.text32") }}</span>
+                <span>{{ $t('market.text32') }}</span>
                 <span>{{ item.buyer2 }}</span>
               </li>
             </ul>
@@ -89,7 +89,7 @@
         <img :src="card.card" alt="" />
         <span>{{ $t(card.name) }}</span>
         <div class="level_btn" :class="card.rarity" @click="openVideo">
-          {{ $t("artist.text11") }}
+          {{ $t('artist.text11') }}
         </div>
       </div>
       <div class="title">
@@ -97,52 +97,52 @@
         <div class="row2">
           <div class="row_left">
             <span>{{ name }}</span>
-            <img :src="`${$urlImages}icon1.webp`" alt="" />
+            <img src="@/assets/cdn/images/icon1.webp" alt="" />
           </div>
         </div>
       </div>
       <div class="purchase box">
         <div class="header">
           <i class="iconfont pcqianbao2-mianxing"></i>
-          <span>{{ $t("market.text29") }}</span>
+          <span>{{ $t('market.text29') }}</span>
         </div>
         <div class="pur_body">
           <div>
-            <img :src="`${$urlImages}coin.webp`" alt="" />
+            <img src="@/assets/cdn/images/coin.webp" alt="" />
             <span>12</span>
             <span>($123)</span>
           </div>
           <el-button>
             <i class="iconfont pcqianbao2-mianxing"></i>
-            <span>{{ $t("market.text28") }}</span>
+            <span>{{ $t('market.text28') }}</span>
           </el-button>
         </div>
       </div>
       <div class="attribute box">
         <div class="header">
           <i class="iconfont pcshuxingchaxun"></i>
-          <span>{{ $t("market.text12") }}</span>
+          <span>{{ $t('market.text12') }}</span>
         </div>
         <div class="attr_body">
           <ul>
             <li>
               <i class="iconfont pcshuxingchaxun"></i>
-              <span>{{ $t("market.text13") }}</span>
+              <span>{{ $t('market.text13') }}</span>
               <span>{{ $t(card.attribute) }}</span>
             </li>
             <li>
               <i class="iconfont pcshuxingchaxun"></i>
-              <span>{{ $t("market.text14") }}</span>
+              <span>{{ $t('market.text14') }}</span>
               <span>{{ $t(card.level) }}</span>
             </li>
             <li>
               <i class="iconfont pcshuxingchaxun"></i>
-              <span>{{ $t("market.text15") }}</span>
+              <span>{{ $t('market.text15') }}</span>
               <span>{{ $t(card.starlevel) }}</span>
             </li>
             <li>
               <i class="iconfont pcshuxingchaxun"></i>
-              <span>{{ $t("market.text16") }}</span>
+              <span>{{ $t('market.text16') }}</span>
               <span>{{ card.rarity }}</span>
             </li>
           </ul>
@@ -151,7 +151,7 @@
       <div class="description box">
         <div class="header">
           <i class="iconfont pcshuxingchaxun"></i>
-          <span>{{ $t("market.text17") }}</span>
+          <span>{{ $t('market.text17') }}</span>
         </div>
         <div class="des_body">
           <div>
@@ -162,35 +162,41 @@
       <div class="history box">
         <div class="header">
           <i class="iconfont pcshuxingchaxun"></i>
-          <span>{{ $t("market.text18") }}</span>
+          <span>{{ $t('market.text18') }}</span>
         </div>
         <div class="his_body">
           <ul>
-            <li v-if="!history.length">{{ $t("nodata.text3") }}</li>
+            <li v-if="!history.length">{{ $t('nodata.text3') }}</li>
             <li v-else v-for="(item, index) in history" :key="index">
-              <span>{{ $t("market.text31") }}</span>
+              <span>{{ $t('market.text31') }}</span>
               <span>{{ item.seller2 }}</span>
-              <span>{{ $t("market.text32") }}</span>
+              <span>{{ $t('market.text32') }}</span>
               <span>{{ item.buyer2 }}</span>
             </li>
           </ul>
         </div>
       </div>
     </div>
-    <el-dialog center top="0" :title="$t(card.name)" :visible.sync="isShowPopup" :modal-append-to-body="false" :destroy-on-close="true">
+    <el-dialog
+      center
+      top="0"
+      :title="$t(card.name)"
+      :visible.sync="isShowPopup"
+      :modal-append-to-body="false"
+      :destroy-on-close="true">
       <PaintingVideo :videoUrl="card.video"></PaintingVideo>
     </el-dialog>
     <ApprovePopup :operation="operation" :loading="buyLoading"></ApprovePopup>
   </div>
 </template>
 <script>
-import { marketInfo, market, util, getSigner, erc20, contract } from "funtopia-sdk";
-import PaintingVideo from "@/components/PaintingVideo.vue";
-import ApprovePopup from "@/components/ApprovePopup.vue";
-import { shikastudio } from "@/mock/nftworks";
-import { mapGetters } from "vuex";
+import { marketInfo, market, util, getSigner, erc20, contract } from 'funtopia-sdk';
+import PaintingVideo from '@/components/PaintingVideo.vue';
+import ApprovePopup from '@/components/ApprovePopup.vue';
+import { shikastudio } from '@/mock/nftworks';
+import { mapGetters } from 'vuex';
 export default {
-  name: "MarketDetails",
+  name: 'MarketDetails',
   components: { PaintingVideo, ApprovePopup },
   data() {
     return {
@@ -206,19 +212,19 @@ export default {
       nft_addr: null,
       history: [],
       operation: {
-        name: this.$t("approvePopup.text1"),
-        func: "buyNfts",
+        name: this.$t('approvePopup.text1'),
+        func: 'buyNfts'
       },
-      buyLoading: false,
+      buyLoading: false
     };
   },
-  computed: { ...mapGetters(["getWalletAccount"]), ...mapGetters(["getApprovePopup"]) },
+  computed: { ...mapGetters(['getWalletAccount']), ...mapGetters(['getApprovePopup']) },
   watch: {
     getWalletAccount: {
       handler(newVal) {
         // if (newVal) { }
-      },
-    },
+      }
+    }
   },
   created() {
     if (Object.keys(this.$route.query).length > 0) {
@@ -229,7 +235,7 @@ export default {
       this.nft_type = this.$route.query.nft_type;
       this.price = this.$route.query.price;
       const tmp = this.$route.query.seller;
-      this.seller = tmp.slice(0, 2) + tmp.slice(2, 4).toUpperCase() + "..." + tmp.slice(-4).toUpperCase();
+      this.seller = tmp.slice(0, 2) + tmp.slice(2, 4).toUpperCase() + '...' + tmp.slice(-4).toUpperCase();
       //this.token = this.$route.query.token == token().USDT ? "USDT" : (this.$route.query.token  == token().FUN ? "FUN" : "ETH");
       this.token_type = this.$route.query.token_type;
       // if (this.token == "USDT") this.token_addr = token().USDT;
@@ -243,8 +249,8 @@ export default {
         .getBuyInfos(
           30,
           0,
-          "buyTime",
-          "desc",
+          'buyTime',
+          'desc',
           undefined,
           undefined,
           this.nft_addr,
@@ -254,14 +260,22 @@ export default {
           undefined,
           undefined,
           undefined,
-          this.$route.query.id - 1,
+          this.$route.query.id - 1
         )
         .then((res) => {
           let data = JSON.parse(JSON.stringify(res.data.buyInfos));
           this.history = data.filter((item) => item.nftId == this.nftId);
           this.history.forEach((item) => {
-            item.buyer2 = item.buyer.slice(0, 2) + item.buyer.slice(2, 4).toUpperCase() + "..." + item.buyer.slice(-4).toUpperCase();
-            item.seller2 = item.seller.slice(0, 2) + item.seller.slice(2, 4).toUpperCase() + "..." + item.seller.slice(-4).toUpperCase();
+            item.buyer2 =
+              item.buyer.slice(0, 2) +
+              item.buyer.slice(2, 4).toUpperCase() +
+              '...' +
+              item.buyer.slice(-4).toUpperCase();
+            item.seller2 =
+              item.seller.slice(0, 2) +
+              item.seller.slice(2, 4).toUpperCase() +
+              '...' +
+              item.seller.slice(-4).toUpperCase();
           });
           // console.log(this.history);
         });
@@ -277,7 +291,7 @@ export default {
 
     //contract
     beforeBuy() {
-      if (!this.getWalletAccount) return this.$store.commit("setWalletConnectPopup", true);
+      if (!this.getWalletAccount) return this.$store.commit('setWalletConnectPopup', true);
       this.buyLoading = true;
       // 授权检查
       if (this.token_addr) {
@@ -289,12 +303,12 @@ export default {
             if (Number(res._hex) > this.price) {
               this.buyNfts();
             } else {
-              this.$store.commit("setApprovePopup", true);
+              this.$store.commit('setApprovePopup', true);
               this.buyLoading = false;
             }
           })
           .catch((err) => {
-            console.error("allowance", err);
+            console.error('allowance', err);
             this.buyLoading = false;
           });
       }
@@ -302,7 +316,9 @@ export default {
 
     /**去授权 */
     async toApprove() {
-      const tx = await erc20(this.token_addr).connect(getSigner()).approve(contract().Market, util.parseUnits((1e10).toString()));
+      const tx = await erc20(this.token_addr)
+        .connect(getSigner())
+        .approve(contract().Market, util.parseUnits((1e10).toString()));
       await tx.wait();
     },
     async buyNfts() {
@@ -314,23 +330,23 @@ export default {
         // const etReceipt = await tx.wait(); // 请求已发出，等待矿工打包进块，交易成功，返回交易收据
         // console.log("交易收据", etReceipt);
         await tx.wait();
-        if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
+        if (this.getApprovePopup) this.$store.commit('setApprovePopup', false);
         this.buyloading = false;
-        this.$message({ message: this.$t("tips.text11") });
-        this.$router.push({ path: "/market" });
+        this.$message({ message: this.$t('tips.text11') });
+        this.$router.push({ path: '/market' });
       } catch (err) {
         this.buyloading = false;
-        console.error("buyNfts", err);
+        console.error('buyNfts', err);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
 .page {
   width: 100%;
   padding-top: 0.8rem;
-  background: url($urlImages + "bg5.webp") no-repeat;
+  background: url('~@/assets/cdn/images/bg5.webp') no-repeat;
   background-size: 100% 100%;
 }
 .banner {

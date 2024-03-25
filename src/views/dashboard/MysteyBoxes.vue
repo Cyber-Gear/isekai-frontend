@@ -3,14 +3,18 @@
     <div class="title">Mystey Boxes</div>
     <div class="switch_box">
       <ul class="switch_list">
-        <li v-for="(item, index) in switchList" :key="index" :class="{ active: switchIndex == index }" @click="switchTab(index)">
+        <li
+          v-for="(item, index) in switchList"
+          :key="index"
+          :class="{ active: switchIndex == index }"
+          @click="switchTab(index)">
           {{ $t(item.label) }}({{ item.total }})
         </li>
       </ul>
       <div v-show="switchIndex == 1">
         <i class="iconfont pcfuxuankuang-quanxuan"></i>
         <i class="iconfont pcfuxuankuang-weiquanxuan"></i>
-        {{ $t("dashboard.text14") }}/{{ $t("dashboard.text15") }}
+        {{ $t('dashboard.text14') }}/{{ $t('dashboard.text15') }}
       </div>
     </div>
     <ul class="box_list" v-if="switchIndex == 0 && boxList.length > 0">
@@ -22,10 +26,10 @@
           <div>
             <p>{{ item.label }}</p>
             <p>
-              {{ $t("dashboard.text17") }}: <span>{{ item.list.length }}</span>
+              {{ $t('dashboard.text17') }}: <span>{{ item.list.length }}</span>
             </p>
           </div>
-          <div>{{ $t("dashboard.text18") }} <i class="iconfont pcfuxuankuang-quanxuan"></i></div>
+          <div>{{ $t('dashboard.text18') }} <i class="iconfont pcfuxuankuang-quanxuan"></i></div>
         </div>
       </li>
     </ul>
@@ -39,7 +43,7 @@
             <div class="row1">
               <div>
                 <span>{{ item.name1 }}</span>
-                <img :src="`${$urlImages}icon1.webp`" alt="" />
+                <img src="@/assets/cdn/images/icon1.webp" alt="" />
               </div>
               <div>
                 <!-- <span>{{ item.num1 }}busd</span> -->
@@ -62,36 +66,36 @@
 </template>
 
 <script>
-import { cb } from "funtopia-sdk";
-import { mapGetters } from "vuex";
-import NoData from "@/components/NoData.vue";
-import LottieAnimation from "@/components/LottieAnimation.vue";
+import { cb } from 'funtopia-sdk';
+import { mapGetters } from 'vuex';
+import NoData from '@/components/NoData.vue';
+import LottieAnimation from '@/components/LottieAnimation.vue';
 export default {
   components: { NoData, LottieAnimation },
-  name: "MysteyBoxes",
+  name: 'MysteyBoxes',
   data() {
     return {
       isShowCheck: false,
       switchIndex: 0,
       switchList: [
-        { label: "dashboard.text12", total: 0 },
+        { label: 'dashboard.text12', total: 0 }
         // { label: "dashboard.text13", total: 0 },
       ],
       idArr: [],
       cardList: [],
       boxList: [],
-      requestTimer: null,
+      requestTimer: null
     };
   },
-  computed: { ...mapGetters(["getWalletAccount"]) },
+  computed: { ...mapGetters(['getWalletAccount']) },
   watch: {
     getWalletAccount: {
       handler(newVal, oldVal) {
-        if (newVal !== oldVal) sessionStorage.removeItem("MysteyBoxesList");
+        if (newVal !== oldVal) sessionStorage.removeItem('MysteyBoxesList');
         if (newVal) this.switchTab(0);
       },
-      immediate: true, // 页面初始化后立即执行
-    },
+      immediate: true // 页面初始化后立即执行
+    }
   },
   beforeDestroy() {
     clearInterval(this.requestTimer);
@@ -103,8 +107,8 @@ export default {
       this.boxList = [];
       if (index == 0) {
         this.switchList[0].total = 0;
-        if (sessionStorage.getItem("MysteyBoxesList")) {
-          this.boxList = JSON.parse(sessionStorage.getItem("MysteyBoxesList"));
+        if (sessionStorage.getItem('MysteyBoxesList')) {
+          this.boxList = JSON.parse(sessionStorage.getItem('MysteyBoxesList'));
           this.boxList.forEach((element) => {
             this.switchList[0].total += element.list.length;
           });
@@ -135,7 +139,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.error("tokensOfOwnerBySize", err);
+          console.error('tokensOfOwnerBySize', err);
         });
     },
     /**筛选类型重组 */
@@ -145,23 +149,23 @@ export default {
           clearInterval(this.requestTimer);
           this.requestTimer = null;
           this.idArr.sort((a, b) => a.cbId - b.cbId);
-          const arr = this.$utils.unique(this.idArr, "boxType"); // 去重
+          const arr = this.$utils.unique(this.idArr, 'boxType'); // 去重
           if (arr.length > 1) arr.sort((a, b) => a.boxType - b.boxType);
           arr.forEach((element) => {
             const list = this.idArr.filter((item) => {
               return item.boxType == element.boxType;
             });
-            const obj = { boxType: element.boxType, label: "", list: list, checked: false };
+            const obj = { boxType: element.boxType, label: '', list: list, checked: false };
             switch (element.boxType) {
               case 0:
-                obj.label = "Bir Mystery Box";
+                obj.label = 'Bir Mystery Box';
                 break;
               default:
                 break;
             }
             this.boxList.push(obj);
           });
-          sessionStorage.setItem("MysteyBoxesList", JSON.stringify(this.boxList));
+          sessionStorage.setItem('MysteyBoxesList', JSON.stringify(this.boxList));
         }
       }, 200);
     },
@@ -178,15 +182,16 @@ export default {
           this.idArr.push({ cbId: cbId, boxType: Number(res) });
         })
         .catch((err) => {
-          console.error("cbIdToType", err);
+          console.error('cbIdToType', err);
           clearInterval(this.requestTimer);
           this.requestTimer = null;
         });
     },
     toDetail(item) {
-      if (item.list.length > 0) this.$router.push({ path: "/dashboard/mystey-boxes-details", query: { id: item.boxType } });
-    },
-  },
+      if (item.list.length > 0)
+        this.$router.push({ path: '/dashboard/mystey-boxes-details', query: { id: item.boxType } });
+    }
+  }
 };
 </script>
 

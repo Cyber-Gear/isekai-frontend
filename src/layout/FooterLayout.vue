@@ -4,7 +4,7 @@
       <div>
         <img class="logo" src="@/assets/cdn/images/logo2.webp" alt="" />
         <div class="linklist">
-          <a v-for="(item, index) in linkList" :key="index" :href="item.href">
+          <a v-for="(item, index) in linkList" :key="index" :href="item.href || '#'">
             <img :src="item.image" alt="" />
           </a>
         </div>
@@ -14,19 +14,12 @@
   </div>
 </template>
 <script>
+import { linkList } from '@/mock/staticdata';
 export default {
   name: 'FooterLayout',
   data() {
     return {
-      linkList: [
-        {
-          image: this.$urlImages + 'contact_Gitbook.webp',
-          href: 'https://funtopia.gitbook.io/fun-topia/create-a-fun-metaverse/about-fun-topia'
-        },
-        { image: this.$urlImages + 'contact_Twitter.webp', href: 'https://twitter.com/FuntopiaNFT' },
-        { image: this.$urlImages + 'contact_Discord.webp', href: 'https://discord.gg/Gtq9JsPcPN' },
-        { image: this.$urlImages + 'contact_Medium.webp', href: 'https://medium.com/@funtopiagame' }
-      ]
+      linkList: linkList
     };
   }
 };
@@ -34,18 +27,19 @@ export default {
 <style lang="scss" scoped>
 .footer_box {
   width: 100%;
-  height: 3rem;
+  height: 2rem;
   background: linear-gradient(180deg, #252637 0%, #0f0f12 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   .center {
-    width: 6.5rem;
+    width: 8rem;
     text-align: center;
     > div {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-bottom: 0.2rem;
       .logo {
         width: 2.95rem;
         height: auto;
@@ -71,8 +65,7 @@ export default {
     p {
       font-size: 0.15rem;
       font-weight: bold;
-      line-height: 0.5rem;
-      letter-spacing: 0.06rem;
+      letter-spacing: 0.02rem;
     }
   }
 }
@@ -81,7 +74,7 @@ export default {
     width: 100%;
     height: 1rem;
     .center {
-      width: 80vw;
+      width: 90vw;
       > div {
         .logo {
           width: 1.5rem;
@@ -98,7 +91,6 @@ export default {
       p {
         font-size: 0.12rem;
         font-weight: 400;
-        line-height: 0.3rem;
         letter-spacing: 0;
       }
     }

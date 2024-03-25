@@ -2,7 +2,7 @@
   <div class="page">
     <div class="box">
       <div class="box_title">
-        <img :src="`${$urlImages}box_title1.webp`" alt="" />
+        <img src="@/assets/cdn/images/box_title1.webp" alt="" />
         <span>{{ $t('dashboard.text1') }}</span>
       </div>
       <div class="box_content">
@@ -170,7 +170,7 @@ export default {
 .page {
   width: 100%;
   padding: 0.8rem 0;
-  background: url($urlImages + 'bg7.webp') no-repeat;
+  background: url('~@/assets/cdn/images/bg7.webp') no-repeat;
   background-size: 100% 100%;
 }
 .box {

@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <div class="title">
-      <div class="left">{{ $t("dashboard.text8") }}</div>
+      <div class="left">{{ $t('dashboard.text8') }}</div>
       <div class="right">
         <!-- <el-select v-model="selectKey" @change="selectChange">
           <el-option v-for="item in selectOptions" :key="item.value" :label="$t(item.label)" :value="item.value"></el-option>
@@ -11,12 +11,20 @@
       </div>
     </div>
     <ul class="switch_list1">
-      <li v-for="(item, index) in switchList1" :key="index" :class="{ active: switchIndex1 == index }" @click="switchTab1(index)">
+      <li
+        v-for="(item, index) in switchList1"
+        :key="index"
+        :class="{ active: switchIndex1 == index }"
+        @click="switchTab1(index)">
         {{ $t(item.label) }}
       </li>
     </ul>
     <ul class="switch_list2">
-      <li v-for="(item, index) in switchList2" :key="index" :class="{ active: switchIndex2 == index }" @click="switchTab2(index)">
+      <li
+        v-for="(item, index) in switchList2"
+        :key="index"
+        :class="{ active: switchIndex2 == index }"
+        @click="switchTab2(index)">
         {{ $t(item.label) }}
       </li>
     </ul>
@@ -27,13 +35,13 @@
           <div class="center">
             <div>
               <span>{{ $t(item.name) }}</span>
-              <img :src="`${$urlImages}icon1.webp`" alt="" />
+              <img src="@/assets/cdn/images/icon1.webp" alt="" />
             </div>
             <div>
               <span>{{ $t(item.title) }}</span>
               <span>88busd</span>
             </div>
-            <div>{{ $t("artist.text10") }}77busd</div>
+            <div>{{ $t('artist.text10') }}77busd</div>
           </div>
         </div>
       </li>
@@ -43,28 +51,28 @@
 </template>
 
 <script>
-import { shikastudio } from "@/mock/nftworks";
-import NoData from "@/components/NoData.vue";
+import { shikastudio } from '@/mock/nftworks';
+import NoData from '@/components/NoData.vue';
 export default {
   components: { NoData },
-  name: "Orders",
+  name: 'Orders',
   data() {
     return {
       selectKey: 1,
       selectOptions: [
-        { value: 1, label: "status.text4" },
-        { value: 2, label: "status.text5" },
+        { value: 1, label: 'status.text4' },
+        { value: 2, label: 'status.text5' },
         // { value: 3, label: "status.text6" },
-        { value: 3, label: "status.text7" },
-        { value: 4, label: "status.text8" },
-        { value: 5, label: "status.text9" },
+        { value: 3, label: 'status.text7' },
+        { value: 4, label: 'status.text8' },
+        { value: 5, label: 'status.text9' }
       ],
-      dateTime: "",
-      switchList1: [{ label: "dashboard.text23" }, { label: "dashboard.text24" }, { label: "dashboard.text25" }],
-      switchList2: [{ label: "dashboard.text26" }, { label: "dashboard.text27" }],
+      dateTime: '',
+      switchList1: [{ label: 'dashboard.text23' }, { label: 'dashboard.text24' }, { label: 'dashboard.text25' }],
+      switchList2: [{ label: 'dashboard.text26' }, { label: 'dashboard.text27' }],
       switchIndex1: 0,
       switchIndex2: 0,
-      cardList: [],
+      cardList: []
     };
   },
   created() {
@@ -107,8 +115,8 @@ export default {
         default:
           break;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

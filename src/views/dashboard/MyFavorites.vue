@@ -1,19 +1,19 @@
 <template>
   <div class="box">
-    <div class="title">{{ $t("dashboard.text10") }}</div>
+    <div class="title">{{ $t('dashboard.text10') }}</div>
     <ul class="card_list">
       <li v-for="(item, index) in cardList" :key="index">
         <div class="top"><img :src="item.logo" alt="" /></div>
         <div class="center">
           <div>
             <span>{{ $t(item.name) }}</span>
-            <img :src="`${$urlImages}icon1.webp`" alt="" />
+            <img src="@/assets/cdn/images/icon1.webp" alt="" />
           </div>
           <div>
             <span>{{ $t(item.title) }}</span>
             <span>88busd</span>
           </div>
-          <div>{{ $t("artist.text10") }}77busd</div>
+          <div>{{ $t('artist.text10') }}77busd</div>
         </div>
       </li>
     </ul>
@@ -21,18 +21,18 @@
 </template>
 
 <script>
-import { shikastudio } from "@/mock/nftworks";
+import { shikastudio } from '@/mock/nftworks';
 export default {
-  name: "MyFavorites",
+  name: 'MyFavorites',
   data() {
     return {
-      cardList: [],
+      cardList: []
     };
   },
   created() {
     this.cardList = shikastudio.works;
   },
-  methods: {},
+  methods: {}
 };
 </script>
 

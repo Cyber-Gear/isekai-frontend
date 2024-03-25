@@ -3,20 +3,21 @@
     <div class="banner">
       <div class="back_box">
         <div @click="goBack">
-          <i class="iconfont pcfanhui"></i><span>{{ $t("btns.text1") }}</span>
+          <i class="iconfont pcfanhui"></i><span>{{ $t('btns.text1') }}</span>
         </div>
       </div>
     </div>
 
     <div class="content_box">
       <div class="box_title">
-        <img :src="`${$urlImages}box_title1.webp`" alt="" />
-        <span>{{ $t("market.text19") }}</span>
+        <img src="@/assets/cdn/images/box_title1.webp" alt="" />
+        <span>{{ $t('market.text19') }}</span>
       </div>
       <div class="filter">
         <div class="select">
           <el-select v-for="(filter, index) in filters" :key="index" v-model="filter.value" :placeholder="filter.name">
-            <el-option v-for="item in filter.options" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+            <el-option v-for="item in filter.options" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
           </el-select>
         </div>
         <div class="selectAll" @click="allCheckHandler">
@@ -24,8 +25,8 @@
             <i class="iconfont pcfuxuankuang-quanxuan" v-show="isAllChecked"></i>
             <i class="iconfont pcfuxuankuang-weiquanxuan" v-show="!isAllChecked"></i>
           </span>
-          <span v-show="!isAllChecked">{{ $t("market.text20") }}</span>
-          <span v-show="isAllChecked">{{ $t("market.text27") }}</span>
+          <span v-show="!isAllChecked">{{ $t('market.text20') }}</span>
+          <span v-show="isAllChecked">{{ $t('market.text27') }}</span>
         </div>
       </div>
       <div class="card_list">
@@ -39,7 +40,7 @@
         </div>
       </div>
       <div class="confirm">
-        <el-button @click="openOrder" v-show="!disable">{{ $t("market.text21") }}</el-button>
+        <el-button @click="openOrder" v-show="!disable">{{ $t('market.text21') }}</el-button>
       </div>
     </div>
     <el-dialog
@@ -49,38 +50,38 @@
       :visible.sync="isShowOrder"
       :modal-append-to-body="false"
       :destroy-on-close="true"
-      @close="closeOrder"
-    >
+      @close="closeOrder">
       <div class="popupbox">
         <div class="box_body">
           <div class="row">
-            <span>{{ $t("market.text22") }}</span>
+            <span>{{ $t('market.text22') }}</span>
             <div>
               <input
                 type="text"
                 v-model="price"
                 :placeholder="$t('tips.text14')"
                 @input="price = price.replace(/[^\d]/g, '')"
-                :disabled="sellLoading"
-              />
+                :disabled="sellLoading" />
               <span>USDT</span>
             </div>
           </div>
           <div class="row">
-            <span>{{ $t("market.text23") }}</span>
+            <span>{{ $t('market.text23') }}</span>
             <div>
               <input type="text" :value="fees" disabled />
               <span>USDT</span>
             </div>
           </div>
           <div class="row">
-            <span>{{ $t("market.text24") }}</span>
+            <span>{{ $t('market.text24') }}</span>
             <div>
               <input type="text" :value="income" disabled />
               <span>USDT</span>
             </div>
           </div>
-          <el-button :loading="sellLoading" @click="beforeSell('USDT')" :disabled="enabled">{{ $t("market.text21") }}</el-button>
+          <el-button :loading="sellLoading" @click="beforeSell('USDT')" :disabled="enabled">{{
+            $t('market.text21')
+          }}</el-button>
         </div>
       </div>
     </el-dialog>
@@ -89,12 +90,12 @@
 </template>
 
 <script>
-import { cn, market, util, getSigner, token, contract } from "funtopia-sdk";
-import { mapGetters } from "vuex";
-import ApprovePopup from "@/components/ApprovePopup.vue";
-import { shikastudio } from "@/mock/nftworks";
+import { cn, market, util, getSigner, token, contract } from 'funtopia-sdk';
+import { mapGetters } from 'vuex';
+import ApprovePopup from '@/components/ApprovePopup.vue';
+import { shikastudio } from '@/mock/nftworks';
 export default {
-  name: "MarketOrder",
+  name: 'MarketOrder',
   components: { ApprovePopup },
   data() {
     return {
@@ -102,90 +103,90 @@ export default {
       heroIdList: [],
       filters: [
         {
-          name: "Series",
+          name: 'Series',
           options: [
             {
               value: 0,
-              label: "Cybergear",
+              label: 'Cybergear'
             },
             {
               value: 1,
-              label: "Puck",
+              label: 'Puck'
             },
             {
               value: 2,
-              label: "Moonbird",
-            },
+              label: 'Moonbird'
+            }
           ],
-          value: "",
+          value: ''
         },
         {
-          name: "Type",
+          name: 'Type',
           options: [
             {
               value: 0,
-              label: "Box",
+              label: 'Box'
             },
             {
               value: 1,
-              label: "Character",
+              label: 'Character'
             },
             {
               value: 2,
-              label: "Shard",
-            },
+              label: 'Shard'
+            }
           ],
-          value: "",
+          value: ''
         },
         {
-          name: "Rarity",
+          name: 'Rarity',
           options: [
             {
               value: 0,
-              label: "MR",
+              label: 'MR'
             },
             {
               value: 1,
-              label: "UR",
+              label: 'UR'
             },
             {
               value: 2,
-              label: "SR",
+              label: 'SR'
             },
             {
               value: 3,
-              label: "R",
-            },
+              label: 'R'
+            }
           ],
-          value: "",
+          value: ''
         },
         {
-          name: "Attribute",
+          name: 'Attribute',
           options: [
             {
               value: 0,
-              label: "Class",
+              label: 'Class'
             },
             {
               value: 1,
-              label: "Grade",
+              label: 'Grade'
             },
             {
               value: 2,
-              label: "Character",
-            },
+              label: 'Character'
+            }
           ],
-          value: "",
-        },
+          value: ''
+        }
       ],
       tokens: [
-        { label: "USDT", addr: token().USDT },
-        { label: "FUN", addr: token().FUN },
-        { label: "ETH", addr: "" },
+        { label: 'USDT', addr: token().USDT },
+        { label: 'FUN', addr: token().FUN },
+        { label: 'ETH', addr: '' }
       ],
       operation: {
-        name: this.$t("approvePopup.text5"),
-        func: "sellNfts",
+        name: this.$t('approvePopup.text5'),
+        func: 'sellNfts'
       },
       sellList: {},
       name: null,
@@ -196,16 +197,16 @@ export default {
       popupActive: 1,
       approvedloading: false,
       sellLoading: false,
-      price: "",
+      price: '',
       fee: 0,
-      value: "",
+      value: '',
       balance: 0,
       disable: true,
-      requestTimer: null,
+      requestTimer: null
     };
   },
   computed: {
-    ...mapGetters(["getWalletAccount"]),
+    ...mapGetters(['getWalletAccount']),
     fees: function () {
       return ((this.fee * this.price) / 100).toFixed(4);
     },
@@ -213,8 +214,8 @@ export default {
       return this.price - this.fees;
     },
     enabled: function () {
-      return this.price == "";
-    },
+      return this.price == '';
+    }
   },
   watch: {
     getWalletAccount: {
@@ -222,24 +223,24 @@ export default {
         this.getFee();
         //有值即已登录状态
         if (newVal) {
-          console.log("登陆状态下的跳转");
-          if (sessionStorage.getItem("HeroAssetList")) {
-            console.log("立即读取");
-            this.heroIdList = JSON.parse(sessionStorage.getItem("HeroAssetList"));
+          console.log('登陆状态下的跳转');
+          if (sessionStorage.getItem('HeroAssetList')) {
+            console.log('立即读取');
+            this.heroIdList = JSON.parse(sessionStorage.getItem('HeroAssetList'));
             this.cardListInit();
           } else {
-            console.log("首次跳转到此页面 加载");
+            console.log('首次跳转到此页面 加载');
             this.tokensOfOwner();
           }
         } else {
           //未连接或断开操作
-          sessionStorage.removeItem("HeroAssetList");
+          sessionStorage.removeItem('HeroAssetList');
           // this.cardList = [];
-          this.$router.push({ path: "/market" });
+          this.$router.push({ path: '/market' });
         }
       },
-      immediate: true,
-    },
+      immediate: true
+    }
   },
   beforeDestroy() {
     clearInterval(this.requestTimer);
@@ -274,7 +275,7 @@ export default {
         types: [],
         tokens: [],
         prices: [],
-        total: 0,
+        total: 0
       };
       this.cardList.forEach((item) => {
         if (item.isChecked) {
@@ -290,7 +291,7 @@ export default {
     },
 
     closeOrder() {
-      this.price = "";
+      this.price = '';
       this.isShowOrder = false;
       this.sellLoading = false;
     },
@@ -335,7 +336,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.error("tokensOfOwnerBySize", err);
+          console.error('tokensOfOwnerBySize', err);
         });
     },
 
@@ -343,7 +344,7 @@ export default {
     getHeroList(cnIds) {
       cnIds.forEach((element) => {
         cn()
-          .data(element, "hero")
+          .data(element, 'hero')
           .then((res) => {
             // console.log("获取某英雄的某单数据字段的数据", res, Number(res));
             const hero = {};
@@ -352,7 +353,7 @@ export default {
             this.heroIdList.push(hero);
           })
           .catch((err) => {
-            console.error("data", err);
+            console.error('data', err);
             clearInterval(this.requestTimer);
             this.requestTimer = null;
           });
@@ -363,7 +364,7 @@ export default {
           clearInterval(this.requestTimer);
           this.requestTimer = null;
           this.cardListInit();
-          sessionStorage.setItem("HeroAssetList", JSON.stringify(this.heroIdList));
+          sessionStorage.setItem('HeroAssetList', JSON.stringify(this.heroIdList));
         }
       }, 100);
     },
@@ -376,9 +377,9 @@ export default {
 
     beforeSell(whichToken) {
       console.log(this.sellList);
-      let tokenAddr = "";
-      if (whichToken == "USDT") tokenAddr = token().USDT;
-      else if (whichToken == "FUN") tokenAddr = token().FUN;
+      let tokenAddr = '';
+      if (whichToken == 'USDT') tokenAddr = token().USDT;
+      else if (whichToken == 'FUN') tokenAddr = token().FUN;
       console.log(tokenAddr);
       this.sellLoading = true;
       // this.$store.commit("setApprovePopup", true);
@@ -387,20 +388,20 @@ export default {
         .isApprovedForAll(this.getWalletAccount, contract().Market)
         .then((res) => {
           // Number(res._hex) 可付款额度
-          console.log("授权了吗", res);
+          console.log('授权了吗', res);
           // console.log("额度", this.price);
           // this.isApproved = Number(res._hex) > this.totalPrice;
           if (res) {
             this.sellNfts();
           } else {
             // this.isShowOrder = false;
-            console.log("去授权");
+            console.log('去授权');
             this.sellLoading = false;
-            this.$store.commit("setApprovePopup", true);
+            this.$store.commit('setApprovePopup', true);
           }
         })
         .catch((err) => {
-          console.error("allowance", err);
+          console.error('allowance', err);
           this.isApproved = false;
         });
     },
@@ -411,13 +412,15 @@ export default {
         this.sellList.prices.push(util.parseEther(this.price));
       }
       try {
-        const tx = await market().connect(getSigner()).sell(this.sellList.types, this.sellList.nftIds, this.sellList.tokens, this.sellList.prices);
+        const tx = await market()
+          .connect(getSigner())
+          .sell(this.sellList.types, this.sellList.nftIds, this.sellList.tokens, this.sellList.prices);
         // const etReceipt = await tx.wait(); // 请求已发出，等待矿工打包进块，交易成功，返回交易收据
         // console.log("交易收据", etReceipt);
         await tx.wait();
-        if (this.getApprovePopup) this.$store.commit("setApprovePopup", false);
-        this.$message({ message: this.$t("tips.text16") });
-        sessionStorage.removeItem("HeroAssetList");
+        if (this.getApprovePopup) this.$store.commit('setApprovePopup', false);
+        this.$message({ message: this.$t('tips.text16') });
+        sessionStorage.removeItem('HeroAssetList');
         // this.sellLoading = false;
         // this.isShowOrder =false;
         // this.sellList = {};
@@ -425,10 +428,10 @@ export default {
         location.reload();
       } catch (err) {
         this.sellLoading = false;
-        console.error("sellNfts", err);
+        console.error('sellNfts', err);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -436,7 +439,7 @@ export default {
 .page {
   width: 100%;
   padding-top: 0.8rem;
-  background: url($urlImages + "bg7.webp") no-repeat;
+  background: url('~@/assets/cdn/images/bg7.webp') no-repeat;
   background-size: 100% 100%;
 }
 .banner {

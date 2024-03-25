@@ -11,7 +11,7 @@
       <div class="leftbox">
         <div class="box1">
           <div class="title">
-            <span><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ someProposals.title }}</span>
+            <span><img src="@/assets/cdn/images/box_title3.webp" alt="" />{{ someProposals.title }}</span>
             <span>
               <template v-if="someProposals.state == 'active'"> {{ $t('status.text7') }} </template>
               <template v-if="someProposals.state == 'pending'"> {{ $t('status.text8') }} </template>
@@ -36,7 +36,7 @@
           <!-- Cast your vote -->
           <div class="box4" v-if="someProposals.state == 'active'">
             <div class="title">
-              <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t('dao.text15') }}</span>
+              <img src="@/assets/cdn/images/box_title3.webp" alt="" /><span>{{ $t('dao.text15') }}</span>
             </div>
             <div class="check_boxs">
               <div
@@ -59,7 +59,7 @@
           <!-- Discuss -->
           <div class="box5">
             <div class="title">
-              <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t('dao.text17') }}</span>
+              <img src="@/assets/cdn/images/box_title3.webp" alt="" /><span>{{ $t('dao.text17') }}</span>
             </div>
             <div class="linkbox">
               <a :href="someProposals.discussion">{{ someProposals.discussion }}</a>
@@ -68,7 +68,7 @@
           <!-- Votes -->
           <div class="box6" v-if="someProposals.state !== 'pending'">
             <div class="title">
-              <img :src="`${$urlImages}box_title3.webp`" alt="" /><span>{{ $t('dao.text16') }}</span>
+              <img src="@/assets/cdn/images/box_title3.webp" alt="" /><span>{{ $t('dao.text16') }}</span>
               <div v-if="someProposals.votes">{{ someProposals.votes }}</div>
             </div>
             <ul class="list">
@@ -93,7 +93,7 @@
       </div>
       <div class="rightbox">
         <div class="box1">
-          <div class="title"><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t('dao.text26') }}</div>
+          <div class="title"><img src="@/assets/cdn/images/box_title3.webp" alt="" />{{ $t('dao.text26') }}</div>
           <ul class="list">
             <li>
               <div>{{ $t('dao.text27') }}</div>
@@ -124,7 +124,7 @@
           </ul>
         </div>
         <div class="box1">
-          <div class="title"><img :src="`${$urlImages}box_title3.webp`" alt="" />{{ $t('dao.text35') }}</div>
+          <div class="title"><img src="@/assets/cdn/images/box_title3.webp" alt="" />{{ $t('dao.text35') }}</div>
           <ul class="progressbarlist">
             <li v-for="(item, index) in resultList" :key="index">
               <div>
@@ -346,7 +346,7 @@ export default {
 .page {
   width: 100%;
   padding: 0.8rem 0;
-  background: url($urlImages + 'bg7.webp') no-repeat;
+  background: url('~@/assets/cdn/images/bg7.webp') no-repeat;
   background-size: 100% 100%;
 }
 .banner {

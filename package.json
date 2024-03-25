@@ -10,11 +10,11 @@
     "publish": "npm run build && rimraf -- prod && cpr -- dist prod"
   },
   "dependencies": {
+    "axios": "^0.26.1",
     "core-js": "^3.6.5",
     "cpr": "^3.0.1",
-    "axios": "^0.26.1",
     "element-ui": "^2.15.8",
-    "funtopia-sdk": "^1.0.26",
+    "funtopia-sdk": "^1.0.27",
     "lottie-web": "^5.9.6",
     "react": "^18.1.0",
     "rimraf": "^3.0.2",
